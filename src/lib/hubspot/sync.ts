@@ -275,8 +275,8 @@ async function syncPipelineStages(
       stage_label: stage.label,
       display_order: stage.displayOrder,
       probability: stage.metadata.probability ?? null,
-      is_closed_won: stage.metadata.isClosed === "true" && stage.metadata.probability === "1.0",
-      is_closed_lost: stage.metadata.isClosed === "true" && stage.metadata.probability !== "1.0",
+      is_closed_won: stage.metadata.isClosed === "WON",
+      is_closed_lost: stage.metadata.isClosed === "LOST",
       synced_at: new Date().toISOString(),
     }))
   );
