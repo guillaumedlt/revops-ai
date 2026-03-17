@@ -3,6 +3,12 @@
 import { useEffect, useState, useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import {
+  MessageSquarePlus,
+  Search,
+  Settings,
+  LogOut,
+} from "lucide-react";
 
 interface Conversation {
   id: string;
@@ -23,10 +29,10 @@ function groupByDate(conversations: Conversation[]): GroupedConversations {
   const weekAgo = new Date(today.getTime() - 7 * 86400000);
 
   const groups: GroupedConversations = [
-    { label: "Aujourd\u2019hui", items: [] },
-    { label: "Hier", items: [] },
-    { label: "7 derniers jours", items: [] },
-    { label: "Plus ancien", items: [] },
+    { label: "Today", items: [] },
+    { label: "Yesterday", items: [] },
+    { label: "Previous 7 days", items: [] },
+    { label: "Older", items: [] },
   ];
 
   for (const conv of conversations) {
@@ -43,6 +49,8 @@ function groupByDate(conversations: Conversation[]): GroupedConversations {
 export default function ConversationSidebar() {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [userEmail, setUserEmail] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const pathname = usePathname();
   const router = useRouter();
 
@@ -79,33 +87,82 @@ export default function ConversationSidebar() {
 
   const grouped = groupByDate(conversations);
 
+  const filteredGrouped = searchQuery
+    ? grouped
+        .map((g) => ({
+          ...g,
+          items: g.items.filter((c) =>
+            c.title.toLowerCase().includes(searchQuery.toLowerCase())
+          ),
+        }))
+        .filter((g) => g.items.length > 0)
+    : grouped;
+
+  const userInitial = userEmail ? userEmail[0].toUpperCase() : "?";
+
   return (
-    <aside className="w-[260px] bg-[#0A0A0A] text-white flex flex-col h-full shrink-0">
-      {/* New conversation button */}
-      <div className="p-3">
+    <aside className="w-[240px] bg-white border-r border-[#E5E5E5] flex flex-col h-full shrink-0">
+      {/* Logo */}
+      <div className="px-3 pt-4 pb-2 flex items-center gap-2">
+        <div className="h-7 w-7 rounded-lg bg-[#0A0A0A] text-white flex items-center justify-center text-xs font-bold">
+          R
+        </div>
+        <span className="text-sm font-semibold text-[#0A0A0A]">RevOps AI</span>
+      </div>
+
+      {/* Action buttons */}
+      <div className="px-2 space-y-0.5 mt-1">
         <button
           onClick={handleNew}
-          className="w-full border border-[#333] text-white text-sm rounded-lg px-3 py-2.5 text-left hover:bg-[#1A1A1A] transition-colors"
+          className="w-full flex items-center gap-2 px-3 h-9 rounded-lg text-sm text-[#525252] hover:bg-[#F5F5F5] transition-colors"
         >
-          + Nouvelle conversation
+          <MessageSquarePlus size={16} className="text-[#A3A3A3]" />
+          New Chat
+        </button>
+        <button
+          onClick={() => setSearchOpen(!searchOpen)}
+          className="w-full flex items-center gap-2 px-3 h-9 rounded-lg text-sm text-[#525252] hover:bg-[#F5F5F5] transition-colors"
+        >
+          <Search size={16} className="text-[#A3A3A3]" />
+          Search
         </button>
       </div>
 
+      {/* Search input */}
+      {searchOpen && (
+        <div className="px-3 mt-2">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search conversations..."
+            autoFocus
+            className="w-full h-8 px-2.5 text-xs rounded-lg border border-[#E5E5E5] bg-[#FAFAFA] text-[#0A0A0A] placeholder:text-[#A3A3A3] focus:outline-none focus:ring-1 focus:ring-[#0A0A0A]"
+          />
+        </div>
+      )}
+
+      {/* Separator */}
+      <div className="mx-3 my-2 border-t border-[#E5E5E5]" />
+
       {/* Conversation list */}
       <div className="flex-1 overflow-y-auto px-2">
-        {grouped.map((group) => (
-          <div key={group.label} className="mb-3">
-            <div className="text-[10px] uppercase tracking-wider text-[#737373] px-2 py-1.5 font-medium">
+        {filteredGrouped.length === 0 && (
+          <p className="px-3 py-4 text-xs text-[#A3A3A3]">No conversations yet</p>
+        )}
+        {filteredGrouped.map((group) => (
+          <div key={group.label} className="mb-2">
+            <div className="text-[10px] uppercase tracking-wider text-[#A3A3A3] font-medium px-3 mt-3 mb-1">
               {group.label}
             </div>
             {group.items.map((conv) => (
               <button
                 key={conv.id}
-                onClick={() => router.push(`/chat/${conv.id}`)}
-                className={`w-full text-left text-sm truncate px-2 py-2 rounded-lg transition-colors ${
+                onClick={() => router.push("/chat/" + conv.id)}
+                className={`w-full text-left text-sm truncate px-3 h-8 flex items-center rounded-lg transition-colors ${
                   activeId === conv.id
-                    ? "bg-[#1A1A1A] text-white"
-                    : "text-[#A3A3A3] hover:bg-[#1A1A1A] hover:text-white"
+                    ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium"
+                    : "text-[#525252] hover:bg-[#F5F5F5]"
                 }`}
               >
                 {conv.title}
@@ -116,21 +173,32 @@ export default function ConversationSidebar() {
       </div>
 
       {/* Bottom section */}
-      <div className="border-t border-[#1A1A1A] p-3 space-y-2">
-        <a
-          href="/settings"
-          className="flex items-center gap-2 text-xs text-[#737373] hover:text-white transition-colors"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="3" />
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
-          </svg>
-          Parametres
-        </a>
-        <div className="flex items-center justify-between">
-          <span className="text-xs text-[#737373] truncate max-w-[160px]">{userEmail}</span>
-          <button onClick={handleLogout} className="text-xs text-[#737373] hover:text-white transition-colors">
-            Deconnexion
+      <div className="border-t border-[#E5E5E5] p-3 space-y-2">
+        {/* Context indicator */}
+        <div className="flex items-center gap-2 px-1">
+          <div className="h-2 w-2 rounded-full bg-emerald-500" />
+          <span className="text-[10px] text-[#A3A3A3]">Context enabled</span>
+        </div>
+
+        {/* User section */}
+        <div className="flex items-center gap-2">
+          <div className="h-7 w-7 rounded-full bg-[#F0F0F0] flex items-center justify-center text-xs font-medium text-[#525252] shrink-0">
+            {userInitial}
+          </div>
+          <span className="text-xs text-[#525252] truncate flex-1">{userEmail}</span>
+          <button
+            onClick={() => router.push("/settings")}
+            className="text-[#A3A3A3] hover:text-[#0A0A0A] transition-colors"
+            title="Settings"
+          >
+            <Settings size={14} />
+          </button>
+          <button
+            onClick={handleLogout}
+            className="text-[#A3A3A3] hover:text-[#0A0A0A] transition-colors"
+            title="Logout"
+          >
+            <LogOut size={14} />
           </button>
         </div>
       </div>

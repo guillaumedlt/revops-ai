@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Copy, ThumbsUp, Share2, ChevronDown } from "lucide-react";
 import BlockRenderer from "./blocks/BlockRenderer";
 import TextBlock from "./blocks/TextBlock";
 import type { ContentBlock } from "@/types/chat-blocks";
@@ -19,7 +20,47 @@ interface Props {
   activeTools: string[];
 }
 
-export default function MessageThread({ messages, streamingText, streamingBlocks, activeTools }: Props) {
+function MessageActions() {
+  return (
+    <div className="flex items-center gap-1 mt-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+      <button className="h-7 w-7 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors" title="Copy">
+        <Copy size={13} />
+      </button>
+      <button className="h-7 w-7 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors" title="Like">
+        <ThumbsUp size={13} />
+      </button>
+      <button className="h-7 w-7 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors" title="Share">
+        <Share2 size={13} />
+      </button>
+    </div>
+  );
+}
+
+function ToolIndicator({ tools }: { tools: string[] }) {
+  const [expanded, setExpanded] = useState(false);
+
+  if (tools.length === 0) return null;
+
+  const label = "Analyzing" + (tools.length > 0 ? " — " + tools.join(", ") : "");
+
+  return (
+    <button
+      onClick={() => setExpanded(!expanded)}
+      className="flex items-center gap-1.5 text-xs text-[#A3A3A3] mb-2 hover:text-[#525252] transition-colors"
+    >
+      <span className="h-3 w-3 rounded-full border-2 border-[#A3A3A3] border-t-transparent animate-spin" />
+      <span>{label}</span>
+      <ChevronDown size={12} className={`transition-transform ${expanded ? "rotate-180" : ""}`} />
+    </button>
+  );
+}
+
+export default function MessageThread({
+  messages,
+  streamingText,
+  streamingBlocks,
+  activeTools,
+}: Props) {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -28,20 +69,26 @@ export default function MessageThread({ messages, streamingText, streamingBlocks
 
   return (
     <div className="flex-1 overflow-y-auto">
-      <div className="max-w-3xl mx-auto px-4 py-6 space-y-6">
+      <div className="max-w-2xl mx-auto px-4 py-6 space-y-5">
         {messages.map((msg) => (
-          <div key={msg.id} className={msg.role === "user" ? "flex justify-end" : ""}>
+          <div
+            key={msg.id}
+            className={msg.role === "user" ? "flex justify-end" : "group"}
+          >
             {msg.role === "user" ? (
-              <div className="max-w-[70%] bg-[#0A0A0A] text-white rounded-2xl px-4 py-2.5 text-sm">
+              <div className="max-w-[70%] bg-[#F5F5F5] text-[#0A0A0A] rounded-2xl px-4 py-2.5 text-sm">
                 {msg.content}
               </div>
             ) : (
-              <div className="w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A]">
-                {msg.content_blocks && msg.content_blocks.length > 0 ? (
-                  <BlockRenderer blocks={msg.content_blocks} />
-                ) : (
-                  <TextBlock text={msg.content} />
-                )}
+              <div className="w-full">
+                <div className="text-sm text-[#0A0A0A] leading-relaxed">
+                  {msg.content_blocks && msg.content_blocks.length > 0 ? (
+                    <BlockRenderer blocks={msg.content_blocks} />
+                  ) : (
+                    <TextBlock text={msg.content} />
+                  )}
+                </div>
+                <MessageActions />
               </div>
             )}
           </div>
@@ -49,26 +96,16 @@ export default function MessageThread({ messages, streamingText, streamingBlocks
 
         {/* Streaming state */}
         {(streamingText || activeTools.length > 0) && (
-          <div className="w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A]">
-            {activeTools.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-3">
-                {activeTools.map((tool) => (
-                  <span
-                    key={tool}
-                    className="inline-flex items-center gap-1.5 text-xs bg-[#F5F5F5] text-[#737373] rounded-full px-2.5 py-1"
-                  >
-                    <span className="w-2 h-2 bg-[#0A0A0A] rounded-full animate-pulse" />
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            )}
+          <div className="group">
+            <ToolIndicator tools={activeTools} />
             {streamingText && (
-              streamingBlocks && streamingBlocks.length > 0 ? (
-                <BlockRenderer blocks={streamingBlocks} />
-              ) : (
-                <TextBlock text={streamingText} />
-              )
+              <div className="text-sm text-[#0A0A0A] leading-relaxed">
+                {streamingBlocks && streamingBlocks.length > 0 ? (
+                  <BlockRenderer blocks={streamingBlocks} />
+                ) : (
+                  <TextBlock text={streamingText} />
+                )}
+              </div>
             )}
           </div>
         )}

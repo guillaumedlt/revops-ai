@@ -1,12 +1,17 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import ConnectorPopover from "./ConnectorPopover";
+import {
+  Plus,
+  SlidersHorizontal,
+  Lightbulb,
+  Mic,
+  ArrowUp,
+} from "lucide-react";
 
 interface ChatInputBarProps {
   onSend: (message: string, model: string) => void;
   disabled?: boolean;
-  connectedTools?: string[];
   initialValue?: string;
 }
 
@@ -17,12 +22,16 @@ const MODELS = [
   { id: "gemini", label: "Gemini" },
 ];
 
-export default function ChatInputBar({ onSend, disabled, connectedTools = [], initialValue }: ChatInputBarProps) {
+export default function ChatInputBar({
+  onSend,
+  disabled,
+  initialValue,
+}: ChatInputBarProps) {
   const [value, setValue] = useState(initialValue ?? "");
   const [selectedModel, setSelectedModel] = useState("revops-ai");
-  const [showConnectors, setShowConnectors] = useState(false);
+  const [showModelPicker, setShowModelPicker] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const connectorRef = useRef<HTMLDivElement>(null);
+  const modelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (initialValue) setValue(initialValue);
@@ -31,14 +40,15 @@ export default function ChatInputBar({ onSend, disabled, connectedTools = [], in
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
-      textareaRef.current.style.height = Math.min(textareaRef.current.scrollHeight, 200) + "px";
+      textareaRef.current.style.height =
+        Math.min(textareaRef.current.scrollHeight, 200) + "px";
     }
   }, [value]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (connectorRef.current && !connectorRef.current.contains(e.target as Node)) {
-        setShowConnectors(false);
+      if (modelRef.current && !modelRef.current.contains(e.target as Node)) {
+        setShowModelPicker(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -60,74 +70,101 @@ export default function ChatInputBar({ onSend, disabled, connectedTools = [], in
     }
   };
 
+  const currentModel = MODELS.find((m) => m.id === selectedModel) ?? MODELS[0];
+
   return (
-    <div className="mx-auto max-w-3xl w-full px-4 pb-6">
-      <div className="border border-[#E5E5E5] rounded-2xl bg-white shadow-sm focus-within:ring-1 focus-within:ring-[#0A0A0A] transition-shadow">
-        {/* Top row: icons + textarea + send */}
-        <div className="flex items-end gap-2 px-4 pt-3 pb-2">
-          <div className="flex items-center gap-1 shrink-0 pb-1" ref={connectorRef}>
-            <button
-              onClick={() => setShowConnectors(!showConnectors)}
-              className="h-8 w-8 rounded-lg flex items-center justify-center text-[#737373] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors relative"
-              title="Connecteurs"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg>
-            </button>
-            {showConnectors && (
-              <div className="absolute bottom-full left-0 mb-2 z-50">
-                <ConnectorPopover onClose={() => setShowConnectors(false)} />
-              </div>
-            )}
-            <button
-              className="h-8 w-8 rounded-lg flex items-center justify-center text-[#737373] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors"
-              title="Joindre un fichier"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
-              </svg>
-            </button>
-          </div>
+    <div className="mx-auto max-w-2xl w-full px-4 pb-4">
+      <div className="border border-[#E5E5E5] rounded-2xl bg-white shadow-sm focus-within:ring-1 focus-within:ring-[#D4D4D4] transition-shadow">
+        {/* Textarea row */}
+        <div className="px-4 pt-3 pb-1">
           <textarea
             ref={textareaRef}
             value={value}
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={handleKeyDown}
             disabled={disabled}
-            placeholder="Que veux-tu analyser ?"
+            placeholder="Ask RevOps AI..."
             rows={1}
-            className="flex-1 resize-none bg-transparent text-sm text-[#0A0A0A] placeholder:text-[#A3A3A3] focus:outline-none min-h-[36px] max-h-[200px] py-1"
+            className="w-full resize-none bg-transparent text-sm text-[#0A0A0A] placeholder:text-[#A3A3A3] focus:outline-none min-h-[36px] max-h-[200px] py-1"
           />
-          {value.trim() && (
-            <button
-              onClick={handleSend}
-              disabled={disabled}
-              className="h-8 w-8 rounded-full bg-[#0A0A0A] text-white flex items-center justify-center shrink-0 hover:bg-[#333] transition-colors disabled:opacity-50 mb-1"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="19" x2="12" y2="5" />
-                <polyline points="5 12 12 5 19 12" />
-              </svg>
-            </button>
-          )}
         </div>
-        {/* Bottom row: model selector pills */}
-        <div className="px-4 pb-3 pt-1 flex items-center gap-2 border-t border-[#F5F5F5]">
-          {MODELS.map((model) => (
+
+        {/* Icon row */}
+        <div className="px-3 pb-2.5 flex items-center justify-between">
+          {/* Left icons */}
+          <div className="flex items-center gap-0.5">
             <button
-              key={model.id}
-              onClick={() => setSelectedModel(model.id)}
-              className={`h-7 px-3 rounded-full text-xs font-medium border cursor-pointer transition-colors ${
-                selectedModel === model.id
-                  ? "bg-[#0A0A0A] text-white border-[#0A0A0A]"
-                  : "bg-white text-[#737373] border-[#E5E5E5] hover:border-[#0A0A0A]"
-              }`}
+              className="h-8 w-8 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
+              title="Attach file"
             >
-              {model.label}
+              <Plus size={18} />
             </button>
-          ))}
+            <button
+              className="h-8 w-8 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
+              title="Filters"
+            >
+              <SlidersHorizontal size={16} />
+            </button>
+            <button
+              className="h-8 w-8 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
+              title="Suggestions"
+            >
+              <Lightbulb size={16} />
+            </button>
+
+            {/* Model pill */}
+            <div className="relative" ref={modelRef}>
+              <button
+                onClick={() => setShowModelPicker(!showModelPicker)}
+                className="ml-1 h-7 px-2.5 rounded-full text-[11px] font-medium border border-[#E5E5E5] text-[#525252] hover:bg-[#F5F5F5] transition-colors"
+              >
+                {currentModel.label}
+              </button>
+              {showModelPicker && (
+                <div className="absolute bottom-full left-0 mb-1 bg-white border border-[#E5E5E5] rounded-xl shadow-lg py-1 min-w-[140px] z-50">
+                  {MODELS.map((model) => (
+                    <button
+                      key={model.id}
+                      onClick={() => {
+                        setSelectedModel(model.id);
+                        setShowModelPicker(false);
+                      }}
+                      className={`w-full text-left px-3 py-1.5 text-xs hover:bg-[#F5F5F5] transition-colors ${
+                        selectedModel === model.id
+                          ? "text-[#0A0A0A] font-medium"
+                          : "text-[#525252]"
+                      }`}
+                    >
+                      {model.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right icons */}
+          <div className="flex items-center gap-0.5">
+            <button
+              className="h-8 w-8 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
+              title="Voice input"
+            >
+              <Mic size={16} />
+            </button>
+            {value.trim() ? (
+              <button
+                onClick={handleSend}
+                disabled={disabled}
+                className="h-8 w-8 rounded-full bg-[#0A0A0A] text-white flex items-center justify-center hover:bg-[#333] transition-colors disabled:opacity-50"
+              >
+                <ArrowUp size={16} />
+              </button>
+            ) : (
+              <div className="h-8 w-8 rounded-full bg-[#E5E5E5] flex items-center justify-center">
+                <ArrowUp size={16} className="text-[#A3A3A3]" />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

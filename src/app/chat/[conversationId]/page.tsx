@@ -79,7 +79,8 @@ export default function ConversationPage() {
           if (done) break;
           buffer += decoder.decode(value, { stream: true });
 
-          const lines = buffer.split("\n");
+          const lines = buffer.split("
+");
           buffer = lines.pop() ?? "";
 
           for (const line of lines) {
@@ -97,7 +98,9 @@ export default function ConversationPage() {
                 finalBlocks = event.blocks;
                 setStreamingBlocks(event.blocks);
               } else if (event.type === "error") {
-                accText += `\n\n**Erreur:** ${event.error || "Une erreur est survenue"}`;
+                accText += `
+
+**Error:** ${event.error || "Something went wrong"}`;
                 setStreamingText(accText);
               } else if (event.type === "done") {
                 const assistantMsg: Message = {
@@ -153,10 +156,7 @@ export default function ConversationPage() {
         activeTools={activeTools}
       />
       <div className="shrink-0 pb-2">
-        <ChatInputBar
-          onSend={handleSend}
-          disabled={isStreaming}
-        />
+        <ChatInputBar onSend={handleSend} disabled={isStreaming} />
       </div>
     </div>
   );
