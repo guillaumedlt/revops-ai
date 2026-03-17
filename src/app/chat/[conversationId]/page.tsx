@@ -29,7 +29,7 @@ export default function ConversationPage() {
   const searchParams = useSearchParams();
   const [messages, setMessages] = useState<Message[]>(() => {
     const cached = getCachedMessages(conversationId);
-    return cached ?? [];
+    return (cached as Message[]) ?? [];
   });
   const [streamingText, setStreamingText] = useState("");
   const [streamingBlocks, setStreamingBlocks] = useState<ContentBlock[] | null>(null);
