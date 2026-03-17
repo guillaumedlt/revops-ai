@@ -5,6 +5,7 @@ import { SlidersHorizontal, ArrowUp } from "lucide-react";
 import FileUpload from "./FileUpload";
 import VoiceInput from "./VoiceInput";
 import TemplatesPopover from "./TemplatesPopover";
+import { CONNECTOR_REGISTRY, CATEGORIES } from "@/lib/connectors/registry";
 
 interface Attachment {
   type: string;
@@ -28,23 +29,6 @@ const MODELS = [
   { id: "gemini", label: "Gemini" },
 ];
 
-const CONNECTORS = [
-  { id: "hubspot", name: "HubSpot", icon: "\uD83D\uDFE0", connected: true },
-  {
-    id: "salesforce",
-    name: "Salesforce",
-    icon: "\u2601\uFE0F",
-    connected: false,
-  },
-  {
-    id: "google_sheets",
-    name: "Google Sheets",
-    icon: "\uD83D\uDCCA",
-    connected: false,
-  },
-  { id: "slack", name: "Slack", icon: "\uD83D\uDCAC", connected: false },
-];
-
 export default function ChatInputBar({
   onSend,
   disabled,
@@ -56,6 +40,8 @@ export default function ChatInputBar({
   const [showConnectors, setShowConnectors] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [connectorSearch, setConnectorSearch] = useState("");
+  const [connectorCategory, setConnectorCategory] = useState("all");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const modelRef = useRef<HTMLDivElement>(null);
   const connectorsRef = useRef<HTMLDivElement>(null);
@@ -90,6 +76,24 @@ export default function ChatInputBar({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Reset search/category when popover closes
+  useEffect(() => {
+    if (!showConnectors) {
+      setConnectorSearch("");
+      setConnectorCategory("all");
+    }
+  }, [showConnectors]);
+
+  const filteredConnectors = CONNECTOR_REGISTRY.filter((c) => {
+    const matchesSearch =
+      !connectorSearch ||
+      c.name.toLowerCase().includes(connectorSearch.toLowerCase()) ||
+      c.description.toLowerCase().includes(connectorSearch.toLowerCase());
+    const matchesCategory =
+      connectorCategory === "all" || c.category === connectorCategory;
+    return matchesSearch && matchesCategory;
+  });
 
   const handleSend = async () => {
     const trimmed = value.trim();
@@ -158,10 +162,10 @@ export default function ChatInputBar({
                 </span>
                 <span className="text-[#A3A3A3]">
                   {selectedFile.size < 1024
-                    ? `${selectedFile.size} B`
+                    ? selectedFile.size + " B"
                     : selectedFile.size < 1048576
-                      ? `${(selectedFile.size / 1024).toFixed(1)} KB`
-                      : `${(selectedFile.size / 1048576).toFixed(1)} MB`}
+                      ? (selectedFile.size / 1024).toFixed(1) + " KB"
+                      : (selectedFile.size / 1048576).toFixed(1) + " MB"}
                 </span>
                 <button
                   onClick={() => setSelectedFile(null)}
@@ -206,32 +210,81 @@ export default function ChatInputBar({
                   <SlidersHorizontal size={16} />
                 </button>
                 {showConnectors && (
-                  <div className="absolute bottom-full left-0 mb-2 w-[240px] rounded-xl border border-[#E5E5E5] bg-white shadow-lg p-2 z-50">
-                    <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#A3A3A3]">
-                      Connected Tools
-                    </p>
-                    {CONNECTORS.map((c) => (
-                      <div
-                        key={c.id}
-                        className="flex items-center justify-between px-2 py-2 rounded-lg hover:bg-[#FAFAFA]"
-                      >
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm">{c.icon}</span>
-                          <span className="text-sm text-[#525252]">
-                            {c.name}
-                          </span>
-                        </div>
-                        {c.connected ? (
-                          <div className="h-4 w-8 rounded-full bg-[#22C55E] relative cursor-pointer">
-                            <div className="absolute right-0.5 top-0.5 h-3 w-3 rounded-full bg-white" />
+                  <div className="absolute bottom-full left-0 mb-2 w-[340px] max-h-[450px] flex flex-col rounded-xl border border-[#E5E5E5] bg-white shadow-lg z-50">
+                    {/* Search */}
+                    <div className="p-3 border-b border-[#F0F0F0]">
+                      <input
+                        type="text"
+                        value={connectorSearch}
+                        onChange={(e) => setConnectorSearch(e.target.value)}
+                        placeholder="Search connectors..."
+                        className="w-full px-3 py-1.5 text-sm border border-[#E5E5E5] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]"
+                        autoFocus
+                      />
+                    </div>
+
+                    {/* Category pills */}
+                    <div className="px-3 py-2 flex gap-1 flex-wrap border-b border-[#F0F0F0]">
+                      {CATEGORIES.map((cat) => (
+                        <button
+                          key={cat.id}
+                          onClick={() => setConnectorCategory(cat.id)}
+                          className={
+                            "px-2 py-0.5 rounded-full text-[10px] font-medium transition-colors " +
+                            (connectorCategory === cat.id
+                              ? "bg-[#0A0A0A] text-white"
+                              : "bg-[#F5F5F5] text-[#737373] hover:bg-[#E5E5E5]")
+                          }
+                        >
+                          {cat.label}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Connector list */}
+                    <div className="flex-1 overflow-y-auto p-2" style={{ maxHeight: "320px" }}>
+                      {filteredConnectors.map((c) => (
+                        <div
+                          key={c.id}
+                          className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-[#FAFAFA]"
+                        >
+                          <img
+                            src={c.logo}
+                            alt=""
+                            className="h-5 w-5 rounded"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-[#0A0A0A]">
+                              {c.name}
+                            </p>
+                            <p className="text-[10px] text-[#A3A3A3] truncate">
+                              {c.description}
+                            </p>
                           </div>
-                        ) : (
-                          <span className="text-[10px] text-[#A3A3A3]">
-                            Soon
-                          </span>
-                        )}
-                      </div>
-                    ))}
+                          {c.id === "hubspot" ? (
+                            <div className="flex items-center gap-1">
+                              <div className="h-2 w-2 rounded-full bg-[#22C55E]" />
+                              <span className="text-[10px] text-[#22C55E]">
+                                Active
+                              </span>
+                            </div>
+                          ) : c.available ? (
+                            <button className="text-[10px] text-[#0A0A0A] font-medium px-2 py-0.5 rounded border border-[#E5E5E5] hover:bg-[#F5F5F5]">
+                              Connect
+                            </button>
+                          ) : (
+                            <span className="text-[10px] text-[#D4D4D4]">
+                              Soon
+                            </span>
+                          )}
+                        </div>
+                      ))}
+                      {filteredConnectors.length === 0 && (
+                        <p className="text-xs text-[#A3A3A3] text-center py-4">
+                          No connectors found
+                        </p>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
@@ -254,11 +307,12 @@ export default function ChatInputBar({
                           setSelectedModel(model.id);
                           setShowModelPicker(false);
                         }}
-                        className={`w-full text-left px-3 py-1.5 text-xs hover:bg-[#F5F5F5] transition-colors ${
-                          selectedModel === model.id
+                        className={
+                          "w-full text-left px-3 py-1.5 text-xs hover:bg-[#F5F5F5] transition-colors " +
+                          (selectedModel === model.id
                             ? "text-[#0A0A0A] font-medium"
-                            : "text-[#525252]"
-                        }`}
+                            : "text-[#525252]")
+                        }
                       >
                         {model.label}
                       </button>

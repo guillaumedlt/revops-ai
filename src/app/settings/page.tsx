@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { CONNECTOR_REGISTRY, CATEGORIES } from "@/lib/connectors/registry";
 
 type Tab = "general" | "llm" | "connectors" | "billing";
 
@@ -22,15 +23,6 @@ interface LlmConfig {
   };
 }
 
-interface ConnectorToggle {
-  id: string;
-  name: string;
-  icon: string;
-  enabled: boolean;
-  connected: boolean;
-  detail: string;
-}
-
 function SettingsContent() {
   const searchParams = useSearchParams();
   const initialTab = (searchParams.get("tab") as Tab) ?? "general";
@@ -44,11 +36,9 @@ function SettingsContent() {
   const [hubspotLoading, setHubspotLoading] = useState(false);
   const [connectorToggles, setConnectorToggles] = useState<Record<string, boolean>>({
     hubspot: true,
-    salesforce: false,
-    google_sheets: false,
-    google_analytics: false,
-    slack: false,
   });
+  const [connectorSearch, setConnectorSearch] = useState("");
+  const [connectorCategory, setConnectorCategory] = useState("all");
 
   useEffect(() => {
     const supabase = createClient();
@@ -98,7 +88,6 @@ function SettingsContent() {
       ...prev,
       [connectorId]: !prev[connectorId],
     }));
-    // Persist toggle preference
     fetch("/api/settings/connectors", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -129,6 +118,16 @@ function SettingsContent() {
     setLlmConfig((prev) => prev ? { ...prev, defaultModel: model } : prev);
   };
 
+  const filteredConnectors = CONNECTOR_REGISTRY.filter((c) => {
+    const matchesSearch =
+      !connectorSearch ||
+      c.name.toLowerCase().includes(connectorSearch.toLowerCase()) ||
+      c.description.toLowerCase().includes(connectorSearch.toLowerCase());
+    const matchesCategory =
+      connectorCategory === "all" || c.category === connectorCategory;
+    return matchesSearch && matchesCategory;
+  });
+
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
@@ -144,11 +143,12 @@ function SettingsContent() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2.5 text-sm transition-colors -mb-px ${
-              activeTab === tab.id
+            className={
+              "px-4 py-2.5 text-sm transition-colors -mb-px " +
+              (activeTab === tab.id
                 ? "text-[#0A0A0A] font-medium border-b-2 border-[#0A0A0A]"
-                : "text-[#737373] hover:text-[#0A0A0A]"
-            }`}
+                : "text-[#737373] hover:text-[#0A0A0A]")
+            }
           >
             {tab.label}
           </button>
@@ -190,11 +190,12 @@ function SettingsContent() {
                 <button
                   key={model}
                   onClick={() => saveDefaultModel(model)}
-                  className={`h-8 px-4 rounded-full text-xs font-medium border transition-colors ${
-                    llmConfig?.defaultModel === model
+                  className={
+                    "h-8 px-4 rounded-full text-xs font-medium border transition-colors " +
+                    (llmConfig?.defaultModel === model
                       ? "bg-[#0A0A0A] text-white border-[#0A0A0A]"
-                      : "bg-white text-[#737373] border-[#E5E5E5] hover:border-[#0A0A0A]"
-                  }`}
+                      : "bg-white text-[#737373] border-[#E5E5E5] hover:border-[#0A0A0A]")
+                  }
                 >
                   {model === "revops-ai" ? "RevOps AI" : model.charAt(0).toUpperCase() + model.slice(1)}
                 </button>
@@ -222,7 +223,7 @@ function SettingsContent() {
                     <p className="text-sm text-[#0A0A0A]">{provider.name}</p>
                     <p className="text-xs text-[#737373] mt-0.5">
                       {config?.configured ? (
-                        <span className="text-green-600">Connected — ****{config.last4}</span>
+                        <span className="text-green-600">{"Connected — ****" + config.last4}</span>
                       ) : (
                         <span>Not configured</span>
                       )}
@@ -268,72 +269,94 @@ function SettingsContent() {
       {/* Connectors tab */}
       {activeTab === "connectors" && (
         <div className="space-y-4">
-          {/* HubSpot */}
-          <div className="bg-white rounded-xl border border-[#E5E5E5] p-4 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="text-xl">{"\uD83D\uDFE0"}</span>
-              <div>
-                <p className="text-sm font-medium text-[#0A0A0A]">HubSpot</p>
-                <p className={`text-xs mt-0.5 ${hubspotConnected ? "text-green-600" : "text-[#A3A3A3]"}`}>
-                  {hubspotConnected ? "Connected — Portal sync active" : "Not connected"}
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              {/* Toggle switch */}
-              <button
-                onClick={() => handleToggleConnector("hubspot")}
-                className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
-                  connectorToggles.hubspot ? "bg-[#0A0A0A]" : "bg-[#E5E5E5]"
-                }`}
-              >
-                <span className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform ${
-                  connectorToggles.hubspot ? "translate-x-[18px]" : "translate-x-[3px]"
-                }`} />
-              </button>
-              <button
-                onClick={handleConnectHubspot}
-                disabled={hubspotLoading}
-                className="text-xs text-[#737373] hover:text-[#0A0A0A] border border-[#E5E5E5] rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50"
-              >
-                {hubspotLoading ? "Redirecting..." : hubspotConnected ? "Reconnect" : "Connect"}
-              </button>
-            </div>
+          {/* Search bar */}
+          <div className="flex items-center gap-3">
+            <input
+              type="text"
+              value={connectorSearch}
+              onChange={(e) => setConnectorSearch(e.target.value)}
+              placeholder="Search connectors..."
+              className="flex-1 px-4 py-2 text-sm border border-[#E5E5E5] rounded-xl bg-white focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]"
+            />
           </div>
 
-          {/* Other connectors */}
-          {[
-            { id: "salesforce", name: "Salesforce", icon: "\u2601\ufe0f", detail: "Coming soon" },
-            { id: "google_sheets", name: "Google Sheets", icon: "\uD83D\uDCCA", detail: "Coming soon" },
-            { id: "google_analytics", name: "Google Analytics", icon: "\uD83D\uDCC8", detail: "Coming soon" },
-            { id: "slack", name: "Slack", icon: "\uD83D\uDCAC", detail: "Coming soon" },
-          ].map((connector) => (
-            <div
-              key={connector.id}
-              className="bg-white rounded-xl border border-[#E5E5E5] p-4 flex items-center justify-between"
-            >
-              <div className="flex items-center gap-3">
-                <span className="text-xl">{connector.icon}</span>
-                <div>
-                  <p className="text-sm font-medium text-[#0A0A0A]">{connector.name}</p>
-                  <p className="text-xs mt-0.5 text-[#A3A3A3]">{connector.detail}</p>
+          {/* Category pills */}
+          <div className="flex gap-1.5 flex-wrap">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setConnectorCategory(cat.id)}
+                className={
+                  "px-3 py-1 rounded-full text-xs font-medium transition-colors " +
+                  (connectorCategory === cat.id
+                    ? "bg-[#0A0A0A] text-white"
+                    : "bg-[#F5F5F5] text-[#737373] hover:bg-[#E5E5E5]")
+                }
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Connector list */}
+          <div className="space-y-2">
+            {filteredConnectors.map((c) => (
+              <div
+                key={c.id}
+                className="bg-white rounded-xl border border-[#E5E5E5] p-4 flex items-center justify-between"
+              >
+                <div className="flex items-center gap-3">
+                  <img src={c.logo} alt="" className="h-6 w-6 rounded" />
+                  <div>
+                    <p className="text-sm font-medium text-[#0A0A0A]">{c.name}</p>
+                    <p className={"text-xs mt-0.5 " + (c.id === "hubspot" && hubspotConnected ? "text-green-600" : "text-[#A3A3A3]")}>
+                      {c.id === "hubspot" && hubspotConnected
+                        ? "Connected — Portal sync active"
+                        : c.id === "hubspot"
+                          ? "Not connected"
+                          : c.description}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  {c.id === "hubspot" ? (
+                    <>
+                      <button
+                        onClick={() => handleToggleConnector("hubspot")}
+                        className={
+                          "relative inline-flex h-5 w-9 items-center rounded-full transition-colors " +
+                          (connectorToggles.hubspot ? "bg-[#0A0A0A]" : "bg-[#E5E5E5]")
+                        }
+                      >
+                        <span className={
+                          "inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform " +
+                          (connectorToggles.hubspot ? "translate-x-[18px]" : "translate-x-[3px]")
+                        } />
+                      </button>
+                      <button
+                        onClick={handleConnectHubspot}
+                        disabled={hubspotLoading}
+                        className="text-xs text-[#737373] hover:text-[#0A0A0A] border border-[#E5E5E5] rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50"
+                      >
+                        {hubspotLoading ? "Redirecting..." : hubspotConnected ? "Reconnect" : "Connect"}
+                      </button>
+                    </>
+                  ) : c.available ? (
+                    <button className="text-xs text-[#0A0A0A] font-medium border border-[#E5E5E5] rounded-lg px-3 py-1.5 hover:bg-[#F5F5F5] transition-colors">
+                      Connect
+                    </button>
+                  ) : (
+                    <span className="text-xs text-[#D4D4D4]">Coming soon</span>
+                  )}
                 </div>
               </div>
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => handleToggleConnector(connector.id)}
-                  className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
-                    connectorToggles[connector.id] ? "bg-[#0A0A0A]" : "bg-[#E5E5E5]"
-                  }`}
-                >
-                  <span className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform ${
-                    connectorToggles[connector.id] ? "translate-x-[18px]" : "translate-x-[3px]"
-                  }`} />
-                </button>
-                <span className="text-xs text-[#A3A3A3]">Unavailable</span>
+            ))}
+            {filteredConnectors.length === 0 && (
+              <div className="bg-white rounded-xl border border-[#E5E5E5] p-8 text-center">
+                <p className="text-sm text-[#A3A3A3]">No connectors found</p>
               </div>
-            </div>
-          ))}
+            )}
+          </div>
         </div>
       )}
 
