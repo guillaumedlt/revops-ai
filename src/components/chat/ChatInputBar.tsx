@@ -1,10 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import {
-  SlidersHorizontal,
-  ArrowUp,
-} from "lucide-react";
+import { SlidersHorizontal, ArrowUp } from "lucide-react";
 import FileUpload from "./FileUpload";
 import VoiceInput from "./VoiceInput";
 import TemplatesPopover from "./TemplatesPopover";
@@ -33,8 +30,18 @@ const MODELS = [
 
 const CONNECTORS = [
   { id: "hubspot", name: "HubSpot", icon: "\uD83D\uDFE0", connected: true },
-  { id: "salesforce", name: "Salesforce", icon: "\u2601\uFE0F", connected: false },
-  { id: "google_sheets", name: "Google Sheets", icon: "\uD83D\uDCCA", connected: false },
+  {
+    id: "salesforce",
+    name: "Salesforce",
+    icon: "\u2601\uFE0F",
+    connected: false,
+  },
+  {
+    id: "google_sheets",
+    name: "Google Sheets",
+    icon: "\uD83D\uDCCA",
+    connected: false,
+  },
   { id: "slack", name: "Slack", icon: "\uD83D\uDCAC", connected: false },
 ];
 
@@ -67,10 +74,16 @@ export default function ChatInputBar({
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (modelRef.current && !modelRef.current.contains(e.target as Node)) {
+      if (
+        modelRef.current &&
+        !modelRef.current.contains(e.target as Node)
+      ) {
         setShowModelPicker(false);
       }
-      if (connectorsRef.current && !connectorsRef.current.contains(e.target as Node)) {
+      if (
+        connectorsRef.current &&
+        !connectorsRef.current.contains(e.target as Node)
+      ) {
         setShowConnectors(false);
       }
     };
@@ -84,13 +97,15 @@ export default function ChatInputBar({
 
     let attachment: Attachment | undefined;
 
-    // Upload file if selected
     if (selectedFile) {
       setUploading(true);
       try {
         const formData = new FormData();
         formData.append("file", selectedFile);
-        const res = await fetch("/api/chat/upload", { method: "POST", body: formData });
+        const res = await fetch("/api/chat/upload", {
+          method: "POST",
+          body: formData,
+        });
         if (res.ok) {
           const json = await res.json();
           if (json.data) {
@@ -127,126 +142,152 @@ export default function ChatInputBar({
     textareaRef.current?.focus();
   };
 
-  const currentModel = MODELS.find((m) => m.id === selectedModel) ?? MODELS[0];
+  const currentModel =
+    MODELS.find((m) => m.id === selectedModel) ?? MODELS[0];
 
   return (
-    <div className="mx-auto max-w-2xl w-full px-4 pb-4">
-      <div className="relative border border-[#E5E5E5] rounded-2xl bg-white shadow-sm focus-within:ring-1 focus-within:ring-[#D4D4D4] transition-shadow">
-        {/* File preview chip */}
-        {selectedFile && (
-          <div className="px-4 pt-2">
-            <div className="inline-flex items-center gap-2 rounded-lg border border-[#E5E5E5] bg-[#FAFAFA] px-3 py-1.5 text-xs text-[#525252]">
-              <span className="max-w-[200px] truncate">{selectedFile.name}</span>
-              <span className="text-[#A3A3A3]">
-                {selectedFile.size < 1024 ? `${selectedFile.size} B` : selectedFile.size < 1048576 ? `${(selectedFile.size / 1024).toFixed(1)} KB` : `${(selectedFile.size / 1048576).toFixed(1)} MB`}
-              </span>
-              <button onClick={() => setSelectedFile(null)} className="text-[#A3A3A3] hover:text-[#0A0A0A] text-sm leading-none">&times;</button>
-            </div>
-          </div>
-        )}
-
-        {/* Textarea row */}
-        <div className="px-4 pt-3 pb-1">
-          <textarea
-            ref={textareaRef}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            onKeyDown={handleKeyDown}
-            disabled={disabled || uploading}
-            placeholder="Ask RevOps AI..."
-            rows={1}
-            className="w-full resize-none bg-transparent text-sm text-[#0A0A0A] placeholder:text-[#A3A3A3] focus:outline-none min-h-[36px] max-h-[200px] py-1"
-          />
-        </div>
-
-        {/* Icon row */}
-        <div className="px-3 pb-2.5 flex items-center justify-between">
-          {/* Left icons */}
-          <div className="relative flex items-center gap-0.5">
-            <FileUpload
-              onFileSelect={(file) => setSelectedFile(file)}
-              selectedFile={null}
-              onClear={() => setSelectedFile(null)}
-            />
-            <div className="relative" ref={connectorsRef}>
-              <button
-                onClick={() => setShowConnectors(!showConnectors)}
-                type="button"
-                className="flex h-8 w-8 items-center justify-center rounded-lg text-[#737373] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors"
-                title="Connected Tools"
-              >
-                <SlidersHorizontal size={16} />
-              </button>
-              {showConnectors && (
-                <div className="absolute bottom-full left-0 mb-2 w-[240px] rounded-xl border border-[#E5E5E5] bg-white shadow-lg p-2 z-50">
-                  <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#A3A3A3]">Connected Tools</p>
-                  {CONNECTORS.map((c) => (
-                    <div key={c.id} className="flex items-center justify-between px-2 py-2 rounded-lg hover:bg-[#FAFAFA]">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm">{c.icon}</span>
-                        <span className="text-sm text-[#525252]">{c.name}</span>
-                      </div>
-                      {c.connected ? (
-                        <div className="h-4 w-8 rounded-full bg-[#22C55E] relative cursor-pointer">
-                          <div className="absolute right-0.5 top-0.5 h-3 w-3 rounded-full bg-white" />
-                        </div>
-                      ) : (
-                        <span className="text-[10px] text-[#A3A3A3]">Soon</span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            <TemplatesPopover onSelect={handleTemplateSelect} />
-
-            {/* Model pill */}
-            <div className="relative" ref={modelRef}>
-              <button
-                onClick={() => setShowModelPicker(!showModelPicker)}
-                className="ml-1 h-7 px-2.5 rounded-full text-[11px] font-medium border border-[#E5E5E5] text-[#525252] hover:bg-[#F5F5F5] transition-colors"
-              >
-                {currentModel.label}
-              </button>
-              {showModelPicker && (
-                <div className="absolute bottom-full left-0 mb-1 bg-white border border-[#E5E5E5] rounded-xl shadow-lg py-1 min-w-[140px] z-50">
-                  {MODELS.map((model) => (
-                    <button
-                      key={model.id}
-                      onClick={() => {
-                        setSelectedModel(model.id);
-                        setShowModelPicker(false);
-                      }}
-                      className={`w-full text-left px-3 py-1.5 text-xs hover:bg-[#F5F5F5] transition-colors ${
-                        selectedModel === model.id
-                          ? "text-[#0A0A0A] font-medium"
-                          : "text-[#525252]"
-                      }`}
-                    >
-                      {model.label}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Right icons */}
-          <div className="flex items-center gap-0.5">
-            <VoiceInput onTranscript={handleVoiceTranscript} disabled={disabled} />
-            {value.trim() ? (
-              <button
-                onClick={handleSend}
-                disabled={disabled || uploading}
-                className="h-8 w-8 rounded-full bg-[#0A0A0A] text-white flex items-center justify-center hover:bg-[#333] transition-colors disabled:opacity-50"
-              >
-                <ArrowUp size={16} />
-              </button>
-            ) : (
-              <div className="h-8 w-8 rounded-full bg-[#E5E5E5] flex items-center justify-center">
-                <ArrowUp size={16} className="text-[#A3A3A3]" />
+    <div className="relative w-full px-4 pb-4">
+      <div className="mx-auto max-w-2xl">
+        <div className="relative border border-[#E5E5E5] rounded-2xl bg-white shadow-sm focus-within:ring-1 focus-within:ring-[#D4D4D4] transition-shadow">
+          {/* File preview chip */}
+          {selectedFile && (
+            <div className="px-4 pt-2">
+              <div className="inline-flex items-center gap-2 rounded-lg border border-[#E5E5E5] bg-[#FAFAFA] px-3 py-1.5 text-xs text-[#525252]">
+                <span className="max-w-[200px] truncate">
+                  {selectedFile.name}
+                </span>
+                <span className="text-[#A3A3A3]">
+                  {selectedFile.size < 1024
+                    ? \`\${selectedFile.size} B\`
+                    : selectedFile.size < 1048576
+                      ? \`\${(selectedFile.size / 1024).toFixed(1)} KB\`
+                      : \`\${(selectedFile.size / 1048576).toFixed(1)} MB\`}
+                </span>
+                <button
+                  onClick={() => setSelectedFile(null)}
+                  className="text-[#A3A3A3] hover:text-[#0A0A0A] text-sm leading-none"
+                >
+                  &times;
+                </button>
               </div>
-            )}
+            </div>
+          )}
+
+          {/* Textarea row */}
+          <div className="px-4 pt-3 pb-1">
+            <textarea
+              ref={textareaRef}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onKeyDown={handleKeyDown}
+              disabled={disabled || uploading}
+              placeholder="Ask RevOps AI..."
+              rows={1}
+              className="w-full resize-none bg-transparent text-sm text-[#0A0A0A] placeholder:text-[#A3A3A3] focus:outline-none min-h-[36px] max-h-[200px] py-1"
+            />
+          </div>
+
+          {/* Icon row */}
+          <div className="px-3 pb-2.5 flex items-center justify-between">
+            {/* Left icons */}
+            <div className="relative flex items-center gap-0.5">
+              <FileUpload
+                onFileSelect={(file) => setSelectedFile(file)}
+                selectedFile={null}
+                onClear={() => setSelectedFile(null)}
+              />
+              <div className="relative" ref={connectorsRef}>
+                <button
+                  onClick={() => setShowConnectors(!showConnectors)}
+                  type="button"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg text-[#737373] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors"
+                  title="Connected Tools"
+                >
+                  <SlidersHorizontal size={16} />
+                </button>
+                {showConnectors && (
+                  <div className="absolute bottom-full left-0 mb-2 w-[240px] rounded-xl border border-[#E5E5E5] bg-white shadow-lg p-2 z-50">
+                    <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#A3A3A3]">
+                      Connected Tools
+                    </p>
+                    {CONNECTORS.map((c) => (
+                      <div
+                        key={c.id}
+                        className="flex items-center justify-between px-2 py-2 rounded-lg hover:bg-[#FAFAFA]"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm">{c.icon}</span>
+                          <span className="text-sm text-[#525252]">
+                            {c.name}
+                          </span>
+                        </div>
+                        {c.connected ? (
+                          <div className="h-4 w-8 rounded-full bg-[#22C55E] relative cursor-pointer">
+                            <div className="absolute right-0.5 top-0.5 h-3 w-3 rounded-full bg-white" />
+                          </div>
+                        ) : (
+                          <span className="text-[10px] text-[#A3A3A3]">
+                            Soon
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <TemplatesPopover onSelect={handleTemplateSelect} />
+
+              {/* Model pill */}
+              <div className="relative" ref={modelRef}>
+                <button
+                  onClick={() => setShowModelPicker(!showModelPicker)}
+                  className="ml-1 h-7 px-2.5 rounded-full text-[11px] font-medium border border-[#E5E5E5] text-[#525252] hover:bg-[#F5F5F5] transition-colors"
+                >
+                  {currentModel.label}
+                </button>
+                {showModelPicker && (
+                  <div className="absolute bottom-full left-0 mb-1 bg-white border border-[#E5E5E5] rounded-xl shadow-lg py-1 min-w-[140px] z-50">
+                    {MODELS.map((model) => (
+                      <button
+                        key={model.id}
+                        onClick={() => {
+                          setSelectedModel(model.id);
+                          setShowModelPicker(false);
+                        }}
+                        className={\`w-full text-left px-3 py-1.5 text-xs hover:bg-[#F5F5F5] transition-colors \${
+                          selectedModel === model.id
+                            ? "text-[#0A0A0A] font-medium"
+                            : "text-[#525252]"
+                        }\`}
+                      >
+                        {model.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Right icons */}
+            <div className="flex items-center gap-0.5">
+              <VoiceInput
+                onTranscript={handleVoiceTranscript}
+                disabled={disabled}
+              />
+              {value.trim() ? (
+                <button
+                  onClick={handleSend}
+                  disabled={disabled || uploading}
+                  className="h-8 w-8 rounded-full bg-[#0A0A0A] text-white flex items-center justify-center hover:bg-[#333] transition-colors disabled:opacity-50"
+                >
+                  <ArrowUp size={16} />
+                </button>
+              ) : (
+                <div className="h-8 w-8 rounded-full bg-[#E5E5E5] flex items-center justify-center">
+                  <ArrowUp size={16} className="text-[#A3A3A3]" />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -1,11 +1,16 @@
 "use client";
 
 import { useEffect, useState, useRef, useCallback } from "react";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
+import { motion } from "framer-motion";
 import MessageThread from "@/components/chat/MessageThread";
 import ChatInputBar from "@/components/chat/ChatInputBar";
 import type { ContentBlock } from "@/types/chat-blocks";
-import { getCachedMessages, setCachedMessages, appendCachedMessage, updateCachedMessage } from "@/lib/chat-store";
+import {
+  getCachedMessages,
+  setCachedMessages,
+  appendCachedMessage,
+} from "@/lib/chat-store";
 
 interface Attachment {
   type: string;
@@ -26,18 +31,21 @@ interface Message {
 
 export default function ConversationPage() {
   const { conversationId } = useParams<{ conversationId: string }>();
-  const searchParams = useSearchParams();
   const [messages, setMessages] = useState<Message[]>(() => {
     const cached = getCachedMessages(conversationId);
     return cached ?? [];
   });
   const [streamingText, setStreamingText] = useState("");
-  const [streamingBlocks, setStreamingBlocks] = useState<ContentBlock[] | null>(null);
+  const [streamingBlocks, setStreamingBlocks] = useState<ContentBlock[] | null>(
+    null
+  );
   const [activeTools, setActiveTools] = useState<string[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
-  const [loaded, setLoaded] = useState(() => !!getCachedMessages(conversationId));
+  const [loaded, setLoaded] = useState(
+    () => !!getCachedMessages(conversationId)
+  );
   const [selectedModel, setSelectedModel] = useState("revops-ai");
-  const initialSent = useRef(false);
+  const pendingSent = useRef(false);
   const pendingTextRef = useRef("");
   const updateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -70,7 +78,6 @@ export default function ConversationPage() {
       const useModel = model ?? selectedModel;
       setSelectedModel(useModel);
 
-      // 1. INSTANTLY show user message + typing indicator
       const userMsg: Message = {
         id: crypto.randomUUID(),
         role: "user",
@@ -85,12 +92,16 @@ export default function ConversationPage() {
       setActiveTools([]);
       pendingTextRef.current = "";
 
-      // 2. THEN make API call (user sees message + typing indicator immediately)
       try {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message, conversationId, model: useModel, attachment }),
+          body: JSON.stringify({
+            message,
+            conversationId,
+            model: useModel,
+            attachment,
+          }),
         });
 
         if (!res.ok || !res.body) {
@@ -128,7 +139,9 @@ export default function ConversationPage() {
               } else if (event.type === "tool_start") {
                 setActiveTools((prev) => [...prev, event.name]);
               } else if (event.type === "tool_result") {
-                setActiveTools((prev) => prev.filter((t) => t !== event.name));
+                setActiveTools((prev) =>
+                  prev.filter((t) => t !== event.name)
+                );
               } else if (event.type === "content_blocks") {
                 finalBlocks = event.blocks;
                 setStreamingBlocks(event.blocks);
@@ -137,7 +150,6 @@ export default function ConversationPage() {
                 pendingTextRef.current += `\n\n**Error:** ${event.error || "Something went wrong"}`;
                 flushPendingText();
               } else if (event.type === "done") {
-                // Flush any remaining pending text
                 if (updateTimerRef.current) {
                   clearTimeout(updateTimerRef.current);
                   updateTimerRef.current = null;
@@ -163,12 +175,10 @@ export default function ConversationPage() {
           }
         }
       } catch {
-        /* network error */
         setStreamingText("");
         setStreamingBlocks(null);
         setActiveTools([]);
       } finally {
-        // Final cleanup
         if (updateTimerRef.current) {
           clearTimeout(updateTimerRef.current);
           updateTimerRef.current = null;
@@ -180,32 +190,40 @@ export default function ConversationPage() {
     [conversationId, isStreaming, selectedModel, flushPendingText]
   );
 
+  // Auto-send pending message from welcome page
   useEffect(() => {
-    if (loaded && !initialSent.current) {
-      const initial = searchParams.get("initial");
-      const model = searchParams.get("model") ?? "revops-ai";
-      if (initial && messages.length === 0) {
-        initialSent.current = true;
-        // Check for stored attachment
-        let attachment: Attachment | undefined;
-        try {
-          const stored = sessionStorage.getItem(`attachment_${conversationId}`);
-          if (stored) {
-            attachment = JSON.parse(stored);
-            sessionStorage.removeItem(`attachment_${conversationId}`);
-          }
-        } catch { /* ignore */ }
-        sendMessage(initial, model, attachment);
+    if (!loaded || pendingSent.current) return;
+    if (typeof window === "undefined") return;
+
+    const pending = sessionStorage.getItem("pending_message");
+    if (pending && messages.length === 0) {
+      pendingSent.current = true;
+      sessionStorage.removeItem("pending_message");
+      try {
+        const { message, model, attachment } = JSON.parse(pending);
+        setTimeout(() => sendMessage(message, model, attachment), 100);
+      } catch {
+        /* ignore */
       }
     }
-  }, [loaded, searchParams, messages.length, sendMessage, conversationId]);
+  }, [loaded, messages.length, sendMessage]);
 
-  const handleSend = (message: string, model: string, attachment?: Attachment) => {
+  const handleSend = (
+    message: string,
+    model: string,
+    attachment?: Attachment
+  ) => {
     sendMessage(message, model, attachment);
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full">
+    <motion.div
+      className="flex flex-1 flex-col h-full"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
+      {/* Messages area */}
       <MessageThread
         messages={messages}
         streamingText={streamingText}
@@ -213,9 +231,13 @@ export default function ConversationPage() {
         activeTools={activeTools}
         streaming={isStreaming}
       />
-      <div className="shrink-0 pb-2">
-        <ChatInputBar onSend={handleSend} disabled={isStreaming} />
+
+      {/* Input bar at bottom */}
+      <div className="shrink-0 border-t border-[#F0F0F0] bg-white/80 backdrop-blur-sm pb-2">
+        <div className="pt-3">
+          <ChatInputBar onSend={handleSend} disabled={isStreaming} />
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
