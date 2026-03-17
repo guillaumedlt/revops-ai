@@ -31,7 +31,9 @@ export async function deductCredit(tenantId: string, userId: string, messageId?:
   });
 
   // Increment used count on allocation
-  await supabase.rpc("increment_credits_used", { p_tenant_id: tenantId }).catch(() => {
+  try {
+    await supabase.rpc("increment_credits_used", { p_tenant_id: tenantId });
+  } catch {
     // RPC may not exist yet, silently fail
-  });
+  }
 }
