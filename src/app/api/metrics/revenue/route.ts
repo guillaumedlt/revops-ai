@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { metricRoute } from "@/lib/api-helpers";
 import {
-  computeTotalRevenue,
+  computeRevenueWon,
   computeRevenueByOwner,
   computeRevenueByAccount,
   computeRevenueForecast,
@@ -10,10 +10,10 @@ import {
 export const GET = metricRoute((data, query) => {
   const filter = { dateRange: query.dateRange, ownerIds: query.ownerIds, pipeline: query.pipeline };
 
-  const totalRevenue = computeTotalRevenue(data.deals, filter);
+  const totalRevenue = computeRevenueWon(data.deals, filter);
   const byOwner = computeRevenueByOwner(data.deals, filter);
   const byAccount = computeRevenueByAccount(data.deals, data.companies, filter);
-  const forecast = computeRevenueForecast(data.deals, filter);
+  const forecast = computeRevenueForecast(data.deals, 0, filter);
 
   return {
     totalRevenue,
