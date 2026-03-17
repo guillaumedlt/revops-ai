@@ -20,7 +20,7 @@ export function buildAuthorizationUrl(state: string): string {
     state,
   });
 
-  return `https://app.hubapi.com/oauth/authorize?${params.toString()}`;
+  return `https://app.hubspot.com/oauth/authorize?${params.toString()}`;
 }
 
 export interface HubSpotTokenResponse {
