@@ -42,6 +42,16 @@ export interface SearchResponse {
   };
 }
 
+export interface ListResponse {
+  results: Array<{
+    id: string;
+    properties: Record<string, string | null>;
+  }>;
+  paging?: {
+    next?: { after: string };
+  };
+}
+
 export interface RetryConfig {
   maxRetries: number;
   initialDelayMs: number;
@@ -283,6 +293,48 @@ export async function* searchObjectsIterator(
       yield result;
     }
 
+    after = response.paging?.next?.after;
+  } while (after);
+}
+
+// ---------------------------------------------------------------------------
+// List API — GET-based pagination (avoids search API property limits)
+// ---------------------------------------------------------------------------
+
+export async function listObjects(
+  objectType: string,
+  properties: string[],
+  accessToken: string,
+  portalId: string,
+  after?: string
+): Promise<ListResponse> {
+  const params = new URLSearchParams({
+    limit: "100",
+    properties: properties.join(","),
+  });
+  if (after) params.set("after", after);
+
+  const response = await fetchWithRetry(
+    `${HUBSPOT_BASE_URL}/crm/v3/objects/${objectType}?${params}`,
+    { method: "GET", headers: authHeaders(accessToken) },
+    portalId
+  );
+
+  return response.json() as Promise<ListResponse>;
+}
+
+export async function* listObjectsIterator(
+  objectType: string,
+  properties: string[],
+  accessToken: string,
+  portalId: string
+): AsyncGenerator<{ id: string; properties: Record<string, string | null> }> {
+  let after: string | undefined;
+  do {
+    const response = await listObjects(objectType, properties, accessToken, portalId, after);
+    for (const result of response.results) {
+      yield result;
+    }
     after = response.paging?.next?.after;
   } while (after);
 }

@@ -6,6 +6,7 @@ import {
   getPipelines,
   getOwners,
   searchObjectsIterator,
+  listObjectsIterator,
   getAssociations,
   type Pipeline,
 } from "./client";
@@ -13,7 +14,6 @@ import {
   DEAL_PROPERTIES,
   CONTACT_PROPERTIES,
   COMPANY_PROPERTIES,
-  getDealPropertiesForPipelines,
   type SyncResult,
 } from "./types";
 
@@ -54,7 +54,7 @@ function mapDealFromHubSpot(
 ): Record<string, unknown> {
   const p = record.properties;
 
-  // Extract dynamic stage timestamps and cumulative times
+  // Extract dynamic stage timestamps and cumulative times from raw_properties
   const stageTimestamps: Record<string, string | null> = {};
   const cumulativeStageTimes: Record<string, number | null> = {};
 
@@ -361,34 +361,39 @@ async function syncDeals(
   accessToken: string,
   portalId: string,
   supabase: SupabaseClient,
-  dealProperties: string[],
   lastSyncAt?: string | null
 ): Promise<SyncResult> {
-  const filters: Array<{
-    propertyName: string;
-    operator: string;
-    value?: string;
-  }> = [];
-
-  if (lastSyncAt) {
-    filters.push({
-      propertyName: "hs_lastmodifieddate",
-      operator: "GTE",
-      value: new Date(lastSyncAt).getTime().toString(),
-    });
-  }
-
   const records: Record<string, unknown>[] = [];
   const errors: Array<{ id: string; error: string }> = [];
 
-  for await (const record of searchObjectsIterator(
-    "deals",
-    filters,
-    dealProperties,
-    accessToken,
-    portalId
-  )) {
-    records.push(mapDealFromHubSpot(record, tenantId));
+  if (lastSyncAt) {
+    // Incremental sync — use search API with filter, static properties only
+    const filters = [
+      {
+        propertyName: "hs_lastmodifieddate",
+        operator: "GTE",
+        value: new Date(lastSyncAt).getTime().toString(),
+      },
+    ];
+    for await (const record of searchObjectsIterator(
+      "deals",
+      filters,
+      DEAL_PROPERTIES,
+      accessToken,
+      portalId
+    )) {
+      records.push(mapDealFromHubSpot(record, tenantId));
+    }
+  } else {
+    // Full sync — use GET list API to avoid search API property limit (400 error)
+    for await (const record of listObjectsIterator(
+      "deals",
+      DEAL_PROPERTIES,
+      accessToken,
+      portalId
+    )) {
+      records.push(mapDealFromHubSpot(record, tenantId));
+    }
   }
 
   // Upsert in batches of 500
@@ -429,31 +434,37 @@ async function syncContacts(
   supabase: SupabaseClient,
   lastSyncAt?: string | null
 ): Promise<SyncResult> {
-  const filters: Array<{
-    propertyName: string;
-    operator: string;
-    value?: string;
-  }> = [];
-
-  if (lastSyncAt) {
-    filters.push({
-      propertyName: "hs_lastmodifieddate",
-      operator: "GTE",
-      value: new Date(lastSyncAt).getTime().toString(),
-    });
-  }
-
   const records: Record<string, unknown>[] = [];
   const errors: Array<{ id: string; error: string }> = [];
 
-  for await (const record of searchObjectsIterator(
-    "contacts",
-    filters,
-    CONTACT_PROPERTIES,
-    accessToken,
-    portalId
-  )) {
-    records.push(mapContactFromHubSpot(record, tenantId));
+  if (lastSyncAt) {
+    // Incremental sync — use search API with filter
+    const filters = [
+      {
+        propertyName: "hs_lastmodifieddate",
+        operator: "GTE",
+        value: new Date(lastSyncAt).getTime().toString(),
+      },
+    ];
+    for await (const record of searchObjectsIterator(
+      "contacts",
+      filters,
+      CONTACT_PROPERTIES,
+      accessToken,
+      portalId
+    )) {
+      records.push(mapContactFromHubSpot(record, tenantId));
+    }
+  } else {
+    // Full sync — use GET list API
+    for await (const record of listObjectsIterator(
+      "contacts",
+      CONTACT_PROPERTIES,
+      accessToken,
+      portalId
+    )) {
+      records.push(mapContactFromHubSpot(record, tenantId));
+    }
   }
 
   const BATCH_SIZE = 500;
@@ -493,31 +504,37 @@ async function syncCompanies(
   supabase: SupabaseClient,
   lastSyncAt?: string | null
 ): Promise<SyncResult> {
-  const filters: Array<{
-    propertyName: string;
-    operator: string;
-    value?: string;
-  }> = [];
-
-  if (lastSyncAt) {
-    filters.push({
-      propertyName: "hs_lastmodifieddate",
-      operator: "GTE",
-      value: new Date(lastSyncAt).getTime().toString(),
-    });
-  }
-
   const records: Record<string, unknown>[] = [];
   const errors: Array<{ id: string; error: string }> = [];
 
-  for await (const record of searchObjectsIterator(
-    "companies",
-    filters,
-    COMPANY_PROPERTIES,
-    accessToken,
-    portalId
-  )) {
-    records.push(mapCompanyFromHubSpot(record, tenantId));
+  if (lastSyncAt) {
+    // Incremental sync — use search API with filter
+    const filters = [
+      {
+        propertyName: "hs_lastmodifieddate",
+        operator: "GTE",
+        value: new Date(lastSyncAt).getTime().toString(),
+      },
+    ];
+    for await (const record of searchObjectsIterator(
+      "companies",
+      filters,
+      COMPANY_PROPERTIES,
+      accessToken,
+      portalId
+    )) {
+      records.push(mapCompanyFromHubSpot(record, tenantId));
+    }
+  } else {
+    // Full sync — use GET list API
+    for await (const record of listObjectsIterator(
+      "companies",
+      COMPANY_PROPERTIES,
+      accessToken,
+      portalId
+    )) {
+      records.push(mapCompanyFromHubSpot(record, tenantId));
+    }
   }
 
   const BATCH_SIZE = 500;
@@ -685,7 +702,7 @@ export async function syncTenant(
     );
 
     // 3. Sync pipeline stages
-    const { pipelines, result: stagesResult } = await syncPipelineStages(
+    const { result: stagesResult } = await syncPipelineStages(
       tenantId,
       accessToken,
       portalId,
@@ -707,16 +724,12 @@ export async function syncTenant(
     const isIncremental = !forceFullSync && !!lastSyncAt;
     const syncSince = isIncremental ? lastSyncAt : null;
 
-    // Get deal properties including dynamic stage properties
-    const dealProperties = getDealPropertiesForPipelines(pipelines);
-
-    // 6. Sync deals
+    // 6. Sync deals — use static DEAL_PROPERTIES only (stage timestamps in raw_properties)
     const dealsResult = await syncDeals(
       tenantId,
       accessToken,
       portalId,
       supabase,
-      dealProperties,
       syncSince
     );
     results.push(dealsResult);
