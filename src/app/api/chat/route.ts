@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
   // Check credits
   const credits = await checkCredits(auth.tenantId);
   if (!credits.allowed) {
-    return NextResponse.json({ error: "Limite de credits atteinte" }, { status: 402 });
+    return NextResponse.json({ error: "Credit limit reached" }, { status: 402 });
   }
 
   const { message, conversationId } = parsed.data;
@@ -57,11 +57,19 @@ export async function POST(request: NextRequest) {
   const systemPrompt = SYSTEM_PROMPT + buildTenantContext({ name: "Tenant" });
 
   // Build tool definitions for Anthropic API
-  const toolDefs = Object.entries(aiTools).map(([name, tool]) => ({
-    name,
-    description: tool.description,
-    input_schema: zodToJsonSchema(tool.parameters),
-  }));
+  const toolDefs = Object.entries(aiTools).map(([name, tool]) => {
+    const schema = zodToJsonSchema(tool.parameters);
+    // Validate: Anthropic requires properties to be a non-empty object when provided
+    // and required array should only be present if non-empty
+    return {
+      name,
+      description: tool.description,
+      input_schema: schema,
+    };
+  });
+
+  // Log tool count for debugging
+  console.log("[chat/route] Prepared", toolDefs.length, "tools for model:", modelId);
 
   // Call Anthropic API with streaming
   const encoder = new TextEncoder();
@@ -77,19 +85,21 @@ export async function POST(request: NextRequest) {
           // Determine whether to include tools (skip on retry after 500)
           const useTools = retryAttempt === 0;
 
+          const apiHeaders: Record<string, string> = {
+            "Content-Type": "application/json",
+            "x-api-key": process.env.ANTHROPIC_API_KEY!,
+            "anthropic-version": "2023-06-01",
+          };
+
           const response = await fetch("https://api.anthropic.com/v1/messages", {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "x-api-key": process.env.ANTHROPIC_API_KEY!,
-              "anthropic-version": "2023-06-01",
-            },
+            headers: apiHeaders,
             body: JSON.stringify({
               model: modelId,
               max_tokens: 2048,
-              system: systemPrompt,
+              system: systemPrompt.trim(),
               messages,
-              ...(useTools ? { tools: toolDefs } : {}),
+              ...(useTools && toolDefs.length > 0 ? { tools: toolDefs } : {}),
               stream: true,
             }),
           });
@@ -102,10 +112,11 @@ export async function POST(request: NextRequest) {
 
             console.error("[chat/route] Anthropic API error:", {
               status: response.status,
-              body: errorBody,
+              body: errorBody.slice(0, 500),
               model: modelId,
               retryAttempt,
               conversationId: convId,
+              toolCount: useTools ? toolDefs.length : 0,
             });
 
             // Retry once without tools on 500/529 errors
@@ -164,9 +175,14 @@ export async function POST(request: NextRequest) {
 
                 if (event.type === "content_block_stop" && currentToolUse) {
                   try {
-                    const input = JSON.parse(currentToolUse.inputJson);
+                    const input = currentToolUse.inputJson ? JSON.parse(currentToolUse.inputJson) : {};
                     toolUseBlocks.push({ id: currentToolUse.id, name: currentToolUse.name, input });
-                  } catch { /* invalid JSON */ }
+                  } catch (parseErr) {
+                    console.error("[chat/route] Failed to parse tool input JSON:", {
+                      tool: currentToolUse.name,
+                      inputJson: currentToolUse.inputJson.slice(0, 200),
+                    });
+                  }
                   currentToolUse = null;
                 }
 
@@ -274,7 +290,7 @@ function zodToJsonSchema(schema: z.ZodType): Record<string, unknown> {
     for (const [key, val] of Object.entries(shape)) {
       const zodVal = val as z.ZodType;
       if (zodVal instanceof z.ZodString) {
-        properties[key] = { type: "string", description: (zodVal as any)._def?.description };
+        properties[key] = { type: "string", ...(((zodVal as any)._def?.description) ? { description: (zodVal as any)._def.description } : {}) };
       } else if (zodVal instanceof z.ZodNumber) {
         properties[key] = { type: "number" };
       } else if (zodVal instanceof z.ZodEnum) {
@@ -296,7 +312,12 @@ function zodToJsonSchema(schema: z.ZodType): Record<string, unknown> {
         required.push(key);
       }
     }
-    return { type: "object", properties, ...(required.length > 0 ? { required } : {}) };
+    const result: Record<string, unknown> = { type: "object", properties };
+    if (required.length > 0) {
+      result.required = required;
+    }
+    return result;
   }
+  // For empty schemas (like z.object({})), return valid Anthropic input_schema
   return { type: "object", properties: {} };
 }
