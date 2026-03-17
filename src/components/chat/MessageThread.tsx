@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Copy } from "lucide-react";
+import { Copy, Check } from "lucide-react";
 import BlockRenderer from "./blocks/BlockRenderer";
 import TextBlock from "./blocks/TextBlock";
 import AddToDashboard from "./AddToDashboard";
@@ -31,16 +31,23 @@ function stripBlockSyntax(text: string): string {
 }
 
 function CopyButton({ text }: { text: string }) {
+  var copied = React.useState(false);
+  var isCopied = copied[0];
+  var setCopied = copied[1];
   var handleCopy = function () {
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText(text).then(function () {
+      setCopied(true);
+      setTimeout(function () { setCopied(false); }, 2000);
+    });
   };
   return (
     <button
       onClick={handleCopy}
-      className="h-7 w-7 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
+      className="h-7 px-2 rounded-lg flex items-center gap-1 text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
       title="Copy"
     >
-      <Copy size={13} />
+      {isCopied ? <Check size={13} className="text-[#22C55E]" /> : <Copy size={13} />}
+      {isCopied && <span className="text-[10px] text-[#22C55E]">Copied</span>}
     </button>
   );
 }
@@ -187,7 +194,7 @@ export default function MessageThread({
         {/* Streaming state — separate from message list to avoid re-renders */}
         {streaming && (
           <div className="flex justify-start">
-            <div className="max-w-2xl w-full text-sm text-[#0A0A0A] leading-relaxed">
+            <div className="group max-w-2xl w-full text-sm text-[#0A0A0A] leading-relaxed">
               {streamingText ? (
                 <>
                   <TextBlock text={stripBlockSyntax(streamingText)} />
