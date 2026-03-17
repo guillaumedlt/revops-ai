@@ -9,8 +9,8 @@ type Tab = "general" | "llm" | "connectors" | "billing";
 const TABS: { id: Tab; label: string }[] = [
   { id: "general", label: "General" },
   { id: "llm", label: "LLM" },
-  { id: "connectors", label: "Connecteurs" },
-  { id: "billing", label: "Facturation" },
+  { id: "connectors", label: "Connectors" },
+  { id: "billing", label: "Billing" },
 ];
 
 interface LlmConfig {
@@ -20,6 +20,15 @@ interface LlmConfig {
     openai: { configured: boolean; last4?: string };
     google: { configured: boolean; last4?: string };
   };
+}
+
+interface ConnectorToggle {
+  id: string;
+  name: string;
+  icon: string;
+  enabled: boolean;
+  connected: boolean;
+  detail: string;
 }
 
 function SettingsContent() {
@@ -33,6 +42,13 @@ function SettingsContent() {
   const [keyInput, setKeyInput] = useState("");
   const [hubspotConnected, setHubspotConnected] = useState(false);
   const [hubspotLoading, setHubspotLoading] = useState(false);
+  const [connectorToggles, setConnectorToggles] = useState<Record<string, boolean>>({
+    hubspot: true,
+    salesforce: false,
+    google_sheets: false,
+    google_analytics: false,
+    slack: false,
+  });
 
   useEffect(() => {
     const supabase = createClient();
@@ -77,6 +93,19 @@ function SettingsContent() {
     }
   };
 
+  const handleToggleConnector = (connectorId: string) => {
+    setConnectorToggles((prev) => ({
+      ...prev,
+      [connectorId]: !prev[connectorId],
+    }));
+    // Persist toggle preference
+    fetch("/api/settings/connectors", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ connectorId, enabled: !connectorToggles[connectorId] }),
+    }).catch(() => {});
+  };
+
   const saveKey = async (provider: string) => {
     const bodyKey = provider === "anthropic" ? "anthropicKey" : provider === "openai" ? "openaiKey" : "googleKey";
     await fetch("/api/settings/llm", {
@@ -86,7 +115,6 @@ function SettingsContent() {
     });
     setEditingKey(null);
     setKeyInput("");
-    // Refresh config
     const res = await fetch("/api/settings/llm");
     const json = await res.json();
     if (json.data) setLlmConfig(json.data);
@@ -104,9 +132,9 @@ function SettingsContent() {
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-xl font-semibold text-[#0A0A0A]">Parametres</h1>
+        <h1 className="text-xl font-semibold text-[#0A0A0A]">Settings</h1>
         <a href="/chat" className="text-sm text-[#737373] hover:text-[#0A0A0A] transition-colors">
-          Retour au chat
+          Back to chat
         </a>
       </div>
 
@@ -131,15 +159,15 @@ function SettingsContent() {
       {activeTab === "general" && (
         <div className="space-y-6">
           <div className="bg-white rounded-xl border border-[#E5E5E5] p-6 space-y-4">
-            <h2 className="text-sm font-medium text-[#0A0A0A]">Compte</h2>
+            <h2 className="text-sm font-medium text-[#0A0A0A]">Account</h2>
             <div className="space-y-3">
               <div>
                 <label className="text-xs text-[#737373]">Email</label>
                 <p className="text-sm text-[#0A0A0A] mt-0.5">{userEmail}</p>
               </div>
               <div>
-                <label className="text-xs text-[#737373]">Nom</label>
-                <p className="text-sm text-[#0A0A0A] mt-0.5">{userName || "Non renseigne"}</p>
+                <label className="text-xs text-[#737373]">Name</label>
+                <p className="text-sm text-[#0A0A0A] mt-0.5">{userName || "Not set"}</p>
               </div>
             </div>
           </div>
@@ -147,7 +175,7 @@ function SettingsContent() {
             onClick={handleLogout}
             className="px-4 py-2 text-sm rounded-lg border border-[#E5E5E5] text-[#737373] hover:text-red-600 hover:border-red-200 transition-colors"
           >
-            Se deconnecter
+            Log out
           </button>
         </div>
       )}
@@ -156,7 +184,7 @@ function SettingsContent() {
       {activeTab === "llm" && (
         <div className="space-y-6">
           <div className="bg-white rounded-xl border border-[#E5E5E5] p-6 space-y-4">
-            <h2 className="text-sm font-medium text-[#0A0A0A]">Modele par defaut</h2>
+            <h2 className="text-sm font-medium text-[#0A0A0A]">Default model</h2>
             <div className="flex flex-wrap gap-2">
               {["revops-ai", "claude", "gpt", "gemini"].map((model) => (
                 <button
@@ -175,9 +203,9 @@ function SettingsContent() {
           </div>
 
           <div className="bg-white rounded-xl border border-[#E5E5E5] p-6 space-y-4">
-            <h2 className="text-sm font-medium text-[#0A0A0A]">Cles API</h2>
+            <h2 className="text-sm font-medium text-[#0A0A0A]">API Keys</h2>
             <p className="text-xs text-[#737373]">
-              Optionnel — si non configure, les cles RevOps AI seront utilisees
+              Optional — if not configured, RevOps AI keys will be used
             </p>
             {[
               { id: "anthropic", name: "Anthropic (Claude)" },
@@ -194,9 +222,9 @@ function SettingsContent() {
                     <p className="text-sm text-[#0A0A0A]">{provider.name}</p>
                     <p className="text-xs text-[#737373] mt-0.5">
                       {config?.configured ? (
-                        <span className="text-green-600">Connecte — ****{config.last4}</span>
+                        <span className="text-green-600">Connected — ****{config.last4}</span>
                       ) : (
-                        <span>Non configure</span>
+                        <span>Not configured</span>
                       )}
                     </p>
                   </div>
@@ -213,13 +241,13 @@ function SettingsContent() {
                         onClick={() => saveKey(provider.id)}
                         className="h-8 px-3 rounded-lg bg-[#0A0A0A] text-white text-xs"
                       >
-                        Sauver
+                        Save
                       </button>
                       <button
                         onClick={() => { setEditingKey(null); setKeyInput(""); }}
                         className="text-xs text-[#737373]"
                       >
-                        Annuler
+                        Cancel
                       </button>
                     </div>
                   ) : (
@@ -227,7 +255,7 @@ function SettingsContent() {
                       onClick={() => setEditingKey(provider.id)}
                       className="text-xs text-[#737373] hover:text-[#0A0A0A] transition-colors"
                     >
-                      Modifier
+                      Edit
                     </button>
                   )}
                 </div>
@@ -240,31 +268,45 @@ function SettingsContent() {
       {/* Connectors tab */}
       {activeTab === "connectors" && (
         <div className="space-y-4">
-          {/* HubSpot — dynamic connection status */}
+          {/* HubSpot */}
           <div className="bg-white rounded-xl border border-[#E5E5E5] p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <span className="text-xl">{"\uD83D\uDFE0"}</span>
               <div>
                 <p className="text-sm font-medium text-[#0A0A0A]">HubSpot</p>
                 <p className={`text-xs mt-0.5 ${hubspotConnected ? "text-green-600" : "text-[#A3A3A3]"}`}>
-                  {hubspotConnected ? "Connecte — Portal sync active" : "Non connecte"}
+                  {hubspotConnected ? "Connected — Portal sync active" : "Not connected"}
                 </p>
               </div>
             </div>
-            <button
-              onClick={handleConnectHubspot}
-              disabled={hubspotLoading}
-              className="text-xs text-[#737373] hover:text-[#0A0A0A] border border-[#E5E5E5] rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50"
-            >
-              {hubspotLoading ? "Redirection..." : hubspotConnected ? "Reconnecter" : "Connecter"}
-            </button>
+            <div className="flex items-center gap-3">
+              {/* Toggle switch */}
+              <button
+                onClick={() => handleToggleConnector("hubspot")}
+                className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
+                  connectorToggles.hubspot ? "bg-[#0A0A0A]" : "bg-[#E5E5E5]"
+                }`}
+              >
+                <span className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform ${
+                  connectorToggles.hubspot ? "translate-x-[18px]" : "translate-x-[3px]"
+                }`} />
+              </button>
+              <button
+                onClick={handleConnectHubspot}
+                disabled={hubspotLoading}
+                className="text-xs text-[#737373] hover:text-[#0A0A0A] border border-[#E5E5E5] rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50"
+              >
+                {hubspotLoading ? "Redirecting..." : hubspotConnected ? "Reconnect" : "Connect"}
+              </button>
+            </div>
           </div>
-          {/* Other connectors — coming soon */}
+
+          {/* Other connectors */}
           {[
-            { id: "salesforce", name: "Salesforce", icon: "\u2601\ufe0f", detail: "Bientot disponible" },
-            { id: "google_sheets", name: "Google Sheets", icon: "\uD83D\uDCCA", detail: "Bientot disponible" },
-            { id: "google_analytics", name: "Google Analytics", icon: "\uD83D\uDCC8", detail: "Bientot disponible" },
-            { id: "slack", name: "Slack", icon: "\uD83D\uDCAC", detail: "Bientot disponible" },
+            { id: "salesforce", name: "Salesforce", icon: "\u2601\ufe0f", detail: "Coming soon" },
+            { id: "google_sheets", name: "Google Sheets", icon: "\uD83D\uDCCA", detail: "Coming soon" },
+            { id: "google_analytics", name: "Google Analytics", icon: "\uD83D\uDCC8", detail: "Coming soon" },
+            { id: "slack", name: "Slack", icon: "\uD83D\uDCAC", detail: "Coming soon" },
           ].map((connector) => (
             <div
               key={connector.id}
@@ -277,7 +319,19 @@ function SettingsContent() {
                   <p className="text-xs mt-0.5 text-[#A3A3A3]">{connector.detail}</p>
                 </div>
               </div>
-              <span className="text-xs text-[#A3A3A3]">Indisponible</span>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => handleToggleConnector(connector.id)}
+                  className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
+                    connectorToggles[connector.id] ? "bg-[#0A0A0A]" : "bg-[#E5E5E5]"
+                  }`}
+                >
+                  <span className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform ${
+                    connectorToggles[connector.id] ? "translate-x-[18px]" : "translate-x-[3px]"
+                  }`} />
+                </button>
+                <span className="text-xs text-[#A3A3A3]">Unavailable</span>
+              </div>
             </div>
           ))}
         </div>
@@ -287,15 +341,15 @@ function SettingsContent() {
       {activeTab === "billing" && (
         <div className="space-y-6">
           <div className="bg-white rounded-xl border border-[#E5E5E5] p-6 space-y-4">
-            <h2 className="text-sm font-medium text-[#0A0A0A]">Plan actuel</h2>
+            <h2 className="text-sm font-medium text-[#0A0A0A]">Current plan</h2>
             <div className="flex items-center gap-3">
               <span className="text-lg font-semibold text-[#0A0A0A]">Free</span>
-              <span className="text-xs bg-[#F5F5F5] text-[#737373] px-2 py-0.5 rounded-full">Actif</span>
+              <span className="text-xs bg-[#F5F5F5] text-[#737373] px-2 py-0.5 rounded-full">Active</span>
             </div>
-            <p className="text-xs text-[#737373]">50 messages / mois inclus</p>
+            <p className="text-xs text-[#737373]">50 messages / month included</p>
           </div>
           <div className="bg-white rounded-xl border border-[#E5E5E5] p-6 space-y-4">
-            <h2 className="text-sm font-medium text-[#0A0A0A]">Credits restants</h2>
+            <h2 className="text-sm font-medium text-[#0A0A0A]">Remaining credits</h2>
             <div className="flex items-end gap-1">
               <span className="text-2xl font-semibold text-[#0A0A0A]">--</span>
               <span className="text-sm text-[#737373] mb-0.5">/ 50</span>

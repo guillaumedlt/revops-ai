@@ -8,7 +8,7 @@ export default function ChatWelcomePage() {
   const router = useRouter();
   const [sending, setSending] = useState(false);
 
-  const handleSend = async (message: string, model: string) => {
+  const handleSend = async (message: string, model: string, attachment?: any) => {
     if (sending) return;
     setSending(true);
 
@@ -25,6 +25,13 @@ export default function ChatWelcomePage() {
         return;
       }
 
+      // Store attachment in sessionStorage if present
+      if (attachment) {
+        try {
+          sessionStorage.setItem(`attachment_${conversationId}`, JSON.stringify(attachment));
+        } catch { /* storage full, skip */ }
+      }
+
       router.push(
         `/chat/${conversationId}?initial=${encodeURIComponent(message)}&model=${model}`
       );
@@ -35,7 +42,7 @@ export default function ChatWelcomePage() {
 
   return (
     <div className="flex-1 flex flex-col h-full">
-      {/* Center area — subtle branding */}
+      {/* Center area */}
       <div className="flex-1 flex items-center justify-center">
         <span className="text-lg text-[#D4D4D4] select-none">RevOps AI</span>
       </div>

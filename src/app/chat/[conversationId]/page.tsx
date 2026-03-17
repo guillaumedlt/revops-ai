@@ -6,6 +6,15 @@ import MessageThread from "@/components/chat/MessageThread";
 import ChatInputBar from "@/components/chat/ChatInputBar";
 import type { ContentBlock } from "@/types/chat-blocks";
 
+interface Attachment {
+  type: string;
+  content?: string;
+  base64?: string;
+  mediaType?: string;
+  fileName?: string;
+  mimeType?: string;
+}
+
 interface Message {
   id: string;
   role: "user" | "assistant";
@@ -39,7 +48,7 @@ export default function ConversationPage() {
   }, [conversationId]);
 
   const sendMessage = useCallback(
-    async (message: string, model?: string) => {
+    async (message: string, model?: string, attachment?: Attachment) => {
       if (isStreaming) return;
       const useModel = model ?? selectedModel;
       setSelectedModel(useModel);
@@ -60,7 +69,7 @@ export default function ConversationPage() {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message, conversationId, model: useModel }),
+          body: JSON.stringify({ message, conversationId, model: useModel, attachment }),
         });
 
         if (!res.ok || !res.body) {
@@ -97,9 +106,7 @@ export default function ConversationPage() {
                 finalBlocks = event.blocks;
                 setStreamingBlocks(event.blocks);
               } else if (event.type === "error") {
-                accText += `
-
-**Error:** ${event.error || "Something went wrong"}`;
+                accText += `\n\n**Error:** ${event.error || "Something went wrong"}`;
                 setStreamingText(accText);
               } else if (event.type === "done") {
                 const assistantMsg: Message = {
@@ -137,13 +144,22 @@ export default function ConversationPage() {
       const model = searchParams.get("model") ?? "revops-ai";
       if (initial && messages.length === 0) {
         initialSent.current = true;
-        sendMessage(initial, model);
+        // Check for stored attachment
+        let attachment: Attachment | undefined;
+        try {
+          const stored = sessionStorage.getItem(`attachment_${conversationId}`);
+          if (stored) {
+            attachment = JSON.parse(stored);
+            sessionStorage.removeItem(`attachment_${conversationId}`);
+          }
+        } catch { /* ignore */ }
+        sendMessage(initial, model, attachment);
       }
     }
-  }, [loaded, searchParams, messages.length, sendMessage]);
+  }, [loaded, searchParams, messages.length, sendMessage, conversationId]);
 
-  const handleSend = (message: string, model: string) => {
-    sendMessage(message, model);
+  const handleSend = (message: string, model: string, attachment?: Attachment) => {
+    sendMessage(message, model, attachment);
   };
 
   return (

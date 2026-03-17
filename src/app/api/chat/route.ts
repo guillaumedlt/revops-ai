@@ -8,10 +8,20 @@ import { checkCredits, deductCredit } from "@/lib/ai/credits";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { parseContentBlocks } from "@/lib/ai/parse-blocks";
 
+const AttachmentSchema = z.object({
+  type: z.string(),
+  content: z.string().optional(),
+  base64: z.string().optional(),
+  mediaType: z.string().optional(),
+  fileName: z.string().optional(),
+  mimeType: z.string().optional(),
+}).optional();
+
 const ChatSchema = z.object({
   message: z.string().min(1).max(4000),
   conversationId: z.string().uuid().optional(),
   model: z.string().optional(),
+  attachment: AttachmentSchema,
 });
 
 export async function POST(request: NextRequest) {
@@ -25,10 +35,10 @@ export async function POST(request: NextRequest) {
   // Check credits
   const credits = await checkCredits(auth.tenantId);
   if (!credits.allowed) {
-    return NextResponse.json({ error: "Limite de credits atteinte" }, { status: 402 });
+    return NextResponse.json({ error: "Credit limit reached" }, { status: 402 });
   }
 
-  const { message, conversationId, model: requestedModel } = parsed.data;
+  const { message, conversationId, model: requestedModel, attachment } = parsed.data;
   const supabase = createAdminClient();
 
   // Get or create conversation
@@ -50,8 +60,7 @@ export async function POST(request: NextRequest) {
     content: message,
   });
 
-  // Route model — use requested model preference, fallback to router
-  // "claude" maps to sonnet, "revops-ai"/"gpt"/"gemini" and default use the auto-router
+  // Route model
   let modelChoice: "haiku" | "sonnet";
   if (requestedModel === "claude" || requestedModel === "sonnet") {
     modelChoice = "sonnet";
@@ -72,13 +81,41 @@ export async function POST(request: NextRequest) {
     input_schema: zodToJsonSchema(tool.parameters),
   }));
 
+  // Build user content with optional attachment
+  let userContent: any;
+  if (attachment) {
+    if (attachment.type === "image" && attachment.base64 && attachment.mediaType) {
+      // Image attachment: use Claude vision
+      userContent = [
+        {
+          type: "image",
+          source: {
+            type: "base64",
+            media_type: attachment.mediaType,
+            data: attachment.base64,
+          },
+        },
+        { type: "text", text: attachment.fileName ? `[File: ${attachment.fileName}]\n\n${message}` : message },
+      ];
+    } else if (attachment.type === "text" && attachment.content) {
+      // Text/CSV attachment: prepend content
+      userContent = `[File: ${attachment.fileName || "file"}]\n${attachment.content}\n\n${message}`;
+    } else if (attachment.type === "document" && attachment.base64) {
+      // Document attachment: mention in context
+      userContent = `[File attached: ${attachment.fileName || "document"} (${attachment.mimeType || "unknown type"})]\nThe file content is provided as base64. Please analyze it.\nBase64 data: ${attachment.base64.slice(0, 10000)}...\n\n${message}`;
+    } else {
+      userContent = message;
+    }
+  } else {
+    userContent = message;
+  }
+
   // Call Anthropic API with streaming
-  // V1: All models route through Claude API. Multi-LLM routing comes later.
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
     async start(controller) {
       try {
-        let messages: Array<{ role: string; content: any }> = [{ role: "user", content: message }];
+        let messages: Array<{ role: string; content: any }> = [{ role: "user", content: userContent }];
         let continueLoop = true;
         let finalText = "";
 

@@ -2,15 +2,24 @@
 
 import { useState, useRef, useEffect } from "react";
 import {
-  Plus,
   SlidersHorizontal,
-  Lightbulb,
-  Mic,
   ArrowUp,
 } from "lucide-react";
+import FileUpload from "./FileUpload";
+import VoiceInput from "./VoiceInput";
+import TemplatesPopover from "./TemplatesPopover";
+
+interface Attachment {
+  type: string;
+  content?: string;
+  base64?: string;
+  mediaType?: string;
+  fileName?: string;
+  mimeType?: string;
+}
 
 interface ChatInputBarProps {
-  onSend: (message: string, model: string) => void;
+  onSend: (message: string, model: string, attachment?: Attachment) => void;
   disabled?: boolean;
   initialValue?: string;
 }
@@ -30,6 +39,8 @@ export default function ChatInputBar({
   const [value, setValue] = useState(initialValue ?? "");
   const [selectedModel, setSelectedModel] = useState("revops-ai");
   const [showModelPicker, setShowModelPicker] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const modelRef = useRef<HTMLDivElement>(null);
 
@@ -55,10 +66,34 @@ export default function ChatInputBar({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     const trimmed = value.trim();
-    if (!trimmed || disabled) return;
-    onSend(trimmed, selectedModel);
+    if (!trimmed || disabled || uploading) return;
+
+    let attachment: Attachment | undefined;
+
+    // Upload file if selected
+    if (selectedFile) {
+      setUploading(true);
+      try {
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+        const res = await fetch("/api/chat/upload", { method: "POST", body: formData });
+        if (res.ok) {
+          const json = await res.json();
+          if (json.data) {
+            attachment = json.data;
+          }
+        }
+      } catch {
+        // Upload failed, send without attachment
+      } finally {
+        setUploading(false);
+        setSelectedFile(null);
+      }
+    }
+
+    onSend(trimmed, selectedModel, attachment);
     setValue("");
     if (textareaRef.current) textareaRef.current.style.height = "auto";
   };
@@ -70,11 +105,34 @@ export default function ChatInputBar({
     }
   };
 
+  const handleVoiceTranscript = (text: string) => {
+    setValue((prev) => (prev ? prev + " " + text : text));
+    textareaRef.current?.focus();
+  };
+
+  const handleTemplateSelect = (prompt: string) => {
+    setValue(prompt);
+    textareaRef.current?.focus();
+  };
+
   const currentModel = MODELS.find((m) => m.id === selectedModel) ?? MODELS[0];
 
   return (
     <div className="mx-auto max-w-2xl w-full px-4 pb-4">
-      <div className="border border-[#E5E5E5] rounded-2xl bg-white shadow-sm focus-within:ring-1 focus-within:ring-[#D4D4D4] transition-shadow">
+      <div className="relative border border-[#E5E5E5] rounded-2xl bg-white shadow-sm focus-within:ring-1 focus-within:ring-[#D4D4D4] transition-shadow">
+        {/* File preview chip */}
+        {selectedFile && (
+          <div className="px-4 pt-2">
+            <div className="inline-flex items-center gap-2 rounded-lg border border-[#E5E5E5] bg-[#FAFAFA] px-3 py-1.5 text-xs text-[#525252]">
+              <span className="max-w-[200px] truncate">{selectedFile.name}</span>
+              <span className="text-[#A3A3A3]">
+                {selectedFile.size < 1024 ? `${selectedFile.size} B` : selectedFile.size < 1048576 ? `${(selectedFile.size / 1024).toFixed(1)} KB` : `${(selectedFile.size / 1048576).toFixed(1)} MB`}
+              </span>
+              <button onClick={() => setSelectedFile(null)} className="text-[#A3A3A3] hover:text-[#0A0A0A] text-sm leading-none">&times;</button>
+            </div>
+          </div>
+        )}
+
         {/* Textarea row */}
         <div className="px-4 pt-3 pb-1">
           <textarea
@@ -82,7 +140,7 @@ export default function ChatInputBar({
             value={value}
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            disabled={disabled}
+            disabled={disabled || uploading}
             placeholder="Ask RevOps AI..."
             rows={1}
             className="w-full resize-none bg-transparent text-sm text-[#0A0A0A] placeholder:text-[#A3A3A3] focus:outline-none min-h-[36px] max-h-[200px] py-1"
@@ -92,25 +150,19 @@ export default function ChatInputBar({
         {/* Icon row */}
         <div className="px-3 pb-2.5 flex items-center justify-between">
           {/* Left icons */}
-          <div className="flex items-center gap-0.5">
-            <button
-              className="h-8 w-8 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
-              title="Attach file"
-            >
-              <Plus size={18} />
-            </button>
+          <div className="relative flex items-center gap-0.5">
+            <FileUpload
+              onFileSelect={(file) => setSelectedFile(file)}
+              selectedFile={null}
+              onClear={() => setSelectedFile(null)}
+            />
             <button
               className="h-8 w-8 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
               title="Filters"
             >
               <SlidersHorizontal size={16} />
             </button>
-            <button
-              className="h-8 w-8 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
-              title="Suggestions"
-            >
-              <Lightbulb size={16} />
-            </button>
+            <TemplatesPopover onSelect={handleTemplateSelect} />
 
             {/* Model pill */}
             <div className="relative" ref={modelRef}>
@@ -145,16 +197,11 @@ export default function ChatInputBar({
 
           {/* Right icons */}
           <div className="flex items-center gap-0.5">
-            <button
-              className="h-8 w-8 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
-              title="Voice input"
-            >
-              <Mic size={16} />
-            </button>
+            <VoiceInput onTranscript={handleVoiceTranscript} disabled={disabled} />
             {value.trim() ? (
               <button
                 onClick={handleSend}
-                disabled={disabled}
+                disabled={disabled || uploading}
                 className="h-8 w-8 rounded-full bg-[#0A0A0A] text-white flex items-center justify-center hover:bg-[#333] transition-colors disabled:opacity-50"
               >
                 <ArrowUp size={16} />
