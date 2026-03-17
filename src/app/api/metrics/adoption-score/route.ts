@@ -10,6 +10,14 @@ function scoreToStatus(score: number): "excellent" | "good" | "fair" | "poor" {
   return "poor";
 }
 
+function getTrend(current: number, previous: number | undefined): "improving" | "stable" | "declining" {
+  if (previous === undefined) return "stable";
+  const diff = current - previous;
+  if (diff > 2) return "improving";
+  if (diff < -2) return "declining";
+  return "stable";
+}
+
 export async function GET(request: NextRequest) {
   const auth = getAuthFromHeaders(request);
   if (!auth) return NextResponse.json(apiError("Unauthorized"), { status: 401 });
@@ -17,7 +25,6 @@ export async function GET(request: NextRequest) {
   try {
     const supabase = createAdminClient();
 
-    // Fetch latest daily score for this tenant
     const { data: latestScore, error: scoreError } = await supabase
       .from("daily_scores")
       .select("*")
@@ -30,7 +37,6 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(apiError(scoreError.message), { status: 500 });
     }
 
-    // Fetch previous score for trend
     const { data: prevScores } = await supabase
       .from("daily_scores")
       .select("*")
@@ -40,87 +46,49 @@ export async function GET(request: NextRequest) {
 
     const prev = prevScores?.[0];
 
-    function getTrend(current: number, previous: number | undefined): "improving" | "stable" | "declining" {
-      if (previous === undefined) return "stable";
-      const diff = current - previous;
-      if (diff > 2) return "improving";
-      if (diff < -2) return "declining";
-      return "stable";
-    }
+    const overallScore = latestScore?.adoption_score ?? 0;
+    const dataQualityScore = latestScore?.data_discipline_score ?? 0;
+    const pipelineRigorScore = latestScore?.pipeline_rigor_score ?? 0;
+    const activityScore = latestScore?.activity_logging_score ?? 0;
+    const processScore = latestScore?.process_adherence_score ?? 0;
+    const toolScore = latestScore?.tool_usage_score ?? 0;
 
-    // Default scores if no daily_scores exist yet
-    const dataQualityScore = latestScore?.data_quality_score ?? 0;
-    const engagementScore = latestScore?.engagement_score ?? 0;
-    const forecastScore = latestScore?.forecast_score ?? 0;
-    const velocityScore = latestScore?.velocity_score ?? 0;
-    const overallScore = latestScore?.overall_score ?? 0;
-
-    const prevDataQuality = prev?.data_quality_score;
-    const prevEngagement = prev?.engagement_score;
-    const prevForecast = prev?.forecast_score;
-    const prevVelocity = prev?.velocity_score;
-
-    // Build risk areas and recommendations
     const potentialRiskAreas: string[] = [];
     const recommendations: string[] = [];
 
     if (dataQualityScore < 60) {
-      potentialRiskAreas.push("Low data quality — many records have missing fields");
-      recommendations.push("Run a data cleanup to fill critical fields (email, phone, company)");
+      potentialRiskAreas.push("Qualite des donnees insuffisante");
+      recommendations.push("Completer les champs manquants sur les deals");
     }
-    if (engagementScore < 60) {
-      potentialRiskAreas.push("Low engagement — deals are not receiving enough activity");
-      recommendations.push("Increase deal touches to 5+ per month");
+    if (pipelineRigorScore < 60) {
+      potentialRiskAreas.push("Pipeline peu rigoureux");
+      recommendations.push("Traiter les deals stalled et mettre a jour les close dates");
     }
-    if (forecastScore < 60) {
-      potentialRiskAreas.push("Forecast accuracy is below target");
-      recommendations.push("Review and update close dates on open deals weekly");
-    }
-    if (velocityScore < 60) {
-      potentialRiskAreas.push("Sales cycle is longer than expected");
-      recommendations.push("Identify and address pipeline bottleneck stages");
+    if (activityScore < 60) {
+      potentialRiskAreas.push("Volume d activite faible");
+      recommendations.push("Augmenter les touches par deal a 5+ par mois");
     }
 
-    const result = {
+    return NextResponse.json(apiSuccess({
       overallScore,
+      grade: latestScore ? undefined : "N/A",
       lastUpdated: latestScore?.computed_at ?? new Date().toISOString(),
+      dataDiscipline: dataQualityScore,
+      pipelineRigor: pipelineRigorScore,
+      activityLogging: activityScore,
+      processAdherence: processScore,
+      toolUsage: toolScore,
       dimensions: {
-        dataQuality: {
-          score: dataQualityScore,
-          status: scoreToStatus(dataQualityScore),
-          trend: getTrend(dataQualityScore, prevDataQuality),
-        },
-        engagement: {
-          score: engagementScore,
-          status: scoreToStatus(engagementScore),
-          trend: getTrend(engagementScore, prevEngagement),
-          avgActivitiesPerDeal: latestScore?.avg_activities_per_deal ?? 0,
-        },
-        forecast: {
-          score: forecastScore,
-          status: scoreToStatus(forecastScore),
-          trend: getTrend(forecastScore, prevForecast),
-          forecastAccuracy: latestScore?.forecast_accuracy ?? 0,
-        },
-        velocity: {
-          score: velocityScore,
-          status: scoreToStatus(velocityScore),
-          trend: getTrend(velocityScore, prevVelocity),
-          avgSalesCycleDays: latestScore?.avg_sales_cycle_days ?? 0,
-        },
+        dataQuality: { score: dataQualityScore, status: scoreToStatus(dataQualityScore), trend: getTrend(dataQualityScore, prev?.data_discipline_score) },
+        pipelineRigor: { score: pipelineRigorScore, status: scoreToStatus(pipelineRigorScore), trend: getTrend(pipelineRigorScore, prev?.pipeline_rigor_score) },
+        activityLogging: { score: activityScore, status: scoreToStatus(activityScore), trend: getTrend(activityScore, prev?.activity_logging_score) },
+        processAdherence: { score: processScore, status: scoreToStatus(processScore), trend: getTrend(processScore, prev?.process_adherence_score) },
+        toolUsage: { score: toolScore, status: scoreToStatus(toolScore), trend: getTrend(toolScore, prev?.tool_usage_score) },
       },
-      domainHealth: {
-        potentialRiskAreas,
-        recommendations,
-      },
-    };
-
-    return NextResponse.json(apiSuccess(result));
+      domainHealth: { potentialRiskAreas, recommendations },
+    }));
   } catch (error) {
     console.error("Adoption score route error:", error);
-    return NextResponse.json(
-      apiError(error instanceof Error ? error.message : "Internal server error"),
-      { status: 500 }
-    );
+    return NextResponse.json(apiError(error instanceof Error ? error.message : "Internal server error"), { status: 500 });
   }
 }
