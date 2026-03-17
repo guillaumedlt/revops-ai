@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Copy, ThumbsUp, Share2, ChevronDown } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { Copy, ThumbsUp, Share2 } from "lucide-react";
 import BlockRenderer from "./blocks/BlockRenderer";
 import TextBlock from "./blocks/TextBlock";
 import type { ContentBlock } from "@/types/chat-blocks";
@@ -42,31 +42,67 @@ function MessageActions() {
   );
 }
 
-function ToolIndicator({ tools }: { tools: string[] }) {
-  const [expanded, setExpanded] = useState(false);
+const TOOL_AGENTS: Record<string, { name: string; icon: string; action: string }> = {
+  get_pipeline: { name: "Pipeline Agent", icon: "\u{1F4CA}", action: "Analyzing pipeline data..." },
+  get_deals: { name: "Deal Agent", icon: "\u{1F4BC}", action: "Searching deals..." },
+  get_win_rate: { name: "Closing Agent", icon: "\u{1F3AF}", action: "Calculating win rates..." },
+  get_velocity: { name: "Velocity Agent", icon: "\u26A1", action: "Measuring sales velocity..." },
+  get_adoption: { name: "Adoption Agent", icon: "\u{1F4C8}", action: "Checking adoption score..." },
+  get_alerts: { name: "Alert Agent", icon: "\u{1F514}", action: "Scanning for alerts..." },
+  get_revenue: { name: "Revenue Agent", icon: "\u{1F4B0}", action: "Computing revenue metrics..." },
+  get_activity: { name: "Activity Agent", icon: "\u{1F4CB}", action: "Reviewing activity data..." },
+  get_data_quality: { name: "Data Quality Agent", icon: "\u{1F9F9}", action: "Auditing data quality..." },
+  get_owner_performance: { name: "Performance Agent", icon: "\u{1F464}", action: "Evaluating rep performance..." },
+  create_note: { name: "Notes Agent", icon: "\u{1F4DD}", action: "Creating note..." },
+};
 
-  if (tools.length === 0) return null;
+function AgentThinking({ activeTools, streamingText, streaming, streamingBlocks }: { activeTools: string[]; streamingText: string; streaming?: boolean; streamingBlocks?: ContentBlock[] | null }) {
+  const hasText = streamingText && stripBlockSyntax(streamingText).trim().length > 0;
 
-  const label = "Analyzing" + (tools.length > 0 ? " — " + tools.join(", ") : "");
+  if (hasText) {
+    return (
+      <div className="text-sm text-[#0A0A0A] leading-relaxed">
+        {streamingBlocks && streamingBlocks.length > 0 ? (
+          <BlockRenderer blocks={streamingBlocks} />
+        ) : (
+          <>
+            <TextBlock text={stripBlockSyntax(streamingText)} />
+            {streaming && streamingText.includes(":::") && (
+              <div className="flex items-center gap-2 mt-3 py-2 px-3 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
+                <div className="h-4 w-4 border-2 border-[#E5E5E5] border-t-[#0A0A0A] rounded-full animate-spin" />
+                <span className="text-xs text-[#737373]">Building report...</span>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    );
+  }
+
+  if (activeTools.length > 0) {
+    return (
+      <div className="space-y-2">
+        {activeTools.map((tool) => {
+          const agent = TOOL_AGENTS[tool] ?? { name: "RevOps Agent", icon: "\u{1F916}", action: `Running ${tool}...` };
+          return (
+            <div key={tool} className="flex items-center gap-3 py-2 px-3 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] animate-in fade-in duration-300">
+              <span className="text-base">{agent.icon}</span>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-medium text-[#0A0A0A]">{agent.name}</p>
+                <p className="text-[11px] text-[#737373]">{agent.action}</p>
+              </div>
+              <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" />
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
-    <button
-      onClick={() => setExpanded(!expanded)}
-      className="flex items-center gap-1.5 text-xs text-[#A3A3A3] mb-2 hover:text-[#525252] transition-colors"
-    >
-      <span className="h-3 w-3 rounded-full border-2 border-[#A3A3A3] border-t-transparent animate-spin" />
-      <span>{label}</span>
-      <ChevronDown size={12} className={`transition-transform ${expanded ? "rotate-180" : ""}`} />
-    </button>
-  );
-}
-
-function TypingIndicator() {
-  return (
-    <div className="flex gap-1 py-2">
-      <span className="h-2 w-2 rounded-full bg-[#D4D4D4] animate-bounce" style={{ animationDelay: "0ms" }} />
-      <span className="h-2 w-2 rounded-full bg-[#D4D4D4] animate-bounce" style={{ animationDelay: "150ms" }} />
-      <span className="h-2 w-2 rounded-full bg-[#D4D4D4] animate-bounce" style={{ animationDelay: "300ms" }} />
+    <div className="flex items-center gap-3 py-2 px-3 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
+      <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" />
+      <span className="text-xs text-[#737373]">Thinking...</span>
     </div>
   );
 }
@@ -113,27 +149,10 @@ export default function MessageThread({
 
         {/* Streaming state */}
         {(streamingText || activeTools.length > 0 || (streaming && !streamingText)) && (
-          <div className="group">
-            <ToolIndicator tools={activeTools} />
-            {streamingText ? (
-              <div className="text-sm text-[#0A0A0A] leading-relaxed">
-                {streamingBlocks && streamingBlocks.length > 0 ? (
-                  <BlockRenderer blocks={streamingBlocks} />
-                ) : (
-                  <>
-                    <TextBlock text={stripBlockSyntax(streamingText)} />
-                    {streaming && streamingText.includes(":::") && (
-                      <div className="flex items-center gap-2 mt-2 text-xs text-[#A3A3A3]">
-                        <div className="h-4 w-4 border-2 border-[#E5E5E5] border-t-[#0A0A0A] rounded-full animate-spin" />
-                        Generating report...
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
-            ) : streaming && activeTools.length === 0 ? (
-              <TypingIndicator />
-            ) : null}
+          <div className="flex justify-start">
+            <div className="max-w-2xl w-full">
+              <AgentThinking activeTools={activeTools} streamingText={streamingText} streaming={streaming} streamingBlocks={streamingBlocks} />
+            </div>
           </div>
         )}
 
