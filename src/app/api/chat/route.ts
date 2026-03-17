@@ -51,7 +51,15 @@ export async function POST(request: NextRequest) {
   });
 
   // Route model — use requested model preference, fallback to router
-  const modelChoice = (requestedModel === "claude" || requestedModel === "sonnet" || requestedModel === "haiku") ? requestedModel as "haiku" | "sonnet" : routeToModel(message, 0);
+  // "claude" maps to sonnet, "revops-ai"/"gpt"/"gemini" and default use the auto-router
+  let modelChoice: "haiku" | "sonnet";
+  if (requestedModel === "claude" || requestedModel === "sonnet") {
+    modelChoice = "sonnet";
+  } else if (requestedModel === "haiku") {
+    modelChoice = "haiku";
+  } else {
+    modelChoice = routeToModel(message, 0);
+  }
   const modelId = getModelId(modelChoice);
 
   // Build messages
@@ -93,7 +101,9 @@ export async function POST(request: NextRequest) {
           });
 
           if (!response.ok || !response.body) {
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "API error" })}\n\n`));
+            let errorDetail = `Anthropic API error (${response.status})`;
+            try { const errBody = await response.text(); console.error("Anthropic API error:", response.status, errBody); errorDetail = `API error: ${response.status}`; } catch {}
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: errorDetail })}\n\n`));
             break;
           }
 
@@ -198,6 +208,12 @@ export async function POST(request: NextRequest) {
         });
 
         await deductCredit(auth.tenantId, auth.userId);
+
+        // Update conversation last_message_at for sidebar ordering
+        await supabase
+          .from("conversations")
+          .update({ last_message_at: new Date().toISOString() })
+          .eq("id", convId);
 
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "content_blocks", blocks: parsedBlocks })}\n\n`));
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "metadata", conversationId: convId, model: modelChoice, creditsRemaining: credits.remaining - 1 })}\n\n`));

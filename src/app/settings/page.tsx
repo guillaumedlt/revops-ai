@@ -31,6 +31,8 @@ function SettingsContent() {
   const [llmConfig, setLlmConfig] = useState<LlmConfig | null>(null);
   const [editingKey, setEditingKey] = useState<string | null>(null);
   const [keyInput, setKeyInput] = useState("");
+  const [hubspotConnected, setHubspotConnected] = useState(false);
+  const [hubspotLoading, setHubspotLoading] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -39,6 +41,14 @@ function SettingsContent() {
       setUserName(data.user?.user_metadata?.full_name ?? "");
     });
   }, []);
+
+  useEffect(() => {
+    if (activeTab === "connectors") {
+      fetch("/api/connectors/hubspot/status").then((r) => r.json()).then((json) => {
+        setHubspotConnected(json.data?.connected ?? false);
+      }).catch(() => {});
+    }
+  }, [activeTab]);
 
   useEffect(() => {
     if (activeTab === "llm") {
@@ -52,6 +62,19 @@ function SettingsContent() {
     const supabase = createClient();
     await supabase.auth.signOut();
     window.location.href = "/login";
+  };
+
+  const handleConnectHubspot = async () => {
+    setHubspotLoading(true);
+    try {
+      const res = await fetch("/api/auth/hubspot", { method: "POST" });
+      const json = await res.json();
+      if (json.data?.authUrl) {
+        window.location.href = json.data.authUrl;
+      }
+    } catch {
+      setHubspotLoading(false);
+    }
   };
 
   const saveKey = async (provider: string) => {
@@ -217,12 +240,31 @@ function SettingsContent() {
       {/* Connectors tab */}
       {activeTab === "connectors" && (
         <div className="space-y-4">
+          {/* HubSpot — dynamic connection status */}
+          <div className="bg-white rounded-xl border border-[#E5E5E5] p-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="text-xl">{"\uD83D\uDFE0"}</span>
+              <div>
+                <p className="text-sm font-medium text-[#0A0A0A]">HubSpot</p>
+                <p className={`text-xs mt-0.5 ${hubspotConnected ? "text-green-600" : "text-[#A3A3A3]"}`}>
+                  {hubspotConnected ? "Connecte — Portal sync active" : "Non connecte"}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={handleConnectHubspot}
+              disabled={hubspotLoading}
+              className="text-xs text-[#737373] hover:text-[#0A0A0A] border border-[#E5E5E5] rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50"
+            >
+              {hubspotLoading ? "Redirection..." : hubspotConnected ? "Reconnecter" : "Connecter"}
+            </button>
+          </div>
+          {/* Other connectors — coming soon */}
           {[
-            { id: "hubspot", name: "HubSpot", icon: "\ud83d\udfe0", connected: true, detail: "Connecte — Portal sync active" },
-            { id: "salesforce", name: "Salesforce", icon: "\u2601\ufe0f", connected: false, detail: "Bientot disponible" },
-            { id: "google_sheets", name: "Google Sheets", icon: "\ud83d\udcca", connected: false, detail: "Bientot disponible" },
-            { id: "google_analytics", name: "Google Analytics", icon: "\ud83d\udcc8", connected: false, detail: "Bientot disponible" },
-            { id: "slack", name: "Slack", icon: "\ud83d\udcac", connected: false, detail: "Bientot disponible" },
+            { id: "salesforce", name: "Salesforce", icon: "\u2601\ufe0f", detail: "Bientot disponible" },
+            { id: "google_sheets", name: "Google Sheets", icon: "\uD83D\uDCCA", detail: "Bientot disponible" },
+            { id: "google_analytics", name: "Google Analytics", icon: "\uD83D\uDCC8", detail: "Bientot disponible" },
+            { id: "slack", name: "Slack", icon: "\uD83D\uDCAC", detail: "Bientot disponible" },
           ].map((connector) => (
             <div
               key={connector.id}
@@ -232,18 +274,10 @@ function SettingsContent() {
                 <span className="text-xl">{connector.icon}</span>
                 <div>
                   <p className="text-sm font-medium text-[#0A0A0A]">{connector.name}</p>
-                  <p className={`text-xs mt-0.5 ${connector.connected ? "text-green-600" : "text-[#A3A3A3]"}`}>
-                    {connector.detail}
-                  </p>
+                  <p className="text-xs mt-0.5 text-[#A3A3A3]">{connector.detail}</p>
                 </div>
               </div>
-              {connector.connected ? (
-                <button className="text-xs text-[#737373] hover:text-[#0A0A0A] border border-[#E5E5E5] rounded-lg px-3 py-1.5 transition-colors">
-                  Reconnecter
-                </button>
-              ) : (
-                <span className="text-xs text-[#A3A3A3]">Indisponible</span>
-              )}
+              <span className="text-xs text-[#A3A3A3]">Indisponible</span>
             </div>
           ))}
         </div>

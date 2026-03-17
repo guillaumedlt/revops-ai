@@ -89,7 +89,7 @@ export default function SignupPage() {
         // Non-blocking, will be handled on first dashboard visit
       }
 
-      router.push("/dashboard");
+      router.push("/chat");
       router.refresh();
     }
   }

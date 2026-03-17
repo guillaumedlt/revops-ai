@@ -4,7 +4,7 @@ export async function checkCredits(tenantId: string): Promise<{ allowed: boolean
   const supabase = createAdminClient();
   const { data } = await supabase
     .from("credit_allocations")
-    .select("credits_remaining")
+    .select("credits_allocated, credits_used")
     .eq("tenant_id", tenantId)
     .gte("billing_period_end", new Date().toISOString().split("T")[0])
     .order("billing_period_start", { ascending: false })
@@ -12,7 +12,8 @@ export async function checkCredits(tenantId: string): Promise<{ allowed: boolean
     .single();
 
   if (!data) return { allowed: true, remaining: 999 }; // No allocation = free tier, allow
-  return { allowed: data.credits_remaining > 0, remaining: data.credits_remaining };
+  const remaining = (data.credits_allocated ?? 0) - (data.credits_used ?? 0);
+  return { allowed: remaining > 0, remaining };
 }
 
 export async function deductCredit(tenantId: string, userId: string, messageId?: string): Promise<void> {

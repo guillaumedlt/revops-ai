@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://revops-ai-six.vercel.app";
 
   if (!code) {
-    return NextResponse.redirect(`${appUrl}/dashboard/settings?hubspot=error&reason=missing_code`);
+    return NextResponse.redirect(`${appUrl}/settings?tab=connectors&hubspot=error&reason=missing_code`);
   }
 
   try {
@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (!tenantId) {
-      return NextResponse.redirect(`${appUrl}/dashboard/settings?hubspot=error&reason=no_tenant`);
+      return NextResponse.redirect(`${appUrl}/settings?tab=connectors&hubspot=error&reason=no_tenant`);
     }
 
     // Store HubSpot tokens
@@ -71,13 +71,13 @@ export async function GET(request: NextRequest) {
 
     if (connError) {
       console.error("HubSpot connection upsert error:", connError);
-      return NextResponse.redirect(`${appUrl}/dashboard/settings?hubspot=error&reason=db_error`);
+      return NextResponse.redirect(`${appUrl}/settings?tab=connectors&hubspot=error&reason=db_error`);
     }
 
-    return NextResponse.redirect(`${appUrl}/dashboard/settings?hubspot=success`);
+    return NextResponse.redirect(`${appUrl}/settings?tab=connectors&hubspot=success`);
   } catch (error) {
     console.error("HubSpot callback error:", error);
     const msg = error instanceof Error ? error.message : "unknown";
-    return NextResponse.redirect(`${appUrl}/dashboard/settings?hubspot=error&reason=oauth_failed&detail=${encodeURIComponent(msg)}`);
+    return NextResponse.redirect(`${appUrl}/settings?tab=connectors&hubspot=error&reason=oauth_failed&detail=${encodeURIComponent(msg)}`);
   }
 }

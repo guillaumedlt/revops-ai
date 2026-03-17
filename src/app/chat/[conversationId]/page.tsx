@@ -96,6 +96,9 @@ export default function ConversationPage() {
               } else if (event.type === "content_blocks") {
                 finalBlocks = event.blocks;
                 setStreamingBlocks(event.blocks);
+              } else if (event.type === "error") {
+                accText += `\n\n**Erreur:** ${event.error || "Une erreur est survenue"}`;
+                setStreamingText(accText);
               } else if (event.type === "done") {
                 const assistantMsg: Message = {
                   id: crypto.randomUUID(),
@@ -116,6 +119,9 @@ export default function ConversationPage() {
         }
       } catch {
         /* network error */
+        setStreamingText("");
+        setStreamingBlocks(null);
+        setActiveTools([]);
       } finally {
         setIsStreaming(false);
       }

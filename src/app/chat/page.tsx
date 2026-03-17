@@ -28,7 +28,10 @@ export default function ChatWelcomePage() {
       });
       const convJson = await convRes.json();
       const conversationId = convJson.data?.id;
-      if (!conversationId) return;
+      if (!conversationId) {
+        setSending(false);
+        return;
+      }
 
       router.push(`/chat/${conversationId}?initial=${encodeURIComponent(message)}&model=${model}`);
     } catch {
