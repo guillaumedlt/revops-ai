@@ -5,10 +5,13 @@
 -- ROW LEVEL SECURITY
 -- ========================================
 
--- Helper function to get current user's tenant_id
-CREATE OR REPLACE FUNCTION auth.tenant_id()
+-- Helper function to get current user's tenant_id from JWT claims
+CREATE OR REPLACE FUNCTION public.tenant_id()
 RETURNS UUID AS $$
-  SELECT (auth.jwt() ->> 'tenant_id')::uuid;
+  SELECT COALESCE(
+    (current_setting('request.jwt.claims', true)::json ->> 'tenant_id')::uuid,
+    NULL
+  );
 $$ LANGUAGE sql STABLE SECURITY DEFINER;
 
 -- Enable RLS on all tables
@@ -42,96 +45,96 @@ ALTER TABLE credit_allocations ENABLE ROW LEVEL SECURITY;
 
 -- Tenant: users can only see their own tenant
 CREATE POLICY tenant_select ON tenants FOR SELECT
-  USING (id = auth.tenant_id());
+  USING (id = public.tenant_id());
 
 -- Users: same tenant only
 CREATE POLICY users_select ON users FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY users_update ON users FOR UPDATE
-  USING (tenant_id = auth.tenant_id() AND id = auth.uid());
+  USING (tenant_id = public.tenant_id() AND id = auth.uid());
 
 -- HubSpot data (read-only for app users, writes via service role)
 CREATE POLICY hs_deals_select ON hs_deals FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY hs_contacts_select ON hs_contacts FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY hs_companies_select ON hs_companies FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY hs_stages_select ON hs_pipeline_stages FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY hs_owners_select ON hs_owners FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 
 -- Scores (read-only for app users)
 CREATE POLICY scores_daily_select ON daily_scores FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY scores_weekly_select ON weekly_scores FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 
 -- Alerts
 CREATE POLICY alerts_select ON alerts FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY alerts_update ON alerts FOR UPDATE
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 
 -- Pilot notes (CRUD per tenant)
 CREATE POLICY notes_select ON pilot_notes FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY notes_insert ON pilot_notes FOR INSERT
-  WITH CHECK (tenant_id = auth.tenant_id());
+  WITH CHECK (tenant_id = public.tenant_id());
 CREATE POLICY notes_update ON pilot_notes FOR UPDATE
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY notes_delete ON pilot_notes FOR DELETE
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 
 -- Objectives (CRUD per tenant)
 CREATE POLICY obj_select ON objectives FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY obj_insert ON objectives FOR INSERT
-  WITH CHECK (tenant_id = auth.tenant_id());
+  WITH CHECK (tenant_id = public.tenant_id());
 CREATE POLICY obj_update ON objectives FOR UPDATE
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 
 -- Actions (CRUD per tenant)
 CREATE POLICY actions_select ON actions FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY actions_insert ON actions FOR INSERT
-  WITH CHECK (tenant_id = auth.tenant_id());
+  WITH CHECK (tenant_id = public.tenant_id());
 CREATE POLICY actions_update ON actions FOR UPDATE
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 
 -- Conversations & messages
 CREATE POLICY conv_select ON conversations FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY conv_insert ON conversations FOR INSERT
-  WITH CHECK (tenant_id = auth.tenant_id());
+  WITH CHECK (tenant_id = public.tenant_id());
 CREATE POLICY msg_select ON messages FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY msg_insert ON messages FOR INSERT
-  WITH CHECK (tenant_id = auth.tenant_id());
+  WITH CHECK (tenant_id = public.tenant_id());
 
 -- Reviews
 CREATE POLICY reviews_select ON weekly_reviews FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 
 -- Insights
 CREATE POLICY insights_select ON batch_insights FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY insights_update ON batch_insights FOR UPDATE
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 
 -- Billing (read-only)
 CREATE POLICY billing_select ON billing_events FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY credits_select ON credit_allocations FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 CREATE POLICY usage_select ON credit_usage FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 
 -- Sync logs (read-only, admin only)
 CREATE POLICY sync_logs_select ON sync_logs FOR SELECT
   USING (
-    tenant_id = auth.tenant_id()
+    tenant_id = public.tenant_id()
     AND EXISTS (
       SELECT 1 FROM users
       WHERE id = auth.uid()
@@ -142,7 +145,7 @@ CREATE POLICY sync_logs_select ON sync_logs FOR SELECT
 -- HubSpot connections (admin only)
 CREATE POLICY hs_conn_select ON hubspot_connections FOR SELECT
   USING (
-    tenant_id = auth.tenant_id()
+    tenant_id = public.tenant_id()
     AND EXISTS (
       SELECT 1 FROM users
       WHERE id = auth.uid()
@@ -152,7 +155,7 @@ CREATE POLICY hs_conn_select ON hubspot_connections FOR SELECT
 
 -- AI cache (read-only per tenant)
 CREATE POLICY cache_select ON ai_cache FOR SELECT
-  USING (tenant_id = auth.tenant_id());
+  USING (tenant_id = public.tenant_id());
 
 -- ========================================
 -- ADDITIONAL PERFORMANCE INDEXES

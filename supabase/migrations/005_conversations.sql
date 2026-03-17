@@ -71,7 +71,7 @@ CREATE TABLE ai_cache (
   UNIQUE(tenant_id, cache_key)
 );
 
-CREATE INDEX idx_ai_cache_lookup ON ai_cache(tenant_id, cache_key) WHERE expires_at > now();
+CREATE INDEX idx_ai_cache_lookup ON ai_cache(tenant_id, cache_key, expires_at);
 
 -- Credit usage tracking
 CREATE TABLE credit_usage (
@@ -117,13 +117,15 @@ CREATE TABLE batch_insights (
   is_read BOOLEAN DEFAULT false,
   read_at TIMESTAMPTZ,
 
-  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-
-  UNIQUE(tenant_id, insight_date, insight_type, COALESCE(metric_id, ''), COALESCE(owner_id, ''))
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+-- Unique index with COALESCE expressions (not in UNIQUE constraint)
+CREATE UNIQUE INDEX idx_batch_insights_unique
+  ON batch_insights(tenant_id, insight_date, insight_type, COALESCE(metric_id, ''), COALESCE(owner_id, ''));
+
 CREATE INDEX idx_insights_tenant_date ON batch_insights(tenant_id, insight_date DESC);
-CREATE INDEX idx_insights_unread ON batch_insights(tenant_id, is_read) WHERE is_read = false;
+CREATE INDEX idx_insights_unread ON batch_insights(tenant_id) WHERE is_read = false;
 
 -- Triggers
 CREATE TRIGGER trg_conversations_updated BEFORE UPDATE ON conversations
