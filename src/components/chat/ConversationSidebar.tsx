@@ -219,32 +219,29 @@ export default function ConversationSidebar() {
       </div>
 
       {/* Bottom section */}
-      <div className="border-t border-[#E5E5E5] p-3 space-y-2">
-        {/* Context indicator */}
-        <div className="flex items-center gap-2 px-1">
-          <div className="h-2 w-2 rounded-full bg-emerald-500" />
-          <span className="text-[10px] text-[#A3A3A3]">Context enabled</span>
-        </div>
-
-        {/* User section */}
-        <div className="flex items-center gap-2">
-          <div className="h-7 w-7 rounded-full bg-[#F0F0F0] flex items-center justify-center text-xs font-medium text-[#525252] shrink-0">
+      <div className="border-t border-[#F0F0F0] px-3 py-3">
+        <div className="flex items-center gap-3">
+          <div className="h-8 w-8 rounded-full bg-[#0A0A0A] flex items-center justify-center text-xs font-medium text-white shrink-0">
             {userInitial}
           </div>
-          <span className="text-xs text-[#525252] truncate flex-1">{userEmail}</span>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium text-[#0A0A0A] truncate">{userEmail}</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-1 mt-2">
           <button
             onClick={() => router.push("/settings")}
-            className="text-[#A3A3A3] hover:text-[#0A0A0A] transition-colors"
-            title="Settings"
+            className="flex-1 flex items-center justify-center gap-1.5 h-8 rounded-lg text-xs text-[#737373] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors"
           >
             <Settings size={14} />
+            <span>Settings</span>
           </button>
           <button
             onClick={handleLogout}
-            className="text-[#A3A3A3] hover:text-[#0A0A0A] transition-colors"
-            title="Logout"
+            className="flex-1 flex items-center justify-center gap-1.5 h-8 rounded-lg text-xs text-[#737373] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors"
           >
             <LogOut size={14} />
+            <span>Log out</span>
           </button>
         </div>
       </div>
