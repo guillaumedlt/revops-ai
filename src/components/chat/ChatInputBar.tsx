@@ -158,10 +158,10 @@ export default function ChatInputBar({
                 </span>
                 <span className="text-[#A3A3A3]">
                   {selectedFile.size < 1024
-                    ? \`\${selectedFile.size} B\`
+                    ? `${selectedFile.size} B`
                     : selectedFile.size < 1048576
-                      ? \`\${(selectedFile.size / 1024).toFixed(1)} KB\`
-                      : \`\${(selectedFile.size / 1048576).toFixed(1)} MB\`}
+                      ? `${(selectedFile.size / 1024).toFixed(1)} KB`
+                      : `${(selectedFile.size / 1048576).toFixed(1)} MB`}
                 </span>
                 <button
                   onClick={() => setSelectedFile(null)}
@@ -254,11 +254,11 @@ export default function ChatInputBar({
                           setSelectedModel(model.id);
                           setShowModelPicker(false);
                         }}
-                        className={\`w-full text-left px-3 py-1.5 text-xs hover:bg-[#F5F5F5] transition-colors \${
+                        className={`w-full text-left px-3 py-1.5 text-xs hover:bg-[#F5F5F5] transition-colors ${
                           selectedModel === model.id
                             ? "text-[#0A0A0A] font-medium"
                             : "text-[#525252]"
-                        }\`}
+                        }`}
                       >
                         {model.label}
                       </button>

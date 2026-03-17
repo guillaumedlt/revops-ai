@@ -155,7 +155,7 @@ function AgentThinking({
           const agent = TOOL_AGENTS[tool] ?? {
             name: "RevOps Agent",
             icon: "\u{1F916}",
-            action: \`Running \${tool}...\`,
+            action: `Running ${tool}...`,
           };
           return (
             <motion.div
