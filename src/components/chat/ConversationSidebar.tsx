@@ -200,7 +200,7 @@ export default function ConversationSidebar() {
                   onClick={() => router.push("/chat/" + conv.id)}
                   className={"w-full text-left text-sm truncate px-3 pr-8 h-8 flex items-center rounded-lg transition-colors " + (activeId === conv.id ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium" : "text-[#525252] hover:bg-[#F5F5F5]")}
                 >
-                  {conv.title}
+                  <span className="block truncate max-w-[140px]">{conv.title || "New Chat"}</span>
                 </button>
                 <button
                   onClick={(e) => {
