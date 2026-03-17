@@ -1,5 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
-  return NextResponse.json({ data: null, error: null, metadata: { timestamp: new Date().toISOString(), cached: false } });
+export async function GET(request: NextRequest) {
+  // Legacy route -- redirect to the API callback
+  const url = new URL(request.url);
+  return NextResponse.redirect(
+    new URL(`/api/auth/hubspot/callback${url.search}`, request.url)
+  );
 }

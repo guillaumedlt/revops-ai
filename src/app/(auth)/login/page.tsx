@@ -3,88 +3,130 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 function LoginContent() {
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const searchParams = useSearchParams();
-
   const errorParam = searchParams.get("error");
-  const errorMessages: Record<string, string> = {
-    missing_params: "Paramètres manquants. Réessayez.",
-    invalid_state: "Session expirée. Réessayez.",
-    oauth_failed: "La connexion HubSpot a échoué. Réessayez.",
-    tenant_creation_failed: "Erreur lors de la création du compte.",
-    user_creation_failed: "Erreur lors de la création de l'utilisateur.",
-  };
 
-  async function handleConnect() {
+  const supabase = createClient();
+
+  async function handleMagicLink(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email.trim()) return;
     setLoading(true);
     setError(null);
 
-    try {
-      const response = await fetch("/api/auth/hubspot", { method: "POST" });
-      const result = await response.json();
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+      },
+    });
 
-      if (result.error) {
-        setError(result.error);
-        setLoading(false);
-        return;
-      }
-
-      // Redirect to HubSpot OAuth
-      window.location.href = result.data.authUrl;
-    } catch {
-      setError("Erreur de connexion. Réessayez.");
+    if (error) {
+      setError(error.message);
+      setLoading(false);
+    } else {
+      setSent(true);
       setLoading(false);
     }
+  }
+
+  async function handleGoogle() {
+    setLoading(true);
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    });
+  }
+
+  if (sent) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#0B1120]">
+        <div className="w-full max-w-sm text-center">
+          <div className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-white/10 text-white text-lg font-semibold">
+            R
+          </div>
+          <h1 className="mt-4 text-xl font-medium text-white">
+            Verifie ta boite mail
+          </h1>
+          <p className="mt-2 text-sm text-white/50">
+            Un lien de connexion a ete envoye a {email}
+          </p>
+          <button
+            onClick={() => setSent(false)}
+            className="mt-6 text-xs text-white/30 underline"
+          >
+            Utiliser une autre adresse
+          </button>
+        </div>
+      </main>
+    );
   }
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-[#0B1120]">
       <div className="w-full max-w-sm text-center">
-        {/* Logo */}
-        <div className="mb-8">
-          <div className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-white/10 text-white text-lg font-semibold">
-            R
-          </div>
-          <h1 className="mt-4 text-xl font-medium text-white">
-            RevOps Command Center
-          </h1>
-          <p className="mt-2 text-sm text-white/50">
-            Pilotez votre machine commerciale
-          </p>
+        <div className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-white/10 text-white text-lg font-semibold">
+          R
         </div>
+        <h1 className="mt-4 text-xl font-medium text-white">
+          RevOps Command Center
+        </h1>
+        <p className="mt-2 text-sm text-white/50">
+          Pilotez votre machine commerciale
+        </p>
 
-        {/* Error */}
         {(error || errorParam) && (
-          <div className="mb-6 rounded-md bg-red-500/10 border border-red-500/20 px-4 py-3 text-sm text-red-400">
-            {error || errorMessages[errorParam!] || "Une erreur est survenue."}
+          <div className="mt-6 rounded-md bg-red-500/10 border border-red-500/20 px-4 py-3 text-sm text-red-400">
+            {error || "Une erreur est survenue. Reessayez."}
           </div>
         )}
 
-        {/* Connect button */}
+        {/* Google */}
         <button
-          onClick={handleConnect}
+          onClick={handleGoogle}
           disabled={loading}
-          className="w-full rounded-md bg-[#FF7A59] px-4 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+          className="mt-6 w-full rounded-md border border-white/20 bg-white px-4 py-2.5 text-sm font-medium text-[#0A0A0A] transition-opacity hover:opacity-90 disabled:opacity-50"
         >
-          {loading ? "Connexion en cours..." : "Connecter mon HubSpot"}
+          Continuer avec Google
         </button>
 
-        <p className="mt-6 text-xs text-white/30">
-          Pas de compte a creer. Connectez votre portail HubSpot et
-          c&apos;est parti.
-        </p>
-
-        <div className="mt-8 border-t border-white/10 pt-6">
-          <p className="text-xs text-white/30">
-            Fonctionne avec HubSpot Sales Hub
-          </p>
-          <p className="text-xs text-white/20">
-            Free · Starter · Pro · Enterprise
-          </p>
+        <div className="my-4 flex items-center gap-3">
+          <div className="h-px flex-1 bg-white/10" />
+          <span className="text-xs text-white/30">ou</span>
+          <div className="h-px flex-1 bg-white/10" />
         </div>
+
+        {/* Magic link */}
+        <form onSubmit={handleMagicLink} className="space-y-3">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="email@entreprise.com"
+            required
+            className="w-full rounded-md border border-white/20 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 focus:border-white/40 focus:outline-none"
+          />
+          <button
+            type="submit"
+            disabled={loading || !email.trim()}
+            className="w-full rounded-md bg-white px-4 py-2.5 text-sm font-medium text-[#0A0A0A] transition-opacity hover:opacity-90 disabled:opacity-50"
+          >
+            {loading ? "Envoi..." : "Recevoir un lien de connexion"}
+          </button>
+        </form>
+
+        <p className="mt-8 text-xs text-white/20">
+          Pas de mot de passe. Un lien securise est envoye par email.
+        </p>
       </div>
     </main>
   );

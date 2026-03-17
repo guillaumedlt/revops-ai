@@ -1,65 +1,44 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyToken } from "@/lib/auth";
+import { updateSession } from "@/lib/supabase/middleware";
 
 const PUBLIC_PATHS = [
   "/",
   "/login",
   "/signup",
   "/pricing",
-  "/api/auth/hubspot",
-  "/api/auth/hubspot/callback",
+  "/auth/callback",
   "/api/webhooks/stripe",
+  "/api/auth/hubspot/callback",
 ];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Allow public paths
-  if (PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"))) {
-    return NextResponse.next();
-  }
-
-  // Allow static files and Next.js internals
+  // Allow public paths, static files, cron routes
   if (
+    PUBLIC_PATHS.some(
+      (p) => pathname === p || pathname.startsWith(p + "/")
+    ) ||
     pathname.startsWith("/_next") ||
-    pathname.startsWith("/favicon") ||
-    pathname.includes(".")
+    pathname.includes(".") ||
+    pathname.startsWith("/api/cron/")
   ) {
-    return NextResponse.next();
+    const { supabaseResponse } = await updateSession(request);
+    return supabaseResponse;
   }
 
-  // Cron routes use x-cron-secret header, not JWT
-  if (pathname.startsWith("/api/cron/")) {
-    return NextResponse.next();
-  }
+  const { user, supabaseResponse, supabase } = await updateSession(request);
 
-  // Check auth for /dashboard/* and /api/* routes
-  const token = request.cookies.get("auth_token")?.value;
-
-  if (!token) {
-    // API routes → 401 JSON
+  if (!user) {
     if (pathname.startsWith("/api/")) {
       return NextResponse.json(
         {
           data: null,
           error: "Unauthorized",
-          metadata: { timestamp: new Date().toISOString(), cached: false },
-        },
-        { status: 401 }
-      );
-    }
-    // Pages → redirect to login
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-
-  const payload = await verifyToken(token);
-  if (!payload) {
-    if (pathname.startsWith("/api/")) {
-      return NextResponse.json(
-        {
-          data: null,
-          error: "Invalid or expired token",
-          metadata: { timestamp: new Date().toISOString(), cached: false },
+          metadata: {
+            timestamp: new Date().toISOString(),
+            cached: false,
+          },
         },
         { status: 401 }
       );
@@ -67,17 +46,31 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  // Inject tenant_id and user_id as headers for downstream routes
+  // Get tenant_id from public.users table
+  const { data: dbUser } = await supabase
+    .from("users")
+    .select("tenant_id")
+    .eq("id", user.id)
+    .single();
+
+  // Inject auth context headers for API routes
   const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-tenant-id", payload.tenant_id);
-  requestHeaders.set("x-user-id", payload.user_id);
-  requestHeaders.set("x-user-email", payload.email);
+  requestHeaders.set("x-user-id", user.id);
+  requestHeaders.set("x-user-email", user.email ?? "");
+  requestHeaders.set("x-tenant-id", dbUser?.tenant_id ?? "");
 
-  return NextResponse.next({
+  const response = NextResponse.next({
     request: { headers: requestHeaders },
   });
+
+  // Copy Supabase auth cookies
+  supabaseResponse.cookies.getAll().forEach((cookie) => {
+    response.cookies.set(cookie.name, cookie.value);
+  });
+
+  return response;
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/api/:path*"],
+  matcher: ["/dashboard/:path*", "/api/:path*", "/auth/:path*"],
 };
