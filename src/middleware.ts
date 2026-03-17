@@ -9,6 +9,7 @@ const PUBLIC_PATHS = [
   "/auth/callback",
   "/api/webhooks/stripe",
   "/api/auth/hubspot/callback",
+  "/api/auth/setup",
 ];
 
 export async function middleware(request: NextRequest) {
