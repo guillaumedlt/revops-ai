@@ -11,6 +11,7 @@ import { parseContentBlocks } from "@/lib/ai/parse-blocks";
 const ChatSchema = z.object({
   message: z.string().min(1).max(4000),
   conversationId: z.string().uuid().optional(),
+  model: z.string().optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -27,7 +28,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Limite de credits atteinte" }, { status: 402 });
   }
 
-  const { message, conversationId } = parsed.data;
+  const { message, conversationId, model: requestedModel } = parsed.data;
   const supabase = createAdminClient();
 
   // Get or create conversation
@@ -49,8 +50,8 @@ export async function POST(request: NextRequest) {
     content: message,
   });
 
-  // Route model
-  const modelChoice = routeToModel(message, 0);
+  // Route model — use requested model preference, fallback to router
+  const modelChoice = requestedModel ?? routeToModel(message, 0);
   const modelId = getModelId(modelChoice);
 
   // Build messages
@@ -64,6 +65,7 @@ export async function POST(request: NextRequest) {
   }));
 
   // Call Anthropic API with streaming
+  // V1: All models route through Claude API. Multi-LLM routing comes later.
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
     async start(controller) {
@@ -151,7 +153,6 @@ export async function POST(request: NextRequest) {
 
           // If tool_use, execute tools and continue
           if (stopReason === "tool_use" && toolUseBlocks.length > 0) {
-            // Add assistant message with tool uses
             messages.push({
               role: "assistant",
               content: [
@@ -160,7 +161,6 @@ export async function POST(request: NextRequest) {
               ],
             });
 
-            // Execute each tool
             const toolResults = [];
             for (const toolCall of toolUseBlocks) {
               const tool = aiTools[toolCall.name as keyof typeof aiTools];
@@ -178,7 +178,6 @@ export async function POST(request: NextRequest) {
 
             messages.push({ role: "user", content: toolResults });
             toolUseBlocks = [];
-            // Accumulate text from this iteration before continuing
             finalText += fullText;
             fullText = "";
           } else {
@@ -187,10 +186,8 @@ export async function POST(request: NextRequest) {
           }
         }
 
-        // Parse content blocks from the final text
         const parsedBlocks = parseContentBlocks(finalText);
 
-        // Save assistant message with content_blocks
         await supabase.from("messages").insert({
           conversation_id: convId,
           tenant_id: auth.tenantId,
@@ -200,10 +197,8 @@ export async function POST(request: NextRequest) {
           model: modelChoice,
         });
 
-        // Deduct credit
         await deductCredit(auth.tenantId, auth.userId);
 
-        // Emit content blocks event
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "content_blocks", blocks: parsedBlocks })}\n\n`));
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "metadata", conversationId: convId, model: modelChoice, creditsRemaining: credits.remaining - 1 })}\n\n`));
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));

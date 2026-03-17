@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import MessageThread from "@/components/chat/MessageThread";
-import ChatInput from "@/components/chat/ChatInput";
+import ChatInputBar from "@/components/chat/ChatInputBar";
 import type { ContentBlock } from "@/types/chat-blocks";
 
 interface Message {
@@ -23,9 +23,9 @@ export default function ConversationPage() {
   const [activeTools, setActiveTools] = useState<string[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [selectedModel, setSelectedModel] = useState("revops-ai");
   const initialSent = useRef(false);
 
-  // Fetch existing messages
   useEffect(() => {
     async function load() {
       const res = await fetch(`/api/conversations/${conversationId}`);
@@ -39,8 +39,10 @@ export default function ConversationPage() {
   }, [conversationId]);
 
   const sendMessage = useCallback(
-    async (message: string) => {
+    async (message: string, model?: string) => {
       if (isStreaming) return;
+      const useModel = model ?? selectedModel;
+      setSelectedModel(useModel);
 
       const userMsg: Message = {
         id: crypto.randomUUID(),
@@ -58,7 +60,7 @@ export default function ConversationPage() {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message, conversationId }),
+          body: JSON.stringify({ message, conversationId, model: useModel }),
         });
 
         if (!res.ok || !res.body) {
@@ -118,19 +120,23 @@ export default function ConversationPage() {
         setIsStreaming(false);
       }
     },
-    [conversationId, isStreaming]
+    [conversationId, isStreaming, selectedModel]
   );
 
-  // Handle initial message from query param
   useEffect(() => {
     if (loaded && !initialSent.current) {
       const initial = searchParams.get("initial");
+      const model = searchParams.get("model") ?? "revops-ai";
       if (initial && messages.length === 0) {
         initialSent.current = true;
-        sendMessage(initial);
+        sendMessage(initial, model);
       }
     }
   }, [loaded, searchParams, messages.length, sendMessage]);
+
+  const handleSend = (message: string, model: string) => {
+    sendMessage(message, model);
+  };
 
   return (
     <div className="flex-1 flex flex-col h-full">
@@ -141,10 +147,9 @@ export default function ConversationPage() {
         activeTools={activeTools}
       />
       <div className="shrink-0 pb-2">
-        <ChatInput
-          onSend={sendMessage}
+        <ChatInputBar
+          onSend={handleSend}
           disabled={isStreaming}
-          placeholder="Pose une question..."
         />
       </div>
     </div>

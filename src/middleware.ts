@@ -15,6 +15,11 @@ const PUBLIC_PATHS = [
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Redirect /dashboard to /chat
+  if (pathname === "/dashboard" || pathname.startsWith("/dashboard/")) {
+    return NextResponse.redirect(new URL("/chat", request.url));
+  }
+
   // Allow public paths, static files, cron routes
   if (
     PUBLIC_PATHS.some(
@@ -48,7 +53,6 @@ export async function middleware(request: NextRequest) {
   }
 
   // Get tenant_id from public.users table
-  // Use service role to bypass RLS (tenant_id JWT claim not set yet at this point)
   const { createClient } = await import("@supabase/supabase-js");
   const adminClient = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -80,5 +84,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/chat/:path*", "/api/:path*", "/auth/:path*"],
+  matcher: ["/chat/:path*", "/settings/:path*", "/api/:path*", "/auth/:path*", "/dashboard/:path*"],
 };

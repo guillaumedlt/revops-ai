@@ -117,14 +117,16 @@ export default function ConversationSidebar() {
 
       {/* Bottom section */}
       <div className="border-t border-[#1A1A1A] p-3 space-y-2">
-        <div className="flex gap-3">
-          <a href="/dashboard" className="text-xs text-[#737373] underline hover:text-white transition-colors">
-            Dashboard
-          </a>
-          <a href="/dashboard/settings" className="text-xs text-[#737373] hover:text-white transition-colors">
-            Settings
-          </a>
-        </div>
+        <a
+          href="/settings"
+          className="flex items-center gap-2 text-xs text-[#737373] hover:text-white transition-colors"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+          </svg>
+          Parametres
+        </a>
         <div className="flex items-center justify-between">
           <span className="text-xs text-[#737373] truncate max-w-[160px]">{userEmail}</span>
           <button onClick={handleLogout} className="text-xs text-[#737373] hover:text-white transition-colors">
