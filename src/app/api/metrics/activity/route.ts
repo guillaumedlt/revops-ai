@@ -1,5 +1,21 @@
-import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { metricRoute } from "@/lib/api-helpers";
+import {
+  computeActivityVolume,
+  computeUnworkedDeals,
+  computeContactEngagementRate,
+} from "@/lib/scoring/metrics/activity";
 
-export async function GET() {
-  return NextResponse.json({ data: null, error: null, metadata: { timestamp: new Date().toISOString(), cached: false } });
-}
+export const GET = metricRoute((data, query) => {
+  const filter = { dateRange: query.dateRange, ownerIds: query.ownerIds, pipeline: query.pipeline };
+
+  const activityVolume = computeActivityVolume(data.contacts, filter);
+  const unworkedDeals = computeUnworkedDeals(data.deals, filter);
+  const contactEngagementRate = computeContactEngagementRate(data.contacts, filter);
+
+  return {
+    activityVolume,
+    unworkedDeals,
+    contactEngagementRate,
+  };
+});
