@@ -1,0 +1,179 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Plus, LayoutDashboard, X } from "lucide-react";
+
+interface Dashboard {
+  id: string;
+  name: string;
+  description: string | null;
+  widget_count: number;
+  updated_at: string;
+}
+
+function CreateModal({ onClose, onCreate }: { onClose: () => void; onCreate: (name: string, desc: string) => void }) {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!name.trim()) return;
+    setLoading(true);
+    onCreate(name, description);
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-[#0A0A0A]">Create Dashboard</h2>
+          <button onClick={onClose} className="text-[#A3A3A3] hover:text-[#0A0A0A]">
+            <X size={18} />
+          </button>
+        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-[#525252] mb-1">Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="e.g. Weekly Pipeline Review"
+              autoFocus
+              className="w-full h-10 px-3 text-sm rounded-lg border border-[#E5E5E5] bg-white text-[#0A0A0A] placeholder:text-[#A3A3A3] focus:outline-none focus:ring-1 focus:ring-[#0A0A0A]"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-[#525252] mb-1">Description (optional)</label>
+            <input
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="What is this dashboard for?"
+              className="w-full h-10 px-3 text-sm rounded-lg border border-[#E5E5E5] bg-white text-[#0A0A0A] placeholder:text-[#A3A3A3] focus:outline-none focus:ring-1 focus:ring-[#0A0A0A]"
+            />
+          </div>
+          <div className="flex justify-end gap-2 pt-2">
+            <button type="button" onClick={onClose} className="px-4 py-2 text-sm text-[#525252] hover:bg-[#F5F5F5] rounded-lg">
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={!name.trim() || loading}
+              className="bg-[#0A0A0A] text-white rounded-lg px-4 py-2 text-sm font-medium disabled:opacity-50 hover:bg-[#262626] transition-colors"
+            >
+              {loading ? "Creating..." : "Create"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function formatDate(dateStr: string) {
+  const d = new Date(dateStr);
+  const now = new Date();
+  const diff = now.getTime() - d.getTime();
+  const hours = Math.floor(diff / 3600000);
+  if (hours < 1) return "Just now";
+  if (hours < 24) return hours + "h ago";
+  const days = Math.floor(hours / 24);
+  if (days < 7) return days + "d ago";
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
+
+export default function DashboardsPage() {
+  const [dashboards, setDashboards] = useState<Dashboard[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [showCreate, setShowCreate] = useState(false);
+  const router = useRouter();
+
+  async function fetchDashboards() {
+    const res = await fetch("/api/dashboards");
+    if (res.ok) {
+      const json = await res.json();
+      setDashboards(json.data?.dashboards ?? []);
+    }
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    fetchDashboards();
+  }, []);
+
+  async function handleCreate(name: string, description: string) {
+    const res = await fetch("/api/dashboards", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, description: description || undefined }),
+    });
+    if (res.ok) {
+      const json = await res.json();
+      setShowCreate(false);
+      router.push("/dashboards/" + json.data.dashboard.id);
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex-1 flex items-center justify-center">
+        <div className="h-5 w-5 border-2 border-[#E5E5E5] border-t-[#0A0A0A] rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex-1 overflow-y-auto">
+      <div className="max-w-5xl mx-auto px-6 py-8">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="text-xl font-semibold text-[#0A0A0A]">Dashboards</h1>
+            <p className="text-sm text-[#737373] mt-0.5">Pin reports and metrics from chat into custom dashboards.</p>
+          </div>
+          <button
+            onClick={() => setShowCreate(true)}
+            className="bg-[#0A0A0A] text-white rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-1.5 hover:bg-[#262626] transition-colors"
+          >
+            <Plus size={16} />
+            Create Dashboard
+          </button>
+        </div>
+
+        {/* Grid */}
+        {dashboards.length === 0 ? (
+          <div className="text-center py-16">
+            <div className="h-12 w-12 rounded-xl bg-[#F5F5F5] flex items-center justify-center mx-auto mb-3">
+              <LayoutDashboard size={24} className="text-[#A3A3A3]" />
+            </div>
+            <p className="text-sm text-[#525252] font-medium">No dashboards yet</p>
+            <p className="text-sm text-[#A3A3A3] mt-1">Create one to start pinning reports.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-4">
+            {dashboards.map((d) => (
+              <button
+                key={d.id}
+                onClick={() => router.push("/dashboards/" + d.id)}
+                className="text-left border border-[#E5E5E5] rounded-xl p-5 hover:border-[#D4D4D4] hover:shadow-sm transition-all cursor-pointer"
+              >
+                <h3 className="text-base font-medium text-[#0A0A0A]">{d.name}</h3>
+                {d.description && (
+                  <p className="text-sm text-[#737373] mt-1 line-clamp-2">{d.description}</p>
+                )}
+                <p className="text-xs text-[#A3A3A3] mt-3">
+                  {d.widget_count} widget{d.widget_count !== 1 ? "s" : ""} &middot; {formatDate(d.updated_at)}
+                </p>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {showCreate && <CreateModal onClose={() => setShowCreate(false)} onCreate={handleCreate} />}
+    </div>
+  );
+}

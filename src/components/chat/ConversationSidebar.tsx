@@ -9,6 +9,7 @@ import {
   Settings,
   LogOut,
   Trash2,
+  LayoutDashboard,
 } from "lucide-react";
 import { getCachedMessages, setCachedMessages, deleteCachedConversation } from "@/lib/chat-store";
 
@@ -82,15 +83,10 @@ export default function ConversationSidebar() {
   };
 
   const handleDelete = async (id: string) => {
-    // Optimistic update
     setConversations((prev) => prev.filter((c) => c.id !== id));
     deleteCachedConversation(id);
-
-    // Delete via API
-    await fetch(`/api/conversations/${id}`, { method: "DELETE" });
-
-    // If we deleted the active conversation, go to /chat
-    if (pathname === `/chat/${id}`) {
+    await fetch("/api/conversations/" + id, { method: "DELETE" });
+    if (pathname === "/chat/" + id) {
       router.push("/chat");
     }
   };
@@ -103,7 +99,7 @@ export default function ConversationSidebar() {
 
   const handleHover = (id: string) => {
     if (!getCachedMessages(id)) {
-      fetch(`/api/conversations/${id}`)
+      fetch("/api/conversations/" + id)
         .then((r) => r.json())
         .then((res) => {
           if (res.data?.messages) {
@@ -116,7 +112,7 @@ export default function ConversationSidebar() {
             setCachedMessages(id, msgs);
           }
         })
-        .catch(() => {}); // Silent prefetch
+        .catch(() => {});
     }
   };
 
@@ -153,6 +149,13 @@ export default function ConversationSidebar() {
         >
           <MessageSquarePlus size={16} className="text-[#A3A3A3]" />
           New Chat
+        </button>
+        <button
+          onClick={() => router.push("/dashboards")}
+          className={"w-full flex items-center gap-2 px-3 h-9 rounded-lg text-sm transition-colors " + (pathname.startsWith("/dashboards") ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium" : "text-[#525252] hover:bg-[#F5F5F5]")}
+        >
+          <LayoutDashboard size={16} className={pathname.startsWith("/dashboards") ? "text-[#0A0A0A]" : "text-[#A3A3A3]"} />
+          Dashboards
         </button>
         <button
           onClick={() => setSearchOpen(!searchOpen)}
@@ -195,11 +198,7 @@ export default function ConversationSidebar() {
                 <button
                   onMouseEnter={() => handleHover(conv.id)}
                   onClick={() => router.push("/chat/" + conv.id)}
-                  className={`w-full text-left text-sm truncate px-3 pr-8 h-8 flex items-center rounded-lg transition-colors ${
-                    activeId === conv.id
-                      ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium"
-                      : "text-[#525252] hover:bg-[#F5F5F5]"
-                  }`}
+                  className={"w-full text-left text-sm truncate px-3 pr-8 h-8 flex items-center rounded-lg transition-colors " + (activeId === conv.id ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium" : "text-[#525252] hover:bg-[#F5F5F5]")}
                 >
                   {conv.title}
                 </button>

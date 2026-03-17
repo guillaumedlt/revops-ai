@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Copy, ThumbsUp, Share2 } from "lucide-react";
 import BlockRenderer from "./blocks/BlockRenderer";
 import TextBlock from "./blocks/TextBlock";
+import AddToDashboard from "./AddToDashboard";
 import type { ContentBlock } from "@/types/chat-blocks";
 
 interface Message {
@@ -20,7 +21,10 @@ interface Props {
   streamingBlocks?: ContentBlock[] | null;
   activeTools: string[];
   streaming?: boolean;
+  conversationId?: string;
 }
+
+const PINNABLE_TYPES = ["kpi", "kpi_grid", "chart", "table"];
 
 function stripBlockSyntax(text: string): string {
   return text.replace(/:::\w+(?:\{[^}]*\})?\n[\s\S]*?:::/g, "").trim();
@@ -51,65 +55,18 @@ function MessageActions() {
   );
 }
 
-const TOOL_AGENTS: Record<
-  string,
-  { name: string; icon: string; action: string }
-> = {
-  get_pipeline: {
-    name: "Pipeline Agent",
-    icon: "\u{1F4CA}",
-    action: "Analyzing pipeline data...",
-  },
-  get_deals: {
-    name: "Deal Agent",
-    icon: "\u{1F4BC}",
-    action: "Searching deals...",
-  },
-  get_win_rate: {
-    name: "Closing Agent",
-    icon: "\u{1F3AF}",
-    action: "Calculating win rates...",
-  },
-  get_velocity: {
-    name: "Velocity Agent",
-    icon: "\u26A1",
-    action: "Measuring sales velocity...",
-  },
-  get_adoption: {
-    name: "Adoption Agent",
-    icon: "\u{1F4C8}",
-    action: "Checking adoption score...",
-  },
-  get_alerts: {
-    name: "Alert Agent",
-    icon: "\u{1F514}",
-    action: "Scanning for alerts...",
-  },
-  get_revenue: {
-    name: "Revenue Agent",
-    icon: "\u{1F4B0}",
-    action: "Computing revenue metrics...",
-  },
-  get_activity: {
-    name: "Activity Agent",
-    icon: "\u{1F4CB}",
-    action: "Reviewing activity data...",
-  },
-  get_data_quality: {
-    name: "Data Quality Agent",
-    icon: "\u{1F9F9}",
-    action: "Auditing data quality...",
-  },
-  get_owner_performance: {
-    name: "Performance Agent",
-    icon: "\u{1F464}",
-    action: "Evaluating rep performance...",
-  },
-  create_note: {
-    name: "Notes Agent",
-    icon: "\u{1F4DD}",
-    action: "Creating note...",
-  },
+const TOOL_AGENTS: Record<string, { name: string; icon: string; action: string }> = {
+  get_pipeline: { name: "Pipeline Agent", icon: "\u{1F4CA}", action: "Analyzing pipeline data..." },
+  get_deals: { name: "Deal Agent", icon: "\u{1F4BC}", action: "Searching deals..." },
+  get_win_rate: { name: "Closing Agent", icon: "\u{1F3AF}", action: "Calculating win rates..." },
+  get_velocity: { name: "Velocity Agent", icon: "\u26A1", action: "Measuring sales velocity..." },
+  get_adoption: { name: "Adoption Agent", icon: "\u{1F4C8}", action: "Checking adoption score..." },
+  get_alerts: { name: "Alert Agent", icon: "\u{1F514}", action: "Scanning for alerts..." },
+  get_revenue: { name: "Revenue Agent", icon: "\u{1F4B0}", action: "Computing revenue metrics..." },
+  get_activity: { name: "Activity Agent", icon: "\u{1F4CB}", action: "Reviewing activity data..." },
+  get_data_quality: { name: "Data Quality Agent", icon: "\u{1F9F9}", action: "Auditing data quality..." },
+  get_owner_performance: { name: "Performance Agent", icon: "\u{1F464}", action: "Evaluating rep performance..." },
+  create_note: { name: "Notes Agent", icon: "\u{1F4DD}", action: "Creating note..." },
 };
 
 function AgentThinking({
@@ -123,8 +80,7 @@ function AgentThinking({
   streaming?: boolean;
   streamingBlocks?: ContentBlock[] | null;
 }) {
-  const hasText =
-    streamingText && stripBlockSyntax(streamingText).trim().length > 0;
+  const hasText = streamingText && stripBlockSyntax(streamingText).trim().length > 0;
 
   if (hasText) {
     return (
@@ -137,9 +93,7 @@ function AgentThinking({
             {streaming && streamingText.includes(":::") && (
               <div className="flex items-center gap-2 mt-3 py-2 px-3 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                 <div className="h-4 w-4 border-2 border-[#E5E5E5] border-t-[#0A0A0A] rounded-full animate-spin" />
-                <span className="text-xs text-[#737373]">
-                  Building report...
-                </span>
+                <span className="text-xs text-[#737373]">Building report...</span>
               </div>
             )}
           </>
@@ -152,11 +106,7 @@ function AgentThinking({
     return (
       <div className="space-y-2">
         {activeTools.map((tool) => {
-          const agent = TOOL_AGENTS[tool] ?? {
-            name: "RevOps Agent",
-            icon: "\u{1F916}",
-            action: `Running ${tool}...`,
-          };
+          const agent = TOOL_AGENTS[tool] ?? { name: "RevOps Agent", icon: "\u{1F916}", action: "Running " + tool + "..." };
           return (
             <motion.div
               key={tool}
@@ -167,9 +117,7 @@ function AgentThinking({
             >
               <span className="text-base">{agent.icon}</span>
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-medium text-[#0A0A0A]">
-                  {agent.name}
-                </p>
+                <p className="text-xs font-medium text-[#0A0A0A]">{agent.name}</p>
                 <p className="text-[11px] text-[#737373]">{agent.action}</p>
               </div>
               <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" />
@@ -193,12 +141,46 @@ function AgentThinking({
   );
 }
 
+function AssistantBlocksWithPin({
+  blocks,
+  messageId,
+  conversationId,
+}: {
+  blocks: ContentBlock[];
+  messageId?: string;
+  conversationId?: string;
+}) {
+  return (
+    <div className="space-y-4">
+      {blocks.map((block, i) => {
+        const isPinnable = PINNABLE_TYPES.includes(block.type);
+        return (
+          <div key={i} className={isPinnable ? "group/block relative" : ""}>
+            <BlockRenderer blocks={[block]} />
+            {isPinnable && (
+              <div className="absolute top-2 right-2 hidden group-hover/block:flex">
+                <AddToDashboard
+                  block={block}
+                  blockTitle={"title" in block ? (block as any).title : "label" in block ? (block as any).label : undefined}
+                  messageId={messageId}
+                  conversationId={conversationId}
+                />
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function MessageThread({
   messages,
   streamingText,
   streamingBlocks,
   activeTools,
   streaming,
+  conversationId,
 }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -225,7 +207,11 @@ export default function MessageThread({
               <div className="w-full">
                 <div className="text-sm text-[#0A0A0A] leading-relaxed">
                   {msg.content_blocks && msg.content_blocks.length > 0 ? (
-                    <BlockRenderer blocks={msg.content_blocks} />
+                    <AssistantBlocksWithPin
+                      blocks={msg.content_blocks}
+                      messageId={msg.id}
+                      conversationId={conversationId}
+                    />
                   ) : (
                     <TextBlock text={msg.content} />
                   )}
@@ -237,9 +223,7 @@ export default function MessageThread({
         ))}
 
         {/* Streaming state */}
-        {(streamingText ||
-          activeTools.length > 0 ||
-          (streaming && !streamingText)) && (
+        {(streamingText || activeTools.length > 0 || (streaming && !streamingText)) && (
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
