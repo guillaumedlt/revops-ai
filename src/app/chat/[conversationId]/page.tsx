@@ -36,9 +36,6 @@ export default function ConversationPage() {
     return cached ?? [];
   });
   const [streamingText, setStreamingText] = useState("");
-  const [streamingBlocks, setStreamingBlocks] = useState<ContentBlock[] | null>(
-    null
-  );
   const [activeTools, setActiveTools] = useState<string[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
   const [loaded, setLoaded] = useState(
@@ -46,13 +43,15 @@ export default function ConversationPage() {
   );
   const [selectedModel, setSelectedModel] = useState("revops-ai");
   const pendingSent = useRef(false);
-  const pendingTextRef = useRef("");
-  const updateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // RAF-based streaming: accumulate in ref, flush at 60fps
+  const streamingTextRef = useRef("");
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     async function load() {
       const hadCache = !!getCachedMessages(conversationId);
-      const res = await fetch(`/api/conversations/${conversationId}`);
+      const res = await fetch("/api/conversations/" + conversationId);
       if (res.ok) {
         const json = await res.json();
         const msgs = json.data?.messages ?? [];
@@ -63,14 +62,6 @@ export default function ConversationPage() {
     }
     load();
   }, [conversationId]);
-
-  const flushPendingText = useCallback(() => {
-    if (pendingTextRef.current) {
-      const text = pendingTextRef.current;
-      pendingTextRef.current = "";
-      setStreamingText((prev) => prev + text);
-    }
-  }, []);
 
   const sendMessage = useCallback(
     async (message: string, model?: string, attachment?: Attachment) => {
@@ -84,23 +75,22 @@ export default function ConversationPage() {
         content: message,
         created_at: new Date().toISOString(),
       };
-      setMessages((prev) => [...prev, userMsg]);
+      setMessages(function (prev) { return prev.concat([userMsg]); });
       appendCachedMessage(conversationId, userMsg);
       setIsStreaming(true);
       setStreamingText("");
-      setStreamingBlocks(null);
       setActiveTools([]);
-      pendingTextRef.current = "";
+      streamingTextRef.current = "";
 
       try {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            message,
-            conversationId,
+            message: message,
+            conversationId: conversationId,
             model: useModel,
-            attachment,
+            attachment: attachment,
           }),
         });
 
@@ -111,9 +101,9 @@ export default function ConversationPage() {
 
         const reader = res.body.getReader();
         const decoder = new TextDecoder();
-        let buffer = "";
-        let accText = "";
-        let finalBlocks: ContentBlock[] | null = null;
+        var buffer = "";
+        var accText = "";
+        var finalBlocks: ContentBlock[] | null = null;
 
         while (true) {
           const { done, value } = await reader.read();
@@ -123,96 +113,98 @@ export default function ConversationPage() {
           const lines = buffer.split(String.fromCharCode(10));
           buffer = lines.pop() ?? "";
 
-          for (const line of lines) {
+          for (var li = 0; li < lines.length; li++) {
+            var line = lines[li];
             if (!line.startsWith("data: ")) continue;
             try {
-              const event = JSON.parse(line.slice(6));
-              if (event.type === "token") {
+              var event = JSON.parse(line.slice(6));
+              if (event.type === "token" && event.token) {
                 accText += event.token;
-                pendingTextRef.current += event.token;
-                if (!updateTimerRef.current) {
-                  updateTimerRef.current = setTimeout(() => {
-                    flushPendingText();
-                    updateTimerRef.current = null;
-                  }, 30);
+                streamingTextRef.current = accText;
+
+                // Use RAF for smooth 60fps updates instead of batched setTimeout
+                if (!rafRef.current) {
+                  rafRef.current = requestAnimationFrame(function () {
+                    setStreamingText(streamingTextRef.current);
+                    rafRef.current = null;
+                  });
                 }
               } else if (event.type === "tool_start") {
-                setActiveTools((prev) => [...prev, event.name]);
+                setActiveTools(function (prev) { return prev.concat([event.name]); });
               } else if (event.type === "tool_result") {
-                setActiveTools((prev) =>
-                  prev.filter((t) => t !== event.name)
-                );
+                setActiveTools(function (prev) {
+                  return prev.filter(function (t) { return t !== event.name; });
+                });
               } else if (event.type === "content_blocks") {
                 finalBlocks = event.blocks;
-                setStreamingBlocks(event.blocks);
               } else if (event.type === "error") {
-                accText += `\n\n**Error:** ${event.error || "Something went wrong"}`;
-                pendingTextRef.current += `\n\n**Error:** ${event.error || "Something went wrong"}`;
-                flushPendingText();
+                accText += String.fromCharCode(10) + String.fromCharCode(10) + "**Error:** " + (event.error || "Something went wrong");
+                streamingTextRef.current = accText;
+                setStreamingText(accText);
               } else if (event.type === "done") {
-                if (updateTimerRef.current) {
-                  clearTimeout(updateTimerRef.current);
-                  updateTimerRef.current = null;
+                // Cancel any pending RAF
+                if (rafRef.current) {
+                  cancelAnimationFrame(rafRef.current);
+                  rafRef.current = null;
                 }
-                pendingTextRef.current = "";
 
-                const assistantMsg: Message = {
+                var assistantMsg: Message = {
                   id: crypto.randomUUID(),
                   role: "assistant",
                   content: accText,
                   content_blocks: finalBlocks,
                   created_at: new Date().toISOString(),
                 };
-                setMessages((prev) => [...prev, assistantMsg]);
+                setMessages(function (prev) { return prev.concat([assistantMsg]); });
                 appendCachedMessage(conversationId, assistantMsg);
                 setStreamingText("");
-                setStreamingBlocks(null);
                 setActiveTools([]);
               }
-            } catch {
+            } catch (e) {
               /* parse error */
             }
           }
         }
-      } catch {
+      } catch (e) {
         setStreamingText("");
-        setStreamingBlocks(null);
         setActiveTools([]);
       } finally {
-        if (updateTimerRef.current) {
-          clearTimeout(updateTimerRef.current);
-          updateTimerRef.current = null;
+        if (rafRef.current) {
+          cancelAnimationFrame(rafRef.current);
+          rafRef.current = null;
         }
-        pendingTextRef.current = "";
+        streamingTextRef.current = "";
         setIsStreaming(false);
       }
     },
-    [conversationId, isStreaming, selectedModel, flushPendingText]
+    [conversationId, isStreaming, selectedModel]
   );
 
   // Auto-send pending message from welcome page
-  useEffect(() => {
+  useEffect(function () {
     if (!loaded || pendingSent.current) return;
     if (typeof window === "undefined") return;
 
-    const pending = sessionStorage.getItem("pending_message");
+    var pending = sessionStorage.getItem("pending_message");
     if (pending && messages.length === 0) {
       pendingSent.current = true;
       sessionStorage.removeItem("pending_message");
       try {
-        const { message, model, attachment } = JSON.parse(pending);
-        setTimeout(() => sendMessage(message, model, attachment), 100);
-      } catch {
+        var parsed = JSON.parse(pending);
+        setTimeout(function () {
+          sendMessage(parsed.message, parsed.model, parsed.attachment);
+        }, 100);
+      } catch (e) {
         /* ignore */
       }
     }
   }, [loaded, messages.length, sendMessage]);
 
-  const handleSend = (
+  var handleSend = function (
     message: string,
     model: string,
     attachment?: Attachment
-  ) => {
+  ) {
     sendMessage(message, model, attachment);
   };
 
@@ -227,9 +219,9 @@ export default function ConversationPage() {
       <MessageThread
         messages={messages}
         streamingText={streamingText}
-        streamingBlocks={streamingBlocks}
         activeTools={activeTools}
         streaming={isStreaming}
+        conversationId={conversationId}
       />
 
       {/* Input bar at bottom */}

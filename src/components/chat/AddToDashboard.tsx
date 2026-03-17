@@ -10,16 +10,40 @@ interface AddToDashboardProps {
   conversationId?: string;
 }
 
-export default function AddToDashboard({ block, blockTitle, messageId, conversationId }: AddToDashboardProps) {
-  const [open, setOpen] = useState(false);
-  const [dashboards, setDashboards] = useState<any[]>([]);
-  const [adding, setAdding] = useState<string | null>(null);
-  const [added, setAdded] = useState<Set<string>>(new Set());
-  const ref = useRef<HTMLDivElement>(null);
+function getDefaultSize(block: any): { w: number; h: number } {
+  switch (block.type) {
+    case "kpi":
+      return { w: 3, h: 2 };
+    case "kpi_grid": {
+      var count = block.items?.length || 3;
+      if (count <= 3) return { w: 12, h: 2 };
+      if (count <= 6) return { w: 12, h: 3 };
+      return { w: 12, h: 4 };
+    }
+    case "chart":
+      return { w: 6, h: 4 };
+    case "table": {
+      var rows = block.rows?.length || 0;
+      if (rows <= 5) return { w: 12, h: 4 };
+      return { w: 12, h: 6 };
+    }
+    case "text":
+      return { w: 6, h: 3 };
+    default:
+      return { w: 6, h: 4 };
+  }
+}
 
-  useEffect(() => {
+export default function AddToDashboard({ block, blockTitle, messageId, conversationId }: AddToDashboardProps) {
+  var [open, setOpen] = useState(false);
+  var [dashboards, setDashboards] = useState<any[]>([]);
+  var [adding, setAdding] = useState<string | null>(null);
+  var [added, setAdded] = useState<Set<string>>(new Set());
+  var ref = useRef<HTMLDivElement>(null);
+
+  useEffect(function () {
     if (!open) return;
-    fetch("/api/dashboards").then((r) => r.json()).then((res) => {
+    fetch("/api/dashboards").then(function (r) { return r.json(); }).then(function (res) {
       setDashboards(res.data?.dashboards ?? []);
     });
 
@@ -27,41 +51,52 @@ export default function AddToDashboard({ block, blockTitle, messageId, conversat
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     }
     document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
+    return function () { document.removeEventListener("mousedown", handleClick); };
   }, [open]);
 
   async function addWidget(dashboardId: string) {
     setAdding(dashboardId);
 
-    const widgetType = block.type === "kpi_grid" ? "kpi_grid" : block.type;
-    const title = blockTitle || block.title || block.label || "Widget";
-    const defaultW = widgetType === "table" ? 12 : widgetType === "chart" ? 6 : 4;
-    const defaultH = widgetType === "table" ? 6 : widgetType === "chart" ? 5 : 3;
+    var size = getDefaultSize(block);
+    var title = blockTitle || block.title || block.label || "Widget";
+
+    // Fetch current layout to find next available Y position
+    var nextY = 0;
+    try {
+      var dashRes = await fetch("/api/dashboards/" + dashboardId);
+      var dashData = await dashRes.json();
+      var existingWidgets = dashData.data?.widgets || [];
+      nextY = existingWidgets.reduce(function (max: number, w: any) {
+        return Math.max(max, (w.y || 0) + (w.h || 2));
+      }, 0);
+    } catch (e) {
+      // Fall back to y=0 if fetch fails
+    }
 
     await fetch("/api/dashboards/" + dashboardId + "/widgets", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        widget_type: widgetType,
-        title,
+        widget_type: block.type,
+        title: title,
         config: block,
         x: 0,
-        y: 0,
-        w: defaultW,
-        h: defaultH,
+        y: nextY,
+        w: size.w,
+        h: size.h,
         source_message_id: messageId,
         source_conversation_id: conversationId,
       }),
     });
 
     setAdding(null);
-    setAdded((prev) => new Set(prev).add(dashboardId));
+    setAdded(function (prev) { return new Set(prev).add(dashboardId); });
   }
 
   return (
     <div ref={ref} className="relative inline-flex">
       <button
-        onClick={() => setOpen(!open)}
+        onClick={function () { setOpen(!open); }}
         className="flex h-7 w-7 items-center justify-center rounded-lg text-[#A3A3A3] hover:text-[#0A0A0A] hover:bg-[#F5F5F5] transition-colors"
         title="Add to Dashboard"
       >
@@ -76,23 +111,25 @@ export default function AddToDashboard({ block, blockTitle, messageId, conversat
           {dashboards.length === 0 ? (
             <p className="px-2 py-2 text-xs text-[#737373]">No dashboards yet</p>
           ) : (
-            dashboards.map((d) => (
-              <button
-                key={d.id}
-                onClick={() => addWidget(d.id)}
-                disabled={adding === d.id || added.has(d.id)}
-                className="flex w-full items-center justify-between px-2 py-2 rounded-lg text-sm text-[#525252] hover:bg-[#FAFAFA] disabled:opacity-50"
-              >
-                <span className="truncate">{d.name}</span>
-                {added.has(d.id) ? (
-                  <Check size={14} className="text-[#22C55E]" />
-                ) : adding === d.id ? (
-                  <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" />
-                ) : (
-                  <Plus size={14} className="text-[#A3A3A3]" />
-                )}
-              </button>
-            ))
+            dashboards.map(function (d) {
+              return (
+                <button
+                  key={d.id}
+                  onClick={function () { addWidget(d.id); }}
+                  disabled={adding === d.id || added.has(d.id)}
+                  className="flex w-full items-center justify-between px-2 py-2 rounded-lg text-sm text-[#525252] hover:bg-[#FAFAFA] disabled:opacity-50"
+                >
+                  <span className="truncate">{d.name}</span>
+                  {added.has(d.id) ? (
+                    <Check size={14} className="text-[#22C55E]" />
+                  ) : adding === d.id ? (
+                    <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" />
+                  ) : (
+                    <Plus size={14} className="text-[#A3A3A3]" />
+                  )}
+                </button>
+              );
+            })
           )}
           <a href="/dashboards" className="flex items-center gap-1 px-2 py-2 text-xs text-[#737373] hover:text-[#0A0A0A]">
             <Plus size={12} /> Create new dashboard

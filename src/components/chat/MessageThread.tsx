@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Copy2 } from "lucide-react";
+import { Copy } from "lucide-react";
 import BlockRenderer from "./blocks/BlockRenderer";
 import TextBlock from "./blocks/TextBlock";
 import AddToDashboard from "./AddToDashboard";
@@ -18,122 +18,68 @@ interface Message {
 interface Props {
   messages: Message[];
   streamingText: string;
-  streamingBlocks?: ContentBlock[] | null;
   activeTools: string[];
   streaming?: boolean;
   conversationId?: string;
 }
 
-const PINNABLE_TYPES = ["kpi", "kpi_grid", "chart", "table"];
+var PINNABLE_TYPES = ["kpi", "kpi_grid", "chart", "table"];
 
+var BLOCK_REGEX = /:::\w+(?:\{[^}]*\})?[\s\S]*?:::/g;
 function stripBlockSyntax(text: string): string {
-  return text.replace(/:::\w+(?:\{[^}]*\})?\n[\s\S]*?:::/g, "").trim();
+  return text.replace(BLOCK_REGEX, "").trim();
 }
 
-function MessageActions() {
+function CopyButton({ text }: { text: string }) {
+  var handleCopy = function () {
+    navigator.clipboard.writeText(text);
+  };
   return (
-    <div className="flex items-center gap-1 mt-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-      <button
-        className="h-7 w-7 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
-        title="Copy"
-      >
-        <Copy size={13} />
-      </button>
-      <button
-        className="h-7 w-7 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
-      >
-      </button>
-      <button
-        className="h-7 w-7 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
-      >
-      </button>
-    </div>
+    <button
+      onClick={handleCopy}
+      className="h-7 w-7 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
+      title="Copy"
+    >
+      <Copy size={13} />
+    </button>
   );
 }
 
-const TOOL_AGENTS: Record<string, { name: string; icon: string; action: string }> = {
-  get_pipeline: { name: "Pipeline Agent", icon: "\u{1F4CA}", action: "Analyzing pipeline data..." },
-  get_deals: { name: "Deal Agent", icon: "\u{1F4BC}", action: "Searching deals..." },
-  get_win_rate: { name: "Closing Agent", icon: "\u{1F3AF}", action: "Calculating win rates..." },
-  get_velocity: { name: "Velocity Agent", icon: "\u26A1", action: "Measuring sales velocity..." },
-  get_adoption: { name: "Adoption Agent", icon: "\u{1F4C8}", action: "Checking adoption score..." },
-  get_alerts: { name: "Alert Agent", icon: "\u{1F514}", action: "Scanning for alerts..." },
-  get_revenue: { name: "Revenue Agent", icon: "\u{1F4B0}", action: "Computing revenue metrics..." },
-  get_activity: { name: "Activity Agent", icon: "\u{1F4CB}", action: "Reviewing activity data..." },
-  get_data_quality: { name: "Data Quality Agent", icon: "\u{1F9F9}", action: "Auditing data quality..." },
-  get_owner_performance: { name: "Performance Agent", icon: "\u{1F464}", action: "Evaluating rep performance..." },
-  create_note: { name: "Notes Agent", icon: "\u{1F4DD}", action: "Creating note..." },
+var TOOL_LABELS: Record<string, string> = {
+  get_pipeline: "Analyzing pipeline...",
+  get_deals: "Searching deals...",
+  get_win_rate: "Calculating win rates...",
+  get_velocity: "Measuring velocity...",
+  get_adoption: "Checking adoption score...",
+  get_alerts: "Scanning alerts...",
+  get_revenue: "Computing revenue...",
+  get_activity: "Reviewing activity...",
+  get_data_quality: "Auditing data quality...",
+  get_owner_performance: "Evaluating performance...",
+  create_note: "Creating note...",
 };
 
-function AgentThinking({
-  activeTools,
-  streamingText,
-  streaming,
-  streamingBlocks,
-}: {
-  activeTools: string[];
-  streamingText: string;
-  streaming?: boolean;
-  streamingBlocks?: ContentBlock[] | null;
-}) {
-  const hasText = streamingText && stripBlockSyntax(streamingText).trim().length > 0;
-
-  if (hasText) {
+function AgentThinking({ activeTools }: { activeTools: string[] }) {
+  if (activeTools.length === 0) {
     return (
-      <div className="text-sm text-[#0A0A0A] leading-relaxed">
-        {streamingBlocks && streamingBlocks.length > 0 ? (
-          <BlockRenderer blocks={streamingBlocks} />
-        ) : (
-          <>
-            <TextBlock text={stripBlockSyntax(streamingText)} />
-            {streaming && streamingText.includes(":::") && (
-              <div className="flex items-center gap-2 mt-3 py-2 px-3 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
-                <div className="h-4 w-4 border-2 border-[#E5E5E5] border-t-[#0A0A0A] rounded-full animate-spin" />
-                <span className="text-xs text-[#737373]">Building report...</span>
-              </div>
-            )}
-          </>
-        )}
-      </div>
-    );
-  }
-
-  if (activeTools.length > 0) {
-    return (
-      <div className="space-y-2">
-        {activeTools.map((tool) => {
-          const agent = TOOL_AGENTS[tool] ?? { name: "RevOps Agent", icon: "\u{1F916}", action: "Running " + tool + "..." };
-          return (
-            <motion.div
-              key={tool}
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}
-              className="flex items-center gap-3 py-2 px-3 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]"
-            >
-              <span className="text-base">{agent.icon}</span>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-medium text-[#0A0A0A]">{agent.name}</p>
-                <p className="text-[11px] text-[#737373]">{agent.action}</p>
-              </div>
-              <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" />
-            </motion.div>
-          );
-        })}
+      <div className="flex items-center gap-2 py-2">
+        <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" />
+        <span className="text-sm text-[#737373]">Thinking...</span>
       </div>
     );
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 5 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2 }}
-      className="flex items-center gap-3 py-2 px-3 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]"
-    >
-      <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" />
-      <span className="text-xs text-[#737373]">Thinking...</span>
-    </motion.div>
+    <div className="space-y-1.5">
+      {activeTools.map(function (tool) {
+        return (
+          <div key={tool} className="flex items-center gap-2 py-1">
+            <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" />
+            <span className="text-sm text-[#737373]">{TOOL_LABELS[tool] || tool}</span>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
@@ -148,8 +94,8 @@ function AssistantBlocksWithPin({
 }) {
   return (
     <div className="space-y-4">
-      {blocks.map((block, i) => {
-        const isPinnable = PINNABLE_TYPES.includes(block.type);
+      {blocks.map(function (block, i) {
+        var isPinnable = PINNABLE_TYPES.includes(block.type);
         return (
           <div key={i} className={isPinnable ? "group/block relative" : ""}>
             <BlockRenderer blocks={[block]} />
@@ -170,71 +116,93 @@ function AssistantBlocksWithPin({
   );
 }
 
+// Memoized message item to prevent re-renders during streaming
+var MemoizedMessage = React.memo(function MemoizedMessage({
+  msg,
+  conversationId,
+}: {
+  msg: Message;
+  conversationId?: string;
+}) {
+  if (msg.role === "user") {
+    return (
+      <div className="flex justify-end">
+        <div className="max-w-[70%] bg-[#F5F5F5] text-[#0A0A0A] rounded-2xl px-4 py-2.5 text-sm">
+          {msg.content}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="group w-full">
+      <div className="text-sm text-[#0A0A0A] leading-relaxed">
+        {msg.content_blocks && msg.content_blocks.length > 0 ? (
+          <AssistantBlocksWithPin
+            blocks={msg.content_blocks}
+            messageId={msg.id}
+            conversationId={conversationId}
+          />
+        ) : (
+          <TextBlock text={msg.content} />
+        )}
+      </div>
+      <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <CopyButton text={msg.content} />
+      </div>
+    </div>
+  );
+});
+
 export default function MessageThread({
   messages,
   streamingText,
-  streamingBlocks,
   activeTools,
   streaming,
   conversationId,
 }: Props) {
-  const bottomRef = useRef<HTMLDivElement>(null);
+  var bottomRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  // Memoize the message list so it only re-renders when messages array changes,
+  // NOT when streamingText changes
+  var messageList = useMemo(function () {
+    return messages.map(function (msg) {
+      return (
+        <div key={msg.id}>
+          <MemoizedMessage msg={msg} conversationId={conversationId} />
+        </div>
+      );
+    });
+  }, [messages, conversationId]);
+
+  useEffect(function () {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, streamingText]);
 
   return (
-    <div className="flex-1 overflow-y-auto">
+    <div className="flex-1 overflow-y-auto" style={{ willChange: "transform" }}>
       <div className="max-w-2xl mx-auto px-4 py-6 space-y-5">
-        {messages.map((msg) => (
-          <motion.div
-            key={msg.id}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className={msg.role === "user" ? "flex justify-end" : "group"}
-          >
-            {msg.role === "user" ? (
-              <div className="max-w-[70%] bg-[#F5F5F5] text-[#0A0A0A] rounded-2xl px-4 py-2.5 text-sm">
-                {msg.content}
-              </div>
-            ) : (
-              <div className="w-full">
-                <div className="text-sm text-[#0A0A0A] leading-relaxed">
-                  {msg.content_blocks && msg.content_blocks.length > 0 ? (
-                    <AssistantBlocksWithPin
-                      blocks={msg.content_blocks}
-                      messageId={msg.id}
-                      conversationId={conversationId}
-                    />
-                  ) : (
-                    <TextBlock text={msg.content} />
-                  )}
-                </div>
-                <MessageActions />
-              </div>
-            )}
-          </motion.div>
-        ))}
+        {messageList}
 
-        {/* Streaming state */}
-        {(streamingText || activeTools.length > 0 || (streaming && !streamingText)) && (
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="flex justify-start"
-          >
-            <div className="max-w-2xl w-full">
-              <AgentThinking
-                activeTools={activeTools}
-                streamingText={streamingText}
-                streaming={streaming}
-                streamingBlocks={streamingBlocks}
-              />
+        {/* Streaming state — separate from message list to avoid re-renders */}
+        {streaming && (
+          <div className="flex justify-start">
+            <div className="max-w-2xl w-full text-sm text-[#0A0A0A] leading-relaxed">
+              {streamingText ? (
+                <>
+                  <TextBlock text={stripBlockSyntax(streamingText)} />
+                  {streamingText.includes(":::") && (
+                    <div className="flex items-center gap-2 mt-2 text-xs text-[#A3A3A3]">
+                      <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" />
+                      Building report...
+                    </div>
+                  )}
+                </>
+              ) : (
+                <AgentThinking activeTools={activeTools} />
+              )}
             </div>
-          </motion.div>
+          </div>
         )}
 
         <div ref={bottomRef} />
