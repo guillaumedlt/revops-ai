@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Lightbulb, X } from "lucide-react";
 
 interface TemplatesPopoverProps {
@@ -42,6 +42,18 @@ const TEMPLATES = [
 
 export default function TemplatesPopover({ onSelect }: TemplatesPopoverProps) {
   const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    function handleClick(e: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [open]);
 
   if (!open) {
     return (
@@ -53,7 +65,7 @@ export default function TemplatesPopover({ onSelect }: TemplatesPopoverProps) {
   }
 
   return (
-    <div className="absolute bottom-full left-0 mb-2 w-[400px] max-h-[400px] overflow-y-auto rounded-xl border border-[#E5E5E5] bg-white shadow-lg p-3">
+    <div ref={containerRef} className="absolute bottom-full left-0 mb-2 w-[400px] max-h-[400px] overflow-y-auto rounded-xl border border-[#E5E5E5] bg-white shadow-lg p-3 z-50">
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-sm font-medium text-[#0A0A0A]">RevOps Templates</h3>
         <button onClick={() => setOpen(false)} className="text-[#A3A3A3] hover:text-[#0A0A0A]"><X size={16} /></button>

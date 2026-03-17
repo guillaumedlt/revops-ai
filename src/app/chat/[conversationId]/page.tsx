@@ -63,6 +63,7 @@ export default function ConversationPage() {
       const useModel = model ?? selectedModel;
       setSelectedModel(useModel);
 
+      // 1. INSTANTLY show user message + typing indicator
       const userMsg: Message = {
         id: crypto.randomUUID(),
         role: "user",
@@ -76,6 +77,7 @@ export default function ConversationPage() {
       setActiveTools([]);
       pendingTextRef.current = "";
 
+      // 2. THEN make API call (user sees message + typing indicator immediately)
       try {
         const res = await fetch("/api/chat", {
           method: "POST",
@@ -99,7 +101,7 @@ export default function ConversationPage() {
           if (done) break;
           buffer += decoder.decode(value, { stream: true });
 
-          const lines = buffer.split("\n");
+          const lines = buffer.split("\\n");
           buffer = lines.pop() ?? "";
 
           for (const line of lines) {
@@ -123,12 +125,8 @@ export default function ConversationPage() {
                 finalBlocks = event.blocks;
                 setStreamingBlocks(event.blocks);
               } else if (event.type === "error") {
-                accText += `
-
-**Error:** ${event.error || "Something went wrong"}`;
-                pendingTextRef.current += `
-
-**Error:** ${event.error || "Something went wrong"}`;
+                accText += `\n\n**Error:** ${event.error || "Something went wrong"}`;
+                pendingTextRef.current += `\n\n**Error:** ${event.error || "Something went wrong"}`;
                 flushPendingText();
               } else if (event.type === "done") {
                 // Flush any remaining pending text

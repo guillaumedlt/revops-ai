@@ -31,6 +31,13 @@ const MODELS = [
   { id: "gemini", label: "Gemini" },
 ];
 
+const CONNECTORS = [
+  { id: "hubspot", name: "HubSpot", icon: "\uD83D\uDFE0", connected: true },
+  { id: "salesforce", name: "Salesforce", icon: "\u2601\uFE0F", connected: false },
+  { id: "google_sheets", name: "Google Sheets", icon: "\uD83D\uDCCA", connected: false },
+  { id: "slack", name: "Slack", icon: "\uD83D\uDCAC", connected: false },
+];
+
 export default function ChatInputBar({
   onSend,
   disabled,
@@ -39,10 +46,12 @@ export default function ChatInputBar({
   const [value, setValue] = useState(initialValue ?? "");
   const [selectedModel, setSelectedModel] = useState("revops-ai");
   const [showModelPicker, setShowModelPicker] = useState(false);
+  const [showConnectors, setShowConnectors] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const modelRef = useRef<HTMLDivElement>(null);
+  const connectorsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (initialValue) setValue(initialValue);
@@ -60,6 +69,9 @@ export default function ChatInputBar({
     const handleClickOutside = (e: MouseEvent) => {
       if (modelRef.current && !modelRef.current.contains(e.target as Node)) {
         setShowModelPicker(false);
+      }
+      if (connectorsRef.current && !connectorsRef.current.contains(e.target as Node)) {
+        setShowConnectors(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -156,12 +168,36 @@ export default function ChatInputBar({
               selectedFile={null}
               onClear={() => setSelectedFile(null)}
             />
-            <button
-              className="h-8 w-8 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
-              title="Filters"
-            >
-              <SlidersHorizontal size={16} />
-            </button>
+            <div className="relative" ref={connectorsRef}>
+              <button
+                onClick={() => setShowConnectors(!showConnectors)}
+                type="button"
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-[#737373] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors"
+                title="Connected Tools"
+              >
+                <SlidersHorizontal size={16} />
+              </button>
+              {showConnectors && (
+                <div className="absolute bottom-full left-0 mb-2 w-[240px] rounded-xl border border-[#E5E5E5] bg-white shadow-lg p-2 z-50">
+                  <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#A3A3A3]">Connected Tools</p>
+                  {CONNECTORS.map((c) => (
+                    <div key={c.id} className="flex items-center justify-between px-2 py-2 rounded-lg hover:bg-[#FAFAFA]">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm">{c.icon}</span>
+                        <span className="text-sm text-[#525252]">{c.name}</span>
+                      </div>
+                      {c.connected ? (
+                        <div className="h-4 w-8 rounded-full bg-[#22C55E] relative cursor-pointer">
+                          <div className="absolute right-0.5 top-0.5 h-3 w-3 rounded-full bg-white" />
+                        </div>
+                      ) : (
+                        <span className="text-[10px] text-[#A3A3A3]">Soon</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             <TemplatesPopover onSelect={handleTemplateSelect} />
 
             {/* Model pill */}

@@ -21,6 +21,11 @@ interface Props {
   streaming?: boolean;
 }
 
+function stripBlockSyntax(text: string): string {
+  // Remove :::type{params}\n...\n::: blocks, keep only plain text
+  return text.replace(/:::\w+(?:\{[^}]*\})?\n[\s\S]*?:::/g, "").trim();
+}
+
 function MessageActions() {
   return (
     <div className="flex items-center gap-1 mt-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -115,7 +120,15 @@ export default function MessageThread({
                 {streamingBlocks && streamingBlocks.length > 0 ? (
                   <BlockRenderer blocks={streamingBlocks} />
                 ) : (
-                  <TextBlock text={streamingText} />
+                  <>
+                    <TextBlock text={stripBlockSyntax(streamingText)} />
+                    {streaming && streamingText.includes(":::") && (
+                      <div className="flex items-center gap-2 mt-2 text-xs text-[#A3A3A3]">
+                        <div className="h-4 w-4 border-2 border-[#E5E5E5] border-t-[#0A0A0A] rounded-full animate-spin" />
+                        Generating report...
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             ) : streaming && activeTools.length === 0 ? (

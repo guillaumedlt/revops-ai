@@ -32,6 +32,7 @@ export default function ChatWelcomePage() {
         } catch { /* storage full, skip */ }
       }
 
+      // Redirect immediately — conversation page handles showing message + streaming
       router.push(
         `/chat/${conversationId}?initial=${encodeURIComponent(message)}&model=${model}`
       );
