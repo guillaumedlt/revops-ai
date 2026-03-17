@@ -323,8 +323,6 @@ export default function ChatInputBar({
 
             {/* Right icons */}
             <div className="flex items-center gap-0.5">
-                disabled={disabled}
-              />
               {value.trim() ? (
                 <button
                   onClick={handleSend}
