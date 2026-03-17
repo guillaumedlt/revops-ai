@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
   if (!parsed.success) return NextResponse.json({ error: parsed.error.message }, { status: 400 });
 
   // Check credits
-  var credits = await checkCredits(auth.tenantId);
+  var credits = await checkCredits(auth!.tenantId);
   if (!credits.allowed) {
     return NextResponse.json({ error: "Credit limit reached" }, { status: 402 });
   }
@@ -69,8 +69,8 @@ export async function POST(request: NextRequest) {
   var convId = conversationId;
   if (!convId) {
     var { data: conv } = await supabase.from("conversations").insert({
-      tenant_id: auth.tenantId,
-      user_id: auth.userId,
+      tenant_id: auth!.tenantId,
+      user_id: auth!.userId,
       title: message.slice(0, 100),
     }).select("id").single();
     convId = conv?.id;
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
   // Save user message
   await supabase.from("messages").insert({
     conversation_id: convId,
-    tenant_id: auth.tenantId,
+    tenant_id: auth!.tenantId,
     role: "user",
     content: message,
   });
@@ -92,7 +92,7 @@ export async function POST(request: NextRequest) {
     var { data: tenant } = await supabase
       .from("tenants")
       .select("settings")
-      .eq("id", auth.tenantId)
+      .eq("id", auth!.tenantId)
       .single();
     if (tenant?.settings?.llm) {
       tenantKeys = tenant.settings.llm;
@@ -320,7 +320,7 @@ export async function POST(request: NextRequest) {
                 try {
                   result = await (tool.execute as any)(
                     toolCall.input,
-                    auth.tenantId
+                    auth!.tenantId
                   );
                   controller.enqueue(
                     encoder.encode(
@@ -362,14 +362,14 @@ export async function POST(request: NextRequest) {
 
         await supabase.from("messages").insert({
           conversation_id: convId,
-          tenant_id: auth.tenantId,
+          tenant_id: auth!.tenantId,
           role: "assistant",
           content: finalText,
           content_blocks: parsedBlocks,
           model: modelLabel,
         });
 
-        await deductCredit(auth.tenantId, auth.userId);
+        await deductCredit(auth!.tenantId, auth!.userId);
 
         await supabase
           .from("conversations")
