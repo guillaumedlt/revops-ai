@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
   });
 
   // Route model — use requested model preference, fallback to router
-  const modelChoice = requestedModel ?? routeToModel(message, 0);
+  const modelChoice = (requestedModel === "claude" || requestedModel === "sonnet" || requestedModel === "haiku") ? requestedModel as "haiku" | "sonnet" : routeToModel(message, 0);
   const modelId = getModelId(modelChoice);
 
   // Build messages
