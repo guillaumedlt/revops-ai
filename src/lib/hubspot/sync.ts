@@ -274,7 +274,7 @@ async function syncPipelineStages(
       stage_id: stage.id,
       stage_label: stage.label,
       display_order: stage.displayOrder,
-      probability: toNumber(stage.metadata.probability),
+      probability: stage.metadata.probability ?? null,
       is_closed_won: stage.metadata.isClosed === "true" && stage.metadata.probability === "1.0",
       is_closed_lost: stage.metadata.isClosed === "true" && stage.metadata.probability !== "1.0",
       synced_at: new Date().toISOString(),
