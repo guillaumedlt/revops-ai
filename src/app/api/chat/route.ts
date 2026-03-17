@@ -6,6 +6,7 @@ import { SYSTEM_PROMPT, buildTenantContext } from "@/lib/ai/prompts/system";
 import { aiTools } from "@/lib/ai/tools/index";
 import { checkCredits, deductCredit } from "@/lib/ai/credits";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { parseContentBlocks } from "@/lib/ai/parse-blocks";
 
 const ChatSchema = z.object({
   message: z.string().min(1).max(4000),
@@ -69,6 +70,7 @@ export async function POST(request: NextRequest) {
       try {
         let messages: Array<{ role: string; content: any }> = [{ role: "user", content: message }];
         let continueLoop = true;
+        let finalText = "";
 
         while (continueLoop) {
           const response = await fetch("https://api.anthropic.com/v1/messages", {
@@ -176,25 +178,33 @@ export async function POST(request: NextRequest) {
 
             messages.push({ role: "user", content: toolResults });
             toolUseBlocks = [];
+            // Accumulate text from this iteration before continuing
+            finalText += fullText;
             fullText = "";
           } else {
+            finalText += fullText;
             continueLoop = false;
           }
         }
 
-        // Save assistant message
-        // (fullText collected from last iteration)
+        // Parse content blocks from the final text
+        const parsedBlocks = parseContentBlocks(finalText);
+
+        // Save assistant message with content_blocks
         await supabase.from("messages").insert({
           conversation_id: convId,
           tenant_id: auth.tenantId,
           role: "assistant",
-          content: "Response saved", // Would be fullText but it's from the stream
+          content: finalText,
+          content_blocks: parsedBlocks,
           model: modelChoice,
         });
 
         // Deduct credit
         await deductCredit(auth.tenantId, auth.userId);
 
+        // Emit content blocks event
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "content_blocks", blocks: parsedBlocks })}\n\n`));
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "metadata", conversationId: convId, model: modelChoice, creditsRemaining: credits.remaining - 1 })}\n\n`));
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
         controller.close();

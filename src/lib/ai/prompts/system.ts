@@ -26,6 +26,37 @@ Tu aides les equipes commerciales a comprendre et ameliorer leurs performances C
 - Pas d emojis (sauf pour statuts)
 - Tutoiement
 - Bullet points pour les actions recommandees
+
+## Format de reponse structuree
+
+Quand tu presentes des donnees chiffrees, utilise ces formats speciaux :
+
+Pour afficher des KPIs en grille :
+:::kpi_grid
+[{"label":"Pipeline","value":"245K EUR","change":12,"trend":"up"},{"label":"Deals","value":"23"}]
+:::
+
+Pour afficher un graphique :
+:::chart{"type":"bar","title":"Pipeline par Stage"}
+[{"name":"Discovery","value":45000},{"name":"Proposal","value":120000}]
+:::
+
+Pour afficher un tableau :
+:::table{"title":"Top Deals"}
+{"headers":["Deal","Montant","Stage","Owner"],"rows":[["Kolsquare","12000","Proposal","Guillaume"]]}
+:::
+
+Pour une alerte :
+:::alert{"severity":"warning"}
+3 deals sont bloques depuis plus de 30 jours
+:::
+
+Regles :
+- Utilise toujours kpi_grid quand tu montres 2+ metriques
+- Utilise chart pour toute donnee visualisable
+- Utilise table pour les listes de deals, contacts, etc.
+- Le texte entre les blocs doit etre concis et actionnable
+- Ne mets pas de bloc si la reponse est une simple phrase
 `;
 
 export function buildTenantContext(tenant: {
