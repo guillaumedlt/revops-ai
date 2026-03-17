@@ -1,25 +1,10 @@
 "use client";
 
 import { useEffect, useState, useRef, useCallback } from "react";
-import { useParams } from "next/navigation";
-import { motion } from "framer-motion";
+import { useParams, useSearchParams } from "next/navigation";
 import MessageThread from "@/components/chat/MessageThread";
-import ChatInputBar from "@/components/chat/ChatInputBar";
+import ChatInput from "@/components/chat/ChatInput";
 import type { ContentBlock } from "@/types/chat-blocks";
-import {
-  getCachedMessages,
-  setCachedMessages,
-  appendCachedMessage,
-} from "@/lib/chat-store";
-
-interface Attachment {
-  type: string;
-  content?: string;
-  base64?: string;
-  mediaType?: string;
-  fileName?: string;
-  mimeType?: string;
-}
 
 interface Message {
   id: string;
@@ -31,43 +16,37 @@ interface Message {
 
 export default function ConversationPage() {
   const { conversationId } = useParams<{ conversationId: string }>();
-  const [messages, setMessages] = useState<Message[]>(() => {
-    const cached = getCachedMessages(conversationId);
-    return cached ?? [];
-  });
+  const searchParams = useSearchParams();
+  const [messages, setMessages] = useState<Message[]>([]);
   const [streamingText, setStreamingText] = useState("");
+  const [streamingBlocks, setStreamingBlocks] = useState<ContentBlock[] | null>(null);
   const [activeTools, setActiveTools] = useState<string[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
-  const [loaded, setLoaded] = useState(
-    () => !!getCachedMessages(conversationId)
-  );
-  const [selectedModel, setSelectedModel] = useState("revops-ai");
-  const pendingSent = useRef(false);
+  const [chatError, setChatError] = useState<{ message: string } | null>(null);
+  const [loaded, setLoaded] = useState(false);
+  const initialSent = useRef(false);
+  const lastMessageRef = useRef<string>("");
 
-  // RAF-based streaming: accumulate in ref, flush at 60fps
-  const streamingTextRef = useRef("");
-  const rafRef = useRef<number | null>(null);
-
+  // Fetch existing messages
   useEffect(() => {
     async function load() {
-      const hadCache = !!getCachedMessages(conversationId);
-      const res = await fetch("/api/conversations/" + conversationId);
+      const res = await fetch(`/api/conversations/${conversationId}`);
       if (res.ok) {
         const json = await res.json();
-        const msgs = json.data?.messages ?? [];
-        setMessages(msgs);
-        setCachedMessages(conversationId, msgs);
+        setMessages(json.data?.messages ?? []);
       }
-      if (!hadCache) setLoaded(true);
+      setLoaded(true);
     }
     load();
   }, [conversationId]);
 
   const sendMessage = useCallback(
-    async (message: string, model?: string, attachment?: Attachment) => {
+    async (message: string) => {
       if (isStreaming) return;
-      const useModel = model ?? selectedModel;
-      setSelectedModel(useModel);
+
+      // Clear any previous error
+      setChatError(null);
+      lastMessageRef.current = message;
 
       const userMsg: Message = {
         id: crypto.randomUUID(),
@@ -75,161 +54,132 @@ export default function ConversationPage() {
         content: message,
         created_at: new Date().toISOString(),
       };
-      setMessages(function (prev) { return prev.concat([userMsg]); });
-      appendCachedMessage(conversationId, userMsg);
+      setMessages((prev) => [...prev, userMsg]);
       setIsStreaming(true);
       setStreamingText("");
+      setStreamingBlocks(null);
       setActiveTools([]);
-      streamingTextRef.current = "";
 
       try {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            message: message,
-            conversationId: conversationId,
-            model: useModel,
-            attachment: attachment,
-          }),
+          body: JSON.stringify({ message, conversationId }),
         });
 
         if (!res.ok || !res.body) {
+          setChatError({ message: "Failed to connect to the server. Please try again." });
           setIsStreaming(false);
           return;
         }
 
         const reader = res.body.getReader();
         const decoder = new TextDecoder();
-        var buffer = "";
-        var accText = "";
-        var finalBlocks: ContentBlock[] | null = null;
+        let buffer = "";
+        let accText = "";
+        let finalBlocks: ContentBlock[] | null = null;
+        let hadError = false;
 
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
           buffer += decoder.decode(value, { stream: true });
 
-          const lines = buffer.split(String.fromCharCode(10));
+          const lines = buffer.split("\n");
           buffer = lines.pop() ?? "";
 
-          for (var li = 0; li < lines.length; li++) {
-            var line = lines[li];
+          for (const line of lines) {
             if (!line.startsWith("data: ")) continue;
             try {
-              var event = JSON.parse(line.slice(6));
-              if (event.type === "token" && event.token) {
+              const event = JSON.parse(line.slice(6));
+              if (event.type === "token") {
                 accText += event.token;
-                streamingTextRef.current = accText;
-
-                // Use RAF for smooth 60fps updates instead of batched setTimeout
-                if (!rafRef.current) {
-                  rafRef.current = requestAnimationFrame(function () {
-                    setStreamingText(streamingTextRef.current);
-                    rafRef.current = null;
-                  });
-                }
+                setStreamingText(accText);
               } else if (event.type === "tool_start") {
-                setActiveTools(function (prev) { return prev.concat([event.name]); });
+                setActiveTools((prev) => [...prev, event.name]);
               } else if (event.type === "tool_result") {
-                setActiveTools(function (prev) {
-                  return prev.filter(function (t) { return t !== event.name; });
-                });
+                setActiveTools((prev) => prev.filter((t) => t !== event.name));
               } else if (event.type === "content_blocks") {
                 finalBlocks = event.blocks;
+                setStreamingBlocks(event.blocks);
               } else if (event.type === "error") {
-                accText += String.fromCharCode(10) + String.fromCharCode(10) + "**Error:** " + (event.error || "Something went wrong");
-                streamingTextRef.current = accText;
-                setStreamingText(accText);
+                hadError = true;
+                setChatError({ message: event.error || "Something went wrong. Please try again." });
               } else if (event.type === "done") {
-                // Cancel any pending RAF
-                if (rafRef.current) {
-                  cancelAnimationFrame(rafRef.current);
-                  rafRef.current = null;
-                }
-
-                var assistantMsg: Message = {
+                const assistantMsg: Message = {
                   id: crypto.randomUUID(),
                   role: "assistant",
                   content: accText,
                   content_blocks: finalBlocks,
                   created_at: new Date().toISOString(),
                 };
-                setMessages(function (prev) { return prev.concat([assistantMsg]); });
-                appendCachedMessage(conversationId, assistantMsg);
+                setMessages((prev) => [...prev, assistantMsg]);
                 setStreamingText("");
+                setStreamingBlocks(null);
                 setActiveTools([]);
               }
-            } catch (e) {
+            } catch {
               /* parse error */
             }
           }
         }
-      } catch (e) {
-        setStreamingText("");
-        setActiveTools([]);
-      } finally {
-        if (rafRef.current) {
-          cancelAnimationFrame(rafRef.current);
-          rafRef.current = null;
+
+        // If stream ended without a "done" event and no text was received, show error
+        if (!accText && !hadError) {
+          setChatError({ message: "No response received. Please try again." });
         }
-        streamingTextRef.current = "";
+      } catch {
+        setChatError({ message: "Network error. Please check your connection and try again." });
+      } finally {
         setIsStreaming(false);
       }
     },
-    [conversationId, isStreaming, selectedModel]
+    [conversationId, isStreaming]
   );
 
-  // Auto-send pending message from welcome page
-  useEffect(function () {
-    if (!loaded || pendingSent.current) return;
-    if (typeof window === "undefined") return;
+  const handleRetry = useCallback(() => {
+    if (lastMessageRef.current && !isStreaming) {
+      // Remove the last user message (will be re-added by sendMessage)
+      setMessages((prev) => {
+        const last = prev[prev.length - 1];
+        if (last?.role === "user") {
+          return prev.slice(0, -1);
+        }
+        return prev;
+      });
+      setChatError(null);
+      sendMessage(lastMessageRef.current);
+    }
+  }, [isStreaming, sendMessage]);
 
-    var pending = sessionStorage.getItem("pending_message");
-    if (pending && messages.length === 0) {
-      pendingSent.current = true;
-      sessionStorage.removeItem("pending_message");
-      try {
-        var parsed = JSON.parse(pending);
-        setTimeout(function () {
-          sendMessage(parsed.message, parsed.model, parsed.attachment);
-        }, 100);
-      } catch (e) {
-        /* ignore */
+  // Handle initial message from query param
+  useEffect(() => {
+    if (loaded && !initialSent.current) {
+      const initial = searchParams.get("initial");
+      if (initial && messages.length === 0) {
+        initialSent.current = true;
+        sendMessage(initial);
       }
     }
-  }, [loaded, messages.length, sendMessage]);
-
-  var handleSend = function (
-    message: string,
-    model: string,
-    attachment?: Attachment
-  ) {
-    sendMessage(message, model, attachment);
-  };
+  }, [loaded, searchParams, messages.length, sendMessage]);
 
   return (
-    <motion.div
-      className="flex flex-1 flex-col h-full"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
-    >
-      {/* Messages area */}
+    <div className="flex-1 flex flex-col h-full">
       <MessageThread
         messages={messages}
         streamingText={streamingText}
+        streamingBlocks={streamingBlocks}
         activeTools={activeTools}
-        streaming={isStreaming}
-        conversationId={conversationId}
+        error={chatError}
+        onRetry={handleRetry}
       />
-
-      {/* Input bar at bottom */}
-      <div className="shrink-0 border-t border-[#F0F0F0] bg-white/80 backdrop-blur-sm pb-2">
-        <div className="pt-3">
-          <ChatInputBar onSend={handleSend} disabled={isStreaming} />
-        </div>
+      <div className="shrink-0 pb-2">
+        <ChatInput
+          onSend={sendMessage}
+          disabled={isStreaming}
+          placeholder="Pose une question..."
+        />
       </div>
-    </motion.div>
+    </div>
   );
 }
