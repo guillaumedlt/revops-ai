@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getAuthFromHeaders } from "@/lib/api-helpers";
-import { routeToModel, getModelId } from "@/lib/ai/router";
+import { routeToModel } from "@/lib/ai/router";
 import { SYSTEM_PROMPT, buildTenantContext } from "@/lib/ai/prompts/system";
 import { aiTools } from "@/lib/ai/tools/index";
 import { checkCredits, deductCredit } from "@/lib/ai/credits";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { parseContentBlocks } from "@/lib/ai/parse-blocks";
+import { resolveModel, callProvider, Provider } from "@/lib/ai/providers";
+import { getParser, StreamEvent } from "@/lib/ai/stream-parsers";
 
 const AttachmentSchema = z.object({
   type: z.string(),
@@ -60,21 +62,49 @@ export async function POST(request: NextRequest) {
     content: message,
   });
 
-  // Route model
-  let modelChoice: "haiku" | "sonnet";
-  if (requestedModel === "claude" || requestedModel === "sonnet") {
-    modelChoice = "sonnet";
-  } else if (requestedModel === "haiku") {
-    modelChoice = "haiku";
-  } else {
-    modelChoice = routeToModel(message, 0);
+  // ---------------------------------------------------------------------------
+  // Resolve provider + API key
+  // Priority: tenant BYOK keys > server env vars
+  // ---------------------------------------------------------------------------
+  let tenantKeys: { openaiKey?: string; googleKey?: string } = {};
+  try {
+    const { data: tenant } = await supabase
+      .from("tenants")
+      .select("settings")
+      .eq("id", auth.tenantId)
+      .single();
+    if (tenant?.settings?.llm) {
+      tenantKeys = tenant.settings.llm;
+    }
+  } catch {
+    // No tenant settings — fall through to env vars
   }
-  const modelId = getModelId(modelChoice);
 
-  // Build messages
-  const systemPrompt = SYSTEM_PROMPT + buildTenantContext({ name: "Tenant" });
+  // Determine the selected model string
+  const selectedModel = requestedModel || routeToModel(message, 0);
 
-  // Build tool definitions for Anthropic API
+  const resolved = resolveModel(selectedModel, {
+    anthropic: process.env.ANTHROPIC_API_KEY,
+    openai: tenantKeys.openaiKey || process.env.OPENAI_API_KEY,
+    google: tenantKeys.googleKey || process.env.GOOGLE_AI_KEY,
+  });
+
+  if ("error" in resolved) {
+    return NextResponse.json({ error: resolved.error }, { status: 400 });
+  }
+
+  const { provider, model: modelId, apiKey } = resolved;
+  const parse = getParser(provider);
+
+  // Build system prompt — enhanced for RevOps AI, basic for others
+  const systemPrompt =
+    selectedModel === "revops-ai"
+      ? SYSTEM_PROMPT + buildTenantContext({ name: "Tenant" })
+      : provider === "anthropic"
+        ? SYSTEM_PROMPT + buildTenantContext({ name: "Tenant" })
+        : SYSTEM_PROMPT;
+
+  // Build tool definitions for Anthropic API format (canonical)
   const toolDefs = Object.entries(aiTools).map(([name, tool]) => ({
     name,
     description: tool.description,
@@ -85,7 +115,6 @@ export async function POST(request: NextRequest) {
   let userContent: any;
   if (attachment) {
     if (attachment.type === "image" && attachment.base64 && attachment.mediaType) {
-      // Image attachment: use Claude vision
       userContent = [
         {
           type: "image",
@@ -98,10 +127,8 @@ export async function POST(request: NextRequest) {
         { type: "text", text: attachment.fileName ? `[File: ${attachment.fileName}]\n\n${message}` : message },
       ];
     } else if (attachment.type === "text" && attachment.content) {
-      // Text/CSV attachment: prepend content
       userContent = `[File: ${attachment.fileName || "file"}]\n${attachment.content}\n\n${message}`;
     } else if (attachment.type === "document" && attachment.base64) {
-      // Document attachment: mention in context
       userContent = `[File attached: ${attachment.fileName || "document"} (${attachment.mimeType || "unknown type"})]\nThe file content is provided as base64. Please analyze it.\nBase64 data: ${attachment.base64.slice(0, 10000)}...\n\n${message}`;
     } else {
       userContent = message;
@@ -110,37 +137,48 @@ export async function POST(request: NextRequest) {
     userContent = message;
   }
 
-  // Call Anthropic API with streaming
+  // For non-Anthropic providers, flatten image attachments to text
+  if (provider !== "anthropic" && Array.isArray(userContent)) {
+    const textParts = userContent.filter((p: any) => p.type === "text");
+    userContent = textParts.map((p: any) => p.text).join("\n");
+  }
+
+  // ---------------------------------------------------------------------------
+  // Streaming response
+  // ---------------------------------------------------------------------------
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
     async start(controller) {
       try {
-        let messages: Array<{ role: string; content: any }> = [{ role: "user", content: userContent }];
+        let messages: Array<{ role: string; content: any }> = [
+          { role: "user", content: userContent },
+        ];
         let continueLoop = true;
         let finalText = "";
 
         while (continueLoop) {
-          const response = await fetch("https://api.anthropic.com/v1/messages", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "x-api-key": process.env.ANTHROPIC_API_KEY!,
-              "anthropic-version": "2023-06-01",
-            },
-            body: JSON.stringify({
-              model: modelId,
-              max_tokens: 2048,
-              system: systemPrompt,
-              messages,
-              tools: toolDefs,
-              stream: true,
-            }),
+          const response = await callProvider({
+            provider,
+            apiKey,
+            model: modelId,
+            systemPrompt,
+            messages,
+            tools: provider === "anthropic" ? toolDefs : toolDefs,
+            // All providers get tools — format conversion is handled in callProvider
           });
 
           if (!response.ok || !response.body) {
-            let errorDetail = `Anthropic API error (${response.status})`;
-            try { const errBody = await response.text(); console.error("Anthropic API error:", response.status, errBody); errorDetail = `API error: ${response.status}`; } catch {}
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: errorDetail })}\n\n`));
+            let errorDetail = `${provider} API error (${response.status})`;
+            try {
+              const errBody = await response.text();
+              console.error(`${provider} API error:`, response.status, errBody);
+              errorDetail = `API error: ${response.status}`;
+            } catch {}
+            controller.enqueue(
+              encoder.encode(
+                `data: ${JSON.stringify({ type: "error", error: errorDetail })}\n\n`
+              )
+            );
             break;
           }
 
@@ -163,48 +201,89 @@ export async function POST(request: NextRequest) {
             for (const line of lines) {
               if (!line.startsWith("data: ")) continue;
               const jsonStr = line.slice(6).trim();
-              if (jsonStr === "[DONE]") continue;
-
-              try {
-                const event = JSON.parse(jsonStr);
-
-                if (event.type === "content_block_start" && event.content_block?.type === "tool_use") {
-                  currentToolUse = { id: event.content_block.id, name: event.content_block.name, inputJson: "" };
-                  controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "tool_start", name: event.content_block.name })}\n\n`));
+              if (!jsonStr || jsonStr === "[DONE]") {
+                if (jsonStr === "[DONE]") {
+                  stopReason = stopReason || "end_turn";
                 }
+                continue;
+              }
 
-                if (event.type === "content_block_delta") {
-                  if (event.delta?.type === "text_delta") {
-                    fullText += event.delta.text;
-                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "token", token: event.delta.text })}\n\n`));
+              const evt = parse(jsonStr);
+              if (!evt) continue;
+
+              switch (evt.type) {
+                case "token":
+                  fullText += evt.token || "";
+                  controller.enqueue(
+                    encoder.encode(
+                      `data: ${JSON.stringify({ type: "token", token: evt.token })}\n\n`
+                    )
+                  );
+                  break;
+
+                case "tool_start":
+                  currentToolUse = {
+                    id: evt.toolId || "",
+                    name: evt.toolName || "",
+                    inputJson: "",
+                  };
+                  controller.enqueue(
+                    encoder.encode(
+                      `data: ${JSON.stringify({ type: "tool_start", name: evt.toolName })}\n\n`
+                    )
+                  );
+                  break;
+
+                case "tool_input":
+                  if (currentToolUse) {
+                    currentToolUse.inputJson += evt.toolInput || "";
                   }
-                  if (event.delta?.type === "input_json_delta" && currentToolUse) {
-                    currentToolUse.inputJson += event.delta.partial_json;
+                  break;
+
+                case "tool_done":
+                  if (currentToolUse) {
+                    try {
+                      const input = JSON.parse(currentToolUse.inputJson);
+                      toolUseBlocks.push({
+                        id: currentToolUse.id,
+                        name: currentToolUse.name,
+                        input,
+                      });
+                    } catch {
+                      /* invalid JSON */
+                    }
+                    currentToolUse = null;
                   }
-                }
+                  break;
 
-                if (event.type === "content_block_stop" && currentToolUse) {
-                  try {
-                    const input = JSON.parse(currentToolUse.inputJson);
-                    toolUseBlocks.push({ id: currentToolUse.id, name: currentToolUse.name, input });
-                  } catch { /* invalid JSON */ }
-                  currentToolUse = null;
-                }
-
-                if (event.type === "message_delta" && event.delta?.stop_reason) {
-                  stopReason = event.delta.stop_reason;
-                }
-              } catch { /* parse error, skip */ }
+                case "done":
+                  stopReason = evt.stopReason || "end_turn";
+                  break;
+              }
             }
           }
 
-          // If tool_use, execute tools and continue
-          if (stopReason === "tool_use" && toolUseBlocks.length > 0) {
+          // ---------------------------------------------------------------
+          // Tool use loop — currently only supported for Anthropic
+          // TODO: Add tool execution support for OpenAI and Gemini providers
+          // ---------------------------------------------------------------
+          if (
+            stopReason === "tool_use" &&
+            toolUseBlocks.length > 0 &&
+            provider === "anthropic"
+          ) {
             messages.push({
               role: "assistant",
               content: [
-                ...(fullText ? [{ type: "text", text: fullText }] : []),
-                ...toolUseBlocks.map((t) => ({ type: "tool_use", id: t.id, name: t.name, input: t.input })),
+                ...(fullText
+                  ? [{ type: "text", text: fullText }]
+                  : []),
+                ...toolUseBlocks.map((t) => ({
+                  type: "tool_use",
+                  id: t.id,
+                  name: t.name,
+                  input: t.input,
+                })),
               ],
             });
 
@@ -214,13 +293,27 @@ export async function POST(request: NextRequest) {
               let result = { error: "Unknown tool" };
               if (tool) {
                 try {
-                  result = await (tool.execute as any)(toolCall.input, auth.tenantId);
-                  controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "tool_result", name: toolCall.name })}\n\n`));
+                  result = await (tool.execute as any)(
+                    toolCall.input,
+                    auth.tenantId
+                  );
+                  controller.enqueue(
+                    encoder.encode(
+                      `data: ${JSON.stringify({ type: "tool_result", name: toolCall.name })}\n\n`
+                    )
+                  );
                 } catch (e) {
-                  result = { error: e instanceof Error ? e.message : "Tool execution failed" };
+                  result = {
+                    error:
+                      e instanceof Error ? e.message : "Tool execution failed",
+                  };
                 }
               }
-              toolResults.push({ type: "tool_result", tool_use_id: toolCall.id, content: JSON.stringify(result) });
+              toolResults.push({
+                type: "tool_result",
+                tool_use_id: toolCall.id,
+                content: JSON.stringify(result),
+              });
             }
 
             messages.push({ role: "user", content: toolResults });
@@ -235,13 +328,21 @@ export async function POST(request: NextRequest) {
 
         const parsedBlocks = parseContentBlocks(finalText);
 
+        // Determine model label for storage
+        const modelLabel =
+          provider === "anthropic"
+            ? selectedModel === "haiku"
+              ? "haiku"
+              : "sonnet"
+            : selectedModel;
+
         await supabase.from("messages").insert({
           conversation_id: convId,
           tenant_id: auth.tenantId,
           role: "assistant",
           content: finalText,
           content_blocks: parsedBlocks,
-          model: modelChoice,
+          model: modelLabel,
         });
 
         await deductCredit(auth.tenantId, auth.userId);
@@ -252,12 +353,33 @@ export async function POST(request: NextRequest) {
           .update({ last_message_at: new Date().toISOString() })
           .eq("id", convId);
 
-        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "content_blocks", blocks: parsedBlocks })}\n\n`));
-        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "metadata", conversationId: convId, model: modelChoice, creditsRemaining: credits.remaining - 1 })}\n\n`));
-        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
+        controller.enqueue(
+          encoder.encode(
+            `data: ${JSON.stringify({ type: "content_blocks", blocks: parsedBlocks })}\n\n`
+          )
+        );
+        controller.enqueue(
+          encoder.encode(
+            `data: ${JSON.stringify({
+              type: "metadata",
+              conversationId: convId,
+              model: modelLabel,
+              provider,
+              creditsRemaining: credits.remaining - 1,
+            })}\n\n`
+          )
+        );
+        controller.enqueue(
+          encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`)
+        );
         controller.close();
       } catch (error) {
-        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Internal error" })}\n\n`));
+        console.error("Chat route error:", error);
+        controller.enqueue(
+          encoder.encode(
+            `data: ${JSON.stringify({ type: "error", error: "Internal error" })}\n\n`
+          )
+        );
         controller.close();
       }
     },
