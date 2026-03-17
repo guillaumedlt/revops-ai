@@ -74,31 +74,31 @@ function mapDealFromHubSpot(
   return {
     tenant_id: tenantId,
     hubspot_deal_id: record.id,
-    deal_name: p.dealname,
-    deal_stage: p.dealstage,
-    pipeline_id: p.pipeline,
+    dealname: p.dealname,
+    dealstage: p.dealstage,
+    pipeline: p.pipeline,
     amount: toNumber(p.amount),
-    close_date: toTimestamp(p.closedate),
-    create_date: toTimestamp(p.createdate),
-    owner_id: p.hubspot_owner_id,
-    last_modified_date: toTimestamp(p.hs_lastmodifieddate),
+    closedate: toTimestamp(p.closedate),
+    createdate: toTimestamp(p.createdate),
+    hubspot_owner_id: p.hubspot_owner_id,
+    hs_lastmodifieddate: toTimestamp(p.hs_lastmodifieddate),
     notes_last_updated: toTimestamp(p.notes_last_updated),
-    last_sales_activity_date: toTimestamp(p.hs_last_sales_activity_date),
-    date_entered_closed_won: toTimestamp(p.hs_date_entered_closedwon),
-    date_entered_closed_lost: toTimestamp(p.hs_date_entered_closedlost),
-    is_closed_won: toBoolean(p.hs_is_closed_won),
-    is_closed: toBoolean(p.hs_is_closed),
-    time_in_current_stage: toNumber(p.hs_time_in_current_stage),
-    is_stalled: toBoolean(p.hs_is_stalled),
+    hs_last_sales_activity_date: toTimestamp(p.hs_last_sales_activity_date),
+    hs_date_entered_closedwon: toTimestamp(p.hs_date_entered_closedwon),
+    hs_date_entered_closedlost: toTimestamp(p.hs_date_entered_closedlost),
+    hs_is_closed_won: toBoolean(p.hs_is_closed_won),
+    hs_is_closed: toBoolean(p.hs_is_closed),
+    hs_time_in_current_stage: toNumber(p.hs_time_in_current_stage),
+    hs_is_stalled: toBoolean(p.hs_is_stalled),
     days_to_close: toNumber(p.days_to_close),
     closed_lost_reason: p.closed_lost_reason,
-    closed_lost_category: p.hs_closed_lost_category,
-    deal_stage_probability: toNumber(p.hs_deal_stage_probability),
-    analytics_source: p.hs_analytics_source,
-    analytics_source_data_1: p.hs_analytics_source_data_1,
+    hs_closed_lost_category: p.hs_closed_lost_category,
+    hs_deal_stage_probability: toNumber(p.hs_deal_stage_probability),
+    hs_analytics_source: p.hs_analytics_source,
+    hs_analytics_source_data_1: p.hs_analytics_source_data_1,
     stage_timestamps: stageTimestamps,
     cumulative_stage_times: cumulativeStageTimes,
-    is_archived: false,
+    raw_properties: p,
     synced_at: new Date().toISOString(),
   };
 }
@@ -113,24 +113,24 @@ function mapContactFromHubSpot(
     tenant_id: tenantId,
     hubspot_contact_id: record.id,
     email: p.email,
-    first_name: p.firstname,
-    last_name: p.lastname,
+    firstname: p.firstname,
+    lastname: p.lastname,
     phone: p.phone,
     company: p.company,
-    job_title: p.jobtitle,
-    lifecycle_stage: p.lifecyclestage,
-    lead_status: p.hs_lead_status,
-    owner_id: p.hubspot_owner_id,
-    create_date: toTimestamp(p.createdate),
-    last_modified_date: toTimestamp(p.hs_lastmodifieddate),
-    time_to_first_engagement: toNumber(p.hs_time_to_first_engagement),
+    jobtitle: p.jobtitle,
+    lifecyclestage: p.lifecyclestage,
+    hs_lead_status: p.hs_lead_status,
+    hubspot_owner_id: p.hubspot_owner_id,
+    createdate: toTimestamp(p.createdate),
+    hs_lastmodifieddate: toTimestamp(p.hs_lastmodifieddate),
+    hs_time_to_first_engagement: toNumber(p.hs_time_to_first_engagement),
     notes_last_updated: toTimestamp(p.notes_last_updated),
     num_notes: toNumber(p.num_notes),
     num_contacted_notes: toNumber(p.num_contacted_notes),
-    sales_email_last_replied: toTimestamp(p.hs_sales_email_last_replied),
-    is_unworked: toBoolean(p.hs_is_unworked),
-    analytics_source: p.hs_analytics_source,
-    is_archived: false,
+    hs_sales_email_last_replied: toTimestamp(p.hs_sales_email_last_replied),
+    hs_is_unworked: toBoolean(p.hs_is_unworked),
+    hs_analytics_source: p.hs_analytics_source,
+    raw_properties: p,
     synced_at: new Date().toISOString(),
   };
 }
@@ -149,13 +149,13 @@ function mapCompanyFromHubSpot(
     industry: p.industry,
     city: p.city,
     country: p.country,
-    number_of_employees: toNumber(p.numberofemployees),
-    annual_revenue: toNumber(p.annualrevenue),
-    owner_id: p.hubspot_owner_id,
+    numberofemployees: toNumber(p.numberofemployees),
+    annualrevenue: toNumber(p.annualrevenue),
+    hubspot_owner_id: p.hubspot_owner_id,
     total_revenue: toNumber(p.total_revenue),
-    create_date: toTimestamp(p.createdate),
-    last_modified_date: toTimestamp(p.hs_lastmodifieddate),
-    is_archived: false,
+    createdate: toTimestamp(p.createdate),
+    hs_lastmodifieddate: toTimestamp(p.hs_lastmodifieddate),
+    raw_properties: p,
     synced_at: new Date().toISOString(),
   };
 }
@@ -271,12 +271,12 @@ async function syncPipelineStages(
       tenant_id: tenantId,
       pipeline_id: pipeline.id,
       pipeline_label: pipeline.label,
-      pipeline_display_order: pipeline.displayOrder,
       stage_id: stage.id,
       stage_label: stage.label,
-      stage_display_order: stage.displayOrder,
-      probability: stage.metadata.probability ?? null,
-      is_closed: stage.metadata.isClosed === "true",
+      display_order: stage.displayOrder,
+      probability: toNumber(stage.metadata.probability),
+      is_closed_won: stage.metadata.isClosed === "true" && stage.metadata.probability === "1.0",
+      is_closed_lost: stage.metadata.isClosed === "true" && stage.metadata.probability !== "1.0",
       synced_at: new Date().toISOString(),
     }))
   );
@@ -325,7 +325,7 @@ async function syncOwners(
     email: owner.email,
     first_name: owner.firstName,
     last_name: owner.lastName,
-    user_id: owner.userId,
+    is_active: true,
     synced_at: new Date().toISOString(),
   }));
 
@@ -556,12 +556,11 @@ async function syncAssociations(
   portalId: string,
   supabase: SupabaseClient
 ): Promise<SyncResult> {
-  // Fetch all non-archived deals for this tenant
+  // Fetch all deals for this tenant
   const { data: deals, error: fetchError } = await supabase
     .from("hs_deals")
     .select("hubspot_deal_id")
-    .eq("tenant_id", tenantId)
-    .eq("is_archived", false);
+    .eq("tenant_id", tenantId);
 
   if (fetchError) {
     return {
