@@ -1,4 +1,5 @@
 import Sidebar from "@/components/dashboard/Sidebar";
+import ChatPanel from "@/components/dashboard/ChatPanel";
 
 export default function DashboardLayout({
   children,
@@ -11,6 +12,7 @@ export default function DashboardLayout({
       <div className="flex flex-1 flex-col overflow-hidden">
         <main className="flex-1 overflow-y-auto p-6">{children}</main>
       </div>
+      <ChatPanel />
     </div>
   );
 }
