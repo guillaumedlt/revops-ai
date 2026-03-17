@@ -10,6 +10,7 @@ import {
   LogOut,
   Trash2,
 } from "lucide-react";
+import { getCachedMessages, setCachedMessages, deleteCachedConversation } from "@/lib/chat-store";
 
 interface Conversation {
   id: string;
@@ -83,6 +84,7 @@ export default function ConversationSidebar() {
   const handleDelete = async (id: string) => {
     // Optimistic update
     setConversations((prev) => prev.filter((c) => c.id !== id));
+    deleteCachedConversation(id);
 
     // Delete via API
     await fetch(`/api/conversations/${id}`, { method: "DELETE" });
@@ -97,6 +99,25 @@ export default function ConversationSidebar() {
     const supabase = createClient();
     await supabase.auth.signOut();
     router.push("/login");
+  };
+
+  const handleHover = (id: string) => {
+    if (!getCachedMessages(id)) {
+      fetch(`/api/conversations/${id}`)
+        .then((r) => r.json())
+        .then((res) => {
+          if (res.data?.messages) {
+            const msgs = res.data.messages.map((m: any) => ({
+              id: m.id,
+              role: m.role,
+              content: m.content,
+              content_blocks: m.content_blocks,
+            }));
+            setCachedMessages(id, msgs);
+          }
+        })
+        .catch(() => {}); // Silent prefetch
+    }
   };
 
   const grouped = groupByDate(conversations);
@@ -172,6 +193,7 @@ export default function ConversationSidebar() {
             {group.items.map((conv) => (
               <div key={conv.id} className="group relative">
                 <button
+                  onMouseEnter={() => handleHover(conv.id)}
                   onClick={() => router.push("/chat/" + conv.id)}
                   className={`w-full text-left text-sm truncate px-3 pr-8 h-8 flex items-center rounded-lg transition-colors ${
                     activeId === conv.id

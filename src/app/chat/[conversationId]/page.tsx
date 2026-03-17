@@ -5,6 +5,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import MessageThread from "@/components/chat/MessageThread";
 import ChatInputBar from "@/components/chat/ChatInputBar";
 import type { ContentBlock } from "@/types/chat-blocks";
+import { getCachedMessages, setCachedMessages, appendCachedMessage, updateCachedMessage } from "@/lib/chat-store";
 
 interface Attachment {
   type: string;
@@ -26,12 +27,15 @@ interface Message {
 export default function ConversationPage() {
   const { conversationId } = useParams<{ conversationId: string }>();
   const searchParams = useSearchParams();
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>(() => {
+    const cached = getCachedMessages(conversationId);
+    return cached ?? [];
+  });
   const [streamingText, setStreamingText] = useState("");
   const [streamingBlocks, setStreamingBlocks] = useState<ContentBlock[] | null>(null);
   const [activeTools, setActiveTools] = useState<string[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(() => !!getCachedMessages(conversationId));
   const [selectedModel, setSelectedModel] = useState("revops-ai");
   const initialSent = useRef(false);
   const pendingTextRef = useRef("");
@@ -39,12 +43,15 @@ export default function ConversationPage() {
 
   useEffect(() => {
     async function load() {
+      const hadCache = !!getCachedMessages(conversationId);
       const res = await fetch(`/api/conversations/${conversationId}`);
       if (res.ok) {
         const json = await res.json();
-        setMessages(json.data?.messages ?? []);
+        const msgs = json.data?.messages ?? [];
+        setMessages(msgs);
+        setCachedMessages(conversationId, msgs);
       }
-      setLoaded(true);
+      if (!hadCache) setLoaded(true);
     }
     load();
   }, [conversationId]);
@@ -71,6 +78,7 @@ export default function ConversationPage() {
         created_at: new Date().toISOString(),
       };
       setMessages((prev) => [...prev, userMsg]);
+      appendCachedMessage(conversationId, userMsg);
       setIsStreaming(true);
       setStreamingText("");
       setStreamingBlocks(null);
@@ -144,6 +152,7 @@ export default function ConversationPage() {
                   created_at: new Date().toISOString(),
                 };
                 setMessages((prev) => [...prev, assistantMsg]);
+                appendCachedMessage(conversationId, assistantMsg);
                 setStreamingText("");
                 setStreamingBlocks(null);
                 setActiveTools([]);
