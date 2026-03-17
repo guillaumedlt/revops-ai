@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans text-base antialiased;
+  }
+}
+
+@layer components {
+  /* Body principal — 13px regular */
+  .text-body {
+    @apply text-base font-normal text-foreground;
+  }
+
+  /* Body secondary — 12px gris */
+  .text-secondary {
+    @apply text-sm font-normal text-muted-foreground;
+  }
+
+  /* Label — 11px medium uppercase tracking-wide */
+  .text-label {
+    @apply text-xs font-medium uppercase tracking-wide text-muted-foreground;
+  }
+
+  /* KPI value — 24px semibold */
+  .text-kpi {
+    @apply text-2xl font-semibold text-foreground tracking-tight;
+  }
+
+  /* Card title — 13px medium */
+  .text-card-title {
+    @apply text-base font-medium text-foreground;
+  }
+
+  /* Page title — 20px medium */
+  .text-page-title {
+    @apply text-xl font-medium text-foreground tracking-tight;
+  }
+
+  /* Metric label inside charts — 11px */
+  .text-chart-label {
+    @apply text-xs font-normal text-muted-foreground;
+  }
+
+  /* Score central — 32px bold */
+  .text-score {
+    @apply text-3xl font-bold text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Tabular nums for monospace numbers */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
