@@ -73,8 +73,8 @@ function LoginContent() {
         </button>
 
         <p className="mt-6 text-xs text-white/30">
-          Pas de compte à créer. Connectez votre portail HubSpot et c'est
-          parti.
+          Pas de compte a creer. Connectez votre portail HubSpot et
+          c&apos;est parti.
         </p>
 
         <div className="mt-8 border-t border-white/10 pt-6">
