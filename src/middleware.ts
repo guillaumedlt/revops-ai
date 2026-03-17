@@ -48,7 +48,14 @@ export async function middleware(request: NextRequest) {
   }
 
   // Get tenant_id from public.users table
-  const { data: dbUser } = await supabase
+  // Use service role to bypass RLS (tenant_id JWT claim not set yet at this point)
+  const { createClient } = await import("@supabase/supabase-js");
+  const adminClient = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { auth: { autoRefreshToken: false, persistSession: false } }
+  );
+  const { data: dbUser } = await adminClient
     .from("users")
     .select("tenant_id")
     .eq("id", user.id)
