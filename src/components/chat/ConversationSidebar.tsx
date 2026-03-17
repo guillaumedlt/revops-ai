@@ -10,6 +10,7 @@ import {
   LogOut,
   Trash2,
   LayoutDashboard,
+  FileText,
 } from "lucide-react";
 import { getCachedMessages, setCachedMessages, deleteCachedConversation } from "@/lib/chat-store";
 
@@ -26,110 +27,115 @@ type GroupedConversations = {
 }[];
 
 function groupByDate(conversations: Conversation[]): GroupedConversations {
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const yesterday = new Date(today.getTime() - 86400000);
-  const weekAgo = new Date(today.getTime() - 7 * 86400000);
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var yesterday = new Date(today.getTime() - 86400000);
+  var weekAgo = new Date(today.getTime() - 7 * 86400000);
 
-  const groups: GroupedConversations = [
+  var groups: GroupedConversations = [
     { label: "Today", items: [] },
     { label: "Yesterday", items: [] },
     { label: "Previous 7 days", items: [] },
     { label: "Older", items: [] },
   ];
 
-  for (const conv of conversations) {
-    const d = new Date(conv.last_message_at || conv.created_at);
+  for (var i = 0; i < conversations.length; i++) {
+    var conv = conversations[i];
+    var d = new Date(conv.last_message_at || conv.created_at);
     if (d >= today) groups[0].items.push(conv);
     else if (d >= yesterday) groups[1].items.push(conv);
     else if (d >= weekAgo) groups[2].items.push(conv);
     else groups[3].items.push(conv);
   }
 
-  return groups.filter((g) => g.items.length > 0);
+  return groups.filter(function(g) { return g.items.length > 0; });
 }
 
 export default function ConversationSidebar() {
-  const [conversations, setConversations] = useState<Conversation[]>([]);
-  const [userEmail, setUserEmail] = useState("");
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const pathname = usePathname();
-  const router = useRouter();
+  var [conversations, setConversations] = useState<Conversation[]>([]);
+  var [userEmail, setUserEmail] = useState("");
+  var [searchOpen, setSearchOpen] = useState(false);
+  var [searchQuery, setSearchQuery] = useState("");
+  var pathname = usePathname();
+  var router = useRouter();
 
-  const activeId = pathname.startsWith("/chat/") ? pathname.split("/")[2] : null;
+  var activeId = pathname.startsWith("/chat/") ? pathname.split("/")[2] : null;
 
-  const fetchConversations = useCallback(async () => {
-    const res = await fetch("/api/conversations");
+  var fetchConversations = useCallback(async function() {
+    var res = await fetch("/api/conversations");
     if (res.ok) {
-      const json = await res.json();
+      var json = await res.json();
       setConversations(json.data ?? []);
     }
   }, []);
 
-  useEffect(() => {
+  useEffect(function() {
     fetchConversations();
   }, [fetchConversations, pathname]);
 
-  useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
+  useEffect(function() {
+    var supabase = createClient();
+    supabase.auth.getUser().then(function({ data }) {
       setUserEmail(data.user?.email ?? "");
     });
   }, []);
 
-  const handleNew = () => {
+  function handleNew() {
     router.push("/chat");
-  };
+  }
 
-  const handleDelete = async (id: string) => {
-    setConversations((prev) => prev.filter((c) => c.id !== id));
+  async function handleDelete(id: string) {
+    setConversations(function(prev) { return prev.filter(function(c) { return c.id !== id; }); });
     deleteCachedConversation(id);
     await fetch("/api/conversations/" + id, { method: "DELETE" });
     if (pathname === "/chat/" + id) {
       router.push("/chat");
     }
-  };
+  }
 
-  const handleLogout = async () => {
-    const supabase = createClient();
+  async function handleLogout() {
+    var supabase = createClient();
     await supabase.auth.signOut();
     router.push("/login");
-  };
+  }
 
-  const handleHover = (id: string) => {
+  function handleHover(id: string) {
     if (!getCachedMessages(id)) {
       fetch("/api/conversations/" + id)
-        .then((r) => r.json())
-        .then((res) => {
+        .then(function(r) { return r.json(); })
+        .then(function(res) {
           if (res.data?.messages) {
-            const msgs = res.data.messages.map((m: any) => ({
-              id: m.id,
-              role: m.role,
-              content: m.content,
-              content_blocks: m.content_blocks,
-            }));
+            var msgs = res.data.messages.map(function(m: any) {
+              return {
+                id: m.id,
+                role: m.role,
+                content: m.content,
+                content_blocks: m.content_blocks,
+              };
+            });
             setCachedMessages(id, msgs);
           }
         })
-        .catch(() => {});
+        .catch(function() {});
     }
-  };
+  }
 
-  const grouped = groupByDate(conversations);
+  var grouped = groupByDate(conversations);
 
-  const filteredGrouped = searchQuery
+  var filteredGrouped = searchQuery
     ? grouped
-        .map((g) => ({
-          ...g,
-          items: g.items.filter((c) =>
-            c.title.toLowerCase().includes(searchQuery.toLowerCase())
-          ),
-        }))
-        .filter((g) => g.items.length > 0)
+        .map(function(g) {
+          return {
+            label: g.label,
+            items: g.items.filter(function(c) {
+              return c.title.toLowerCase().includes(searchQuery.toLowerCase());
+            }),
+          };
+        })
+        .filter(function(g) { return g.items.length > 0; })
     : grouped;
 
-  const userInitial = userEmail ? userEmail[0].toUpperCase() : "?";
+  var userInitial = userEmail ? userEmail[0].toUpperCase() : "?";
 
   return (
     <aside className="w-[240px] bg-white border-r border-[#E5E5E5] flex flex-col h-full shrink-0">
@@ -151,14 +157,21 @@ export default function ConversationSidebar() {
           New Chat
         </button>
         <button
-          onClick={() => router.push("/dashboards")}
+          onClick={function() { router.push("/dashboards"); }}
           className={"w-full flex items-center gap-2 px-3 h-9 rounded-lg text-sm transition-colors " + (pathname.startsWith("/dashboards") ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium" : "text-[#525252] hover:bg-[#F5F5F5]")}
         >
           <LayoutDashboard size={16} className={pathname.startsWith("/dashboards") ? "text-[#0A0A0A]" : "text-[#A3A3A3]"} />
           Dashboards
         </button>
         <button
-          onClick={() => setSearchOpen(!searchOpen)}
+          onClick={function() { router.push("/reports"); }}
+          className={"w-full flex items-center gap-2 px-3 h-9 rounded-lg text-sm transition-colors " + (pathname.startsWith("/reports") ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium" : "text-[#525252] hover:bg-[#F5F5F5]")}
+        >
+          <FileText size={16} className={pathname.startsWith("/reports") ? "text-[#0A0A0A]" : "text-[#A3A3A3]"} />
+          Reports
+        </button>
+        <button
+          onClick={function() { setSearchOpen(!searchOpen); }}
           className="w-full flex items-center gap-2 px-3 h-9 rounded-lg text-sm text-[#525252] hover:bg-[#F5F5F5] transition-colors"
         >
           <Search size={16} className="text-[#A3A3A3]" />
@@ -172,7 +185,7 @@ export default function ConversationSidebar() {
           <input
             type="text"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={function(e) { setSearchQuery(e.target.value); }}
             placeholder="Search conversations..."
             autoFocus
             className="w-full h-8 px-2.5 text-xs rounded-lg border border-[#E5E5E5] bg-[#FAFAFA] text-[#0A0A0A] placeholder:text-[#A3A3A3] focus:outline-none focus:ring-1 focus:ring-[#0A0A0A]"
@@ -188,34 +201,38 @@ export default function ConversationSidebar() {
         {filteredGrouped.length === 0 && (
           <p className="px-3 py-4 text-xs text-[#A3A3A3]">No conversations yet</p>
         )}
-        {filteredGrouped.map((group) => (
-          <div key={group.label} className="mb-2">
-            <div className="text-[10px] uppercase tracking-wider text-[#A3A3A3] font-medium px-3 mt-3 mb-1">
-              {group.label}
-            </div>
-            {group.items.map((conv) => (
-              <div key={conv.id} className="group relative">
-                <button
-                  onMouseEnter={() => handleHover(conv.id)}
-                  onClick={() => router.push("/chat/" + conv.id)}
-                  className={"w-full text-left text-sm truncate px-3 pr-8 h-8 flex items-center rounded-lg transition-colors " + (activeId === conv.id ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium" : "text-[#525252] hover:bg-[#F5F5F5]")}
-                >
-                  <span className="block truncate max-w-[140px]">{conv.title || "New Chat"}</span>
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleDelete(conv.id);
-                  }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 hidden group-hover:flex h-6 w-6 items-center justify-center rounded text-[#A3A3A3] hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-colors"
-                  title="Delete conversation"
-                >
-                  <Trash2 size={14} />
-                </button>
+        {filteredGrouped.map(function(group) {
+          return (
+            <div key={group.label} className="mb-2">
+              <div className="text-[10px] uppercase tracking-wider text-[#A3A3A3] font-medium px-3 mt-3 mb-1">
+                {group.label}
               </div>
-            ))}
-          </div>
-        ))}
+              {group.items.map(function(conv) {
+                return (
+                  <div key={conv.id} className="group relative">
+                    <button
+                      onMouseEnter={function() { handleHover(conv.id); }}
+                      onClick={function() { router.push("/chat/" + conv.id); }}
+                      className={"w-full text-left text-sm truncate px-3 pr-8 h-8 flex items-center rounded-lg transition-colors " + (activeId === conv.id ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium" : "text-[#525252] hover:bg-[#F5F5F5]")}
+                    >
+                      <span className="block truncate max-w-[140px]">{conv.title || "New Chat"}</span>
+                    </button>
+                    <button
+                      onClick={function(e) {
+                        e.stopPropagation();
+                        handleDelete(conv.id);
+                      }}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 hidden group-hover:flex h-6 w-6 items-center justify-center rounded text-[#A3A3A3] hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-colors"
+                      title="Delete conversation"
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
       </div>
 
       {/* Bottom section */}
@@ -230,7 +247,7 @@ export default function ConversationSidebar() {
         </div>
         <div className="flex items-center gap-1 mt-2">
           <button
-            onClick={() => router.push("/settings")}
+            onClick={function() { router.push("/settings"); }}
             className="flex-1 flex items-center justify-center gap-1.5 h-8 rounded-lg text-xs text-[#737373] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors"
           >
             <Settings size={14} />

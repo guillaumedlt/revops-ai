@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { SlidersHorizontal, ArrowUp } from "lucide-react";
+import { SlidersHorizontal, ArrowUp, FileText, LayoutDashboard, Search, GitCompare, TrendingUp, Shield } from "lucide-react";
 import FileUpload from "./FileUpload";
 import TemplatesPopover from "./TemplatesPopover";
 import { CONNECTOR_REGISTRY, CATEGORIES } from "@/lib/connectors/registry";
@@ -21,35 +21,56 @@ interface ChatInputBarProps {
   initialValue?: string;
 }
 
-const MODELS = [
+var MODELS = [
   { id: "revops-ai", label: "RevOps AI" },
   { id: "claude", label: "Claude" },
   { id: "gpt", label: "GPT" },
   { id: "gemini", label: "Gemini" },
 ];
 
+var SLASH_COMMANDS = [
+  { command: "/report", label: "Create Report", description: "Generate a PPT-style report from your data", icon: "FileText" },
+  { command: "/dashboard", label: "Add to Dashboard", description: "Create a dashboard widget from the response", icon: "LayoutDashboard" },
+  { command: "/analyze", label: "Deep Analysis", description: "Run a comprehensive analysis on a topic", icon: "Search" },
+  { command: "/compare", label: "Compare", description: "Compare reps, periods, or segments", icon: "GitCompare" },
+  { command: "/forecast", label: "Forecast", description: "Generate revenue or pipeline forecast", icon: "TrendingUp" },
+  { command: "/audit", label: "CRM Audit", description: "Run a full CRM data quality audit", icon: "Shield" },
+];
+
+var ICON_MAP: Record<string, any> = {
+  FileText: FileText,
+  LayoutDashboard: LayoutDashboard,
+  Search: Search,
+  GitCompare: GitCompare,
+  TrendingUp: TrendingUp,
+  Shield: Shield,
+};
+
 export default function ChatInputBar({
   onSend,
   disabled,
   initialValue,
 }: ChatInputBarProps) {
-  const [value, setValue] = useState(initialValue ?? "");
-  const [selectedModel, setSelectedModel] = useState("revops-ai");
-  const [showModelPicker, setShowModelPicker] = useState(false);
-  const [showConnectors, setShowConnectors] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [uploading, setUploading] = useState(false);
-  const [connectorSearch, setConnectorSearch] = useState("");
-  const [connectorCategory, setConnectorCategory] = useState("all");
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const modelRef = useRef<HTMLDivElement>(null);
-  const connectorsRef = useRef<HTMLDivElement>(null);
+  var [value, setValue] = useState(initialValue ?? "");
+  var [selectedModel, setSelectedModel] = useState("revops-ai");
+  var [showModelPicker, setShowModelPicker] = useState(false);
+  var [showConnectors, setShowConnectors] = useState(false);
+  var [selectedFile, setSelectedFile] = useState<File | null>(null);
+  var [uploading, setUploading] = useState(false);
+  var [connectorSearch, setConnectorSearch] = useState("");
+  var [connectorCategory, setConnectorCategory] = useState("all");
+  var [showSlash, setShowSlash] = useState(false);
+  var [slashIndex, setSlashIndex] = useState(0);
+  var textareaRef = useRef<HTMLTextAreaElement>(null);
+  var modelRef = useRef<HTMLDivElement>(null);
+  var connectorsRef = useRef<HTMLDivElement>(null);
+  var slashRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useEffect(function() {
     if (initialValue) setValue(initialValue);
   }, [initialValue]);
 
-  useEffect(() => {
+  useEffect(function() {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
       textareaRef.current.style.height =
@@ -57,60 +78,78 @@ export default function ChatInputBar({
     }
   }, [value]);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        modelRef.current &&
-        !modelRef.current.contains(e.target as Node)
-      ) {
+  useEffect(function() {
+    var handleClickOutside = function(e: MouseEvent) {
+      if (modelRef.current && !modelRef.current.contains(e.target as Node)) {
         setShowModelPicker(false);
       }
-      if (
-        connectorsRef.current &&
-        !connectorsRef.current.contains(e.target as Node)
-      ) {
+      if (connectorsRef.current && !connectorsRef.current.contains(e.target as Node)) {
         setShowConnectors(false);
+      }
+      if (slashRef.current && !slashRef.current.contains(e.target as Node)) {
+        setShowSlash(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return function() { document.removeEventListener("mousedown", handleClickOutside); };
   }, []);
 
-  // Reset search/category when popover closes
-  useEffect(() => {
+  useEffect(function() {
     if (!showConnectors) {
       setConnectorSearch("");
       setConnectorCategory("all");
     }
   }, [showConnectors]);
 
-  const filteredConnectors = CONNECTOR_REGISTRY.filter((c) => {
-    const matchesSearch =
+  // Slash command detection
+  var filteredSlash = SLASH_COMMANDS.filter(function(cmd) {
+    if (!value.startsWith("/")) return false;
+    var typed = value.split(" ")[0].toLowerCase();
+    return cmd.command.startsWith(typed);
+  });
+
+  useEffect(function() {
+    if (value.startsWith("/") && value.indexOf(" ") === -1 && filteredSlash.length > 0) {
+      setShowSlash(true);
+      setSlashIndex(0);
+    } else {
+      setShowSlash(false);
+    }
+  }, [value, filteredSlash.length]);
+
+  var filteredConnectors = CONNECTOR_REGISTRY.filter(function(c) {
+    var matchesSearch =
       !connectorSearch ||
       c.name.toLowerCase().includes(connectorSearch.toLowerCase()) ||
       c.description.toLowerCase().includes(connectorSearch.toLowerCase());
-    const matchesCategory =
+    var matchesCategory =
       connectorCategory === "all" || c.category === connectorCategory;
     return matchesSearch && matchesCategory;
   });
 
-  const handleSend = async () => {
-    const trimmed = value.trim();
+  function selectSlashCommand(cmd: typeof SLASH_COMMANDS[0]) {
+    setValue(cmd.command + " ");
+    setShowSlash(false);
+    if (textareaRef.current) textareaRef.current.focus();
+  }
+
+  var handleSend = async function() {
+    var trimmed = value.trim();
     if (!trimmed || disabled || uploading) return;
 
-    let attachment: Attachment | undefined;
+    var attachment: Attachment | undefined;
 
     if (selectedFile) {
       setUploading(true);
       try {
-        const formData = new FormData();
+        var formData = new FormData();
         formData.append("file", selectedFile);
-        const res = await fetch("/api/chat/upload", {
+        var res = await fetch("/api/chat/upload", {
           method: "POST",
           body: formData,
         });
         if (res.ok) {
-          const json = await res.json();
+          var json = await res.json();
           if (json.data) {
             attachment = json.data;
           }
@@ -128,30 +167,70 @@ export default function ChatInputBar({
     if (textareaRef.current) textareaRef.current.style.height = "auto";
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  var handleKeyDown = function(e: React.KeyboardEvent) {
+    if (showSlash && filteredSlash.length > 0) {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setSlashIndex(function(prev) { return Math.min(prev + 1, filteredSlash.length - 1); });
+        return;
+      }
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setSlashIndex(function(prev) { return Math.max(prev - 1, 0); });
+        return;
+      }
+      if (e.key === "Enter" || e.key === "Tab") {
+        e.preventDefault();
+        selectSlashCommand(filteredSlash[slashIndex]);
+        return;
+      }
+    }
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSend();
     }
   };
 
-  const handleVoiceTranscript = (text: string) => {
-    setValue((prev) => (prev ? prev + " " + text : text));
-    textareaRef.current?.focus();
+  var handleVoiceTranscript = function(text: string) {
+    setValue(function(prev) { return prev ? prev + " " + text : text; });
+    if (textareaRef.current) textareaRef.current.focus();
   };
 
-  const handleTemplateSelect = (prompt: string) => {
+  var handleTemplateSelect = function(prompt: string) {
     setValue(prompt);
-    textareaRef.current?.focus();
+    if (textareaRef.current) textareaRef.current.focus();
   };
 
-  const currentModel =
-    MODELS.find((m) => m.id === selectedModel) ?? MODELS[0];
+  var currentModel = MODELS.find(function(m) { return m.id === selectedModel; }) || MODELS[0];
 
   return (
     <div className="relative w-full px-4 pb-4">
       <div className="mx-auto max-w-2xl">
         <div className="relative border border-[#E5E5E5] rounded-2xl bg-white shadow-sm focus-within:ring-1 focus-within:ring-[#D4D4D4] transition-shadow">
+          {/* Slash command popover */}
+          {showSlash && filteredSlash.length > 0 && (
+            <div ref={slashRef} className="absolute bottom-full left-4 mb-2 w-[300px] rounded-xl border border-[#E5E5E5] bg-white shadow-lg z-50 py-1 overflow-hidden">
+              {filteredSlash.map(function(cmd, i) {
+                var Icon = ICON_MAP[cmd.icon] || FileText;
+                return (
+                  <button
+                    key={cmd.command}
+                    onClick={function() { selectSlashCommand(cmd); }}
+                    className={"w-full flex items-center gap-3 px-3 py-2 text-left transition-colors " + (i === slashIndex ? "bg-[#F5F5F5]" : "hover:bg-[#FAFAFA]")}
+                  >
+                    <div className="h-8 w-8 rounded-lg bg-[#F5F5F5] flex items-center justify-center shrink-0">
+                      <Icon size={16} className="text-[#525252]" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium text-[#0A0A0A]">{cmd.command}</p>
+                      <p className="text-[11px] text-[#A3A3A3] truncate">{cmd.description}</p>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
           {/* File preview chip */}
           {selectedFile && (
             <div className="px-4 pt-2">
@@ -167,7 +246,7 @@ export default function ChatInputBar({
                       : (selectedFile.size / 1048576).toFixed(1) + " MB"}
                 </span>
                 <button
-                  onClick={() => setSelectedFile(null)}
+                  onClick={function() { setSelectedFile(null); }}
                   className="text-[#A3A3A3] hover:text-[#0A0A0A] text-sm leading-none"
                 >
                   &times;
@@ -181,10 +260,10 @@ export default function ChatInputBar({
             <textarea
               ref={textareaRef}
               value={value}
-              onChange={(e) => setValue(e.target.value)}
+              onChange={function(e) { setValue(e.target.value); }}
               onKeyDown={handleKeyDown}
               disabled={disabled || uploading}
-              placeholder="Ask RevOps AI..."
+              placeholder="Ask RevOps AI... (type / for commands)"
               rows={1}
               className="w-full resize-none bg-transparent text-sm text-[#0A0A0A] placeholder:text-[#A3A3A3] focus:outline-none min-h-[36px] max-h-[200px] py-1"
             />
@@ -195,13 +274,13 @@ export default function ChatInputBar({
             {/* Left icons */}
             <div className="relative flex items-center gap-0.5">
               <FileUpload
-                onFileSelect={(file) => setSelectedFile(file)}
+                onFileSelect={function(file) { setSelectedFile(file); }}
                 selectedFile={null}
-                onClear={() => setSelectedFile(null)}
+                onClear={function() { setSelectedFile(null); }}
               />
               <div className="relative" ref={connectorsRef}>
                 <button
-                  onClick={() => setShowConnectors(!showConnectors)}
+                  onClick={function() { setShowConnectors(!showConnectors); }}
                   type="button"
                   className="flex h-8 w-8 items-center justify-center rounded-lg text-[#737373] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors"
                   title="Connected Tools"
@@ -215,7 +294,7 @@ export default function ChatInputBar({
                       <input
                         type="text"
                         value={connectorSearch}
-                        onChange={(e) => setConnectorSearch(e.target.value)}
+                        onChange={function(e) { setConnectorSearch(e.target.value); }}
                         placeholder="Search connectors..."
                         className="w-full px-3 py-1.5 text-sm border border-[#E5E5E5] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]"
                         autoFocus
@@ -224,60 +303,64 @@ export default function ChatInputBar({
 
                     {/* Category pills */}
                     <div className="px-3 py-2 flex gap-1 flex-wrap border-b border-[#F0F0F0]">
-                      {CATEGORIES.map((cat) => (
-                        <button
-                          key={cat.id}
-                          onClick={() => setConnectorCategory(cat.id)}
-                          className={
-                            "px-2 py-0.5 rounded-full text-[10px] font-medium transition-colors " +
-                            (connectorCategory === cat.id
-                              ? "bg-[#0A0A0A] text-white"
-                              : "bg-[#F5F5F5] text-[#737373] hover:bg-[#E5E5E5]")
-                          }
-                        >
-                          {cat.label}
-                        </button>
-                      ))}
+                      {CATEGORIES.map(function(cat) {
+                        return (
+                          <button
+                            key={cat.id}
+                            onClick={function() { setConnectorCategory(cat.id); }}
+                            className={
+                              "px-2 py-0.5 rounded-full text-[10px] font-medium transition-colors " +
+                              (connectorCategory === cat.id
+                                ? "bg-[#0A0A0A] text-white"
+                                : "bg-[#F5F5F5] text-[#737373] hover:bg-[#E5E5E5]")
+                            }
+                          >
+                            {cat.label}
+                          </button>
+                        );
+                      })}
                     </div>
 
                     {/* Connector list */}
                     <div className="flex-1 overflow-y-auto p-2" style={{ maxHeight: "320px" }}>
-                      {filteredConnectors.map((c) => (
-                        <div
-                          key={c.id}
-                          className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-[#FAFAFA]"
-                        >
-                          <img
-                            src={c.logo}
-                            alt=""
-                            className="h-5 w-5 rounded"
-                          />
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-[#0A0A0A]">
-                              {c.name}
-                            </p>
-                            <p className="text-[10px] text-[#A3A3A3] truncate">
-                              {c.description}
-                            </p>
-                          </div>
-                          {c.id === "hubspot" ? (
-                            <div className="flex items-center gap-1">
-                              <div className="h-2 w-2 rounded-full bg-[#22C55E]" />
-                              <span className="text-[10px] text-[#22C55E]">
-                                Active
-                              </span>
+                      {filteredConnectors.map(function(c) {
+                        return (
+                          <div
+                            key={c.id}
+                            className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-[#FAFAFA]"
+                          >
+                            <img
+                              src={c.logo}
+                              alt=""
+                              className="h-5 w-5 rounded"
+                            />
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-[#0A0A0A]">
+                                {c.name}
+                              </p>
+                              <p className="text-[10px] text-[#A3A3A3] truncate">
+                                {c.description}
+                              </p>
                             </div>
-                          ) : c.available ? (
-                            <button className="text-[10px] text-[#0A0A0A] font-medium px-2 py-0.5 rounded border border-[#E5E5E5] hover:bg-[#F5F5F5]">
-                              Connect
-                            </button>
-                          ) : (
-                            <span className="text-[10px] text-[#D4D4D4]">
-                              Soon
-                            </span>
-                          )}
-                        </div>
-                      ))}
+                            {c.id === "hubspot" ? (
+                              <div className="flex items-center gap-1">
+                                <div className="h-2 w-2 rounded-full bg-[#22C55E]" />
+                                <span className="text-[10px] text-[#22C55E]">
+                                  Active
+                                </span>
+                              </div>
+                            ) : c.available ? (
+                              <button className="text-[10px] text-[#0A0A0A] font-medium px-2 py-0.5 rounded border border-[#E5E5E5] hover:bg-[#F5F5F5]">
+                                Connect
+                              </button>
+                            ) : (
+                              <span className="text-[10px] text-[#D4D4D4]">
+                                Soon
+                              </span>
+                            )}
+                          </div>
+                        );
+                      })}
                       {filteredConnectors.length === 0 && (
                         <p className="text-xs text-[#A3A3A3] text-center py-4">
                           No connectors found
@@ -292,30 +375,32 @@ export default function ChatInputBar({
               {/* Model pill */}
               <div className="relative" ref={modelRef}>
                 <button
-                  onClick={() => setShowModelPicker(!showModelPicker)}
+                  onClick={function() { setShowModelPicker(!showModelPicker); }}
                   className="ml-1 h-7 px-2.5 rounded-full text-[11px] font-medium border border-[#E5E5E5] text-[#525252] hover:bg-[#F5F5F5] transition-colors"
                 >
                   {currentModel.label}
                 </button>
                 {showModelPicker && (
                   <div className="absolute bottom-full left-0 mb-1 bg-white border border-[#E5E5E5] rounded-xl shadow-lg py-1 min-w-[140px] z-50">
-                    {MODELS.map((model) => (
-                      <button
-                        key={model.id}
-                        onClick={() => {
-                          setSelectedModel(model.id);
-                          setShowModelPicker(false);
-                        }}
-                        className={
-                          "w-full text-left px-3 py-1.5 text-xs hover:bg-[#F5F5F5] transition-colors " +
-                          (selectedModel === model.id
-                            ? "text-[#0A0A0A] font-medium"
-                            : "text-[#525252]")
-                        }
-                      >
-                        {model.label}
-                      </button>
-                    ))}
+                    {MODELS.map(function(model) {
+                      return (
+                        <button
+                          key={model.id}
+                          onClick={function() {
+                            setSelectedModel(model.id);
+                            setShowModelPicker(false);
+                          }}
+                          className={
+                            "w-full text-left px-3 py-1.5 text-xs hover:bg-[#F5F5F5] transition-colors " +
+                            (selectedModel === model.id
+                              ? "text-[#0A0A0A] font-medium"
+                              : "text-[#525252]")
+                          }
+                        >
+                          {model.label}
+                        </button>
+                      );
+                    })}
                   </div>
                 )}
               </div>

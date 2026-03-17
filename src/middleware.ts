@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
-const PUBLIC_PATHS = [
+var PUBLIC_PATHS = [
   "/",
   "/login",
   "/signup",
@@ -13,7 +13,7 @@ const PUBLIC_PATHS = [
 ];
 
 export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  var { pathname } = request.nextUrl;
 
   // Redirect /dashboard to /chat
   if (pathname === "/dashboard" || pathname.startsWith("/dashboard/")) {
@@ -23,17 +23,17 @@ export async function middleware(request: NextRequest) {
   // Allow public paths, static files, cron routes
   if (
     PUBLIC_PATHS.some(
-      (p) => pathname === p || pathname.startsWith(p + "/")
+      function(p) { return pathname === p || pathname.startsWith(p + "/"); }
     ) ||
     pathname.startsWith("/_next") ||
     pathname.includes(".") ||
     pathname.startsWith("/api/cron/")
   ) {
-    const { supabaseResponse } = await updateSession(request);
+    var { supabaseResponse } = await updateSession(request);
     return supabaseResponse;
   }
 
-  const { user, supabaseResponse, supabase } = await updateSession(request);
+  var { user, supabaseResponse, supabase } = await updateSession(request);
 
   if (!user) {
     if (pathname.startsWith("/api/")) {
@@ -53,36 +53,36 @@ export async function middleware(request: NextRequest) {
   }
 
   // Get tenant_id from public.users table
-  const { createClient } = await import("@supabase/supabase-js");
-  const adminClient = createClient(
+  var { createClient } = await import("@supabase/supabase-js");
+  var adminClient = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
     { auth: { autoRefreshToken: false, persistSession: false } }
   );
-  const { data: dbUser } = await adminClient
+  var { data: dbUser } = await adminClient
     .from("users")
     .select("tenant_id")
     .eq("id", user.id)
     .single();
 
   // Inject auth context headers for API routes
-  const requestHeaders = new Headers(request.headers);
+  var requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-user-id", user.id);
   requestHeaders.set("x-user-email", user.email ?? "");
   requestHeaders.set("x-tenant-id", dbUser?.tenant_id ?? "");
 
-  const response = NextResponse.next({
+  var response = NextResponse.next({
     request: { headers: requestHeaders },
   });
 
   // Copy Supabase auth cookies
-  supabaseResponse.cookies.getAll().forEach((cookie) => {
+  supabaseResponse.cookies.getAll().forEach(function(cookie) {
     response.cookies.set(cookie.name, cookie.value);
   });
 
   return response;
 }
 
-export const config = {
-  matcher: ["/chat/:path*", "/settings/:path*", "/dashboards/:path*", "/api/:path*", "/auth/:path*", "/dashboard/:path*"],
+export var config = {
+  matcher: ["/chat/:path*", "/settings/:path*", "/dashboards/:path*", "/reports/:path*", "/api/:path*", "/auth/:path*", "/dashboard/:path*"],
 };

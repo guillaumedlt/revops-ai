@@ -10,7 +10,7 @@ import { parseContentBlocks } from "@/lib/ai/parse-blocks";
 import { resolveModel, callProvider, Provider } from "@/lib/ai/providers";
 import { getParser, StreamEvent } from "@/lib/ai/stream-parsers";
 
-const AttachmentSchema = z.object({
+var AttachmentSchema = z.object({
   type: z.string(),
   content: z.string().optional(),
   base64: z.string().optional(),
@@ -19,7 +19,7 @@ const AttachmentSchema = z.object({
   mimeType: z.string().optional(),
 }).optional();
 
-const ChatSchema = z.object({
+var ChatSchema = z.object({
   message: z.string().min(1).max(4000),
   conversationId: z.string().uuid().optional(),
   model: z.string().optional(),
@@ -27,26 +27,48 @@ const ChatSchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
-  const auth = getAuthFromHeaders(request);
+  var auth = getAuthFromHeaders(request);
   if (!auth) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const body = await request.json();
-  const parsed = ChatSchema.safeParse(body);
+  var body = await request.json();
+  var parsed = ChatSchema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: parsed.error.message }, { status: 400 });
 
   // Check credits
-  const credits = await checkCredits(auth.tenantId);
+  var credits = await checkCredits(auth.tenantId);
   if (!credits.allowed) {
     return NextResponse.json({ error: "Credit limit reached" }, { status: 402 });
   }
 
-  const { message, conversationId, model: requestedModel, attachment } = parsed.data;
-  const supabase = createAdminClient();
+  var { message, conversationId, model: requestedModel, attachment } = parsed.data;
+  var supabase = createAdminClient();
+
+  // ── Slash command detection ───────────────────────────────────────
+  var commandPrefix = "";
+  if (message.startsWith("/report")) {
+    commandPrefix = "The user wants a PPT-style report. Structure your response as numbered slides (Slide 1: Title, Slide 2: Overview with KPIs, etc.). Use :::kpi_grid for metrics and :::chart for visualizations. Make each section a clear slide." + String.fromCharCode(10) + String.fromCharCode(10);
+    message = message.replace("/report", "").trim() || "Generate a comprehensive RevOps report";
+  } else if (message.startsWith("/dashboard")) {
+    commandPrefix = "The user wants dashboard widgets. Include multiple :::kpi_grid and :::chart blocks that can be pinned to a dashboard." + String.fromCharCode(10) + String.fromCharCode(10);
+    message = message.replace("/dashboard", "").trim() || "Show key RevOps metrics";
+  } else if (message.startsWith("/analyze")) {
+    commandPrefix = "The user wants a deep, comprehensive analysis. Use all available tools to gather data, then provide detailed insights with numbers, trends, and actionable recommendations. Be thorough and data-driven." + String.fromCharCode(10) + String.fromCharCode(10);
+    message = message.replace("/analyze", "").trim() || "Run a comprehensive RevOps analysis";
+  } else if (message.startsWith("/compare")) {
+    commandPrefix = "The user wants a comparison. Present data in side-by-side tables using :::table blocks. Include percentage differences and highlight winners/losers." + String.fromCharCode(10) + String.fromCharCode(10);
+    message = message.replace("/compare", "").trim() || "Compare key segments";
+  } else if (message.startsWith("/forecast")) {
+    commandPrefix = "The user wants a revenue or pipeline forecast. Use historical data to project future numbers. Include :::chart blocks with trend lines and :::kpi_grid for key projections." + String.fromCharCode(10) + String.fromCharCode(10);
+    message = message.replace("/forecast", "").trim() || "Generate a revenue forecast";
+  } else if (message.startsWith("/audit")) {
+    commandPrefix = "The user wants a CRM data quality audit. Check for missing fields, stale deals, incomplete contacts, and data hygiene issues. Provide a scored report card with specific fix recommendations." + String.fromCharCode(10) + String.fromCharCode(10);
+    message = message.replace("/audit", "").trim() || "Run a full CRM data quality audit";
+  }
 
   // Get or create conversation
-  let convId = conversationId;
+  var convId = conversationId;
   if (!convId) {
-    const { data: conv } = await supabase.from("conversations").insert({
+    var { data: conv } = await supabase.from("conversations").insert({
       tenant_id: auth.tenantId,
       user_id: auth.userId,
       title: message.slice(0, 100),
@@ -64,11 +86,10 @@ export async function POST(request: NextRequest) {
 
   // ---------------------------------------------------------------------------
   // Resolve provider + API key
-  // Priority: tenant BYOK keys > server env vars
   // ---------------------------------------------------------------------------
-  let tenantKeys: { openaiKey?: string; googleKey?: string } = {};
+  var tenantKeys: { openaiKey?: string; googleKey?: string } = {};
   try {
-    const { data: tenant } = await supabase
+    var { data: tenant } = await supabase
       .from("tenants")
       .select("settings")
       .eq("id", auth.tenantId)
@@ -77,13 +98,12 @@ export async function POST(request: NextRequest) {
       tenantKeys = tenant.settings.llm;
     }
   } catch {
-    // No tenant settings — fall through to env vars
+    // No tenant settings
   }
 
-  // Determine the selected model string
-  const selectedModel = requestedModel || routeToModel(message, 0);
+  var selectedModel = requestedModel || routeToModel(message, 0);
 
-  const resolved = resolveModel(selectedModel, {
+  var resolved = resolveModel(selectedModel, {
     anthropic: process.env.ANTHROPIC_API_KEY,
     openai: tenantKeys.openaiKey || process.env.OPENAI_API_KEY,
     google: tenantKeys.googleKey || process.env.GOOGLE_AI_KEY,
@@ -93,26 +113,34 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: resolved.error }, { status: 400 });
   }
 
-  const { provider, model: modelId, apiKey } = resolved;
-  const parse = getParser(provider);
+  var { provider, model: modelId, apiKey } = resolved;
+  var parse = getParser(provider);
 
-  // Build system prompt — enhanced for RevOps AI, basic for others
-  const systemPrompt =
+  // Build system prompt with optional command prefix
+  var systemPrompt =
     selectedModel === "revops-ai"
       ? SYSTEM_PROMPT + buildTenantContext({ name: "Tenant" })
       : provider === "anthropic"
         ? SYSTEM_PROMPT + buildTenantContext({ name: "Tenant" })
         : SYSTEM_PROMPT;
 
-  // Build tool definitions for Anthropic API format (canonical)
-  const toolDefs = Object.entries(aiTools).map(([name, tool]) => ({
-    name,
-    description: tool.description,
-    input_schema: zodToJsonSchema(tool.parameters),
-  }));
+  if (commandPrefix) {
+    systemPrompt = commandPrefix + systemPrompt;
+  }
+
+  // Build tool definitions
+  var toolDefs = Object.entries(aiTools).map(function(entry) {
+    var name = entry[0];
+    var tool = entry[1];
+    return {
+      name: name,
+      description: tool.description,
+      input_schema: zodToJsonSchema(tool.parameters),
+    };
+  });
 
   // Build user content with optional attachment
-  let userContent: any;
+  var userContent: any;
   if (attachment) {
     if (attachment.type === "image" && attachment.base64 && attachment.mediaType) {
       userContent = [
@@ -124,12 +152,12 @@ export async function POST(request: NextRequest) {
             data: attachment.base64,
           },
         },
-        { type: "text", text: attachment.fileName ? `[File: ${attachment.fileName}]\n\n${message}` : message },
+        { type: "text", text: attachment.fileName ? "[File: " + attachment.fileName + "]" + String.fromCharCode(10) + String.fromCharCode(10) + message : message },
       ];
     } else if (attachment.type === "text" && attachment.content) {
-      userContent = `[File: ${attachment.fileName || "file"}]\n${attachment.content}\n\n${message}`;
+      userContent = "[File: " + (attachment.fileName || "file") + "]" + String.fromCharCode(10) + attachment.content + String.fromCharCode(10) + String.fromCharCode(10) + message;
     } else if (attachment.type === "document" && attachment.base64) {
-      userContent = `[File attached: ${attachment.fileName || "document"} (${attachment.mimeType || "unknown type"})]\nThe file content is provided as base64. Please analyze it.\nBase64 data: ${attachment.base64.slice(0, 10000)}...\n\n${message}`;
+      userContent = "[File attached: " + (attachment.fileName || "document") + " (" + (attachment.mimeType || "unknown type") + ")]" + String.fromCharCode(10) + "The file content is provided as base64. Please analyze it." + String.fromCharCode(10) + "Base64 data: " + attachment.base64.slice(0, 10000) + "..." + String.fromCharCode(10) + String.fromCharCode(10) + message;
     } else {
       userContent = message;
     }
@@ -139,68 +167,68 @@ export async function POST(request: NextRequest) {
 
   // For non-Anthropic providers, flatten image attachments to text
   if (provider !== "anthropic" && Array.isArray(userContent)) {
-    const textParts = userContent.filter((p: any) => p.type === "text");
-    userContent = textParts.map((p: any) => p.text).join("\n");
+    var textParts = userContent.filter(function(p: any) { return p.type === "text"; });
+    userContent = textParts.map(function(p: any) { return p.text; }).join(String.fromCharCode(10));
   }
 
   // ---------------------------------------------------------------------------
   // Streaming response
   // ---------------------------------------------------------------------------
-  const encoder = new TextEncoder();
-  const stream = new ReadableStream({
+  var encoder = new TextEncoder();
+  var stream = new ReadableStream({
     async start(controller) {
       try {
-        let messages: Array<{ role: string; content: any }> = [
+        var messages: Array<{ role: string; content: any }> = [
           { role: "user", content: userContent },
         ];
-        let continueLoop = true;
-        let finalText = "";
+        var continueLoop = true;
+        var finalText = "";
 
         while (continueLoop) {
-          const response = await callProvider({
+          var response = await callProvider({
             provider,
             apiKey,
             model: modelId,
             systemPrompt,
             messages,
             tools: provider === "anthropic" ? toolDefs : toolDefs,
-            // All providers get tools — format conversion is handled in callProvider
           });
 
           if (!response.ok || !response.body) {
-            let errorDetail = `${provider} API error (${response.status})`;
+            var errorDetail = provider + " API error (" + response.status + ")";
             try {
-              const errBody = await response.text();
-              console.error(`${provider} API error:`, response.status, errBody);
-              errorDetail = `API error: ${response.status}`;
+              var errBody = await response.text();
+              console.error(provider + " API error:", response.status, errBody);
+              errorDetail = "API error: " + response.status;
             } catch {}
             controller.enqueue(
               encoder.encode(
-                `data: ${JSON.stringify({ type: "error", error: errorDetail })}\n\n`
+                "data: " + JSON.stringify({ type: "error", error: errorDetail }) + String.fromCharCode(10) + String.fromCharCode(10)
               )
             );
             break;
           }
 
-          const reader = response.body.getReader();
-          const decoder = new TextDecoder();
-          let buffer = "";
-          let fullText = "";
-          let toolUseBlocks: Array<{ id: string; name: string; input: any }> = [];
-          let currentToolUse: { id: string; name: string; inputJson: string } | null = null;
-          let stopReason = "";
+          var reader = response.body.getReader();
+          var decoder = new TextDecoder();
+          var buffer = "";
+          var fullText = "";
+          var toolUseBlocks: Array<{ id: string; name: string; input: any }> = [];
+          var currentToolUse: { id: string; name: string; inputJson: string } | null = null;
+          var stopReason = "";
 
           while (true) {
-            const { done, value } = await reader.read();
+            var { done, value } = await reader.read();
             if (done) break;
             buffer += decoder.decode(value, { stream: true });
 
-            const lines = buffer.split("\n");
+            var lines = buffer.split(String.fromCharCode(10));
             buffer = lines.pop() ?? "";
 
-            for (const line of lines) {
+            for (var li = 0; li < lines.length; li++) {
+              var line = lines[li];
               if (!line.startsWith("data: ")) continue;
-              const jsonStr = line.slice(6).trim();
+              var jsonStr = line.slice(6).trim();
               if (!jsonStr || jsonStr === "[DONE]") {
                 if (jsonStr === "[DONE]") {
                   stopReason = stopReason || "end_turn";
@@ -208,7 +236,7 @@ export async function POST(request: NextRequest) {
                 continue;
               }
 
-              const evt = parse(jsonStr);
+              var evt = parse(jsonStr);
               if (!evt) continue;
 
               switch (evt.type) {
@@ -216,7 +244,7 @@ export async function POST(request: NextRequest) {
                   fullText += evt.token || "";
                   controller.enqueue(
                     encoder.encode(
-                      `data: ${JSON.stringify({ type: "token", token: evt.token })}\n\n`
+                      "data: " + JSON.stringify({ type: "token", token: evt.token }) + String.fromCharCode(10) + String.fromCharCode(10)
                     )
                   );
                   break;
@@ -229,7 +257,7 @@ export async function POST(request: NextRequest) {
                   };
                   controller.enqueue(
                     encoder.encode(
-                      `data: ${JSON.stringify({ type: "tool_start", name: evt.toolName })}\n\n`
+                      "data: " + JSON.stringify({ type: "tool_start", name: evt.toolName }) + String.fromCharCode(10) + String.fromCharCode(10)
                     )
                   );
                   break;
@@ -243,11 +271,11 @@ export async function POST(request: NextRequest) {
                 case "tool_done":
                   if (currentToolUse) {
                     try {
-                      const input = JSON.parse(currentToolUse.inputJson);
+                      var input = JSON.parse(currentToolUse.inputJson);
                       toolUseBlocks.push({
                         id: currentToolUse.id,
                         name: currentToolUse.name,
-                        input,
+                        input: input,
                       });
                     } catch {
                       /* invalid JSON */
@@ -263,34 +291,31 @@ export async function POST(request: NextRequest) {
             }
           }
 
-          // ---------------------------------------------------------------
-          // Tool use loop — currently only supported for Anthropic
-          // TODO: Add tool execution support for OpenAI and Gemini providers
-          // ---------------------------------------------------------------
+          // Tool use loop
           if (
             stopReason === "tool_use" &&
             toolUseBlocks.length > 0 &&
             provider === "anthropic"
           ) {
-            messages.push({
-              role: "assistant",
-              content: [
-                ...(fullText
-                  ? [{ type: "text", text: fullText }]
-                  : []),
-                ...toolUseBlocks.map((t) => ({
-                  type: "tool_use",
-                  id: t.id,
-                  name: t.name,
-                  input: t.input,
-                })),
-              ],
-            });
+            var assistantContent: any[] = [];
+            if (fullText) {
+              assistantContent.push({ type: "text", text: fullText });
+            }
+            for (var ti = 0; ti < toolUseBlocks.length; ti++) {
+              assistantContent.push({
+                type: "tool_use",
+                id: toolUseBlocks[ti].id,
+                name: toolUseBlocks[ti].name,
+                input: toolUseBlocks[ti].input,
+              });
+            }
+            messages.push({ role: "assistant", content: assistantContent });
 
-            const toolResults = [];
-            for (const toolCall of toolUseBlocks) {
-              const tool = aiTools[toolCall.name as keyof typeof aiTools];
-              let result = { error: "Unknown tool" };
+            var toolResults: any[] = [];
+            for (var tj = 0; tj < toolUseBlocks.length; tj++) {
+              var toolCall = toolUseBlocks[tj];
+              var tool = aiTools[toolCall.name as keyof typeof aiTools];
+              var result: any = { error: "Unknown tool" };
               if (tool) {
                 try {
                   result = await (tool.execute as any)(
@@ -299,7 +324,7 @@ export async function POST(request: NextRequest) {
                   );
                   controller.enqueue(
                     encoder.encode(
-                      `data: ${JSON.stringify({ type: "tool_result", name: toolCall.name })}\n\n`
+                      "data: " + JSON.stringify({ type: "tool_result", name: toolCall.name }) + String.fromCharCode(10) + String.fromCharCode(10)
                     )
                   );
                 } catch (e) {
@@ -326,10 +351,9 @@ export async function POST(request: NextRequest) {
           }
         }
 
-        const parsedBlocks = parseContentBlocks(finalText);
+        var parsedBlocks = parseContentBlocks(finalText);
 
-        // Determine model label for storage
-        const modelLabel =
+        var modelLabel =
           provider === "anthropic"
             ? selectedModel === "haiku"
               ? "haiku"
@@ -347,7 +371,6 @@ export async function POST(request: NextRequest) {
 
         await deductCredit(auth.tenantId, auth.userId);
 
-        // Update conversation last_message_at for sidebar ordering
         await supabase
           .from("conversations")
           .update({ last_message_at: new Date().toISOString() })
@@ -355,29 +378,29 @@ export async function POST(request: NextRequest) {
 
         controller.enqueue(
           encoder.encode(
-            `data: ${JSON.stringify({ type: "content_blocks", blocks: parsedBlocks })}\n\n`
+            "data: " + JSON.stringify({ type: "content_blocks", blocks: parsedBlocks }) + String.fromCharCode(10) + String.fromCharCode(10)
           )
         );
         controller.enqueue(
           encoder.encode(
-            `data: ${JSON.stringify({
+            "data: " + JSON.stringify({
               type: "metadata",
               conversationId: convId,
               model: modelLabel,
-              provider,
+              provider: provider,
               creditsRemaining: credits.remaining - 1,
-            })}\n\n`
+            }) + String.fromCharCode(10) + String.fromCharCode(10)
           )
         );
         controller.enqueue(
-          encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`)
+          encoder.encode("data: " + JSON.stringify({ type: "done" }) + String.fromCharCode(10) + String.fromCharCode(10))
         );
         controller.close();
       } catch (error) {
         console.error("Chat route error:", error);
         controller.enqueue(
           encoder.encode(
-            `data: ${JSON.stringify({ type: "error", error: "Internal error" })}\n\n`
+            "data: " + JSON.stringify({ type: "error", error: "Internal error" }) + String.fromCharCode(10) + String.fromCharCode(10)
           )
         );
         controller.close();
@@ -397,11 +420,11 @@ export async function POST(request: NextRequest) {
 // Convert Zod schema to JSON Schema (simplified)
 function zodToJsonSchema(schema: z.ZodType): Record<string, unknown> {
   if (schema instanceof z.ZodObject) {
-    const shape = schema.shape;
-    const properties: Record<string, unknown> = {};
-    const required: string[] = [];
-    for (const [key, val] of Object.entries(shape)) {
-      const zodVal = val as z.ZodType;
+    var shape = schema.shape;
+    var properties: Record<string, unknown> = {};
+    var required: string[] = [];
+    for (var key of Object.keys(shape)) {
+      var zodVal = shape[key] as z.ZodType;
       if (zodVal instanceof z.ZodString) {
         properties[key] = { type: "string", description: (zodVal as any)._def?.description };
       } else if (zodVal instanceof z.ZodNumber) {
@@ -409,14 +432,14 @@ function zodToJsonSchema(schema: z.ZodType): Record<string, unknown> {
       } else if (zodVal instanceof z.ZodEnum) {
         properties[key] = { type: "string", enum: (zodVal as any)._def?.values };
       } else if (zodVal instanceof z.ZodOptional) {
-        const inner = (zodVal as any)._def.innerType;
+        var inner = (zodVal as any)._def.innerType;
         if (inner instanceof z.ZodString) properties[key] = { type: "string" };
         else if (inner instanceof z.ZodNumber) properties[key] = { type: "number" };
         else if (inner instanceof z.ZodEnum) properties[key] = { type: "string", enum: inner._def?.values };
         else properties[key] = { type: "string" };
       } else if (zodVal instanceof z.ZodDefault) {
-        const inner = (zodVal as any)._def.innerType;
-        if (inner instanceof z.ZodNumber) properties[key] = { type: "number" };
+        var innerDef = (zodVal as any)._def.innerType;
+        if (innerDef instanceof z.ZodNumber) properties[key] = { type: "number" };
         else properties[key] = { type: "string" };
       } else {
         properties[key] = { type: "string" };
@@ -425,7 +448,7 @@ function zodToJsonSchema(schema: z.ZodType): Record<string, unknown> {
         required.push(key);
       }
     }
-    return { type: "object", properties, ...(required.length > 0 ? { required } : {}) };
+    return { type: "object", properties: properties, ...(required.length > 0 ? { required: required } : {}) };
   }
   return { type: "object", properties: {} };
 }
