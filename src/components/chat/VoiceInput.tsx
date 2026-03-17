@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useState, useRef } from "react";
 import { Mic, MicOff } from "lucide-react";
@@ -9,7 +10,7 @@ interface VoiceInputProps {
 
 export default function VoiceInput({ onTranscript, disabled }: VoiceInputProps) {
   const [listening, setListening] = useState(false);
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const recognitionRef = useRef<any>(null);
 
   function toggle() {
     if (listening) {
@@ -29,7 +30,7 @@ export default function VoiceInput({ onTranscript, disabled }: VoiceInputProps) 
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
 
-    recognition.onresult = (event: SpeechRecognitionEvent) => {
+    recognition.onresult = (event: any) => {
       const transcript = event.results[0][0].transcript;
       onTranscript(transcript);
       setListening(false);
