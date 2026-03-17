@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react";
 import { SlidersHorizontal, ArrowUp } from "lucide-react";
 import FileUpload from "./FileUpload";
-import VoiceInput from "./VoiceInput";
 import TemplatesPopover from "./TemplatesPopover";
 import { CONNECTOR_REGISTRY, CATEGORIES } from "@/lib/connectors/registry";
 
@@ -324,8 +323,6 @@ export default function ChatInputBar({
 
             {/* Right icons */}
             <div className="flex items-center gap-0.5">
-              <VoiceInput
-                onTranscript={handleVoiceTranscript}
                 disabled={disabled}
               />
               {value.trim() ? (

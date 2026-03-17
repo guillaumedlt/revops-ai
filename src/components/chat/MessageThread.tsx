@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Copy, ThumbsUp, Share2 } from "lucide-react";
+import { Copy2 } from "lucide-react";
 import BlockRenderer from "./blocks/BlockRenderer";
 import TextBlock from "./blocks/TextBlock";
 import AddToDashboard from "./AddToDashboard";
@@ -41,15 +41,11 @@ function MessageActions() {
       </button>
       <button
         className="h-7 w-7 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
-        title="Like"
       >
-        <ThumbsUp size={13} />
       </button>
       <button
         className="h-7 w-7 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
-        title="Share"
       >
-        <Share2 size={13} />
       </button>
     </div>
   );
