@@ -18,6 +18,7 @@ interface Props {
   streamingText: string;
   streamingBlocks?: ContentBlock[] | null;
   activeTools: string[];
+  streaming?: boolean;
 }
 
 function MessageActions() {
@@ -55,11 +56,22 @@ function ToolIndicator({ tools }: { tools: string[] }) {
   );
 }
 
+function TypingIndicator() {
+  return (
+    <div className="flex gap-1 py-2">
+      <span className="h-2 w-2 rounded-full bg-[#D4D4D4] animate-bounce" style={{ animationDelay: "0ms" }} />
+      <span className="h-2 w-2 rounded-full bg-[#D4D4D4] animate-bounce" style={{ animationDelay: "150ms" }} />
+      <span className="h-2 w-2 rounded-full bg-[#D4D4D4] animate-bounce" style={{ animationDelay: "300ms" }} />
+    </div>
+  );
+}
+
 export default function MessageThread({
   messages,
   streamingText,
   streamingBlocks,
   activeTools,
+  streaming,
 }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -95,10 +107,10 @@ export default function MessageThread({
         ))}
 
         {/* Streaming state */}
-        {(streamingText || activeTools.length > 0) && (
+        {(streamingText || activeTools.length > 0 || (streaming && !streamingText)) && (
           <div className="group">
             <ToolIndicator tools={activeTools} />
-            {streamingText && (
+            {streamingText ? (
               <div className="text-sm text-[#0A0A0A] leading-relaxed">
                 {streamingBlocks && streamingBlocks.length > 0 ? (
                   <BlockRenderer blocks={streamingBlocks} />
@@ -106,7 +118,9 @@ export default function MessageThread({
                   <TextBlock text={streamingText} />
                 )}
               </div>
-            )}
+            ) : streaming && activeTools.length === 0 ? (
+              <TypingIndicator />
+            ) : null}
           </div>
         )}
 

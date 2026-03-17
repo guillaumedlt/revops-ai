@@ -8,6 +8,7 @@ import {
   Search,
   Settings,
   LogOut,
+  Trash2,
 } from "lucide-react";
 
 interface Conversation {
@@ -77,6 +78,19 @@ export default function ConversationSidebar() {
 
   const handleNew = () => {
     router.push("/chat");
+  };
+
+  const handleDelete = async (id: string) => {
+    // Optimistic update
+    setConversations((prev) => prev.filter((c) => c.id !== id));
+
+    // Delete via API
+    await fetch(`/api/conversations/${id}`, { method: "DELETE" });
+
+    // If we deleted the active conversation, go to /chat
+    if (pathname === `/chat/${id}`) {
+      router.push("/chat");
+    }
   };
 
   const handleLogout = async () => {
@@ -156,17 +170,28 @@ export default function ConversationSidebar() {
               {group.label}
             </div>
             {group.items.map((conv) => (
-              <button
-                key={conv.id}
-                onClick={() => router.push("/chat/" + conv.id)}
-                className={`w-full text-left text-sm truncate px-3 h-8 flex items-center rounded-lg transition-colors ${
-                  activeId === conv.id
-                    ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium"
-                    : "text-[#525252] hover:bg-[#F5F5F5]"
-                }`}
-              >
-                {conv.title}
-              </button>
+              <div key={conv.id} className="group relative">
+                <button
+                  onClick={() => router.push("/chat/" + conv.id)}
+                  className={`w-full text-left text-sm truncate px-3 pr-8 h-8 flex items-center rounded-lg transition-colors ${
+                    activeId === conv.id
+                      ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium"
+                      : "text-[#525252] hover:bg-[#F5F5F5]"
+                  }`}
+                >
+                  {conv.title}
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDelete(conv.id);
+                  }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 hidden group-hover:flex h-6 w-6 items-center justify-center rounded text-[#A3A3A3] hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-colors"
+                  title="Delete conversation"
+                >
+                  <Trash2 size={14} />
+                </button>
+              </div>
             ))}
           </div>
         ))}

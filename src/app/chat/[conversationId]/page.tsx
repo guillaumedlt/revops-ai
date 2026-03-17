@@ -34,6 +34,8 @@ export default function ConversationPage() {
   const [loaded, setLoaded] = useState(false);
   const [selectedModel, setSelectedModel] = useState("revops-ai");
   const initialSent = useRef(false);
+  const pendingTextRef = useRef("");
+  const updateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     async function load() {
@@ -46,6 +48,14 @@ export default function ConversationPage() {
     }
     load();
   }, [conversationId]);
+
+  const flushPendingText = useCallback(() => {
+    if (pendingTextRef.current) {
+      const text = pendingTextRef.current;
+      pendingTextRef.current = "";
+      setStreamingText((prev) => prev + text);
+    }
+  }, []);
 
   const sendMessage = useCallback(
     async (message: string, model?: string, attachment?: Attachment) => {
@@ -64,6 +74,7 @@ export default function ConversationPage() {
       setStreamingText("");
       setStreamingBlocks(null);
       setActiveTools([]);
+      pendingTextRef.current = "";
 
       try {
         const res = await fetch("/api/chat", {
@@ -88,7 +99,8 @@ export default function ConversationPage() {
           if (done) break;
           buffer += decoder.decode(value, { stream: true });
 
-          const lines = buffer.split("\n");
+          const lines = buffer.split("
+");
           buffer = lines.pop() ?? "";
 
           for (const line of lines) {
@@ -97,7 +109,13 @@ export default function ConversationPage() {
               const event = JSON.parse(line.slice(6));
               if (event.type === "token") {
                 accText += event.token;
-                setStreamingText(accText);
+                pendingTextRef.current += event.token;
+                if (!updateTimerRef.current) {
+                  updateTimerRef.current = setTimeout(() => {
+                    flushPendingText();
+                    updateTimerRef.current = null;
+                  }, 30);
+                }
               } else if (event.type === "tool_start") {
                 setActiveTools((prev) => [...prev, event.name]);
               } else if (event.type === "tool_result") {
@@ -106,9 +124,21 @@ export default function ConversationPage() {
                 finalBlocks = event.blocks;
                 setStreamingBlocks(event.blocks);
               } else if (event.type === "error") {
-                accText += `\n\n**Error:** ${event.error || "Something went wrong"}`;
-                setStreamingText(accText);
+                accText += `
+
+**Error:** ${event.error || "Something went wrong"}`;
+                pendingTextRef.current += `
+
+**Error:** ${event.error || "Something went wrong"}`;
+                flushPendingText();
               } else if (event.type === "done") {
+                // Flush any remaining pending text
+                if (updateTimerRef.current) {
+                  clearTimeout(updateTimerRef.current);
+                  updateTimerRef.current = null;
+                }
+                pendingTextRef.current = "";
+
                 const assistantMsg: Message = {
                   id: crypto.randomUUID(),
                   role: "assistant",
@@ -132,10 +162,16 @@ export default function ConversationPage() {
         setStreamingBlocks(null);
         setActiveTools([]);
       } finally {
+        // Final cleanup
+        if (updateTimerRef.current) {
+          clearTimeout(updateTimerRef.current);
+          updateTimerRef.current = null;
+        }
+        pendingTextRef.current = "";
         setIsStreaming(false);
       }
     },
-    [conversationId, isStreaming, selectedModel]
+    [conversationId, isStreaming, selectedModel, flushPendingText]
   );
 
   useEffect(() => {
@@ -169,6 +205,7 @@ export default function ConversationPage() {
         streamingText={streamingText}
         streamingBlocks={streamingBlocks}
         activeTools={activeTools}
+        streaming={isStreaming}
       />
       <div className="shrink-0 pb-2">
         <ChatInputBar onSend={handleSend} disabled={isStreaming} />
