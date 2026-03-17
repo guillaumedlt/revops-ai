@@ -1,7 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 import {
   LayoutDashboard,
   Users,
@@ -13,6 +15,7 @@ import {
   Database,
   Compass,
   Settings,
+  LogOut,
 } from "lucide-react";
 
 const NAV_SECTIONS = [
@@ -44,6 +47,22 @@ const NAV_SECTIONS = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => {
+      setUserEmail(data.user?.email ?? null);
+    });
+  }, []);
+
+  async function handleLogout() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push("/login");
+    router.refresh();
+  }
 
   const isActive = (href: string) =>
     href === "/dashboard" ? pathname === href : pathname.startsWith(href);
@@ -96,6 +115,19 @@ export default function Sidebar() {
           <Settings size={16} strokeWidth={1.5} />
           Settings
         </Link>
+      </div>
+
+      <div className="border-t border-[#F0F0F0] px-3 py-3">
+        {userEmail && (
+          <p className="text-xs text-[#737373] truncate mb-2">{userEmail}</p>
+        )}
+        <button
+          onClick={handleLogout}
+          className="flex w-full items-center gap-2 rounded px-3 h-8 text-sm font-normal text-[#525252] hover:bg-[#F5F5F5]"
+        >
+          <LogOut size={16} strokeWidth={1.5} />
+          Deconnexion
+        </button>
       </div>
     </aside>
   );

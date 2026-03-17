@@ -13,7 +13,14 @@ interface AdoptionData {
   activityLogging: number;
   processAdherence: number;
   toolUsage: number;
-  domainHealth?: Array<{ domain: string; status: "good" | "warning" | "critical" }>;
+  dimensions?: Record<
+    string,
+    { score: number; status: string; trend: string }
+  >;
+  domainHealth?: {
+    potentialRiskAreas: string[];
+    recommendations: string[];
+  };
 }
 
 const DOMAINS = [
@@ -29,19 +36,47 @@ const DOMAINS = [
 export default function DashboardHome() {
   const [data, setData] = useState<AdoptionData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/metrics/adoption-score")
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
       .then((res) => {
-        setData(res.data);
+        if (res.error) {
+          setError(res.error);
+        } else {
+          setData(res.data);
+        }
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {
-    return <div className="text-sm text-[#737373]">Chargement...</div>;
+    return (
+      <div className="flex h-64 items-center justify-center">
+        <div className="text-sm text-[#737373]">Chargement du score...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="rounded border border-red-200 bg-red-50 p-4">
+        <p className="text-sm text-red-700">
+          Erreur lors du chargement : {error}
+        </p>
+        <p className="mt-1 text-xs text-red-500">
+          Verifiez que HubSpot est connecte dans Settings.
+        </p>
+      </div>
+    );
   }
 
   if (!data) {
@@ -94,21 +129,37 @@ export default function DashboardHome() {
         <KPICard label="Tool Usage" value={`${data.toolUsage}`} />
       </div>
 
-      {/* Domain health + trend placeholder */}
+      {/* Risk areas + trend */}
       <div className="grid grid-cols-2 gap-3">
-        <ChartCard title="Sante par Domaine">
+        <ChartCard title="Zones de Risque">
           <div className="space-y-2">
-            {(data.domainHealth ?? DOMAINS.map((d) => ({ domain: d, status: "good" as const }))).map(
-              (item) => (
+            {data.domainHealth?.potentialRiskAreas &&
+            data.domainHealth.potentialRiskAreas.length > 0 ? (
+              data.domainHealth.potentialRiskAreas.map((area, i) => (
                 <div
-                  key={item.domain}
-                  className="flex items-center justify-between py-1"
+                  key={i}
+                  className="flex items-center gap-2 py-1"
                 >
-                  <span className="text-sm text-[#525252]">{item.domain}</span>
-                  <StatusBadge status={item.status} label={item.status} />
+                  <span className="h-2 w-2 rounded-full bg-amber-400" />
+                  <span className="text-sm text-[#525252]">{area}</span>
                 </div>
-              )
+              ))
+            ) : (
+              <p className="text-sm text-[#A3A3A3]">Aucune zone de risque detectee</p>
             )}
+            {data.domainHealth?.recommendations &&
+              data.domainHealth.recommendations.length > 0 && (
+                <div className="mt-3 border-t border-[#F0F0F0] pt-3">
+                  <p className="text-[10px] font-medium uppercase tracking-wider text-[#737373] mb-2">
+                    Recommandations
+                  </p>
+                  {data.domainHealth.recommendations.map((rec, i) => (
+                    <p key={i} className="text-xs text-[#525252] mb-1">
+                      {rec}
+                    </p>
+                  ))}
+                </div>
+              )}
           </div>
         </ChartCard>
 

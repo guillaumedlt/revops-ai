@@ -3,6 +3,16 @@ import { getAuthFromHeaders } from "@/lib/api-helpers";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { apiSuccess, apiError } from "@/types/api";
 
+function scoreToGrade(score: number): string {
+  if (score >= 90) return "A";
+  if (score >= 80) return "B+";
+  if (score >= 70) return "B";
+  if (score >= 60) return "C+";
+  if (score >= 50) return "C";
+  if (score >= 40) return "D";
+  return "F";
+}
+
 function scoreToStatus(score: number): "excellent" | "good" | "fair" | "poor" {
   if (score >= 90) return "excellent";
   if (score >= 70) return "good";
@@ -53,6 +63,8 @@ export async function GET(request: NextRequest) {
     const processScore = latestScore?.process_adherence_score ?? 0;
     const toolScore = latestScore?.tool_usage_score ?? 0;
 
+    const grade = latestScore ? scoreToGrade(overallScore) : "N/A";
+
     const potentialRiskAreas: string[] = [];
     const recommendations: string[] = [];
 
@@ -71,7 +83,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(apiSuccess({
       overallScore,
-      grade: latestScore ? undefined : "N/A",
+      grade,
       lastUpdated: latestScore?.computed_at ?? new Date().toISOString(),
       dataDiscipline: dataQualityScore,
       pipelineRigor: pipelineRigorScore,
