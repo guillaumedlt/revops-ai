@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
@@ -22,7 +22,7 @@ interface LlmConfig {
   };
 }
 
-export default function SettingsPage() {
+function SettingsContent() {
   const searchParams = useSearchParams();
   const initialTab = (searchParams.get("tab") as Tab) ?? "general";
   const [activeTab, setActiveTab] = useState<Tab>(initialTab);
@@ -270,5 +270,14 @@ export default function SettingsPage() {
         </div>
       )}
     </div>
+  );
+}
+
+
+export default function SettingsPage() {
+  return (
+    <Suspense>
+      <SettingsContent />
+    </Suspense>
   );
 }
