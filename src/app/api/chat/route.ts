@@ -3,7 +3,7 @@ import { z } from "zod";
 import { getAuthFromHeaders } from "@/lib/api-helpers";
 import { routeToModel, getModelId } from "@/lib/ai/router";
 import { SYSTEM_PROMPT, buildTenantContext } from "@/lib/ai/prompts/system";
-import { aiTools } from "@/lib/ai/tools/index";
+import { getToolsForTenant } from "@/lib/connectors";
 import { checkCredits, deductCredit } from "@/lib/ai/credits";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { parseContentBlocks } from "@/lib/ai/parse-blocks";
@@ -21,7 +21,6 @@ export async function POST(request: NextRequest) {
   const parsed = ChatSchema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: parsed.error.message }, { status: 400 });
 
-  // Check credits
   const credits = await checkCredits(auth.tenantId);
   if (!credits.allowed) {
     return NextResponse.json({ error: "Credit limit reached" }, { status: 402 });
@@ -30,7 +29,6 @@ export async function POST(request: NextRequest) {
   const { message, conversationId } = parsed.data;
   const supabase = createAdminClient();
 
-  // Get or create conversation
   let convId = conversationId;
   if (!convId) {
     const { data: conv } = await supabase.from("conversations").insert({
@@ -41,7 +39,6 @@ export async function POST(request: NextRequest) {
     convId = conv?.id;
   }
 
-  // Save user message
   await supabase.from("messages").insert({
     conversation_id: convId,
     tenant_id: auth.tenantId,
@@ -49,29 +46,23 @@ export async function POST(request: NextRequest) {
     content: message,
   });
 
-  // Route model
+  // Get connector tools for this tenant
+  const connectorTools = await getToolsForTenant(auth.tenantId);
+  
   const modelChoice = routeToModel(message, 0);
   const modelId = getModelId(modelChoice);
 
-  // Build messages
-  const systemPrompt = SYSTEM_PROMPT + buildTenantContext({ name: "Tenant" });
+  const systemPrompt = (SYSTEM_PROMPT + buildTenantContext({ name: "Tenant" })).trim();
 
-  // Build tool definitions for Anthropic API
-  const toolDefs = Object.entries(aiTools).map(([name, tool]) => {
-    const schema = zodToJsonSchema(tool.parameters);
-    // Validate: Anthropic requires properties to be a non-empty object when provided
-    // and required array should only be present if non-empty
-    return {
-      name,
-      description: tool.description,
-      input_schema: schema,
-    };
-  });
+  // Build tool definitions from connector tools
+  const toolDefs = Object.entries(connectorTools).map(([name, tool]) => ({
+    name,
+    description: tool.description,
+    input_schema: zodToJsonSchema(tool.parameters),
+  }));
 
-  // Log tool count for debugging
-  console.log("[chat/route] Prepared", toolDefs.length, "tools for model:", modelId);
+  console.log("[chat] Using", toolDefs.length, "tools from connectors for tenant", auth.tenantId);
 
-  // Call Anthropic API with streaming
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
     async start(controller) {
@@ -82,52 +73,38 @@ export async function POST(request: NextRequest) {
         let retryAttempt = 0;
 
         while (continueLoop) {
-          // Determine whether to include tools (skip on retry after 500)
-          const useTools = retryAttempt === 0;
-
-          const apiHeaders: Record<string, string> = {
-            "Content-Type": "application/json",
-            "x-api-key": process.env.ANTHROPIC_API_KEY!,
-            "anthropic-version": "2023-06-01",
-          };
+          const useTools = retryAttempt === 0 && toolDefs.length > 0;
 
           const response = await fetch("https://api.anthropic.com/v1/messages", {
             method: "POST",
-            headers: apiHeaders,
+            headers: {
+              "Content-Type": "application/json",
+              "x-api-key": process.env.ANTHROPIC_API_KEY!,
+              "anthropic-version": "2023-06-01",
+            },
             body: JSON.stringify({
               model: modelId,
-              max_tokens: 2048,
-              system: systemPrompt.trim(),
+              max_tokens: 4096,
+              system: systemPrompt,
               messages,
-              ...(useTools && toolDefs.length > 0 ? { tools: toolDefs } : {}),
+              ...(useTools ? { tools: toolDefs } : {}),
               stream: true,
             }),
           });
 
           if (!response.ok || !response.body) {
             let errorBody = "";
-            try {
-              errorBody = await response.text();
-            } catch { /* ignore */ }
+            try { errorBody = await response.text(); } catch {}
 
-            console.error("[chat/route] Anthropic API error:", {
-              status: response.status,
-              body: errorBody.slice(0, 500),
-              model: modelId,
-              retryAttempt,
-              conversationId: convId,
-              toolCount: useTools ? toolDefs.length : 0,
-            });
+            console.error("[chat] Anthropic error:", response.status, errorBody.slice(0, 500));
 
-            // Retry once without tools on 500/529 errors
-            if ((response.status >= 500) && retryAttempt === 0) {
-              console.log("[chat/route] Retrying without tools after", response.status);
+            if (response.status >= 500 && retryAttempt === 0) {
               retryAttempt = 1;
               continue;
             }
 
             const friendlyError = response.status >= 500
-              ? "The AI service is temporarily unavailable. Please try again in a moment."
+              ? "The AI service is temporarily unavailable. Please try again."
               : "API error (" + response.status + ")";
 
             controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: friendlyError, statusCode: response.status })}\n\n`));
@@ -175,13 +152,10 @@ export async function POST(request: NextRequest) {
 
                 if (event.type === "content_block_stop" && currentToolUse) {
                   try {
-                    const input = currentToolUse.inputJson ? JSON.parse(currentToolUse.inputJson) : {};
+                    const input = currentToolUse.inputJson.trim() ? JSON.parse(currentToolUse.inputJson) : {};
                     toolUseBlocks.push({ id: currentToolUse.id, name: currentToolUse.name, input });
-                  } catch (parseErr) {
-                    console.error("[chat/route] Failed to parse tool input JSON:", {
-                      tool: currentToolUse.name,
-                      inputJson: currentToolUse.inputJson.slice(0, 200),
-                    });
+                  } catch {
+                    toolUseBlocks.push({ id: currentToolUse.id, name: currentToolUse.name, input: {} });
                   }
                   currentToolUse = null;
                 }
@@ -190,17 +164,14 @@ export async function POST(request: NextRequest) {
                   stopReason = event.delta.stop_reason;
                 }
 
-                // Handle stream-level errors from Anthropic
                 if (event.type === "error") {
-                  console.error("[chat/route] Stream error from Anthropic:", event.error);
+                  console.error("[chat] Stream error:", event.error);
                 }
-              } catch { /* parse error, skip */ }
+              } catch {}
             }
           }
 
-          // If tool_use, execute tools and continue
           if (stopReason === "tool_use" && toolUseBlocks.length > 0) {
-            // Add assistant message with tool uses
             messages.push({
               role: "assistant",
               content: [
@@ -209,22 +180,17 @@ export async function POST(request: NextRequest) {
               ],
             });
 
-            // Execute each tool
             const toolResults = [];
             for (const toolCall of toolUseBlocks) {
-              const tool = aiTools[toolCall.name as keyof typeof aiTools];
-              let result = { error: "Unknown tool" };
+              const tool = connectorTools[toolCall.name];
+              let result: any = { error: "Unknown tool: " + toolCall.name };
               if (tool) {
                 try {
-                  result = await (tool.execute as any)(toolCall.input, auth.tenantId);
+                  result = await tool.execute(toolCall.input, auth.tenantId);
                   controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "tool_result", name: toolCall.name })}\n\n`));
                 } catch (e) {
-                  console.error("[chat/route] Tool execution error:", {
-                    tool: toolCall.name,
-                    error: e instanceof Error ? e.message : e,
-                    conversationId: convId,
-                  });
-                  result = { error: e instanceof Error ? e.message : "Tool execution failed" };
+                  console.error("[chat] Tool error:", toolCall.name, e instanceof Error ? e.message : e);
+                  result = { error: e instanceof Error ? e.message : "Tool failed" };
                 }
               }
               toolResults.push({ type: "tool_result", tool_use_id: toolCall.id, content: JSON.stringify(result) });
@@ -232,7 +198,6 @@ export async function POST(request: NextRequest) {
 
             messages.push({ role: "user", content: toolResults });
             toolUseBlocks = [];
-            // Accumulate text from this iteration before continuing
             finalText += fullText;
             fullText = "";
           } else {
@@ -241,10 +206,8 @@ export async function POST(request: NextRequest) {
           }
         }
 
-        // Parse content blocks from the final text
         const parsedBlocks = parseContentBlocks(finalText);
 
-        // Save assistant message with content_blocks
         await supabase.from("messages").insert({
           conversation_id: convId,
           tenant_id: auth.tenantId,
@@ -254,19 +217,15 @@ export async function POST(request: NextRequest) {
           model: modelChoice,
         });
 
-        // Deduct credit
         await deductCredit(auth.tenantId, auth.userId);
 
-        // Emit content blocks event
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "content_blocks", blocks: parsedBlocks })}\n\n`));
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "metadata", conversationId: convId, model: modelChoice, creditsRemaining: credits.remaining - 1 })}\n\n`));
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
         controller.close();
       } catch (error) {
-        console.error("[chat/route] Unhandled error:", {
-          error: error instanceof Error ? { message: error.message, stack: error.stack } : error,
-        });
-        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "An unexpected error occurred. Please try again." })}\n\n`));
+        console.error("[chat] Error:", error instanceof Error ? error.message : error);
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "An unexpected error occurred." })}\n\n`));
         controller.close();
       }
     },
@@ -281,7 +240,6 @@ export async function POST(request: NextRequest) {
   });
 }
 
-// Convert Zod schema to JSON Schema (simplified)
 function zodToJsonSchema(schema: z.ZodType): Record<string, unknown> {
   if (schema instanceof z.ZodObject) {
     const shape = schema.shape;
@@ -289,35 +247,34 @@ function zodToJsonSchema(schema: z.ZodType): Record<string, unknown> {
     const required: string[] = [];
     for (const [key, val] of Object.entries(shape)) {
       const zodVal = val as z.ZodType;
-      if (zodVal instanceof z.ZodString) {
-        properties[key] = { type: "string", ...(((zodVal as any)._def?.description) ? { description: (zodVal as any)._def.description } : {}) };
-      } else if (zodVal instanceof z.ZodNumber) {
-        properties[key] = { type: "number" };
-      } else if (zodVal instanceof z.ZodEnum) {
-        properties[key] = { type: "string", enum: (zodVal as any)._def?.values };
-      } else if (zodVal instanceof z.ZodOptional) {
-        const inner = (zodVal as any)._def.innerType;
-        if (inner instanceof z.ZodString) properties[key] = { type: "string" };
-        else if (inner instanceof z.ZodNumber) properties[key] = { type: "number" };
-        else if (inner instanceof z.ZodEnum) properties[key] = { type: "string", enum: inner._def?.values };
-        else properties[key] = { type: "string" };
-      } else if (zodVal instanceof z.ZodDefault) {
-        const inner = (zodVal as any)._def.innerType;
-        if (inner instanceof z.ZodNumber) properties[key] = { type: "number" };
-        else properties[key] = { type: "string" };
-      } else {
-        properties[key] = { type: "string" };
-      }
+      const prop = zodFieldToSchema(zodVal);
+      properties[key] = prop;
       if (!(zodVal instanceof z.ZodOptional) && !(zodVal instanceof z.ZodDefault)) {
         required.push(key);
       }
     }
-    const result: Record<string, unknown> = { type: "object", properties };
-    if (required.length > 0) {
-      result.required = required;
-    }
-    return result;
+    return { type: "object", properties, ...(required.length > 0 ? { required } : {}) };
   }
-  // For empty schemas (like z.object({})), return valid Anthropic input_schema
   return { type: "object", properties: {} };
+}
+
+function zodFieldToSchema(zodVal: z.ZodType): Record<string, unknown> {
+  if (zodVal instanceof z.ZodString) {
+    const desc = (zodVal as any)._def?.description;
+    return { type: "string", ...(desc ? { description: desc } : {}) };
+  }
+  if (zodVal instanceof z.ZodNumber) {
+    const desc = (zodVal as any)._def?.description;
+    return { type: "number", ...(desc ? { description: desc } : {}) };
+  }
+  if (zodVal instanceof z.ZodEnum) {
+    return { type: "string", enum: (zodVal as any)._def?.values };
+  }
+  if (zodVal instanceof z.ZodOptional) {
+    return zodFieldToSchema((zodVal as any)._def.innerType);
+  }
+  if (zodVal instanceof z.ZodDefault) {
+    return zodFieldToSchema((zodVal as any)._def.innerType);
+  }
+  return { type: "string" };
 }
