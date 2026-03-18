@@ -93,7 +93,7 @@ export default function SignupPage() {
     <main className="flex min-h-screen items-center justify-center bg-[#0B1120]">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-white/10 text-white text-lg font-semibold">R</div>
+          <div className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-white/10 text-white text-lg font-semibold">K</div>
           <h1 className="mt-4 text-xl font-medium text-white">Create your account</h1>
           <p className="mt-2 text-sm text-white/50">Professional email required</p>
         </div>
