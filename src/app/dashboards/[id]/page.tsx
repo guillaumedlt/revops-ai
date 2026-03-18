@@ -7,6 +7,7 @@ import KPICardBlock from "@/components/chat/blocks/KPICardBlock";
 import ChartBlock from "@/components/chat/blocks/ChartBlock";
 import TableBlock from "@/components/chat/blocks/TableBlock";
 import TextBlock from "@/components/chat/blocks/TextBlock";
+import BlockRenderer from "@/components/chat/blocks/BlockRenderer";
 
 interface Widget {
   id: string;
@@ -59,6 +60,8 @@ function WidgetContent({ widget }: { widget: Widget }) {
       return <TableBlock title="" headers={c.headers || []} rows={c.rows || []} />;
     case "text":
       return <TextBlock text={c.text || ""} />;
+    case "report":
+      return c.blocks ? <BlockRenderer blocks={c.blocks} /> : <p className="text-xs text-[#A3A3A3]">Empty report</p>;
     default:
       return <p className="text-xs text-[#A3A3A3]">Unknown widget type</p>;
   }
