@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { getAuthFromHeaders } from "@/lib/api-helpers";
 import { createAdminClient } from "@/lib/supabase/admin";
 
-// GET - Load saved ICP
 export async function GET(request: NextRequest) {
   const auth = getAuthFromHeaders(request);
   if (!auth) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -14,14 +13,12 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ data: icp });
 }
 
-// PUT - Save/update ICP (manual adjustments)
 export async function PUT(request: NextRequest) {
   const auth = getAuthFromHeaders(request);
   if (!auth) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const body = await request.json();
   const supabase = createAdminClient();
-
   const { data: tenant } = await supabase.from("tenants").select("settings").eq("id", auth.tenantId).single();
   const currentSettings = (tenant?.settings as Record<string, any>) || {};
 
@@ -32,10 +29,25 @@ export async function PUT(request: NextRequest) {
   return NextResponse.json({ data: { saved: true } });
 }
 
-// POST - Auto-generate ICP from HubSpot won deals
+async function hsFetch(path: string, token: string, options?: RequestInit) {
+  const res = await fetch("https://api.hubapi.com" + path, {
+    ...options,
+    headers: { Authorization: "Bearer " + token, "Content-Type": "application/json", ...options?.headers },
+  });
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    console.error("[ICP] HubSpot error:", res.status, body.slice(0, 300));
+    throw new Error("HubSpot " + res.status);
+  }
+  return res.json();
+}
+
 export async function POST(request: NextRequest) {
   const auth = getAuthFromHeaders(request);
   if (!auth) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const body = await request.json().catch(() => ({}));
+  const domain = body.domain || null;
 
   const supabase = createAdminClient();
 
@@ -72,36 +84,62 @@ export async function POST(request: NextRequest) {
           token_expires_at: new Date(Date.now() + tokens.expires_in * 1000).toISOString(),
         }).eq("tenant_id", auth.tenantId);
       } else {
-        return NextResponse.json({ error: "HubSpot token expired. Please reconnect in Settings > Connectors." }, { status: 401 });
+        return NextResponse.json({ error: "HubSpot token expired. Reconnect in Settings." }, { status: 401 });
       }
     } catch {
       return NextResponse.json({ error: "Failed to refresh HubSpot token" }, { status: 500 });
     }
   }
 
-  // Get won deals
-  const wonRes = await fetch("https://api.hubapi.com/crm/v3/objects/deals/search", {
-    method: "POST",
-    headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      filterGroups: [{ filters: [{ propertyName: "hs_is_closed_won", operator: "EQ", value: "true" }] }],
-      properties: ["dealname", "amount", "closedate", "createdate"],
-      limit: 100,
-    }),
-  });
-  if (!wonRes.ok) {
-    const errBody = await wonRes.text().catch(() => "");
-    console.error("[ICP] HubSpot deals error:", wonRes.status, errBody.slice(0, 300));
-    return NextResponse.json({ error: "Failed to fetch deals from HubSpot (" + wonRes.status + ")" }, { status: 500 });
+  // Step 1: Lookup company by domain
+  let companyInfo: any = null;
+  if (domain) {
+    try {
+      const compSearch = await hsFetch("/crm/v3/objects/companies/search", token, {
+        method: "POST",
+        body: JSON.stringify({
+          filterGroups: [{ filters: [{ propertyName: "domain", operator: "CONTAINS_TOKEN", value: domain }] }],
+          properties: ["name", "domain", "industry", "numberofemployees", "annualrevenue", "city", "country"],
+          limit: 1,
+        }),
+      });
+      if (compSearch.results && compSearch.results.length > 0) {
+        const p = compSearch.results[0].properties;
+        companyInfo = {
+          id: compSearch.results[0].id,
+          name: p.name,
+          domain: p.domain,
+          industry: p.industry,
+          employees: Number(p.numberofemployees) || 0,
+          revenue: Number(p.annualrevenue) || 0,
+          city: p.city,
+          country: p.country,
+        };
+      }
+    } catch { /* company not found */ }
   }
-  const wonData = await wonRes.json();
+
+  // Step 2: Get won deals
+  let wonData: any;
+  try {
+    wonData = await hsFetch("/crm/v3/objects/deals/search", token, {
+      method: "POST",
+      body: JSON.stringify({
+        filterGroups: [{ filters: [{ propertyName: "hs_is_closed_won", operator: "EQ", value: "true" }] }],
+        properties: ["dealname", "amount", "closedate", "createdate"],
+        limit: 100,
+      }),
+    });
+  } catch (e) {
+    return NextResponse.json({ error: "Failed to fetch deals from HubSpot" }, { status: 500 });
+  }
+
   const deals = wonData.results || [];
-
   if (deals.length < 3) {
-    return NextResponse.json({ error: "Need at least 3 won deals to build ICP", wonCount: deals.length }, { status: 400 });
+    return NextResponse.json({ error: "Need at least 3 won deals to build ICP (found " + deals.length + ")" }, { status: 400 });
   }
 
-  // Get associated companies
+  // Step 3: Analyze company patterns from won deals
   const industries: Record<string, number> = {};
   const countries: Record<string, number> = {};
   const cities: Record<string, number> = {};
@@ -113,19 +151,10 @@ export async function POST(request: NextRequest) {
   for (const deal of deals.slice(0, 50)) {
     dealAmounts.push(Number(deal.properties.amount) || 0);
     try {
-      const assocRes = await fetch("https://api.hubapi.com/crm/v4/objects/deals/" + deal.id + "/associations/companies", {
-        headers: { Authorization: "Bearer " + token },
-      });
-      if (!assocRes.ok) continue;
-      const assocData = await assocRes.json();
-      if (!assocData.results || !assocData.results[0]) continue;
+      const assoc = await hsFetch("/crm/v4/objects/deals/" + deal.id + "/associations/companies", token);
+      if (!assoc.results || !assoc.results[0]) continue;
 
-      const compId = assocData.results[0].toObjectId;
-      const compRes = await fetch("https://api.hubapi.com/crm/v3/objects/companies/" + compId + "?properties=name,industry,numberofemployees,annualrevenue,city,country,domain", {
-        headers: { Authorization: "Bearer " + token },
-      });
-      if (!compRes.ok) continue;
-      const comp = await compRes.json();
+      const comp = await hsFetch("/crm/v3/objects/companies/" + assoc.results[0].toObjectId + "?properties=name,industry,numberofemployees,annualrevenue,city,country,domain", token);
       const p = comp.properties;
 
       companiesFound++;
@@ -138,7 +167,9 @@ export async function POST(request: NextRequest) {
   }
 
   const sortTop = (obj: Record<string, number>, n: number) =>
-    Object.entries(obj).sort((a, b) => b[1] - a[1]).slice(0, n).map(([k, v]) => ({ name: k, count: v, percent: Math.round((v / companiesFound) * 100) }));
+    Object.entries(obj).sort((a, b) => b[1] - a[1]).slice(0, n).map(([k, v]) => ({
+      name: k, count: v, percent: companiesFound > 0 ? Math.round((v / companiesFound) * 100) : 0,
+    }));
 
   const median = (arr: number[]) => {
     if (!arr.length) return 0;
@@ -146,34 +177,33 @@ export async function POST(request: NextRequest) {
     return s[Math.floor(s.length / 2)];
   };
 
-  const icp = {
-    generatedAt: new Date().toISOString(),
-    basedOn: { wonDeals: deals.length, companiesMatched: companiesFound },
-    criteria: {
-      industries: sortTop(industries, 5),
-      countries: sortTop(countries, 5),
-      cities: sortTop(cities, 5),
-      employeeRange: {
-        min: employeeCounts.length ? Math.min(...employeeCounts) : 0,
-        max: employeeCounts.length ? Math.max(...employeeCounts) : 0,
-        median: median(employeeCounts),
+  const icpData = {
+    company: companyInfo,
+    icp: {
+      generatedAt: new Date().toISOString(),
+      basedOn: { wonDeals: deals.length, companiesMatched: companiesFound },
+      criteria: {
+        industries: sortTop(industries, 5),
+        countries: sortTop(countries, 5),
+        cities: sortTop(cities, 5),
+        employeeRange: {
+          min: employeeCounts.length ? Math.min(...employeeCounts) : 0,
+          max: employeeCounts.length ? Math.max(...employeeCounts) : 0,
+          median: median(employeeCounts),
+        },
+        revenueRange: {
+          min: revenues.length ? Math.min(...revenues) : 0,
+          max: revenues.length ? Math.max(...revenues) : 0,
+          median: median(revenues),
+        },
+        dealSize: {
+          avg: dealAmounts.length ? Math.round(dealAmounts.reduce((a, b) => a + b, 0) / dealAmounts.length) : 0,
+          median: median(dealAmounts),
+          min: dealAmounts.length ? Math.min(...dealAmounts) : 0,
+          max: dealAmounts.length ? Math.max(...dealAmounts) : 0,
+        },
       },
-      revenueRange: {
-        min: revenues.length ? Math.min(...revenues) : 0,
-        max: revenues.length ? Math.max(...revenues) : 0,
-        median: median(revenues),
-      },
-      dealSize: {
-        avg: dealAmounts.length ? Math.round(dealAmounts.reduce((a, b) => a + b, 0) / dealAmounts.length) : 0,
-        median: median(dealAmounts),
-        min: dealAmounts.length ? Math.min(...dealAmounts) : 0,
-        max: dealAmounts.length ? Math.max(...dealAmounts) : 0,
-      },
-    },
-    weights: {
-      industry: 40,
-      companySize: 30,
-      revenue: 30,
+      weights: { industry: 40, companySize: 30, revenue: 30 },
     },
   };
 
@@ -181,8 +211,8 @@ export async function POST(request: NextRequest) {
   const { data: tenant } = await supabase.from("tenants").select("settings").eq("id", auth.tenantId).single();
   const currentSettings = (tenant?.settings as Record<string, any>) || {};
   await supabase.from("tenants").update({
-    settings: { ...currentSettings, icp },
+    settings: { ...currentSettings, icp: icpData },
   }).eq("id", auth.tenantId);
 
-  return NextResponse.json({ data: icp });
+  return NextResponse.json({ data: icpData });
 }
