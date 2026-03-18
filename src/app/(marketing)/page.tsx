@@ -1,3 +1,15 @@
+import Hero from "@/components/marketing/Hero";
+import Features from "@/components/marketing/Features";
+import Pricing from "@/components/marketing/Pricing";
+import Footer from "@/components/marketing/Footer";
+
 export default function LandingPage() {
-  return <div className="p-6"><h1 className="text-page-title">Landing Page</h1></div>;
+  return (
+    <main>
+      <Hero />
+      <Features />
+      <Pricing />
+      <Footer />
+    </main>
+  );
 }
