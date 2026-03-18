@@ -202,7 +202,7 @@ function SaveMessageToDashboard({ blocks, title }: { blocks: any[]; title: strin
         <LayoutDashboard size={12} /> Save to Dashboard
       </button>
       {open && (
-        <div className="absolute top-full right-0 mt-1 w-[220px] rounded-xl border border-[#E5E5E5] bg-white shadow-lg p-2 z-50">
+        <div className="absolute bottom-full right-0 mb-1 w-[220px] rounded-xl border border-[#E5E5E5] bg-white shadow-lg p-2 z-50">
           <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#A3A3A3]">Save to Dashboard</p>
           {dashboards.length === 0 ? (
             <p className="px-2 py-2 text-xs text-[#737373]">No dashboards yet</p>
