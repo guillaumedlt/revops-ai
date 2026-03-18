@@ -3,6 +3,8 @@
 import { useEffect, useState, useCallback, use } from "react";
 import { useRouter } from "next/navigation";
 import { BarChart3, Table } from "lucide-react";
+import ChartBlock from "@/components/chat/blocks/ChartBlock";
+import TableBlock from "@/components/chat/blocks/TableBlock";
 
 interface Slide {
   id: string;
@@ -18,6 +20,54 @@ var THEMES: Record<string, { bg: string; text: string; accent: string; border: s
   gradient: { bg: "bg-gradient-to-br from-[#667eea] to-[#764ba2]", text: "text-white", accent: "text-white/70", border: "border-white/20", cardBg: "bg-white/10" },
   minimal: { bg: "bg-[#FAFAF8]", text: "text-[#333]", accent: "text-[#666]", border: "border-[#E8E8E5]", cardBg: "bg-white" },
 };
+
+function hasRealContentBlocks(blocks: any[]): boolean {
+  if (!blocks || blocks.length === 0) return false;
+  return blocks.some(function(b: any) {
+    return b.type === "kpi" || b.type === "kpi_grid" || b.type === "chart" || b.type === "table";
+  });
+}
+
+function SlideBlockRenderer({ blocks, theme: themeName }: { blocks: any[]; theme: string }) {
+  var t = THEMES[themeName] || THEMES.light;
+  return (
+    <div className="space-y-6 h-full">
+      {blocks.map(function(block: any, i: number) {
+        if (block.type === "kpi" || block.type === "kpi_grid") {
+          var items = block.type === "kpi" ? [block] : (block.items || []);
+          var cols = items.length <= 2 ? items.length : items.length <= 4 ? Math.min(items.length, 4) : 3;
+          return (
+            <div key={i} className="grid gap-6" style={{ gridTemplateColumns: "repeat(" + cols + ", 1fr)" }}>
+              {items.map(function(item: any, j: number) {
+                return (
+                  <div key={j} className={"rounded-xl p-6 text-center " + t.cardBg + " " + t.border + " border"}>
+                    <p className={"text-4xl font-bold " + t.text}>{item.value}</p>
+                    <p className={"text-sm mt-2 " + t.accent}>{item.label}</p>
+                    {item.change !== undefined && (
+                      <p className={"text-sm mt-1 " + (item.change >= 0 ? "text-[#22C55E]" : "text-[#EF4444]")}>
+                        {(item.change >= 0 ? "+" : "") + item.change + "%"}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          );
+        }
+        if (block.type === "chart") {
+          return <ChartBlock key={i} chartType={block.chartType || "bar"} title="" data={block.data || []} xKey={block.xKey} yKey={block.yKey} />;
+        }
+        if (block.type === "table") {
+          return <TableBlock key={i} title="" headers={block.headers || []} rows={block.rows || []} />;
+        }
+        if (block.type === "text") {
+          return <p key={i} className={"text-lg whitespace-pre-wrap " + t.text}>{block.text || block.content || ""}</p>;
+        }
+        return null;
+      })}
+    </div>
+  );
+}
 
 export default function PresentPage({ params }: { params: Promise<{ id: string }> }) {
   var resolvedParams = use(params);
@@ -100,7 +150,11 @@ export default function PresentPage({ params }: { params: Promise<{ id: string }
           {slide.layout === "full" && (
             <div className="w-full max-w-4xl">
               {slide.title && <h2 className={"text-3xl font-semibold mb-6 " + t.text}>{slide.title}</h2>}
-              <p className={"text-lg whitespace-pre-wrap " + t.text}>{getContentText(slide)}</p>
+              {hasRealContentBlocks(slide.content_blocks) ? (
+                <SlideBlockRenderer blocks={slide.content_blocks} theme={theme} />
+              ) : (
+                <p className={"text-lg whitespace-pre-wrap " + t.text}>{getContentText(slide)}</p>
+              )}
             </div>
           )}
 
@@ -118,34 +172,46 @@ export default function PresentPage({ params }: { params: Promise<{ id: string }
           {slide.layout === "kpi_row" && (
             <div className="w-full max-w-4xl">
               {slide.title && <h2 className={"text-3xl font-semibold mb-8 text-center " + t.text}>{slide.title}</h2>}
-              <div className="grid grid-cols-3 gap-6">
-                {[1, 2, 3].map(function(i) {
-                  return (
-                    <div key={i} className={"rounded-xl p-6 text-center " + t.cardBg + " " + t.border + " border"}>
-                      <p className={"text-4xl font-bold " + t.text}>--</p>
-                      <p className={"text-sm mt-2 " + t.accent}>{"KPI " + i}</p>
-                    </div>
-                  );
-                })}
-              </div>
+              {hasRealContentBlocks(slide.content_blocks) ? (
+                <SlideBlockRenderer blocks={slide.content_blocks} theme={theme} />
+              ) : (
+                <div className="grid grid-cols-3 gap-6">
+                  {[1, 2, 3].map(function(i) {
+                    return (
+                      <div key={i} className={"rounded-xl p-6 text-center " + t.cardBg + " " + t.border + " border"}>
+                        <p className={"text-4xl font-bold " + t.text}>--</p>
+                        <p className={"text-sm mt-2 " + t.accent}>{"KPI " + i}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           )}
 
           {slide.layout === "chart_focus" && (
             <div className="w-full max-w-4xl">
               {slide.title && <h2 className={"text-3xl font-semibold mb-6 " + t.text}>{slide.title}</h2>}
-              <div className={"h-80 rounded-xl flex items-center justify-center " + t.cardBg + " " + t.border + " border"}>
-                <BarChart3 size={64} className={t.accent} />
-              </div>
+              {hasRealContentBlocks(slide.content_blocks) ? (
+                <SlideBlockRenderer blocks={slide.content_blocks} theme={theme} />
+              ) : (
+                <div className={"h-80 rounded-xl flex items-center justify-center " + t.cardBg + " " + t.border + " border"}>
+                  <BarChart3 size={64} className={t.accent} />
+                </div>
+              )}
             </div>
           )}
 
           {slide.layout === "table_focus" && (
             <div className="w-full max-w-4xl">
               {slide.title && <h2 className={"text-3xl font-semibold mb-6 " + t.text}>{slide.title}</h2>}
-              <div className={"h-80 rounded-xl flex items-center justify-center " + t.cardBg + " " + t.border + " border"}>
-                <Table size={64} className={t.accent} />
-              </div>
+              {hasRealContentBlocks(slide.content_blocks) ? (
+                <SlideBlockRenderer blocks={slide.content_blocks} theme={theme} />
+              ) : (
+                <div className={"h-80 rounded-xl flex items-center justify-center " + t.cardBg + " " + t.border + " border"}>
+                  <Table size={64} className={t.accent} />
+                </div>
+              )}
             </div>
           )}
         </div>
