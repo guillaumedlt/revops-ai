@@ -155,7 +155,7 @@ export default function TemplatesPopover({ onSelect }: TemplatesPopoverProps) {
       </div>
 
       {/* Templates list */}
-      <div className="max-h-[400px] overflow-y-auto p-2">
+      <div className="max-h-[280px] overflow-y-auto p-2">
         {filtered.length === 0 ? (
           <p className="text-xs text-[#A3A3A3] text-center py-4">No templates found</p>
         ) : filtered.map(function(cat) {
