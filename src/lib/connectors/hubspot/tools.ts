@@ -403,4 +403,204 @@ export const hubspotTools = {
       return results;
     },
   },
+  hubspot_get_tickets: {
+    connector: "hubspot",
+    description: "Get support tickets from HubSpot. Returns subject, status, priority, pipeline, owner.",
+    parameters: z.object({
+      status: z.string().optional().describe("Filter by status (e.g. open, closed)"),
+      limit: z.number().optional().describe("Max results (default 20)"),
+    }),
+    execute: async (args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+      
+      const filters: any[] = [];
+      if (args.status) {
+        filters.push({ propertyName: "hs_pipeline_stage", operator: "EQ", value: args.status });
+      }
+      
+      const data = await hubspotFetch("/crm/v3/objects/tickets/search", auth.accessToken, {
+        method: "POST",
+        body: JSON.stringify({
+          filterGroups: filters.length > 0 ? [{ filters }] : [],
+          properties: ["subject", "content", "hs_pipeline_stage", "hs_ticket_priority", "hubspot_owner_id", "createdate", "hs_lastmodifieddate"],
+          limit: Math.min(args.limit || 20, 100),
+          sorts: [{ propertyName: "createdate", direction: "DESCENDING" }],
+        }),
+      });
+      
+      return {
+        total: data.total,
+        tickets: (data.results || []).map((t: any) => ({
+          id: t.id,
+          subject: t.properties.subject,
+          status: t.properties.hs_pipeline_stage,
+          priority: t.properties.hs_ticket_priority,
+          ownerId: t.properties.hubspot_owner_id,
+          created: t.properties.createdate,
+          lastModified: t.properties.hs_lastmodifieddate,
+        })),
+      };
+    },
+  },
+
+  hubspot_get_engagements: {
+    connector: "hubspot",
+    description: "Get recent sales activities (emails, calls, meetings, notes) for a deal or contact.",
+    parameters: z.object({
+      object_type: z.enum(["deals", "contacts"]).describe("Object type to get engagements for"),
+      object_id: z.string().describe("HubSpot object ID"),
+      limit: z.number().optional().describe("Max results (default 10)"),
+    }),
+    execute: async (args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+      
+      try {
+        const data = await hubspotFetch(
+          "/crm/v3/objects/${args.object_type}/" + args.object_id + "/associations/engagements",
+          auth.accessToken
+        );
+        
+        const engagementIds = (data.results || []).slice(0, args.limit || 10).map((r: any) => r.toObjectId || r.id);
+        
+        if (engagementIds.length === 0) return { engagements: [], total: 0 };
+        
+        const engagements = [];
+        for (const eid of engagementIds) {
+          try {
+            const eng = await hubspotFetch("/engagements/v1/engagements/" + eid, auth.accessToken);
+            engagements.push({
+              id: eid,
+              type: eng.engagement?.type,
+              timestamp: eng.engagement?.timestamp,
+              subject: eng.metadata?.subject || eng.metadata?.title || "",
+              body: (eng.metadata?.text || eng.metadata?.body || "").slice(0, 200),
+            });
+          } catch { /* skip individual failures */ }
+        }
+        
+        return { engagements, total: engagements.length };
+      } catch {
+        return { engagements: [], total: 0, note: "Engagements API not available" };
+      }
+    },
+  },
+
+  hubspot_get_line_items: {
+    connector: "hubspot",
+    description: "Get line items (products) associated with a deal. Shows what products/services are in a deal.",
+    parameters: z.object({
+      deal_id: z.string().describe("HubSpot deal ID"),
+    }),
+    execute: async (args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+      
+      try {
+        const assoc = await hubspotFetch(
+          "/crm/v3/objects/deals/" + args.deal_id + "/associations/line_items",
+          auth.accessToken
+        );
+        
+        const lineItemIds = (assoc.results || []).map((r: any) => r.toObjectId || r.id);
+        if (lineItemIds.length === 0) return { lineItems: [], total: 0 };
+        
+        const items = [];
+        for (const lid of lineItemIds) {
+          try {
+            const li = await hubspotFetch(
+              "/crm/v3/objects/line_items/" + lid + "?properties=name,quantity,price,amount,hs_product_id",
+              auth.accessToken
+            );
+            items.push({
+              id: li.id,
+              name: li.properties.name,
+              quantity: Number(li.properties.quantity) || 1,
+              price: Number(li.properties.price) || 0,
+              amount: Number(li.properties.amount) || 0,
+            });
+          } catch { /* skip */ }
+        }
+        
+        return { lineItems: items, total: items.length };
+      } catch {
+        return { lineItems: [], total: 0 };
+      }
+    },
+  },
+
+  hubspot_get_forms: {
+    connector: "hubspot",
+    description: "Get HubSpot forms with submission counts. Shows lead generation performance.",
+    parameters: z.object({
+      limit: z.number().optional().describe("Max results (default 20)"),
+    }),
+    execute: async (args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+      
+      try {
+        const data = await hubspotFetch("/marketing/v3/forms?limit=" + (args.limit || 20), auth.accessToken);
+        return {
+          forms: (data.results || []).map((f: any) => ({
+            id: f.id,
+            name: f.name,
+            type: f.formType,
+            createdAt: f.createdAt,
+            updatedAt: f.updatedAt,
+            submissions: f.submissions || 0,
+          })),
+          total: data.total || (data.results || []).length,
+        };
+      } catch {
+        return { forms: [], total: 0, note: "Forms API not available" };
+      }
+    },
+  },
+
+  hubspot_search_all: {
+    connector: "hubspot",
+    description: "Search across all HubSpot objects (deals, contacts, companies, tickets) by keyword. Use this for general search.",
+    parameters: z.object({
+      query: z.string().describe("Search keyword"),
+      object_type: z.enum(["deals", "contacts", "companies", "tickets"]).optional().describe("Limit search to specific type"),
+      limit: z.number().optional().describe("Max results (default 10)"),
+    }),
+    execute: async (args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+      
+      const types = args.object_type ? [args.object_type] : ["deals", "contacts", "companies"];
+      const results: any = {};
+      const limit = Math.min(args.limit || 10, 20);
+      
+      for (const type of types) {
+        try {
+          const propMap: Record<string, string[]> = {
+            deals: ["dealname", "dealstage", "amount", "hubspot_owner_id"],
+            contacts: ["firstname", "lastname", "email", "company"],
+            companies: ["name", "domain", "industry"],
+            tickets: ["subject", "hs_pipeline_stage", "hs_ticket_priority"],
+          };
+          
+          const data = await hubspotFetch("/crm/v3/objects/" + type + "/search", auth.accessToken, {
+            method: "POST",
+            body: JSON.stringify({
+              query: args.query,
+              properties: propMap[type] || [],
+              limit: limit,
+            }),
+          });
+          
+          results[type] = {
+            total: data.total,
+            items: (data.results || []).map((r: any) => ({ id: r.id, ...r.properties })),
+          };
+        } catch { /* skip failed types */ }
+      }
+      
+      return results;
+    },
+  },
 };
