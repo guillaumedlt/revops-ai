@@ -46,9 +46,38 @@ export async function POST(request: NextRequest) {
     .eq("tenant_id", auth.tenantId)
     .single();
 
-  if (!hsConn) return NextResponse.json({ error: "HubSpot not connected" }, { status: 400 });
+  if (!hsConn) return NextResponse.json({ error: "HubSpot not connected. Go to Settings > Connectors." }, { status: 400 });
 
-  const token = hsConn.access_token;
+  // Refresh token if needed
+  let token = hsConn.access_token;
+  const expiresAt = new Date(hsConn.token_expires_at).getTime();
+  if (Date.now() > expiresAt - 5 * 60 * 1000) {
+    try {
+      const refreshRes = await fetch("https://api.hubapi.com/oauth/v1/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          grant_type: "refresh_token",
+          client_id: process.env.HUBSPOT_CLIENT_ID!,
+          client_secret: process.env.HUBSPOT_CLIENT_SECRET!,
+          refresh_token: hsConn.refresh_token,
+        }).toString(),
+      });
+      if (refreshRes.ok) {
+        const tokens = await refreshRes.json();
+        token = tokens.access_token;
+        await supabase.from("hubspot_connections").update({
+          access_token: tokens.access_token,
+          refresh_token: tokens.refresh_token,
+          token_expires_at: new Date(Date.now() + tokens.expires_in * 1000).toISOString(),
+        }).eq("tenant_id", auth.tenantId);
+      } else {
+        return NextResponse.json({ error: "HubSpot token expired. Please reconnect in Settings > Connectors." }, { status: 401 });
+      }
+    } catch {
+      return NextResponse.json({ error: "Failed to refresh HubSpot token" }, { status: 500 });
+    }
+  }
 
   // Get won deals
   const wonRes = await fetch("https://api.hubapi.com/crm/v3/objects/deals/search", {
@@ -60,7 +89,11 @@ export async function POST(request: NextRequest) {
       limit: 100,
     }),
   });
-  if (!wonRes.ok) return NextResponse.json({ error: "Failed to fetch deals" }, { status: 500 });
+  if (!wonRes.ok) {
+    const errBody = await wonRes.text().catch(() => "");
+    console.error("[ICP] HubSpot deals error:", wonRes.status, errBody.slice(0, 300));
+    return NextResponse.json({ error: "Failed to fetch deals from HubSpot (" + wonRes.status + ")" }, { status: 500 });
+  }
   const wonData = await wonRes.json();
   const deals = wonData.results || [];
 
