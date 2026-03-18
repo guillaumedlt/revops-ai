@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { hubspotTools } from "./hubspot/tools";
+import { lemlistTools } from "./lemlist/tools";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export type ConnectorTool = {
@@ -25,9 +26,21 @@ export async function getToolsForTenant(tenantId: string): Promise<Record<string
     Object.assign(tools, hubspotTools);
   }
   
+  // Check Lemlist connection (API key stored in tenant settings)
+  const { data: tenant } = await supabase
+    .from("tenants")
+    .select("settings")
+    .eq("id", tenantId)
+    .single();
+
+  const tenantSettings = (tenant?.settings as any) ?? {};
+  const lemlistKey = tenantSettings?.connectors?.lemlist?.apiKey;
+  if (lemlistKey) {
+    Object.assign(tools, lemlistTools);
+  }
+
   // TODO: Check Notion connection and add notion tools
   // TODO: Check Slack connection and add slack tools
-  // TODO: Check Lemlist connection and add lemlist tools
   
   // Always include the create_note tool (internal, no connector needed)
   tools.create_note = {
