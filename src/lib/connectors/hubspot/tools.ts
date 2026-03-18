@@ -611,6 +611,15 @@ export const hubspotTools = {
       const auth = await getHubSpotToken(tenantId);
       if (!auth) return { error: "HubSpot not connected" };
 
+      // Check if there's a saved ICP in tenant settings
+      const supabaseIcp = createAdminClient();
+      const { data: tenantData } = await supabaseIcp.from("tenants").select("settings").eq("id", tenantId).single();
+      const savedIcp = ((tenantData?.settings as any)?.icp) || null;
+
+      if (savedIcp) {
+        return { ...savedIcp, source: "saved", note: "Using saved ICP from dashboard. Visit /dashboards/icp to regenerate." };
+      }
+
       // Get won deals with company associations
       const wonDeals = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
         method: "POST",
@@ -688,7 +697,29 @@ export const hubspotTools = {
       const auth = await getHubSpotToken(tenantId);
       if (!auth) return { error: "HubSpot not connected" };
 
-      // First build ICP from won deals
+      // Check for saved ICP first
+      const supabaseScore = createAdminClient();
+      const { data: tenantDataScore } = await supabaseScore.from("tenants").select("settings").eq("id", tenantId).single();
+      const savedIcpData = ((tenantDataScore?.settings as any)?.icp) || null;
+
+      let icpIndustries: Record<string, number> = {};
+      let icpEmployees: number[] = [];
+      let icpRevenues: number[] = [];
+      let icpCount = 0;
+
+      if (savedIcpData && savedIcpData.criteria) {
+        // Use saved ICP criteria
+        for (const ind of (savedIcpData.criteria.industries || [])) {
+          icpIndustries[ind.name] = ind.count;
+        }
+        icpCount = savedIcpData.basedOn?.companiesMatched || 1;
+        // Create synthetic arrays from saved ranges for scoring
+        const empMedian = savedIcpData.criteria.employeeRange?.median || 0;
+        if (empMedian > 0) icpEmployees = [empMedian];
+        const revMedian = savedIcpData.criteria.revenueRange?.median || 0;
+        if (revMedian > 0) icpRevenues = [revMedian];
+      } else {
+        // Fall back to computing from HubSpot won deals
       const wonDeals = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
         method: "POST",
         body: JSON.stringify({
@@ -698,11 +729,10 @@ export const hubspotTools = {
         }),
       });
 
-      // Get ICP company data
-      const icpIndustries: Record<string, number> = {};
-      const icpEmployees: number[] = [];
-      const icpRevenues: number[] = [];
-      let icpCount = 0;
+      // Populate ICP company data from HubSpot
+
+
+
 
       for (const deal of (wonDeals.results || []).slice(0, 30)) {
         try {
@@ -717,7 +747,11 @@ export const hubspotTools = {
         } catch { /* skip */ }
       }
 
-      if (icpCount < 3) return { error: "Not enough data to build ICP for scoring" };
+      if (icpCount < 3) return { error: "Not enough data to build ICP for scoring. Go to Dashboards > ICP to generate one." };
+      } // end else (fallback inline ICP build)
+
+      // Use saved weights if available
+      const icpWeights = savedIcpData?.weights || { industry: 40, companySize: 30, revenue: 30 };
 
       // Get the target company
       let targetComp: any = null;
@@ -747,34 +781,34 @@ export const hubspotTools = {
       const medianEmp = icpEmployees.sort((a, b) => a - b)[Math.floor(icpEmployees.length / 2)] || 0;
       const medianRev = icpRevenues.sort((a, b) => a - b)[Math.floor(icpRevenues.length / 2)] || 0;
 
-      // Industry match (40 points)
+      // Industry match (weighted by ICP)
       if (targetComp.properties.industry && icpIndustries[targetComp.properties.industry]) {
         const matchRate = icpIndustries[targetComp.properties.industry] / icpCount;
-        const pts = Math.round(matchRate * 40);
+        const pts = Math.round(matchRate * icpWeights.industry);
         score += pts;
-        breakdown.push({ criteria: "Industry", value: targetComp.properties.industry, score: pts, max: 40, match: true });
+        breakdown.push({ criteria: "Industry", value: targetComp.properties.industry, score: pts, max: icpWeights.industry, match: true });
       } else {
-        breakdown.push({ criteria: "Industry", value: targetComp.properties.industry || "Unknown", score: 0, max: 40, match: false });
+        breakdown.push({ criteria: "Industry", value: targetComp.properties.industry || "Unknown", score: 0, max: icpWeights.industry, match: false });
       }
 
-      // Company size match (30 points)
+      // Company size match (weighted by ICP)
       const empCount = Number(targetComp.properties.numberofemployees) || 0;
       if (empCount > 0 && medianEmp > 0) {
         const ratio = empCount / medianEmp;
-        const pts = ratio >= 0.3 && ratio <= 3 ? Math.round(30 * (1 - Math.abs(1 - ratio) * 0.5)) : 5;
-        score += Math.max(0, Math.min(30, pts));
-        breakdown.push({ criteria: "Company size", value: empCount + " employees", score: Math.max(0, Math.min(30, pts)), max: 30, match: ratio >= 0.5 && ratio <= 2 });
+        const pts = ratio >= 0.3 && ratio <= 3 ? Math.round(icpWeights.companySize * (1 - Math.abs(1 - ratio) * 0.5)) : 5;
+        score += Math.max(0, Math.min(icpWeights.companySize, pts));
+        breakdown.push({ criteria: "Company size", value: empCount + " employees", score: Math.max(0, Math.min(icpWeights.companySize, pts)), max: icpWeights.companySize, match: ratio >= 0.5 && ratio <= 2 });
       } else {
         breakdown.push({ criteria: "Company size", value: "Unknown", score: 0, max: 30, match: false });
       }
 
-      // Revenue match (30 points)
+      // Revenue match (weighted by ICP)
       const rev = Number(targetComp.properties.annualrevenue) || 0;
       if (rev > 0 && medianRev > 0) {
         const ratio = rev / medianRev;
-        const pts = ratio >= 0.3 && ratio <= 3 ? Math.round(30 * (1 - Math.abs(1 - ratio) * 0.5)) : 5;
-        score += Math.max(0, Math.min(30, pts));
-        breakdown.push({ criteria: "Revenue", value: rev + " EUR", score: Math.max(0, Math.min(30, pts)), max: 30, match: ratio >= 0.5 && ratio <= 2 });
+        const pts = ratio >= 0.3 && ratio <= 3 ? Math.round(icpWeights.revenue * (1 - Math.abs(1 - ratio) * 0.5)) : 5;
+        score += Math.max(0, Math.min(icpWeights.revenue, pts));
+        breakdown.push({ criteria: "Revenue", value: rev + " EUR", score: Math.max(0, Math.min(icpWeights.revenue, pts)), max: icpWeights.revenue, match: ratio >= 0.5 && ratio <= 2 });
       } else {
         breakdown.push({ criteria: "Revenue", value: "Unknown", score: 0, max: 30, match: false });
       }
