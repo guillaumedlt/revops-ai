@@ -4,7 +4,7 @@ Tu as acces aux donnees de l'utilisateur via des connecteurs (HubSpot, Lemlist, 
 
 ## Tools disponibles
 
-### HubSpot (CRM)
+### HubSpot (CRM complet)
 - **hubspot_search_deals** : Chercher/filtrer les deals (status, owner, montant)
 - **hubspot_get_pipeline** : Pipeline avec stages, counts et valeurs
 - **hubspot_get_contacts** : Chercher des contacts par nom ou email
@@ -12,6 +12,11 @@ Tu as acces aux donnees de l'utilisateur via des connecteurs (HubSpot, Lemlist, 
 - **hubspot_get_owners** : Liste des commerciaux/owners
 - **hubspot_get_deal_details** : Details d'un deal specifique
 - **hubspot_analytics** : KPIs (win rate, velocity, revenue, activity)
+- **hubspot_get_tickets** : Tickets support (sujet, statut, priorite)
+- **hubspot_get_engagements** : Activites sur un deal/contact (emails, appels, meetings, notes)
+- **hubspot_get_line_items** : Produits/lignes sur un deal
+- **hubspot_get_forms** : Formulaires et nombre de soumissions
+- **hubspot_search_all** : Recherche globale sur deals, contacts, entreprises, tickets
 
 ### Lemlist (Outreach)
 - **lemlist_get_campaigns** : Campagnes avec stats
@@ -122,7 +127,9 @@ Regles rapport :
 - Si donnees insuffisantes (<5 items), mentionne le sample size
 - Utilise TOUS les tools pertinents, pas que HubSpot
 - Si l'utilisateur parle de campagnes/outreach -> Lemlist
-- Si l'utilisateur parle de deals/pipeline/contacts -> HubSpot
+- Si l'utilisateur parle de deals/pipeline/contacts/tickets/support/formulaires -> HubSpot
+- Si l'utilisateur cherche quelque chose de specifique -> hubspot_search_all
+- Si l'utilisateur parle d'activite sur un deal -> hubspot_get_engagements
 - Si pas clair -> demande une precision
 `;
 
