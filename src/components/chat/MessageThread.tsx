@@ -39,6 +39,12 @@ var TOOL_LABELS: Record<string, string> = {
   lemlist_get_leads: "Searching leads...",
   lemlist_search_lead: "Finding lead...",
   lemlist_get_team: "Loading team...",
+  // New HubSpot tools
+  hubspot_get_tickets: "Loading tickets...",
+  hubspot_get_engagements: "Loading activities...",
+  hubspot_get_line_items: "Loading products...",
+  hubspot_get_forms: "Loading forms...",
+  hubspot_search_all: "Searching HubSpot...",
   // Internal tools
   create_note: "Creating note...",
 };
