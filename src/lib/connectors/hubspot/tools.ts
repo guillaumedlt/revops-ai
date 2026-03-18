@@ -603,4 +603,279 @@ export const hubspotTools = {
       return results;
     },
   },
+  hubspot_build_icp: {
+    connector: "hubspot",
+    description: "Build an Ideal Customer Profile (ICP) by analyzing won deals. Returns the typical company profile that converts: industry, size, revenue range, location patterns, average deal size, and common traits.",
+    parameters: z.object({}),
+    execute: async (_args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      // Get won deals with company associations
+      const wonDeals = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
+        method: "POST",
+        body: JSON.stringify({
+          filterGroups: [{ filters: [{ propertyName: "hs_is_closed_won", operator: "EQ", value: "true" }] }],
+          properties: ["dealname", "amount", "dealstage", "closedate", "hubspot_owner_id"],
+          limit: 100,
+        }),
+      });
+
+      if (!wonDeals.results || wonDeals.results.length < 3) {
+        return { error: "Not enough won deals to build ICP (need at least 3)", wonDealsCount: wonDeals.total || 0 };
+      }
+
+      // Get associated companies for won deals
+      const companyData: any[] = [];
+      const dealAmounts: number[] = [];
+      const cycleDays: number[] = [];
+
+      for (const deal of wonDeals.results.slice(0, 50)) {
+        dealAmounts.push(Number(deal.properties.amount) || 0);
+        
+        try {
+          const assoc = await hubspotFetch("/crm/v4/objects/deals/" + deal.id + "/associations/companies", auth.accessToken);
+          if (assoc.results && assoc.results.length > 0) {
+            const compId = assoc.results[0].toObjectId;
+            const comp = await hubspotFetch("/crm/v3/objects/companies/" + compId + "?properties=name,industry,numberofemployees,annualrevenue,city,country,domain", auth.accessToken);
+            companyData.push(comp.properties);
+          }
+        } catch { /* skip */ }
+      }
+
+      // Analyze patterns
+      const industries: Record<string, number> = {};
+      const countries: Record<string, number> = {};
+      const cities: Record<string, number> = {};
+      const employeeRanges: number[] = [];
+      const revenueRanges: number[] = [];
+
+      for (const comp of companyData) {
+        if (comp.industry) industries[comp.industry] = (industries[comp.industry] || 0) + 1;
+        if (comp.country) countries[comp.country] = (countries[comp.country] || 0) + 1;
+        if (comp.city) cities[comp.city] = (cities[comp.city] || 0) + 1;
+        if (comp.numberofemployees) employeeRanges.push(Number(comp.numberofemployees));
+        if (comp.annualrevenue) revenueRanges.push(Number(comp.annualrevenue));
+      }
+
+      const sortByCount = (obj: Record<string, number>) => Object.entries(obj).sort((a, b) => b[1] - a[1]).slice(0, 5);
+      const median = (arr: number[]) => { const s = arr.sort((a, b) => a - b); return s.length ? s[Math.floor(s.length / 2)] : 0; };
+      const avg = (arr: number[]) => arr.length ? Math.round(arr.reduce((a, b) => a + b, 0) / arr.length) : 0;
+
+      return {
+        wonDealsAnalyzed: wonDeals.results.length,
+        companiesMatched: companyData.length,
+        icp: {
+          topIndustries: sortByCount(industries),
+          topCountries: sortByCount(countries),
+          topCities: sortByCount(cities),
+          employeeRange: { median: median(employeeRanges), min: Math.min(...employeeRanges), max: Math.max(...employeeRanges) },
+          revenueRange: { median: median(revenueRanges), avg: avg(revenueRanges) },
+          dealSize: { avg: avg(dealAmounts), median: median(dealAmounts), min: Math.min(...dealAmounts), max: Math.max(...dealAmounts) },
+        },
+      };
+    },
+  },
+
+  hubspot_score_company: {
+    connector: "hubspot",
+    description: "Score a company or contact against the Ideal Customer Profile (ICP). Returns a 0-100 ICP fit score with breakdown of matching/non-matching criteria.",
+    parameters: z.object({
+      company_id: z.string().optional().describe("HubSpot company ID to score"),
+      contact_email: z.string().optional().describe("Contact email to find and score their company"),
+    }),
+    execute: async (args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      // First build ICP from won deals
+      const wonDeals = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
+        method: "POST",
+        body: JSON.stringify({
+          filterGroups: [{ filters: [{ propertyName: "hs_is_closed_won", operator: "EQ", value: "true" }] }],
+          properties: ["amount"],
+          limit: 100,
+        }),
+      });
+
+      // Get ICP company data
+      const icpIndustries: Record<string, number> = {};
+      const icpEmployees: number[] = [];
+      const icpRevenues: number[] = [];
+      let icpCount = 0;
+
+      for (const deal of (wonDeals.results || []).slice(0, 30)) {
+        try {
+          const assoc = await hubspotFetch("/crm/v4/objects/deals/" + deal.id + "/associations/companies", auth.accessToken);
+          if (assoc.results?.[0]) {
+            const comp = await hubspotFetch("/crm/v3/objects/companies/" + assoc.results[0].toObjectId + "?properties=industry,numberofemployees,annualrevenue", auth.accessToken);
+            if (comp.properties.industry) icpIndustries[comp.properties.industry] = (icpIndustries[comp.properties.industry] || 0) + 1;
+            if (comp.properties.numberofemployees) icpEmployees.push(Number(comp.properties.numberofemployees));
+            if (comp.properties.annualrevenue) icpRevenues.push(Number(comp.properties.annualrevenue));
+            icpCount++;
+          }
+        } catch { /* skip */ }
+      }
+
+      if (icpCount < 3) return { error: "Not enough data to build ICP for scoring" };
+
+      // Get the target company
+      let targetComp: any = null;
+      if (args.company_id) {
+        targetComp = await hubspotFetch("/crm/v3/objects/companies/" + args.company_id + "?properties=name,industry,numberofemployees,annualrevenue,domain,city,country", auth.accessToken);
+      } else if (args.contact_email) {
+        const contact = await hubspotFetch("/crm/v3/objects/contacts/search", auth.accessToken, {
+          method: "POST",
+          body: JSON.stringify({ filterGroups: [{ filters: [{ propertyName: "email", operator: "EQ", value: args.contact_email }] }], properties: ["company", "associatedcompanyid"] }),
+        });
+        if (contact.results?.[0]) {
+          try {
+            const assoc = await hubspotFetch("/crm/v4/objects/contacts/" + contact.results[0].id + "/associations/companies", auth.accessToken);
+            if (assoc.results?.[0]) {
+              targetComp = await hubspotFetch("/crm/v3/objects/companies/" + assoc.results[0].toObjectId + "?properties=name,industry,numberofemployees,annualrevenue,domain,city,country", auth.accessToken);
+            }
+          } catch { /* no company */ }
+        }
+      }
+
+      if (!targetComp) return { error: "Company not found" };
+
+      // Score against ICP
+      let score = 0;
+      const breakdown: any[] = [];
+      const topIndustry = Object.entries(icpIndustries).sort((a, b) => b[1] - a[1])[0]?.[0];
+      const medianEmp = icpEmployees.sort((a, b) => a - b)[Math.floor(icpEmployees.length / 2)] || 0;
+      const medianRev = icpRevenues.sort((a, b) => a - b)[Math.floor(icpRevenues.length / 2)] || 0;
+
+      // Industry match (40 points)
+      if (targetComp.properties.industry && icpIndustries[targetComp.properties.industry]) {
+        const matchRate = icpIndustries[targetComp.properties.industry] / icpCount;
+        const pts = Math.round(matchRate * 40);
+        score += pts;
+        breakdown.push({ criteria: "Industry", value: targetComp.properties.industry, score: pts, max: 40, match: true });
+      } else {
+        breakdown.push({ criteria: "Industry", value: targetComp.properties.industry || "Unknown", score: 0, max: 40, match: false });
+      }
+
+      // Company size match (30 points)
+      const empCount = Number(targetComp.properties.numberofemployees) || 0;
+      if (empCount > 0 && medianEmp > 0) {
+        const ratio = empCount / medianEmp;
+        const pts = ratio >= 0.3 && ratio <= 3 ? Math.round(30 * (1 - Math.abs(1 - ratio) * 0.5)) : 5;
+        score += Math.max(0, Math.min(30, pts));
+        breakdown.push({ criteria: "Company size", value: empCount + " employees", score: Math.max(0, Math.min(30, pts)), max: 30, match: ratio >= 0.5 && ratio <= 2 });
+      } else {
+        breakdown.push({ criteria: "Company size", value: "Unknown", score: 0, max: 30, match: false });
+      }
+
+      // Revenue match (30 points)
+      const rev = Number(targetComp.properties.annualrevenue) || 0;
+      if (rev > 0 && medianRev > 0) {
+        const ratio = rev / medianRev;
+        const pts = ratio >= 0.3 && ratio <= 3 ? Math.round(30 * (1 - Math.abs(1 - ratio) * 0.5)) : 5;
+        score += Math.max(0, Math.min(30, pts));
+        breakdown.push({ criteria: "Revenue", value: rev + " EUR", score: Math.max(0, Math.min(30, pts)), max: 30, match: ratio >= 0.5 && ratio <= 2 });
+      } else {
+        breakdown.push({ criteria: "Revenue", value: "Unknown", score: 0, max: 30, match: false });
+      }
+
+      return {
+        company: targetComp.properties.name,
+        icpScore: Math.min(100, score),
+        grade: score >= 80 ? "A" : score >= 60 ? "B" : score >= 40 ? "C" : "D",
+        breakdown,
+        icpBasedOn: icpCount + " won deals",
+      };
+    },
+  },
+
+  hubspot_deal_health: {
+    connector: "hubspot",
+    description: "Calculate a health score (0-100) for open deals. Identifies at-risk deals based on: days without activity, time stuck in stage, missing data, and deal amount vs average. Returns scored deals sorted by risk.",
+    parameters: z.object({
+      owner_id: z.string().optional().describe("Filter by owner ID"),
+      min_amount: z.number().optional().describe("Minimum deal amount to include"),
+    }),
+    execute: async (args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      const filters: any[] = [{ propertyName: "hs_is_closed", operator: "EQ", value: "false" }];
+      if (args.owner_id) filters.push({ propertyName: "hubspot_owner_id", operator: "EQ", value: args.owner_id });
+      if (args.min_amount) filters.push({ propertyName: "amount", operator: "GTE", value: String(args.min_amount) });
+
+      const data = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
+        method: "POST",
+        body: JSON.stringify({
+          filterGroups: [{ filters }],
+          properties: ["dealname", "dealstage", "amount", "hubspot_owner_id", "closedate", "hs_last_sales_activity_date", "hs_date_entered_" + "currentstage", "createdate", "notes_last_updated"],
+          limit: 100,
+          sorts: [{ propertyName: "amount", direction: "DESCENDING" }],
+        }),
+      });
+
+      const now = Date.now();
+      const DAY = 86400000;
+
+      const scoredDeals = (data.results || []).map((d: any) => {
+        const p = d.properties;
+        let health = 100;
+        const risks: string[] = [];
+
+        // Activity check (-30 pts max)
+        const lastActivity = p.hs_last_sales_activity_date ? new Date(p.hs_last_sales_activity_date).getTime() : 0;
+        const daysSinceActivity = lastActivity ? Math.floor((now - lastActivity) / DAY) : 999;
+        if (daysSinceActivity > 30) { health -= 30; risks.push("No activity in " + daysSinceActivity + " days"); }
+        else if (daysSinceActivity > 14) { health -= 15; risks.push("No activity in " + daysSinceActivity + " days"); }
+        else if (daysSinceActivity > 7) { health -= 5; }
+
+        // Close date check (-25 pts max)
+        if (p.closedate) {
+          const closeDate = new Date(p.closedate).getTime();
+          if (closeDate < now) { health -= 25; risks.push("Close date passed"); }
+          else if (closeDate - now < 7 * DAY) { health -= 10; risks.push("Closing in < 7 days"); }
+        } else {
+          health -= 10; risks.push("No close date set");
+        }
+
+        // Amount check (-15 pts)
+        if (!p.amount || Number(p.amount) === 0) { health -= 15; risks.push("No amount set"); }
+
+        // Age check (-20 pts max)
+        const created = p.createdate ? new Date(p.createdate).getTime() : now;
+        const ageInDays = Math.floor((now - created) / DAY);
+        if (ageInDays > 90) { health -= 20; risks.push("Open for " + ageInDays + " days"); }
+        else if (ageInDays > 60) { health -= 10; risks.push("Open for " + ageInDays + " days"); }
+
+        // Notes check (-10 pts)
+        if (!p.notes_last_updated) { health -= 10; risks.push("No notes"); }
+
+        return {
+          id: d.id,
+          name: p.dealname,
+          stage: p.dealstage,
+          amount: Number(p.amount) || 0,
+          ownerId: p.hubspot_owner_id,
+          healthScore: Math.max(0, health),
+          grade: health >= 80 ? "Healthy" : health >= 50 ? "At Risk" : "Critical",
+          risks,
+          daysSinceActivity,
+          ageInDays,
+        };
+      });
+
+      // Sort by health (worst first)
+      scoredDeals.sort((a: any, b: any) => a.healthScore - b.healthScore);
+
+      const criticalCount = scoredDeals.filter((d: any) => d.grade === "Critical").length;
+      const atRiskCount = scoredDeals.filter((d: any) => d.grade === "At Risk").length;
+      const healthyCount = scoredDeals.filter((d: any) => d.grade === "Healthy").length;
+      const avgHealth = scoredDeals.length ? Math.round(scoredDeals.reduce((s: number, d: any) => s + d.healthScore, 0) / scoredDeals.length) : 0;
+
+      return {
+        summary: { total: scoredDeals.length, critical: criticalCount, atRisk: atRiskCount, healthy: healthyCount, avgHealth },
+        deals: scoredDeals,
+      };
+    },
+  },
 };
