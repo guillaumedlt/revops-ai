@@ -122,6 +122,8 @@ export default function ChatInputBar({
     google: false,
   });
 
+  var [connectorStatus, setConnectorStatus] = useState<Record<string, boolean>>({});
+
   useEffect(function() {
     fetch("/api/settings/llm").then(function(r) { return r.json(); }).then(function(json) {
       if (json.data?.keys) {
@@ -132,6 +134,16 @@ export default function ChatInputBar({
         });
       }
     }).catch(function() {});
+
+    // Check all connector statuses
+    Promise.all([
+      fetch("/api/connectors/hubspot/status").then(function(r) { return r.json(); }).then(function(j) { return { hubspot: j.data?.connected ?? false }; }).catch(function() { return { hubspot: false }; }),
+      fetch("/api/connectors/lemlist/status").then(function(r) { return r.json(); }).then(function(j) { return { lemlist: j.data?.connected ?? false }; }).catch(function() { return { lemlist: false }; }),
+    ]).then(function(results) {
+      var status: Record<string, boolean> = {};
+      results.forEach(function(r) { Object.assign(status, r); });
+      setConnectorStatus(status);
+    });
   }, []);
 
   function isProviderConnected(provider: string): boolean {
@@ -343,6 +355,7 @@ export default function ChatInputBar({
                     </div>
                     <div className="p-1.5">
                       {CONNECTOR_REGISTRY.map(function(c) {
+                        var isConnected = connectorStatus[c.id] ?? false;
                         return (
                           <div key={c.id} className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#FAFAFA] transition-colors">
                             <img src={c.logo} alt="" className="h-5 w-5 rounded" />
@@ -350,13 +363,18 @@ export default function ChatInputBar({
                               <p className="text-sm font-medium text-[#0A0A0A]">{c.name}</p>
                               <p className="text-[10px] text-[#A3A3A3] truncate">{c.description}</p>
                             </div>
-                            {c.connected ? (
+                            {isConnected ? (
                               <div className="flex items-center gap-1">
                                 <div className="h-2 w-2 rounded-full bg-[#22C55E]" />
                                 <span className="text-[10px] font-medium text-[#22C55E]">Connected</span>
                               </div>
                             ) : (
-                              <button className="text-[10px] text-[#0A0A0A] font-medium px-2.5 py-1 rounded-md border border-[#E5E5E5] hover:bg-[#F5F5F5] transition-colors">Connect</button>
+                              <a
+                                href="/settings?tab=connectors"
+                                className="text-[10px] text-[#0A0A0A] font-medium px-2.5 py-1 rounded-md border border-[#E5E5E5] hover:bg-[#F5F5F5] transition-colors"
+                              >
+                                Connect
+                              </a>
                             )}
                           </div>
                         );
