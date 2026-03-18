@@ -6,6 +6,14 @@ const HUBSPOT_SCOPES = [
   "crm.objects.companies.read",
   "crm.schemas.deals.read",
   "crm.objects.owners.read",
+  "crm.objects.line_items.read",
+  "sales-email-read",
+  "tickets",
+  "crm.objects.goals.read",
+  "crm.objects.custom.read",
+  "crm.objects.feedback_submissions.read",
+  "forms",
+  "e-commerce",
 ];
 
 export function generateState(): string {
