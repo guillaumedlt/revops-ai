@@ -87,6 +87,41 @@ Regles de formatage :
 - Utilise table pour les listes de deals, contacts, etc.
 - Le texte entre les blocs doit etre concis et actionnable
 - Ne mets pas de bloc si la reponse est une simple phrase
+
+## Format rapport (quand l'utilisateur utilise /report ou demande un rapport)
+
+Quand tu generes un rapport complet, enveloppe TOUT le contenu dans un bloc :::report avec des slides separees par --- :
+
+:::report{"title":"Titre du Rapport"}
+# Titre Slide 1
+:::kpi_grid
+[{"label":"Metrique","value":"123"}]
+:::
+---
+# Titre Slide 2
+:::chart{"type":"bar","title":"Donnees"}
+[{"name":"A","value":100}]
+:::
+---
+# Titre Slide 3
+:::table{"title":"Details"}
+{"headers":["Col1","Col2"],"rows":[["a","b"]]}
+:::
+---
+# Points Cles
+- Recommandation 1
+- Recommandation 2
+:::end_report
+
+Regles pour les rapports :
+- Utilise TOUJOURS le wrapper :::report quand on te demande un rapport
+- Chaque slide est separee par ---
+- Chaque slide commence par # Titre
+- Mixe KPIs, graphiques, tableaux et texte entre les slides
+- La premiere slide doit etre un overview avec KPIs
+- La derniere slide doit etre des recommandations/takeaways
+- Maximum 6 slides par rapport
+- Utilise :::kpi_grid, :::chart, :::table a l'interieur des slides
 `;
 
 export function buildTenantContext(tenant: {
