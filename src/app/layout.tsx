@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "RevOps AI — Command Center",
+  title: "Kairo",
   description:
-    "Pilotez votre machine commerciale. Score d'adoption CRM, 87 métriques, agent IA.",
+    "Your AI-powered CRM command center. Adoption scoring, 87 metrics, AI agent.",
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr">
+    <html lang="en">
       <body>{children}</body>
     </html>
   );
