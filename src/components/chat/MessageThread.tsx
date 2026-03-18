@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { RotateCcw, LayoutDashboard, Plus, Check } from "lucide-react";
+import { RotateCcw, LayoutDashboard, Plus, Check, Copy } from "lucide-react";
 import BlockRenderer from "./blocks/BlockRenderer";
 import TextBlock from "./blocks/TextBlock";
 import type { ContentBlock } from "@/types/chat-blocks";
@@ -73,6 +73,14 @@ function PulsingDot() {
       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A3A3A3] opacity-75" />
       <span className="relative inline-flex rounded-full h-2 w-2 bg-[#737373]" />
     </span>
+  );
+}
+
+function KairoAvatar() {
+  return (
+    <div className="h-7 w-7 rounded-lg bg-[#0A0A0A] flex items-center justify-center shrink-0 mt-0.5">
+      <span className="text-white text-[10px] font-bold">K</span>
+    </div>
   );
 }
 
@@ -280,19 +288,31 @@ export default function MessageThread({
                 {msg.content}
               </div>
             ) : (
-              <div className="w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A] group/msg">
-                {msg.content_blocks && msg.content_blocks.length > 0 ? (
-                  <>
-                    <BlockRenderer blocks={msg.content_blocks} />
-                    {msg.content_blocks.length > 2 && (
-                      <div className="mt-4 pt-3 border-t border-[#F0F0F0] opacity-0 group-hover/msg:opacity-100 transition-opacity">
-                        <SaveMessageToDashboard blocks={msg.content_blocks} title={msg.content.slice(0, 60)} />
-                      </div>
+              <div className="flex gap-3">
+                <KairoAvatar />
+                <div className="flex-1 min-w-0">
+                  <div className="relative w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A] group/msg">
+                    {msg.content_blocks && msg.content_blocks.length > 0 ? (
+                      <>
+                        <BlockRenderer blocks={msg.content_blocks} />
+                        {msg.content_blocks.length > 2 && (
+                          <div className="mt-4 pt-3 border-t border-[#F0F0F0] opacity-0 group-hover/msg:opacity-100 transition-opacity">
+                            <SaveMessageToDashboard blocks={msg.content_blocks} title={msg.content.slice(0, 60)} />
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <TextBlock text={msg.content} />
                     )}
-                  </>
-                ) : (
-                  <TextBlock text={msg.content} />
-                )}
+                    <button
+                      onClick={function() { navigator.clipboard.writeText(msg.content); }}
+                      className="absolute top-2 right-2 opacity-0 group-hover/msg:opacity-100 h-7 w-7 flex items-center justify-center rounded-lg text-[#A3A3A3] hover:text-[#0A0A0A] hover:bg-[#F5F5F5] transition-all"
+                      title="Copy"
+                    >
+                      <Copy size={13} />
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -300,21 +320,31 @@ export default function MessageThread({
 
         {/* Streaming / thinking state */}
         {streamingText ? (
-          <div className="w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A]">
-            {activeTools.length > 0 && (
-              <div className="mb-3">
-                <ThinkingIndicator activeTools={activeTools} />
+          <div className="flex gap-3">
+            <KairoAvatar />
+            <div className="flex-1 min-w-0">
+              <div className="w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A]">
+                {activeTools.length > 0 && (
+                  <div className="mb-3">
+                    <ThinkingIndicator activeTools={activeTools} />
+                  </div>
+                )}
+                {streamingBlocks && streamingBlocks.length > 0 ? (
+                  <BlockRenderer blocks={streamingBlocks} />
+                ) : (
+                  <TextBlock text={streamingText} />
+                )}
               </div>
-            )}
-            {streamingBlocks && streamingBlocks.length > 0 ? (
-              <BlockRenderer blocks={streamingBlocks} />
-            ) : (
-              <TextBlock text={streamingText} />
-            )}
+            </div>
           </div>
         ) : isThinking && !error ? (
-          <div className="w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A]">
-            <ThinkingIndicator activeTools={activeTools} />
+          <div className="flex gap-3">
+            <KairoAvatar />
+            <div className="flex-1 min-w-0">
+              <div className="w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A]">
+                <ThinkingIndicator activeTools={activeTools} />
+              </div>
+            </div>
           </div>
         ) : null}
 
