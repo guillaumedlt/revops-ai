@@ -33,7 +33,7 @@ function resolveModelId(model: string | undefined, message: string): { provider:
     case "kairo":
     default: {
       const choice = routeToModel(message, 0);
-      return { provider: "anthropic", modelId: getModelId(choice), displayName: choice };
+      return { provider: "anthropic", modelId: getModelId(choice), displayName: "kairo" };
     }
   }
 }
