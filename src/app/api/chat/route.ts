@@ -184,7 +184,7 @@ export async function POST(request: NextRequest) {
             },
             body: JSON.stringify({
               model: resolved.modelId,
-              max_tokens: 4096,
+              max_tokens: creditAction === "report" ? 16000 : 4096,
               system: systemPrompt,
               messages,
               ...(useTools ? { tools: toolDefs } : {}),
