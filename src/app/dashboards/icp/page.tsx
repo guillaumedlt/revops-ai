@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Search, RefreshCw, Globe, Users, DollarSign, MapPin, Target, Zap, UserCheck, AlertTriangle, ShieldCheck, Clock, ArrowRight } from "lucide-react";
+import { Search, RefreshCw, Globe, Users, DollarSign, MapPin, Target, Zap, UserCheck, AlertTriangle, ShieldCheck, Clock, ArrowRight, ArrowUp, MessageSquare } from "lucide-react";
 
 var FREE_PROVIDERS = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "live.com", "icloud.com", "aol.com", "protonmail.com"];
 
@@ -19,6 +19,30 @@ export default function IcpPage() {
   var [error, setError] = useState<string | null>(null);
   var [data, setData] = useState<any>(null);
   var [step, setStep] = useState<"input" | "loading" | "result">("input");
+  var [chatInput, setChatInput] = useState("");
+  var [chatMessages, setChatMessages] = useState<Array<{ role: string; text: string }>>([]);
+  var [refining, setRefining] = useState(false);
+
+  function handleRefine() {
+    if (!chatInput.trim() || refining) return;
+    var msg = chatInput.trim();
+    setChatInput("");
+    setChatMessages(function(prev) { return prev.concat([{ role: "user", text: msg }]); });
+    setRefining(true);
+
+    fetch("/api/icp/refine", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: msg }) })
+      .then(function(r) { return r.json(); })
+      .then(function(res) {
+        if (res.data) {
+          setChatMessages(function(prev) { return prev.concat([{ role: "assistant", text: res.data.message }]); });
+          if (res.data.icp) setData(res.data.icp);
+        } else {
+          setChatMessages(function(prev) { return prev.concat([{ role: "assistant", text: res.error || "Failed to update" }]); });
+        }
+        setRefining(false);
+      })
+      .catch(function() { setRefining(false); });
+  }
 
   useEffect(function() {
     fetch("/api/icp").then(function(r) { return r.json(); }).then(function(j) {
@@ -290,7 +314,54 @@ export default function IcpPage() {
           </div>
         </div>
 
-        <p className="text-[11px] text-[#A3A3A3] text-center">
+        {/* Refine Chat */}
+        <div className="mt-8 border-t border-[#E5E5E5] pt-6">
+          <div className="flex items-center gap-2 mb-4">
+            <MessageSquare size={16} className="text-[#A3A3A3]" />
+            <h3 className="text-sm font-semibold text-[#0A0A0A]">Refine your ICP</h3>
+            <span className="text-[11px] text-[#A3A3A3]">Tell Kairo what to adjust</span>
+          </div>
+
+          {chatMessages.length > 0 && (
+            <div className="space-y-2 mb-4 max-h-48 overflow-y-auto">
+              {chatMessages.map(function(msg, i) {
+                return (
+                  <div key={i} className={msg.role === "user" ? "flex justify-end" : ""}>
+                    <div className={msg.role === "user"
+                      ? "max-w-[70%] bg-[#0A0A0A] text-white rounded-xl px-3 py-2 text-xs"
+                      : "max-w-[80%] bg-[#F5F5F5] text-[#0A0A0A] rounded-xl px-3 py-2 text-xs"}>
+                      {msg.text}
+                    </div>
+                  </div>
+                );
+              })}
+              {refining && (
+                <div className="flex items-center gap-2 text-xs text-[#A3A3A3]">
+                  <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" />
+                  Updating ICP...
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={chatInput}
+              onChange={function(e) { setChatInput(e.target.value); }}
+              onKeyDown={function(e) { if (e.key === "Enter") handleRefine(); }}
+              placeholder="Ex: Our sweet spot is 20-50 employees, add fintech industry..."
+              className="flex-1 h-10 px-4 text-sm rounded-xl border border-[#E5E5E5] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] focus:border-transparent"
+              disabled={refining}
+            />
+            <button onClick={handleRefine} disabled={refining || !chatInput.trim()}
+              className="h-10 w-10 rounded-xl bg-[#0A0A0A] text-white flex items-center justify-center hover:bg-[#333] disabled:opacity-40 transition-colors shrink-0">
+              <ArrowUp size={16} />
+            </button>
+          </div>
+        </div>
+
+        <p className="text-[11px] text-[#A3A3A3] text-center mt-6">
           {"Generated " + new Date(data.generatedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) + " — Used by Kairo AI to score prospects and prioritize deals"}
         </p>
       </div>
