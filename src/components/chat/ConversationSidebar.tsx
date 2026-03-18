@@ -10,7 +10,6 @@ import {
   LogOut,
   Trash2,
   LayoutDashboard,
-  FileText,
 } from "lucide-react";
 import { getCachedMessages, setCachedMessages, deleteCachedConversation } from "@/lib/chat-store";
 
@@ -162,13 +161,6 @@ export default function ConversationSidebar() {
         >
           <LayoutDashboard size={16} className={pathname.startsWith("/dashboards") ? "text-[#0A0A0A]" : "text-[#A3A3A3]"} />
           Dashboards
-        </button>
-        <button
-          onClick={function() { router.push("/reports"); }}
-          className={"w-full flex items-center gap-2 px-3 h-9 rounded-lg text-sm transition-colors " + (pathname.startsWith("/reports") ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium" : "text-[#525252] hover:bg-[#F5F5F5]")}
-        >
-          <FileText size={16} className={pathname.startsWith("/reports") ? "text-[#0A0A0A]" : "text-[#A3A3A3]"} />
-          Reports
         </button>
         <button
           onClick={function() { setSearchOpen(!searchOpen); }}
