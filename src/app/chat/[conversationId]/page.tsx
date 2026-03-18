@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef, useCallback } from "react";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import MessageThread from "@/components/chat/MessageThread";
 import ChatInputBar from "@/components/chat/ChatInputBar";
 import type { ContentBlock } from "@/types/chat-blocks";
@@ -16,7 +16,7 @@ interface Message {
 
 export default function ConversationPage() {
   const { conversationId } = useParams<{ conversationId: string }>();
-  const searchParams = useSearchParams();
+
   const [messages, setMessages] = useState<Message[]>([]);
   const [streamingText, setStreamingText] = useState("");
   const [streamingBlocks, setStreamingBlocks] = useState<ContentBlock[] | null>(null);
@@ -161,16 +161,7 @@ export default function ConversationPage() {
     }
   }, [isStreaming, sendMessage, selectedModel]);
 
-  // Handle initial message from query param
-  useEffect(() => {
-    if (loaded && !initialSent.current) {
-      const initial = searchParams.get("initial");
-      if (initial && messages.length === 0) {
-        initialSent.current = true;
-        sendMessage(initial, "kairo");
-      }
-    }
-  }, [loaded, searchParams, messages.length, sendMessage]);
+
 
   // Handle pending message from sessionStorage (welcome page)
   useEffect(() => {
