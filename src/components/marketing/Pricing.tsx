@@ -64,7 +64,7 @@ export default function Pricing() {
               </p>
               <div className="mt-4 mb-6">
                 <span className={"text-4xl font-bold " + (plan.highlight ? "text-white" : "text-[#0A0A0A]")}>
-                  {"$" + plan.price}
+                  {"€" + plan.price}
                 </span>
                 {plan.period && (
                   <span className={"text-sm " + (plan.highlight ? "text-white/50" : "text-[#A3A3A3]")}>
