@@ -11,7 +11,32 @@ import { parseContentBlocks } from "@/lib/ai/parse-blocks";
 const ChatSchema = z.object({
   message: z.string().min(1).max(4000),
   conversationId: z.string().uuid().optional(),
+  model: z.string().optional(),
 });
+
+function resolveModelId(model: string | undefined, message: string): { provider: string; modelId: string; displayName: string } {
+  switch (model) {
+    case "claude-opus":
+      return { provider: "anthropic", modelId: "claude-opus-4-20250514", displayName: "opus" };
+    case "claude-sonnet":
+      return { provider: "anthropic", modelId: "claude-sonnet-4-20250514", displayName: "sonnet" };
+    case "claude-haiku":
+      return { provider: "anthropic", modelId: "claude-haiku-4-5-20251001", displayName: "haiku" };
+    case "gpt-4o":
+      return { provider: "openai", modelId: "gpt-4o", displayName: "gpt-4o" };
+    case "gpt-4o-mini":
+      return { provider: "openai", modelId: "gpt-4o-mini", displayName: "gpt-4o-mini" };
+    case "gemini-pro":
+      return { provider: "google", modelId: "gemini-2.5-pro", displayName: "gemini-pro" };
+    case "gemini-flash":
+      return { provider: "google", modelId: "gemini-2.5-flash", displayName: "gemini-flash" };
+    case "kairo":
+    default: {
+      const choice = routeToModel(message, 0);
+      return { provider: "anthropic", modelId: getModelId(choice), displayName: choice };
+    }
+  }
+}
 
 export async function POST(request: NextRequest) {
   const auth = getAuthFromHeaders(request);
@@ -46,11 +71,11 @@ export async function POST(request: NextRequest) {
     content: message,
   });
 
+  // Resolve model from request
+  const resolved = resolveModelId(parsed.data.model, message);
+
   // Get connector tools for this tenant
   const connectorTools = await getToolsForTenant(auth.tenantId);
-  
-  const modelChoice = routeToModel(message, 0);
-  const modelId = getModelId(modelChoice);
 
   const systemPrompt = (SYSTEM_PROMPT + buildTenantContext({ name: "Tenant" })).trim();
 
@@ -61,12 +86,61 @@ export async function POST(request: NextRequest) {
     input_schema: zodToJsonSchema(tool.parameters),
   }));
 
-  console.log("[chat] Using", toolDefs.length, "tools from connectors for tenant", auth.tenantId);
+  console.log("[chat] Model:", resolved.modelId, "Provider:", resolved.provider, "Tools:", toolDefs.length);
 
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
     async start(controller) {
       try {
+        // For non-Anthropic providers, check BYOK key and return appropriate message
+        if (resolved.provider === "openai" || resolved.provider === "google") {
+          const { data: tenant } = await supabase.from("tenants").select("settings").eq("id", auth.tenantId).single();
+          const llmSettings = ((tenant?.settings as any)?.llm as any) ?? {};
+
+          let apiKey: string | undefined;
+          let providerLabel: string;
+
+          if (resolved.provider === "openai") {
+            apiKey = llmSettings.openaiKey;
+            providerLabel = "OpenAI";
+          } else {
+            apiKey = llmSettings.googleKey;
+            providerLabel = "Google AI";
+          }
+
+          if (!apiKey) {
+            const errorText = providerLabel + " API key not configured. Go to Settings > LLM to add your key.";
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: errorText })}\n\n`));
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
+            controller.close();
+            return;
+          }
+
+          // Key exists but full integration coming soon
+          const comingSoonText = "Support for " + providerLabel + " models with tools is coming soon. For now, please use Kairo AI or Claude models which support all features including data analysis, reports, and CRM queries.";
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "token", token: comingSoonText })}\n\n`));
+
+          const parsedBlocks = parseContentBlocks(comingSoonText);
+
+          await supabase.from("messages").insert({
+            conversation_id: convId,
+            tenant_id: auth.tenantId,
+            role: "assistant",
+            content: comingSoonText,
+            content_blocks: parsedBlocks,
+            model: resolved.displayName,
+          });
+
+          await deductCredit(auth.tenantId, auth.userId);
+
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "content_blocks", blocks: parsedBlocks })}\n\n`));
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "metadata", conversationId: convId, model: resolved.displayName, creditsRemaining: credits.remaining - 1 })}\n\n`));
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
+          controller.close();
+          return;
+        }
+
+        // Anthropic provider path (kairo, claude-opus, claude-sonnet, claude-haiku)
         let messages: Array<{ role: string; content: any }> = [{ role: "user", content: message }];
         let continueLoop = true;
         let finalText = "";
@@ -83,7 +157,7 @@ export async function POST(request: NextRequest) {
               "anthropic-version": "2023-06-01",
             },
             body: JSON.stringify({
-              model: modelId,
+              model: resolved.modelId,
               max_tokens: 4096,
               system: systemPrompt,
               messages,
@@ -214,13 +288,13 @@ export async function POST(request: NextRequest) {
           role: "assistant",
           content: finalText,
           content_blocks: parsedBlocks,
-          model: modelChoice,
+          model: resolved.displayName,
         });
 
         await deductCredit(auth.tenantId, auth.userId);
 
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "content_blocks", blocks: parsedBlocks })}\n\n`));
-        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "metadata", conversationId: convId, model: modelChoice, creditsRemaining: credits.remaining - 1 })}\n\n`));
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "metadata", conversationId: convId, model: resolved.displayName, creditsRemaining: credits.remaining - 1 })}\n\n`));
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
         controller.close();
       } catch (error) {
