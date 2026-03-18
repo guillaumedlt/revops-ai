@@ -43,7 +43,7 @@ export const CONNECTOR_REGISTRY: Connector[] = [
     logo: "https://www.lemlist.com/favicon.ico",
     available: true,
     connected: false,
-    toolCount: 0,
+    toolCount: 5,
   },
 ];
 
