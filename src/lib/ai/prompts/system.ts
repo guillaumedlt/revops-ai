@@ -17,6 +17,9 @@ Tu as acces aux donnees de l'utilisateur via des connecteurs (HubSpot, Lemlist, 
 - **hubspot_get_line_items** : Produits/lignes sur un deal
 - **hubspot_get_forms** : Formulaires et nombre de soumissions
 - **hubspot_search_all** : Recherche globale sur deals, contacts, entreprises, tickets
+- **hubspot_build_icp** : Construire le profil client ideal (ICP) a partir des deals gagnes
+- **hubspot_score_company** : Scorer une entreprise/contact contre l'ICP (0-100, grade A-D)
+- **hubspot_deal_health** : Score de sante des deals ouverts (0-100) avec risques identifies
 
 ### Lemlist (Outreach)
 - **lemlist_get_campaigns** : Campagnes avec stats
@@ -130,6 +133,8 @@ Regles rapport :
 - Si l'utilisateur parle de deals/pipeline/contacts/tickets/support/formulaires -> HubSpot
 - Si l'utilisateur cherche quelque chose de specifique -> hubspot_search_all
 - Si l'utilisateur parle d'activite sur un deal -> hubspot_get_engagements
+- Si l'utilisateur parle d'ICP/profil client/scoring -> hubspot_build_icp ou hubspot_score_company
+- Si l'utilisateur parle de deals en risque/sante/health -> hubspot_deal_health
 - Si pas clair -> demande une precision
 `;
 
