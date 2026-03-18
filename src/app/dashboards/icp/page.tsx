@@ -15,12 +15,22 @@ export default function IcpPage() {
     }).catch(function() { setLoading(false); });
   }, []);
 
+  var [error, setError] = useState<string | null>(null);
+
   function handleGenerate() {
     setGenerating(true);
-    fetch("/api/icp", { method: "POST" }).then(function(r) { return r.json(); }).then(function(json) {
-      if (json.data) setIcp(json.data);
-      setGenerating(false);
-    }).catch(function() { setGenerating(false); });
+    setError(null);
+    fetch("/api/icp", { method: "POST" })
+      .then(function(r) { return r.json().then(function(j) { return { ok: r.ok, data: j }; }); })
+      .then(function(res) {
+        if (!res.ok) {
+          setError(res.data.error || "Failed to generate ICP");
+        } else if (res.data.data) {
+          setIcp(res.data.data);
+        }
+        setGenerating(false);
+      })
+      .catch(function(e) { setError("Network error: " + e.message); setGenerating(false); });
   }
 
   if (loading) {
@@ -42,6 +52,12 @@ export default function IcpPage() {
             {generating ? "Generating..." : icp ? "Regenerate" : "Generate ICP"}
           </button>
         </div>
+
+        {error && (
+          <div className="mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+            {error}
+          </div>
+        )}
 
         {!icp ? (
           <div className="text-center py-20">
