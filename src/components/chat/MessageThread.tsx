@@ -21,19 +21,25 @@ interface Props {
   activeTools: string[];
   error?: { message: string } | null;
   onRetry?: () => void;
+  isLoading?: boolean;
 }
 
 var TOOL_LABELS: Record<string, string> = {
-  get_pipeline: "Analyzing pipeline...",
-  get_deals: "Searching deals...",
-  get_win_rate: "Calculating win rates...",
-  get_velocity: "Measuring velocity...",
-  get_adoption: "Checking adoption score...",
-  get_alerts: "Scanning alerts...",
-  get_revenue: "Computing revenue...",
-  get_activity: "Reviewing activity...",
-  get_data_quality: "Auditing data quality...",
-  get_owner_performance: "Evaluating performance...",
+  // HubSpot tools
+  hubspot_search_deals: "Searching deals...",
+  hubspot_get_pipeline: "Loading pipeline...",
+  hubspot_get_contacts: "Searching contacts...",
+  hubspot_get_companies: "Searching companies...",
+  hubspot_get_owners: "Loading sales reps...",
+  hubspot_get_deal_details: "Loading deal details...",
+  hubspot_analytics: "Computing analytics...",
+  // Lemlist tools
+  lemlist_get_campaigns: "Loading campaigns...",
+  lemlist_get_campaign_stats: "Loading campaign stats...",
+  lemlist_get_leads: "Searching leads...",
+  lemlist_search_lead: "Finding lead...",
+  lemlist_get_team: "Loading team...",
+  // Internal tools
   create_note: "Creating note...",
 };
 
@@ -170,6 +176,7 @@ export default function MessageThread({
   activeTools,
   error,
   onRetry,
+  isLoading,
 }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -177,10 +184,8 @@ export default function MessageThread({
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, streamingText]);
 
-  // Show thinking state: when streaming has started but no text yet
-  var isThinking = activeTools.length > 0 || (
-    !streamingText && messages.length > 0 && messages[messages.length - 1]?.role === "user" && !error
-  );
+  // Show thinking state: only when parent signals loading and no text/error yet
+  var isThinking = isLoading && !streamingText && !error;
 
   return (
     <div className="flex-1 overflow-y-auto">
