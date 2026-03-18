@@ -912,4 +912,301 @@ export const hubspotTools = {
       };
     },
   },
+  // === WRITE ACTIONS ===
+
+  hubspot_update_deal: {
+    connector: "hubspot",
+    description: "Update a deal in HubSpot. Can change stage, amount, close date, owner, or any property. Use this when user asks to move a deal, update a value, etc.",
+    parameters: z.object({
+      deal_id: z.string().describe("HubSpot deal ID"),
+      properties: z.object({
+        dealstage: z.string().optional().describe("New stage ID"),
+        amount: z.string().optional().describe("New amount"),
+        closedate: z.string().optional().describe("New close date (YYYY-MM-DD)"),
+        hubspot_owner_id: z.string().optional().describe("New owner ID"),
+      }).describe("Properties to update"),
+    }),
+    execute: async (args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      const res = await hubspotFetch("/crm/v3/objects/deals/" + args.deal_id, auth.accessToken, {
+        method: "PATCH",
+        body: JSON.stringify({ properties: args.properties }),
+      });
+
+      return { success: true, dealId: args.deal_id, updated: Object.keys(args.properties) };
+    },
+  },
+
+  hubspot_create_task: {
+    connector: "hubspot",
+    description: "Create a task in HubSpot for a sales rep. Can be associated with a deal or contact. Use when user asks to create a reminder, follow-up, or action item.",
+    parameters: z.object({
+      title: z.string().describe("Task title"),
+      body: z.string().optional().describe("Task description/notes"),
+      due_date: z.string().optional().describe("Due date (YYYY-MM-DD). Defaults to tomorrow."),
+      owner_id: z.string().optional().describe("Assign to this owner ID"),
+      deal_id: z.string().optional().describe("Associate with this deal"),
+      contact_id: z.string().optional().describe("Associate with this contact"),
+    }),
+    execute: async (args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      const tomorrow = new Date(Date.now() + 86400000).toISOString().split("T")[0];
+      const dueDate = args.due_date || tomorrow;
+
+      const task = await hubspotFetch("/crm/v3/objects/tasks", auth.accessToken, {
+        method: "POST",
+        body: JSON.stringify({
+          properties: {
+            hs_task_subject: args.title,
+            hs_task_body: args.body || "",
+            hs_task_status: "NOT_STARTED",
+            hs_task_priority: "MEDIUM",
+            hs_timestamp: new Date(dueDate).toISOString(),
+            hubspot_owner_id: args.owner_id || "",
+          },
+        }),
+      });
+
+      // Associate with deal or contact
+      if (args.deal_id && task.id) {
+        try {
+          await hubspotFetch("/crm/v4/objects/tasks/" + task.id + "/associations/deals/" + args.deal_id + "/task_to_deal", auth.accessToken, { method: "PUT" });
+        } catch {}
+      }
+      if (args.contact_id && task.id) {
+        try {
+          await hubspotFetch("/crm/v4/objects/tasks/" + task.id + "/associations/contacts/" + args.contact_id + "/task_to_contact", auth.accessToken, { method: "PUT" });
+        } catch {}
+      }
+
+      return { success: true, taskId: task.id, title: args.title, dueDate: dueDate };
+    },
+  },
+
+  hubspot_create_note: {
+    connector: "hubspot",
+    description: "Create a note on a deal or contact in HubSpot. Use when user wants to log information about an interaction or observation.",
+    parameters: z.object({
+      body: z.string().describe("Note content"),
+      deal_id: z.string().optional().describe("Associate with this deal"),
+      contact_id: z.string().optional().describe("Associate with this contact"),
+      owner_id: z.string().optional().describe("Note owner ID"),
+    }),
+    execute: async (args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      const note = await hubspotFetch("/crm/v3/objects/notes", auth.accessToken, {
+        method: "POST",
+        body: JSON.stringify({
+          properties: {
+            hs_note_body: args.body,
+            hs_timestamp: new Date().toISOString(),
+            hubspot_owner_id: args.owner_id || "",
+          },
+        }),
+      });
+
+      if (args.deal_id && note.id) {
+        try { await hubspotFetch("/crm/v4/objects/notes/" + note.id + "/associations/deals/" + args.deal_id + "/note_to_deal", auth.accessToken, { method: "PUT" }); } catch {}
+      }
+      if (args.contact_id && note.id) {
+        try { await hubspotFetch("/crm/v4/objects/notes/" + note.id + "/associations/contacts/" + args.contact_id + "/note_to_contact", auth.accessToken, { method: "PUT" }); } catch {}
+      }
+
+      return { success: true, noteId: note.id };
+    },
+  },
+
+  // === INTELLIGENCE ===
+
+  hubspot_meeting_prep: {
+    connector: "hubspot",
+    description: "Prepare a meeting brief for a deal or company. Returns deal history, recent activity, contacts involved, risks, and talking points. Use when user says 'prep my meeting' or 'brief me on X'.",
+    parameters: z.object({
+      deal_id: z.string().optional().describe("Deal ID to prep for"),
+      company_name: z.string().optional().describe("Company name to search and prep for"),
+    }),
+    execute: async (args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      let dealId = args.deal_id;
+      let dealData: any = null;
+      let companyData: any = null;
+      let contacts: any[] = [];
+
+      // Find deal by company name if no deal_id
+      if (!dealId && args.company_name) {
+        const search = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
+          method: "POST",
+          body: JSON.stringify({ query: args.company_name, properties: ["dealname", "amount", "dealstage", "closedate", "hubspot_owner_id", "hs_last_sales_activity_date", "createdate"], limit: 1 }),
+        });
+        if (search.results?.[0]) {
+          dealId = search.results[0].id;
+          dealData = search.results[0].properties;
+        }
+      }
+
+      if (dealId && !dealData) {
+        const d = await hubspotFetch("/crm/v3/objects/deals/" + dealId + "?properties=dealname,amount,dealstage,closedate,hubspot_owner_id,hs_last_sales_activity_date,createdate,description,notes_last_updated", auth.accessToken);
+        dealData = d.properties;
+      }
+
+      if (!dealData) return { error: "Deal not found" };
+
+      // Get associated company
+      try {
+        const assoc = await hubspotFetch("/crm/v4/objects/deals/" + dealId + "/associations/companies", auth.accessToken);
+        if (assoc.results?.[0]) {
+          const comp = await hubspotFetch("/crm/v3/objects/companies/" + assoc.results[0].toObjectId + "?properties=name,domain,industry,numberofemployees,annualrevenue,city,country", auth.accessToken);
+          companyData = comp.properties;
+        }
+      } catch {}
+
+      // Get associated contacts
+      try {
+        const assoc = await hubspotFetch("/crm/v4/objects/deals/" + dealId + "/associations/contacts", auth.accessToken);
+        for (const a of (assoc.results || []).slice(0, 5)) {
+          try {
+            const c = await hubspotFetch("/crm/v3/objects/contacts/" + a.toObjectId + "?properties=firstname,lastname,email,jobtitle,phone", auth.accessToken);
+            contacts.push(c.properties);
+          } catch {}
+        }
+      } catch {}
+
+      // Calculate deal age and days since activity
+      const now = Date.now();
+      const DAY = 86400000;
+      const created = dealData.createdate ? new Date(dealData.createdate).getTime() : now;
+      const lastActivity = dealData.hs_last_sales_activity_date ? new Date(dealData.hs_last_sales_activity_date).getTime() : 0;
+
+      return {
+        deal: {
+          id: dealId,
+          name: dealData.dealname,
+          amount: Number(dealData.amount) || 0,
+          stage: dealData.dealstage,
+          closeDate: dealData.closedate,
+          owner: dealData.hubspot_owner_id,
+          ageInDays: Math.floor((now - created) / DAY),
+          daysSinceActivity: lastActivity ? Math.floor((now - lastActivity) / DAY) : null,
+          description: dealData.description,
+        },
+        company: companyData ? {
+          name: companyData.name,
+          domain: companyData.domain,
+          industry: companyData.industry,
+          employees: Number(companyData.numberofemployees) || 0,
+          revenue: Number(companyData.annualrevenue) || 0,
+          location: [companyData.city, companyData.country].filter(Boolean).join(", "),
+        } : null,
+        contacts: contacts.map(function(c: any) { return { name: (c.firstname || "") + " " + (c.lastname || ""), email: c.email, title: c.jobtitle, phone: c.phone }; }),
+      };
+    },
+  },
+
+  hubspot_win_loss_analysis: {
+    connector: "hubspot",
+    description: "Analyze patterns in won vs lost deals. Compares deal size, cycle time, industries, stages where deals are lost, and identifies what makes deals successful. Use for 'why do we lose deals' or 'win/loss analysis'.",
+    parameters: z.object({
+      period_days: z.number().optional().describe("Look back period in days (default 180)"),
+    }),
+    execute: async (args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      // Get won deals
+      const won = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
+        method: "POST",
+        body: JSON.stringify({
+          filterGroups: [{ filters: [{ propertyName: "hs_is_closed_won", operator: "EQ", value: "true" }] }],
+          properties: ["dealname", "amount", "dealstage", "closedate", "createdate", "hubspot_owner_id"],
+          limit: 100,
+        }),
+      });
+
+      // Get lost deals
+      const lost = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
+        method: "POST",
+        body: JSON.stringify({
+          filterGroups: [{ filters: [
+            { propertyName: "hs_is_closed", operator: "EQ", value: "true" },
+            { propertyName: "hs_is_closed_won", operator: "EQ", value: "false" },
+          ] }],
+          properties: ["dealname", "amount", "dealstage", "closedate", "createdate", "hubspot_owner_id"],
+          limit: 100,
+        }),
+      });
+
+      const wonDeals = won.results || [];
+      const lostDeals = lost.results || [];
+
+      const calcStats = function(deals: any[]) {
+        const amounts = deals.map(function(d: any) { return Number(d.properties.amount) || 0; }).filter(function(a: number) { return a > 0; });
+        const cycles = deals.map(function(d: any) {
+          const c = new Date(d.properties.closedate).getTime();
+          const s = new Date(d.properties.createdate).getTime();
+          return Math.floor((c - s) / 86400000);
+        }).filter(function(d: number) { return d > 0 && d < 365; });
+
+        return {
+          count: deals.length,
+          avgAmount: amounts.length ? Math.round(amounts.reduce(function(a: number, b: number) { return a + b; }, 0) / amounts.length) : 0,
+          medianAmount: amounts.length ? amounts.sort(function(a: number, b: number) { return a - b; })[Math.floor(amounts.length / 2)] : 0,
+          totalAmount: amounts.reduce(function(a: number, b: number) { return a + b; }, 0),
+          avgCycleDays: cycles.length ? Math.round(cycles.reduce(function(a: number, b: number) { return a + b; }, 0) / cycles.length) : 0,
+          medianCycleDays: cycles.length ? cycles.sort(function(a: number, b: number) { return a - b; })[Math.floor(cycles.length / 2)] : 0,
+        };
+      };
+
+      const wonStats = calcStats(wonDeals);
+      const lostStats = calcStats(lostDeals);
+
+      // Analyze stages where deals are lost
+      const lostByStage: Record<string, number> = {};
+      for (const d of lostDeals) {
+        const stage = d.properties.dealstage || "unknown";
+        lostByStage[stage] = (lostByStage[stage] || 0) + 1;
+      }
+      const topLossStages = Object.entries(lostByStage).sort(function(a, b) { return b[1] - a[1]; }).slice(0, 5).map(function(e) { return { stage: e[0], count: e[1] }; });
+
+      // Win rate by owner
+      const ownerWins: Record<string, { won: number; lost: number }> = {};
+      for (const d of wonDeals) {
+        const o = d.properties.hubspot_owner_id || "unassigned";
+        if (!ownerWins[o]) ownerWins[o] = { won: 0, lost: 0 };
+        ownerWins[o].won++;
+      }
+      for (const d of lostDeals) {
+        const o = d.properties.hubspot_owner_id || "unassigned";
+        if (!ownerWins[o]) ownerWins[o] = { won: 0, lost: 0 };
+        ownerWins[o].lost++;
+      }
+      const ownerPerf = Object.entries(ownerWins).map(function(e) {
+        const total = e[1].won + e[1].lost;
+        return { ownerId: e[0], won: e[1].won, lost: e[1].lost, winRate: total > 0 ? Math.round((e[1].won / total) * 100) : 0 };
+      }).sort(function(a, b) { return b.winRate - a.winRate; });
+
+      return {
+        summary: {
+          winRate: (wonDeals.length + lostDeals.length) > 0 ? Math.round((wonDeals.length / (wonDeals.length + lostDeals.length)) * 1000) / 10 : 0,
+          totalWon: wonStats.count,
+          totalLost: lostStats.count,
+        },
+        won: wonStats,
+        lost: lostStats,
+        insights: {
+          avgDealSizeDiff: wonStats.avgAmount - lostStats.avgAmount,
+          cycleDiff: wonStats.avgCycleDays - lostStats.avgCycleDays,
+          topLossStages: topLossStages,
+        },
+        ownerPerformance: ownerPerf,
+      };
+    },
+  },
 };
