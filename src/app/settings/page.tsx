@@ -89,6 +89,12 @@ function SettingsContent() {
     hubspot: true,
   });
 
+  // Lemlist state
+  const [lemlistConnected, setLemlistConnected] = useState(false);
+  const [lemlistKeyInput, setLemlistKeyInput] = useState("");
+  const [lemlistConnecting, setLemlistConnecting] = useState(false);
+  const [showLemlistInput, setShowLemlistInput] = useState(false);
+
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getUser().then(({ data }) => {
@@ -101,6 +107,9 @@ function SettingsContent() {
     if (activeTab === "connectors") {
       fetch("/api/connectors/hubspot/status").then((r) => r.json()).then((json) => {
         setHubspotConnected(json.data?.connected ?? false);
+      }).catch(() => {});
+      fetch("/api/connectors/lemlist/status").then((r) => r.json()).then((json) => {
+        setLemlistConnected(json.data?.connected ?? false);
       }).catch(() => {});
     }
   }, [activeTab]);
@@ -165,6 +174,29 @@ function SettingsContent() {
       body: JSON.stringify({ defaultModel: model }),
     });
     setLlmConfig((prev) => prev ? { ...prev, defaultModel: model } : prev);
+  };
+
+  const handleConnectLemlist = async () => {
+    setLemlistConnecting(true);
+    try {
+      const res = await fetch("/api/connectors/lemlist/connect", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ apiKey: lemlistKeyInput }),
+      });
+      if (res.ok) {
+        setLemlistConnected(true);
+        setShowLemlistInput(false);
+        setLemlistKeyInput("");
+      }
+    } finally {
+      setLemlistConnecting(false);
+    }
+  };
+
+  const handleDisconnectLemlist = async () => {
+    await fetch("/api/connectors/lemlist/connect", { method: "DELETE" });
+    setLemlistConnected(false);
   };
 
   return (
@@ -343,10 +375,16 @@ function SettingsContent() {
                       </span>
                     )}
                   </div>
-                  <p className={"text-xs mt-0.5 " + (c.id === "hubspot" && hubspotConnected ? "text-green-600" : "text-[#A3A3A3]")}>
+                  <p className={"text-xs mt-0.5 " + (
+                    (c.id === "hubspot" && hubspotConnected) || (c.id === "lemlist" && lemlistConnected)
+                      ? "text-green-600"
+                      : "text-[#A3A3A3]"
+                  )}>
                     {c.id === "hubspot" && hubspotConnected
                       ? "Connected — MCP active"
-                      : c.description}
+                      : c.id === "lemlist" && lemlistConnected
+                        ? "Connected — API key active"
+                        : c.description}
                   </p>
                 </div>
               </div>
@@ -373,6 +411,51 @@ function SettingsContent() {
                       {hubspotLoading ? "Redirecting..." : hubspotConnected ? "Reconnect" : "Connect"}
                     </button>
                   </>
+                ) : c.id === "lemlist" ? (
+                  lemlistConnected ? (
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1">
+                        <div className="h-2 w-2 rounded-full bg-[#22C55E]" />
+                        <span className="text-[10px] font-medium text-[#22C55E]">Connected</span>
+                      </div>
+                      <button
+                        onClick={handleDisconnectLemlist}
+                        className="text-[10px] text-[#737373] hover:text-red-500 border border-[#E5E5E5] rounded-lg px-2 py-1 transition-colors"
+                      >
+                        Disconnect
+                      </button>
+                    </div>
+                  ) : showLemlistInput ? (
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="password"
+                        value={lemlistKeyInput}
+                        onChange={(e) => setLemlistKeyInput(e.target.value)}
+                        placeholder="API key..."
+                        className="h-7 px-2 border border-[#E5E5E5] rounded-lg text-xs w-32 focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]"
+                      />
+                      <button
+                        onClick={handleConnectLemlist}
+                        disabled={lemlistConnecting || !lemlistKeyInput.trim()}
+                        className="text-[10px] text-white bg-[#0A0A0A] rounded-lg px-2.5 py-1 hover:bg-[#333] disabled:opacity-50"
+                      >
+                        {lemlistConnecting ? "..." : "Save"}
+                      </button>
+                      <button
+                        onClick={() => { setShowLemlistInput(false); setLemlistKeyInput(""); }}
+                        className="text-[10px] text-[#A3A3A3]"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setShowLemlistInput(true)}
+                      className="text-xs text-[#0A0A0A] font-medium border border-[#E5E5E5] rounded-lg px-3 py-1.5 hover:bg-[#F5F5F5] transition-colors"
+                    >
+                      Connect
+                    </button>
+                  )
                 ) : (
                   <button className="text-xs text-[#0A0A0A] font-medium border border-[#E5E5E5] rounded-lg px-3 py-1.5 hover:bg-[#F5F5F5] transition-colors">
                     Connect
