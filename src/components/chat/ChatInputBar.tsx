@@ -117,7 +117,7 @@ export default function ChatInputBar({
   var slashRef = useRef<HTMLDivElement>(null);
 
   var [providerStatus, setProviderStatus] = useState<Record<string, boolean>>({
-    anthropic: true,
+    anthropic: false,
     openai: false,
     google: false,
   });
@@ -126,7 +126,7 @@ export default function ChatInputBar({
     fetch("/api/settings/llm").then(function(r) { return r.json(); }).then(function(json) {
       if (json.data?.keys) {
         setProviderStatus({
-          anthropic: true,
+          anthropic: json.data.keys.anthropic?.configured ?? false,
           openai: json.data.keys.openai?.configured ?? false,
           google: json.data.keys.google?.configured ?? false,
         });
