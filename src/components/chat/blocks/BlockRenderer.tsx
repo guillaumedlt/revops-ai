@@ -73,7 +73,7 @@ export default function BlockRenderer({ blocks }: { blocks: ContentBlock[] }) {
             content = <TableBlock title={block.title} headers={block.headers} rows={block.rows} />;
             break;
           case "report":
-            content = <ReportSlides title={block.title} sections={block.sections} />;
+            content = block.sections ? <ReportSlides title={block.title} sections={block.sections} /> : null;
             break;
           case "alert":
             content = (
