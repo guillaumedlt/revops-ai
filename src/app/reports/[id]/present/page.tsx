@@ -23,8 +23,8 @@ function hasRealContentBlocks(blocks: any[]): boolean {
   });
 }
 
-function SlideBlockRenderer({ blocks, theme: themeName }: { blocks: any[]; theme: string }) {
-  var t = THEMES[themeName] || THEMES.light;
+function SlideBlockRenderer({ blocks }: { blocks: any[] }) {
+  var t = S;
   return (
     <div className="space-y-6 h-full">
       {blocks.map(function(block: any, i: number) {
@@ -146,7 +146,7 @@ export default function PresentPage({ params }: { params: Promise<{ id: string }
             <div className="w-full max-w-4xl">
               {slide.title && <h2 className={"text-3xl font-semibold mb-6 " + t.text}>{slide.title}</h2>}
               {hasRealContentBlocks(slide.content_blocks) ? (
-                <SlideBlockRenderer blocks={slide.content_blocks} theme={theme} />
+                <SlideBlockRenderer blocks={slide.content_blocks} />
               ) : (
                 <p className={"text-lg whitespace-pre-wrap " + t.text}>{getContentText(slide)}</p>
               )}
@@ -168,7 +168,7 @@ export default function PresentPage({ params }: { params: Promise<{ id: string }
             <div className="w-full max-w-4xl">
               {slide.title && <h2 className={"text-3xl font-semibold mb-8 text-center " + t.text}>{slide.title}</h2>}
               {hasRealContentBlocks(slide.content_blocks) ? (
-                <SlideBlockRenderer blocks={slide.content_blocks} theme={theme} />
+                <SlideBlockRenderer blocks={slide.content_blocks} />
               ) : (
                 <div className="grid grid-cols-3 gap-6">
                   {[1, 2, 3].map(function(i) {
@@ -188,7 +188,7 @@ export default function PresentPage({ params }: { params: Promise<{ id: string }
             <div className="w-full max-w-4xl">
               {slide.title && <h2 className={"text-3xl font-semibold mb-6 " + t.text}>{slide.title}</h2>}
               {hasRealContentBlocks(slide.content_blocks) ? (
-                <SlideBlockRenderer blocks={slide.content_blocks} theme={theme} />
+                <SlideBlockRenderer blocks={slide.content_blocks} />
               ) : (
                 <div className={"h-80 rounded-xl flex items-center justify-center " + t.cardBg + " " + t.border + " border"}>
                   <BarChart3 size={64} className={t.accent} />
@@ -201,7 +201,7 @@ export default function PresentPage({ params }: { params: Promise<{ id: string }
             <div className="w-full max-w-4xl">
               {slide.title && <h2 className={"text-3xl font-semibold mb-6 " + t.text}>{slide.title}</h2>}
               {hasRealContentBlocks(slide.content_blocks) ? (
-                <SlideBlockRenderer blocks={slide.content_blocks} theme={theme} />
+                <SlideBlockRenderer blocks={slide.content_blocks} />
               ) : (
                 <div className={"h-80 rounded-xl flex items-center justify-center " + t.cardBg + " " + t.border + " border"}>
                   <Table size={64} className={t.accent} />
