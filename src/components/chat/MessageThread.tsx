@@ -48,6 +48,11 @@ var TOOL_LABELS: Record<string, string> = {
   hubspot_build_icp: "Building ICP profile...",
   hubspot_score_company: "Scoring against ICP...",
   hubspot_deal_health: "Scoring deal health...",
+  hubspot_update_deal: "Updating deal...",
+  hubspot_create_task: "Creating task...",
+  hubspot_create_note: "Adding note...",
+  hubspot_meeting_prep: "Preparing meeting brief...",
+  hubspot_win_loss_analysis: "Analyzing win/loss patterns...",
   // Internal tools
   create_note: "Creating note...",
 };
