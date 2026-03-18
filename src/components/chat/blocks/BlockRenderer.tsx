@@ -7,7 +7,6 @@ import ChartBlock from "./ChartBlock";
 import TableBlock from "./TableBlock";
 import ReportSlides from "./ReportSlides";
 import AddToDashboard from "../AddToDashboard";
-import AddToReport from "../AddToReport";
 
 function BlockWrapper({ block, children }: { block: ContentBlock; children: React.ReactNode }) {
   // Only show AddToDashboard for actionable blocks (not text, alert, or report)
@@ -29,16 +28,7 @@ function BlockWrapper({ block, children }: { block: ContentBlock; children: Reac
             "Widget"
           }
         />
-        <AddToReport
-          block={block}
-          blockTitle={
-            block.type === "chart" ? block.title :
-            block.type === "table" ? block.title :
-            block.type === "kpi" ? block.label :
-            block.type === "kpi_grid" ? "KPI Grid" :
-            "Widget"
-          }
-        />
+
       </div>
     </div>
   );
