@@ -10,6 +10,7 @@ import {
   LogOut,
   Trash2,
   LayoutDashboard,
+  Target,
 } from "lucide-react";
 import { getCachedMessages, setCachedMessages, deleteCachedConversation } from "@/lib/chat-store";
 
@@ -161,6 +162,13 @@ export default function ConversationSidebar() {
         >
           <LayoutDashboard size={16} className={pathname.startsWith("/dashboards") ? "text-[#0A0A0A]" : "text-[#A3A3A3]"} />
           Dashboards
+        </button>
+        <button
+          onClick={function() { router.push("/dashboards/icp"); }}
+          className={"w-full flex items-center gap-2 px-3 pl-8 h-8 rounded-lg text-sm transition-colors " + (pathname === "/dashboards/icp" ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium" : "text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252]")}
+        >
+          <Target size={14} />
+          ICP
         </button>
         <button
           onClick={function() { setSearchOpen(!searchOpen); }}
