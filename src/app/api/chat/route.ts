@@ -4,7 +4,7 @@ import { getAuthFromHeaders } from "@/lib/api-helpers";
 import { routeToModel, getModelId } from "@/lib/ai/router";
 import { SYSTEM_PROMPT, buildTenantContext } from "@/lib/ai/prompts/system";
 import { getToolsForTenant } from "@/lib/connectors";
-import { checkCredits, deductCredit } from "@/lib/ai/credits";
+import { checkCredits, deductCredit, CREDIT_COSTS, CreditAction } from "@/lib/ai/credits";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { parseContentBlocks } from "@/lib/ai/parse-blocks";
 
@@ -46,12 +46,24 @@ export async function POST(request: NextRequest) {
   const parsed = ChatSchema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: parsed.error.message }, { status: 400 });
 
-  const credits = await checkCredits(auth.tenantId);
-  if (!credits.allowed) {
-    return NextResponse.json({ error: "Credit limit reached" }, { status: 402 });
+  const { message, conversationId } = parsed.data;
+
+  // Resolve model from request
+  const resolved = resolveModelId(parsed.data.model, message);
+
+  // Determine credit action based on message and model
+  let creditAction: CreditAction = "standard";
+  if (message.startsWith("/report")) {
+    creditAction = "report";
+  } else if (resolved.displayName === "haiku" || (resolved.displayName === "kairo" && resolved.modelId.includes("haiku"))) {
+    creditAction = "simple";
   }
 
-  const { message, conversationId } = parsed.data;
+  const credits = await checkCredits(auth.tenantId, creditAction);
+  if (!credits.allowed) {
+    return NextResponse.json({ error: "Credit limit reached", creditCost: CREDIT_COSTS[creditAction], creditsRemaining: credits.remaining }, { status: 402 });
+  }
+
   const supabase = createAdminClient();
 
   let convId = conversationId;
@@ -71,9 +83,6 @@ export async function POST(request: NextRequest) {
     content: message,
   });
 
-  // Resolve model from request
-  const resolved = resolveModelId(parsed.data.model, message);
-
   // Get connector tools for this tenant
   const connectorTools = await getToolsForTenant(auth.tenantId);
 
@@ -86,7 +95,7 @@ export async function POST(request: NextRequest) {
     input_schema: zodToJsonSchema(tool.parameters),
   }));
 
-  console.log("[chat] Model:", resolved.modelId, "Provider:", resolved.provider, "Tools:", toolDefs.length);
+  console.log("[chat] Model:", resolved.modelId, "Provider:", resolved.provider, "Tools:", toolDefs.length, "CreditAction:", creditAction, "Cost:", CREDIT_COSTS[creditAction]);
 
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
@@ -147,10 +156,10 @@ export async function POST(request: NextRequest) {
             model: resolved.displayName,
           });
 
-          await deductCredit(auth.tenantId, auth.userId);
+          await deductCredit(auth.tenantId, auth.userId, creditAction);
 
           controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "content_blocks", blocks: parsedBlocks })}\n\n`));
-          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "metadata", conversationId: convId, model: resolved.displayName, creditsRemaining: credits.remaining - 1 })}\n\n`));
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "metadata", conversationId: convId, model: resolved.displayName, creditsRemaining: credits.remaining - CREDIT_COSTS[creditAction], creditCost: CREDIT_COSTS[creditAction] })}\n\n`));
           controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
           controller.close();
           return;
@@ -161,6 +170,7 @@ export async function POST(request: NextRequest) {
         let continueLoop = true;
         let finalText = "";
         let retryAttempt = 0;
+        let usedTools = false;
 
         while (continueLoop) {
           const useTools = retryAttempt === 0 && toolDefs.length > 0;
@@ -262,6 +272,7 @@ export async function POST(request: NextRequest) {
           }
 
           if (stopReason === "tool_use" && toolUseBlocks.length > 0) {
+            usedTools = true;
             messages.push({
               role: "assistant",
               content: [
@@ -296,6 +307,12 @@ export async function POST(request: NextRequest) {
           }
         }
 
+        // If initially classified as "simple" but tools were used, upgrade to "standard"
+        let finalAction = creditAction;
+        if (creditAction === "simple" && usedTools) {
+          finalAction = "standard";
+        }
+
         const parsedBlocks = parseContentBlocks(finalText);
 
         await supabase.from("messages").insert({
@@ -307,10 +324,10 @@ export async function POST(request: NextRequest) {
           model: resolved.displayName,
         });
 
-        await deductCredit(auth.tenantId, auth.userId);
+        await deductCredit(auth.tenantId, auth.userId, finalAction);
 
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "content_blocks", blocks: parsedBlocks })}\n\n`));
-        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "metadata", conversationId: convId, model: resolved.displayName, creditsRemaining: credits.remaining - 1 })}\n\n`));
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "metadata", conversationId: convId, model: resolved.displayName, creditsRemaining: credits.remaining - CREDIT_COSTS[finalAction], creditCost: CREDIT_COSTS[finalAction] })}\n\n`));
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
         controller.close();
       } catch (error) {
