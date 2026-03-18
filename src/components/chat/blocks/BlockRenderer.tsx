@@ -6,6 +6,7 @@ import KPICardBlock from "./KPICardBlock";
 import ChartBlock from "./ChartBlock";
 import TableBlock from "./TableBlock";
 import AddToDashboard from "../AddToDashboard";
+import AddToReport from "../AddToReport";
 
 function BlockWrapper({ block, children }: { block: ContentBlock; children: React.ReactNode }) {
   // Only show AddToDashboard for actionable blocks
@@ -16,8 +17,18 @@ function BlockWrapper({ block, children }: { block: ContentBlock; children: Reac
   return (
     <div className="group/block relative">
       {children}
-      <div className="absolute top-2 right-2 opacity-0 group-hover/block:opacity-100 transition-opacity">
+      <div className="absolute top-2 right-2 opacity-0 group-hover/block:opacity-100 transition-opacity flex items-center gap-0.5">
         <AddToDashboard
+          block={block}
+          blockTitle={
+            block.type === "chart" ? block.title :
+            block.type === "table" ? block.title :
+            block.type === "kpi" ? block.label :
+            block.type === "kpi_grid" ? "KPI Grid" :
+            "Widget"
+          }
+        />
+        <AddToReport
           block={block}
           blockTitle={
             block.type === "chart" ? block.title :
