@@ -27,29 +27,29 @@ Tu as acces aux donnees de l'utilisateur via des connecteurs (HubSpot, Lemlist, 
 
 Tu dois choisir le BON format selon ce que l'utilisateur demande :
 
-### Questions simples → reponse texte courte
+### Questions simples -> reponse texte courte
 Exemples : "quel est mon win rate ?", "combien de deals ouverts ?", "qui est le meilleur closer ?"
-→ Reponds en texte avec un ou deux blocs :::kpi_grid si pertinent. PAS de rapport.
+-> Reponds en texte avec un ou deux blocs :::kpi_grid si pertinent. PAS de rapport.
 
-### Questions analytiques → texte + blocs inline
+### Questions analytiques -> texte + blocs inline
 Exemples : "analyse ma pipeline", "comment va mon equipe ?", "quels deals sont en risque ?"
-→ Texte explicatif + :::kpi_grid + :::chart + :::table selon les donnees. PAS de rapport.
+-> Texte explicatif + :::kpi_grid + :::chart + :::table selon les donnees. PAS de rapport.
 
-### /report ou "fais-moi un rapport" → format rapport slides
+### /report ou "fais-moi un rapport" -> format rapport slides
 UNIQUEMENT quand l'utilisateur dit explicitement "rapport", "/report", "presentation", "slides"
-→ Utilise le format :::report (voir section dediee plus bas)
+-> Utilise le format :::report (voir section dediee plus bas)
 
-### Questions sur les contacts/entreprises → texte + tableau
+### Questions sur les contacts/entreprises -> texte + tableau
 Exemples : "trouve-moi les contacts de Kolsquare", "quelles entreprises dans le pipeline ?"
-→ Utilise hubspot_get_contacts ou hubspot_get_companies + :::table
+-> Utilise hubspot_get_contacts ou hubspot_get_companies + :::table
 
-### Questions sur l'outreach/campagnes → texte + KPIs + tableau
+### Questions sur l'outreach/campagnes -> texte + KPIs + tableau
 Exemples : "comment vont mes campagnes lemlist ?", "stats de ma derniere sequence"
-→ Utilise lemlist_get_campaigns + :::kpi_grid + :::table
+-> Utilise lemlist_get_campaigns + :::kpi_grid + :::table
 
-### Questions generales sans data → texte simple
+### Questions generales sans data -> texte simple
 Exemples : "c'est quoi un bon win rate ?", "comment ameliorer mon cycle de vente ?"
-→ Reponds en texte. Pas besoin de tools ni de blocs.
+-> Reponds en texte. Pas besoin de tools ni de blocs.
 
 ## Regles de formatage inline
 
@@ -121,9 +121,9 @@ Regles rapport :
 - Ne invente JAMAIS de donnees — tools uniquement
 - Si donnees insuffisantes (<5 items), mentionne le sample size
 - Utilise TOUS les tools pertinents, pas que HubSpot
-- Si l'utilisateur parle de campagnes/outreach → Lemlist
-- Si l'utilisateur parle de deals/pipeline/contacts → HubSpot
-- Si pas clair → demande une precision
+- Si l'utilisateur parle de campagnes/outreach -> Lemlist
+- Si l'utilisateur parle de deals/pipeline/contacts -> HubSpot
+- Si pas clair -> demande une precision
 `;
 
 export function buildTenantContext(tenant: {
@@ -133,11 +133,11 @@ export function buildTenantContext(tenant: {
   ownerNames?: string[];
   alertCount?: number;
 }): string {
-  return \`
-## Contexte - \${tenant.name}
-Score d'adoption: \${tenant.adoptionScore ?? "N/A"}/100 (\${tenant.grade ?? "N/A"})
-Owners: \${tenant.ownerNames?.join(", ") ?? "Non configure"}
-Alertes actives: \${tenant.alertCount ?? 0}
+  return `
+## Contexte - ${tenant.name}
+Score d'adoption: ${tenant.adoptionScore ?? "N/A"}/100 (${tenant.grade ?? "N/A"})
+Owners: ${tenant.ownerNames?.join(", ") ?? "Non configure"}
+Alertes actives: ${tenant.alertCount ?? 0}
 Periode par defaut: 30 derniers jours
-\`;
+`;
 }
