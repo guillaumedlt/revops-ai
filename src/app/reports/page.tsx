@@ -14,19 +14,6 @@ interface Report {
   updated_at: string;
 }
 
-var THEME_PREVIEWS: Record<string, { bg: string; label: string; desc: string }> = {
-  light: { bg: "bg-white border border-[#E5E5E5]", label: "Light", desc: "Clean white background" },
-  dark: { bg: "bg-[#0A0A0A]", label: "Dark", desc: "Dark professional look" },
-  gradient: { bg: "bg-gradient-to-br from-[#667eea] to-[#764ba2]", label: "Gradient", desc: "Modern gradient style" },
-  minimal: { bg: "bg-[#FAFAF8] border border-[#E8E8E5]", label: "Minimal", desc: "Subtle and clean" },
-};
-
-var THEME_DOTS: Record<string, string> = {
-  light: "bg-[#E5E5E5]",
-  dark: "bg-[#0A0A0A]",
-  gradient: "bg-gradient-to-r from-[#667eea] to-[#764ba2]",
-  minimal: "bg-[#D4D4C8]",
-};
 
 export default function ReportsPage() {
   var [reports, setReports] = useState<Report[]>([]);
@@ -95,8 +82,8 @@ export default function ReportsPage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {reports.map(function(report) {
-              var themeBg = THEME_PREVIEWS[report.theme] ? THEME_PREVIEWS[report.theme].bg : THEME_PREVIEWS.light.bg;
-              var dotColor = THEME_DOTS[report.theme] || THEME_DOTS.light;
+              
+              
               return (
                 <div
                   key={report.id}
@@ -109,12 +96,12 @@ export default function ReportsPage() {
                   >
                     <Trash2 size={14} />
                   </button>
-                  <div className={"h-32 flex items-center justify-center " + themeBg}>
-                    <FileText size={32} className={report.theme === "dark" || report.theme === "gradient" ? "text-white/30" : "text-[#D4D4D4]"} />
+                  <div className="h-32 flex items-center justify-center bg-white border-b border-[#E5E5E5]">
+                    <FileText size={32} className={"text-[#D4D4D4]"} />
                   </div>
                   <div className="p-4">
                     <div className="flex items-center gap-2 mb-1">
-                      <div className={"h-2 w-2 rounded-full shrink-0 " + dotColor} />
+                      <div className={"h-2 w-2 rounded-full shrink-0 bg-[#0A0A0A]"} />
                       <h3 className="text-sm font-medium text-[#0A0A0A] truncate">{report.name}</h3>
                     </div>
                     <div className="flex items-center gap-2 text-xs text-[#A3A3A3]">
