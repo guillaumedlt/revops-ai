@@ -84,7 +84,7 @@ export default function SignupPage() {
         // Non-blocking
       }
 
-      router.push("/chat");
+      router.push("/onboarding");
       router.refresh();
     }
   }
