@@ -180,7 +180,8 @@ export default function ConversationPage() {
         if (pending) {
           sessionStorage.removeItem("pending_message");
           initialSent.current = true;
-          sendMessage(pending, "kairo");
+          const parsed = JSON.parse(pending);
+          sendMessage(parsed.message, parsed.model || "kairo", parsed.attachment);
         }
       } catch {
         /* sessionStorage not available */
@@ -197,6 +198,7 @@ export default function ConversationPage() {
         activeTools={activeTools}
         error={chatError}
         onRetry={handleRetry}
+        isLoading={isStreaming}
       />
       <div className="shrink-0 pb-2">
         <ChatInputBar
