@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, BookmarkPlus, ExternalLink } from "lucide-react";
+import { ChevronLeft, ChevronRight, LayoutDashboard, Plus, Check } from "lucide-react";
 import KPICardBlock from "./KPICardBlock";
 import ChartBlock from "./ChartBlock";
 import TableBlock from "./TableBlock";
@@ -68,69 +68,80 @@ function getSlideTitle(slideBlocks: ContentBlock[]): { title: string; content: C
   return { title: "", content: slideBlocks };
 }
 
-function getSlideLayout(blocks: ContentBlock[]): string {
-  var types = blocks.map(function(b) { return b.type; });
-  if (types.includes("kpi_grid") || types.includes("kpi")) return "kpi_row";
-  if (types.includes("chart")) return "chart_focus";
-  if (types.includes("table")) return "table_focus";
-  return "full";
+function AddReportToDashboard({ title, sections }: { title: string; sections: ContentBlock[][] }) {
+  var [open, setOpen] = useState(false);
+  var [dashboards, setDashboards] = useState<any[]>([]);
+  var [adding, setAdding] = useState<string | null>(null);
+  var [added, setAdded] = useState<Set<string>>(new Set());
+
+  function handleOpen() {
+    setOpen(!open);
+    if (!open) {
+      fetch("/api/dashboards").then(function(r) { return r.json(); }).then(function(res) {
+        setDashboards(res.data?.dashboards ?? []);
+      }).catch(function() {});
+    }
+  }
+
+  async function addWidget(dashboardId: string) {
+    setAdding(dashboardId);
+    var nextY = 0;
+    try {
+      var dr = await fetch("/api/dashboards/" + dashboardId);
+      var dd = await dr.json();
+      var widgets = dd.data?.widgets || [];
+      nextY = widgets.reduce(function(max: number, w: any) { return Math.max(max, (w.y || 0) + (w.h || 2)); }, 0);
+    } catch {}
+
+    await fetch("/api/dashboards/" + dashboardId + "/widgets", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        widget_type: "report",
+        title: title,
+        config: { title: title, sections: sections },
+        x: 0, y: nextY, w: 12, h: 6,
+      }),
+    });
+    setAdding(null);
+    setAdded(function(prev) { return new Set(prev).add(dashboardId); });
+  }
+
+  return (
+    <div className="relative">
+      <button onClick={handleOpen} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#0A0A0A] text-white hover:bg-[#333] shadow-sm transition-colors">
+        <LayoutDashboard size={12} /> Add to Dashboard
+      </button>
+      {open && (
+        <div className="absolute bottom-full right-0 mb-1 w-[220px] rounded-xl border border-[#E5E5E5] bg-white shadow-lg p-2 z-50">
+          <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#A3A3A3]">Add to Dashboard</p>
+          {dashboards.length === 0 ? (
+            <p className="px-2 py-2 text-xs text-[#737373]">No dashboards yet</p>
+          ) : dashboards.map(function(d) {
+            return (
+              <button key={d.id} onClick={function() { addWidget(d.id); }} disabled={adding === d.id || added.has(d.id)}
+                className="flex w-full items-center justify-between px-2 py-2 rounded-lg text-sm text-[#525252] hover:bg-[#FAFAFA] disabled:opacity-50">
+                <span className="truncate">{d.name}</span>
+                {added.has(d.id) ? <Check size={14} className="text-[#22C55E]" /> : adding === d.id ? <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" /> : <Plus size={14} className="text-[#A3A3A3]" />}
+              </button>
+            );
+          })}
+          <a href="/dashboards" className="flex items-center gap-1 px-2 py-2 text-xs text-[#737373] hover:text-[#0A0A0A]"><Plus size={12} /> Create new dashboard</a>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default function ReportSlides({ title, sections }: ReportSlidesProps) {
   var [current, setCurrent] = useState(0);
-  var [saving, setSaving] = useState(false);
-  var [saved, setSaved] = useState(false);
-  var [savedId, setSavedId] = useState<string | null>(null);
-  var [saveError, setSaveError] = useState<string | null>(null);
-  if (!sections || !Array.isArray(sections)) return null;
+
+  if (!sections || !Array.isArray(sections) || sections.length === 0) return null;
   var total = sections.length;
 
   function prev() { setCurrent(function(c) { return Math.max(0, c - 1); }); }
   function next() { setCurrent(function(c) { return Math.min(total - 1, c + 1); }); }
 
-  async function saveAsReport() {
-    if (saving || saved) return;
-    setSaving(true);
-    setSaveError(null);
-    try {
-      var res = await fetch("/api/reports", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: title, description: "Generated from chat", theme: "light" }),
-      });
-      if (!res.ok) {
-        var err = await res.json().catch(function() { return { error: "HTTP " + res.status }; });
-        console.error("[ReportSlides] Create report failed:", err);
-        setSaveError(err.error || "Failed");
-        setSaving(false);
-        return;
-      }
-      var json = await res.json();
-      var reportId = json.data?.id;
-      if (!reportId) { setSaveError("No ID returned"); setSaving(false); return; }
-      setSavedId(reportId);
-
-      for (var i = 0; i < sections.length; i++) {
-        var p = getSlideTitle(sections[i]);
-        var layout = getSlideLayout(p.content);
-        if (i === 0 && p.content.length === 0) layout = "title";
-        var sr = await fetch("/api/reports/" + reportId + "/slides", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ layout: layout, title: p.title || "Slide " + (i + 1), content_blocks: p.content }),
-        });
-        if (!sr.ok) console.error("[ReportSlides] Slide " + i + " failed:", await sr.text());
-      }
-      setSaved(true);
-    } catch (e) {
-      console.error("[ReportSlides] Error:", e);
-      setSaveError("Network error");
-    } finally {
-      setSaving(false);
-    }
-  }
-
-  if (total === 0) return null;
   var slideBlocks = sections[current];
   if (!slideBlocks || !Array.isArray(slideBlocks)) return null;
   var parsed = getSlideTitle(slideBlocks);
@@ -138,17 +149,9 @@ export default function ReportSlides({ title, sections }: ReportSlidesProps) {
 
   return (
     <div className="group/report relative">
+      {/* Add to Dashboard button on hover */}
       <div className="absolute -top-3 right-0 z-10 opacity-0 group-hover/report:opacity-100 transition-opacity">
-        {saved ? (
-          <a href={"/reports/" + savedId} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#22C55E] text-white hover:bg-[#16A34A] shadow-sm transition-colors">
-            <ExternalLink size={12} /> View Report
-          </a>
-        ) : (
-          <button onClick={saveAsReport} disabled={saving} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#0A0A0A] text-white hover:bg-[#333] disabled:opacity-50 shadow-sm transition-colors">
-            {saving ? <><div className="h-3 w-3 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Saving...</> : <><BookmarkPlus size={12} /> Save as Report</>}
-          </button>
-        )}
-        {saveError && <p className="text-[10px] text-[#EF4444] mt-1 text-right">{saveError}</p>}
+        <AddReportToDashboard title={title} sections={sections} />
       </div>
 
       <div className="rounded-xl overflow-hidden border border-[#E5E5E5] shadow-sm mt-6">
