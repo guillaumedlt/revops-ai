@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import MessageThread from "@/components/chat/MessageThread";
-import ChatInput from "@/components/chat/ChatInput";
+import ChatInputBar from "@/components/chat/ChatInputBar";
 import type { ContentBlock } from "@/types/chat-blocks";
 
 interface Message {
@@ -24,6 +24,7 @@ export default function ConversationPage() {
   const [isStreaming, setIsStreaming] = useState(false);
   const [chatError, setChatError] = useState<{ message: string } | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const [selectedModel, setSelectedModel] = useState("kairo");
   const initialSent = useRef(false);
   const lastMessageRef = useRef<string>("");
 
@@ -41,8 +42,11 @@ export default function ConversationPage() {
   }, [conversationId]);
 
   const sendMessage = useCallback(
-    async (message: string) => {
+    async (message: string, model?: string, attachment?: any) => {
       if (isStreaming) return;
+
+      // Track selected model from picker
+      if (model) setSelectedModel(model);
 
       // Clear any previous error
       setChatError(null);
@@ -64,7 +68,12 @@ export default function ConversationPage() {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message, conversationId }),
+          body: JSON.stringify({
+            message,
+            conversationId,
+            model: model || selectedModel,
+            ...(attachment ? { attachment } : {}),
+          }),
         });
 
         if (!res.ok || !res.body) {
@@ -134,7 +143,7 @@ export default function ConversationPage() {
         setIsStreaming(false);
       }
     },
-    [conversationId, isStreaming]
+    [conversationId, isStreaming, selectedModel]
   );
 
   const handleRetry = useCallback(() => {
@@ -148,9 +157,9 @@ export default function ConversationPage() {
         return prev;
       });
       setChatError(null);
-      sendMessage(lastMessageRef.current);
+      sendMessage(lastMessageRef.current, selectedModel);
     }
-  }, [isStreaming, sendMessage]);
+  }, [isStreaming, sendMessage, selectedModel]);
 
   // Handle initial message from query param
   useEffect(() => {
@@ -158,10 +167,26 @@ export default function ConversationPage() {
       const initial = searchParams.get("initial");
       if (initial && messages.length === 0) {
         initialSent.current = true;
-        sendMessage(initial);
+        sendMessage(initial, "kairo");
       }
     }
   }, [loaded, searchParams, messages.length, sendMessage]);
+
+  // Handle pending message from sessionStorage (welcome page)
+  useEffect(() => {
+    if (loaded && !initialSent.current && messages.length === 0) {
+      try {
+        const pending = sessionStorage.getItem("pending_message");
+        if (pending) {
+          sessionStorage.removeItem("pending_message");
+          initialSent.current = true;
+          sendMessage(pending, "kairo");
+        }
+      } catch {
+        /* sessionStorage not available */
+      }
+    }
+  }, [loaded, messages.length, sendMessage]);
 
   return (
     <div className="flex-1 flex flex-col h-full">
@@ -174,10 +199,9 @@ export default function ConversationPage() {
         onRetry={handleRetry}
       />
       <div className="shrink-0 pb-2">
-        <ChatInput
+        <ChatInputBar
           onSend={sendMessage}
           disabled={isStreaming}
-          placeholder="Pose une question..."
         />
       </div>
     </div>
