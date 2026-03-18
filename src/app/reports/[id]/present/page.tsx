@@ -14,12 +14,7 @@ interface Slide {
   slide_order: number;
 }
 
-var THEMES: Record<string, { bg: string; text: string; accent: string; border: string; cardBg: string }> = {
-  light: { bg: "bg-white", text: "text-[#0A0A0A]", accent: "text-[#0A0A0A]", border: "border-[#E5E5E5]", cardBg: "bg-[#FAFAFA]" },
-  dark: { bg: "bg-[#0A0A0A]", text: "text-white", accent: "text-[#A3A3A3]", border: "border-[#333]", cardBg: "bg-[#1A1A1A]" },
-  gradient: { bg: "bg-gradient-to-br from-[#667eea] to-[#764ba2]", text: "text-white", accent: "text-white/70", border: "border-white/20", cardBg: "bg-white/10" },
-  minimal: { bg: "bg-[#FAFAF8]", text: "text-[#333]", accent: "text-[#666]", border: "border-[#E8E8E5]", cardBg: "bg-white" },
-};
+var S = { bg: "bg-white", text: "text-[#0A0A0A]", accent: "text-[#737373]", border: "border-[#E5E5E5]", cardBg: "bg-[#FAFAFA]" };
 
 function hasRealContentBlocks(blocks: any[]): boolean {
   if (!blocks || blocks.length === 0) return false;
@@ -73,7 +68,7 @@ export default function PresentPage({ params }: { params: Promise<{ id: string }
   var resolvedParams = use(params);
   var reportId = resolvedParams.id;
   var [slides, setSlides] = useState<Slide[]>([]);
-  var [theme, setTheme] = useState("light");
+  
   var [current, setCurrent] = useState(0);
   var [loading, setLoading] = useState(true);
   var router = useRouter();
@@ -84,7 +79,7 @@ export default function PresentPage({ params }: { params: Promise<{ id: string }
       .then(function(res) {
         if (res.data) {
           setSlides(res.data.slides || []);
-          setTheme(res.data.theme || "light");
+          
         }
         setLoading(false);
       })
@@ -123,7 +118,7 @@ export default function PresentPage({ params }: { params: Promise<{ id: string }
   }
 
   var slide = slides[current];
-  var t = THEMES[theme] || THEMES.light;
+  var t = S;
 
   function getContentText(s: Slide) {
     if (!s.content_blocks || s.content_blocks.length === 0) return "";
@@ -219,7 +214,7 @@ export default function PresentPage({ params }: { params: Promise<{ id: string }
 
       {/* Slide counter */}
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2">
-        <div className={"px-3 py-1 rounded-full text-xs " + (theme === "light" || theme === "minimal" ? "bg-[#0A0A0A]/10 text-[#0A0A0A]/60" : "bg-white/10 text-white/60")}>
+        <div className={"px-3 py-1 rounded-full text-xs " + (true ? "bg-[#0A0A0A]/10 text-[#0A0A0A]/60" : "bg-white/10 text-white/60")}>
           {(current + 1) + " / " + slides.length}
         </div>
       </div>
@@ -228,7 +223,7 @@ export default function PresentPage({ params }: { params: Promise<{ id: string }
       <div className="fixed top-4 right-4">
         <button
           onClick={function(e) { e.stopPropagation(); router.push("/reports/" + reportId); }}
-          className={"px-2 py-1 rounded text-xs " + (theme === "light" || theme === "minimal" ? "bg-[#0A0A0A]/10 text-[#0A0A0A]/60 hover:bg-[#0A0A0A]/20" : "bg-white/10 text-white/60 hover:bg-white/20")}
+          className={"px-2 py-1 rounded text-xs " + (true ? "bg-[#0A0A0A]/10 text-[#0A0A0A]/60 hover:bg-[#0A0A0A]/20" : "bg-white/10 text-white/60 hover:bg-white/20")}
         >
           ESC
         </button>
