@@ -45,6 +45,9 @@ var TOOL_LABELS: Record<string, string> = {
   hubspot_get_line_items: "Loading products...",
   hubspot_get_forms: "Loading forms...",
   hubspot_search_all: "Searching HubSpot...",
+  hubspot_build_icp: "Building ICP profile...",
+  hubspot_score_company: "Scoring against ICP...",
+  hubspot_deal_health: "Scoring deal health...",
   // Internal tools
   create_note: "Creating note...",
 };
