@@ -102,12 +102,8 @@ export async function POST(request: NextRequest) {
         if (resolved.provider === "anthropic" && resolved.displayName !== "kairo") {
           const userKey = llmSettings.anthropicKey;
           if (!userKey) {
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Anthropic API key not configured. Go to Settings > LLM to add your key, or use Kairo AI which is included." })}
-
-`));
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}
-
-`));
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Anthropic API key not configured. Go to Settings > LLM to add your key, or use Kairo AI which is included." })}\n\n`));
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
             controller.close();
             return;
           }
