@@ -82,6 +82,7 @@ export default function ReportSlides({ title, sections }: ReportSlidesProps) {
   var [saved, setSaved] = useState(false);
   var [savedId, setSavedId] = useState<string | null>(null);
   var [saveError, setSaveError] = useState<string | null>(null);
+  if (!sections || !Array.isArray(sections)) return null;
   var total = sections.length;
 
   function prev() { setCurrent(function(c) { return Math.max(0, c - 1); }); }
@@ -130,7 +131,9 @@ export default function ReportSlides({ title, sections }: ReportSlidesProps) {
   }
 
   if (total === 0) return null;
-  var parsed = getSlideTitle(sections[current] || []);
+  var slideBlocks = sections[current];
+  if (!slideBlocks || !Array.isArray(slideBlocks)) return null;
+  var parsed = getSlideTitle(slideBlocks);
   var isFirstSlide = current === 0 && !parsed.title;
 
   return (
