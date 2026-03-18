@@ -5,12 +5,13 @@ import TextBlock from "./TextBlock";
 import KPICardBlock from "./KPICardBlock";
 import ChartBlock from "./ChartBlock";
 import TableBlock from "./TableBlock";
+import ReportSlides from "./ReportSlides";
 import AddToDashboard from "../AddToDashboard";
 import AddToReport from "../AddToReport";
 
 function BlockWrapper({ block, children }: { block: ContentBlock; children: React.ReactNode }) {
-  // Only show AddToDashboard for actionable blocks
-  if (block.type === "text" || block.type === "alert") {
+  // Only show AddToDashboard for actionable blocks (not text, alert, or report)
+  if (block.type === "text" || block.type === "alert" || block.type === "report") {
     return <>{children}</>;
   }
 
@@ -70,6 +71,9 @@ export default function BlockRenderer({ blocks }: { blocks: ContentBlock[] }) {
             break;
           case "table":
             content = <TableBlock title={block.title} headers={block.headers} rows={block.rows} />;
+            break;
+          case "report":
+            content = <ReportSlides title={block.title} sections={block.sections} />;
             break;
           case "alert":
             content = (
