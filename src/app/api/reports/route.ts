@@ -42,6 +42,7 @@ export async function POST(request: NextRequest) {
     .from("reports")
     .insert({
       tenant_id: auth.tenantId,
+      author_id: auth.userId,
       name: body.name || "Untitled Report",
       description: body.description || null,
       theme: body.theme || "light",
