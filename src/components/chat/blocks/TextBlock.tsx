@@ -1,3 +1,4 @@
+import React from "react";
 export default function TextBlock({ text }: { text: string }) {
   if (!text) return null;
   const lines = text.split("\n");
