@@ -3,6 +3,8 @@
 import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Play, Check, Plus, Trash2, GripVertical, Type, Columns, BarChart3, Table, LayoutGrid, Monitor } from "lucide-react";
+import ChartBlock from "@/components/chat/blocks/ChartBlock";
+import TableBlock from "@/components/chat/blocks/TableBlock";
 
 interface Slide {
   id: string;
@@ -36,6 +38,54 @@ var LAYOUTS = [
   { id: "chart_focus", label: "Chart", icon: BarChart3, desc: "Large chart" },
   { id: "table_focus", label: "Table", icon: Table, desc: "Full-width table" },
 ];
+
+function hasRealContentBlocks(blocks: any[]): boolean {
+  if (!blocks || blocks.length === 0) return false;
+  return blocks.some(function(b: any) {
+    return b.type === "kpi" || b.type === "kpi_grid" || b.type === "chart" || b.type === "table";
+  });
+}
+
+function SlideBlockRenderer({ blocks, theme: themeName }: { blocks: any[]; theme: string }) {
+  var t = THEMES[themeName] || THEMES.light;
+  return (
+    <div className="space-y-4 h-full">
+      {blocks.map(function(block: any, i: number) {
+        if (block.type === "kpi" || block.type === "kpi_grid") {
+          var items = block.type === "kpi" ? [block] : (block.items || []);
+          var cols = items.length <= 2 ? items.length : items.length <= 4 ? Math.min(items.length, 4) : 3;
+          return (
+            <div key={i} className="grid gap-4" style={{ gridTemplateColumns: "repeat(" + cols + ", 1fr)" }}>
+              {items.map(function(item: any, j: number) {
+                return (
+                  <div key={j} className={"rounded-xl p-5 text-center " + t.cardBg + " " + t.border + " border"}>
+                    <p className={"text-3xl font-bold " + t.text}>{item.value}</p>
+                    <p className={"text-xs mt-1.5 " + t.accent}>{item.label}</p>
+                    {item.change !== undefined && (
+                      <p className={"text-xs mt-1 " + (item.change >= 0 ? "text-[#22C55E]" : "text-[#EF4444]")}>
+                        {(item.change >= 0 ? "+" : "") + item.change + "%"}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          );
+        }
+        if (block.type === "chart") {
+          return <ChartBlock key={i} chartType={block.chartType || "bar"} title="" data={block.data || []} xKey={block.xKey} yKey={block.yKey} />;
+        }
+        if (block.type === "table") {
+          return <TableBlock key={i} title="" headers={block.headers || []} rows={block.rows || []} />;
+        }
+        if (block.type === "text") {
+          return <p key={i} className={"text-sm whitespace-pre-wrap " + t.text}>{block.text || block.content || ""}</p>;
+        }
+        return null;
+      })}
+    </div>
+  );
+}
 
 export default function ReportEditorPage({ params }: { params: Promise<{ id: string }> }) {
   var resolvedParams = use(params);
@@ -363,7 +413,11 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
                         {currentSlide.title && (
                           <h2 className={"text-xl font-semibold mb-4 " + theme.text}>{currentSlide.title}</h2>
                         )}
-                        {editingContent ? (
+                        {hasRealContentBlocks(currentSlide.content_blocks) ? (
+                          <div className="flex-1">
+                            <SlideBlockRenderer blocks={currentSlide.content_blocks} theme={report.theme} />
+                          </div>
+                        ) : editingContent ? (
                           <textarea
                             value={contentValue}
                             onChange={function(e) { setContentValue(e.target.value); }}
@@ -398,18 +452,26 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
                         {currentSlide.title && (
                           <h2 className={"text-xl font-semibold mb-4 " + theme.text}>{currentSlide.title}</h2>
                         )}
-                        <div className="flex-1 flex items-center">
-                          <div className="grid grid-cols-3 gap-4 w-full">
-                            {[1, 2, 3].map(function(i) {
-                              return (
-                                <div key={i} className={"rounded-lg p-4 text-center " + theme.cardBg + " " + theme.border + " border"}>
-                                  <p className={"text-2xl font-bold " + theme.text}>--</p>
-                                  <p className={"text-xs mt-1 " + theme.accent}>{"KPI " + i}</p>
-                                </div>
-                              );
-                            })}
+                        {hasRealContentBlocks(currentSlide.content_blocks) ? (
+                          <div className="flex-1 flex items-center">
+                            <div className="w-full">
+                              <SlideBlockRenderer blocks={currentSlide.content_blocks} theme={report.theme} />
+                            </div>
                           </div>
-                        </div>
+                        ) : (
+                          <div className="flex-1 flex items-center">
+                            <div className="grid grid-cols-3 gap-4 w-full">
+                              {[1, 2, 3].map(function(i) {
+                                return (
+                                  <div key={i} className={"rounded-lg p-4 text-center " + theme.cardBg + " " + theme.border + " border"}>
+                                    <p className={"text-2xl font-bold " + theme.text}>--</p>
+                                    <p className={"text-xs mt-1 " + theme.accent}>{"KPI " + i}</p>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     )}
 
@@ -418,9 +480,15 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
                         {currentSlide.title && (
                           <h2 className={"text-xl font-semibold mb-4 " + theme.text}>{currentSlide.title}</h2>
                         )}
-                        <div className={"flex-1 rounded-lg flex items-center justify-center " + theme.cardBg + " " + theme.border + " border"}>
-                          <BarChart3 size={48} className={theme.accent} />
-                        </div>
+                        {hasRealContentBlocks(currentSlide.content_blocks) ? (
+                          <div className="flex-1">
+                            <SlideBlockRenderer blocks={currentSlide.content_blocks} theme={report.theme} />
+                          </div>
+                        ) : (
+                          <div className={"flex-1 rounded-lg flex items-center justify-center " + theme.cardBg + " " + theme.border + " border"}>
+                            <BarChart3 size={48} className={theme.accent} />
+                          </div>
+                        )}
                       </div>
                     )}
 
@@ -429,9 +497,15 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
                         {currentSlide.title && (
                           <h2 className={"text-xl font-semibold mb-4 " + theme.text}>{currentSlide.title}</h2>
                         )}
-                        <div className={"flex-1 rounded-lg flex items-center justify-center " + theme.cardBg + " " + theme.border + " border"}>
-                          <Table size={48} className={theme.accent} />
-                        </div>
+                        {hasRealContentBlocks(currentSlide.content_blocks) ? (
+                          <div className="flex-1">
+                            <SlideBlockRenderer blocks={currentSlide.content_blocks} theme={report.theme} />
+                          </div>
+                        ) : (
+                          <div className={"flex-1 rounded-lg flex items-center justify-center " + theme.cardBg + " " + theme.border + " border"}>
+                            <Table size={48} className={theme.accent} />
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
