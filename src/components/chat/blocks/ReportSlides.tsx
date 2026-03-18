@@ -86,6 +86,7 @@ export default function ReportSlides({ title, sections }: ReportSlidesProps) {
   var [current, setCurrent] = useState(0);
   var [saving, setSaving] = useState(false);
   var [saved, setSaved] = useState(false);
+  var [savedReportId, setSavedReportId] = useState<string | null>(null);
   var totalSlides = sections.length;
 
   function prev() { setCurrent(function (c) { return Math.max(0, c - 1); }); }
@@ -104,6 +105,7 @@ export default function ReportSlides({ title, sections }: ReportSlidesProps) {
       var json = await res.json();
       var reportId = json.data?.id;
       if (!reportId) { setSaving(false); return; }
+      setSavedReportId(reportId);
 
       // Create each slide
       for (var i = 0; i < sections.length; i++) {
@@ -148,7 +150,7 @@ export default function ReportSlides({ title, sections }: ReportSlidesProps) {
           {saved ? (
             <>
               <Check size={13} />
-              Saved
+              <a href={"/reports/" + savedReportId}>View Report</a>
             </>
           ) : saving ? (
             <>
