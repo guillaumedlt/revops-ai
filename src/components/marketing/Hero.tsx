@@ -19,9 +19,8 @@ export default function Hero() {
 
       {/* Hero content */}
       <div className="max-w-4xl mx-auto px-6 pt-20 pb-32 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F5F5F5] border border-[#E5E5E5] text-xs text-[#525252] mb-6">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#22C55E]" />
-          Now with 28 AI-powered tools
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0A0A0A] text-xs text-white mb-6">
+          Beta
         </div>
 
         <h1 className="text-5xl sm:text-6xl font-bold text-[#0A0A0A] leading-tight tracking-tight mb-6">
