@@ -37,7 +37,7 @@ export default function ChatWelcome() {
       if (typeof window !== "undefined") {
         sessionStorage.setItem(
           "pending_message",
-          JSON.stringify({ message, model: model ?? "revops-ai", attachment })
+          JSON.stringify({ message, model: model ?? "kairo", attachment })
         );
       }
 
@@ -48,7 +48,7 @@ export default function ChatWelcome() {
   }
 
   function handleSuggestion(text: string) {
-    handleSend(text, "revops-ai");
+    handleSend(text, "kairo");
   }
 
   return (
@@ -61,7 +61,7 @@ export default function ChatWelcome() {
       >
         {/* Title */}
         <h1 className="text-center text-3xl font-semibold text-[#0A0A0A] mb-8">
-          What can I help you with?
+          How can I help you today?
         </h1>
 
         {/* Input bar - centered */}
