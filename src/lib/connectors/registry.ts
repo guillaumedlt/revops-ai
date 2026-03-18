@@ -16,7 +16,7 @@ export const CONNECTOR_REGISTRY: Connector[] = [
     logo: "https://www.hubspot.com/favicon.ico",
     available: true,
     connected: true,
-    toolCount: 12,
+    toolCount: 15,
   },
   {
     id: "notion",
