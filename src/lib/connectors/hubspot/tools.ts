@@ -1209,4 +1209,265 @@ export const hubspotTools = {
       };
     },
   },
+  // === REVOPS CORE ===
+
+  hubspot_forecast: {
+    connector: "hubspot",
+    description: "Generate revenue forecast with 3 scenarios: commit (high confidence), best case, worst case. Based on pipeline weighted by stage probability and deal health. Use for 'forecast', 'projection', 'combien on va closer'.",
+    parameters: z.object({
+      period: z.enum(["month", "quarter"]).optional().describe("Forecast period (default: quarter)"),
+    }),
+    execute: async (args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      // Get pipeline stages with probabilities
+      const pipelines = await hubspotFetch("/crm/v3/pipelines/deals", auth.accessToken);
+      const stageProb: Record<string, number> = {};
+      for (const p of pipelines.results || []) {
+        for (const s of p.stages || []) {
+          stageProb[s.id] = Number(s.metadata?.probability || 0) / 100;
+        }
+      }
+
+      // Get open deals
+      const deals = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
+        method: "POST",
+        body: JSON.stringify({
+          filterGroups: [{ filters: [{ propertyName: "hs_is_closed", operator: "EQ", value: "false" }] }],
+          properties: ["dealname", "amount", "dealstage", "closedate", "hubspot_owner_id", "hs_last_sales_activity_date", "createdate"],
+          limit: 100,
+        }),
+      });
+
+      // Get already won this period
+      const now = new Date();
+      const periodStart = args.period === "month"
+        ? new Date(now.getFullYear(), now.getMonth(), 1)
+        : new Date(now.getFullYear(), Math.floor(now.getMonth() / 3) * 3, 1);
+
+      const won = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
+        method: "POST",
+        body: JSON.stringify({
+          filterGroups: [{ filters: [
+            { propertyName: "hs_is_closed_won", operator: "EQ", value: "true" },
+            { propertyName: "closedate", operator: "GTE", value: periodStart.toISOString().split("T")[0] },
+          ] }],
+          properties: ["amount"],
+          limit: 100,
+        }),
+      });
+
+      const closedRevenue = (won.results || []).reduce(function(s: number, d: any) { return s + (Number(d.properties.amount) || 0); }, 0);
+
+      // Calculate scenarios
+      const DAY = 86400000;
+      let commit = 0;
+      let bestCase = 0;
+      let worstCase = 0;
+      const dealForecasts: any[] = [];
+
+      for (const d of deals.results || []) {
+        const amount = Number(d.properties.amount) || 0;
+        if (amount === 0) continue;
+        const prob = stageProb[d.properties.dealstage] || 0.1;
+        const lastActivity = d.properties.hs_last_sales_activity_date ? new Date(d.properties.hs_last_sales_activity_date).getTime() : 0;
+        const daysSinceActivity = lastActivity ? Math.floor((Date.now() - lastActivity) / DAY) : 999;
+
+        // Health multiplier
+        let healthMult = 1;
+        if (daysSinceActivity > 30) healthMult = 0.3;
+        else if (daysSinceActivity > 14) healthMult = 0.6;
+
+        const weighted = amount * prob * healthMult;
+        bestCase += amount * prob;
+        commit += prob >= 0.5 ? weighted : 0;
+        worstCase += prob >= 0.8 ? weighted * 0.8 : 0;
+
+        dealForecasts.push({
+          name: d.properties.dealname,
+          amount: amount,
+          stage: d.properties.dealstage,
+          probability: Math.round(prob * 100),
+          weighted: Math.round(weighted),
+          health: daysSinceActivity > 30 ? "Critical" : daysSinceActivity > 14 ? "At Risk" : "Healthy",
+        });
+      }
+
+      dealForecasts.sort(function(a: any, b: any) { return b.weighted - a.weighted; });
+
+      return {
+        period: args.period || "quarter",
+        closedRevenue: closedRevenue,
+        scenarios: {
+          commit: Math.round(closedRevenue + commit),
+          bestCase: Math.round(closedRevenue + bestCase),
+          worstCase: Math.round(closedRevenue + worstCase),
+        },
+        pipeline: {
+          totalValue: (deals.results || []).reduce(function(s: number, d: any) { return s + (Number(d.properties.amount) || 0); }, 0),
+          dealCount: deals.total || 0,
+          weightedValue: Math.round(bestCase),
+        },
+        topDeals: dealForecasts.slice(0, 10),
+      };
+    },
+  },
+
+  hubspot_funnel: {
+    connector: "hubspot",
+    description: "Analyze the sales funnel: conversion rates between each stage, average time per stage, and where deals get stuck or lost. Use for 'funnel', 'conversion', 'taux de conversion'.",
+    parameters: z.object({}),
+    execute: async (_args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      // Get pipeline stages
+      const pipelines = await hubspotFetch("/crm/v3/pipelines/deals", auth.accessToken);
+      const stages: Array<{ id: string; label: string; order: number }> = [];
+      for (const p of (pipelines.results || []).slice(0, 1)) {
+        for (const s of (p.stages || [])) {
+          stages.push({ id: s.id, label: s.label, order: s.displayOrder });
+        }
+      }
+      stages.sort(function(a, b) { return a.order - b.order; });
+
+      // Get all deals (open + closed) for funnel analysis
+      const allDeals = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
+        method: "POST",
+        body: JSON.stringify({
+          filterGroups: [],
+          properties: ["dealstage", "amount", "hs_is_closed", "hs_is_closed_won"],
+          limit: 100,
+        }),
+      });
+
+      // Count deals per stage
+      const stageCount: Record<string, { total: number; value: number; won: number; lost: number }> = {};
+      for (const s of stages) {
+        stageCount[s.id] = { total: 0, value: 0, won: 0, lost: 0 };
+      }
+
+      for (const d of allDeals.results || []) {
+        const stage = d.properties.dealstage;
+        if (!stageCount[stage]) stageCount[stage] = { total: 0, value: 0, won: 0, lost: 0 };
+        stageCount[stage].total++;
+        stageCount[stage].value += Number(d.properties.amount) || 0;
+        if (d.properties.hs_is_closed_won === "true") stageCount[stage].won++;
+        if (d.properties.hs_is_closed === "true" && d.properties.hs_is_closed_won !== "true") stageCount[stage].lost++;
+      }
+
+      // Build funnel with conversion rates
+      const funnel = stages.map(function(s, i) {
+        const current = stageCount[s.id] || { total: 0, value: 0, won: 0, lost: 0 };
+        const prev = i > 0 ? (stageCount[stages[i - 1].id] || { total: 1 }) : { total: allDeals.total || 1 };
+        return {
+          stage: s.label,
+          stageId: s.id,
+          deals: current.total,
+          value: current.value,
+          conversionFromPrev: prev.total > 0 ? Math.round((current.total / prev.total) * 100) : 0,
+          lostAtStage: current.lost,
+        };
+      });
+
+      return {
+        totalDeals: allDeals.total || 0,
+        stages: funnel,
+      };
+    },
+  },
+
+  hubspot_crm_hygiene: {
+    connector: "hubspot",
+    description: "Audit CRM data quality. Scores each rep on data completeness: deals without amount, without close date, without contact, stale deals. Returns a hygiene score per owner and overall. Use for 'data quality', 'CRM hygiene', 'audit CRM'.",
+    parameters: z.object({}),
+    execute: async (_args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      // Get open deals with key fields
+      const deals = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
+        method: "POST",
+        body: JSON.stringify({
+          filterGroups: [{ filters: [{ propertyName: "hs_is_closed", operator: "EQ", value: "false" }] }],
+          properties: ["dealname", "amount", "closedate", "hubspot_owner_id", "hs_last_sales_activity_date", "notes_last_updated"],
+          limit: 100,
+        }),
+      });
+
+      // Get owners
+      const owners = await hubspotFetch("/crm/v3/owners", auth.accessToken);
+      const ownerNames: Record<string, string> = {};
+      for (const o of owners.results || []) {
+        ownerNames[o.id] = ((o.firstName || "") + " " + (o.lastName || "")).trim() || o.email || o.id;
+      }
+
+      const now = Date.now();
+      const DAY = 86400000;
+
+      // Score per owner
+      const ownerStats: Record<string, { total: number; noAmount: number; noCloseDate: number; noActivity14d: number; noNotes: number }> = {};
+
+      let globalNoAmount = 0;
+      let globalNoCloseDate = 0;
+      let globalNoActivity = 0;
+      let globalNoNotes = 0;
+
+      for (const d of deals.results || []) {
+        const p = d.properties;
+        const owner = p.hubspot_owner_id || "unassigned";
+        if (!ownerStats[owner]) ownerStats[owner] = { total: 0, noAmount: 0, noCloseDate: 0, noActivity14d: 0, noNotes: 0 };
+        ownerStats[owner].total++;
+
+        if (!p.amount || Number(p.amount) === 0) { ownerStats[owner].noAmount++; globalNoAmount++; }
+        if (!p.closedate) { ownerStats[owner].noCloseDate++; globalNoCloseDate++; }
+        const lastAct = p.hs_last_sales_activity_date ? new Date(p.hs_last_sales_activity_date).getTime() : 0;
+        if (!lastAct || (now - lastAct) > 14 * DAY) { ownerStats[owner].noActivity14d++; globalNoActivity++; }
+        if (!p.notes_last_updated) { ownerStats[owner].noNotes++; globalNoNotes++; }
+      }
+
+      const totalDeals = deals.results?.length || 1;
+      const globalScore = Math.max(0, 100 - Math.round(
+        ((globalNoAmount / totalDeals) * 25) +
+        ((globalNoCloseDate / totalDeals) * 25) +
+        ((globalNoActivity / totalDeals) * 25) +
+        ((globalNoNotes / totalDeals) * 25)
+      ));
+
+      const perOwner = Object.entries(ownerStats).map(function(e) {
+        const o = e[1];
+        const t = o.total || 1;
+        const score = Math.max(0, 100 - Math.round(
+          ((o.noAmount / t) * 25) + ((o.noCloseDate / t) * 25) + ((o.noActivity14d / t) * 25) + ((o.noNotes / t) * 25)
+        ));
+        return {
+          ownerId: e[0],
+          ownerName: ownerNames[e[0]] || e[0],
+          deals: o.total,
+          score: score,
+          grade: score >= 80 ? "A" : score >= 60 ? "B" : score >= 40 ? "C" : "D",
+          issues: {
+            noAmount: o.noAmount,
+            noCloseDate: o.noCloseDate,
+            noActivity14d: o.noActivity14d,
+            noNotes: o.noNotes,
+          },
+        };
+      }).sort(function(a, b) { return b.score - a.score; });
+
+      return {
+        globalScore: globalScore,
+        globalGrade: globalScore >= 80 ? "A" : globalScore >= 60 ? "B" : globalScore >= 40 ? "C" : "D",
+        totalOpenDeals: totalDeals,
+        issues: {
+          noAmount: globalNoAmount,
+          noCloseDate: globalNoCloseDate,
+          noActivity14d: globalNoActivity,
+          noNotes: globalNoNotes,
+        },
+        perOwner: perOwner,
+      };
+    },
+  },
 };
