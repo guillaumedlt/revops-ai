@@ -142,9 +142,9 @@ export default function ConversationSidebar() {
       {/* Logo */}
       <div className="px-3 pt-4 pb-2 flex items-center gap-2">
         <div className="h-7 w-7 rounded-lg bg-[#0A0A0A] text-white flex items-center justify-center text-xs font-bold">
-          R
+          K
         </div>
-        <span className="text-sm font-semibold text-[#0A0A0A]">RevOps AI</span>
+        <span className="text-sm font-semibold text-[#0A0A0A]">Kairo</span>
       </div>
 
       {/* Action buttons */}
