@@ -95,12 +95,26 @@ function SettingsContent() {
   const [lemlistConnecting, setLemlistConnecting] = useState(false);
   const [showLemlistInput, setShowLemlistInput] = useState(false);
 
+  // Morning Briefing state
+  const [briefingEnabled, setBriefingEnabled] = useState(false);
+  const [briefingLoading, setBriefingLoading] = useState(false);
+
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getUser().then(({ data }) => {
       setUserEmail(data.user?.email ?? "");
       setUserName(data.user?.user_metadata?.full_name ?? "");
     });
+
+    // Load automation settings
+    fetch("/api/settings/automations")
+      .then((r) => r.json())
+      .then((json) => {
+        if (json.data?.morningBriefing?.enabled) {
+          setBriefingEnabled(true);
+        }
+      })
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -199,6 +213,24 @@ function SettingsContent() {
     setLemlistConnected(false);
   };
 
+  const toggleBriefing = async () => {
+    const newValue = !briefingEnabled;
+    setBriefingEnabled(newValue);
+    setBriefingLoading(true);
+    try {
+      await fetch("/api/settings/automations", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ morningBriefing: { enabled: newValue } }),
+      });
+    } catch {
+      // Revert on error
+      setBriefingEnabled(!newValue);
+    } finally {
+      setBriefingLoading(false);
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
@@ -242,6 +274,36 @@ function SettingsContent() {
               </div>
             </div>
           </div>
+
+          {/* Morning Briefing */}
+          <div className="bg-white rounded-xl border border-[#E5E5E5] p-6 space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-sm font-medium text-[#0A0A0A]">Morning Briefing</h2>
+                <p className="text-xs text-[#737373] mt-0.5">Daily pipeline summary, at-risk deals, and action items</p>
+              </div>
+              <button
+                onClick={toggleBriefing}
+                disabled={briefingLoading}
+                className={
+                  "relative inline-flex h-6 w-11 items-center rounded-full transition-colors " +
+                  (briefingEnabled ? "bg-[#0A0A0A]" : "bg-[#E5E5E5]")
+                }
+              >
+                <span
+                  className={
+                    "inline-block h-4 w-4 transform rounded-full bg-white transition-transform " +
+                    (briefingEnabled ? "translate-x-[22px]" : "translate-x-[3px]")
+                  }
+                />
+              </button>
+            </div>
+            <div className="flex items-center gap-4 text-xs text-[#A3A3A3]">
+              <span>Cost: 3 credits/day</span>
+              <span>Delivery: 8:00 AM</span>
+            </div>
+          </div>
+
           <button
             onClick={handleLogout}
             className="px-4 py-2 text-sm rounded-lg border border-[#E5E5E5] text-[#737373] hover:text-red-600 hover:border-red-200 transition-colors"
@@ -476,7 +538,7 @@ function SettingsContent() {
               <span className="text-lg font-semibold text-[#0A0A0A]">Free</span>
               <span className="text-xs bg-[#F5F5F5] text-[#737373] px-2 py-0.5 rounded-full">Active</span>
             </div>
-            <p className="text-xs text-[#737373]">50 messages / month included</p>
+            <p className="text-xs text-[#737373]">50 credits / month included</p>
           </div>
           <div className="bg-white rounded-xl border border-[#E5E5E5] p-6 space-y-4">
             <h2 className="text-sm font-medium text-[#0A0A0A]">Remaining credits</h2>
