@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { CONNECTOR_REGISTRY, CATEGORIES } from "@/lib/connectors/registry";
+import { CONNECTOR_REGISTRY } from "@/lib/connectors/registry";
 
 type Tab = "general" | "llm" | "connectors" | "billing";
 
@@ -37,8 +37,6 @@ function SettingsContent() {
   const [connectorToggles, setConnectorToggles] = useState<Record<string, boolean>>({
     hubspot: true,
   });
-  const [connectorSearch, setConnectorSearch] = useState("");
-  const [connectorCategory, setConnectorCategory] = useState("all");
 
   useEffect(() => {
     const supabase = createClient();
@@ -117,16 +115,6 @@ function SettingsContent() {
     });
     setLlmConfig((prev) => prev ? { ...prev, defaultModel: model } : prev);
   };
-
-  const filteredConnectors = CONNECTOR_REGISTRY.filter((c) => {
-    const matchesSearch =
-      !connectorSearch ||
-      c.name.toLowerCase().includes(connectorSearch.toLowerCase()) ||
-      c.description.toLowerCase().includes(connectorSearch.toLowerCase());
-    const matchesCategory =
-      connectorCategory === "all" || c.category === connectorCategory;
-    return matchesSearch && matchesCategory;
-  });
 
   return (
     <div>
@@ -268,95 +256,64 @@ function SettingsContent() {
 
       {/* Connectors tab */}
       {activeTab === "connectors" && (
-        <div className="space-y-4">
-          {/* Search bar */}
-          <div className="flex items-center gap-3">
-            <input
-              type="text"
-              value={connectorSearch}
-              onChange={(e) => setConnectorSearch(e.target.value)}
-              placeholder="Search connectors..."
-              className="flex-1 px-4 py-2 text-sm border border-[#E5E5E5] rounded-xl bg-white focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]"
-            />
-          </div>
-
-          {/* Category pills */}
-          <div className="flex gap-1.5 flex-wrap">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setConnectorCategory(cat.id)}
-                className={
-                  "px-3 py-1 rounded-full text-xs font-medium transition-colors " +
-                  (connectorCategory === cat.id
-                    ? "bg-[#0A0A0A] text-white"
-                    : "bg-[#F5F5F5] text-[#737373] hover:bg-[#E5E5E5]")
-                }
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Connector list */}
-          <div className="space-y-2">
-            {filteredConnectors.map((c) => (
-              <div
-                key={c.id}
-                className="bg-white rounded-xl border border-[#E5E5E5] p-4 flex items-center justify-between"
-              >
-                <div className="flex items-center gap-3">
-                  <img src={c.logo} alt="" className="h-6 w-6 rounded" />
-                  <div>
+        <div className="space-y-3">
+          <p className="text-xs text-[#737373] mb-4">
+            Connect your tools to let RevOps AI access your data in real-time via MCP.
+          </p>
+          {CONNECTOR_REGISTRY.map((c) => (
+            <div
+              key={c.id}
+              className="bg-white rounded-xl border border-[#E5E5E5] p-4 flex items-center justify-between"
+            >
+              <div className="flex items-center gap-3">
+                <img src={c.logo} alt="" className="h-6 w-6 rounded" />
+                <div>
+                  <div className="flex items-center gap-2">
                     <p className="text-sm font-medium text-[#0A0A0A]">{c.name}</p>
-                    <p className={"text-xs mt-0.5 " + (c.id === "hubspot" && hubspotConnected ? "text-green-600" : "text-[#A3A3A3]")}>
-                      {c.id === "hubspot" && hubspotConnected
-                        ? "Connected — Portal sync active"
-                        : c.id === "hubspot"
-                          ? "Not connected"
-                          : c.description}
-                    </p>
+                    {c.toolCount > 0 && (
+                      <span className="text-[10px] bg-[#F5F5F5] text-[#737373] px-1.5 py-0.5 rounded-full">
+                        {c.toolCount} tools
+                      </span>
+                    )}
                   </div>
+                  <p className={"text-xs mt-0.5 " + (c.id === "hubspot" && hubspotConnected ? "text-green-600" : "text-[#A3A3A3]")}>
+                    {c.id === "hubspot" && hubspotConnected
+                      ? "Connected — MCP active"
+                      : c.description}
+                  </p>
                 </div>
-                <div className="flex items-center gap-3">
-                  {c.id === "hubspot" ? (
-                    <>
-                      <button
-                        onClick={() => handleToggleConnector("hubspot")}
-                        className={
-                          "relative inline-flex h-5 w-9 items-center rounded-full transition-colors " +
-                          (connectorToggles.hubspot ? "bg-[#0A0A0A]" : "bg-[#E5E5E5]")
-                        }
-                      >
-                        <span className={
-                          "inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform " +
-                          (connectorToggles.hubspot ? "translate-x-[18px]" : "translate-x-[3px]")
-                        } />
-                      </button>
-                      <button
-                        onClick={handleConnectHubspot}
-                        disabled={hubspotLoading}
-                        className="text-xs text-[#737373] hover:text-[#0A0A0A] border border-[#E5E5E5] rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50"
-                      >
-                        {hubspotLoading ? "Redirecting..." : hubspotConnected ? "Reconnect" : "Connect"}
-                      </button>
-                    </>
-                  ) : c.available ? (
-                    <button className="text-xs text-[#0A0A0A] font-medium border border-[#E5E5E5] rounded-lg px-3 py-1.5 hover:bg-[#F5F5F5] transition-colors">
-                      Connect
+              </div>
+              <div className="flex items-center gap-3">
+                {c.id === "hubspot" ? (
+                  <>
+                    <button
+                      onClick={() => handleToggleConnector("hubspot")}
+                      className={
+                        "relative inline-flex h-5 w-9 items-center rounded-full transition-colors " +
+                        (connectorToggles.hubspot ? "bg-[#0A0A0A]" : "bg-[#E5E5E5]")
+                      }
+                    >
+                      <span className={
+                        "inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform " +
+                        (connectorToggles.hubspot ? "translate-x-[18px]" : "translate-x-[3px]")
+                      } />
                     </button>
-                  ) : (
-                    <span className="text-xs text-[#D4D4D4]">Coming soon</span>
-                  )}
-                </div>
+                    <button
+                      onClick={handleConnectHubspot}
+                      disabled={hubspotLoading}
+                      className="text-xs text-[#737373] hover:text-[#0A0A0A] border border-[#E5E5E5] rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50"
+                    >
+                      {hubspotLoading ? "Redirecting..." : hubspotConnected ? "Reconnect" : "Connect"}
+                    </button>
+                  </>
+                ) : (
+                  <button className="text-xs text-[#0A0A0A] font-medium border border-[#E5E5E5] rounded-lg px-3 py-1.5 hover:bg-[#F5F5F5] transition-colors">
+                    Connect
+                  </button>
+                )}
               </div>
-            ))}
-            {filteredConnectors.length === 0 && (
-              <div className="bg-white rounded-xl border border-[#E5E5E5] p-8 text-center">
-                <p className="text-sm text-[#A3A3A3]">No connectors found</p>
-              </div>
-            )}
-          </div>
+            </div>
+          ))}
         </div>
       )}
 
@@ -383,7 +340,6 @@ function SettingsContent() {
     </div>
   );
 }
-
 
 export default function SettingsPage() {
   return (
