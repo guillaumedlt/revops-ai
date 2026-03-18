@@ -27,21 +27,40 @@ export function resolveModel(
 ): { provider: Provider; model: string; apiKey: string } | { error: string } {
   switch (selectedModel) {
     case "revops-ai":
+    case "kairo":
     case "claude":
     case "sonnet":
-    case "haiku":
+    case "claude-sonnet":
       if (!keys.anthropic)
         return { error: "No Anthropic API key configured" };
       return {
         provider: "anthropic",
-        model:
-          selectedModel === "haiku"
-            ? "claude-haiku-4-5-20251001"
-            : "claude-sonnet-4-20250514",
+        model: "claude-sonnet-4-20250514",
+        apiKey: keys.anthropic,
+      };
+
+    case "claude-opus":
+    case "opus":
+      if (!keys.anthropic)
+        return { error: "No Anthropic API key configured" };
+      return {
+        provider: "anthropic",
+        model: "claude-opus-4-20250514",
+        apiKey: keys.anthropic,
+      };
+
+    case "haiku":
+    case "claude-haiku":
+      if (!keys.anthropic)
+        return { error: "No Anthropic API key configured" };
+      return {
+        provider: "anthropic",
+        model: "claude-haiku-4-5-20251001",
         apiKey: keys.anthropic,
       };
 
     case "gpt":
+    case "gpt-4o":
       if (!keys.openai)
         return {
           error:
@@ -49,7 +68,16 @@ export function resolveModel(
         };
       return { provider: "openai", model: "gpt-4o", apiKey: keys.openai };
 
+    case "gpt-4o-mini":
+      if (!keys.openai)
+        return {
+          error:
+            "No OpenAI API key configured. Add your key in Settings > LLM.",
+        };
+      return { provider: "openai", model: "gpt-4o-mini", apiKey: keys.openai };
+
     case "gemini":
+    case "gemini-pro":
       if (!keys.google)
         return {
           error:
@@ -57,7 +85,19 @@ export function resolveModel(
         };
       return {
         provider: "gemini",
-        model: "gemini-2.0-flash",
+        model: "gemini-2.5-pro",
+        apiKey: keys.google,
+      };
+
+    case "gemini-flash":
+      if (!keys.google)
+        return {
+          error:
+            "No Google AI key configured. Add your key in Settings > LLM.",
+        };
+      return {
+        provider: "gemini",
+        model: "gemini-2.5-flash",
         apiKey: keys.google,
       };
 
