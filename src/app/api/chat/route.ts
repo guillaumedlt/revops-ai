@@ -92,12 +92,32 @@ export async function POST(request: NextRequest) {
   const stream = new ReadableStream({
     async start(controller) {
       try {
-        // For non-Anthropic providers, check BYOK key and return appropriate message
-        if (resolved.provider === "openai" || resolved.provider === "google") {
-          const { data: tenant } = await supabase.from("tenants").select("settings").eq("id", auth.tenantId).single();
-          const llmSettings = ((tenant?.settings as any)?.llm as any) ?? {};
+        // Get tenant BYOK keys for provider routing
+        const { data: tenant } = await supabase.from("tenants").select("settings").eq("id", auth.tenantId).single();
+        const llmSettings = ((tenant?.settings as any)?.llm as any) ?? {};
 
+        // Resolve API key: Kairo AI uses server key, everything else needs BYOK
+        let anthropicApiKey = process.env.ANTHROPIC_API_KEY!;
+
+        if (resolved.provider === "anthropic" && resolved.displayName !== "kairo") {
+          const userKey = llmSettings.anthropicKey;
+          if (!userKey) {
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Anthropic API key not configured. Go to Settings > LLM to add your key, or use Kairo AI which is included." })}
+
+`));
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}
+
+`));
+            controller.close();
+            return;
+          }
+          anthropicApiKey = userKey;
+        }
+
+        // For non-Anthropic providers, check BYOK key
+        if (resolved.provider === "openai" || resolved.provider === "google") {
           let apiKey: string | undefined;
+
           let providerLabel: string;
 
           if (resolved.provider === "openai") {
@@ -153,7 +173,7 @@ export async function POST(request: NextRequest) {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "x-api-key": process.env.ANTHROPIC_API_KEY!,
+              "x-api-key": anthropicApiKey,
               "anthropic-version": "2023-06-01",
             },
             body: JSON.stringify({
