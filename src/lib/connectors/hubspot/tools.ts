@@ -1470,4 +1470,61 @@ export const hubspotTools = {
       };
     },
   },
+
+  hubspot_draft_email: {
+    connector: "hubspot",
+    description: "Draft a professional email for a deal or contact. Generates subject and body based on deal context, recent activity, and the purpose (follow-up, intro, proposal, etc). Use when user says 'write an email', 'draft a follow-up', etc.",
+    parameters: z.object({
+      deal_id: z.string().optional().describe("Deal ID for context"),
+      contact_email: z.string().optional().describe("Contact email to write to"),
+      purpose: z.enum(["follow_up", "introduction", "proposal", "check_in", "meeting_request", "custom"]).describe("Email purpose"),
+      custom_context: z.string().optional().describe("Additional context from the user"),
+    }),
+    execute: async (args: any, tenantId: string) => {
+      const auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      let dealContext = "";
+      let contactName = "";
+
+      if (args.deal_id) {
+        try {
+          const deal = await hubspotFetch(
+            "/crm/v3/objects/deals/" + args.deal_id + "?properties=dealname,amount,dealstage,closedate,description",
+            auth.accessToken
+          );
+          dealContext = "Deal: " + deal.properties.dealname +
+            ", Amount: " + (deal.properties.amount || "N/A") +
+            ", Stage: " + deal.properties.dealstage;
+        } catch {}
+      }
+
+      if (args.contact_email) {
+        try {
+          const contacts = await hubspotFetch("/crm/v3/objects/contacts/search", auth.accessToken, {
+            method: "POST",
+            body: JSON.stringify({
+              filterGroups: [{ filters: [{ propertyName: "email", operator: "EQ", value: args.contact_email }] }],
+              properties: ["firstname", "lastname", "jobtitle", "company"],
+            }),
+          });
+          if (contacts.results?.[0]) {
+            const c = contacts.results[0].properties;
+            contactName = ((c.firstname || "") + " " + (c.lastname || "")).trim();
+            dealContext += " Contact: " + contactName +
+              ", Title: " + (c.jobtitle || "N/A") +
+              ", Company: " + (c.company || "N/A");
+          }
+        } catch {}
+      }
+
+      return {
+        context: dealContext,
+        contactName: contactName,
+        purpose: args.purpose,
+        customContext: args.custom_context || "",
+        instruction: "Use this context to generate a professional email. The AI should compose the subject and body. Return the draft as formatted text with Subject: and Body: sections.",
+      };
+    },
+  },
 };
