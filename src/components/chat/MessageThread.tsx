@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { RotateCcw } from "lucide-react";
+import { RotateCcw, LayoutDashboard, Plus, Check } from "lucide-react";
 import BlockRenderer from "./blocks/BlockRenderer";
 import TextBlock from "./blocks/TextBlock";
 import type { ContentBlock } from "@/types/chat-blocks";
@@ -154,6 +154,71 @@ function ThinkingIndicator({ activeTools }: { activeTools: string[] }) {
   );
 }
 
+function SaveMessageToDashboard({ blocks, title }: { blocks: any[]; title: string }) {
+  var [open, setOpen] = useState(false);
+  var [dashboards, setDashboards] = useState<any[]>([]);
+  var [adding, setAdding] = useState<string | null>(null);
+  var [added, setAdded] = useState<Set<string>>(new Set());
+  var ref = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(function() {
+    if (!open) return;
+    fetch("/api/dashboards").then(function(r) { return r.json(); }).then(function(res) {
+      setDashboards(res.data?.dashboards ?? []);
+    }).catch(function() {});
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handleClick);
+    return function() { document.removeEventListener("mousedown", handleClick); };
+  }, [open]);
+
+  async function addWidget(dashboardId: string) {
+    setAdding(dashboardId);
+    var nextY = 0;
+    try {
+      var dr = await fetch("/api/dashboards/" + dashboardId);
+      var dd = await dr.json();
+      var widgets = dd.data?.widgets || [];
+      nextY = widgets.reduce(function(max: number, w: any) { return Math.max(max, (w.y || 0) + (w.h || 2)); }, 0);
+    } catch {}
+
+    await fetch("/api/dashboards/" + dashboardId + "/widgets", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ widget_type: "report", title: title, config: { blocks: blocks }, x: 0, y: nextY, w: 12, h: 8 }),
+    });
+    setAdding(null);
+    setAdded(function(prev) { return new Set(prev).add(dashboardId); });
+  }
+
+  return (
+    <div ref={ref} className="relative">
+      <button onClick={function() { setOpen(!open); }}
+        className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] text-[#737373] hover:text-[#0A0A0A] hover:bg-[#F5F5F5] transition-colors">
+        <LayoutDashboard size={12} /> Save to Dashboard
+      </button>
+      {open && (
+        <div className="absolute top-full right-0 mt-1 w-[220px] rounded-xl border border-[#E5E5E5] bg-white shadow-lg p-2 z-50">
+          <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#A3A3A3]">Save to Dashboard</p>
+          {dashboards.length === 0 ? (
+            <p className="px-2 py-2 text-xs text-[#737373]">No dashboards yet</p>
+          ) : dashboards.map(function(d) {
+            return (
+              <button key={d.id} onClick={function() { addWidget(d.id); }} disabled={adding === d.id || added.has(d.id)}
+                className="flex w-full items-center justify-between px-2 py-2 rounded-lg text-sm text-[#525252] hover:bg-[#FAFAFA] disabled:opacity-50">
+                <span className="truncate">{d.name}</span>
+                {added.has(d.id) ? <Check size={14} className="text-[#22C55E]" /> : adding === d.id ? <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" /> : <Plus size={14} className="text-[#A3A3A3]" />}
+              </button>
+            );
+          })}
+          <a href="/dashboards" className="flex items-center gap-1 px-2 py-2 text-xs text-[#737373] hover:text-[#0A0A0A]"><Plus size={12} /> New dashboard</a>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ErrorCard({
   message,
   onRetry,
@@ -211,9 +276,16 @@ export default function MessageThread({
                 {msg.content}
               </div>
             ) : (
-              <div className="w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A]">
+              <div className="w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A] group/msg">
                 {msg.content_blocks && msg.content_blocks.length > 0 ? (
-                  <BlockRenderer blocks={msg.content_blocks} />
+                  <>
+                    <BlockRenderer blocks={msg.content_blocks} />
+                    {msg.content_blocks.length > 2 && (
+                      <div className="mt-4 pt-3 border-t border-[#F0F0F0] opacity-0 group-hover/msg:opacity-100 transition-opacity">
+                        <SaveMessageToDashboard blocks={msg.content_blocks} title={msg.content.slice(0, 60)} />
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <TextBlock text={msg.content} />
                 )}
