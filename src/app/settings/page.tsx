@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { CONNECTOR_REGISTRY } from "@/lib/connectors/registry";
+import { Check } from "lucide-react";
 
 type Tab = "general" | "llm" | "connectors" | "billing";
 
@@ -21,6 +22,56 @@ interface LlmConfig {
     openai: { configured: boolean; last4?: string };
     google: { configured: boolean; last4?: string };
   };
+}
+
+interface ModelOption {
+  id: string;
+  label: string;
+  description: string;
+  provider: string;
+}
+
+const MODELS: ModelOption[] = [
+  { id: "kairo", label: "Kairo AI", description: "Auto-selects the best model", provider: "kairo" },
+  { id: "claude-opus", label: "Claude Opus 4", description: "Most capable, complex analysis", provider: "anthropic" },
+  { id: "claude-sonnet", label: "Claude Sonnet 4", description: "Fast & smart", provider: "anthropic" },
+  { id: "claude-haiku", label: "Claude Haiku 4", description: "Fastest, simple queries", provider: "anthropic" },
+  { id: "gpt-4o", label: "GPT-4o", description: "Most capable", provider: "openai" },
+  { id: "gpt-4o-mini", label: "GPT-4o Mini", description: "Fast & affordable", provider: "openai" },
+  { id: "gemini-pro", label: "Gemini 2.5 Pro", description: "Most capable", provider: "google" },
+  { id: "gemini-flash", label: "Gemini 2.5 Flash", description: "Fast", provider: "google" },
+];
+
+function ProviderIcon({ provider, size = 16 }: { provider: string; size?: number }) {
+  if (provider === "kairo") {
+    return (
+      <div className="flex items-center justify-center rounded bg-[#0A0A0A] text-white" style={{ width: size, height: size }}>
+        <span style={{ fontSize: size * 0.6, fontWeight: 700, lineHeight: 1 }}>K</span>
+      </div>
+    );
+  }
+  if (provider === "anthropic") {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+        <path d="M13.827 3.52l5.51 16.96H16.1L10.59 3.52h3.237zm-7.164 0l5.51 16.96h3.237L9.9 3.52H6.663z" fill="#0A0A0A"/>
+      </svg>
+    );
+  }
+  if (provider === "openai") {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+        <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.998 5.998 0 0 0-3.998 2.9 6.042 6.042 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z" fill="#0A0A0A"/>
+      </svg>
+    );
+  }
+  if (provider === "google") {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+        <path d="M12 11v3.2h5.5c-.2 1.3-1.6 3.9-5.5 3.9-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.1.8 3.8 1.5L18.6 4c-1.8-1.7-4.2-2.7-6.6-2.7C6.5 1.3 2 5.8 2 12s4.5 10.7 10 10.7c5.8 0 9.6-4.1 9.6-9.8 0-.7-.1-1.2-.2-1.7H12z" fill="#0A0A0A"/>
+      </svg>
+    );
+  }
+  return null;
 }
 
 function SettingsContent() {
@@ -173,33 +224,44 @@ function SettingsContent() {
         <div className="space-y-6">
           <div className="bg-white rounded-xl border border-[#E5E5E5] p-6 space-y-4">
             <h2 className="text-sm font-medium text-[#0A0A0A]">Default model</h2>
-            <div className="flex flex-wrap gap-2">
-              {["revops-ai", "claude", "gpt", "gemini"].map((model) => (
-                <button
-                  key={model}
-                  onClick={() => saveDefaultModel(model)}
-                  className={
-                    "h-8 px-4 rounded-full text-xs font-medium border transition-colors " +
-                    (llmConfig?.defaultModel === model
-                      ? "bg-[#0A0A0A] text-white border-[#0A0A0A]"
-                      : "bg-white text-[#737373] border-[#E5E5E5] hover:border-[#0A0A0A]")
-                  }
-                >
-                  {model === "revops-ai" ? "RevOps AI" : model.charAt(0).toUpperCase() + model.slice(1)}
-                </button>
-              ))}
+            <p className="text-xs text-[#737373]">Choose which model Kairo uses by default</p>
+            <div className="space-y-1">
+              {MODELS.map((model) => {
+                const isSelected = llmConfig?.defaultModel === model.id;
+                return (
+                  <button
+                    key={model.id}
+                    onClick={() => saveDefaultModel(model.id)}
+                    className={
+                      "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-colors " +
+                      (isSelected ? "bg-[#F5F5F5] ring-1 ring-[#0A0A0A]" : "hover:bg-[#FAFAFA]")
+                    }
+                  >
+                    <div className="shrink-0">
+                      <ProviderIcon provider={model.provider} size={18} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className={"text-sm " + (isSelected ? "font-medium text-[#0A0A0A]" : "text-[#525252]")}>{model.label}</p>
+                      <p className="text-[11px] text-[#A3A3A3]">{model.description}</p>
+                    </div>
+                    {isSelected && (
+                      <Check size={16} className="text-[#0A0A0A] shrink-0" />
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
           <div className="bg-white rounded-xl border border-[#E5E5E5] p-6 space-y-4">
             <h2 className="text-sm font-medium text-[#0A0A0A]">API Keys</h2>
             <p className="text-xs text-[#737373]">
-              Optional — if not configured, RevOps AI keys will be used
+              Optional — if not configured, Kairo platform keys will be used
             </p>
             {[
-              { id: "anthropic", name: "Anthropic (Claude)" },
-              { id: "openai", name: "OpenAI (GPT)" },
-              { id: "google", name: "Google (Gemini)" },
+              { id: "anthropic", name: "Anthropic", sub: "Claude models", provider: "anthropic" },
+              { id: "openai", name: "OpenAI", sub: "GPT models", provider: "openai" },
+              { id: "google", name: "Google", sub: "Gemini models", provider: "google" },
             ].map((provider) => {
               const config = llmConfig?.keys[provider.id as keyof typeof llmConfig.keys];
               return (
@@ -207,15 +269,20 @@ function SettingsContent() {
                   key={provider.id}
                   className="flex items-center justify-between py-3 border-t border-[#F5F5F5] first:border-0"
                 >
-                  <div>
-                    <p className="text-sm text-[#0A0A0A]">{provider.name}</p>
-                    <p className="text-xs text-[#737373] mt-0.5">
-                      {config?.configured ? (
-                        <span className="text-green-600">{"Connected — ****" + config.last4}</span>
-                      ) : (
-                        <span>Not configured</span>
-                      )}
-                    </p>
+                  <div className="flex items-center gap-3">
+                    <div className="shrink-0">
+                      <ProviderIcon provider={provider.provider} size={20} />
+                    </div>
+                    <div>
+                      <p className="text-sm text-[#0A0A0A] font-medium">{provider.name}</p>
+                      <p className="text-xs text-[#737373] mt-0.5">
+                        {config?.configured ? (
+                          <span className="text-green-600">{"Connected — ****" + config.last4}</span>
+                        ) : (
+                          <span>{provider.sub}</span>
+                        )}
+                      </p>
+                    </div>
                   </div>
                   {editingKey === provider.id ? (
                     <div className="flex items-center gap-2">
@@ -258,7 +325,7 @@ function SettingsContent() {
       {activeTab === "connectors" && (
         <div className="space-y-3">
           <p className="text-xs text-[#737373] mb-4">
-            Connect your tools to let RevOps AI access your data in real-time via MCP.
+            Connect your tools to let Kairo access your data in real-time via MCP.
           </p>
           {CONNECTOR_REGISTRY.map((c) => (
             <div
