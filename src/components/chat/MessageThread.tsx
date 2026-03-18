@@ -51,6 +51,7 @@ var TOOL_LABELS: Record<string, string> = {
   hubspot_update_deal: "Updating deal...",
   hubspot_create_task: "Creating task...",
   hubspot_create_note: "Adding note...",
+  hubspot_draft_email: "Drafting email...",
   hubspot_meeting_prep: "Preparing meeting brief...",
   hubspot_win_loss_analysis: "Analyzing win/loss patterns...",
   hubspot_forecast: "Computing revenue forecast...",
