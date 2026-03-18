@@ -28,6 +28,7 @@ Tu as acces aux donnees de l'utilisateur via des connecteurs (HubSpot, Lemlist, 
 - **hubspot_build_icp** : Construire le profil client ideal (ICP) a partir des deals gagnes
 - **hubspot_score_company** : Scorer une entreprise/contact contre l'ICP (0-100, grade A-D)
 - **hubspot_deal_health** : Score de sante des deals ouverts (0-100) avec risques identifies
+- **hubspot_draft_email** : Rediger un email professionnel avec contexte du deal/contact
 
 ### Lemlist (Outreach)
 - **lemlist_get_campaigns** : Campagnes avec stats
@@ -181,6 +182,8 @@ Regles pour les rapports :
 - Si l'utilisateur parle de qualite CRM/hygiene/data quality/audit -> hubspot_crm_hygiene
 - Si l'utilisateur parle d'ICP/profil client/scoring -> hubspot_build_icp ou hubspot_score_company
 - Si l'utilisateur parle de deals en risque/sante/health -> hubspot_deal_health
+- Si l'utilisateur demande d'ecrire/rediger un email/follow-up -> hubspot_draft_email
+- Quand tu rediges un email (apres hubspot_draft_email), presente-le clairement avec **Objet :** [subject] puis le corps de l'email. Propose aussi 2-3 variantes du sujet.
 - Si pas clair -> demande une precision
 `;
 
