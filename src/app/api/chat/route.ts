@@ -17,15 +17,15 @@ const ChatSchema = z.object({
 function resolveModelId(model: string | undefined, message: string): { provider: string; modelId: string; displayName: string } {
   switch (model) {
     case "claude-opus":
-      return { provider: "anthropic", modelId: "claude-opus-4-20250514", displayName: "opus" };
+      return { provider: "anthropic", modelId: "claude-opus-4-6-20250610", displayName: "opus" };
     case "claude-sonnet":
-      return { provider: "anthropic", modelId: "claude-sonnet-4-20250514", displayName: "sonnet" };
+      return { provider: "anthropic", modelId: "claude-sonnet-4-6-20250610", displayName: "sonnet" };
     case "claude-haiku":
       return { provider: "anthropic", modelId: "claude-haiku-4-5-20251001", displayName: "haiku" };
     case "gpt-4o":
-      return { provider: "openai", modelId: "gpt-4o", displayName: "gpt-4o" };
+      return { provider: "openai", modelId: "gpt-4.1", displayName: "gpt-4o" };
     case "gpt-4o-mini":
-      return { provider: "openai", modelId: "gpt-4o-mini", displayName: "gpt-4o-mini" };
+      return { provider: "openai", modelId: "gpt-4.1-mini", displayName: "gpt-4o-mini" };
     case "gemini-pro":
       return { provider: "google", modelId: "gemini-2.5-pro", displayName: "gemini-pro" };
     case "gemini-flash":
