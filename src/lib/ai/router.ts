@@ -36,6 +36,6 @@ export function routeToModel(message: string, historyLength: number): ModelChoic
 
 export function getModelId(choice: ModelChoice): string {
   return choice === "sonnet"
-    ? "claude-sonnet-4-20250514"
+    ? "claude-sonnet-4-6-20250610"
     : "claude-haiku-4-5-20251001";
 }
