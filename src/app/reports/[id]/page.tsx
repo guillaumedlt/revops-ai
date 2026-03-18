@@ -23,12 +23,7 @@ interface Report {
   slides: Slide[];
 }
 
-var THEMES: Record<string, { bg: string; text: string; accent: string; border: string; cardBg: string }> = {
-  light: { bg: "bg-white", text: "text-[#0A0A0A]", accent: "text-[#0A0A0A]", border: "border-[#E5E5E5]", cardBg: "bg-[#FAFAFA]" },
-  dark: { bg: "bg-[#0A0A0A]", text: "text-white", accent: "text-[#A3A3A3]", border: "border-[#333]", cardBg: "bg-[#1A1A1A]" },
-  gradient: { bg: "bg-gradient-to-br from-[#667eea] to-[#764ba2]", text: "text-white", accent: "text-white/70", border: "border-white/20", cardBg: "bg-white/10" },
-  minimal: { bg: "bg-[#FAFAF8]", text: "text-[#333]", accent: "text-[#666]", border: "border-[#E8E8E5]", cardBg: "bg-white" },
-};
+var SLIDE = { bg: "bg-white", text: "text-[#0A0A0A]", accent: "text-[#737373]", border: "border-[#E5E5E5]", cardBg: "bg-[#FAFAFA]" };
 
 function hasRealContentBlocks(blocks: any[]): boolean {
   if (!blocks || blocks.length === 0) return false;
@@ -37,8 +32,8 @@ function hasRealContentBlocks(blocks: any[]): boolean {
   });
 }
 
-function SlideBlockRenderer({ blocks, theme: themeName }: { blocks: any[]; theme: string }) {
-  var t = THEMES[themeName] || THEMES.light;
+function SlideBlockRenderer({ blocks }: { blocks: any[] }) {
+  var t = SLIDE;
   return (
     <div className="space-y-4 h-full">
       {blocks.map(function(block: any, i: number) {
@@ -160,11 +155,7 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
     }
   }
 
-  function handleThemeChange(theme: string) {
-    if (!report) return;
-    updateReport({ theme: theme });
-    setReport(Object.assign({}, report, { theme: theme }));
-  }
+
 
   function handlePublish() {
     if (!report) return;
@@ -189,7 +180,7 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
     );
   }
 
-  var theme = THEMES[report.theme] || THEMES.light;
+  var s = SLIDE;
   var currentSlide = report.slides[activeSlide] || null;
 
   function getContentText(slide: Slide | null) {
@@ -227,27 +218,7 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
             </button>
           )}
         </div>
-        <div className="flex items-center gap-2">
-          {/* Theme selector */}
-          <div className="flex items-center gap-1 mr-2">
-            {Object.keys(THEMES).map(function(t) {
-              var dotMap: Record<string, string> = {
-                light: "bg-white border border-[#D4D4D4]",
-                dark: "bg-[#0A0A0A]",
-                gradient: "bg-gradient-to-r from-[#667eea] to-[#764ba2]",
-                minimal: "bg-[#FAFAF8] border border-[#D4D4D4]",
-              };
-              return (
-                <button
-                  key={t}
-                  onClick={function() { handleThemeChange(t); }}
-                  className={"h-5 w-5 rounded-full transition-all " + (dotMap[t] || "") + (report!.theme === t ? " ring-2 ring-offset-1 ring-[#0A0A0A]" : "")}
-                  title={t.charAt(0).toUpperCase() + t.slice(1)}
-                />
-              );
-            })}
-          </div>
-          {report.slides.length > 0 && (
+        <div className="flex items-center gap-2">          {report.slides.length > 0 && (
             <button
               onClick={function() { router.push("/reports/" + reportId + "/present"); }}
               className="flex items-center gap-1.5 px-3 h-8 rounded-lg text-sm text-[#525252] hover:bg-[#F5F5F5] transition-colors"
@@ -272,7 +243,7 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
         <div className="w-[180px] border-r border-[#E5E5E5] bg-[#FAFAFA] flex flex-col overflow-y-auto shrink-0">
           <div className="p-3 space-y-2 flex-1">
             {report.slides.map(function(slide, index) {
-              var slideTheme = THEMES[report!.theme] || THEMES.light;
+              var slideTheme = SLIDE;
               return (
                 <div key={slide.id} className="group relative">
                   <button
@@ -306,7 +277,7 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
             <>
               {/* Slide render area */}
               <div className="flex-1 flex items-center justify-center p-8 bg-[#F5F5F5] overflow-auto">
-                <div className={"w-full max-w-3xl aspect-[16/9] rounded-xl shadow-lg overflow-hidden flex flex-col " + theme.bg}>
+                <div className={"w-full max-w-3xl aspect-[16/9] rounded-xl shadow-lg overflow-hidden flex flex-col " + s.bg}>
                   {/* Slide content */}
                   <div className="flex-1 flex flex-col p-8">
                     {currentSlide.layout === "title" && (
@@ -317,13 +288,13 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
                             onChange={function(e) { setSlideTitleValue(e.target.value); }}
                             onBlur={handleSaveSlideTitle}
                             onKeyDown={function(e) { if (e.key === "Enter") handleSaveSlideTitle(); }}
-                            className={"text-3xl font-bold bg-transparent border-b-2 border-current focus:outline-none text-center w-full max-w-lg " + theme.text}
+                            className={"text-3xl font-bold bg-transparent border-b-2 border-current focus:outline-none text-center w-full max-w-lg " + s.text}
                             autoFocus
                           />
                         ) : (
                           <button
                             onClick={function() { setEditingSlideTitle(true); setSlideTitleValue(currentSlide!.title || ""); }}
-                            className={"text-3xl font-bold hover:opacity-70 transition-opacity " + theme.text}
+                            className={"text-3xl font-bold hover:opacity-70 transition-opacity " + s.text}
                           >
                             {currentSlide.title || "Click to edit title"}
                           </button>
@@ -333,14 +304,14 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
                             value={contentValue}
                             onChange={function(e) { setContentValue(e.target.value); }}
                             onBlur={handleSaveContent}
-                            className={"mt-4 text-lg bg-transparent border-b border-current focus:outline-none text-center w-full max-w-md resize-none " + theme.accent}
+                            className={"mt-4 text-lg bg-transparent border-b border-current focus:outline-none text-center w-full max-w-md resize-none " + s.accent}
                             rows={2}
                             autoFocus
                           />
                         ) : (
                           <button
                             onClick={function() { setEditingContent(true); setContentValue(getContentText(currentSlide)); }}
-                            className={"mt-4 text-lg hover:opacity-70 transition-opacity " + theme.accent}
+                            className={"mt-4 text-lg hover:opacity-70 transition-opacity " + s.accent}
                           >
                             {getContentText(currentSlide) || "Click to edit subtitle"}
                           </button>
@@ -351,24 +322,24 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
                     {currentSlide.layout === "full" && (
                       <div className="flex-1 flex flex-col">
                         {currentSlide.title && (
-                          <h2 className={"text-xl font-semibold mb-4 " + theme.text}>{currentSlide.title}</h2>
+                          <h2 className={"text-xl font-semibold mb-4 " + s.text}>{currentSlide.title}</h2>
                         )}
                         {hasRealContentBlocks(currentSlide.content_blocks) ? (
                           <div className="flex-1">
-                            <SlideBlockRenderer blocks={currentSlide.content_blocks} theme={report.theme} />
+                            <SlideBlockRenderer blocks={currentSlide.content_blocks} />
                           </div>
                         ) : editingContent ? (
                           <textarea
                             value={contentValue}
                             onChange={function(e) { setContentValue(e.target.value); }}
                             onBlur={handleSaveContent}
-                            className={"flex-1 bg-transparent focus:outline-none resize-none text-sm " + theme.text}
+                            className={"flex-1 bg-transparent focus:outline-none resize-none text-sm " + s.text}
                             autoFocus
                           />
                         ) : (
                           <button
                             onClick={function() { setEditingContent(true); setContentValue(getContentText(currentSlide)); }}
-                            className={"flex-1 text-left text-sm hover:opacity-70 transition-opacity " + theme.text}
+                            className={"flex-1 text-left text-sm hover:opacity-70 transition-opacity " + s.text}
                           >
                             {getContentText(currentSlide) || "Click to edit content"}
                           </button>
@@ -378,11 +349,11 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
 
                     {currentSlide.layout === "two_column" && (
                       <div className="flex-1 flex gap-6">
-                        <div className={"flex-1 rounded-lg p-4 " + theme.cardBg + " " + theme.border + " border"}>
-                          <p className={"text-xs " + theme.accent}>Column 1</p>
+                        <div className={"flex-1 rounded-lg p-4 " + s.cardBg + " " + s.border + " border"}>
+                          <p className={"text-xs " + s.accent}>Column 1</p>
                         </div>
-                        <div className={"flex-1 rounded-lg p-4 " + theme.cardBg + " " + theme.border + " border"}>
-                          <p className={"text-xs " + theme.accent}>Column 2</p>
+                        <div className={"flex-1 rounded-lg p-4 " + s.cardBg + " " + s.border + " border"}>
+                          <p className={"text-xs " + s.accent}>Column 2</p>
                         </div>
                       </div>
                     )}
@@ -390,12 +361,12 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
                     {currentSlide.layout === "kpi_row" && (
                       <div className="flex-1 flex flex-col">
                         {currentSlide.title && (
-                          <h2 className={"text-xl font-semibold mb-4 " + theme.text}>{currentSlide.title}</h2>
+                          <h2 className={"text-xl font-semibold mb-4 " + s.text}>{currentSlide.title}</h2>
                         )}
                         {hasRealContentBlocks(currentSlide.content_blocks) ? (
                           <div className="flex-1 flex items-center">
                             <div className="w-full">
-                              <SlideBlockRenderer blocks={currentSlide.content_blocks} theme={report.theme} />
+                              <SlideBlockRenderer blocks={currentSlide.content_blocks} />
                             </div>
                           </div>
                         ) : (
@@ -403,9 +374,9 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
                             <div className="grid grid-cols-3 gap-4 w-full">
                               {[1, 2, 3].map(function(i) {
                                 return (
-                                  <div key={i} className={"rounded-lg p-4 text-center " + theme.cardBg + " " + theme.border + " border"}>
-                                    <p className={"text-2xl font-bold " + theme.text}>--</p>
-                                    <p className={"text-xs mt-1 " + theme.accent}>{"KPI " + i}</p>
+                                  <div key={i} className={"rounded-lg p-4 text-center " + s.cardBg + " " + s.border + " border"}>
+                                    <p className={"text-2xl font-bold " + s.text}>--</p>
+                                    <p className={"text-xs mt-1 " + s.accent}>{"KPI " + i}</p>
                                   </div>
                                 );
                               })}
@@ -418,15 +389,15 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
                     {currentSlide.layout === "chart_focus" && (
                       <div className="flex-1 flex flex-col">
                         {currentSlide.title && (
-                          <h2 className={"text-xl font-semibold mb-4 " + theme.text}>{currentSlide.title}</h2>
+                          <h2 className={"text-xl font-semibold mb-4 " + s.text}>{currentSlide.title}</h2>
                         )}
                         {hasRealContentBlocks(currentSlide.content_blocks) ? (
                           <div className="flex-1">
-                            <SlideBlockRenderer blocks={currentSlide.content_blocks} theme={report.theme} />
+                            <SlideBlockRenderer blocks={currentSlide.content_blocks} />
                           </div>
                         ) : (
-                          <div className={"flex-1 rounded-lg flex items-center justify-center " + theme.cardBg + " " + theme.border + " border"}>
-                            <BarChart3 size={48} className={theme.accent} />
+                          <div className={"flex-1 rounded-lg flex items-center justify-center " + s.cardBg + " " + s.border + " border"}>
+                            <BarChart3 size={48} className={s.accent} />
                           </div>
                         )}
                       </div>
@@ -435,15 +406,15 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
                     {currentSlide.layout === "table_focus" && (
                       <div className="flex-1 flex flex-col">
                         {currentSlide.title && (
-                          <h2 className={"text-xl font-semibold mb-4 " + theme.text}>{currentSlide.title}</h2>
+                          <h2 className={"text-xl font-semibold mb-4 " + s.text}>{currentSlide.title}</h2>
                         )}
                         {hasRealContentBlocks(currentSlide.content_blocks) ? (
                           <div className="flex-1">
-                            <SlideBlockRenderer blocks={currentSlide.content_blocks} theme={report.theme} />
+                            <SlideBlockRenderer blocks={currentSlide.content_blocks} />
                           </div>
                         ) : (
-                          <div className={"flex-1 rounded-lg flex items-center justify-center " + theme.cardBg + " " + theme.border + " border"}>
-                            <Table size={48} className={theme.accent} />
+                          <div className={"flex-1 rounded-lg flex items-center justify-center " + s.cardBg + " " + s.border + " border"}>
+                            <Table size={48} className={s.accent} />
                           </div>
                         )}
                       </div>
