@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { SlidersHorizontal, ArrowUp, FileText, LayoutDashboard, Search, GitCompare, TrendingUp, Shield } from "lucide-react";
+import { SlidersHorizontal, ArrowUp, FileText, LayoutDashboard, Search, GitCompare, TrendingUp, Shield, ChevronDown, Check, Sparkles } from "lucide-react";
 import FileUpload from "./FileUpload";
 import TemplatesPopover from "./TemplatesPopover";
 import { CONNECTOR_REGISTRY } from "@/lib/connectors/registry";
@@ -21,12 +21,64 @@ interface ChatInputBarProps {
   initialValue?: string;
 }
 
-var MODELS = [
-  { id: "revops-ai", label: "RevOps AI" },
-  { id: "claude", label: "Claude" },
-  { id: "gpt", label: "GPT" },
-  { id: "gemini", label: "Gemini" },
+interface ModelOption {
+  id: string;
+  label: string;
+  description: string;
+  provider: string;
+}
+
+var MODELS: ModelOption[] = [
+  { id: "kairo", label: "Kairo AI", description: "Auto-selects the best model", provider: "kairo" },
+  { id: "claude-opus", label: "Claude Opus 4", description: "Most capable, complex analysis", provider: "anthropic" },
+  { id: "claude-sonnet", label: "Claude Sonnet 4", description: "Fast & smart", provider: "anthropic" },
+  { id: "claude-haiku", label: "Claude Haiku 4", description: "Fastest, simple queries", provider: "anthropic" },
+  { id: "gpt-4o", label: "GPT-4o", description: "Most capable", provider: "openai" },
+  { id: "gpt-4o-mini", label: "GPT-4o Mini", description: "Fast & affordable", provider: "openai" },
+  { id: "gemini-pro", label: "Gemini 2.5 Pro", description: "Most capable", provider: "google" },
+  { id: "gemini-flash", label: "Gemini 2.5 Flash", description: "Fast", provider: "google" },
 ];
+
+var PROVIDER_ORDER = ["kairo", "anthropic", "openai", "google"];
+
+var PROVIDER_LABELS: Record<string, string> = {
+  kairo: "",
+  anthropic: "Anthropic",
+  openai: "OpenAI",
+  google: "Google",
+};
+
+function ProviderIcon({ provider, size = 16 }: { provider: string; size?: number }) {
+  if (provider === "kairo") {
+    return (
+      <div className="flex items-center justify-center rounded bg-[#0A0A0A] text-white" style={{ width: size, height: size }}>
+        <span style={{ fontSize: size * 0.6, fontWeight: 700, lineHeight: 1 }}>K</span>
+      </div>
+    );
+  }
+  if (provider === "anthropic") {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+        <path d="M13.827 3.52l5.51 16.96H16.1L10.59 3.52h3.237zm-7.164 0l5.51 16.96h3.237L9.9 3.52H6.663z" fill="#0A0A0A"/>
+      </svg>
+    );
+  }
+  if (provider === "openai") {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+        <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.998 5.998 0 0 0-3.998 2.9 6.042 6.042 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z" fill="#0A0A0A"/>
+      </svg>
+    );
+  }
+  if (provider === "google") {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+        <path d="M12 11v3.2h5.5c-.2 1.3-1.6 3.9-5.5 3.9-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.1.8 3.8 1.5L18.6 4c-1.8-1.7-4.2-2.7-6.6-2.7C6.5 1.3 2 5.8 2 12s4.5 10.7 10 10.7c5.8 0 9.6-4.1 9.6-9.8 0-.7-.1-1.2-.2-1.7H12z" fill="#0A0A0A"/>
+      </svg>
+    );
+  }
+  return null;
+}
 
 var SLASH_COMMANDS = [
   { command: "/report", label: "Create Report", description: "Generate a PPT-style report from your data", icon: "FileText" },
@@ -52,7 +104,7 @@ export default function ChatInputBar({
   initialValue,
 }: ChatInputBarProps) {
   var [value, setValue] = useState(initialValue ?? "");
-  var [selectedModel, setSelectedModel] = useState("revops-ai");
+  var [selectedModel, setSelectedModel] = useState("kairo");
   var [showModelPicker, setShowModelPicker] = useState(false);
   var [showConnectors, setShowConnectors] = useState(false);
   var [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -184,6 +236,15 @@ export default function ChatInputBar({
 
   var currentModel = MODELS.find(function(m) { return m.id === selectedModel; }) || MODELS[0];
 
+  // Group models by provider
+  var groupedModels = PROVIDER_ORDER.map(function(provider) {
+    return {
+      provider: provider,
+      label: PROVIDER_LABELS[provider],
+      models: MODELS.filter(function(m) { return m.provider === provider; }),
+    };
+  }).filter(function(g) { return g.models.length > 0; });
+
   return (
     <div className="relative w-full px-4 pb-4">
       <div className="mx-auto max-w-2xl">
@@ -244,7 +305,7 @@ export default function ChatInputBar({
               onChange={function(e) { setValue(e.target.value); }}
               onKeyDown={handleKeyDown}
               disabled={disabled || uploading}
-              placeholder="Ask RevOps AI... (type / for commands)"
+              placeholder="Ask Kairo anything... (type / for commands)"
               rows={1}
               className="w-full resize-none bg-transparent text-sm text-[#0A0A0A] placeholder:text-[#A3A3A3] focus:outline-none min-h-[36px] max-h-[200px] py-1"
             />
@@ -321,29 +382,50 @@ export default function ChatInputBar({
               <div className="relative" ref={modelRef}>
                 <button
                   onClick={function() { setShowModelPicker(!showModelPicker); }}
-                  className="ml-1 h-7 px-2.5 rounded-full text-[11px] font-medium border border-[#E5E5E5] text-[#525252] hover:bg-[#F5F5F5] transition-colors"
+                  className="ml-1 h-7 px-2.5 rounded-full text-[11px] font-medium border border-[#E5E5E5] text-[#525252] hover:bg-[#F5F5F5] transition-colors flex items-center gap-1.5"
                 >
-                  {currentModel.label}
+                  <ProviderIcon provider={currentModel.provider} size={14} />
+                  <span>{currentModel.label}</span>
+                  <ChevronDown size={12} className="text-[#A3A3A3]" />
                 </button>
                 {showModelPicker && (
-                  <div className="absolute bottom-full left-0 mb-1 bg-white border border-[#E5E5E5] rounded-xl shadow-lg py-1 min-w-[140px] z-50">
-                    {MODELS.map(function(model) {
+                  <div className="absolute bottom-full left-0 mb-1 bg-white border border-[#E5E5E5] rounded-xl shadow-lg py-1.5 w-[280px] z-50 overflow-hidden">
+                    {groupedModels.map(function(group, gi) {
                       return (
-                        <button
-                          key={model.id}
-                          onClick={function() {
-                            setSelectedModel(model.id);
-                            setShowModelPicker(false);
-                          }}
-                          className={
-                            "w-full text-left px-3 py-1.5 text-xs hover:bg-[#F5F5F5] transition-colors " +
-                            (selectedModel === model.id
-                              ? "text-[#0A0A0A] font-medium"
-                              : "text-[#525252]")
-                          }
-                        >
-                          {model.label}
-                        </button>
+                        <div key={group.provider}>
+                          {gi > 0 && group.label && (
+                            <div className="mx-3 my-1 border-t border-[#F0F0F0]" />
+                          )}
+                          {group.label && (
+                            <div className="px-3 pt-1.5 pb-0.5">
+                              <span className="text-[10px] uppercase tracking-wider text-[#A3A3A3] font-medium">{group.label}</span>
+                            </div>
+                          )}
+                          {group.models.map(function(model) {
+                            var isSelected = selectedModel === model.id;
+                            return (
+                              <button
+                                key={model.id}
+                                onClick={function() {
+                                  setSelectedModel(model.id);
+                                  setShowModelPicker(false);
+                                }}
+                                className={"w-full flex items-center gap-2.5 px-3 py-2 text-left transition-colors " + (isSelected ? "bg-[#F5F5F5]" : "hover:bg-[#FAFAFA]")}
+                              >
+                                <div className="shrink-0">
+                                  <ProviderIcon provider={model.provider} size={16} />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className={"text-sm " + (isSelected ? "font-medium text-[#0A0A0A]" : "text-[#525252]")}>{model.label}</p>
+                                  <p className="text-[11px] text-[#A3A3A3] truncate">{model.description}</p>
+                                </div>
+                                {isSelected && (
+                                  <Check size={14} className="text-[#0A0A0A] shrink-0" />
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
                       );
                     })}
                   </div>
