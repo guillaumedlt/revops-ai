@@ -116,6 +116,29 @@ export default function ChatInputBar({
   var connectorsRef = useRef<HTMLDivElement>(null);
   var slashRef = useRef<HTMLDivElement>(null);
 
+  var [providerStatus, setProviderStatus] = useState<Record<string, boolean>>({
+    anthropic: true,
+    openai: false,
+    google: false,
+  });
+
+  useEffect(function() {
+    fetch("/api/settings/llm").then(function(r) { return r.json(); }).then(function(json) {
+      if (json.data?.keys) {
+        setProviderStatus({
+          anthropic: true,
+          openai: json.data.keys.openai?.configured ?? false,
+          google: json.data.keys.google?.configured ?? false,
+        });
+      }
+    }).catch(function() {});
+  }, []);
+
+  function isProviderConnected(provider: string): boolean {
+    if (provider === "kairo") return true;
+    return providerStatus[provider] ?? false;
+  }
+
   useEffect(function() {
     if (initialValue) setValue(initialValue);
   }, [initialValue]);
@@ -368,6 +391,7 @@ export default function ChatInputBar({
                             )}
                             {group.models.map(function(model) {
                               var isSelected = selectedModel === model.id;
+                              var connected = isProviderConnected(model.provider);
                               return (
                                 <button
                                   key={model.id}
@@ -380,7 +404,11 @@ export default function ChatInputBar({
                                   <ProviderIcon provider={model.provider} size={15} />
                                   <div className="flex-1 min-w-0">
                                     <p className={"text-[13px] leading-tight " + (isSelected ? "font-medium text-[#0A0A0A]" : "text-[#525252]")}>{model.label}</p>
-                                    <p className="text-[10px] text-[#A3A3A3] leading-tight">{model.description}</p>
+                                    {connected ? (
+                                      <p className="text-[10px] text-[#A3A3A3] leading-tight">{model.description}</p>
+                                    ) : (
+                                      <p className="text-[10px] text-amber-500 font-medium leading-tight">No API key</p>
+                                    )}
                                   </div>
                                   {isSelected && <Check size={13} className="text-[#0A0A0A] shrink-0" />}
                                 </button>
