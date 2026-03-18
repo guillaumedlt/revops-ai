@@ -2,7 +2,7 @@
 
 import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Play, Check, Plus, Trash2, GripVertical, Type, Columns, BarChart3, Table, LayoutGrid, Monitor } from "lucide-react";
+import { ArrowLeft, Play, Check, Trash2, BarChart3, Table } from "lucide-react";
 import ChartBlock from "@/components/chat/blocks/ChartBlock";
 import TableBlock from "@/components/chat/blocks/TableBlock";
 
@@ -29,15 +29,6 @@ var THEMES: Record<string, { bg: string; text: string; accent: string; border: s
   gradient: { bg: "bg-gradient-to-br from-[#667eea] to-[#764ba2]", text: "text-white", accent: "text-white/70", border: "border-white/20", cardBg: "bg-white/10" },
   minimal: { bg: "bg-[#FAFAF8]", text: "text-[#333]", accent: "text-[#666]", border: "border-[#E8E8E5]", cardBg: "bg-white" },
 };
-
-var LAYOUTS = [
-  { id: "title", label: "Title", icon: Type, desc: "Large centered title" },
-  { id: "full", label: "Full", icon: Monitor, desc: "Full content area" },
-  { id: "two_column", label: "Two Column", icon: Columns, desc: "Side by side" },
-  { id: "kpi_row", label: "KPI Row", icon: LayoutGrid, desc: "Row of KPI cards" },
-  { id: "chart_focus", label: "Chart", icon: BarChart3, desc: "Large chart" },
-  { id: "table_focus", label: "Table", icon: Table, desc: "Full-width table" },
-];
 
 function hasRealContentBlocks(blocks: any[]): boolean {
   if (!blocks || blocks.length === 0) return false;
@@ -95,7 +86,6 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
   var [activeSlide, setActiveSlide] = useState(0);
   var [editingName, setEditingName] = useState(false);
   var [nameValue, setNameValue] = useState("");
-  var [showLayoutPicker, setShowLayoutPicker] = useState(false);
   var [editingSlideTitle, setEditingSlideTitle] = useState(false);
   var [slideTitleValue, setSlideTitleValue] = useState("");
   var [editingContent, setEditingContent] = useState(false);
@@ -121,23 +111,6 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updates),
     }).then(function(r) { return r.json(); });
-  }
-
-  function addSlide(layout: string) {
-    setShowLayoutPicker(false);
-    fetch("/api/reports/" + reportId + "/slides", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ layout: layout, title: layout === "title" ? "Slide Title" : null, content_blocks: [] }),
-    })
-      .then(function(r) { return r.json(); })
-      .then(function(res) {
-        if (res.data && report) {
-          var newSlides = report.slides.concat([res.data]);
-          setReport(Object.assign({}, report, { slides: newSlides }));
-          setActiveSlide(newSlides.length - 1);
-        }
-      });
   }
 
   function deleteSlide(slideId: string) {
@@ -325,39 +298,6 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
               );
             })}
           </div>
-
-          {/* Add slide button */}
-          <div className="p-3 border-t border-[#E5E5E5]">
-            <button
-              onClick={function() { setShowLayoutPicker(!showLayoutPicker); }}
-              className="w-full flex items-center justify-center gap-1.5 h-9 rounded-lg border border-dashed border-[#D4D4D4] text-xs text-[#737373] hover:bg-white hover:border-[#A3A3A3] transition-colors"
-            >
-              <Plus size={14} />
-              Add Slide
-            </button>
-
-            {/* Layout picker */}
-            {showLayoutPicker && (
-              <div className="mt-2 bg-white rounded-xl border border-[#E5E5E5] shadow-lg p-2 space-y-1">
-                {LAYOUTS.map(function(layout) {
-                  var Icon = layout.icon;
-                  return (
-                    <button
-                      key={layout.id}
-                      onClick={function() { addSlide(layout.id); }}
-                      className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-left hover:bg-[#F5F5F5] transition-colors"
-                    >
-                      <Icon size={14} className="text-[#A3A3A3] shrink-0" />
-                      <div>
-                        <p className="text-xs font-medium text-[#0A0A0A]">{layout.label}</p>
-                        <p className="text-[10px] text-[#A3A3A3]">{layout.desc}</p>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
         </div>
 
         {/* Slide preview */}
@@ -385,7 +325,7 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
                             onClick={function() { setEditingSlideTitle(true); setSlideTitleValue(currentSlide!.title || ""); }}
                             className={"text-3xl font-bold hover:opacity-70 transition-opacity " + theme.text}
                           >
-                            {currentSlide.title || "Click to add title"}
+                            {currentSlide.title || "Click to edit title"}
                           </button>
                         )}
                         {editingContent ? (
@@ -402,7 +342,7 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
                             onClick={function() { setEditingContent(true); setContentValue(getContentText(currentSlide)); }}
                             className={"mt-4 text-lg hover:opacity-70 transition-opacity " + theme.accent}
                           >
-                            {getContentText(currentSlide) || "Click to add subtitle"}
+                            {getContentText(currentSlide) || "Click to edit subtitle"}
                           </button>
                         )}
                       </div>
@@ -430,7 +370,7 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
                             onClick={function() { setEditingContent(true); setContentValue(getContentText(currentSlide)); }}
                             className={"flex-1 text-left text-sm hover:opacity-70 transition-opacity " + theme.text}
                           >
-                            {getContentText(currentSlide) || "Click to add content"}
+                            {getContentText(currentSlide) || "Click to edit content"}
                           </button>
                         )}
                       </div>
@@ -512,26 +452,8 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
                 </div>
               </div>
 
-              {/* Bottom editing bar */}
-              <div className="h-12 border-t border-[#E5E5E5] flex items-center justify-between px-4 shrink-0 bg-white">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-[#A3A3A3]">Layout:</span>
-                  <div className="flex items-center gap-1">
-                    {LAYOUTS.map(function(layout) {
-                      var Icon = layout.icon;
-                      return (
-                        <button
-                          key={layout.id}
-                          onClick={function() { updateSlide(currentSlide!.id, { layout: layout.id }); }}
-                          className={"h-7 w-7 flex items-center justify-center rounded transition-colors " + (currentSlide!.layout === layout.id ? "bg-[#0A0A0A] text-white" : "text-[#A3A3A3] hover:bg-[#F5F5F5]")}
-                          title={layout.label}
-                        >
-                          <Icon size={14} />
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
+              {/* Bottom bar */}
+              <div className="h-12 border-t border-[#E5E5E5] flex items-center justify-center px-4 shrink-0 bg-white">
                 <span className="text-xs text-[#A3A3A3]">
                   {"Slide " + (activeSlide + 1) + " of " + report.slides.length}
                 </span>
@@ -540,13 +462,8 @@ export default function ReportEditorPage({ params }: { params: Promise<{ id: str
           ) : (
             <div className="flex-1 flex items-center justify-center bg-[#F5F5F5]">
               <div className="text-center">
-                <p className="text-sm text-[#A3A3A3] mb-3">No slides yet</p>
-                <button
-                  onClick={function() { setShowLayoutPicker(true); }}
-                  className="px-4 h-9 rounded-lg bg-[#0A0A0A] text-white text-sm font-medium hover:bg-[#333] transition-colors"
-                >
-                  Add First Slide
-                </button>
+                <p className="text-sm text-[#A3A3A3] mb-2">No slides in this report</p>
+                <p className="text-xs text-[#D4D4D4]">Generate slides from the chat using /report</p>
               </div>
             </div>
           )}
