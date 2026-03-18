@@ -53,6 +53,9 @@ var TOOL_LABELS: Record<string, string> = {
   hubspot_create_note: "Adding note...",
   hubspot_meeting_prep: "Preparing meeting brief...",
   hubspot_win_loss_analysis: "Analyzing win/loss patterns...",
+  hubspot_forecast: "Computing revenue forecast...",
+  hubspot_funnel: "Analyzing sales funnel...",
+  hubspot_crm_hygiene: "Auditing CRM data quality...",
   // Internal tools
   create_note: "Creating note...",
 };
