@@ -17,9 +17,9 @@ const ChatSchema = z.object({
 function resolveModelId(model: string | undefined, message: string): { provider: string; modelId: string; displayName: string } {
   switch (model) {
     case "claude-opus":
-      return { provider: "anthropic", modelId: "claude-opus-4-6-20250610", displayName: "opus" };
+      return { provider: "anthropic", modelId: "claude-opus-4-20250514", displayName: "opus" };
     case "claude-sonnet":
-      return { provider: "anthropic", modelId: "claude-sonnet-4-6-20250610", displayName: "sonnet" };
+      return { provider: "anthropic", modelId: "claude-sonnet-4-20250514", displayName: "sonnet" };
     case "claude-haiku":
       return { provider: "anthropic", modelId: "claude-haiku-4-5-20251001", displayName: "haiku" };
     case "gpt-4o":
