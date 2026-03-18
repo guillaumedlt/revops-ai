@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Kairo",
   description:
-    "Your AI-powered CRM command center. Adoption scoring, 87 metrics, AI agent.",
+    "Your AI RevOps assistant. Pipeline intelligence, forecasting, deal scoring, and CRM automation.",
 };
 
 export default function RootLayout({
