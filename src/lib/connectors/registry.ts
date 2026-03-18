@@ -51,3 +51,4 @@ export const CONNECTOR_REGISTRY: Connector[] = [
 export const CATEGORIES: { id: string; label: string }[] = [
   { id: "all", label: "All" },
 ];
+// ICP scoring tools included
