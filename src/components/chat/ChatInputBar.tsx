@@ -30,11 +30,11 @@ interface ModelOption {
 
 var MODELS: ModelOption[] = [
   { id: "kairo", label: "Kairo AI", description: "Auto-selects the best model", provider: "kairo" },
-  { id: "claude-opus", label: "Claude Opus 4", description: "Most capable, complex analysis", provider: "anthropic" },
-  { id: "claude-sonnet", label: "Claude Sonnet 4", description: "Fast & smart", provider: "anthropic" },
-  { id: "claude-haiku", label: "Claude Haiku 4", description: "Fastest, simple queries", provider: "anthropic" },
-  { id: "gpt-4o", label: "GPT-4o", description: "Most capable", provider: "openai" },
-  { id: "gpt-4o-mini", label: "GPT-4o Mini", description: "Fast & affordable", provider: "openai" },
+  { id: "claude-opus", label: "Claude Opus 4.6", description: "Most capable, complex analysis", provider: "anthropic" },
+  { id: "claude-sonnet", label: "Claude Sonnet 4.6", description: "Fast & smart", provider: "anthropic" },
+  { id: "claude-haiku", label: "Claude Haiku 4.5", description: "Fastest, simple queries", provider: "anthropic" },
+  { id: "gpt-4o", label: "GPT-4.1", description: "Most capable", provider: "openai" },
+  { id: "gpt-4o-mini", label: "GPT-4.1 Mini", description: "Fast & affordable", provider: "openai" },
   { id: "gemini-pro", label: "Gemini 2.5 Pro", description: "Most capable", provider: "google" },
   { id: "gemini-flash", label: "Gemini 2.5 Flash", description: "Fast", provider: "google" },
 ];
