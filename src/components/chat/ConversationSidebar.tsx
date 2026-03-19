@@ -99,24 +99,7 @@ export default function ConversationSidebar() {
   }
 
   function handleHover(id: string) {
-    if (![]) {
-      fetch("/api/conversations/" + id)
-        .then(function(r) { return r.json(); })
-        .then(function(res) {
-          if (res.data?.messages) {
-            var msgs = res.data.messages.map(function(m: any) {
-              return {
-                id: m.id,
-                role: m.role,
-                content: m.content,
-                content_blocks: m.content_blocks,
-              };
-            });
-            ;
-          }
-        })
-        .catch(function() {});
-    }
+    // Prefetch handled by Next.js
   }
 
   var grouped = groupByDate(conversations);
