@@ -11,7 +11,6 @@ import {
   Trash2,
   LayoutDashboard,
   Target,
-  Flag,
 } from "lucide-react";
 import { getCachedMessages, setCachedMessages, deleteCachedConversation } from "@/lib/chat-store";
 
@@ -170,13 +169,6 @@ export default function ConversationSidebar() {
         >
           <Target size={16} className={pathname === "/dashboards/icp" ? "text-[#0A0A0A]" : "text-[#A3A3A3]"} />
           ICP
-        </button>
-        <button
-          onClick={function() { router.push("/dashboards/goals"); }}
-          className={"w-full flex items-center gap-2 px-3 h-9 rounded-lg text-sm transition-colors " + (pathname === "/dashboards/goals" ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium" : "text-[#525252] hover:bg-[#F5F5F5] hover:text-[#0A0A0A]")}
-        >
-          <Flag size={16} className={pathname === "/dashboards/goals" ? "text-[#0A0A0A]" : "text-[#A3A3A3]"} />
-          Goals
         </button>
         <button
           onClick={function() { setSearchOpen(!searchOpen); }}
