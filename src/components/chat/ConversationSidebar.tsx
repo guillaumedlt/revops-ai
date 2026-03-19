@@ -12,7 +12,6 @@ import {
   LayoutDashboard,
   Target,
 } from "lucide-react";
-import { getCachedMessages, setCachedMessages, deleteCachedConversation } from "@/lib/chat-store";
 
 interface Conversation {
   id: string;
@@ -86,7 +85,7 @@ export default function ConversationSidebar() {
 
   async function handleDelete(id: string) {
     setConversations(function(prev) { return prev.filter(function(c) { return c.id !== id; }); });
-    deleteCachedConversation(id);
+    
     await fetch("/api/conversations/" + id, { method: "DELETE" });
     if (pathname === "/chat/" + id) {
       router.push("/chat");
@@ -100,7 +99,7 @@ export default function ConversationSidebar() {
   }
 
   function handleHover(id: string) {
-    if (!getCachedMessages(id)) {
+    if (![]) {
       fetch("/api/conversations/" + id)
         .then(function(r) { return r.json(); })
         .then(function(res) {
@@ -113,7 +112,7 @@ export default function ConversationSidebar() {
                 content_blocks: m.content_blocks,
               };
             });
-            setCachedMessages(id, msgs);
+            ;
           }
         })
         .catch(function() {});
