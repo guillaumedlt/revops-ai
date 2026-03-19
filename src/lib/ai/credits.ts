@@ -5,7 +5,6 @@ export const CREDIT_COSTS = {
   standard: 2,    // Sonnet with tools
   opus: 5,        // Opus (most capable)
   report: 5,      // /report generation
-  briefing: 3,    // Morning briefing
   icp: 2,         // ICP generation
 } as const;
 
