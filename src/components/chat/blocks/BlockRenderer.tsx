@@ -49,7 +49,7 @@ export default function BlockRenderer({ blocks }: { blocks: ContentBlock[] }) {
             break;
           case "kpi_grid":
             content = (
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {block.items.map((item, j) => (
                   <KPICardBlock key={j} label={item.label} value={item.value} change={item.change} trend={item.trend} />
                 ))}
