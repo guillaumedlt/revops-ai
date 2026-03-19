@@ -106,16 +106,7 @@ function SettingsContent() {
       setUserName(data.user?.user_metadata?.full_name ?? "");
     });
 
-    // Load automation settings
-    fetch("/api/settings/automations")
-      .then((r) => r.json())
-      .then((json) => {
-        if (json.data?.morningBriefing?.enabled) {
-          setBriefingEnabled(true);
-        }
-      })
-      .catch(() => {});
-  }, []);
+    // Load automation settings  }, []);
 
   useEffect(() => {
     if (activeTab === "connectors") {
@@ -272,35 +263,6 @@ function SettingsContent() {
                 <label className="text-xs text-[#737373]">Name</label>
                 <p className="text-sm text-[#0A0A0A] mt-0.5">{userName || "Not set"}</p>
               </div>
-            </div>
-          </div>
-
-          {/* Morning Briefing */}
-          <div className="bg-white rounded-xl border border-[#E5E5E5] p-6 space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-sm font-medium text-[#0A0A0A]">Morning Briefing</h2>
-                <p className="text-xs text-[#737373] mt-0.5">Daily pipeline summary, at-risk deals, and action items</p>
-              </div>
-              <button
-                onClick={toggleBriefing}
-                disabled={briefingLoading}
-                className={
-                  "relative inline-flex h-6 w-11 items-center rounded-full transition-colors " +
-                  (briefingEnabled ? "bg-[#0A0A0A]" : "bg-[#E5E5E5]")
-                }
-              >
-                <span
-                  className={
-                    "inline-block h-4 w-4 transform rounded-full bg-white transition-transform " +
-                    (briefingEnabled ? "translate-x-[22px]" : "translate-x-[3px]")
-                  }
-                />
-              </button>
-            </div>
-            <div className="flex items-center gap-4 text-xs text-[#A3A3A3]">
-              <span>Cost: 3 credits/day</span>
-              <span>Delivery: 8:00 AM</span>
             </div>
           </div>
 
