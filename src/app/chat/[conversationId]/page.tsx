@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useParams } from "next/navigation";
+import { ChevronLeft } from "lucide-react";
 import MessageThread from "@/components/chat/MessageThread";
 import ChatInputBar from "@/components/chat/ChatInputBar";
 import type { ContentBlock } from "@/types/chat-blocks";
@@ -27,6 +28,15 @@ export default function ConversationPage() {
   const [selectedModel, setSelectedModel] = useState("kairo");
   const initialSent = useRef(false);
   const lastMessageRef = useRef<string>("");
+  const pendingText = useRef("");
+  const rafId = useRef<number | null>(null);
+
+  // Cleanup RAF on unmount
+  useEffect(() => {
+    return () => {
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+    };
+  }, []);
 
   // Fetch existing messages
   useEffect(() => {
@@ -103,7 +113,13 @@ export default function ConversationPage() {
               const event = JSON.parse(line.slice(6));
               if (event.type === "token") {
                 accText += event.token;
-                setStreamingText(accText);
+                pendingText.current = accText;
+                if (!rafId.current) {
+                  rafId.current = requestAnimationFrame(function() {
+                    setStreamingText(pendingText.current);
+                    rafId.current = null;
+                  });
+                }
               } else if (event.type === "tool_start") {
                 setActiveTools((prev) => [...prev, event.name]);
               } else if (event.type === "tool_result") {
@@ -115,6 +131,11 @@ export default function ConversationPage() {
                 hadError = true;
                 setChatError({ message: event.error || "Something went wrong. Please try again." });
               } else if (event.type === "done") {
+                // Flush any pending RAF
+                if (rafId.current) {
+                  cancelAnimationFrame(rafId.current);
+                  rafId.current = null;
+                }
                 const assistantMsg: Message = {
                   id: crypto.randomUUID(),
                   role: "assistant",
@@ -182,6 +203,13 @@ export default function ConversationPage() {
 
   return (
     <div className="flex-1 flex flex-col h-full">
+      {/* Mobile header */}
+      <div className="md:hidden flex items-center gap-3 px-4 py-3 border-b border-[#E5E5E5] bg-white shrink-0">
+        <a href="/chat" className="h-8 w-8 flex items-center justify-center rounded-lg hover:bg-[#F5F5F5]">
+          <ChevronLeft size={18} className="text-[#525252]" />
+        </a>
+        <span className="text-sm font-medium text-[#0A0A0A] truncate">Kairo</span>
+      </div>
       <MessageThread
         messages={messages}
         streamingText={streamingText}
