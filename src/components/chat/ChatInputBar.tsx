@@ -274,11 +274,11 @@ export default function ChatInputBar({
 
   return (
     <div className="relative w-full px-4 pb-4">
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto max-w-2xl w-full">
         <div className="relative border border-[#E5E5E5] rounded-2xl bg-white shadow-sm focus-within:ring-1 focus-within:ring-[#D4D4D4] transition-shadow">
           {/* Slash command popover */}
           {showSlash && filteredSlash.length > 0 && (
-            <div ref={slashRef} className="absolute bottom-full left-4 mb-2 w-[300px] rounded-xl border border-[#E5E5E5] bg-white shadow-lg z-50 py-1 overflow-hidden">
+            <div ref={slashRef} className="absolute bottom-full left-4 mb-2 w-[300px] max-w-[calc(100vw-2rem)] rounded-xl border border-[#E5E5E5] bg-white shadow-lg z-50 py-1 overflow-hidden">
               {filteredSlash.map(function(cmd, i) {
                 var Icon = ICON_MAP[cmd.icon] || FileText;
                 return (
@@ -333,7 +333,7 @@ export default function ChatInputBar({
 
           {/* Bottom bar */}
           <div className="px-3 pb-2.5 flex items-center justify-between">
-            <div className="relative flex items-center gap-0.5">
+            <div className="relative flex items-center gap-0.5 min-w-0 overflow-x-auto">
               <FileUpload
                 onFileSelect={function(file) { setSelectedFile(file); }}
                 selectedFile={null}
@@ -343,13 +343,13 @@ export default function ChatInputBar({
                 <button
                   onClick={function() { setShowConnectors(!showConnectors); }}
                   type="button"
-                  className="flex h-8 w-8 items-center justify-center rounded-lg text-[#737373] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg text-[#737373] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors shrink-0"
                   title="Connectors"
                 >
                   <SlidersHorizontal size={16} />
                 </button>
                 {showConnectors && (
-                  <div className="absolute bottom-full left-0 mb-2 w-[280px] rounded-xl border border-[#E5E5E5] bg-white shadow-lg z-50 overflow-hidden">
+                  <div className="absolute bottom-full left-0 mb-2 w-[280px] max-w-[calc(100vw-2rem)] rounded-xl border border-[#E5E5E5] bg-white shadow-lg z-50 overflow-hidden">
                     <div className="px-4 py-2.5 border-b border-[#F0F0F0]">
                       <p className="text-xs font-semibold text-[#0A0A0A]">Connectors</p>
                     </div>
@@ -389,14 +389,15 @@ export default function ChatInputBar({
               <div className="relative" ref={modelRef}>
                 <button
                   onClick={function() { setShowModelPicker(!showModelPicker); }}
-                  className="ml-1 h-7 px-2.5 rounded-full text-[11px] font-medium border border-[#E5E5E5] text-[#525252] hover:bg-[#F5F5F5] transition-colors flex items-center gap-1.5"
+                  className="ml-1 h-7 px-2 sm:px-2.5 rounded-full text-[10px] sm:text-[11px] font-medium border border-[#E5E5E5] text-[#525252] hover:bg-[#F5F5F5] transition-colors flex items-center gap-1 sm:gap-1.5 shrink-0"
                 >
                   <ProviderIcon provider={currentModel.provider} size={14} />
-                  <span>{currentModel.label}</span>
+                  <span className="hidden sm:inline">{currentModel.label}</span>
+                  <span className="sm:hidden">{currentModel.label.split(" ")[0]}</span>
                   <ChevronDown size={12} className={"text-[#A3A3A3] transition-transform " + (showModelPicker ? "rotate-180" : "")} />
                 </button>
                 {showModelPicker && (
-                  <div className="absolute bottom-full left-0 mb-1 bg-white border border-[#E5E5E5] rounded-xl shadow-lg w-[260px] z-50 overflow-hidden">
+                  <div className="absolute bottom-full left-0 mb-1 bg-white border border-[#E5E5E5] rounded-xl shadow-lg w-[260px] max-w-[calc(100vw-2rem)] z-50 overflow-hidden">
                     <div className="max-h-[320px] overflow-y-auto py-1">
                       {groupedModels.map(function(group, gi) {
                         return (
@@ -442,7 +443,7 @@ export default function ChatInputBar({
             </div>
 
             {/* Send button */}
-            <div className="flex items-center gap-0.5">
+            <div className="flex items-center gap-0.5 shrink-0">
               {value.trim() ? (
                 <button
                   onClick={handleSend}
