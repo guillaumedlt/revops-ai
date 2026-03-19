@@ -96,8 +96,6 @@ function SettingsContent() {
   const [showLemlistInput, setShowLemlistInput] = useState(false);
 
   // Morning Briefing state
-  const [briefingEnabled, setBriefingEnabled] = useState(false);
-  const [briefingLoading, setBriefingLoading] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -204,23 +202,6 @@ function SettingsContent() {
     setLemlistConnected(false);
   };
 
-  const toggleBriefing = async () => {
-    const newValue = !briefingEnabled;
-    setBriefingEnabled(newValue);
-    setBriefingLoading(true);
-    try {
-      await fetch("/api/settings/automations", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ morningBriefing: { enabled: newValue } }),
-      });
-    } catch {
-      // Revert on error
-      setBriefingEnabled(!newValue);
-    } finally {
-      setBriefingLoading(false);
-    }
-  };
 
   return (
     <div>
