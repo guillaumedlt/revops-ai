@@ -74,6 +74,45 @@ async function hubspotFetch(path: string, token: string, options?: RequestInit) 
   return res.json();
 }
 
+// Paginated search — fetches ALL results (up to maxPages * 100)
+// Aggregates server-side so the AI gets a clean summary, not raw dumps
+async function hubspotSearchAll(
+  token: string,
+  objectType: string,
+  filters: any[],
+  properties: string[],
+  maxPages: number = 10
+): Promise<{ results: any[]; total: number }> {
+  var allResults: any[] = [];
+  var after: string | undefined = undefined;
+  var total = 0;
+
+  for (var page = 0; page < maxPages; page++) {
+    var body: any = {
+      filterGroups: filters.length > 0 ? [{ filters }] : [],
+      properties,
+      limit: 100,
+    };
+    if (after) body.after = after;
+
+    var data = await hubspotFetch(`/crm/v3/objects/${objectType}/search`, token, {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
+
+    allResults = allResults.concat(data.results || []);
+    total = data.total || allResults.length;
+
+    if (data.paging?.next?.after) {
+      after = data.paging.next.after;
+    } else {
+      break;
+    }
+  }
+
+  return { results: allResults, total };
+}
+
 export const hubspotTools = {
   hubspot_search_deals: {
     connector: "hubspot",
@@ -131,29 +170,27 @@ export const hubspotTools = {
 
   hubspot_get_pipeline: {
     connector: "hubspot",
-    description: "Get pipeline stages with deal counts and values. Shows the full sales pipeline breakdown.",
+    description: "Get pipeline stages with deal counts and values. Shows the full sales pipeline breakdown. Fetches ALL open deals (paginated).",
     parameters: z.object({}),
     execute: async (_args: any, tenantId: string) => {
       const auth = await getHubSpotToken(tenantId);
       if (!auth) return { error: "HubSpot not connected" };
-      
+
       // Get pipeline stages
       const pipelines = await hubspotFetch("/crm/v3/pipelines/deals", auth.accessToken);
-      
-      // Get open deals aggregated
-      const dealsData = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
-        method: "POST",
-        body: JSON.stringify({
-          filterGroups: [{ filters: [{ propertyName: "hs_is_closed", operator: "EQ", value: "false" }] }],
-          properties: ["dealstage", "amount"],
-          limit: 100,
-        }),
-      });
-      
+
+      // Get ALL open deals (paginated)
+      const dealsData = await hubspotSearchAll(
+        auth.accessToken,
+        "deals",
+        [{ propertyName: "hs_is_closed", operator: "EQ", value: "false" }],
+        ["dealstage", "amount"],
+      );
+
       // Aggregate by stage
       const byStage: Record<string, { count: number; value: number }> = {};
       let totalValue = 0;
-      for (const deal of dealsData.results || []) {
+      for (const deal of dealsData.results) {
         const stage = deal.properties.dealstage || "unknown";
         if (!byStage[stage]) byStage[stage] = { count: 0, value: 0 };
         byStage[stage].count++;
@@ -161,23 +198,28 @@ export const hubspotTools = {
         byStage[stage].value += amt;
         totalValue += amt;
       }
-      
+
       // Map stage IDs to labels
       const stageLabels: Record<string, string> = {};
+      const stageOrder: Record<string, number> = {};
       for (const p of pipelines.results || []) {
         for (const s of p.stages || []) {
           stageLabels[s.id] = s.label;
+          stageOrder[s.id] = s.displayOrder ?? 0;
         }
       }
-      
-      const stages = Object.entries(byStage).map(([id, data]) => ({
-        stageId: id,
-        stageName: stageLabels[id] || id,
-        dealCount: data.count,
-        value: data.value,
-      }));
-      
-      return { totalValue, totalDeals: dealsData.total, stages };
+
+      const stages = Object.entries(byStage)
+        .map(([id, data]) => ({
+          stageId: id,
+          stageName: stageLabels[id] || id,
+          dealCount: data.count,
+          value: data.value,
+          order: stageOrder[id] ?? 99,
+        }))
+        .sort((a, b) => a.order - b.order);
+
+      return { totalValue, totalDeals: dealsData.total, fetchedDeals: dealsData.results.length, stages };
     },
   },
 
@@ -317,89 +359,110 @@ export const hubspotTools = {
     execute: async (args: any, tenantId: string) => {
       const auth = await getHubSpotToken(tenantId);
       if (!auth) return { error: "HubSpot not connected" };
-      
+
       const results: any = {};
-      
+
       if (args.metric === "win_rate" || args.metric === "all") {
-        // Get closed deals
-        const closed = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
-          method: "POST",
-          body: JSON.stringify({
-            filterGroups: [{ filters: [{ propertyName: "hs_is_closed", operator: "EQ", value: "true" }] }],
-            properties: ["hs_is_closed_won", "amount"],
-            limit: 100,
-          }),
-        });
-        const won = (closed.results || []).filter((d: any) => d.properties.hs_is_closed_won === "true");
-        const total = closed.total || 0;
+        // Fetch ALL closed deals (paginated)
+        const closed = await hubspotSearchAll(
+          auth.accessToken, "deals",
+          [{ propertyName: "hs_is_closed", operator: "EQ", value: "true" }],
+          ["hs_is_closed_won", "amount"],
+        );
+        const won = closed.results.filter((d: any) => d.properties.hs_is_closed_won === "true");
+        const lost = closed.results.length - won.length;
         results.winRate = {
-          rate: total === 0 ? 0 : Math.round((won.length / Math.min(total, 100)) * 1000) / 10,
+          rate: closed.results.length === 0 ? 0 : Math.round((won.length / closed.results.length) * 1000) / 10,
           wonCount: won.length,
-          totalClosed: total,
+          lostCount: lost,
+          totalClosed: closed.total,
+          sampleSize: closed.results.length,
           avgWonAmount: won.length === 0 ? 0 : Math.round(won.reduce((s: number, d: any) => s + (Number(d.properties.amount) || 0), 0) / won.length),
         };
       }
-      
+
       if (args.metric === "velocity" || args.metric === "all") {
-        const won = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
-          method: "POST",
-          body: JSON.stringify({
-            filterGroups: [{ filters: [{ propertyName: "hs_is_closed_won", operator: "EQ", value: "true" }] }],
-            properties: ["createdate", "closedate", "amount"],
-            limit: 100,
-          }),
-        });
-        const cycles = (won.results || [])
+        // Fetch ALL won deals (paginated)
+        const won = await hubspotSearchAll(
+          auth.accessToken, "deals",
+          [{ propertyName: "hs_is_closed_won", operator: "EQ", value: "true" }],
+          ["createdate", "closedate", "amount", "dealstage"],
+        );
+        const cycles = won.results
           .map((d: any) => {
             const created = new Date(d.properties.createdate).getTime();
             const closed = new Date(d.properties.closedate).getTime();
-            return Math.round((closed - created) / (1000 * 60 * 60 * 24));
+            return { days: Math.round((closed - created) / (1000 * 60 * 60 * 24)), amount: Number(d.properties.amount) || 0 };
           })
-          .filter((d: number) => d > 0 && d < 365)
-          .sort((a: number, b: number) => a - b);
-        
+          .filter((d: any) => d.days > 0 && d.days < 365)
+          .sort((a: any, b: any) => a.days - b.days);
+
+        const dayValues = cycles.map((c: any) => c.days);
+        const p25 = dayValues.length > 3 ? dayValues[Math.floor(dayValues.length * 0.25)] : null;
+        const p75 = dayValues.length > 3 ? dayValues[Math.floor(dayValues.length * 0.75)] : null;
+
         results.velocity = {
-          medianDays: cycles.length === 0 ? 0 : cycles[Math.floor(cycles.length / 2)],
-          avgDays: cycles.length === 0 ? 0 : Math.round(cycles.reduce((s: number, v: number) => s + v, 0) / cycles.length),
+          medianDays: cycles.length === 0 ? 0 : dayValues[Math.floor(dayValues.length / 2)],
+          avgDays: cycles.length === 0 ? 0 : Math.round(dayValues.reduce((s: number, v: number) => s + v, 0) / dayValues.length),
+          p25Days: p25,
+          p75Days: p75,
+          minDays: dayValues.length > 0 ? dayValues[0] : 0,
+          maxDays: dayValues.length > 0 ? dayValues[dayValues.length - 1] : 0,
           sampleSize: cycles.length,
+          totalDeals: won.total,
         };
       }
-      
+
       if (args.metric === "revenue" || args.metric === "all") {
-        const won = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
-          method: "POST",
-          body: JSON.stringify({
-            filterGroups: [{ filters: [{ propertyName: "hs_is_closed_won", operator: "EQ", value: "true" }] }],
-            properties: ["amount", "closedate"],
-            limit: 100,
-          }),
-        });
-        const total = (won.results || []).reduce((s: number, d: any) => s + (Number(d.properties.amount) || 0), 0);
-        results.revenue = { totalWonRevenue: total, dealCount: won.total };
+        // Fetch ALL won deals (paginated)
+        const won = await hubspotSearchAll(
+          auth.accessToken, "deals",
+          [{ propertyName: "hs_is_closed_won", operator: "EQ", value: "true" }],
+          ["amount", "closedate"],
+        );
+        const amounts = won.results.map((d: any) => Number(d.properties.amount) || 0);
+        const total = amounts.reduce((s: number, a: number) => s + a, 0);
+        const sorted = [...amounts].sort((a, b) => b - a);
+        results.revenue = {
+          totalWonRevenue: total,
+          dealCount: won.total,
+          avgDealSize: won.results.length > 0 ? Math.round(total / won.results.length) : 0,
+          medianDealSize: sorted.length > 0 ? sorted[Math.floor(sorted.length / 2)] : 0,
+          largestDeal: sorted.length > 0 ? sorted[0] : 0,
+          sampleSize: won.results.length,
+        };
       }
-      
+
       if (args.metric === "activity" || args.metric === "all") {
-        const open = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
-          method: "POST",
-          body: JSON.stringify({
-            filterGroups: [{ filters: [{ propertyName: "hs_is_closed", operator: "EQ", value: "false" }] }],
-            properties: ["dealname", "hs_last_sales_activity_date", "amount"],
-            limit: 100,
-          }),
-        });
+        // Fetch ALL open deals (paginated)
+        const open = await hubspotSearchAll(
+          auth.accessToken, "deals",
+          [{ propertyName: "hs_is_closed", operator: "EQ", value: "false" }],
+          ["dealname", "hs_last_sales_activity_date", "amount", "hubspot_owner_id"],
+        );
         const now = Date.now();
         const fourteenDays = 14 * 24 * 60 * 60 * 1000;
-        const unworked = (open.results || []).filter((d: any) => {
+        const sevenDays = 7 * 24 * 60 * 60 * 1000;
+        let unworked14 = 0;
+        let unworked7 = 0;
+        let totalOpenValue = 0;
+        for (const d of open.results) {
           const last = d.properties.hs_last_sales_activity_date;
-          return !last || (now - new Date(last).getTime()) > fourteenDays;
-        });
+          const amt = Number(d.properties.amount) || 0;
+          totalOpenValue += amt;
+          if (!last || (now - new Date(last).getTime()) > fourteenDays) unworked14++;
+          if (!last || (now - new Date(last).getTime()) > sevenDays) unworked7++;
+        }
         results.activity = {
           totalOpen: open.total,
-          unworkedCount: unworked.length,
-          unworkedPercent: open.total ? Math.round((unworked.length / Math.min(open.total, 100)) * 100) : 0,
+          totalOpenValue: totalOpenValue,
+          unworked7Days: unworked7,
+          unworked14Days: unworked14,
+          unworkedPercent: open.results.length ? Math.round((unworked14 / open.results.length) * 100) : 0,
+          sampleSize: open.results.length,
         };
       }
-      
+
       return results;
     },
   },
