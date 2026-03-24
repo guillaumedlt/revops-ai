@@ -161,91 +161,188 @@ export async function POST(request: NextRequest) {
             controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "conversation_id", conversationId: convId })}\n\n`));
           }
 
+          // Convert tool defs to OpenAI format
+          const openaiTools = toolDefs.map(function(t) {
+            return { type: "function" as const, function: { name: t.name, description: t.description, parameters: t.input_schema } };
+          });
+
+          // Convert tool defs to Gemini format
+          const geminiTools = toolDefs.length > 0 ? [{
+            functionDeclarations: toolDefs.map(function(t) {
+              const schema = t.input_schema as any;
+              return { name: t.name, description: t.description, parameters: schema.properties && Object.keys(schema.properties).length > 0 ? schema : undefined };
+            }),
+          }] : [];
+
           let altText = "";
 
           if (resolved.provider === "openai") {
-            // OpenAI Chat Completions API (streaming)
-            const openaiRes = await fetch("https://api.openai.com/v1/chat/completions", {
-              method: "POST",
-              headers: { "Content-Type": "application/json", "Authorization": "Bearer " + apiKey },
-              body: JSON.stringify({
-                model: resolved.modelId,
-                messages: [{ role: "system", content: systemPrompt }, { role: "user", content: message }],
-                max_tokens: creditAction === "report" ? 16000 : 4096,
-                stream: true,
-              }),
-            });
+            // ── OpenAI with tool calling loop ──
+            let oaiMessages: any[] = [
+              { role: "system", content: systemPrompt },
+              { role: "user", content: message },
+            ];
+            let oaiLoop = true;
 
-            if (!openaiRes.ok || !openaiRes.body) {
-              const errBody = await openaiRes.text().catch(() => "");
-              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "OpenAI error (" + openaiRes.status + "): " + errBody.slice(0, 200) })}\n\n`));
-              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
-              controller.close();
-              return;
-            }
+            while (oaiLoop) {
+              const openaiRes = await fetch("https://api.openai.com/v1/chat/completions", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Authorization": "Bearer " + apiKey },
+                body: JSON.stringify({
+                  model: resolved.modelId,
+                  messages: oaiMessages,
+                  max_tokens: creditAction === "report" ? 16000 : 4096,
+                  stream: true,
+                  ...(openaiTools.length > 0 ? { tools: openaiTools } : {}),
+                }),
+              });
 
-            const oaiReader = openaiRes.body.getReader();
-            const oaiDecoder = new TextDecoder();
-            let oaiBuf = "";
-            while (true) {
-              const { done, value } = await oaiReader.read();
-              if (done) break;
-              oaiBuf += oaiDecoder.decode(value, { stream: true });
-              const oaiLines = oaiBuf.split("\n");
-              oaiBuf = oaiLines.pop() ?? "";
-              for (const line of oaiLines) {
-                if (!line.startsWith("data: ") || line.includes("[DONE]")) continue;
-                try {
-                  const chunk = JSON.parse(line.slice(6));
-                  const token = chunk.choices?.[0]?.delta?.content;
-                  if (token) {
-                    altText += token;
-                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "token", token })}\n\n`));
+              if (!openaiRes.ok || !openaiRes.body) {
+                const errBody = await openaiRes.text().catch(() => "");
+                controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "OpenAI error (" + openaiRes.status + "): " + errBody.slice(0, 200) })}\n\n`));
+                oaiLoop = false;
+                break;
+              }
+
+              const oaiReader = openaiRes.body.getReader();
+              const oaiDecoder = new TextDecoder();
+              let oaiBuf = "";
+              let chunkText = "";
+              let toolCalls: Record<number, { id: string; name: string; args: string }> = {};
+              let finishReason = "";
+
+              while (true) {
+                const { done, value } = await oaiReader.read();
+                if (done) break;
+                oaiBuf += oaiDecoder.decode(value, { stream: true });
+                const oaiLines = oaiBuf.split("\n");
+                oaiBuf = oaiLines.pop() ?? "";
+                for (const line of oaiLines) {
+                  if (!line.startsWith("data: ") || line.includes("[DONE]")) continue;
+                  try {
+                    const chunk = JSON.parse(line.slice(6));
+                    const delta = chunk.choices?.[0]?.delta;
+                    const fr = chunk.choices?.[0]?.finish_reason;
+                    if (fr) finishReason = fr;
+                    if (delta?.content) {
+                      chunkText += delta.content;
+                      controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "token", token: delta.content })}\n\n`));
+                    }
+                    if (delta?.tool_calls) {
+                      for (const tc of delta.tool_calls) {
+                        const idx = tc.index ?? 0;
+                        if (!toolCalls[idx]) toolCalls[idx] = { id: tc.id || "", name: "", args: "" };
+                        if (tc.id) toolCalls[idx].id = tc.id;
+                        if (tc.function?.name) toolCalls[idx].name = tc.function.name;
+                        if (tc.function?.arguments) toolCalls[idx].args += tc.function.arguments;
+                      }
+                    }
+                  } catch {}
+                }
+              }
+
+              altText += chunkText;
+              const toolCallList = Object.values(toolCalls);
+
+              if (finishReason === "tool_calls" && toolCallList.length > 0) {
+                // Build assistant message with tool calls
+                oaiMessages.push({
+                  role: "assistant",
+                  content: chunkText || null,
+                  tool_calls: toolCallList.map(function(tc) {
+                    return { id: tc.id, type: "function", function: { name: tc.name, arguments: tc.args } };
+                  }),
+                });
+
+                // Execute tools and add results
+                for (const tc of toolCallList) {
+                  controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "tool_start", name: tc.name })}\n\n`));
+                  const tool = connectorTools[tc.name];
+                  let result: any = { error: "Unknown tool: " + tc.name };
+                  if (tool) {
+                    try {
+                      const args = tc.args ? JSON.parse(tc.args) : {};
+                      result = await tool.execute(args, auth.tenantId);
+                    } catch (e) {
+                      result = { error: e instanceof Error ? e.message : "Tool failed" };
+                    }
                   }
-                } catch {}
+                  controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "tool_result", name: tc.name })}\n\n`));
+                  oaiMessages.push({ role: "tool", tool_call_id: tc.id, content: JSON.stringify(result) });
+                }
+              } else {
+                oaiLoop = false;
               }
             }
+
           } else {
-            // Google Gemini API (streaming)
-            const geminiModel = resolved.modelId;
-            const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:streamGenerateContent?key=${apiKey}&alt=sse`;
-            const geminiRes = await fetch(geminiUrl, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                system_instruction: { parts: [{ text: systemPrompt }] },
-                contents: [{ role: "user", parts: [{ text: message }] }],
-                generationConfig: { maxOutputTokens: creditAction === "report" ? 16000 : 4096 },
-              }),
-            });
+            // ── Gemini with tool calling loop ──
+            let gemContents: any[] = [{ role: "user", parts: [{ text: message }] }];
+            let gemLoop = true;
 
-            if (!geminiRes.ok || !geminiRes.body) {
-              const errBody = await geminiRes.text().catch(() => "");
-              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Gemini error (" + geminiRes.status + "): " + errBody.slice(0, 200) })}\n\n`));
-              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
-              controller.close();
-              return;
-            }
+            while (gemLoop) {
+              const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${resolved.modelId}:generateContent?key=${apiKey}`;
+              const geminiRes = await fetch(geminiUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  system_instruction: { parts: [{ text: systemPrompt }] },
+                  contents: gemContents,
+                  generationConfig: { maxOutputTokens: creditAction === "report" ? 16000 : 4096 },
+                  ...(geminiTools.length > 0 ? { tools: geminiTools } : {}),
+                }),
+              });
 
-            const gemReader = geminiRes.body.getReader();
-            const gemDecoder = new TextDecoder();
-            let gemBuf = "";
-            while (true) {
-              const { done, value } = await gemReader.read();
-              if (done) break;
-              gemBuf += gemDecoder.decode(value, { stream: true });
-              const gemLines = gemBuf.split("\n");
-              gemBuf = gemLines.pop() ?? "";
-              for (const line of gemLines) {
-                if (!line.startsWith("data: ")) continue;
-                try {
-                  const chunk = JSON.parse(line.slice(6));
-                  const token = chunk.candidates?.[0]?.content?.parts?.[0]?.text;
-                  if (token) {
-                    altText += token;
-                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "token", token })}\n\n`));
+              if (!geminiRes.ok) {
+                const errBody = await geminiRes.text().catch(() => "");
+                controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Gemini error (" + geminiRes.status + "): " + errBody.slice(0, 200) })}\n\n`));
+                gemLoop = false;
+                break;
+              }
+
+              const gemData = await geminiRes.json();
+              const candidate = gemData.candidates?.[0];
+              const parts = candidate?.content?.parts || [];
+
+              let chunkText = "";
+              let functionCalls: Array<{ name: string; args: any }> = [];
+
+              for (const part of parts) {
+                if (part.text) {
+                  chunkText += part.text;
+                  controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "token", token: part.text })}\n\n`));
+                }
+                if (part.functionCall) {
+                  functionCalls.push({ name: part.functionCall.name, args: part.functionCall.args || {} });
+                }
+              }
+
+              altText += chunkText;
+
+              if (functionCalls.length > 0) {
+                // Add model response to conversation
+                gemContents.push({ role: "model", parts: parts });
+
+                // Execute tools
+                const functionResponses: any[] = [];
+                for (const fc of functionCalls) {
+                  controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "tool_start", name: fc.name })}\n\n`));
+                  const tool = connectorTools[fc.name];
+                  let result: any = { error: "Unknown tool: " + fc.name };
+                  if (tool) {
+                    try {
+                      result = await tool.execute(fc.args, auth.tenantId);
+                    } catch (e) {
+                      result = { error: e instanceof Error ? e.message : "Tool failed" };
+                    }
                   }
-                } catch {}
+                  controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "tool_result", name: fc.name })}\n\n`));
+                  functionResponses.push({ functionResponse: { name: fc.name, response: result } });
+                }
+
+                gemContents.push({ role: "user", parts: functionResponses });
+              } else {
+                gemLoop = false;
               }
             }
           }
