@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { CONNECTOR_REGISTRY } from "@/lib/connectors/registry";
-import { Check } from "lucide-react";
+import { Check, HelpCircle, ExternalLink, X as XIcon } from "lucide-react";
 
 type Tab = "general" | "llm" | "connectors" | "billing";
 
@@ -74,6 +74,23 @@ function ProviderIcon({ provider, size = 16 }: { provider: string; size?: number
   return null;
 }
 
+function Step({ n, text, sub, link }: { n: string; text: string; sub?: string; link?: string }) {
+  return (
+    <div className="flex items-start gap-2 flex-1 min-w-0">
+      <span className="h-5 w-5 rounded-full bg-[#0A0A0A] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">{n}</span>
+      <div className="min-w-0">
+        <p className="text-[11px] text-[#333] leading-snug">{text}</p>
+        {sub && <p className="text-[10px] text-[#A3A3A3] leading-snug mt-0.5">{sub}</p>}
+        {link && (
+          <a href={link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-0.5 text-[10px] text-[#6366F1] hover:underline mt-0.5">
+            Open <ExternalLink size={9} />
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function SettingsContent() {
   const searchParams = useSearchParams();
   const initialTab = (searchParams.get("tab") as Tab) ?? "general";
@@ -100,6 +117,9 @@ function SettingsContent() {
   const [notionKeyInput, setNotionKeyInput] = useState("");
   const [notionConnecting, setNotionConnecting] = useState(false);
   const [showNotionInput, setShowNotionInput] = useState(false);
+
+  // Help guide popover
+  const [showGuide, setShowGuide] = useState<string | null>(null);
 
   useEffect(() => {
     const supabase = createClient();
@@ -395,160 +415,118 @@ function SettingsContent() {
       {activeTab === "connectors" && (
         <div className="space-y-3">
           <p className="text-xs text-[#737373] mb-4">
-            Connect your tools to let Kairo access your data in real-time via MCP.
+            Connect your tools to let Kairo query your data in real-time.
           </p>
-          {CONNECTOR_REGISTRY.map((c) => (
-            <div
-              key={c.id}
-              className="bg-white rounded-xl border border-[#E5E5E5] p-4 flex items-center justify-between"
-            >
-              <div className="flex items-center gap-3">
-                <img src={c.logo} alt="" className="h-6 w-6 rounded" />
-                <div>
+          {CONNECTOR_REGISTRY.map(function(c) {
+            var isConnected = (c.id === "hubspot" && hubspotConnected) || (c.id === "notion" && notionConnected) || (c.id === "lemlist" && lemlistConnected);
+            var statusText = c.id === "hubspot" && hubspotConnected ? "Connected — SSO active"
+              : c.id === "notion" && notionConnected ? "Connected — Workspace linked"
+              : c.id === "lemlist" && lemlistConnected ? "Connected — API key active"
+              : c.description;
+
+            return (
+              <div key={c.id} className="bg-white rounded-xl border border-[#E5E5E5] overflow-hidden">
+                {/* Main row */}
+                <div className="p-4 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <img src={c.logo} alt="" className="h-6 w-6 rounded" />
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <p className="text-sm font-medium text-[#0A0A0A]">{c.name}</p>
+                        {c.toolCount > 0 && (
+                          <span className="text-[10px] bg-[#F5F5F5] text-[#737373] px-1.5 py-0.5 rounded-full">{c.toolCount} tools</span>
+                        )}
+                      </div>
+                      <p className={"text-xs mt-0.5 " + (isConnected ? "text-[#22C55E]" : "text-[#A3A3A3]")}>{statusText}</p>
+                    </div>
+                  </div>
                   <div className="flex items-center gap-2">
-                    <p className="text-sm font-medium text-[#0A0A0A]">{c.name}</p>
-                    {c.toolCount > 0 && (
-                      <span className="text-[10px] bg-[#F5F5F5] text-[#737373] px-1.5 py-0.5 rounded-full">
-                        {c.toolCount} tools
-                      </span>
+                    {/* Help button */}
+                    <button
+                      onClick={function() { setShowGuide(showGuide === c.id ? null : c.id); }}
+                      className={"h-7 w-7 flex items-center justify-center rounded-lg transition-colors " + (showGuide === c.id ? "bg-[#F0F0F0] text-[#0A0A0A]" : "text-[#C0C0C0] hover:text-[#737373] hover:bg-[#F5F5F5]")}
+                      title="How to connect"
+                    >
+                      <HelpCircle size={15} />
+                    </button>
+
+                    {/* Action buttons */}
+                    {c.id === "hubspot" ? (
+                      <button
+                        onClick={handleConnectHubspot}
+                        disabled={hubspotLoading}
+                        className={"text-xs font-medium rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50 " + (hubspotConnected ? "text-[#737373] border border-[#E5E5E5] hover:bg-[#F5F5F5]" : "text-white bg-[#0A0A0A] hover:bg-[#333]")}
+                      >
+                        {hubspotLoading ? "Redirecting..." : hubspotConnected ? "Reconnect" : "Connect"}
+                      </button>
+                    ) : c.id === "notion" ? (
+                      notionConnected ? (
+                        <button onClick={handleDisconnectNotion} className="text-[11px] text-[#737373] hover:text-red-500 border border-[#E5E5E5] rounded-lg px-2.5 py-1.5 transition-colors">Disconnect</button>
+                      ) : showNotionInput ? (
+                        <div className="flex items-center gap-1.5">
+                          <input type="password" value={notionKeyInput} onChange={function(e) { setNotionKeyInput(e.target.value); }} placeholder="ntn_..." className="h-7 px-2 border border-[#E5E5E5] rounded-lg text-xs w-36 focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]" />
+                          <button onClick={handleConnectNotion} disabled={notionConnecting || !notionKeyInput.trim()} className="text-[11px] text-white bg-[#0A0A0A] rounded-lg px-2.5 py-1 hover:bg-[#333] disabled:opacity-50">{notionConnecting ? "..." : "Save"}</button>
+                          <button onClick={function() { setShowNotionInput(false); setNotionKeyInput(""); }} className="text-[11px] text-[#A3A3A3]">Cancel</button>
+                        </div>
+                      ) : (
+                        <button onClick={function() { setShowNotionInput(true); setShowGuide("notion"); }} className="text-xs font-medium text-white bg-[#0A0A0A] rounded-lg px-3 py-1.5 hover:bg-[#333] transition-colors">Connect</button>
+                      )
+                    ) : c.id === "lemlist" ? (
+                      lemlistConnected ? (
+                        <button onClick={handleDisconnectLemlist} className="text-[11px] text-[#737373] hover:text-red-500 border border-[#E5E5E5] rounded-lg px-2.5 py-1.5 transition-colors">Disconnect</button>
+                      ) : showLemlistInput ? (
+                        <div className="flex items-center gap-1.5">
+                          <input type="password" value={lemlistKeyInput} onChange={function(e) { setLemlistKeyInput(e.target.value); }} placeholder="API key..." className="h-7 px-2 border border-[#E5E5E5] rounded-lg text-xs w-32 focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]" />
+                          <button onClick={handleConnectLemlist} disabled={lemlistConnecting || !lemlistKeyInput.trim()} className="text-[11px] text-white bg-[#0A0A0A] rounded-lg px-2.5 py-1 hover:bg-[#333] disabled:opacity-50">{lemlistConnecting ? "..." : "Save"}</button>
+                          <button onClick={function() { setShowLemlistInput(false); setLemlistKeyInput(""); }} className="text-[11px] text-[#A3A3A3]">Cancel</button>
+                        </div>
+                      ) : (
+                        <button onClick={function() { setShowLemlistInput(true); setShowGuide("lemlist"); }} className="text-xs font-medium text-white bg-[#0A0A0A] rounded-lg px-3 py-1.5 hover:bg-[#333] transition-colors">Connect</button>
+                      )
+                    ) : null}
+                  </div>
+                </div>
+
+                {/* Setup guide — slides down */}
+                {showGuide === c.id && (
+                  <div className="border-t border-[#F0F0F0] bg-[#FAFAFA] px-4 py-3">
+                    {c.id === "hubspot" && (
+                      <div className="space-y-2">
+                        <p className="text-[11px] font-semibold text-[#525252]">Setup in 1 click</p>
+                        <div className="flex gap-4">
+                          <Step n="1" text='Click "Connect" above' />
+                          <Step n="2" text="Log in to HubSpot" />
+                          <Step n="3" text="Authorize Kairo" />
+                        </div>
+                        <p className="text-[10px] text-[#A3A3A3] mt-1">Kairo connects via OAuth SSO — no API key needed. Your data stays in HubSpot, Kairo queries it in real-time.</p>
+                      </div>
+                    )}
+                    {c.id === "notion" && (
+                      <div className="space-y-2">
+                        <p className="text-[11px] font-semibold text-[#525252]">Setup in 3 steps</p>
+                        <div className="flex gap-4">
+                          <Step n="1" text="Create an integration on Notion" link="https://www.notion.so/profile/integrations" />
+                          <Step n="2" text="Share pages with your integration" sub='Page > "..." > Connections' />
+                          <Step n="3" text="Paste the API key above" sub="Starts with ntn_" />
+                        </div>
+                        <p className="text-[10px] text-[#A3A3A3] mt-1">Create an Internal integration, give it Read access, then share the pages you want Kairo to access.</p>
+                      </div>
+                    )}
+                    {c.id === "lemlist" && (
+                      <div className="space-y-2">
+                        <p className="text-[11px] font-semibold text-[#525252]">Setup in 2 steps</p>
+                        <div className="flex gap-4">
+                          <Step n="1" text="Copy your API key from Lemlist" link="https://app.lemlist.com/settings/integrations" />
+                          <Step n="2" text="Paste it above and click Save" />
+                        </div>
+                        <p className="text-[10px] text-[#A3A3A3] mt-1">Find it in Lemlist Settings &gt; Integrations &gt; API. Kairo will read your campaigns, leads, and team stats.</p>
+                      </div>
                     )}
                   </div>
-                  <p className={"text-xs mt-0.5 " + (
-                    (c.id === "hubspot" && hubspotConnected) || (c.id === "lemlist" && lemlistConnected)
-                      ? "text-green-600"
-                      : "text-[#A3A3A3]"
-                  )}>
-                    {c.id === "hubspot" && hubspotConnected
-                      ? "Connected — MCP active"
-                      : c.id === "notion" && notionConnected
-                        ? "Connected — Workspace linked"
-                        : c.id === "lemlist" && lemlistConnected
-                        ? "Connected — API key active"
-                        : c.description}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                {c.id === "hubspot" ? (
-                  <>
-                    <button
-                      onClick={() => handleToggleConnector("hubspot")}
-                      className={
-                        "relative inline-flex h-5 w-9 items-center rounded-full transition-colors " +
-                        (connectorToggles.hubspot ? "bg-[#0A0A0A]" : "bg-[#E5E5E5]")
-                      }
-                    >
-                      <span className={
-                        "inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform " +
-                        (connectorToggles.hubspot ? "translate-x-[18px]" : "translate-x-[3px]")
-                      } />
-                    </button>
-                    <button
-                      onClick={handleConnectHubspot}
-                      disabled={hubspotLoading}
-                      className="text-xs text-[#737373] hover:text-[#0A0A0A] border border-[#E5E5E5] rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50"
-                    >
-                      {hubspotLoading ? "Redirecting..." : hubspotConnected ? "Reconnect" : "Connect"}
-                    </button>
-                  </>
-                ) : c.id === "lemlist" ? (
-                  lemlistConnected ? (
-                    <div className="flex items-center gap-2">
-                      <div className="flex items-center gap-1">
-                        <div className="h-2 w-2 rounded-full bg-[#22C55E]" />
-                        <span className="text-[10px] font-medium text-[#22C55E]">Connected</span>
-                      </div>
-                      <button
-                        onClick={handleDisconnectLemlist}
-                        className="text-[10px] text-[#737373] hover:text-red-500 border border-[#E5E5E5] rounded-lg px-2 py-1 transition-colors"
-                      >
-                        Disconnect
-                      </button>
-                    </div>
-                  ) : showLemlistInput ? (
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="password"
-                        value={lemlistKeyInput}
-                        onChange={(e) => setLemlistKeyInput(e.target.value)}
-                        placeholder="API key..."
-                        className="h-7 px-2 border border-[#E5E5E5] rounded-lg text-xs w-32 focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]"
-                      />
-                      <button
-                        onClick={handleConnectLemlist}
-                        disabled={lemlistConnecting || !lemlistKeyInput.trim()}
-                        className="text-[10px] text-white bg-[#0A0A0A] rounded-lg px-2.5 py-1 hover:bg-[#333] disabled:opacity-50"
-                      >
-                        {lemlistConnecting ? "..." : "Save"}
-                      </button>
-                      <button
-                        onClick={() => { setShowLemlistInput(false); setLemlistKeyInput(""); }}
-                        className="text-[10px] text-[#A3A3A3]"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => setShowLemlistInput(true)}
-                      className="text-xs text-[#0A0A0A] font-medium border border-[#E5E5E5] rounded-lg px-3 py-1.5 hover:bg-[#F5F5F5] transition-colors"
-                    >
-                      Connect
-                    </button>
-                  )
-                ) : c.id === "notion" ? (
-                  notionConnected ? (
-                    <div className="flex items-center gap-2">
-                      <div className="flex items-center gap-1">
-                        <div className="h-2 w-2 rounded-full bg-[#22C55E]" />
-                        <span className="text-[10px] font-medium text-[#22C55E]">Connected</span>
-                      </div>
-                      <button
-                        onClick={handleDisconnectNotion}
-                        className="text-[10px] text-[#737373] hover:text-red-500 border border-[#E5E5E5] rounded-lg px-2 py-1 transition-colors"
-                      >
-                        Disconnect
-                      </button>
-                    </div>
-                  ) : showNotionInput ? (
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="password"
-                        value={notionKeyInput}
-                        onChange={(e) => setNotionKeyInput(e.target.value)}
-                        placeholder="ntn_..."
-                        className="h-7 px-2 border border-[#E5E5E5] rounded-lg text-xs w-36 focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]"
-                      />
-                      <button
-                        onClick={handleConnectNotion}
-                        disabled={notionConnecting || !notionKeyInput.trim()}
-                        className="text-[10px] text-white bg-[#0A0A0A] rounded-lg px-2.5 py-1 hover:bg-[#333] disabled:opacity-50"
-                      >
-                        {notionConnecting ? "..." : "Save"}
-                      </button>
-                      <button
-                        onClick={() => { setShowNotionInput(false); setNotionKeyInput(""); }}
-                        className="text-[10px] text-[#A3A3A3]"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => setShowNotionInput(true)}
-                      className="text-xs text-[#0A0A0A] font-medium border border-[#E5E5E5] rounded-lg px-3 py-1.5 hover:bg-[#F5F5F5] transition-colors"
-                    >
-                      Connect
-                    </button>
-                  )
-                ) : (
-                  <button className="text-xs text-[#0A0A0A] font-medium border border-[#E5E5E5] rounded-lg px-3 py-1.5 hover:bg-[#F5F5F5] transition-colors">
-                    Connect
-                  </button>
                 )}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
