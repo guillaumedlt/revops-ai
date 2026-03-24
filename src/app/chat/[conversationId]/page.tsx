@@ -87,7 +87,12 @@ export default function ConversationPage() {
         });
 
         if (!res.ok || !res.body) {
-          setChatError({ message: "Failed to connect to the server. Please try again." });
+          let errMsg = "Server error (" + res.status + ")";
+          try {
+            const errJson = await res.json();
+            errMsg = errJson.error || errMsg;
+          } catch {}
+          setChatError({ message: errMsg });
           setIsStreaming(false);
           return;
         }

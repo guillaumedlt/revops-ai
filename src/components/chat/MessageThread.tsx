@@ -245,7 +245,7 @@ function ErrorCard({
       className="rounded-xl border border-red-100 bg-red-50/60 px-4 py-3 text-sm"
     >
       <p className="text-red-700 mb-2">
-        Something went wrong. Please try again.
+        {message || "Something went wrong. Please try again."}
       </p>
       {onRetry && (
         <button

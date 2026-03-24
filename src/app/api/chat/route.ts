@@ -39,12 +39,18 @@ function resolveModelId(model: string | undefined, message: string): { provider:
 }
 
 export async function POST(request: NextRequest) {
+  try {
   const auth = getAuthFromHeaders(request);
-  if (!auth) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!auth) return NextResponse.json({ error: "Unauthorized — no auth headers from middleware" }, { status: 401 });
 
-  const body = await request.json();
+  let body: any;
+  try {
+    body = await request.json();
+  } catch (e) {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
   const parsed = ChatSchema.safeParse(body);
-  if (!parsed.success) return NextResponse.json({ error: parsed.error.message }, { status: 400 });
+  if (!parsed.success) return NextResponse.json({ error: "Validation: " + parsed.error.issues.map(function(i: any) { return i.path.join(".") + " " + i.message; }).join(", ") }, { status: 400 });
 
   const { message, conversationId } = parsed.data;
 
@@ -358,6 +364,10 @@ export async function POST(request: NextRequest) {
       Connection: "keep-alive",
     },
   });
+  } catch (topError) {
+    console.error("[chat] Top-level error:", topError instanceof Error ? topError.message : topError);
+    return NextResponse.json({ error: "Internal error: " + (topError instanceof Error ? topError.message : "unknown") }, { status: 500 });
+  }
 }
 
 function zodToJsonSchema(schema: z.ZodType): Record<string, unknown> {
