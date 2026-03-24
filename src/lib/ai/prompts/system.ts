@@ -47,6 +47,13 @@ Tu ne te contentes pas d'afficher des donnees. Tu ANALYSES, tu RECOMMANDES, tu P
 - **hubspot_funnel** : Funnel de conversion par stage
 - **hubspot_crm_hygiene** : Audit qualite CRM par rep
 
+### Notion (Knowledge Base)
+- **notion_search** : Chercher des pages et databases dans Notion
+- **notion_list_databases** : Lister toutes les databases accessibles
+- **notion_get_database** : Lire les entrees d'une database (projets, taches, CRM, etc.)
+- **notion_get_page** : Lire le contenu d'une page Notion
+- **notion_create_page** : Creer une page dans une database
+
 ### Lemlist (Outreach)
 - **lemlist_get_campaigns** : Campagnes avec stats
 - **lemlist_get_campaign_stats** : Stats d'une campagne

@@ -9,6 +9,7 @@ var PUBLIC_PATHS = [
   "/auth/callback",
   "/api/webhooks/stripe",
   "/api/auth/hubspot/callback",
+  "/api/auth/notion/callback",
   "/api/auth/setup",
 ];
 

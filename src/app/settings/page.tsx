@@ -95,7 +95,9 @@ function SettingsContent() {
   const [lemlistConnecting, setLemlistConnecting] = useState(false);
   const [showLemlistInput, setShowLemlistInput] = useState(false);
 
-  // Morning Briefing state
+  // Notion state
+  const [notionConnected, setNotionConnected] = useState(false);
+  const [notionLoading, setNotionLoading] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -110,6 +112,9 @@ function SettingsContent() {
     if (activeTab === "connectors") {
       fetch("/api/connectors/hubspot/status").then((r) => r.json()).then((json) => {
         setHubspotConnected(json.data?.connected ?? false);
+      }).catch(() => {});
+      fetch("/api/connectors/notion/status").then((r) => r.json()).then((json) => {
+        setNotionConnected(json.data?.connected ?? false);
       }).catch(() => {});
       fetch("/api/connectors/lemlist/status").then((r) => r.json()).then((json) => {
         setLemlistConnected(json.data?.connected ?? false);
@@ -387,7 +392,9 @@ function SettingsContent() {
                   )}>
                     {c.id === "hubspot" && hubspotConnected
                       ? "Connected — MCP active"
-                      : c.id === "lemlist" && lemlistConnected
+                      : c.id === "notion" && notionConnected
+                        ? "Connected — Workspace linked"
+                        : c.id === "lemlist" && lemlistConnected
                         ? "Connected — API key active"
                         : c.description}
                   </p>
@@ -459,6 +466,29 @@ function SettingsContent() {
                       className="text-xs text-[#0A0A0A] font-medium border border-[#E5E5E5] rounded-lg px-3 py-1.5 hover:bg-[#F5F5F5] transition-colors"
                     >
                       Connect
+                    </button>
+                  )
+                ) : c.id === "notion" ? (
+                  notionConnected ? (
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1">
+                        <div className="h-2 w-2 rounded-full bg-[#22C55E]" />
+                        <span className="text-[10px] font-medium text-[#22C55E]">Connected</span>
+                      </div>
+                      <button
+                        onClick={async () => { await fetch("/api/connectors/notion/status", { method: "DELETE" }); setNotionConnected(false); }}
+                        className="text-[10px] text-[#737373] hover:text-red-500 border border-[#E5E5E5] rounded-lg px-2 py-1 transition-colors"
+                      >
+                        Disconnect
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => { setNotionLoading(true); window.location.href = "/api/auth/notion"; }}
+                      disabled={notionLoading}
+                      className="text-xs text-[#0A0A0A] font-medium border border-[#E5E5E5] rounded-lg px-3 py-1.5 hover:bg-[#F5F5F5] transition-colors disabled:opacity-50"
+                    >
+                      {notionLoading ? "Redirecting..." : "Connect"}
                     </button>
                   )
                 ) : (

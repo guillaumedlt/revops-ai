@@ -35,7 +35,7 @@ export default function Features() {
         <div className="mt-16 text-center">
           <p className="text-xs text-[#A3A3A3] uppercase tracking-wider mb-4">Connects with</p>
           <div className="flex items-center justify-center gap-8">
-            {["HubSpot", "Lemlist", "Notion", "Slack"].map((name) => (
+            {["HubSpot", "Lemlist", "Notion"].map((name) => (
               <span key={name} className="text-sm font-medium text-[#525252]">{name}</span>
             ))}
           </div>

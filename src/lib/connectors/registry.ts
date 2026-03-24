@@ -25,16 +25,7 @@ export const CONNECTOR_REGISTRY: Connector[] = [
     logo: "https://www.notion.so/favicon.ico",
     available: true,
     connected: false,
-    toolCount: 0,
-  },
-  {
-    id: "slack",
-    name: "Slack",
-    description: "Team messaging, channels, notifications",
-    logo: "https://a.slack-edge.com/80588/marketing/img/meta/favicon-32.png",
-    available: true,
-    connected: false,
-    toolCount: 0,
+    toolCount: 5,
   },
   {
     id: "lemlist",

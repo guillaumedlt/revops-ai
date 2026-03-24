@@ -143,6 +143,7 @@ export default function ChatInputBar({
     // Check all connector statuses
     Promise.all([
       fetch("/api/connectors/hubspot/status").then(function(r) { return r.json(); }).then(function(j) { return { hubspot: j.data?.connected ?? false }; }).catch(function() { return { hubspot: false }; }),
+      fetch("/api/connectors/notion/status").then(function(r) { return r.json(); }).then(function(j) { return { notion: j.data?.connected ?? false }; }).catch(function() { return { notion: false }; }),
       fetch("/api/connectors/lemlist/status").then(function(r) { return r.json(); }).then(function(j) { return { lemlist: j.data?.connected ?? false }; }).catch(function() { return { lemlist: false }; }),
     ]).then(function(results) {
       var status: Record<string, boolean> = {};
