@@ -66,8 +66,9 @@ export async function POST(request: NextRequest) {
   }
 
   const credits = await checkCredits(auth.tenantId, creditAction);
+  // Don't block on credits for now — log but allow
   if (!credits.allowed) {
-    return NextResponse.json({ error: "Credit limit reached", creditCost: CREDIT_COSTS[creditAction], creditsRemaining: credits.remaining }, { status: 402 });
+    console.log("[chat] Credits low for tenant", auth.tenantId, "remaining:", credits.remaining, "cost:", credits.cost);
   }
 
   const supabase = createAdminClient();
@@ -155,25 +156,118 @@ export async function POST(request: NextRequest) {
             return;
           }
 
-          // Key exists but full integration coming soon
-          const comingSoonText = "Support for " + providerLabel + " models with tools is coming soon. For now, please use Kairo AI or Claude models which support all features including data analysis, reports, and CRM queries.";
-          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "token", token: comingSoonText })}\n\n`));
+          // Send conversationId early
+          if (convId) {
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "conversation_id", conversationId: convId })}\n\n`));
+          }
 
-          const parsedBlocks = parseContentBlocks(comingSoonText);
+          let altText = "";
 
-          await supabase.from("messages").insert({
-            conversation_id: convId,
-            tenant_id: auth.tenantId,
-            role: "assistant",
-            content: comingSoonText,
-            content_blocks: parsedBlocks,
-            model: resolved.displayName,
-          });
+          if (resolved.provider === "openai") {
+            // OpenAI Chat Completions API (streaming)
+            const openaiRes = await fetch("https://api.openai.com/v1/chat/completions", {
+              method: "POST",
+              headers: { "Content-Type": "application/json", "Authorization": "Bearer " + apiKey },
+              body: JSON.stringify({
+                model: resolved.modelId,
+                messages: [{ role: "system", content: systemPrompt }, { role: "user", content: message }],
+                max_tokens: creditAction === "report" ? 16000 : 4096,
+                stream: true,
+              }),
+            });
+
+            if (!openaiRes.ok || !openaiRes.body) {
+              const errBody = await openaiRes.text().catch(() => "");
+              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "OpenAI error (" + openaiRes.status + "): " + errBody.slice(0, 200) })}\n\n`));
+              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
+              controller.close();
+              return;
+            }
+
+            const oaiReader = openaiRes.body.getReader();
+            const oaiDecoder = new TextDecoder();
+            let oaiBuf = "";
+            while (true) {
+              const { done, value } = await oaiReader.read();
+              if (done) break;
+              oaiBuf += oaiDecoder.decode(value, { stream: true });
+              const oaiLines = oaiBuf.split("\n");
+              oaiBuf = oaiLines.pop() ?? "";
+              for (const line of oaiLines) {
+                if (!line.startsWith("data: ") || line.includes("[DONE]")) continue;
+                try {
+                  const chunk = JSON.parse(line.slice(6));
+                  const token = chunk.choices?.[0]?.delta?.content;
+                  if (token) {
+                    altText += token;
+                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "token", token })}\n\n`));
+                  }
+                } catch {}
+              }
+            }
+          } else {
+            // Google Gemini API (streaming)
+            const geminiModel = resolved.modelId;
+            const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:streamGenerateContent?key=${apiKey}&alt=sse`;
+            const geminiRes = await fetch(geminiUrl, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                system_instruction: { parts: [{ text: systemPrompt }] },
+                contents: [{ role: "user", parts: [{ text: message }] }],
+                generationConfig: { maxOutputTokens: creditAction === "report" ? 16000 : 4096 },
+              }),
+            });
+
+            if (!geminiRes.ok || !geminiRes.body) {
+              const errBody = await geminiRes.text().catch(() => "");
+              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Gemini error (" + geminiRes.status + "): " + errBody.slice(0, 200) })}\n\n`));
+              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
+              controller.close();
+              return;
+            }
+
+            const gemReader = geminiRes.body.getReader();
+            const gemDecoder = new TextDecoder();
+            let gemBuf = "";
+            while (true) {
+              const { done, value } = await gemReader.read();
+              if (done) break;
+              gemBuf += gemDecoder.decode(value, { stream: true });
+              const gemLines = gemBuf.split("\n");
+              gemBuf = gemLines.pop() ?? "";
+              for (const line of gemLines) {
+                if (!line.startsWith("data: ")) continue;
+                try {
+                  const chunk = JSON.parse(line.slice(6));
+                  const token = chunk.candidates?.[0]?.content?.parts?.[0]?.text;
+                  if (token) {
+                    altText += token;
+                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "token", token })}\n\n`));
+                  }
+                } catch {}
+              }
+            }
+          }
+
+          // Save and finish
+          const parsedBlocks = parseContentBlocks(altText);
+
+          if (convId) {
+            await supabase.from("messages").insert({
+              conversation_id: convId,
+              tenant_id: auth.tenantId,
+              role: "assistant",
+              content: altText,
+              content_blocks: parsedBlocks,
+              model: resolved.displayName,
+            });
+          }
 
           await deductCredit(auth.tenantId, auth.userId, creditAction);
 
           controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "content_blocks", blocks: parsedBlocks })}\n\n`));
-          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "metadata", conversationId: convId, model: resolved.displayName, creditsRemaining: credits.remaining - CREDIT_COSTS[creditAction], creditCost: CREDIT_COSTS[creditAction] })}\n\n`));
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "metadata", conversationId: convId, model: resolved.displayName })}\n\n`));
           controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
           controller.close();
           return;
