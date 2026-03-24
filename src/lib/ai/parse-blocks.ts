@@ -1,62 +1,103 @@
 import type { ContentBlock } from "@/types/chat-blocks";
 
+var BLOCK_TYPES = "kpi_grid|kpi|chart|table|alert|progress|funnel|comparison|scorecard";
+
 function parseInnerBlocks(text: string): ContentBlock[] {
-  const blocks: ContentBlock[] = [];
+  var blocks: ContentBlock[] = [];
 
   if (!text.includes(":::")) {
     if (text.trim()) blocks.push({ type: "text", text: text.trim() });
     return blocks;
   }
 
-  const blockRegex = /:::(kpi_grid|kpi|chart|table|alert)(?:\{([^}]*)\})?\n([\s\S]*?):::/g;
-  let lastIndex = 0;
-  let match;
+  var blockRegex = new RegExp(":::(" + BLOCK_TYPES + ")(?:\\{([^}]*)\\})?\\n([\\s\\S]*?):::", "g");
+  var lastIndex = 0;
+  var match;
 
   while ((match = blockRegex.exec(text)) !== null) {
-    const textBefore = text.slice(lastIndex, match.index).trim();
+    var textBefore = text.slice(lastIndex, match.index).trim();
     if (textBefore) blocks.push({ type: "text", text: textBefore });
 
-    const blockType = match[1];
-    let params: Record<string, string> = {};
+    var blockType = match[1];
+    var params: Record<string, any> = {};
     if (match[2]) {
       try {
-        params = JSON.parse(`{${match[2]}}`);
+        params = JSON.parse("{" + match[2] + "}");
       } catch {
         params = {};
       }
     }
-    const content = match[3].trim();
+    var content = match[3].trim();
 
     try {
       if (blockType === "kpi_grid") {
-        const items = JSON.parse(content);
-        blocks.push({ type: "kpi_grid", items });
+        var items = JSON.parse(content);
+        blocks.push({ type: "kpi_grid", items: items });
       } else if (blockType === "kpi") {
-        const data = JSON.parse(content);
-        blocks.push({ type: "kpi", ...data } as ContentBlock);
+        var kpiData = JSON.parse(content);
+        blocks.push({ type: "kpi", ...kpiData } as ContentBlock);
       } else if (blockType === "chart") {
-        const data = JSON.parse(content);
+        var chartData = JSON.parse(content);
         blocks.push({
           type: "chart",
-          chartType: (params.type as "bar" | "line" | "area" | "donut") || "bar",
+          chartType: (params.type as any) || "bar",
           title: params.title || "",
-          data,
+          data: chartData,
           xKey: params.xKey,
           yKey: params.yKey,
+          yKeys: params.yKeys,
+          colors: params.colors,
         });
       } else if (blockType === "table") {
-        const data = JSON.parse(content);
+        var tableData = JSON.parse(content);
         blocks.push({
           type: "table",
           title: params.title,
-          headers: data.headers || [],
-          rows: data.rows || [],
+          headers: tableData.headers || [],
+          rows: tableData.rows || [],
+          sortable: params.sortable !== false,
+          searchable: params.searchable !== false,
+          pageSize: params.pageSize || 10,
         });
       } else if (blockType === "alert") {
         blocks.push({
           type: "alert",
-          severity: (params.severity as "info" | "warning" | "critical") || "info",
+          severity: (params.severity as any) || "info",
           message: content,
+        });
+      } else if (blockType === "progress") {
+        var progressData = JSON.parse(content);
+        blocks.push({
+          type: "progress",
+          label: progressData.label || params.label || "",
+          value: progressData.value || 0,
+          max: progressData.max || 100,
+          target: progressData.target,
+          color: progressData.color || params.color,
+        });
+      } else if (blockType === "funnel") {
+        var funnelData = JSON.parse(content);
+        blocks.push({
+          type: "funnel",
+          title: params.title || "",
+          steps: Array.isArray(funnelData) ? funnelData : (funnelData.steps || []),
+        });
+      } else if (blockType === "comparison") {
+        var compData = JSON.parse(content);
+        blocks.push({
+          type: "comparison",
+          title: params.title || "",
+          items: Array.isArray(compData) ? compData : (compData.items || []),
+        });
+      } else if (blockType === "scorecard") {
+        var scoreData = JSON.parse(content);
+        blocks.push({
+          type: "scorecard",
+          title: params.title || scoreData.title || "",
+          value: scoreData.value || "",
+          target: scoreData.target,
+          score: scoreData.score || 0,
+          breakdown: scoreData.breakdown,
         });
       }
     } catch {
@@ -66,7 +107,7 @@ function parseInnerBlocks(text: string): ContentBlock[] {
     lastIndex = match.index + match[0].length;
   }
 
-  const remaining = text.slice(lastIndex).trim();
+  var remaining = text.slice(lastIndex).trim();
   if (remaining) blocks.push({ type: "text", text: remaining });
 
   return blocks;
@@ -74,37 +115,30 @@ function parseInnerBlocks(text: string): ContentBlock[] {
 
 export function parseContentBlocks(rawText: string): ContentBlock[] {
   // Check for report block
-  const reportMatch = rawText.match(/:::report(?:\{([^}]*)\})?\n([\s\S]*?):::end_report/);
+  var reportMatch = rawText.match(/:::report(?:\{([^}]*)\})?\n([\s\S]*?):::end_report/);
   if (reportMatch) {
-    const blocks: ContentBlock[] = [];
+    var blocks: ContentBlock[] = [];
 
-    // Text before the report
-    const beforeReport = rawText.slice(0, reportMatch.index).trim();
+    var beforeReport = rawText.slice(0, reportMatch.index).trim();
     if (beforeReport) blocks.push({ type: "text", text: beforeReport });
 
-    // Parse report params
-    let reportParams: Record<string, string> = {};
+    var reportParams: Record<string, string> = {};
     if (reportMatch[1]) {
       try {
-        reportParams = JSON.parse(`{${reportMatch[1]}}`);
+        reportParams = JSON.parse("{" + reportMatch[1] + "}");
       } catch {
         reportParams = {};
       }
     }
 
-    // Split sections by ---
-    const reportContent = reportMatch[2].trim();
-    const sectionTexts = reportContent.split(/\n---\n/);
+    var reportContent = reportMatch[2].trim();
+    var sectionTexts = reportContent.split(/\n---\n/);
 
-    const sections: ContentBlock[][] = sectionTexts.map((sectionText) => {
-      // Extract title from # heading
-      const titleMatch = sectionText.match(/^#\s+(.+)/m);
-      const cleanedText = sectionText.replace(/^#\s+.+\n?/m, "").trim();
+    var sections: ContentBlock[][] = sectionTexts.map(function(sectionText) {
+      var titleMatch = sectionText.match(/^#\s+(.+)/m);
+      var cleanedText = sectionText.replace(/^#\s+.+\n?/m, "").trim();
+      var innerBlocks = parseInnerBlocks(cleanedText);
 
-      // Parse inner blocks recursively
-      const innerBlocks = parseInnerBlocks(cleanedText);
-
-      // If there was a title, prepend as text
       if (titleMatch) {
         return [{ type: "text" as const, text: "**" + titleMatch[1] + "**" }, ...innerBlocks];
       }
@@ -114,21 +148,19 @@ export function parseContentBlocks(rawText: string): ContentBlock[] {
     blocks.push({
       type: "report",
       title: reportParams.title || "Report",
-      sections,
+      sections: sections,
     });
 
-    // Text after the report
-    const afterReport = rawText.slice((reportMatch.index || 0) + reportMatch[0].length).trim();
+    var afterReport = rawText.slice((reportMatch.index || 0) + reportMatch[0].length).trim();
     if (afterReport) blocks.push({ type: "text", text: afterReport });
 
     return blocks;
   }
 
-  // Standard block parsing (no report)
   if (!rawText.includes(":::")) {
     return [{ type: "text", text: rawText }];
   }
 
-  const result = parseInnerBlocks(rawText);
+  var result = parseInnerBlocks(rawText);
   return result.length > 0 ? result : [{ type: "text", text: rawText }];
 }

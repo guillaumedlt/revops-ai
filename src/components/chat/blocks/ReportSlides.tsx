@@ -5,6 +5,10 @@ import { ChevronLeft, ChevronRight, LayoutDashboard, Plus, Check } from "lucide-
 import KPICardBlock from "./KPICardBlock";
 import ChartBlock from "./ChartBlock";
 import TableBlock from "./TableBlock";
+import ProgressBlock from "./ProgressBlock";
+import FunnelBlock from "./FunnelBlock";
+import ComparisonBlock from "./ComparisonBlock";
+import ScorecardBlock from "./ScorecardBlock";
 import type { ContentBlock } from "@/types/chat-blocks";
 
 interface ReportSlidesProps {
@@ -49,9 +53,17 @@ function SlideContent({ blocks }: { blocks: ContentBlock[] }) {
               </div>
             );
           case "chart":
-            return <ChartBlock key={i} chartType={block.chartType} title={block.title} data={block.data} xKey={block.xKey} yKey={block.yKey} />;
+            return <ChartBlock key={i} chartType={block.chartType} title={block.title} data={block.data} xKey={block.xKey} yKey={block.yKey} yKeys={block.yKeys} colors={block.colors} />;
           case "table":
-            return <TableBlock key={i} title={block.title || ""} headers={block.headers} rows={block.rows} />;
+            return <TableBlock key={i} title={block.title || ""} headers={block.headers} rows={block.rows} sortable={block.sortable} searchable={block.searchable} pageSize={block.pageSize} />;
+          case "progress":
+            return <ProgressBlock key={i} label={block.label} value={block.value} max={block.max} target={block.target} color={block.color} />;
+          case "funnel":
+            return <FunnelBlock key={i} title={block.title} steps={block.steps} />;
+          case "comparison":
+            return <ComparisonBlock key={i} title={block.title} items={block.items} />;
+          case "scorecard":
+            return <ScorecardBlock key={i} title={block.title} value={block.value} target={block.target} score={block.score} breakdown={block.breakdown} />;
           default:
             return null;
         }

@@ -15,78 +15,169 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  Legend,
+  ComposedChart,
 } from "recharts";
 
 interface Props {
-  chartType: "bar" | "line" | "area" | "donut";
+  chartType: "bar" | "line" | "area" | "donut" | "stacked_bar" | "horizontal_bar" | "combo";
   title: string;
   data: Array<Record<string, unknown>>;
   xKey?: string;
   yKey?: string;
+  yKeys?: string[];
+  colors?: string[];
 }
 
-const COLORS = ["#0A0A0A", "#525252", "#A3A3A3", "#D4D4D4", "#737373"];
+var PALETTE = [
+  "#0A0A0A", "#6366F1", "#22C55E", "#F59E0B", "#EF4444",
+  "#8B5CF6", "#06B6D4", "#EC4899", "#14B8A6", "#F97316",
+];
 
-const customTooltipStyle = {
+var tooltipStyle = {
   backgroundColor: "#0A0A0A",
   border: "none",
   borderRadius: "8px",
   color: "#fff",
   fontSize: "12px",
+  padding: "8px 12px",
 };
 
-export default function ChartBlock({ chartType, title, data, xKey, yKey }: Props) {
+function formatValue(val: unknown): string {
+  if (typeof val !== "number") return String(val ?? "");
+  if (val >= 1000000) return (val / 1000000).toFixed(1) + "M";
+  if (val >= 1000) return (val / 1000).toFixed(1) + "K";
+  return val.toLocaleString();
+}
+
+function CustomTooltip({ active, payload, label }: any) {
+  if (!active || !payload?.length) return null;
+  return (
+    <div style={tooltipStyle}>
+      <p className="font-medium mb-1">{String(label)}</p>
+      {payload.map(function(entry: any, i: number) {
+        return (
+          <div key={i} className="flex items-center gap-2 text-[11px]">
+            <span className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: entry.color }} />
+            <span className="opacity-70">{entry.name}:</span>
+            <span className="font-medium">{formatValue(entry.value)}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+export default function ChartBlock({ chartType, title, data, xKey, yKey, yKeys, colors }: Props) {
   if (!data || data.length === 0) return null;
 
-  // Auto-detect keys from first data item
-  const keys = Object.keys(data[0]);
-  const x = xKey || keys.find((k) => typeof data[0][k] === "string") || keys[0];
-  const y = yKey || keys.find((k) => typeof data[0][k] === "number" && k !== x) || keys[1];
+  var keys = Object.keys(data[0]);
+  var x = xKey || keys.find(function(k) { return typeof data[0][k] === "string"; }) || keys[0];
+
+  // Multi-series: use yKeys if provided, otherwise detect all numeric keys
+  var numericKeys = keys.filter(function(k) { return k !== x && typeof data[0][k] === "number"; });
+  var seriesKeys = yKeys && yKeys.length > 0 ? yKeys : (yKey ? [yKey] : numericKeys.length > 0 ? numericKeys : [keys[1]]);
+  var palette = colors && colors.length > 0 ? colors : PALETTE;
+  var isMultiSeries = seriesKeys.length > 1;
+  var height = isMultiSeries || chartType === "combo" ? 300 : 260;
+
+  var commonAxisProps = {
+    tick: { fontSize: 11, fill: "#737373" },
+    axisLine: false,
+    tickLine: false,
+  };
+
+  var renderLegend = isMultiSeries || chartType === "combo";
 
   return (
-    <div className="border border-[#E5E5E5] rounded-lg p-4 bg-white">
-      {title && <div className="text-sm font-medium text-[#0A0A0A] mb-3">{title}</div>}
-      <ResponsiveContainer width="100%" height={250}>
+    <div className="border border-[#E5E5E5] rounded-xl p-4 bg-white">
+      {title && <div className="text-sm font-semibold text-[#0A0A0A] mb-3">{title}</div>}
+      <ResponsiveContainer width="100%" height={height}>
         {chartType === "bar" ? (
+          <BarChart data={data} barGap={2}>
+            <CartesianGrid stroke="#F0F0F0" vertical={false} />
+            <XAxis dataKey={x} {...commonAxisProps} />
+            <YAxis {...commonAxisProps} tickFormatter={formatValue} />
+            <Tooltip content={<CustomTooltip />} />
+            {renderLegend && <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 11, paddingTop: 8 }} />}
+            {seriesKeys.map(function(key, i) {
+              return <Bar key={key} dataKey={key} fill={palette[i % palette.length]} radius={[4, 4, 0, 0]} />;
+            })}
+          </BarChart>
+        ) : chartType === "stacked_bar" ? (
           <BarChart data={data}>
             <CartesianGrid stroke="#F0F0F0" vertical={false} />
-            <XAxis dataKey={x} tick={{ fontSize: 11, fill: "#737373" }} axisLine={false} tickLine={false} />
-            <YAxis tick={{ fontSize: 11, fill: "#737373" }} axisLine={false} tickLine={false} />
-            <Tooltip contentStyle={customTooltipStyle} />
-            <Bar dataKey={y} fill="#0A0A0A" radius={[3, 3, 0, 0]} />
+            <XAxis dataKey={x} {...commonAxisProps} />
+            <YAxis {...commonAxisProps} tickFormatter={formatValue} />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 11, paddingTop: 8 }} />
+            {seriesKeys.map(function(key, i) {
+              return <Bar key={key} dataKey={key} stackId="stack" fill={palette[i % palette.length]} radius={i === seriesKeys.length - 1 ? [4, 4, 0, 0] : [0, 0, 0, 0]} />;
+            })}
+          </BarChart>
+        ) : chartType === "horizontal_bar" ? (
+          <BarChart data={data} layout="vertical" barGap={2}>
+            <CartesianGrid stroke="#F0F0F0" horizontal={false} />
+            <XAxis type="number" {...commonAxisProps} tickFormatter={formatValue} />
+            <YAxis type="category" dataKey={x} {...commonAxisProps} width={100} />
+            <Tooltip content={<CustomTooltip />} />
+            {renderLegend && <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 11, paddingTop: 8 }} />}
+            {seriesKeys.map(function(key, i) {
+              return <Bar key={key} dataKey={key} fill={palette[i % palette.length]} radius={[0, 4, 4, 0]} />;
+            })}
           </BarChart>
         ) : chartType === "line" ? (
           <LineChart data={data}>
             <CartesianGrid stroke="#F0F0F0" vertical={false} />
-            <XAxis dataKey={x} tick={{ fontSize: 11, fill: "#737373" }} axisLine={false} tickLine={false} />
-            <YAxis tick={{ fontSize: 11, fill: "#737373" }} axisLine={false} tickLine={false} />
-            <Tooltip contentStyle={customTooltipStyle} />
-            <Line type="monotone" dataKey={y} stroke="#0A0A0A" strokeWidth={2} dot={false} />
+            <XAxis dataKey={x} {...commonAxisProps} />
+            <YAxis {...commonAxisProps} tickFormatter={formatValue} />
+            <Tooltip content={<CustomTooltip />} />
+            {renderLegend && <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 11, paddingTop: 8 }} />}
+            {seriesKeys.map(function(key, i) {
+              return <Line key={key} type="monotone" dataKey={key} stroke={palette[i % palette.length]} strokeWidth={2} dot={{ r: 3, fill: palette[i % palette.length] }} activeDot={{ r: 5 }} />;
+            })}
           </LineChart>
         ) : chartType === "area" ? (
           <AreaChart data={data}>
             <CartesianGrid stroke="#F0F0F0" vertical={false} />
-            <XAxis dataKey={x} tick={{ fontSize: 11, fill: "#737373" }} axisLine={false} tickLine={false} />
-            <YAxis tick={{ fontSize: 11, fill: "#737373" }} axisLine={false} tickLine={false} />
-            <Tooltip contentStyle={customTooltipStyle} />
-            <Area type="monotone" dataKey={y} stroke="#0A0A0A" fill="#0A0A0A" fillOpacity={0.1} />
+            <XAxis dataKey={x} {...commonAxisProps} />
+            <YAxis {...commonAxisProps} tickFormatter={formatValue} />
+            <Tooltip content={<CustomTooltip />} />
+            {renderLegend && <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 11, paddingTop: 8 }} />}
+            {seriesKeys.map(function(key, i) {
+              return <Area key={key} type="monotone" dataKey={key} stroke={palette[i % palette.length]} fill={palette[i % palette.length]} fillOpacity={0.08 + (i * 0.03)} strokeWidth={2} />;
+            })}
           </AreaChart>
+        ) : chartType === "combo" ? (
+          <ComposedChart data={data}>
+            <CartesianGrid stroke="#F0F0F0" vertical={false} />
+            <XAxis dataKey={x} {...commonAxisProps} />
+            <YAxis {...commonAxisProps} tickFormatter={formatValue} />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 11, paddingTop: 8 }} />
+            {seriesKeys.map(function(key, i) {
+              if (i === 0) return <Bar key={key} dataKey={key} fill={palette[0]} radius={[4, 4, 0, 0]} />;
+              return <Line key={key} type="monotone" dataKey={key} stroke={palette[i % palette.length]} strokeWidth={2} dot={{ r: 3 }} />;
+            })}
+          </ComposedChart>
         ) : (
           <PieChart>
-            <Tooltip contentStyle={customTooltipStyle} />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 11 }} />
             <Pie
               data={data}
-              dataKey={y}
+              dataKey={seriesKeys[0]}
               nameKey={x}
               cx="50%"
               cy="50%"
-              innerRadius={60}
-              outerRadius={100}
-              paddingAngle={2}
+              innerRadius={55}
+              outerRadius={95}
+              paddingAngle={3}
+              strokeWidth={0}
             >
-              {data.map((_, i) => (
-                <Cell key={i} fill={COLORS[i % COLORS.length]} />
-              ))}
+              {data.map(function(_, i) {
+                return <Cell key={i} fill={palette[i % palette.length]} />;
+              })}
             </Pie>
           </PieChart>
         )}
