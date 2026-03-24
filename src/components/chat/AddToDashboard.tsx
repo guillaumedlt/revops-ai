@@ -29,6 +29,14 @@ function getDefaultSize(block: any): { w: number; h: number } {
     }
     case "text":
       return { w: 6, h: 3 };
+    case "progress":
+      return { w: 6, h: 2 };
+    case "funnel":
+      return { w: 6, h: 5 };
+    case "comparison":
+      return { w: 12, h: 4 };
+    case "scorecard":
+      return { w: 6, h: 5 };
     default:
       return { w: 6, h: 4 };
   }

@@ -7,6 +7,10 @@ import KPICardBlock from "@/components/chat/blocks/KPICardBlock";
 import ChartBlock from "@/components/chat/blocks/ChartBlock";
 import TableBlock from "@/components/chat/blocks/TableBlock";
 import TextBlock from "@/components/chat/blocks/TextBlock";
+import ProgressBlock from "@/components/chat/blocks/ProgressBlock";
+import FunnelBlock from "@/components/chat/blocks/FunnelBlock";
+import ComparisonBlock from "@/components/chat/blocks/ComparisonBlock";
+import ScorecardBlock from "@/components/chat/blocks/ScorecardBlock";
 import BlockRenderer from "@/components/chat/blocks/BlockRenderer";
 
 interface Widget {
@@ -55,11 +59,19 @@ function WidgetContent({ widget }: { widget: Widget }) {
         </div>
       );
     case "chart":
-      return <ChartBlock chartType={c.chartType || "bar"} title="" data={c.data || []} xKey={c.xKey} yKey={c.yKey} />;
+      return <ChartBlock chartType={c.chartType || "bar"} title="" data={c.data || []} xKey={c.xKey} yKey={c.yKey} yKeys={c.yKeys} colors={c.colors} />;
     case "table":
-      return <TableBlock title="" headers={c.headers || []} rows={c.rows || []} />;
+      return <TableBlock title="" headers={c.headers || []} rows={c.rows || []} sortable={c.sortable} searchable={c.searchable} pageSize={c.pageSize} />;
     case "text":
       return <TextBlock text={c.text || ""} />;
+    case "progress":
+      return <ProgressBlock label={c.label || ""} value={c.value || 0} max={c.max || 100} target={c.target} color={c.color} />;
+    case "funnel":
+      return <FunnelBlock title="" steps={c.steps || []} />;
+    case "comparison":
+      return <ComparisonBlock title="" items={c.items || []} />;
+    case "scorecard":
+      return <ScorecardBlock title="" value={c.value || ""} target={c.target} score={c.score || 0} breakdown={c.breakdown} />;
     case "report":
       return c.blocks ? <BlockRenderer blocks={c.blocks} /> : <p className="text-xs text-[#A3A3A3]">Empty report</p>;
     default:
