@@ -104,7 +104,12 @@ export default function ChatInputBar({
   initialValue,
 }: ChatInputBarProps) {
   var [value, setValue] = useState(initialValue ?? "");
-  var [selectedModel, setSelectedModel] = useState("kairo");
+  var [selectedModel, setSelectedModel] = useState(function() {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("kairo_model") || "kairo";
+    }
+    return "kairo";
+  });
   var [showModelPicker, setShowModelPicker] = useState(false);
   var [showConnectors, setShowConnectors] = useState(false);
   var [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -416,6 +421,7 @@ export default function ChatInputBar({
                                   key={model.id}
                                   onClick={function() {
                                     setSelectedModel(model.id);
+                                    localStorage.setItem("kairo_model", model.id);
                                     setShowModelPicker(false);
                                   }}
                                   className={"w-full flex items-center gap-2.5 px-3 py-1.5 text-left transition-colors " + (isSelected ? "bg-[#F5F5F5]" : "hover:bg-[#FAFAFA]")}
