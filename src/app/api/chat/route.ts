@@ -17,9 +17,9 @@ const ChatSchema = z.object({
 function resolveModelId(model: string | undefined, message: string): { provider: string; modelId: string; displayName: string } {
   switch (model) {
     case "claude-opus":
-      return { provider: "anthropic", modelId: "claude-opus-4-20250514", displayName: "opus" };
+      return { provider: "anthropic", modelId: "claude-sonnet-4-5-20241022", displayName: "opus" };
     case "claude-sonnet":
-      return { provider: "anthropic", modelId: "claude-sonnet-4-20250514", displayName: "sonnet" };
+      return { provider: "anthropic", modelId: "claude-sonnet-4-5-20241022", displayName: "sonnet" };
     case "claude-haiku":
       return { provider: "anthropic", modelId: "claude-haiku-4-5-20251001", displayName: "haiku" };
     case "gpt-4o":
@@ -68,20 +68,28 @@ export async function POST(request: NextRequest) {
 
   let convId = conversationId;
   if (!convId) {
-    const { data: conv } = await supabase.from("conversations").insert({
+    const { data: conv, error: convError } = await supabase.from("conversations").insert({
       tenant_id: auth.tenantId,
       user_id: auth.userId,
       title: message.slice(0, 100),
     }).select("id").single();
+    if (convError) {
+      console.error("[chat] Conversation create error:", convError.message);
+    }
     convId = conv?.id;
   }
 
-  await supabase.from("messages").insert({
-    conversation_id: convId,
-    tenant_id: auth.tenantId,
-    role: "user",
-    content: message,
-  });
+  if (convId) {
+    const { error: msgError } = await supabase.from("messages").insert({
+      conversation_id: convId,
+      tenant_id: auth.tenantId,
+      role: "user",
+      content: message,
+    });
+    if (msgError) {
+      console.error("[chat] Message insert error:", msgError.message);
+    }
+  }
 
   // Get connector tools for this tenant
   const connectorTools = await getToolsForTenant(auth.tenantId);
@@ -163,6 +171,11 @@ export async function POST(request: NextRequest) {
           controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
           controller.close();
           return;
+        }
+
+        // Send conversationId early so client can navigate
+        if (convId) {
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "conversation_id", conversationId: convId })}\n\n`));
         }
 
         // Anthropic provider path (kairo, claude-opus, claude-sonnet, claude-haiku)
