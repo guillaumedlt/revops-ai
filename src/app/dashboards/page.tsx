@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Plus, LayoutDashboard, X } from "lucide-react";
+import { Plus, LayoutDashboard, X, Trash2 } from "lucide-react";
 
 interface Dashboard {
   id: string;
@@ -104,6 +104,11 @@ export default function DashboardsPage() {
     fetchDashboards();
   }, []);
 
+  async function handleDelete(id: string) {
+    setDashboards(function(prev) { return prev.filter(function(d) { return d.id !== id; }); });
+    await fetch("/api/dashboards/" + id, { method: "DELETE" });
+  }
+
   async function handleCreate(name: string, description: string) {
     const res = await fetch("/api/dashboards", {
       method: "POST",
@@ -154,21 +159,35 @@ export default function DashboardsPage() {
           </div>
         ) : (
           <div className="grid grid-cols-3 gap-4">
-            {dashboards.map((d) => (
-              <button
-                key={d.id}
-                onClick={() => router.push("/dashboards/" + d.id)}
-                className="text-left border border-[#E5E5E5] rounded-xl p-5 hover:border-[#D4D4D4] hover:shadow-sm transition-all cursor-pointer"
-              >
-                <h3 className="text-base font-medium text-[#0A0A0A]">{d.name}</h3>
-                {d.description && (
-                  <p className="text-sm text-[#737373] mt-1 line-clamp-2">{d.description}</p>
-                )}
-                <p className="text-xs text-[#A3A3A3] mt-3">
-                  {d.widget_count} widget{d.widget_count !== 1 ? "s" : ""} &middot; {formatDate(d.updated_at)}
-                </p>
-              </button>
-            ))}
+            {dashboards.map(function(d) {
+              return (
+                <div
+                  key={d.id}
+                  className="group relative text-left border border-[#E5E5E5] rounded-xl p-5 hover:border-[#D4D4D4] hover:shadow-sm transition-all cursor-pointer"
+                  onClick={function() { router.push("/dashboards/" + d.id); }}
+                >
+                  <button
+                    onClick={function(e) {
+                      e.stopPropagation();
+                      if (confirm("Supprimer le dashboard \"" + d.name + "\" ?")) {
+                        handleDelete(d.id);
+                      }
+                    }}
+                    className="absolute top-3 right-3 hidden group-hover:flex h-7 w-7 items-center justify-center rounded-lg text-[#A3A3A3] hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-colors"
+                    title="Supprimer"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                  <h3 className="text-base font-medium text-[#0A0A0A] pr-6">{d.name}</h3>
+                  {d.description && (
+                    <p className="text-sm text-[#737373] mt-1 line-clamp-2">{d.description}</p>
+                  )}
+                  <p className="text-xs text-[#A3A3A3] mt-3">
+                    {d.widget_count} widget{d.widget_count !== 1 ? "s" : ""} &middot; {formatDate(d.updated_at)}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         )}
       </div>
