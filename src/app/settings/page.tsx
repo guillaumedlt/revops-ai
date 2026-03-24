@@ -97,7 +97,9 @@ function SettingsContent() {
 
   // Notion state
   const [notionConnected, setNotionConnected] = useState(false);
-  const [notionLoading, setNotionLoading] = useState(false);
+  const [notionKeyInput, setNotionKeyInput] = useState("");
+  const [notionConnecting, setNotionConnecting] = useState(false);
+  const [showNotionInput, setShowNotionInput] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -205,6 +207,32 @@ function SettingsContent() {
   const handleDisconnectLemlist = async () => {
     await fetch("/api/connectors/lemlist/connect", { method: "DELETE" });
     setLemlistConnected(false);
+  };
+
+  const handleConnectNotion = async () => {
+    setNotionConnecting(true);
+    try {
+      const res = await fetch("/api/connectors/notion/connect", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ apiKey: notionKeyInput }),
+      });
+      if (res.ok) {
+        setNotionConnected(true);
+        setShowNotionInput(false);
+        setNotionKeyInput("");
+      } else {
+        const err = await res.json();
+        alert(err.error || "Failed to connect");
+      }
+    } finally {
+      setNotionConnecting(false);
+    }
+  };
+
+  const handleDisconnectNotion = async () => {
+    await fetch("/api/connectors/notion/connect", { method: "DELETE" });
+    setNotionConnected(false);
   };
 
 
@@ -476,19 +504,41 @@ function SettingsContent() {
                         <span className="text-[10px] font-medium text-[#22C55E]">Connected</span>
                       </div>
                       <button
-                        onClick={async () => { await fetch("/api/connectors/notion/status", { method: "DELETE" }); setNotionConnected(false); }}
+                        onClick={handleDisconnectNotion}
                         className="text-[10px] text-[#737373] hover:text-red-500 border border-[#E5E5E5] rounded-lg px-2 py-1 transition-colors"
                       >
                         Disconnect
                       </button>
                     </div>
+                  ) : showNotionInput ? (
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="password"
+                        value={notionKeyInput}
+                        onChange={(e) => setNotionKeyInput(e.target.value)}
+                        placeholder="ntn_..."
+                        className="h-7 px-2 border border-[#E5E5E5] rounded-lg text-xs w-36 focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]"
+                      />
+                      <button
+                        onClick={handleConnectNotion}
+                        disabled={notionConnecting || !notionKeyInput.trim()}
+                        className="text-[10px] text-white bg-[#0A0A0A] rounded-lg px-2.5 py-1 hover:bg-[#333] disabled:opacity-50"
+                      >
+                        {notionConnecting ? "..." : "Save"}
+                      </button>
+                      <button
+                        onClick={() => { setShowNotionInput(false); setNotionKeyInput(""); }}
+                        className="text-[10px] text-[#A3A3A3]"
+                      >
+                        Cancel
+                      </button>
+                    </div>
                   ) : (
                     <button
-                      onClick={() => { setNotionLoading(true); window.location.href = "/api/auth/notion"; }}
-                      disabled={notionLoading}
-                      className="text-xs text-[#0A0A0A] font-medium border border-[#E5E5E5] rounded-lg px-3 py-1.5 hover:bg-[#F5F5F5] transition-colors disabled:opacity-50"
+                      onClick={() => setShowNotionInput(true)}
+                      className="text-xs text-[#0A0A0A] font-medium border border-[#E5E5E5] rounded-lg px-3 py-1.5 hover:bg-[#F5F5F5] transition-colors"
                     >
-                      {notionLoading ? "Redirecting..." : "Connect"}
+                      Connect
                     </button>
                   )
                 ) : (
