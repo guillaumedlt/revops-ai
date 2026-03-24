@@ -333,7 +333,7 @@ export default function ChatInputBar({
 
           {/* Bottom bar */}
           <div className="px-3 pb-2.5 flex items-center justify-between">
-            <div className="relative flex items-center gap-0.5 min-w-0 overflow-x-auto">
+            <div className="flex items-center gap-0.5 min-w-0">
               <FileUpload
                 onFileSelect={function(file) { setSelectedFile(file); }}
                 selectedFile={null}

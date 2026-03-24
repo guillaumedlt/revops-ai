@@ -104,7 +104,7 @@ function SettingsContent() {
       setUserName(data.user?.user_metadata?.full_name ?? "");
     });
 
-    // Load automation settings  }, []);
+  }, []);
 
   useEffect(() => {
     if (activeTab === "connectors") {
