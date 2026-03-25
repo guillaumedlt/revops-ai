@@ -26,6 +26,10 @@ const config: Config = {
         xl: ["1.25rem", { lineHeight: "1.75rem" }],          // 20px
         "2xl": ["1.5rem", { lineHeight: "2rem" }],           // 24px
         "3xl": ["2rem", { lineHeight: "2.5rem" }],           // 32px
+        "4xl": ["2.5rem", { lineHeight: "3rem" }],          // 40px
+        "5xl": ["3rem", { lineHeight: "3.5rem" }],           // 48px
+        "6xl": ["3.75rem", { lineHeight: "4rem" }],          // 60px
+        "7xl": ["4.5rem", { lineHeight: "4.75rem" }],        // 72px
       },
 
       // === LETTER SPACING ===

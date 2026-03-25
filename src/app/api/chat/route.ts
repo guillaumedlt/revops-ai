@@ -66,9 +66,12 @@ export async function POST(request: NextRequest) {
   }
 
   const credits = await checkCredits(auth.tenantId, creditAction);
-  // Don't block on credits for now — log but allow
   if (!credits.allowed) {
-    console.log("[chat] Credits low for tenant", auth.tenantId, "remaining:", credits.remaining, "cost:", credits.cost);
+    return NextResponse.json({
+      error: "Plus de credits ce mois-ci (" + credits.remaining + " restants, " + credits.cost + " requis). Passez au plan Pro pour continuer.",
+      creditsRemaining: credits.remaining,
+      creditCost: credits.cost,
+    }, { status: 402 });
   }
 
   const supabase = createAdminClient();

@@ -30,8 +30,8 @@ export async function middleware(request: NextRequest) {
     pathname.includes(".") ||
     pathname.startsWith("/api/cron/")
   ) {
-    var { supabaseResponse } = await updateSession(request);
-    return supabaseResponse;
+    var result = await updateSession(request);
+    return result.supabaseResponse;
   }
 
   var { user, supabaseResponse, supabase } = await updateSession(request);

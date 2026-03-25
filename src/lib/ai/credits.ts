@@ -1,41 +1,74 @@
 import { createAdminClient } from "@/lib/supabase/admin";
 
+// Credit costs per action type
+// Calibrated for ~80-85% margin on Pro/Business plans
 export const CREDIT_COSTS = {
-  simple: 1,      // Haiku, no tools
-  standard: 2,    // Sonnet with tools
-  opus: 5,        // Opus (most capable)
-  report: 5,      // /report generation
+  simple: 1,      // Haiku, no tools (~€0.001 real cost)
+  standard: 2,    // Sonnet with tools (~€0.02 real cost)
+  opus: 5,        // Opus, most capable (~€0.10 real cost)
+  report: 5,      // /report long generation (~€0.08 real cost)
   icp: 2,         // ICP generation
 } as const;
 
 export type CreditAction = keyof typeof CREDIT_COSTS;
 
+// Free tier: 50 credits/month (no Stripe needed)
+var FREE_TIER_CREDITS = 50;
+
 export async function checkCredits(tenantId: string, action: CreditAction = "standard"): Promise<{ allowed: boolean; remaining: number; cost: number }> {
-  const supabase = createAdminClient();
-  const { data } = await supabase
+  var supabase = createAdminClient();
+  var cost = CREDIT_COSTS[action];
+
+  // Look for active allocation
+  var { data } = await supabase
     .from("credit_allocations")
-    .select("credits_allocated, credits_used")
+    .select("id, credits_allocated, credits_used, bonus_credits")
     .eq("tenant_id", tenantId)
     .gte("billing_period_end", new Date().toISOString().split("T")[0])
     .order("billing_period_start", { ascending: false })
     .limit(1)
     .single();
 
-  const cost = CREDIT_COSTS[action];
-  if (!data) return { allowed: true, remaining: 999, cost }; // No allocation = free tier, allow
-  const remaining = (data.credits_allocated ?? 0) - (data.credits_used ?? 0);
+  if (!data) {
+    // No allocation — auto-create free tier for current month
+    var now = new Date();
+    var monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split("T")[0];
+    var monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split("T")[0];
+
+    var { data: newAlloc } = await supabase
+      .from("credit_allocations")
+      .upsert({
+        tenant_id: tenantId,
+        billing_period_start: monthStart,
+        billing_period_end: monthEnd,
+        credits_allocated: FREE_TIER_CREDITS,
+        credits_used: 0,
+        bonus_credits: 0,
+      }, { onConflict: "tenant_id,billing_period_start" })
+      .select("id, credits_allocated, credits_used, bonus_credits")
+      .single();
+
+    if (newAlloc) {
+      data = newAlloc;
+    } else {
+      // Fallback: allow if DB fails
+      return { allowed: true, remaining: FREE_TIER_CREDITS, cost };
+    }
+  }
+
+  var totalCredits = (data.credits_allocated ?? 0) + (data.bonus_credits ?? 0);
+  var remaining = totalCredits - (data.credits_used ?? 0);
   return { allowed: remaining >= cost, remaining, cost };
 }
 
-export async function deductCredit(tenantId: string, userId: string, action: CreditAction = "standard"): Promise<void> {
+export async function deductCredit(tenantId: string, userId: string, action: CreditAction = "standard"): Promise<{ remaining: number }> {
   try {
-    const supabase = createAdminClient();
-    const cost = CREDIT_COSTS[action];
+    var supabase = createAdminClient();
+    var cost = CREDIT_COSTS[action];
 
-    // Try to increment on credit_allocations directly
-    const { data } = await supabase
+    var { data } = await supabase
       .from("credit_allocations")
-      .select("id, credits_used")
+      .select("id, credits_used, credits_allocated, bonus_credits")
       .eq("tenant_id", tenantId)
       .gte("billing_period_end", new Date().toISOString().split("T")[0])
       .order("billing_period_start", { ascending: false })
@@ -43,14 +76,49 @@ export async function deductCredit(tenantId: string, userId: string, action: Cre
       .single();
 
     if (data) {
+      var newUsed = (data.credits_used || 0) + cost;
       await supabase
         .from("credit_allocations")
-        .update({ credits_used: (data.credits_used || 0) + cost })
+        .update({ credits_used: newUsed })
         .eq("id", data.id);
+
+      var totalCredits = (data.credits_allocated ?? 0) + (data.bonus_credits ?? 0);
+      return { remaining: totalCredits - newUsed };
     }
-    // If no allocation exists (free tier), just skip - no tracking needed
+
+    return { remaining: 0 };
   } catch {
-    // Silently fail - credit tracking should never break the chat
     console.error("[credits] deductCredit failed for tenant", tenantId);
+    return { remaining: 0 };
   }
+}
+
+// API helper to get current credit status for display
+export async function getCreditStatus(tenantId: string): Promise<{ used: number; total: number; remaining: number; plan: string }> {
+  var supabase = createAdminClient();
+
+  var { data: tenant } = await supabase
+    .from("tenants")
+    .select("plan")
+    .eq("id", tenantId)
+    .single();
+
+  var { data: alloc } = await supabase
+    .from("credit_allocations")
+    .select("credits_allocated, credits_used, bonus_credits")
+    .eq("tenant_id", tenantId)
+    .gte("billing_period_end", new Date().toISOString().split("T")[0])
+    .order("billing_period_start", { ascending: false })
+    .limit(1)
+    .single();
+
+  var total = (alloc?.credits_allocated ?? FREE_TIER_CREDITS) + (alloc?.bonus_credits ?? 0);
+  var used = alloc?.credits_used ?? 0;
+
+  return {
+    used,
+    total,
+    remaining: total - used,
+    plan: tenant?.plan ?? "free",
+  };
 }

@@ -5,32 +5,54 @@ const plans = [
     name: "Free",
     price: "0",
     period: "",
-    desc: "Get started with Kairo",
-    credits: "50 credits / month",
-    features: ["AI chat assistant", "HubSpot integration", "Basic analytics", "1 user", "1 dashboard"],
-    cta: "Start free",
+    desc: "Pour découvrir Kairo",
+    credits: "10 crédits / mois",
+    features: [
+      "Assistant IA conversationnel",
+      "Intégration HubSpot",
+      "Analytics de base",
+      "1 utilisateur",
+      "1 dashboard",
+    ],
+    cta: "Commencer gratuitement",
     href: "/signup",
     highlight: false,
   },
   {
     name: "Pro",
     price: "49",
-    period: "/ month",
-    desc: "For growing sales teams",
-    credits: "500 credits / month",
-    features: ["Everything in Free", "All 28 AI tools", "Forecasting & funnel", "Morning briefing", "Unlimited dashboards", "5 users", "Lemlist integration"],
-    cta: "Start free trial",
+    period: "/ mois",
+    desc: "Pour les équipes commerciales en croissance",
+    credits: "200 crédits / mois",
+    features: [
+      "Tout le plan Free",
+      "28 outils IA",
+      "Forecasting & funnel",
+      "Morning briefing",
+      "Dashboards illimités",
+      "5 utilisateurs",
+      "Intégration Lemlist",
+    ],
+    cta: "Essai gratuit 14 jours",
     href: "/signup?plan=pro",
     highlight: true,
   },
   {
     name: "Business",
     price: "149",
-    period: "/ month",
-    desc: "For established RevOps",
-    credits: "2,000 credits / month",
-    features: ["Everything in Pro", "Full audit reports", "ICP builder", "CRM hygiene scores", "Deal health scoring", "Unlimited users", "Priority support"],
-    cta: "Start free trial",
+    period: "/ mois",
+    desc: "Pour les organisations RevOps établies",
+    credits: "1 000 crédits / mois",
+    features: [
+      "Tout le plan Pro",
+      "Rapports d'audit complets",
+      "ICP Builder",
+      "Scores de qualité CRM",
+      "Deal health scoring",
+      "Utilisateurs illimités",
+      "Support prioritaire",
+    ],
+    cta: "Essai gratuit 14 jours",
     href: "/signup?plan=business",
     highlight: false,
   },
@@ -38,63 +60,122 @@ const plans = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-24">
-      <div className="max-w-5xl mx-auto px-6">
+    <section id="tarifs" className="py-24 md:py-32">
+      <div className="max-w-[1000px] mx-auto px-6">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-[#0A0A0A] mb-4">Simple pricing</h2>
-          <p className="text-[#737373]">Start free. Upgrade when you need more.</p>
+          <p className="text-[13px] text-[#A3A3A3] uppercase tracking-wider mb-4">
+            Tarifs
+          </p>
+          <h2 className="text-[32px] sm:text-[40px] font-bold text-[#0A0A0A] leading-tight tracking-tight mb-4">
+            Simple, transparent,{" "}
+            <span className="text-[#A3A3A3]">sans engagement.</span>
+          </h2>
+          <p className="text-[17px] text-[#737373]">
+            Commencez gratuitement. Passez au plan supérieur quand vous en avez besoin.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Plans */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {plans.map((plan) => (
             <div
               key={plan.name}
               className={
-                "rounded-2xl p-6 " +
+                "rounded-2xl p-7 flex flex-col transition-all " +
                 (plan.highlight
-                  ? "bg-[#0A0A0A] text-white ring-2 ring-[#0A0A0A]"
-                  : "bg-white border border-[#E5E5E5]")
+                  ? "bg-[#0A0A0A] text-white ring-1 ring-[#0A0A0A] scale-[1.02]"
+                  : "bg-white border border-[#E5E5E5] hover:border-[#D4D4D4]")
               }
             >
-              <h3 className={"text-lg font-semibold " + (plan.highlight ? "text-white" : "text-[#0A0A0A]")}>
-                {plan.name}
-              </h3>
-              <p className={"text-xs mt-1 " + (plan.highlight ? "text-white/50" : "text-[#A3A3A3]")}>
-                {plan.desc}
-              </p>
-              <div className="mt-4 mb-6">
-                <span className={"text-4xl font-bold " + (plan.highlight ? "text-white" : "text-[#0A0A0A]")}>
-                  {"€" + plan.price}
+              <div>
+                <h3
+                  className={
+                    "text-[18px] font-semibold " +
+                    (plan.highlight ? "text-white" : "text-[#0A0A0A]")
+                  }
+                >
+                  {plan.name}
+                </h3>
+                <p
+                  className={
+                    "text-[13px] mt-1 " +
+                    (plan.highlight ? "text-white/50" : "text-[#A3A3A3]")
+                  }
+                >
+                  {plan.desc}
+                </p>
+              </div>
+
+              <div className="mt-6 mb-2">
+                <span
+                  className={
+                    "text-[40px] font-bold tracking-tight " +
+                    (plan.highlight ? "text-white" : "text-[#0A0A0A]")
+                  }
+                >
+                  {plan.price}&euro;
                 </span>
                 {plan.period && (
-                  <span className={"text-sm " + (plan.highlight ? "text-white/50" : "text-[#A3A3A3]")}>
+                  <span
+                    className={
+                      "text-[14px] ml-1 " +
+                      (plan.highlight ? "text-white/50" : "text-[#A3A3A3]")
+                    }
+                  >
                     {plan.period}
                   </span>
                 )}
               </div>
-              <p className={"text-xs font-medium mb-4 " + (plan.highlight ? "text-white/70" : "text-[#737373]")}>
+
+              <p
+                className={
+                  "text-[13px] font-medium mb-6 " +
+                  (plan.highlight ? "text-white/60" : "text-[#737373]")
+                }
+              >
                 {plan.credits}
               </p>
+
               <Link
                 href={plan.href}
                 className={
-                  "w-full h-10 flex items-center justify-center rounded-xl text-sm font-medium transition-colors " +
+                  "w-full h-11 flex items-center justify-center rounded-xl text-[14px] font-medium transition-all " +
                   (plan.highlight
                     ? "bg-white text-[#0A0A0A] hover:bg-white/90"
-                    : "bg-[#0A0A0A] text-white hover:bg-[#333]")
+                    : "bg-[#0A0A0A] text-white hover:bg-[#1a1a1a]")
                 }
               >
                 {plan.cta}
               </Link>
-              <ul className="mt-6 space-y-2.5">
+
+              <ul className="mt-7 space-y-3 flex-1">
                 {plan.features.map((f) => (
                   <li
                     key={f}
-                    className={"flex items-center gap-2 text-xs " + (plan.highlight ? "text-white/70" : "text-[#737373]")}
+                    className={
+                      "flex items-start gap-2.5 text-[13px] " +
+                      (plan.highlight ? "text-white/70" : "text-[#737373]")
+                    }
                   >
-                    <span className={"shrink-0 " + (plan.highlight ? "text-white/40" : "text-[#D4D4D4]")}>
-                      {"\u2713"}
-                    </span>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      className={
+                        "mt-0.5 shrink-0 " +
+                        (plan.highlight ? "text-white/40" : "text-[#D4D4D4]")
+                      }
+                    >
+                      <path
+                        d="M13.3 4.3L6 11.6L2.7 8.3"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                     {f}
                   </li>
                 ))}

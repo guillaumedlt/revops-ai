@@ -55,6 +55,7 @@ export default function ConversationSidebar() {
   var [userEmail, setUserEmail] = useState("");
   var [searchOpen, setSearchOpen] = useState(false);
   var [searchQuery, setSearchQuery] = useState("");
+  var [credits, setCredits] = useState<{ used: number; total: number; remaining: number; plan: string } | null>(null);
   var pathname = usePathname();
   var router = useRouter();
 
@@ -77,7 +78,10 @@ export default function ConversationSidebar() {
     supabase.auth.getUser().then(function({ data }) {
       setUserEmail(data.user?.email ?? "");
     });
-  }, []);
+    fetch("/api/credits").then(function(r) { return r.json(); }).then(function(json) {
+      if (json.data) setCredits(json.data);
+    }).catch(function() {});
+  }, [pathname]);
 
   function handleNew() {
     router.push("/chat");
@@ -218,16 +222,45 @@ export default function ConversationSidebar() {
       </div>
 
       {/* Bottom section */}
-      <div className="border-t border-[#E5E5E5] px-3 py-3">
+      <div className="border-t border-[#E5E5E5] px-3 py-3 space-y-2.5">
+        {/* Credit usage bar */}
+        {credits && (
+          <div>
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-[10px] font-medium text-[#A3A3A3] uppercase tracking-wider">Credits</span>
+              <span className="text-[10px] text-[#737373] tabular-nums">{credits.remaining} / {credits.total}</span>
+            </div>
+            <div className="h-1.5 bg-[#F0F0F0] rounded-full overflow-hidden">
+              <div
+                className="h-full rounded-full transition-all duration-300"
+                style={{
+                  width: Math.max(2, Math.round((credits.remaining / credits.total) * 100)) + "%",
+                  backgroundColor: credits.remaining / credits.total > 0.2 ? "#0A0A0A" : credits.remaining / credits.total > 0.05 ? "#F59E0B" : "#EF4444",
+                }}
+              />
+            </div>
+            {credits.plan === "free" && credits.remaining < 15 && (
+              <button
+                onClick={function() { router.push("/settings?tab=billing"); }}
+                className="mt-1.5 w-full text-[10px] font-medium text-[#6366F1] hover:text-[#4F46E5] text-center"
+              >
+                Upgrade to Pro
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* User info */}
         <div className="flex items-center gap-3">
           <div className="h-8 w-8 rounded-full bg-[#F0F0F0] flex items-center justify-center text-xs font-medium text-[#0A0A0A] shrink-0">
             {userInitial}
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-[#0A0A0A] truncate">{userEmail}</p>
+            {credits && <p className="text-[10px] text-[#A3A3A3] capitalize">{credits.plan} plan</p>}
           </div>
         </div>
-        <div className="flex items-center gap-1 mt-2">
+        <div className="flex items-center gap-1">
           <button
             onClick={function() { router.push("/settings"); }}
             className="flex-1 flex items-center justify-center gap-1.5 h-8 rounded-lg text-xs text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"

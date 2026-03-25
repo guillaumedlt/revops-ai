@@ -60,3 +60,74 @@
     font-variant-numeric: tabular-nums;
   }
 }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+/* Cube drops in from above */
+@keyframes cubeDropIn {
+  0%   { opacity: 0; transform: translateY(-30px) scale(0.85); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Brick slots into place (Lego snap) */
+@keyframes brickSlotIn {
+  0%   { opacity: 0; transform: translateY(-50px); }
+  70%  { opacity: 1; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Brick rises from bottom */
+@keyframes brickRise {
+  0%   { opacity: 0; transform: translateY(30px); }
+  70%  { opacity: 1; transform: translateY(-3px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.brick-anim {
+  animation: brickFade 0.5s ease-out both;
+}
+
+@keyframes brickFade {
+  0%   { opacity: 0; transform: translateY(-12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Brick leaves */
+@keyframes brickLeave {
+  0%   { opacity: 1; transform: translateX(0) scale(1); }
+  100% { opacity: 0; transform: translateX(20px) scale(0.8); }
+}
+
+/* Fade + slide in for labels */
+@keyframes fadeSlideIn {
+  0%   { opacity: 0; transform: translateX(-10px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Simple fade in */
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Orbit rotation */
+@keyframes orbitSpin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Blob float */
+@keyframes blobFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(10px, -15px) scale(1.1); }
+  66%      { transform: translate(-8px, 10px) scale(0.95); }
+}
+
+/* Orbit along card border using offset-path */
+@keyframes orbitBorder {
+  0%   { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
