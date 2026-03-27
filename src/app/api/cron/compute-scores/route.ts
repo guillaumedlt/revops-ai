@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { generateAlerts } from "@/lib/alerts/engine";
 import { computeAdoptionScore } from "@/lib/scoring/adoption-score";
 import { computeDataQualityScore } from "@/lib/scoring/metrics/data-quality";
 import { computeStalledDeals, computeInactiveDeals } from "@/lib/scoring/metrics/pipeline";
@@ -83,11 +84,15 @@ export async function GET(request: NextRequest) {
         { onConflict: "tenant_id,score_date" }
       );
 
+      // Generate proactive alerts
+      var alertResult = await generateAlerts(tenant_id);
+
       results.push({
         tenant_id,
         success: true,
         score: adoption.overall,
         grade: adoption.grade,
+        alerts: alertResult.generated,
       });
     } catch (error) {
       results.push({
