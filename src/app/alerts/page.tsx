@@ -82,8 +82,10 @@ function ScoreGauge({ score, size = 120 }: { score: number; size?: number }) {
 }
 
 function timeSince(date: string): string {
-  var seconds = Math.floor((Date.now() - new Date(date).getTime()) / 1000);
-  if (seconds < 3600) return Math.floor(seconds / 60) + " min";
+  var ms = Date.now() - new Date(date).getTime();
+  if (isNaN(ms) || ms < 0) return "";
+  var seconds = Math.floor(ms / 1000);
+  if (seconds < 3600) return Math.max(1, Math.floor(seconds / 60)) + " min";
   if (seconds < 86400) return Math.floor(seconds / 3600) + "h";
   return Math.floor(seconds / 86400) + "j";
 }

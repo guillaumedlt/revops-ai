@@ -16,7 +16,8 @@ interface Message {
 }
 
 export default function ConversationPage() {
-  const { conversationId } = useParams<{ conversationId: string }>();
+  const params = useParams<{ conversationId: string }>();
+  const conversationId = params.conversationId || "";
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [streamingText, setStreamingText] = useState("");

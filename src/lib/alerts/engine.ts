@@ -75,7 +75,7 @@ export async function generateAlerts(tenantId: string): Promise<{ generated: num
 
   // 1b. Deals sans montant
   var noAmount = openDeals.filter(function(d) { return !d.properties?.amount || Number(d.properties.amount) === 0; });
-  if (noAmount.length > 0 && noAmount.length / Math.max(openDeals.length, 1) > 0.2) {
+  if (openDeals.length > 0 && noAmount.length > 0 && noAmount.length / openDeals.length > 0.2) {
     alerts.push({
       alert_type: "data_quality",
       severity: noAmount.length / Math.max(openDeals.length, 1) > 0.5 ? "critical" : "warning",

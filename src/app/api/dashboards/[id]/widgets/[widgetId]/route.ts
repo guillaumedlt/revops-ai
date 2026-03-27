@@ -63,11 +63,12 @@ export async function DELETE(
     return NextResponse.json(apiError(error.message), { status: 500 });
   }
 
-  // Touch dashboard updated_at
+  // Touch dashboard updated_at (with tenant filter)
   await supabase
     .from("dashboards")
     .update({ updated_at: new Date().toISOString() })
-    .eq("id", id);
+    .eq("id", id)
+    .eq("tenant_id", auth.tenantId);
 
   return NextResponse.json(apiSuccess({ deleted: true }));
 }

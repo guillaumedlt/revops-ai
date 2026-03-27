@@ -15,10 +15,15 @@ export async function GET(request: NextRequest) {
   const supabase = createAdminClient();
 
   // Get all active connections (only those not currently syncing or revoked)
-  const { data: connections } = await supabase
+  const { data: connections, error: connError } = await supabase
     .from("hubspot_connections")
     .select("tenant_id, portal_id")
     .eq("sync_status", "idle");
+
+  if (connError) {
+    console.error("[cron] Sync query error:", connError.message);
+    return NextResponse.json({ error: connError.message, synced: 0 }, { status: 500 });
+  }
 
   if (!connections?.length) {
     return NextResponse.json({ message: "No tenants to sync", synced: 0 });

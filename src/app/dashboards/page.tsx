@@ -105,8 +105,12 @@ export default function DashboardsPage() {
   }, []);
 
   async function handleDelete(id: string) {
-    setDashboards(function(prev) { return prev.filter(function(d) { return d.id !== id; }); });
-    await fetch("/api/dashboards/" + id, { method: "DELETE" });
+    var prev = dashboards;
+    setDashboards(function(p) { return p.filter(function(d) { return d.id !== id; }); });
+    var res = await fetch("/api/dashboards/" + id, { method: "DELETE" });
+    if (!res.ok) {
+      setDashboards(prev); // Rollback on failure
+    }
   }
 
   async function handleCreate(name: string, description: string) {
