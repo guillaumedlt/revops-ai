@@ -6,55 +6,78 @@ async function getHubSpotToken(tenantId: string): Promise<{ accessToken: string;
   const supabase = createAdminClient();
   const { data } = await supabase
     .from("hubspot_connections")
-    .select("access_token, portal_id, token_expires_at, refresh_token")
+    .select("access_token, portal_id, token_expires_at, refresh_token, sync_status")
     .eq("tenant_id", tenantId)
     .single();
-  
+
   if (!data) return null;
-  
+
   // Check if token is expired (with 5min buffer)
   const expiresAt = new Date(data.token_expires_at).getTime();
   if (Date.now() > expiresAt - 5 * 60 * 1000) {
     // Refresh the token
     const refreshed = await refreshHubSpotToken(data.refresh_token, tenantId);
-    if (refreshed) return refreshed;
-    return null;
+    if (!refreshed) {
+      // Mark connection as broken
+      await supabase.from("hubspot_connections")
+        .update({ sync_status: "error", sync_error: "Token refresh failed — reconnection needed" })
+        .eq("tenant_id", tenantId);
+      console.error("[hubspot] Token refresh failed for tenant", tenantId);
+      return null;
+    }
+    return refreshed;
   }
-  
+
   return { accessToken: data.access_token, portalId: data.portal_id };
 }
 
 async function refreshHubSpotToken(refreshToken: string, tenantId: string): Promise<{ accessToken: string; portalId: string } | null> {
-  try {
-    const res = await fetch("https://api.hubapi.com/oauth/v1/token", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        grant_type: "refresh_token",
-        client_id: process.env.HUBSPOT_CLIENT_ID!,
-        client_secret: process.env.HUBSPOT_CLIENT_SECRET!,
-        refresh_token: refreshToken,
-      }).toString(),
-    });
-    if (!res.ok) return null;
-    const tokens = await res.json();
-    
-    const supabase = createAdminClient();
-    const { data } = await supabase
-      .from("hubspot_connections")
-      .update({
-        access_token: tokens.access_token,
-        refresh_token: tokens.refresh_token,
-        token_expires_at: new Date(Date.now() + tokens.expires_in * 1000).toISOString(),
-      })
-      .eq("tenant_id", tenantId)
-      .select("portal_id")
-      .single();
-    
-    return data ? { accessToken: tokens.access_token, portalId: data.portal_id } : null;
-  } catch {
-    return null;
+  // Try twice in case of transient network errors
+  for (var attempt = 0; attempt < 2; attempt++) {
+    try {
+      const res = await fetch("https://api.hubapi.com/oauth/v1/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          grant_type: "refresh_token",
+          client_id: process.env.HUBSPOT_CLIENT_ID!,
+          client_secret: process.env.HUBSPOT_CLIENT_SECRET!,
+          refresh_token: refreshToken,
+        }).toString(),
+      });
+
+      if (!res.ok) {
+        const errBody = await res.text().catch(function() { return ""; });
+        console.error("[hubspot] Token refresh error (attempt " + (attempt + 1) + "):", res.status, errBody.slice(0, 200));
+        if (res.status === 400 || res.status === 401) {
+          // Bad refresh token — user revoked access, no point retrying
+          return null;
+        }
+        continue;
+      }
+
+      const tokens = await res.json();
+
+      const supabase = createAdminClient();
+      const { data } = await supabase
+        .from("hubspot_connections")
+        .update({
+          access_token: tokens.access_token,
+          refresh_token: tokens.refresh_token,
+          token_expires_at: new Date(Date.now() + tokens.expires_in * 1000).toISOString(),
+          sync_status: "idle",
+          sync_error: null,
+        })
+        .eq("tenant_id", tenantId)
+        .select("portal_id")
+        .single();
+
+      return data ? { accessToken: tokens.access_token, portalId: data.portal_id } : null;
+    } catch (e) {
+      console.error("[hubspot] Token refresh exception (attempt " + (attempt + 1) + "):", e instanceof Error ? e.message : e);
+    }
   }
+  return null;
 }
 
 // HubSpot API helper

@@ -101,6 +101,8 @@ function SettingsContent() {
   const [editingKey, setEditingKey] = useState<string | null>(null);
   const [keyInput, setKeyInput] = useState("");
   const [hubspotConnected, setHubspotConnected] = useState(false);
+  const [hubspotHealthy, setHubspotHealthy] = useState(true);
+  const [hubspotError, setHubspotError] = useState<string | null>(null);
   const [hubspotLoading, setHubspotLoading] = useState(false);
   const [connectorToggles, setConnectorToggles] = useState<Record<string, boolean>>({
     hubspot: true,
@@ -134,6 +136,8 @@ function SettingsContent() {
     if (activeTab === "connectors") {
       fetch("/api/connectors/hubspot/status").then((r) => r.json()).then((json) => {
         setHubspotConnected(json.data?.connected ?? false);
+        setHubspotHealthy(json.data?.healthy ?? true);
+        setHubspotError(json.data?.syncError ?? null);
       }).catch(() => {});
       fetch("/api/connectors/notion/status").then((r) => r.json()).then((json) => {
         setNotionConnected(json.data?.connected ?? false);
@@ -419,7 +423,10 @@ function SettingsContent() {
           </p>
           {CONNECTOR_REGISTRY.map(function(c) {
             var isConnected = (c.id === "hubspot" && hubspotConnected) || (c.id === "notion" && notionConnected) || (c.id === "lemlist" && lemlistConnected);
-            var statusText = c.id === "hubspot" && hubspotConnected ? "Connected — SSO active"
+            var hasError = c.id === "hubspot" && hubspotConnected && !hubspotHealthy;
+            var statusText = c.id === "hubspot" && hubspotConnected && !hubspotHealthy
+              ? "Connexion perdue — reconnexion necessaire"
+              : c.id === "hubspot" && hubspotConnected ? "Connected — SSO active"
               : c.id === "notion" && notionConnected ? "Connected — Workspace linked"
               : c.id === "lemlist" && lemlistConnected ? "Connected — API key active"
               : c.description;
@@ -437,7 +444,7 @@ function SettingsContent() {
                           <span className="text-[10px] bg-[#F5F5F5] text-[#737373] px-1.5 py-0.5 rounded-full">{c.toolCount} tools</span>
                         )}
                       </div>
-                      <p className={"text-xs mt-0.5 " + (isConnected ? "text-[#22C55E]" : "text-[#A3A3A3]")}>{statusText}</p>
+                      <p className={"text-xs mt-0.5 " + (hasError ? "text-[#EF4444]" : isConnected ? "text-[#22C55E]" : "text-[#A3A3A3]")}>{statusText}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -455,9 +462,9 @@ function SettingsContent() {
                       <button
                         onClick={handleConnectHubspot}
                         disabled={hubspotLoading}
-                        className={"text-xs font-medium rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50 " + (hubspotConnected ? "text-[#737373] border border-[#E5E5E5] hover:bg-[#F5F5F5]" : "text-white bg-[#0A0A0A] hover:bg-[#333]")}
+                        className={"text-xs font-medium rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50 " + (hasError ? "text-white bg-[#EF4444] hover:bg-[#DC2626]" : hubspotConnected ? "text-[#737373] border border-[#E5E5E5] hover:bg-[#F5F5F5]" : "text-white bg-[#0A0A0A] hover:bg-[#333]")}
                       >
-                        {hubspotLoading ? "Redirecting..." : hubspotConnected ? "Reconnect" : "Connect"}
+                        {hubspotLoading ? "Redirecting..." : hasError ? "Reconnecter" : hubspotConnected ? "Reconnect" : "Connect"}
                       </button>
                     ) : c.id === "notion" ? (
                       notionConnected ? (
