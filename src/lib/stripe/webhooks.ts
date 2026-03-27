@@ -131,6 +131,59 @@ export async function handlePaymentSucceeded(invoice: any) {
   });
 }
 
+// Handle one-time credit pack purchase
+export async function handleCheckoutCompleted(session: any) {
+  const supabase = createAdminClient();
+  const tenantId = session.metadata?.tenant_id;
+  const creditPackId = session.metadata?.credit_pack_id;
+  const creditAmount = parseInt(session.metadata?.credit_amount || "0", 10);
+
+  if (!tenantId || !creditPackId || creditAmount <= 0) return;
+
+  // Add bonus credits to current allocation
+  const today = new Date().toISOString().split("T")[0];
+  const { data: alloc } = await supabase
+    .from("credit_allocations")
+    .select("id, bonus_credits")
+    .eq("tenant_id", tenantId)
+    .gte("billing_period_end", today)
+    .order("billing_period_start", { ascending: false })
+    .limit(1)
+    .single();
+
+  if (alloc) {
+    await supabase
+      .from("credit_allocations")
+      .update({ bonus_credits: (alloc.bonus_credits || 0) + creditAmount })
+      .eq("id", alloc.id);
+  } else {
+    // No allocation exists — create one for the current month
+    var now = new Date();
+    var monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split("T")[0];
+    var monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split("T")[0];
+
+    await supabase.from("credit_allocations").upsert({
+      tenant_id: tenantId,
+      billing_period_start: monthStart,
+      billing_period_end: monthEnd,
+      credits_allocated: 50, // free tier
+      credits_used: 0,
+      bonus_credits: creditAmount,
+    }, { onConflict: "tenant_id,billing_period_start" });
+  }
+
+  // Log event
+  await supabase.from("billing_events").insert({
+    tenant_id: tenantId,
+    event_type: "credits_purchased",
+    stripe_event_id: session.id,
+    amount_eur: (session.amount_total ?? 0) / 100,
+    metadata: { pack_id: creditPackId, credits: creditAmount },
+  });
+
+  console.log("[credits] Added", creditAmount, "bonus credits to tenant", tenantId);
+}
+
 export async function handlePaymentFailed(invoice: any) {
   const supabase = createAdminClient();
   const customerId = invoice.customer;

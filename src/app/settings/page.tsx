@@ -91,6 +91,143 @@ function Step({ n, text, sub, link }: { n: string; text: string; sub?: string; l
   );
 }
 
+function BillingTab() {
+  var [credits, setCredits] = useState<{ used: number; total: number; remaining: number; plan: string } | null>(null);
+  var [packs, setPacks] = useState<Array<{ id: string; name: string; credits: number; price: number; popular: boolean }>>([]);
+  var [buying, setBuying] = useState<string | null>(null);
+
+  useEffect(function() {
+    fetch("/api/credits").then(function(r) { return r.json(); }).then(function(json) {
+      if (json.data) setCredits(json.data);
+    }).catch(function() {});
+    fetch("/api/billing/credits").then(function(r) { return r.json(); }).then(function(json) {
+      if (json.data?.packs) setPacks(json.data.packs);
+    }).catch(function() {});
+  }, []);
+
+  async function handleBuyPack(packId: string) {
+    setBuying(packId);
+    try {
+      var res = await fetch("/api/billing/credits", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ packId }),
+      });
+      var json = await res.json();
+      if (json.data?.checkoutUrl) {
+        window.location.href = json.data.checkoutUrl;
+      }
+    } catch {}
+    setBuying(null);
+  }
+
+  async function handleManageBilling() {
+    var res = await fetch("/api/billing/portal", { method: "POST" });
+    var json = await res.json();
+    if (json.data?.portalUrl) window.location.href = json.data.portalUrl;
+  }
+
+  var planLabels: Record<string, string> = { free: "Free", pro: "Pro", business: "Business" };
+  var planCredits: Record<string, number> = { free: 50, pro: 500, business: 2000 };
+
+  return (
+    <div className="space-y-6">
+      {/* Current plan + credits */}
+      <div className="bg-white rounded-xl border border-[#E5E5E5] p-6">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h2 className="text-sm font-semibold text-[#0A0A0A]">Plan actuel</h2>
+            <div className="flex items-center gap-2 mt-1">
+              <span className="text-lg font-bold text-[#0A0A0A]">{planLabels[credits?.plan || "free"] || "Free"}</span>
+              <span className="text-[10px] bg-[#22C55E]/10 text-[#22C55E] font-medium px-2 py-0.5 rounded-full">Actif</span>
+            </div>
+          </div>
+          {credits?.plan !== "free" && (
+            <button onClick={handleManageBilling} className="text-xs text-[#737373] hover:text-[#0A0A0A] border border-[#E5E5E5] rounded-lg px-3 py-1.5 transition-colors">
+              Gerer l&apos;abonnement
+            </button>
+          )}
+        </div>
+        {credits && (
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-xs text-[#737373]">Credits utilises ce mois</span>
+              <span className="text-xs font-semibold text-[#0A0A0A] tabular-nums">{credits.used} / {credits.total}</span>
+            </div>
+            <div className="h-2.5 bg-[#F0F0F0] rounded-full overflow-hidden">
+              <div
+                className="h-full rounded-full transition-all duration-300"
+                style={{
+                  width: Math.max(2, Math.round(((credits.total - credits.remaining) / credits.total) * 100)) + "%",
+                  backgroundColor: credits.remaining / credits.total > 0.2 ? "#0A0A0A" : credits.remaining / credits.total > 0.05 ? "#F59E0B" : "#EF4444",
+                }}
+              />
+            </div>
+            <p className="text-[11px] text-[#A3A3A3] mt-1.5">{credits.remaining} credits restants</p>
+          </div>
+        )}
+      </div>
+
+      {/* Upgrade plan */}
+      {credits?.plan === "free" && (
+        <div className="bg-[#0A0A0A] rounded-xl p-6 text-white">
+          <h3 className="text-sm font-semibold mb-1">Passe au Pro</h3>
+          <p className="text-xs text-white/60 mb-4">500 credits/mois, alertes proactives, tous les connecteurs, export PDF.</p>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={async function() {
+                var res = await fetch("/api/billing/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ planId: "pro" }) });
+                var json = await res.json();
+                if (json.data?.checkoutUrl) window.location.href = json.data.checkoutUrl;
+              }}
+              className="bg-white text-[#0A0A0A] rounded-lg px-4 py-2 text-xs font-semibold hover:bg-white/90 transition-colors"
+            >
+              49 EUR/mois — Upgrade
+            </button>
+            <span className="text-[10px] text-white/40">ou</span>
+            <button
+              onClick={async function() {
+                var res = await fetch("/api/billing/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ planId: "business" }) });
+                var json = await res.json();
+                if (json.data?.checkoutUrl) window.location.href = json.data.checkoutUrl;
+              }}
+              className="text-xs text-white/70 hover:text-white underline underline-offset-2 transition-colors"
+            >
+              Business 149 EUR/mois
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Buy credit packs */}
+      <div className="bg-white rounded-xl border border-[#E5E5E5] p-6">
+        <h2 className="text-sm font-semibold text-[#0A0A0A] mb-1">Acheter des credits</h2>
+        <p className="text-xs text-[#737373] mb-4">Credits bonus ajoutes instantanement. Valides jusqu&apos;a la fin du mois.</p>
+        <div className="grid grid-cols-3 gap-3">
+          {packs.map(function(pack) {
+            return (
+              <button
+                key={pack.id}
+                onClick={function() { handleBuyPack(pack.id); }}
+                disabled={buying === pack.id}
+                className={"relative rounded-xl border p-4 text-center transition-all hover:shadow-sm disabled:opacity-50 " + (pack.popular ? "border-[#0A0A0A] ring-1 ring-[#0A0A0A]" : "border-[#E5E5E5] hover:border-[#D4D4D4]")}
+              >
+                {pack.popular && (
+                  <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-[#0A0A0A] text-white text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">Best value</span>
+                )}
+                <p className="text-lg font-bold text-[#0A0A0A]">{pack.credits}</p>
+                <p className="text-[10px] text-[#A3A3A3] mb-2">credits</p>
+                <p className="text-sm font-semibold text-[#0A0A0A]">{pack.price} EUR</p>
+                <p className="text-[10px] text-[#A3A3A3]">{(pack.price / pack.credits * 100).toFixed(1)} c/credit</p>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function SettingsContent() {
   const searchParams = useSearchParams();
   const initialTab = (searchParams.get("tab") as Tab) ?? "general";
@@ -538,25 +675,7 @@ function SettingsContent() {
       )}
 
       {/* Billing tab */}
-      {activeTab === "billing" && (
-        <div className="space-y-6">
-          <div className="bg-white rounded-xl border border-[#E5E5E5] p-6 space-y-4">
-            <h2 className="text-sm font-medium text-[#0A0A0A]">Current plan</h2>
-            <div className="flex items-center gap-3">
-              <span className="text-lg font-semibold text-[#0A0A0A]">Free</span>
-              <span className="text-xs bg-[#F5F5F5] text-[#737373] px-2 py-0.5 rounded-full">Active</span>
-            </div>
-            <p className="text-xs text-[#737373]">50 credits / month included</p>
-          </div>
-          <div className="bg-white rounded-xl border border-[#E5E5E5] p-6 space-y-4">
-            <h2 className="text-sm font-medium text-[#0A0A0A]">Remaining credits</h2>
-            <div className="flex items-end gap-1">
-              <span className="text-2xl font-semibold text-[#0A0A0A]">--</span>
-              <span className="text-sm text-[#737373] mb-0.5">/ 50</span>
-            </div>
-          </div>
-        </div>
-      )}
+      {activeTab === "billing" && <BillingTab />}
     </div>
   );
 }

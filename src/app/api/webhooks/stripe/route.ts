@@ -6,6 +6,7 @@ import {
   handleSubscriptionDeleted,
   handlePaymentSucceeded,
   handlePaymentFailed,
+  handleCheckoutCompleted,
 } from "@/lib/stripe/webhooks";
 
 export async function POST(request: NextRequest) {
@@ -40,6 +41,12 @@ export async function POST(request: NextRequest) {
         break;
       case "invoice.payment_failed":
         await handlePaymentFailed(event.data.object);
+        break;
+      case "checkout.session.completed":
+        // Handle one-time credit pack purchases
+        if (event.data.object.mode === "payment" && event.data.object.metadata?.credit_pack_id) {
+          await handleCheckoutCompleted(event.data.object);
+        }
         break;
     }
   } catch (error) {
