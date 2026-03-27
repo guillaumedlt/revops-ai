@@ -166,7 +166,7 @@ export default function ConversationSidebar() {
           className={"w-full flex items-center gap-2 px-3 h-9 rounded-lg text-sm transition-colors " + (pathname === "/alerts" ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium" : "text-[#525252] hover:bg-[#F5F5F5] hover:text-[#0A0A0A]")}
         >
           <Bell size={16} className={pathname === "/alerts" ? "text-[#0A0A0A]" : "text-[#A3A3A3]"} />
-          <span className="flex-1">Alertes</span>
+          <span className="flex-1">Monitoring</span>
           {alertCount > 0 && (
             <span className="text-[10px] font-bold text-white bg-[#EF4444] rounded-full h-4 min-w-[16px] flex items-center justify-center px-1">
               {alertCount}
