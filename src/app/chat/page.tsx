@@ -193,7 +193,7 @@ export default function ChatWelcome() {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col items-center justify-center px-4">
+      <div className="flex flex-1 flex-col items-center justify-center px-4 overflow-y-auto py-8">
         <motion.div
           className="w-full max-w-2xl"
           initial={{ opacity: 0, y: 20 }}
@@ -202,7 +202,7 @@ export default function ChatWelcome() {
         >
           {/* Title */}
           <h1 className="text-center text-3xl font-semibold text-[#0A0A0A] mb-6">
-            Comment puis-je t&apos;aider ?
+            {"Comment puis-je t'aider ?"}
           </h1>
 
           {/* Proactive alerts banner */}
