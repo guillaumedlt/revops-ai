@@ -39,11 +39,11 @@ function Logo({ domain, name }: { domain: string; name: string }) {
 
 export default function LogoCloud() {
   return (
-    <section className="pt-0 pb-0 mb-[-1px]">
+    <section className="relative z-10">
       <div className="max-w-[1000px] mx-auto px-6 relative">
-        {/* Two lines that go all the way up through the hero to the navbar */}
-        <div className="hidden md:block absolute left-[20%] bottom-0 w-px bg-[#EAEAEA] pointer-events-none" style={{ top: "-500px" }} />
-        <div className="hidden md:block absolute right-[20%] bottom-0 w-px bg-[#EAEAEA] pointer-events-none" style={{ top: "-500px" }} />
+        {/* Two lines from header to card */}
+        <div className="hidden md:block absolute left-[20%] w-px bg-[#EAEAEA]" style={{ top: "-500px", bottom: "calc(100% - 1px)", pointerEvents: "none" }} />
+        <div className="hidden md:block absolute right-[20%] w-px bg-[#EAEAEA]" style={{ top: "-500px", bottom: "calc(100% - 1px)", pointerEvents: "none" }} />
 
         {/* Blobs outside */}
         <div className="absolute -top-16 -left-20 w-[250px] h-[250px] rounded-full bg-[#FF7A59] opacity-[0.1] blur-[70px] pointer-events-none" style={{ animation: "blobFloat 8s 0s ease-in-out infinite" }} />
@@ -52,7 +52,7 @@ export default function LogoCloud() {
         <div className="absolute top-1/2 -left-28 -translate-y-1/2 w-[180px] h-[180px] rounded-full bg-[#D4A27F] opacity-[0.08] blur-[60px] pointer-events-none" style={{ animation: "blobFloat 8s 6s ease-in-out infinite" }} />
 
         {/* Card */}
-        <div className="relative rounded-2xl border border-[#E8E8E8] bg-white p-8 md:p-12 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08),0_2px_6px_-2px_rgba(0,0,0,0.03)]">
+        <div className="relative rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
           <p className="relative text-center text-[14px] text-[#999] mb-10">
             Déjà <span className="font-semibold text-[#111]">+250 entreprises</span> accompagnées
           </p>
@@ -74,8 +74,8 @@ export default function LogoCloud() {
           </div>
         </div>
 
-        {/* Connector line — touches next bubble */}
-        <div className="hidden md:block mx-auto w-px h-[52px] bg-[#E0E0E0]" />
+        {/* Connector */}
+        <div className="hidden md:block mx-auto w-px h-10 bg-[#E0E0E0]" />
       </div>
     </section>
   );

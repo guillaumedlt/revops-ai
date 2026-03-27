@@ -54,13 +54,13 @@ export default function BlockRenderer({ blocks }: { blocks: ContentBlock[] }) {
             content = <KPICardBlock label={block.label} value={block.value} change={block.change} trend={block.trend} />;
             break;
           case "kpi_grid":
-            content = (
+            content = block.items && block.items.length > 0 ? (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {block.items.map(function(item, j) {
                   return <KPICardBlock key={j} label={item.label} value={item.value} change={item.change} trend={item.trend} />;
                 })}
               </div>
-            );
+            ) : null;
             break;
           case "chart":
             content = <ChartBlock chartType={block.chartType} title={block.title} data={block.data} xKey={block.xKey} yKey={block.yKey} yKeys={block.yKeys} colors={block.colors} />;

@@ -11,6 +11,17 @@ var PUBLIC_PATHS = [
   "/api/auth/hubspot/callback",
   "/api/auth/notion/callback",
   "/api/auth/setup",
+  "/audit-revops",
+  "/revops-part-time",
+  "/agence-hubspot",
+  "/agents-ia",
+  "/revops",
+  "/blog",
+  "/guides",
+  "/guide-revops-ultime",
+  "/guide-ia-commercial",
+  "/glossaire",
+  "/cas-clients",
 ];
 
 export async function middleware(request: NextRequest) {
@@ -65,6 +76,16 @@ export async function middleware(request: NextRequest) {
     .select("tenant_id")
     .eq("id", user.id)
     .single();
+
+  if (!dbUser?.tenant_id) {
+    // User exists in auth but not in users table — redirect to onboarding
+    if (pathname.startsWith("/api/")) {
+      return NextResponse.json({ data: null, error: "Account setup incomplete" }, { status: 403 });
+    }
+    if (pathname !== "/onboarding") {
+      return NextResponse.redirect(new URL("/onboarding", request.url));
+    }
+  }
 
   // Inject auth context headers for API routes
   var requestHeaders = new Headers(request.headers);

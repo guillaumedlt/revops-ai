@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* HubSpot embedded form overrides */
+#hs-guide-form .hs-form-field { margin-bottom: 12px; }
+#hs-guide-form .hs-form-field label { display: block; font-size: 12px; font-weight: 500; color: #666; margin-bottom: 4px; }
+#hs-guide-form .hs-form-field label .hs-form-required { color: #FF7A59; }
+#hs-guide-form .hs-input { width: 100% !important; padding: 8px 12px; border: 1px solid #E8E8E8; border-radius: 8px; font-size: 13px; color: #111; background: #fff; transition: border-color 0.2s; outline: none; }
+#hs-guide-form .hs-input:focus { border-color: #FF7A59; }
+#hs-guide-form .hs-button { width: 100%; padding: 10px 16px; background: #FF7A59; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+#hs-guide-form .hs-button:hover { background: #E86D4F; }
+#hs-guide-form .hs-error-msgs { list-style: none; padding: 0; margin: 4px 0 0; }
+#hs-guide-form .hs-error-msgs li label { font-size: 11px; color: #EF4444; font-weight: 400; }
+#hs-guide-form .hs-form-booleancheckbox label { font-size: 11px; color: #999; display: flex; align-items: flex-start; gap: 6px; }
+#hs-guide-form .hs-form-booleancheckbox input { margin-top: 2px; }
+#hs-guide-form .legal-consent-container { margin-top: 8px; }
+#hs-guide-form .legal-consent-container p { font-size: 10px; color: #CCC; line-height: 1.5; }
+#hs-guide-form .submitted-message { text-align: center; padding: 20px 0; font-size: 14px; color: #22C55E; font-weight: 600; }
+
+/* HubSpot form - Guide IA */
+#hs-guide-ia-form .hs-form-field { margin-bottom: 12px; }
+#hs-guide-ia-form .hs-form-field label { display: block; font-size: 12px; font-weight: 500; color: #666; margin-bottom: 4px; }
+#hs-guide-ia-form .hs-form-field label .hs-form-required { color: #6D00CC; }
+#hs-guide-ia-form .hs-input { width: 100% !important; padding: 8px 12px; border: 1px solid #E8E8E8; border-radius: 8px; font-size: 13px; color: #111; background: #fff; transition: border-color 0.2s; outline: none; }
+#hs-guide-ia-form .hs-input:focus { border-color: #6D00CC; }
+#hs-guide-ia-form .hs-button { width: 100%; padding: 10px 16px; background: #6D00CC; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+#hs-guide-ia-form .hs-button:hover { background: #5B00AD; }
+#hs-guide-ia-form .hs-error-msgs { list-style: none; padding: 0; margin: 4px 0 0; }
+#hs-guide-ia-form .hs-error-msgs li label { font-size: 11px; color: #EF4444; font-weight: 400; }
+#hs-guide-ia-form .hs-form-booleancheckbox label { font-size: 11px; color: #999; display: flex; align-items: flex-start; gap: 6px; }
+#hs-guide-ia-form .hs-form-booleancheckbox input { margin-top: 2px; }
+#hs-guide-ia-form .legal-consent-container { margin-top: 8px; }
+#hs-guide-ia-form .legal-consent-container p { font-size: 10px; color: #CCC; line-height: 1.5; }
+#hs-guide-ia-form .submitted-message { text-align: center; padding: 20px 0; font-size: 14px; color: #22C55E; font-weight: 600; }
+
 @layer base {
   * {
     @apply border-border;

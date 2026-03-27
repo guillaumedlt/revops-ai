@@ -1,5 +1,7 @@
+import Badge from "./Badge";
+
 const stats = [
-  { value: "50+", label: "Entreprises accompagnées" },
+  { value: "250+", label: "Entreprises accompagnées" },
   { value: "3 sem", label: "Pour être opérationnel" },
   { value: "40%", label: "Temps gagné sur le reporting" },
   { value: "2.5x", label: "ROI moyen constaté" },
@@ -7,16 +9,19 @@ const stats = [
 
 export default function Stats() {
   return (
-    <section className="py-16 md:py-20 border-y border-[#F2F2F2]">
-      <div className="max-w-[1100px] mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((s) => (
-            <div key={s.label} className="text-center">
-              <div className="text-[36px] sm:text-[42px] font-semibold text-[#111] tracking-[-0.03em] leading-none mb-2">{s.value}</div>
-              <p className="text-[13px] text-[#999]">{s.label}</p>
-            </div>
-          ))}
+    <section className="relative z-20">
+      <div className="max-w-[1000px] mx-auto px-6">
+        <div className="rounded-2xl border border-[#E8E8E8] bg-[#111] p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.15)]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {stats.map((s) => (
+              <div key={s.label} className="text-center">
+                <div className="text-[28px] sm:text-[36px] font-semibold text-white tracking-[-0.03em] leading-none mb-1.5">{s.value}</div>
+                <p className="text-[11px] text-white/40">{s.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
+        <div className="hidden md:block mx-auto w-px h-10 bg-[#E0E0E0]" />
       </div>
     </section>
   );

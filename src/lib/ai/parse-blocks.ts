@@ -119,7 +119,7 @@ export function parseContentBlocks(rawText: string): ContentBlock[] {
   if (reportMatch) {
     var blocks: ContentBlock[] = [];
 
-    var beforeReport = rawText.slice(0, reportMatch.index).trim();
+    var beforeReport = rawText.slice(0, reportMatch.index ?? 0).trim();
     if (beforeReport) blocks.push({ type: "text", text: beforeReport });
 
     var reportParams: Record<string, string> = {};

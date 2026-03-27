@@ -28,6 +28,9 @@ export async function GET(
   ]);
 
   if (convRes.error) return NextResponse.json({ error: "Conversation not found" }, { status: 404 });
+  if (msgsRes.error) {
+    console.error("[conversations] Messages fetch error:", msgsRes.error.message);
+  }
 
   return NextResponse.json({
     data: {

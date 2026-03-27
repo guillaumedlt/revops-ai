@@ -50,20 +50,24 @@ export default function ChatWelcome() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title: message.slice(0, 80) }),
       });
-      const { data } = await res.json();
-      if (!data?.id) {
+      if (!res.ok) {
+        setSending(false);
+        return;
+      }
+      const json = await res.json();
+      if (!json.data?.id) {
         setSending(false);
         return;
       }
 
-      if (typeof window !== "undefined") {
+      try {
         sessionStorage.setItem(
           "pending_message",
           JSON.stringify({ message, model: model ?? "kairo", attachment })
         );
-      }
+      } catch {}
 
-      router.push(`/chat/${data.id}`);
+      router.push("/chat/" + json.data.id);
     } catch {
       setSending(false);
     }

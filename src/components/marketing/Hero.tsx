@@ -11,15 +11,6 @@ const tools = [
   { name: "Make", domain: "make.com", bg: "#F5EEFF" },
 ];
 
-const blobs = [
-  // left side
-  { x: "2%", y: "5%", w: 250, h: 250, color: "#FF7A59", delay: 0 },
-  { x: "8%", y: "60%", w: 200, h: 200, color: "#4B5EFC", delay: 1.5 },
-  // right side
-  { x: "78%", y: "0%", w: 220, h: 220, color: "#D4A27F", delay: 0.8 },
-  { x: "85%", y: "55%", w: 260, h: 260, color: "#6D00CC", delay: 2.2 },
-];
-
 export default function Hero() {
   const [idx, setIdx] = useState(0);
 
@@ -30,23 +21,7 @@ export default function Hero() {
 
   return (
     <section className="relative pt-[120px] pb-6 md:pt-[140px] md:pb-8">
-      {/* Blobs */}
-      {blobs.map((b, i) => (
-        <div
-          key={i}
-          className="hidden lg:block absolute rounded-full pointer-events-none"
-          style={{
-            left: b.x,
-            top: b.y,
-            width: b.w,
-            height: b.h,
-            background: b.color,
-            opacity: 0.12,
-            filter: "blur(60px)",
-            animation: `blobFloat 8s ${b.delay}s ease-in-out infinite`,
-          }}
-        />
-      ))}
+      {/* Blobs are now in the page layout */}
 
       <div className="relative z-10 max-w-[1100px] mx-auto px-6">
         <div className="max-w-[720px] mx-auto text-center">

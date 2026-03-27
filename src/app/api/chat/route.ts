@@ -203,8 +203,9 @@ export async function POST(request: NextRequest) {
               if (!openaiRes.ok || !openaiRes.body) {
                 const errBody = await openaiRes.text().catch(() => "");
                 controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "OpenAI error (" + openaiRes.status + "): " + errBody.slice(0, 200) })}\n\n`));
-                oaiLoop = false;
-                break;
+                controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
+                controller.close();
+                return;
               }
 
               const oaiReader = openaiRes.body.getReader();
@@ -299,8 +300,9 @@ export async function POST(request: NextRequest) {
               if (!geminiRes.ok) {
                 const errBody = await geminiRes.text().catch(() => "");
                 controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Gemini error (" + geminiRes.status + "): " + errBody.slice(0, 200) })}\n\n`));
-                gemLoop = false;
-                break;
+                controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
+                controller.close();
+                return;
               }
 
               const gemData = await geminiRes.json();

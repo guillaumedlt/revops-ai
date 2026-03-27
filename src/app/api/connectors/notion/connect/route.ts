@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
   const apiKey = body.apiKey?.trim();
 
-  if (!apiKey || !apiKey.startsWith("ntn_") && !apiKey.startsWith("secret_")) {
+  if (!apiKey || (!apiKey.startsWith("ntn_") && !apiKey.startsWith("secret_"))) {
     return NextResponse.json(apiError("Invalid Notion API key. It should start with ntn_ or secret_"), { status: 400 });
   }
 

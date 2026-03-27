@@ -521,7 +521,7 @@ export const hubspotTools = {
       
       try {
         const data = await hubspotFetch(
-          "/crm/v3/objects/${args.object_type}/" + args.object_id + "/associations/engagements",
+          `/crm/v3/objects/${args.object_type}/${args.object_id}/associations/engagements`,
           auth.accessToken
         );
         
