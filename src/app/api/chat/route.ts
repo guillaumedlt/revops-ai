@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getAuthFromHeaders } from "@/lib/api-helpers";
-import { routeToModel, getModelId } from "@/lib/ai/router";
+import { routeToModel, getModelId, getCreditCostForChoice } from "@/lib/ai/router";
 import { SYSTEM_PROMPT, buildTenantContext } from "@/lib/ai/prompts/system";
 import { getToolsForTenant } from "@/lib/connectors";
 import { checkCredits, deductCredit, CREDIT_COSTS, CreditAction } from "@/lib/ai/credits";
@@ -57,12 +57,20 @@ export async function POST(request: NextRequest) {
   // Resolve model from request
   const resolved = resolveModelId(parsed.data.model, message);
 
-  // Determine credit action based on message and model
+  // Determine credit action based on routed model
   let creditAction: CreditAction = "standard";
   if (message.startsWith("/report")) {
     creditAction = "report";
-  } else if (resolved.displayName === "haiku" || (resolved.displayName === "kairo" && resolved.modelId.includes("haiku"))) {
+  } else if (resolved.displayName === "kairo") {
+    // Kairo auto-routes — use the router's credit cost
+    var routerChoice = routeToModel(message, 0);
+    if (routerChoice === "haiku") creditAction = "simple";
+    else if (routerChoice === "opus") creditAction = "opus";
+    else creditAction = "standard";
+  } else if (resolved.modelId.includes("haiku")) {
     creditAction = "simple";
+  } else if (resolved.modelId.includes("opus")) {
+    creditAction = "opus";
   }
 
   const credits = await checkCredits(auth.tenantId, creditAction);
