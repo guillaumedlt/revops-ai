@@ -388,7 +388,7 @@ export default function DataQualityCrmArticle() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {[
                         { rule: "Email identique", action: "Fusion automatique", risk: "Faible" },
-                        { rule: "Nom + Prenom + Entreprise", action: "Revue manuelle", risk: "Moyen" },
+                        { rule: "Nom + First name + Entreprise", action: "Revue manuelle", risk: "Moyen" },
                         { rule: "Domaine email + Nom", action: "Revue manuelle", risk: "Moyen" },
                         { rule: "Telephone identique", action: "Fusion semi-auto", risk: "Faible" },
                       ].map((r) => (
@@ -467,7 +467,7 @@ export default function DataQualityCrmArticle() {
                     <h2 className="text-[17px] font-semibold text-[#111]">Etape 4 : Enrichir les donnees manquantes</h2>
                   </div>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
-                    <p>Une fois les doublons supprimes et les formats standardises, il reste les trous. Les champs vides, les informations manquantes, les fiches incompletes. L&apos;enrichissement consiste a completer automatiquement vos fiches contacts et entreprises avec des donnees provenant de sources externes.</p>
+                    <p>Une fois les doublons supprimes et les formats standardises, il reste les trous. Les champs vides, les informations manquantes, les fiches incompletes. L&apos;enrichissement consiste type to complete automatiquement vos fiches contacts et entreprises avec des donnees provenant de sources externes.</p>
                     <p>L&apos;enrichissement de donnees a enormement progresse ces dernieres annees. Des outils comme Dropcontact, Clay, Clearbit, Apollo ou Lusha permettent de retrouver l&apos;email professionnel, le numero de telephone, le titre de poste, la taille de l&apos;entreprise, le secteur d&apos;activite et le chiffre d&apos;affaires a partir d&apos;un simple nom et d&apos;un nom d&apos;entreprise.</p>
                     <p><strong className="text-[#111]">Les trois principaux outils d&apos;enrichissement pour le marche francais :</strong></p>
                   </div>
@@ -514,8 +514,8 @@ export default function DataQualityCrmArticle() {
                         </div>
                         <div className="space-y-2">
                           {[
-                            { label: "Prenom", value: "Marie", filled: true },
-                            { label: "Nom", value: "dupont", filled: true },
+                            { label: "First name", value: "Marie", filled: true },
+                            { label: "Name", value: "dupont", filled: true },
                             { label: "Email", value: "marie@gmail.com", filled: true },
                             { label: "Telephone", value: "--", filled: false },
                             { label: "Entreprise", value: "--", filled: false },
@@ -544,8 +544,8 @@ export default function DataQualityCrmArticle() {
                         </div>
                         <div className="space-y-2">
                           {[
-                            { label: "Prenom", value: "Marie", enriched: false },
-                            { label: "Nom", value: "Dupont", enriched: true },
+                            { label: "First name", value: "Marie", enriched: false },
+                            { label: "Name", value: "Dupont", enriched: true },
                             { label: "Email", value: "m.dupont@techcorp.fr", enriched: true },
                             { label: "Telephone", value: "+33 6 45 67 89 10", enriched: true },
                             { label: "Entreprise", value: "TechCorp", enriched: true },
@@ -569,7 +569,7 @@ export default function DataQualityCrmArticle() {
 
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p><strong className="text-[#111]">Processus d&apos;enrichissement recommande :</strong></p>
-                    <p>1. Commencez par enrichir les contacts les plus strategiques : ceux qui sont dans votre pipeline actif, ceux qui ont interagi recemment avec votre contenu, ceux qui correspondent a votre ICP (Ideal Customer Profile).</p>
+                    <p>1. Commencez par enrichir les contacts les plus strategiques : ceux qui sont dans votre pipeline actif, ceux qui ont interagi recemment avec votre contenu, ceux qui correspondent a votre ICP (Ideal Customer Profilee).</p>
                     <p>2. Utilisez un enrichissement en cascade (&ldquo;waterfall enrichment&rdquo;) : si Dropcontact ne trouve pas l&apos;email, essayez avec Clearbit, puis avec Apollo. Chaque source a ses forces et ses lacunes. La combinaison de plusieurs sources augmente significativement le taux de completude.</p>
                     <p>3. Verifiez les emails enrichis avec un outil de verification (NeverBounce, ZeroBounce, Bouncer) avant de les utiliser dans des campagnes. Un email trouve par enrichissement n&apos;est pas forcement valide.</p>
                     <p>4. Automatisez l&apos;enrichissement a l&apos;entree : configurez votre outil pour enrichir automatiquement chaque nouveau contact cree dans le CRM. C&apos;est beaucoup plus efficace que de faire des campagnes d&apos;enrichissement ponctuelles.</p>

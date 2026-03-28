@@ -211,7 +211,7 @@ function DownloadModal({ guide, onClose }: { guide: Guide; onClose: () => void }
             <form onSubmit={handleSubmit} className="space-y-3">
               <input
                 type="text"
-                placeholder="Prenom"
+                placeholder="First name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -219,7 +219,7 @@ function DownloadModal({ guide, onClose }: { guide: Guide; onClose: () => void }
               />
               <input
                 type="email"
-                placeholder="Email professionnel"
+                placeholder="Work email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required

@@ -345,7 +345,7 @@ export default function KpiCommerciauxArticle() {
                           <span className="text-[11px] font-bold text-white bg-[#22C55E] w-5 h-5 rounded-md flex items-center justify-center">6</span>
                           <h3 className="text-[14px] font-semibold text-[#111]">Pipeline coverage ratio</h3>
                         </div>
-                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#EF4444]/10 text-[#EF4444]">Critique</span>
+                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#EF4444]/10 text-[#EF4444]">Critical</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Ratio entre la valeur totale du pipeline et le quota a atteindre. C&apos;est le thermometre de votre capacite a atteindre vos objectifs. Un ratio de 3x signifie que vous avez 3 euros de pipeline pour chaque euro de quota. En dessous de 3x, la probabilite d&apos;atteindre le quota chute drastiquement.</p>
                       <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
@@ -538,7 +538,7 @@ export default function KpiCommerciauxArticle() {
                       {
                         num: "17",
                         title: "Duree du cycle de vente (Sales Cycle Length)",
-                        definition: "Nombre moyen de jours entre la creation d&apos;une opportunite et le closing (won ou lost). C&apos;est le temps que met votre machine commerciale a transformer un lead en client. Un cycle qui s&apos;allonge augmente le cout d&apos;acquisition, immobilise vos reps sur des deals qui stagnent, et retarde le cash-flow. A l&apos;inverse, un cycle qui raccourcit est un signal fort d&apos;amelioration du process de vente.",
+                        definition: "Nombre moyen de jours entre la creation d&apos;une opportunite et le closing (won ou lost). C&apos;est le temps que met votre machine commerciale a transformer un lead en client. Un cycle qui s&apos;allonge augmente le cout d&apos;acquisition, immobilise vos reps sur des deals qui stagnent, et overduee le cash-flow. A l&apos;inverse, un cycle qui raccourcit est un signal fort d&apos;amelioration du process de vente.",
                         formula: "Cycle moyen = SUM(jours entre creation et closing de chaque deal) / Nombre de deals closes",
                         benchmark: "SMB : 14-30 jours | Mid-Market : 30-90 jours | Enterprise : 90-180+ jours",
                         hubspot: "Rapport standard &ldquo;Time in deal stage&rdquo;. Utilisez le champ &ldquo;Days to close&rdquo; natif de HubSpot. Segmentez par deal owner, par source et par montant pour identifier les patterns. Les gros deals prennent naturellement plus de temps, ne les melangez pas avec le SMB.",
@@ -546,7 +546,7 @@ export default function KpiCommerciauxArticle() {
                       {
                         num: "18",
                         title: "Time to first contact (delai de premier contact)",
-                        definition: "Temps ecoule entre la creation d&apos;un lead (soumission de formulaire, import, etc.) et le premier contact commercial. Les etudes de InsideSales.com ont montre que les chances de qualifier un lead chutent de 80% apres les 5 premieres minutes. Chaque heure de retard reduit la probabilite de conversion de maniere significative. C&apos;est un des KPI les plus directement actionnables.",
+                        definition: "Temps ecoule entre la creation d&apos;un lead (soumission de formulaire, import, etc.) et le premier contact commercial. Les etudes de InsideSales.com ont montre que les chances de qualifier un lead chutent de 80% apres les 5 premieres minutes. Chaque heure de overdue reduit la probabilite de conversion de maniere significative. C&apos;est un des KPI les plus directement actionnables.",
                         formula: "Time to First Contact = Date/heure du premier appel ou email - Date/heure de creation du contact",
                         benchmark: "Objectif : &lt;5 minutes pour les leads inbound chauds | &lt;1 heure pour les MQL | &lt;24h pour les leads froids",
                         hubspot: "Creez une propriete calculee qui soustrait &ldquo;Create date&rdquo; de &ldquo;First activity date&rdquo;. Alternativement, un workflow peut enregistrer le timestamp du premier contact et calculer le delta. Rapport sur la distribution du time to first contact par tranche (0-5min, 5-30min, 30min-1h, 1h+).",

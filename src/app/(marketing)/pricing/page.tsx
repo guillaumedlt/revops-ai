@@ -67,7 +67,7 @@ var plans = [
 ];
 
 var creditExamples = [
-  { action: "Question simple", cost: "1 credit", example: "\"Quel est mon win rate ?\"" },
+  { action: "Question simple", cost: "1 credit", example: "\"What is my win rate?\"" },
   { action: "Analyse avec tools", cost: "2 credits", example: "\"Analyse ma pipeline\"" },
   { action: "Rapport complet", cost: "5 credits", example: "\"/report audit CRM\"" },
 ];

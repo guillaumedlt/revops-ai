@@ -73,7 +73,7 @@ export default function IcpPage() {
         <div className="w-full max-w-md text-center">
           <div className="h-14 w-14 rounded-lg bg-[#111] flex items-center justify-center mx-auto mb-5"><Target size={24} className="text-white" /></div>
           <h1 className="text-2xl font-bold text-[#111] mb-2">Build your ICP</h1>
-          <p className="text-sm text-[#999] mb-8">Enter your company website and Kairo AI will analyze your business to define your Ideal Customer Profile</p>
+          <p className="text-sm text-[#999] mb-8">Enter your company website and Kairo AI will analyze your business to define your Ideal Customer Profilee</p>
           <div className="relative mb-4">
             <Globe size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#BBB]" />
             <input type="text" value={input} onChange={function(e) { setInput(e.target.value); setError(null); }} onKeyDown={function(e) { if (e.key === "Enter") handleSubmit(); }}
@@ -114,7 +114,7 @@ export default function IcpPage() {
       <div className="max-w-5xl mx-auto p-8">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-[#111]">Ideal Customer Profile</h1>
+            <h1 className="text-2xl font-bold text-[#111]">Ideal Customer Profilee</h1>
             <p className="text-sm text-[#999] mt-1">AI-generated from company analysis</p>
           </div>
           <button onClick={function() { setStep("input"); setInput(""); }} className="flex items-center gap-2 px-4 h-9 rounded-lg border border-[#EAEAEA] text-sm text-[#555] hover:bg-[#F5F5F5] transition-colors">
@@ -249,7 +249,7 @@ export default function IcpPage() {
             <div className="bg-white rounded-lg border border-[#EAEAEA] p-5">
               <div className="flex items-center gap-2 mb-3">
                 <div className="h-8 w-8 rounded-lg bg-[#F5F5F5] flex items-center justify-center"><Clock size={14} className="text-[#555]" /></div>
-                <h3 className="text-sm font-semibold text-[#111]">Deal Profile</h3>
+                <h3 className="text-sm font-semibold text-[#111]">Deal Profilee</h3>
               </div>
               {icp.dealSize && (
                 <div className="grid grid-cols-3 gap-3">

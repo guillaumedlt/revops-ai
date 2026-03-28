@@ -316,12 +316,12 @@ export default function StructurerEquipeRevOpsPage() {
                     <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-3">Missions du premier RevOps</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {[
-                        { mission: "CRM : nettoyage, structure, pipeline", priority: "Critique", color: "#FF7A59" },
-                        { mission: "Reporting : dashboards vente et pipeline", priority: "Critique", color: "#FF7A59" },
-                        { mission: "Process : documentation et standardisation", priority: "Haute", color: "#4B5EFC" },
-                        { mission: "Automatisation : assignation, notifications", priority: "Haute", color: "#4B5EFC" },
-                        { mission: "Data quality : deduplication, enrichissement", priority: "Moyenne", color: "#22C55E" },
-                        { mission: "Onboarding : playbooks pour nouveaux reps", priority: "Moyenne", color: "#22C55E" },
+                        { mission: "CRM : nettoyage, structure, pipeline", priority: "Critical", color: "#FF7A59" },
+                        { mission: "Reporting : dashboards vente et pipeline", priority: "Critical", color: "#FF7A59" },
+                        { mission: "Process : documentation et standardisation", priority: "High", color: "#4B5EFC" },
+                        { mission: "Automatisation : assignation, notifications", priority: "High", color: "#4B5EFC" },
+                        { mission: "Data quality : deduplication, enrichissement", priority: "Medium", color: "#22C55E" },
+                        { mission: "Onboarding : playbooks pour nouveaux reps", priority: "Medium", color: "#22C55E" },
                       ].map((m) => (
                         <div key={m.mission} className="flex items-start gap-3 p-3 rounded-lg bg-white border border-[#EAEAEA]">
                           <span className="text-[8px] font-bold px-1.5 py-0.5 rounded shrink-0 mt-0.5" style={{ color: m.color, backgroundColor: `${m.color}15` }}>{m.priority}</span>
@@ -621,7 +621,7 @@ export default function StructurerEquipeRevOpsPage() {
                         to: "CFO (Chief Financial Officer)",
                         context: "Entreprises tres orientees donnees financieres",
                         pros: ["Rigueur analytique et data-driven", "Alignement naturel sur les previsions de revenue", "Budget et ROI au centre des decisions"],
-                        cons: ["Le CFO raisonne en comptabilite, pas en operations", "Deconnexion avec la realite terrain des equipes sales et marketing", "Tendance a sous-investir dans les outils et les processus"],
+                        cons: ["Le CFO raisonne en comptabilite, pas en operations", "Log out avec la realite terrain des equipes sales et marketing", "Tendance a sous-investir dans les outils et les processus"],
                         verdict: "A eviter sauf cas tres specifiques",
                         color: "#6C5CE7",
                       },

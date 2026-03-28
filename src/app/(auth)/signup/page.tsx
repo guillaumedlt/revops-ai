@@ -32,7 +32,7 @@ export default function SignupPage() {
     var domain = email.split("@")[1] ?? "";
     var freeProviders = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "live.com", "icloud.com", "me.com", "aol.com", "protonmail.com", "mail.com"];
     if (freeProviders.includes(domain.toLowerCase())) {
-      setError("Utilise ton email professionnel (pas gmail, outlook, etc.)");
+      setError("Please use a professional email address");
       setLoading(false);
       return;
     }
@@ -50,7 +50,7 @@ export default function SignupPage() {
 
     if (signUpError) {
       setError(signUpError.message.includes("already registered")
-        ? "Un compte existe deja avec cet email"
+        ? "An account already exists with this email"
         : signUpError.message);
       setLoading(false);
       return;
@@ -82,7 +82,7 @@ export default function SignupPage() {
             L&apos;assistant IA qui transforme ton HubSpot en machine a revenue.
           </p>
           <div className="mt-8 space-y-3 text-left max-w-[260px] mx-auto">
-            {["Analyse pipeline en temps reel", "Alertes proactives quotidiennes", "Rapports en 1 question"].map(function(f) {
+            {["Real-time pipeline analysis", "Daily proactive alerts", "Reports in 1 question"].map(function(f) {
               return (
                 <div key={f} className="flex items-center gap-2.5">
                   <div className="h-1.5 w-1.5 rounded-full bg-white/40 shrink-0" />
@@ -101,8 +101,8 @@ export default function SignupPage() {
             <div className="lg:hidden h-10 w-10 rounded-lg bg-[#111] flex items-center justify-center mb-6">
               <span className="text-white text-sm font-bold">K</span>
             </div>
-            <h1 className="text-2xl font-bold text-[#111] tracking-tight">Creer ton compte</h1>
-            <p className="text-sm text-[#999] mt-1">Email professionnel requis</p>
+            <h1 className="text-2xl font-bold text-[#111] tracking-tight">Create your account</h1>
+            <p className="text-sm text-[#999] mt-1">Professional email required</p>
           </div>
 
           {error && (
@@ -112,7 +112,7 @@ export default function SignupPage() {
           <form onSubmit={handleSubmit} className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-[12px] font-medium text-[#555] mb-1.5">Prenom</label>
+                <label className="block text-[12px] font-medium text-[#555] mb-1.5">First name</label>
                 <input type="text" value={firstName} onChange={function(e) { setFirstName(e.target.value); }}
                   placeholder="Guillaume" required
                   className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent transition-shadow" />
@@ -125,15 +125,15 @@ export default function SignupPage() {
               </div>
             </div>
             <div>
-              <label className="block text-[12px] font-medium text-[#555] mb-1.5">Email professionnel</label>
+              <label className="block text-[12px] font-medium text-[#555] mb-1.5">Work email</label>
               <input type="email" value={email} onChange={function(e) { setEmail(e.target.value); }}
                 placeholder="prenom@entreprise.com" required
                 className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent transition-shadow" />
             </div>
             <div>
-              <label className="block text-[12px] font-medium text-[#555] mb-1.5">Mot de passe</label>
+              <label className="block text-[12px] font-medium text-[#555] mb-1.5">Password</label>
               <input type="password" value={password} onChange={function(e) { setPassword(e.target.value); }}
-                placeholder="8 caracteres minimum" required minLength={8}
+                placeholder="8 characters minimum" required minLength={8}
                 className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent transition-shadow" />
             </div>
             <button type="submit" disabled={loading || !firstName.trim() || !lastName.trim() || !email.trim() || !password}
@@ -141,14 +141,14 @@ export default function SignupPage() {
               {loading ? (
                 <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               ) : (
-                <>Creer mon compte <ArrowRight size={15} /></>
+                <>Create account <ArrowRight size={15} /></>
               )}
             </button>
           </form>
 
           <p className="mt-8 text-center text-[13px] text-[#BBB]">
-            {"Deja un compte ? "}
-            <Link href="/login" className="text-[#111] font-medium hover:underline">Se connecter</Link>
+            {"Already have an account? "}
+            <Link href="/login" className="text-[#111] font-medium hover:underline">Sign in</Link>
           </p>
         </div>
       </div>

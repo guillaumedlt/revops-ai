@@ -195,7 +195,7 @@ export default function EmeliaArticle() {
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Prise en main et interface</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Premiere impression quand on se connecte : c&apos;est propre. L&apos;interface d&apos;Emelia est minimaliste, presque austere. Pas de tutoriels interminables, pas de pop-ups de bienvenue, pas de dashboard encombre. On arrive sur la page des campagnes et on peut commencer a travailler.</p>
-                    <p>La navigation est organisee en 5 sections principales : Campagnes, Contacts, Boites email, Templates et Parametres. C&apos;est tout. Par comparaison, Lemlist a une dizaine d&apos;entrees dans son menu lateral.</p>
+                    <p>La navigation est organisee en 5 sections principales : Campagnes, Contacts, Boites email, Templates et Settings. C&apos;est tout. Par comparaison, Lemlist a une dizaine d&apos;entrees dans son menu lateral.</p>
                     <p>Le temps de setup est rapide. Connecter une boite email prend 2 minutes (OAuth Google ou Microsoft). Importer une liste CSV, 3 minutes. Creer une premiere sequence, 10 minutes. On a pu lancer notre premiere campagne en moins d&apos;une heure apres la creation du compte.</p>
                     <p>Le seul point d&apos;attention : la documentation en ligne est legere. Pas de base de connaissances fournie comme chez Lemlist ou La Growth Machine. Si vous debutez en cold email, vous risquez de manquer de reperes sur les bonnes pratiques. Pour une equipe experimentee, c&apos;est un non-sujet.</p>
                   </div>
@@ -560,7 +560,7 @@ export default function EmeliaArticle() {
                       </div>
                       {[
                         { label: "Prix (entree)", emelia: "37 eur", lemlist: "69 eur", lgm: "80 eur", apollo: "49 eur" },
-                        { label: "Delivrabilite", emelia: "Excellente", lemlist: "Bonne", lgm: "Bonne", apollo: "Moyenne" },
+                        { label: "Delivrabilite", emelia: "Excellente", lemlist: "Bonne", lgm: "Bonne", apollo: "Medium" },
                         { label: "Multi-canal", emelia: "Email only", lemlist: "Email + LinkedIn", lgm: "Email + LinkedIn + Twitter", apollo: "Email + Appels" },
                         { label: "Integration CRM", emelia: "Basique", lemlist: "Bon", lgm: "Bon", apollo: "Excellent" },
                         { label: "Warm-up", emelia: "Inclus", lemlist: "Payant (+29 eur)", lgm: "Inclus", apollo: "Non inclus" },

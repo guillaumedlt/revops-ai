@@ -338,7 +338,7 @@ export default function SkagArticle() {
                       {[
                         { label: "Mots-cles par ad group", skag: "1", stag: "1 theme", thematic: "5-20" },
                         { label: "Nombre d\u2019ad groups", skag: "Tres eleve", stag: "Modere", thematic: "Faible" },
-                        { label: "Pertinence annonce", skag: "Maximale", stag: "Elevee", thematic: "Moyenne" },
+                        { label: "Pertinence annonce", skag: "Maximale", stag: "Elevee", thematic: "Medium" },
                         { label: "Compatibilite Smart Bidding", skag: "Faible", stag: "Bonne", thematic: "Excellente" },
                         { label: "Compatibilite RSA", skag: "Faible", stag: "Bonne", thematic: "Excellente" },
                         { label: "Complexite de gestion", skag: "Tres elevee", stag: "Moderee", thematic: "Faible" },

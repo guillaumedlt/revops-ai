@@ -286,7 +286,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                   {/* Day by day plan */}
                   <div className="space-y-2 mb-5">
                     {[
-                      { day: "Jour 1", tasks: "Creer le compte, configurer le fuseau horaire, la devise, la langue. Ajouter les utilisateurs avec les bons roles (admin, commercial, marketing). Activer l&apos;authentification a deux facteurs.", color: "#4B5EFC" },
+                      { day: "Jour 1", tasks: "Creer le compte, configurer le fuseau horaire, la devise, la langue. Add les utilisateurs avec les bons roles (admin, commercial, marketing). Activer l&apos;authentification a deux facteurs.", color: "#4B5EFC" },
                       { day: "Jour 2", tasks: "Configurer le domaine d&apos;envoi d&apos;emails (DKIM, SPF, DMARC). Connecter le domaine du site web pour le tracking. Installer le code de suivi HubSpot sur toutes les pages du site.", color: "#6C5CE7" },
                       { day: "Jour 3", tasks: "Creer les proprietes personnalisees (contacts, entreprises, deals). Definir les champs obligatoires. Configurer les vues par defaut pour chaque role.", color: "#FF7A59" },
                       { day: "Jour 4-5", tasks: "Configurer le pipeline de vente : etapes, probabilites, proprietes requises par etape. Creer les pipelines secondaires si necessaire (upsell, partenaires). Definir les regles d&apos;attribution des leads.", color: "#22C55E" },
@@ -317,7 +317,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                           <svg width="8" height="8" viewBox="0 0 24 24" fill="white"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" /></svg>
                         </div>
                         <span className="text-[12px] font-semibold text-[#111]">Pipeline : Ventes B2B</span>
-                        <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#E8F5E9] text-[#2E7D32] font-medium ml-auto">Actif</span>
+                        <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#E8F5E9] text-[#2E7D32] font-medium ml-auto">Active</span>
                       </div>
 
                       {/* Pipeline stages */}
@@ -452,9 +452,9 @@ export default function OnboardingHubSpot30JoursArticle() {
                       {/* Import progress */}
                       <div className="space-y-3 mb-4">
                         {[
-                          { type: "Entreprises", count: "342", status: "Termine", pct: 100, color: "#22C55E" },
-                          { type: "Contacts", count: "1 247", status: "Termine", pct: 100, color: "#22C55E" },
-                          { type: "Deals", count: "89", status: "En cours...", pct: 65, color: "#FF7A59" },
+                          { type: "Entreprises", count: "342", status: "Done", pct: 100, color: "#22C55E" },
+                          { type: "Contacts", count: "1 247", status: "Done", pct: 100, color: "#22C55E" },
+                          { type: "Deals", count: "89", status: "In progress...", pct: 65, color: "#FF7A59" },
                           { type: "Notes & activites", count: "---", status: "En attente", pct: 0, color: "#D1D5DB" },
                         ].map((imp) => (
                           <div key={imp.type} className="rounded-lg border border-[#EAEAEA] bg-white p-3">
@@ -498,7 +498,7 @@ export default function OnboardingHubSpot30JoursArticle() {
 
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>
-                      <strong className="text-[#111]">Les proprietes personnalisees meritent une attention particuliere.</strong> HubSpot propose des centaines de proprietes par defaut, mais chaque entreprise a des specificites. Un SaaS aura besoin d&apos;une propriete &ldquo;MRR&rdquo; ou &ldquo;Plan actuel&rdquo; sur ses deals. Une agence aura besoin d&apos;un champ &ldquo;Type de projet&rdquo; ou &ldquo;Budget mensuel&rdquo;. La regle : ne creez que les proprietes que vous utiliserez reellement dans vos filtres, reports ou automatisations. Chaque propriete inutile est du bruit qui ralentit la saisie.
+                      <strong className="text-[#111]">Les proprietes personnalisees meritent une attention particuliere.</strong> HubSpot propose des centaines de proprietes par defaut, mais chaque entreprise a des specificites. Un SaaS aura besoin d&apos;une propriete &ldquo;MRR&rdquo; ou &ldquo;Current plan&rdquo; sur ses deals. Une agence aura besoin d&apos;un champ &ldquo;Type de projet&rdquo; ou &ldquo;Budget mensuel&rdquo;. La regle : ne creez que les proprietes que vous utiliserez reellement dans vos filtres, reports ou automatisations. Chaque propriete inutile est du bruit qui ralentit la saisie.
                     </p>
                     <p>
                       <strong className="text-[#111]">L&apos;association contacts-entreprises-deals</strong> est ce qui fait la puissance d&apos;un CRM. Un contact isole sans entreprise ni deal associe est une donnee morte. Lors de l&apos;import, assurez-vous que chaque contact est rattache a son entreprise, et que chaque deal est rattache a ses contacts et a son entreprise. HubSpot peut creer automatiquement les associations via le domaine email, mais il est preferable de les verifier manuellement pour les comptes strategiques.
@@ -628,7 +628,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                   <div className="space-y-2 mb-5">
                     {[
                       { day: "Jour 22-23", tasks: "Creer le dashboard commercial principal : pipeline value par etape, nombre de deals crees cette semaine/ce mois, taux de conversion par etape, deals a relancer, activites par commercial.", color: "#6C5CE7" },
-                      { day: "Jour 24-25", tasks: "Configurer les rapports de performance individuelle : objectifs vs realise, nombre d&apos;activites, deals gagnes/perdus, cycle de vente moyen. Creer un dashboard par equipe si necessaire.", color: "#4B5EFC" },
+                      { day: "Jour 24-25", tasks: "Configurer les rapports de performance individuelle : objectifs vs realise, nombre d&apos;activites, deals gagnes/perdus, cycle de vente moyen. Create Dashboard par equipe si necessaire.", color: "#4B5EFC" },
                       { day: "Jour 26-27", tasks: "Mettre en place les objectifs (goals) dans HubSpot : revenus par commercial, nombre de deals, nombre de meetings. Configurer les previsions de ventes (forecasting).", color: "#FF7A59" },
                       { day: "Jour 28-29", tasks: "Configurer les rapports marketing (si applicable) : sources de leads, taux de conversion par formulaire, performance des pages. Creer le dashboard de suivi marketing.", color: "#22C55E" },
                       { day: "Jour 30", tasks: "Session finale de formation et revue de l&apos;onboarding. Verifier tous les KPIs de succes. Documenter les conventions d&apos;utilisation. Planifier le premier audit qualite a J+60.", color: "#6C5CE7" },
@@ -786,7 +786,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                         color: "#EF4444"
                       },
                       {
-                        erreur: "Ignorer le mobile",
+                        erreur: "Dismiss le mobile",
                         desc: "Si vos commerciaux sont sur le terrain, l&apos;application mobile HubSpot doit etre installee et configuree des le jour 1. Un commercial qui ne peut pas consulter une fiche client avant un rendez-vous ou loguer une activite en sortant d&apos;un meeting n&apos;utilisera pas le CRM.",
                         color: "#FF7A59"
                       },

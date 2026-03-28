@@ -283,7 +283,7 @@ export default function MRRHubSpotArticle() {
                   </div>
 
                   <div className="mt-5 space-y-3 text-[13px] text-[#555] leading-[1.75]">
-                    <p>Pour creer ces proprietes : Parametres HubSpot &gt; Proprietes &gt; Proprietes du deal &gt; Creer une propriete. Groupez-les dans un groupe custom &ldquo;Revenu Recurrent&rdquo; pour les retrouver facilement.</p>
+                    <p>Pour creer ces proprietes : Settings HubSpot &gt; Proprietes &gt; Proprietes du deal &gt; Creer une propriete. Groupez-les dans un groupe custom &ldquo;Revenu Recurrent&rdquo; pour les retrouver facilement.</p>
                     <p>Point important : la propriete <code className="text-[11px] text-[#22C55E] font-mono bg-[#F0FDF4] px-1.5 py-0.5 rounded">mrr_type</code> est essentielle. C&apos;est elle qui vous permettra de filtrer vos rapports entre new business, expansion et churn. Les valeurs du dropdown doivent etre exactes : New, Expansion, Contraction, Renewal, Churn.</p>
                   </div>
                 </div>
@@ -536,7 +536,7 @@ export default function MRRHubSpotArticle() {
                         actions: [
                           "Creer une tache pour le CSM : \"Planifier un point de renouvellement\"",
                           "Envoyer un email interne au manager avec le MRR a risque",
-                          "Ajouter le deal au pipeline Renewal avec l&apos;etape \"Renewal Upcoming (90j)\"",
+                          "Add le deal au pipeline Renewal avec l&apos;etape \"Renewal Upcoming (90j)\"",
                         ],
                         color: "#EF4444",
                       },
@@ -546,7 +546,7 @@ export default function MRRHubSpotArticle() {
                         actions: [
                           "Creer une tache pour l&apos;AE : \"Proposer un upsell\"",
                           "Enregistrer une note automatique avec le score d&apos;usage",
-                          "Ajouter le deal au pipeline Expansion avec l&apos;etape \"Upsell Identified\"",
+                          "Add le deal au pipeline Expansion avec l&apos;etape \"Upsell Identified\"",
                         ],
                         color: "#22C55E",
                       },
@@ -615,13 +615,13 @@ export default function MRRHubSpotArticle() {
                       {
                         limite: "Pas de gestion native des abonnements",
                         detail: "HubSpot ne distingue pas un deal one-shot d&apos;un abonnement recurrent. La notion de recurrence, de renouvellement et de modification d&apos;abonnement doit etre entierement modelisee avec des proprietes custom.",
-                        severity: "Moyenne",
+                        severity: "Medium",
                         severityColor: "#FF7A59",
                       },
                       {
                         limite: "Reporting historique complexe",
                         detail: "Calculer le MRR a une date passee precise est difficile dans HubSpot. Les rapports standard montrent les deals closes a une date, pas le MRR cumulatif. Il faut des rapports custom avec des filtres de date sophistiques.",
-                        severity: "Moyenne",
+                        severity: "Medium",
                         severityColor: "#FF7A59",
                       },
                       {

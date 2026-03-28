@@ -196,7 +196,7 @@ export default function MeilleurCRMB2BFranceArticle() {
 
                   <div className="mt-5 space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Quatrieme exigence : les integrations. Un CRM B2B ne fonctionne jamais seul. Il doit se connecter a votre stack existante : outil de prospection (Apollo, Lemlist), marketing automation, facturation, support client, outils de communication (Slack, email). La qualite des integrations natives et la disponibilite d&apos;une API ouverte sont des criteres decisifs.</p>
-                    <p>Cinquieme exigence : l&apos;Account-Based Marketing (ABM). Les equipes B2B les plus matures adoptent une approche ABM ou marketing et ventes collaborent pour cibler des comptes specifiques. Le CRM doit permettre de scorer les comptes, de segmenter par ICP (Ideal Customer Profile), et de coordonner les actions marketing et commerciales sur les memes comptes.</p>
+                    <p>Cinquieme exigence : l&apos;Account-Based Marketing (ABM). Les equipes B2B les plus matures adoptent une approche ABM ou marketing et ventes collaborent pour cibler des comptes specifiques. Le CRM doit permettre de scorer les comptes, de segmenter par ICP (Ideal Customer Profilee), et de coordonner les actions marketing et commerciales sur les memes comptes.</p>
                     <p>C&apos;est avec cette grille de lecture que nous avons evalue les 7 CRM de ce comparatif. Un outil peut etre excellent sur le papier mais inadapte au B2B s&apos;il ne coche pas ces cases fondamentales.</p>
                   </div>
                 </div>
@@ -310,7 +310,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                   <div className="mb-4">{renderScore(4.5)}</div>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Salesforce reste la reference absolue du CRM enterprise. C&apos;est le leader mondial depuis plus de 20 ans, avec plus de 150 000 entreprises clientes. Sa force : une flexibilite quasi illimitee. Salesforce peut s&apos;adapter a pratiquement n&apos;importe quel processus de vente B2B, aussi complexe soit-il.</p>
-                    <p>La gestion de comptes dans Salesforce est la meilleure du marche. Hierarchies d&apos;entreprises multi-niveaux, territories, team selling, partner relationship management. Les equipes enterprise qui gerent des cycles de vente de 6 a 18 mois avec des organigrammes d&apos;acheteurs complexes trouvent dans Salesforce tous les outils necessaires.</p>
+                    <p>La gestion de comptes dans Salesforce est la meilleure du marche. Yesterdayarchies d&apos;entreprises multi-niveaux, territories, team selling, partner relationship management. Les equipes enterprise qui gerent des cycles de vente de 6 a 18 mois avec des organigrammes d&apos;acheteurs complexes trouvent dans Salesforce tous les outils necessaires.</p>
                     <p>Le forecasting de Salesforce est extremement avance. Collaborative forecasting avec des categories personnalisables, forecasting par territoire, par produit, par equipe. Les managers peuvent driller dans les previsions a tous les niveaux de la hierarchie. L&apos;IA Einstein ajoute une couche de scoring predictif et de recommandations d&apos;actions.</p>
                     <p>Le revers de la medaille : la complexite. Salesforce n&apos;est pas un outil que l&apos;on deploie en une semaine. Il faut un administrateur dedie (ou un consultant externe) pour configurer, maintenir et faire evoluer la plateforme. Les couts d&apos;implementation depassent souvent le cout de la licence elle-meme. Et l&apos;interface, bien qu&apos;amelioree avec Lightning, reste plus complexe que celle de HubSpot ou Pipedrive.</p>
                     <p>En France, Salesforce est particulierement present dans les grandes entreprises et les scale-ups qui ont leve plus de 10 millions d&apos;euros. Pour les PME de moins de 20 personnes, le rapport cout/complexite/valeur est rarement justifie. On voit regulierement des entreprises qui ont achete Salesforce et qui n&apos;utilisent que 20% des fonctionnalites, tout en payant le prix fort.</p>
@@ -690,7 +690,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                         { critere: "Prise en main", values: ["Facile", "Difficile", "Tres facile", "Difficile", "Facile", "Tres facile", "Moyen"] },
                         { critere: "IA integree", values: ["Oui", "Einstein", "Basique", "Copilot", "Non", "Non", "Zia"] },
                         { critere: "ABM natif", values: ["Oui", "Oui", "Non", "Partiel", "Non", "Non", "Non"] },
-                        { critere: "Facturation", values: ["Add-on", "Non", "Non", "Non", "Natif", "Natif", "Via Zoho Books"] },
+                        { critere: "Billing", values: ["Add-on", "Non", "Non", "Non", "Natif", "Natif", "Via Zoho Books"] },
                         { critere: "Prix entree/user/mois", values: ["0 eur", "25 eur", "14 eur", "60 eur", "29 eur", "35 eur", "14 eur"] },
                         { critere: "Donnees en EU", values: ["Option", "Option", "EU", "Azure EU", "France", "France", "EU"] },
                       ].map((row) => (

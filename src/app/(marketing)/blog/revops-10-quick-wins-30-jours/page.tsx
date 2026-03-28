@@ -30,8 +30,8 @@ const wins = [
     impactLevel: "fort",
     quadrant: "top-right" as const,
     problem: "Votre CRM contient des dizaines, parfois des centaines de fiches en double. Un meme prospect existe sous trois orthographes differentes, avec des informations reparties entre chaque fiche. Vos commerciaux perdent du temps a chercher la bonne fiche, envoient des emails en double, et vos rapports sont fausses. Le pipeline affiche un montant gonfle artificiellement parce que le meme deal apparait deux fois. La direction prend des decisions basees sur des donnees qui ne refletent pas la realite.",
-    solution: "Lancez un audit de deduplication systematique de votre CRM. HubSpot propose un outil natif de gestion des doublons (Parametres > Contacts > Doublons) qui identifie automatiquement les fiches similaires par email, nom ou entreprise. Pour les cas complexes, des outils comme Dedupely ou Insycle permettent de definir des regles de fusion avancees : quel champ prioriser, comment fusionner les activites, comment conserver l&apos;historique.",
-    setup: "1. Allez dans Parametres > Contacts > Doublons dans HubSpot\n2. Examinez les paires detectees automatiquement par l&apos;outil natif\n3. Definissez vos regles de fusion : conserver la fiche la plus recente, fusionner les activites\n4. Traitez les doublons par lot de 50 pour eviter les erreurs\n5. Configurez une regle de prevention : workflow qui alerte quand un doublon potentiel est cree\n6. Planifiez un audit mensuel de 30 minutes pour maintenir la base propre",
+    solution: "Lancez un audit de deduplication systematique de votre CRM. HubSpot propose un outil natif de gestion des doublons (Settings > Contacts > Doublons) qui identifie automatiquement les fiches similaires par email, nom ou entreprise. Pour les cas complexes, des outils comme Dedupely ou Insycle permettent de definir des regles de fusion avancees : quel champ prioriser, comment fusionner les activites, comment conserver l&apos;historique.",
+    setup: "1. Allez dans Settings > Contacts > Doublons dans HubSpot\n2. Examinez les paires detectees automatiquement par l&apos;outil natif\n3. Definissez vos regles de fusion : conserver la fiche la plus recente, fusionner les activites\n4. Traitez les doublons par lot de 50 pour eviter les erreurs\n5. Configurez une regle de prevention : workflow qui alerte quand un doublon potentiel est cree\n6. Planifiez un audit mensuel de 30 minutes pour maintenir la base propre",
   },
   {
     num: "02",
@@ -59,7 +59,7 @@ const wins = [
   },
   {
     num: "04",
-    title: "Creer un dashboard pipeline partage",
+    title: "Create Dashboard pipeline partage",
     setupTime: "2h",
     impact: "visibilite totale",
     effort: "moyen",
@@ -79,7 +79,7 @@ const wins = [
     quadrant: "top-right" as const,
     problem: "Sans lead scoring, tous les leads sont traites de maniere identique. Le commercial passe autant de temps a rappeler un etudiant qui a telecharge un PDF qu&apos;un directeur commercial d&apos;une entreprise de 200 personnes qui a demande une demo. La priorisation se fait au feeling, a l&apos;instinct, ou tout simplement dans l&apos;ordre d&apos;arrivee. Les meilleurs leads ne sont pas traites en premier. Le taux de conversion stagne parce que l&apos;effort commercial n&apos;est pas alloue la ou il aurait le plus d&apos;impact.",
     solution: "Implementez un systeme de scoring simple dans HubSpot. Definissez des criteres demographiques (poste, taille entreprise, secteur) et comportementaux (pages visitees, formulaires remplis, emails ouverts) qui attribuent des points positifs ou negatifs a chaque contact. Les commerciaux voient immediatement quels leads sont chauds et concentrent leur energie sur les opportunites les plus prometteuses.",
-    setup: "1. Allez dans Parametres > Proprietes > HubSpot Score\n2. Definissez les criteres positifs :\n   — Poste contient \"Directeur\" ou \"VP\" : +15 points\n   — Taille entreprise > 50 : +10 points\n   — A visite la page pricing : +20 points\n   — A demande une demo : +25 points\n3. Definissez les criteres negatifs :\n   — Email personnel (gmail, hotmail) : -10 points\n   — Etudiant ou stagiaire : -20 points\n4. Creez un workflow qui notifie le commercial quand un lead depasse 50 points\n5. Ajoutez une vue filtree dans les contacts : leads tries par score decroissant\n6. Revisez les criteres chaque mois en fonction des conversions reelles",
+    setup: "1. Allez dans Settings > Proprietes > HubSpot Score\n2. Definissez les criteres positifs :\n   — Poste contient \"Directeur\" ou \"VP\" : +15 points\n   — Taille entreprise > 50 : +10 points\n   — A visite la page pricing : +20 points\n   — A demande une demo : +25 points\n3. Definissez les criteres negatifs :\n   — Email personnel (gmail, hotmail) : -10 points\n   — Etudiant ou stagiaire : -20 points\n4. Creez un workflow qui notifie le commercial quand un lead depasse 50 points\n5. Ajoutez une vue filtree dans les contacts : leads tries par score decroissant\n6. Revisez les criteres chaque mois en fonction des conversions reelles",
   },
   {
     num: "06",
@@ -115,7 +115,7 @@ const wins = [
     quadrant: "bottom-right" as const,
     problem: "Chaque commercial remplit le CRM a sa maniere. L&apos;un ecrit \"SaaS\" dans le champ secteur, l&apos;autre ecrit \"Logiciel\", un troisieme ecrit \"Tech/Software\". Le champ \"Montant\" contient parfois le montant mensuel, parfois l&apos;annuel, parfois le total du contrat. Les adresses sont saisies sans format standard. Quand vous essayez de segmenter vos contacts par secteur ou de calculer le revenu moyen par deal, les resultats sont inutilisables. Vos rapports deviennent de la fiction.",
     solution: "Auditez toutes les proprietes de votre CRM et standardisez-les. Remplacez les champs texte libre par des menus deroulants quand c&apos;est possible. Definissez des conventions de nommage claires. Creez un document de reference qui explique comment remplir chaque champ. Formez l&apos;equipe en 15 minutes et configurez des proprietes obligatoires pour les champs critiques.",
-    setup: "1. Exportez la liste de toutes vos proprietes CRM (Parametres > Proprietes)\n2. Identifiez les champs texte libre qui devraient etre des menus deroulants\n3. Creez les options standardisees pour chaque champ (ex: secteur, source, raison de perte)\n4. Migrez les donnees existantes vers les nouvelles valeurs standardisees\n5. Configurez les champs obligatoires sur les fiches de deal (montant, date de cloture, source)\n6. Redigez un guide d&apos;une page qui explique les conventions et partagez-le avec l&apos;equipe",
+    setup: "1. Exportez la liste de toutes vos proprietes CRM (Settings > Proprietes)\n2. Identifiez les champs texte libre qui devraient etre des menus deroulants\n3. Creez les options standardisees pour chaque champ (ex: secteur, source, raison de perte)\n4. Migrez les donnees existantes vers les nouvelles valeurs standardisees\n5. Configurez les champs obligatoires sur les fiches de deal (montant, date de cloture, source)\n6. Redigez un guide d&apos;une page qui explique les conventions et partagez-le avec l&apos;equipe",
   },
   {
     num: "09",
@@ -127,7 +127,7 @@ const wins = [
     quadrant: "bottom-left" as const,
     problem: "Chaque lundi matin, le responsable commercial passe une heure a compiler les chiffres de la semaine. Il ouvre HubSpot, exporte des donnees, les colle dans un Google Sheet, calcule les variations, met en forme un tableau, et envoie le tout par email a la direction. C&apos;est une heure de travail repetitif, chaque semaine, sans exception. Et si le responsable est en conge, personne ne fait le reporting. La direction n&apos;a aucune visibilite.",
     solution: "Creez un tableau de bord dans HubSpot avec tous les KPIs hebdomadaires et programmez un envoi automatique chaque lundi matin. Le rapport arrive dans les boites mail a 8h, avec les donnees a jour, sans intervention humaine. Meme quand le responsable est absent, le reporting continue.",
-    setup: "1. Creez un tableau de bord dans HubSpot avec les KPIs cles de la semaine\n2. Incluez : deals crees, deals gagnes, valeur pipeline, taux de conversion, activites par commercial\n3. Configurez les filtres temporels sur \"Cette semaine\" ou \"7 derniers jours\"\n4. Cliquez sur Actions > Programmer un email recurrent\n5. Selectionnez la frequence : hebdomadaire, le lundi a 8h\n6. Ajoutez les destinataires : direction, managers, et les commerciaux eux-memes",
+    setup: "1. Creez un tableau de bord dans HubSpot avec les KPIs cles de la semaine\n2. Incluez : deals crees, deals gagnes, valeur pipeline, taux de conversion, activites par commercial\n3. Configurez les filtres temporels sur \"Cette semaine\" ou \"Last 7 days\"\n4. Cliquez sur Actions > Programmer un email recurrent\n5. Selectionnez la frequence : hebdomadaire, le lundi a 8h\n6. Ajoutez les destinataires : direction, managers, et les commerciaux eux-memes",
   },
   {
     num: "10",
@@ -437,7 +437,7 @@ export default function BlogPostPage() {
                     <div className="ml-8 space-y-1.5">
                       <div className="flex items-center gap-2 text-[11px] text-[#555]">
                         <div className="w-1.5 h-1.5 rounded-full bg-[#FF7A59]" />
-                        <span>Creer un dashboard pipeline partage (2h)</span>
+                        <span>Create Dashboard pipeline partage (2h)</span>
                       </div>
                       <div className="flex items-center gap-2 text-[11px] text-[#555]">
                         <div className="w-1.5 h-1.5 rounded-full bg-[#FF7A59]" />

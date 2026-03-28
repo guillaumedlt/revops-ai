@@ -8,8 +8,8 @@ import ChatInputBar from "@/components/chat/ChatInputBar";
 
 var SUGGESTIONS = [
   { label: "Sales Ops", items: ["/pipeline", "/forecast"] },
-  { label: "Performance", items: ["/coaching", "Decompose ma sales velocity"] },
-  { label: "RevOps", items: ["/audit", "/report Rapport hebdo complet"] },
+  { label: "Performance", items: ["/coaching", "Break down my sales velocity"] },
+  { label: "RevOps", items: ["/audit", "/report Full weekly report"] },
   { label: "Actions", items: ["/cleanup", "/brief "] },
 ];
 
@@ -81,9 +81,9 @@ export default function ChatWelcome() {
           {/* Greeting */}
           <div className="text-center mb-7">
             <h1 className="text-[22px] font-semibold text-[#111] tracking-tight">
-              {"Comment puis-je t'aider ?"}
+              {"How can I help you?"}
             </h1>
-            <p className="text-[13px] text-[#999] mt-1">Pose une question ou utilise une commande /</p>
+            <p className="text-[13px] text-[#999] mt-1">Ask a question or use a / command</p>
           </div>
 
           {/* Alerts summary */}
@@ -106,7 +106,7 @@ export default function ChatWelcome() {
                   <div className="flex items-center gap-2">
                     {alerts.length > 3 && (
                       <button onClick={function() { setAlertsExpanded(!alertsExpanded); }} className="text-[11px] text-[#6366F1] hover:text-[#4F46E5] font-medium">
-                        {alertsExpanded ? "Reduire" : "Voir tout"}
+                        {alertsExpanded ? "Show less" : "Show all"}
                       </button>
                     )}
                     <button
@@ -135,7 +135,7 @@ export default function ChatWelcome() {
                           onClick={function() { handleSuggestion("A propos de l'alerte : " + alert.title + ". Donne-moi les details et un plan d'action."); }}
                           className="text-[10px] font-medium text-[#6366F1] hover:text-[#4F46E5] shrink-0 flex items-center gap-0.5"
                         >
-                          Investiguer <ArrowRight size={9} />
+                          Investigate <ArrowRight size={9} />
                         </button>
                         <button
                           onClick={function() { handleDismissAlert(alert.id); }}

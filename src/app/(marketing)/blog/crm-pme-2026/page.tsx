@@ -314,7 +314,7 @@ export default function CrmPme2026Article() {
                     </div>
                     <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Limites</p>
-                      {["Pas de module marketing natif", "Support en francais limite", "Reporting basique sur les petits plans", "Pas de plan gratuit", "Moins d'integrations natives que HubSpot", "Fonctionnalites IA en retard"].map((i) => (
+                      {["Pas de module marketing natif", "Support en francais limite", "Reporting basique sur les petits plans", "Pas de plan gratuit", "Moins d'integrations natives que HubSpot", "Fonctionnalites IA en overdue"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
                       ))}
                     </div>
@@ -401,7 +401,7 @@ export default function CrmPme2026Article() {
                     <p>L&apos;ecosysteme Zoho est un avantage enorme pour les PME qui veulent tout centraliser chez un seul editeur. Zoho Mail, Zoho Books (comptabilite), Zoho Desk (support client), Zoho Campaigns (email marketing), Zoho Analytics (BI) : tout s&apos;integre nativement sans surcout. Pour une PME qui utilise deja une application Zoho, adopter le CRM est une evidence.</p>
                     <p>Le point faible principal est l&apos;experience utilisateur. L&apos;interface de Zoho CRM est fonctionnelle mais datee. Elle manque de la fluidite et de l&apos;elegance de HubSpot ou Pipedrive. Les menus sont denses, les options nombreuses, et la navigation peut derouter les utilisateurs non techniques. Zoho a fait des progres avec son interface Canvas (personnalisation visuelle), mais on reste en dessous des standards du marche.</p>
                     <p>Le support en francais est un point a verifier. L&apos;interface est traduite, mais le support technique est principalement en anglais. Le reseau de partenaires en France est encore limite, meme s&apos;il se developpe. Pour une PME qui a besoin d&apos;accompagnement, cela peut etre un frein.</p>
-                    <p>L&apos;IA Zia, disponible sur le plan Enterprise, est competente sans etre revolutionnaire. Elle propose de la prediction de conversion, de la detection d&apos;anomalies et de la suggestion de prochaines actions. C&apos;est un plus, mais en retard par rapport aux capacites de HubSpot Breeze ou de Salesforce Einstein.</p>
+                    <p>L&apos;IA Zia, disponible sur le plan Enterprise, est competente sans etre revolutionnaire. Elle propose de la prediction de conversion, de la detection d&apos;anomalies et de la suggestion de prochaines actions. C&apos;est un plus, mais en overdue par rapport aux capacites de HubSpot Breeze ou de Salesforce Einstein.</p>
                   </div>
 
                   <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
@@ -432,7 +432,7 @@ export default function CrmPme2026Article() {
                     </div>
                     <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Limites</p>
-                      {["Interface datee, moins fluide que la concurrence", "Support en francais limite", "Reseau de partenaires FR restreint", "IA Zia en retard sur Breeze/Einstein", "Integrations tierces moins riches que HubSpot", "Courbe d'apprentissage moyenne"].map((i) => (
+                      {["Interface datee, moins fluide que la concurrence", "Support en francais limite", "Reseau de partenaires FR restreint", "IA Zia en overdue sur Breeze/Einstein", "Integrations tierces moins riches que HubSpot", "Courbe d'apprentissage moyenne"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
                       ))}
                     </div>
@@ -571,7 +571,7 @@ export default function CrmPme2026Article() {
                     <span className="text-[9px] px-1.5 py-0.5 rounded font-medium bg-[#22C55E]/10 text-[#22C55E]">Pour les commerciaux purs</span>
                   </div>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
-                    <p>noCRM.io est un outil francais cree en 2014 par Sunny Paris et Guven Urganci. Le nom dit tout : c&apos;est un outil de prospection qui refuse la complexite des CRM traditionnels. noCRM ne parle pas de &ldquo;contacts&rdquo; ou de &ldquo;comptes&rdquo;, mais de &ldquo;leads&rdquo; (opportunites). La philosophie est radicale : chaque lead doit toujours avoir une prochaine action planifiee. Si une action est en retard, le lead passe en rouge. Impossible de l&apos;ignorer.</p>
+                    <p>noCRM.io est un outil francais cree en 2014 par Sunny Paris et Guven Urganci. Le nom dit tout : c&apos;est un outil de prospection qui refuse la complexite des CRM traditionnels. noCRM ne parle pas de &ldquo;contacts&rdquo; ou de &ldquo;comptes&rdquo;, mais de &ldquo;leads&rdquo; (opportunites). La philosophie est radicale : chaque lead doit toujours avoir une prochaine action planifiee. Si une action est en overdue, le lead passe en rouge. Impossible de l&apos;ignorer.</p>
                     <p>Cette approche convient parfaitement aux equipes commerciales dont le metier est la prospection pure. Pas besoin de remplir des dizaines de champs ou de naviguer dans des menus complexes. On cree un lead (depuis un email, un fichier Excel, un scan de carte de visite ou manuellement), on planifie la prochaine action, on avance. C&apos;est tout.</p>
                     <p>noCRM integre un systeme de prospection par fichier qui est unique sur le marche. On importe un fichier CSV de prospects, et l&apos;outil les presente un par un au commercial. Celui-ci decide en un clic : interessant (creer un lead) ou pas interessant (suivant). C&apos;est une mecanique de qualification rapide qui fait gagner un temps considerable aux equipes qui traitent du volume.</p>
                     <p>Le prix est agressif : 22 euros par mois et par utilisateur sur le plan Starter, 33 euros sur le plan Expert. Le plan Dream Team a 39 euros ajoute le management d&apos;equipe et les objectifs. Il n&apos;y a pas de plan gratuit, mais un essai de 15 jours est disponible.</p>
@@ -652,7 +652,7 @@ export default function CrmPme2026Article() {
                         {[
                           ["Prix d'entree/user/mois", "0 EUR", "14 EUR", "25 EUR", "14 EUR", "12 EUR", "0 EUR", "22 EUR"],
                           ["Plan gratuit", "Oui (complet)", "Non", "Non", "Oui (3 users)", "Non", "Oui (limite)", "Non"],
-                          ["Facilite de prise en main", "Excellente", "Excellente", "Moyenne", "Moyenne", "Bonne", "Excellente", "Excellente"],
+                          ["Facilite de prise en main", "Excellente", "Excellente", "Medium", "Medium", "Bonne", "Excellente", "Excellente"],
                           ["Pipeline visuel", "Oui", "Oui (best)", "Oui", "Oui", "Oui", "Basique", "Oui"],
                           ["Sequences email", "Pro (100 EUR)", "Advanced (39 EUR)", "Pro (80 EUR)", "Pro (23 EUR)", "Non", "Mail merge", "Non"],
                           ["Marketing automation", "Oui (natif)", "Non", "Pardot (surcout)", "Oui (Zoho)", "Non", "Non", "Non"],
@@ -775,7 +775,7 @@ export default function CrmPme2026Article() {
                         color: "#22C55E"
                       },
                       {
-                        erreur: "Ignorer l'application mobile",
+                        erreur: "Dismiss l'application mobile",
                         desc: "Si vos commerciaux sont sur le terrain (rendez-vous clients, salons, visites), l'application mobile n'est pas un nice-to-have. C'est un critere eliminatoire. Testez l'application mobile avant de choisir votre CRM. Verifiez qu'elle permet de consulter les fiches contacts, loguer des appels et mettre a jour les deals en deplacement, meme sans connexion.",
                         color: "#FF7A59"
                       },

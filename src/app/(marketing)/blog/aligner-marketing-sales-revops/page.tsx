@@ -189,12 +189,12 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   {/* Symptom diagnostic cards */}
                   <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {[
-                      { symptome: "MQLs ignores", desc: "Moins de 50% des leads marketing sont contactes dans les 48h par les sales. Taux de suivi en chute libre.", severity: "Critique", color: "#FF7A59" },
-                      { symptome: "Definitions floues", desc: "Aucun document partage ne definit MQL, SQL, Opportunity. Chaque equipe a ses propres criteres.", severity: "Critique", color: "#FF7A59" },
+                      { symptome: "MQLs ignores", desc: "Moins de 50% des leads marketing sont contactes dans les 48h par les sales. Taux de suivi en chute libre.", severity: "Critical", color: "#FF7A59" },
+                      { symptome: "Definitions floues", desc: "Aucun document partage ne definit MQL, SQL, Opportunity. Chaque equipe a ses propres criteres.", severity: "Critical", color: "#FF7A59" },
                       { symptome: "Reporting contradictoire", desc: "Marketing et sales presentent des chiffres differents au meme comite. Debats sur les donnees plutot que sur la strategie.", severity: "Eleve", color: "#6C5CE7" },
                       { symptome: "Pas de feedback loop", desc: "Aucun mecanisme structure pour que les sales remontent la qualite des leads au marketing. Optimisation a l&apos;aveugle.", severity: "Eleve", color: "#6C5CE7" },
                       { symptome: "Outils fragmentes", desc: "Marketing automation et CRM non synchronises. Donnees en silo. Pas de vue unifiee du parcours prospect.", severity: "Modere", color: "#4B5EFC" },
-                      { symptome: "Blame game installe", desc: "Reunions tendues entre equipes. Chacun rejette la faute sur l&apos;autre. Culture de competition plutot que de collaboration.", severity: "Critique", color: "#FF7A59" },
+                      { symptome: "Blame game installe", desc: "Reunions tendues entre equipes. Chacun rejette la faute sur l&apos;autre. Culture de competition plutot que de collaboration.", severity: "Critical", color: "#FF7A59" },
                     ].map((item) => (
                       <div key={item.symptome} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <div className="flex items-center justify-between mb-2">
@@ -660,7 +660,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                     <div className="space-y-2">
                       {[
                         { jour: "Jour 15-16", action: "Creer le dashboard partage dans HubSpot avec les KPIs d&apos;alignement" },
-                        { jour: "Jour 17", action: "Configurer les alertes Slack (nouveau MQL, MQL en retard, reject, deal won)" },
+                        { jour: "Jour 17", action: "Configurer les alertes Slack (nouveau MQL, MQL en overdue, reject, deal won)" },
                         { jour: "Jour 18", action: "Installer la cadence de meetings : weekly sync + monthly review" },
                         { jour: "Jour 19", action: "Documenter les templates d&apos;agenda et les process de review" },
                         { jour: "Jour 20-21", action: "Former les equipes aux nouveaux dashboards et aux alertes" },
@@ -896,7 +896,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {[
                       { outil: "HubSpot", role: "CRM + Marketing Automation", desc: "Plateforme unifiee qui centralise le funnel. Lifecycle stages, lead scoring, workflows, dashboards partages. La source de verite unique pour les deux equipes.", color: "#FF7A59" },
-                      { outil: "Slack", role: "Communication temps reel", desc: "Alertes automatiques (nouveau MQL, MQL en retard, deal won). Canal dedie #marketing-sales pour les discussions operationnelles quotidiennes.", color: "#4B5EFC" },
+                      { outil: "Slack", role: "Communication temps reel", desc: "Alertes automatiques (nouveau MQL, MQL en overdue, deal won). Canal dedie #marketing-sales pour les discussions operationnelles quotidiennes.", color: "#4B5EFC" },
                       { outil: "Notion", role: "Documentation partagee", desc: "SLA, glossaire, playbooks, templates de review. Documentation vivante accessible en un clic par les deux equipes.", color: "#6C5CE7" },
                       { outil: "Claap", role: "Feedback video asynchrone", desc: "Retours de demo, walkthrough campagnes, recaps hebdo. Comble le fossement de communication entre equipes distribuees.", color: "#22C55E" },
                     ].map((item) => (
@@ -940,7 +940,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                           color: "#FF7A59",
                         },
                         {
-                          objective: "Reduire le cycle de vente de 20%",
+                          objective: "Show less le cycle de vente de 20%",
                           keyResults: [
                             "Marketing : 5 etudes de cas sectorielles pour accelerer le BOFU",
                             "Sales : premier appel dans les 4h pour les MQLs chauds",

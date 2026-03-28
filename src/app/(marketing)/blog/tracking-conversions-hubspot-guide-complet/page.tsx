@@ -27,7 +27,7 @@ const sections = [
   { id: "formulaires", title: "Tracker les soumissions de formulaires" },
   { id: "attribution", title: "Attribution multi-touch" },
   { id: "events", title: "Events personnalises" },
-  { id: "ga4", title: "Connecter HubSpot a GA4" },
+  { id: "ga4", title: "Connect HubSpot a GA4" },
   { id: "dashboard", title: "Dashboard de conversion" },
   { id: "erreurs", title: "Les erreurs courantes" },
   { id: "setup-ceres", title: "Notre setup chez Ceres" },
@@ -145,7 +145,7 @@ export default function TrackingConversionsHubSpotArticle() {
                 <span className="text-[13px] font-semibold text-[#111] mb-4 block">Ce que vous allez apprendre</span>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {[
-                    { label: "Parametres UTM", value: "5 types", color: "#4B5EFC" },
+                    { label: "Settings UTM", value: "5 types", color: "#4B5EFC" },
                     { label: "Modeles d\u2019attribution", value: "6 modeles", color: "#6C5CE7" },
                     { label: "KPI a suivre", value: "12 metriques", color: "#22C55E" },
                     { label: "Erreurs courantes", value: "8 erreurs", color: "#FF7A59" },
@@ -347,7 +347,7 @@ https://www.ceres-revops.com/blog/article?
 
                   <div className="mt-5 space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p><strong className="text-[#111]">Important :</strong> les proprietes &ldquo;Original Source&rdquo; sont figees. Elles capturent la premiere interaction du contact avec votre site. Meme si un contact revient 10 fois via des canaux differents, la source originale ne changera pas. C&apos;est pour cela que l&apos;attribution multi-touch (que nous verrons plus bas) est indispensable pour une vision complete.</p>
-                    <p>Pour que le tracking fonctionne correctement, assurez-vous que le code de suivi HubSpot est bien installe sur toutes les pages de votre site, y compris les pages de remerciement et les sous-domaines. Verifiez dans Parametres &gt; Tracking &amp; Analytics &gt; Code de suivi.</p>
+                    <p>Pour que le tracking fonctionne correctement, assurez-vous que le code de suivi HubSpot est bien installe sur toutes les pages de votre site, y compris les pages de remerciement et les sous-domaines. Verifiez dans Settings &gt; Tracking &amp; Analytics &gt; Code de suivi.</p>
                   </div>
                 </div>
               </section>
@@ -372,7 +372,7 @@ https://www.ceres-revops.com/blog/article?
                       },
                       {
                         title: "Formulaires non-HubSpot (collected forms)",
-                        desc: "Si vous utilisez des formulaires natifs (HTML, React, WordPress) sans passer par HubSpot, le code de suivi HubSpot peut quand meme les detecter. Activez la collecte automatique dans Parametres > Marketing > Formulaires > Formulaires non-HubSpot. HubSpot interceptera les soumissions et creera les contacts.",
+                        desc: "Si vous utilisez des formulaires natifs (HTML, React, WordPress) sans passer par HubSpot, le code de suivi HubSpot peut quand meme les detecter. Activez la collecte automatique dans Settings > Marketing > Formulaires > Formulaires non-HubSpot. HubSpot interceptera les soumissions et creera les contacts.",
                         pros: "Liberte totale sur le design. Compatible avec n\u2019importe quel framework front-end.",
                         cons: "Le tracking est moins fiable. Certains champs peuvent ne pas etre mappes correctement. Necessite une verification manuelle.",
                       },
@@ -544,7 +544,7 @@ _hsq.push(["trackCustomBehavioralEvent", {
               {/* Section 7 - GA4 */}
               <section id="ga4" className="mb-8">
                 <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
-                  <h2 className="text-[17px] font-semibold text-[#111] mb-4">Connecter HubSpot a Google Analytics 4</h2>
+                  <h2 className="text-[17px] font-semibold text-[#111] mb-4">Connect HubSpot a Google Analytics 4</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>HubSpot et Google Analytics 4 ne trackent pas les memes choses. HubSpot se concentre sur les contacts identifies et les deals. GA4 analyse le trafic global, les parcours de navigation et les micro-conversions. Les combiner donne une vision complete du funnel.</p>
                     <p>Il y a trois niveaux d&apos;integration possibles :</p>

@@ -329,7 +329,7 @@ export default function SequencesHubSpotArticle() {
                     <tr>
                       <td className="px-4 py-3 font-medium bg-gray-50">Personnalisation</td>
                       <td className="px-4 py-3">Tres elevee (tokens + manuel)</td>
-                      <td className="px-4 py-3">Moyenne (tokens uniquement)</td>
+                      <td className="px-4 py-3">Medium (tokens uniquement)</td>
                     </tr>
                   </tbody>
                 </table>
@@ -507,7 +507,7 @@ export default function SequencesHubSpotArticle() {
                 {[
                   {
                     level: "Niveau 1 : Tokens HubSpot",
-                    desc: "Prenom, nom de l&apos;entreprise, secteur, poste. Le minimum vital. Taux d&apos;ouverture moyen : +12% par rapport a un email generique.",
+                    desc: "First name, nom de l&apos;entreprise, secteur, poste. Le minimum vital. Taux d&apos;ouverture moyen : +12% par rapport a un email generique.",
                   },
                   {
                     level: "Niveau 2 : Contexte business",
@@ -593,22 +593,22 @@ export default function SequencesHubSpotArticle() {
                     <tr className="border-b border-gray-100">
                       <td className="px-4 py-3 font-medium bg-gray-50">Objet de l&apos;email</td>
                       <td className="px-4 py-3">+15% a +40% sur le taux d&apos;ouverture</td>
-                      <td className="px-4 py-3"><span className="text-xs font-bold text-white px-2 py-0.5 rounded-full" style={{ backgroundColor: "#22c55e" }}>Haute</span></td>
+                      <td className="px-4 py-3"><span className="text-xs font-bold text-white px-2 py-0.5 rounded-full" style={{ backgroundColor: "#22c55e" }}>High</span></td>
                     </tr>
                     <tr className="border-b border-gray-100">
                       <td className="px-4 py-3 font-medium bg-gray-50">Longueur de l&apos;email</td>
                       <td className="px-4 py-3">+10% a +25% sur le taux de reponse</td>
-                      <td className="px-4 py-3"><span className="text-xs font-bold text-white px-2 py-0.5 rounded-full" style={{ backgroundColor: "#22c55e" }}>Haute</span></td>
+                      <td className="px-4 py-3"><span className="text-xs font-bold text-white px-2 py-0.5 rounded-full" style={{ backgroundColor: "#22c55e" }}>High</span></td>
                     </tr>
                     <tr className="border-b border-gray-100">
                       <td className="px-4 py-3 font-medium bg-gray-50">CTA (question vs lien)</td>
                       <td className="px-4 py-3">+5% a +15% sur le taux de reponse</td>
-                      <td className="px-4 py-3"><span className="text-xs font-bold text-white px-2 py-0.5 rounded-full" style={{ backgroundColor: "#f59e0b" }}>Moyenne</span></td>
+                      <td className="px-4 py-3"><span className="text-xs font-bold text-white px-2 py-0.5 rounded-full" style={{ backgroundColor: "#f59e0b" }}>Medium</span></td>
                     </tr>
                     <tr className="border-b border-gray-100">
                       <td className="px-4 py-3 font-medium bg-gray-50">Nombre d&apos;etapes</td>
                       <td className="px-4 py-3">Variable selon le secteur</td>
-                      <td className="px-4 py-3"><span className="text-xs font-bold text-white px-2 py-0.5 rounded-full" style={{ backgroundColor: "#f59e0b" }}>Moyenne</span></td>
+                      <td className="px-4 py-3"><span className="text-xs font-bold text-white px-2 py-0.5 rounded-full" style={{ backgroundColor: "#f59e0b" }}>Medium</span></td>
                     </tr>
                     <tr>
                       <td className="px-4 py-3 font-medium bg-gray-50">Ton (formel vs decontracte)</td>
@@ -794,7 +794,7 @@ export default function SequencesHubSpotArticle() {
                     fix: "Respectez un delai minimum de 3 jours entre chaque etape. Limitez vos sequences a 6-7 etapes maximum.",
                   },
                   {
-                    error: "Ignorer la delivrabilite",
+                    error: "Dismiss la delivrabilite",
                     impact: "Taux d&apos;ouverture en chute libre",
                     fix: "Chauffez vos adresses email progressivement. Limitez les envois a 40-50 emails/jour par boite. Evitez les mots spam dans vos objets.",
                   },

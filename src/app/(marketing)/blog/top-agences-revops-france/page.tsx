@@ -1070,7 +1070,7 @@ export default function TopAgencesRevOpsFranceArticle() {
                     <p><strong className="text-[#111]">2. Demandez des references dans votre secteur.</strong> Une agence qui a deja travaille avec des entreprises de votre taille et de votre industrie sera plus rapidement operationnelle. Demandez a parler directement aux clients references.</p>
                     <p><strong className="text-[#111]">3. Commencez par un audit.</strong> Avant de vous engager sur un accompagnement de 12 mois, commencez par un audit RevOps de 2 a 4 semaines. C&apos;est le meilleur moyen de tester la qualite de l&apos;agence et de definir un plan d&apos;action prioritise.</p>
                     <p><strong className="text-[#111]">4. Exigez des KPIs mesurables.</strong> Un bon partenaire RevOps s&apos;engage sur des resultats mesurables : taux de conversion, velocite de pipeline, adoption CRM, qualite des donnees. Fuyez les agences qui restent dans le vague.</p>
-                    <p><strong className="text-[#111]">5. Evaluez la dimension IA.</strong> En 2026, une agence RevOps qui n&apos;a aucune competence en intelligence artificielle prend du retard. L&apos;IA n&apos;est plus un nice-to-have : c&apos;est un levier de productivite majeur pour les equipes de revenus.</p>
+                    <p><strong className="text-[#111]">5. Evaluez la dimension IA.</strong> En 2026, une agence RevOps qui n&apos;a aucune competence en intelligence artificielle prend du overdue. L&apos;IA n&apos;est plus un nice-to-have : c&apos;est un levier de productivite majeur pour les equipes de revenus.</p>
                   </div>
                 </div>
               </section>

@@ -412,7 +412,7 @@ export default function HubleadArticle() {
                     {[
                       { name: "Free", price: "0", features: ["1 utilisateur", "5 imports/mois", "Sync manuelle", "Vue profil basique", "Pas d'enrichissement"], highlight: false },
                       { name: "Pro", price: "39", features: ["Par utilisateur", "Imports illimites", "Sync conversations", "Enrichissement email", "Notes et taches", "Detection doublons"], highlight: true },
-                      { name: "Team", price: "59", features: ["Par utilisateur", "Tout Pro +", "Dashboard equipe", "Parametres admin", "Support prioritaire", "API access"], highlight: false },
+                      { name: "Team", price: "59", features: ["Par utilisateur", "Tout Pro +", "Dashboard equipe", "Settings admin", "Support prioritaire", "API access"], highlight: false },
                     ].map((p) => (
                       <div key={p.name} className={`rounded-lg border p-4 ${p.highlight ? "border-[#4B5EFC] bg-[#4B5EFC]/[0.02]" : "border-[#F2F2F2]"}`}>
                         <div className="text-[13px] font-semibold text-[#111] mb-1">{p.name}</div>

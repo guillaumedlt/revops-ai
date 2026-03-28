@@ -8,7 +8,7 @@ import Connector from "@/components/marketing/Connector";
 const steps = [
   { num: "01", title: "Comprendre le problème", content: `Par défaut, HubSpot ne remonte pas les soumissions de formulaires dans Google Analytics 4. Vous avez des formulaires HubSpot sur votre site, des leads qui arrivent dans votre CRM, mais côté analytics vous êtes aveugle.\n\nRésultat : impossible de savoir quelle page, quelle campagne ou quelle source génère réellement des leads. Vous optimisez vos ads à l'aveugle.` },
   { num: "02", title: "Ce qu'on va mettre en place", content: `On va configurer un tracking qui envoie un événement "hubspot_form_submit" dans GA4 à chaque soumission de formulaire HubSpot. Cet événement contiendra :\n- Le nom du formulaire\n- L'URL de la page\n- L'ID du formulaire HubSpot\n\nVous pourrez ensuite l'utiliser comme conversion dans GA4, Google Ads ou tout autre outil d'attribution.` },
-  { num: "03", title: "Ajouter le listener HubSpot", content: `HubSpot expose un événement global quand un formulaire est soumis. On va l'écouter et pousser les données dans le dataLayer de GTM.\n\nAjoutez ce script dans votre site (via GTM en tag HTML personnalisé, ou directement dans votre code) :`,
+  { num: "03", title: "Add le listener HubSpot", content: `HubSpot expose un événement global quand un formulaire est soumis. On va l'écouter et pousser les données dans le dataLayer de GTM.\n\nAjoutez ce script dans votre site (via GTM en tag HTML personnalisé, ou directement dans votre code) :`,
     code: `<script>
   window.addEventListener('message', function(event) {
     if (

@@ -246,13 +246,13 @@ export default function MigrationCrmGuidePage() {
                         </thead>
                         <tbody>
                           {[
-                            { obj: "Contacts", vol: "12 450", props: "34", rate: "67%", priority: "Critique", pColor: "#EF4444" },
-                            { obj: "Entreprises", vol: "3 280", props: "18", rate: "72%", priority: "Critique", pColor: "#EF4444" },
-                            { obj: "Deals", vol: "1 845", props: "22", rate: "58%", priority: "Critique", pColor: "#EF4444" },
-                            { obj: "Activites / Notes", vol: "45 600", props: "5", rate: "91%", priority: "Haute", pColor: "#FF7A59" },
-                            { obj: "Emails logges", vol: "89 200", props: "0", rate: "100%", priority: "Haute", pColor: "#FF7A59" },
-                            { obj: "Tickets / Support", vol: "2 100", props: "12", rate: "45%", priority: "Moyenne", pColor: "#4B5EFC" },
-                            { obj: "Produits / Line items", vol: "340", props: "8", rate: "80%", priority: "Basse", pColor: "#22C55E" },
+                            { obj: "Contacts", vol: "12 450", props: "34", rate: "67%", priority: "Critical", pColor: "#EF4444" },
+                            { obj: "Entreprises", vol: "3 280", props: "18", rate: "72%", priority: "Critical", pColor: "#EF4444" },
+                            { obj: "Deals", vol: "1 845", props: "22", rate: "58%", priority: "Critical", pColor: "#EF4444" },
+                            { obj: "Activites / Notes", vol: "45 600", props: "5", rate: "91%", priority: "High", pColor: "#FF7A59" },
+                            { obj: "Emails logges", vol: "89 200", props: "0", rate: "100%", priority: "High", pColor: "#FF7A59" },
+                            { obj: "Tickets / Support", vol: "2 100", props: "12", rate: "45%", priority: "Medium", pColor: "#4B5EFC" },
+                            { obj: "Produits / Line items", vol: "340", props: "8", rate: "80%", priority: "Low", pColor: "#22C55E" },
                           ].map((row) => (
                             <tr key={row.obj} className="border-b border-[#F8F8F8] hover:bg-[#FAFAFA]">
                               <td className="px-4 py-2.5 font-medium text-[#111]">{row.obj}</td>
@@ -354,7 +354,7 @@ export default function MigrationCrmGuidePage() {
                       </div>
                       <div className="space-y-2">
                         {[
-                          { field: "Nom", value: "jean-pierre DUPONT" },
+                          { field: "Name", value: "jean-pierre DUPONT" },
                           { field: "Email", value: "jp.dupont@acme.COM" },
                           { field: "Telephone", value: "06 12 34 56 78" },
                           { field: "Entreprise", value: "Acme SAS" },
@@ -385,7 +385,7 @@ export default function MigrationCrmGuidePage() {
                       </div>
                       <div className="space-y-2">
                         {[
-                          { field: "Nom", value: "Jean-Pierre Dupont" },
+                          { field: "Name", value: "Jean-Pierre Dupont" },
                           { field: "Email", value: "jp.dupont@acme.com" },
                           { field: "Telephone", value: "+33612345678" },
                           { field: "Entreprise", value: "Acme" },
@@ -512,9 +512,9 @@ export default function MigrationCrmGuidePage() {
                   <div className="space-y-3 mb-5">
                     {[
                       { tool: "Import CSV natif HubSpot", desc: "L&apos;approche la plus simple. Exportez vos donnees en CSV depuis l&apos;ancien CRM, mappez les colonnes lors de l&apos;import dans HubSpot. Gratuit et integre. Limite a des migrations simples (contacts, entreprises). Ne gere pas les associations complexes ni les activites.", price: "Gratuit", complexity: "Simple", best: "Bases de moins de 5 000 contacts, peu de proprietes custom", color: "#22C55E" },
-                      { tool: "Import2 / Trujay", desc: "Outils SaaS specialises dans la migration CRM. Ils connectent directement les deux CRM et transferent les donnees en preservant les associations, l&apos;historique des activites et les pieces jointes. Interface guidee etape par etape. Gestion du mapping dans l&apos;outil.", price: "A partir de 500 EUR", complexity: "Moyenne", best: "Migrations standard Salesforce/Pipedrive/Zoho vers HubSpot", color: "#4B5EFC" },
-                      { tool: "Make (ex-Integromat) / Zapier", desc: "Outils d&apos;automatisation qui permettent de creer des flux de migration personnalises. Plus flexibles que les outils dedies mais necessitent une configuration manuelle des scenarios. Bons pour les migrations incrementales ou les synchronisations en continu pendant la phase de transition.", price: "A partir de 50 EUR/mois", complexity: "Moyenne-haute", best: "Migrations avec logique conditionnelle, synchronisation bidirectionnelle temporaire", color: "#6C5CE7" },
-                      { tool: "Scripts custom (API)", desc: "Developpement sur mesure de scripts de migration via les APIs des deux CRM. Flexibilite totale sur la logique de transformation, le mapping complexe et les regles de deduplication. Necessite un developpeur et du temps de tests. L&apos;approche la plus fiable pour les migrations complexes.", price: "2 000 a 15 000 EUR", complexity: "Haute", best: "Migrations complexes, gros volumes, logique metier specifique", color: "#FF7A59" },
+                      { tool: "Import2 / Trujay", desc: "Outils SaaS specialises dans la migration CRM. Ils connectent directement les deux CRM et transferent les donnees en preservant les associations, l&apos;historique des activites et les pieces jointes. Interface guidee etape par etape. Gestion du mapping dans l&apos;outil.", price: "A partir de 500 EUR", complexity: "Medium", best: "Migrations standard Salesforce/Pipedrive/Zoho vers HubSpot", color: "#4B5EFC" },
+                      { tool: "Make (ex-Integromat) / Zapier", desc: "Outils d&apos;automatisation qui permettent de creer des flux de migration personnalises. Plus flexibles que les outils dedies mais necessitent une configuration manuelle des scenarios. Bons pour les migrations incrementales ou les synchronisations en continu pendant la phase de transition.", price: "A partir de 50 EUR/mois", complexity: "Medium-haute", best: "Migrations avec logique conditionnelle, synchronisation bidirectionnelle temporaire", color: "#6C5CE7" },
+                      { tool: "Scripts custom (API)", desc: "Developpement sur mesure de scripts de migration via les APIs des deux CRM. Flexibilite totale sur la logique de transformation, le mapping complexe et les regles de deduplication. Necessite un developpeur et du temps de tests. L&apos;approche la plus fiable pour les migrations complexes.", price: "2 000 a 15 000 EUR", complexity: "High", best: "Migrations complexes, gros volumes, logique metier specifique", color: "#FF7A59" },
                     ].map((item) => (
                       <div key={item.tool} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-3 mb-3">
@@ -618,7 +618,7 @@ export default function MigrationCrmGuidePage() {
 
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p><strong className="text-[#111]">Le test ultime :</strong> demandez a vos commerciaux pilotes de retrouver 10 contacts specifiques et de verifier que toutes les informations sont presentes (coordonnees, historique des echanges, deals associes, notes). Si un commercial ne retrouve pas ses donnees en moins de 30 secondes, il y a un probleme.</p>
-                    <p>Prevoyez 3 a 5 jours pour la phase de tests. N&apos;hesitez pas a faire plusieurs iterations de migration de test si necessaire. Il vaut mieux retarder le deploiement d&apos;une semaine que de deployer une base incomplete.</p>
+                    <p>Prevoyez 3 a 5 jours pour la phase de tests. N&apos;hesitez pas a faire plusieurs iterations de migration de test si necessaire. Il vaut mieux overdueer le deploiement d&apos;une semaine que de deployer une base incomplete.</p>
                   </div>
                 </div>
               </section>

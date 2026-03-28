@@ -260,7 +260,7 @@ export default function LemlistArticle() {
                 <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Prise en main et interface</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
-                    <p>L&apos;interface de Lemlist a beaucoup evolue depuis notre premier acces en 2024. Le design est propre, moderne, avec une palette de couleurs vives (beaucoup de violet et d&apos;orange). La navigation laterale est bien organisee avec les sections principales : Campagnes, Leads, Enrichissement, Templates, Rapports et Parametres.</p>
+                    <p>L&apos;interface de Lemlist a beaucoup evolue depuis notre premier acces en 2024. Le design est propre, moderne, avec une palette de couleurs vives (beaucoup de violet et d&apos;orange). La navigation laterale est bien organisee avec les sections principales : Campagnes, Leads, Enrichissement, Templates, Rapports et Settings.</p>
                     <p>La premiere prise en main est agreable. Lemlist propose un onboarding guide qui vous accompagne sur les premieres etapes : connexion d&apos;une boite email, creation d&apos;une premiere campagne, import de contacts. Le processus est fluide et bien pense.</p>
                     <p>En revanche, la courbe d&apos;apprentissage se raidit significativement des qu&apos;on veut utiliser les fonctions avancees. La liquid syntax pour la personnalisation dynamique, les conditions dans les sequences multicanal, le paramétrage de l&apos;enrichissement waterfall, la configuration des landing pages : tout ca demande un vrai temps d&apos;apprentissage. Comptez 2 a 3 semaines pour maitriser l&apos;ensemble des fonctionnalites si vous partez de zero.</p>
                     <p>Un point positif : les ressources educatives sont excellentes. Le blog, les webinaires, la communaute lmsqzy, les templates de campagnes. Lemlist investit beaucoup dans l&apos;education de ses utilisateurs, et ca se voit. C&apos;est probablement le meilleur contenu educatif du marche en cold outbound.</p>
@@ -268,7 +268,7 @@ export default function LemlistArticle() {
                   <div className="mt-5 grid grid-cols-3 gap-3">
                     {[
                       { label: "Temps de setup", value: "2-3h", icon: "horloge" },
-                      { label: "Courbe d'apprentissage", value: "Moyenne-haute", icon: "courbe" },
+                      { label: "Courbe d'apprentissage", value: "Medium-haute", icon: "courbe" },
                       { label: "Ressources educatives", value: "Excellentes", icon: "doc" },
                     ].map((m) => (
                       <div key={m.label} className="text-center p-3 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2]">
@@ -1012,12 +1012,12 @@ export default function LemlistArticle() {
                         { label: "Personnalisation email", lemlist: "Excellent", emelia: "Bon", apollo: "Basique", instantly: "Bon", lgm: "Bon" },
                         { label: "Images dynamiques", lemlist: "Oui", emelia: "Non", apollo: "Non", instantly: "Non", lgm: "Non" },
                         { label: "LinkedIn automation", lemlist: "Oui (Expert)", emelia: "Non", apollo: "Non", instantly: "Non", lgm: "Oui (natif)" },
-                        { label: "Delivrabilite", lemlist: "Bonne", emelia: "Excellente", apollo: "Moyenne", instantly: "Bonne", lgm: "Bonne" },
+                        { label: "Delivrabilite", lemlist: "Bonne", emelia: "Excellente", apollo: "Medium", instantly: "Bonne", lgm: "Bonne" },
                         { label: "Warm-up inclus", lemlist: "Oui (Pro+)", emelia: "Oui", apollo: "Non", instantly: "Oui", lgm: "Oui" },
                         { label: "Base B2B integree", lemlist: "450M", emelia: "Non", apollo: "275M", instantly: "Non", lgm: "Non" },
                         { label: "CRM integre", lemlist: "Non", emelia: "Non", apollo: "Oui", instantly: "Non", lgm: "Non" },
                         { label: "Integration HubSpot", lemlist: "Bon", emelia: "Basique", apollo: "Excellent", instantly: "Basique", lgm: "Bon" },
-                        { label: "Facilite d'utilisation", lemlist: "Moyenne", emelia: "Tres facile", apollo: "Moyenne", instantly: "Facile", lgm: "Complexe" },
+                        { label: "Facilite d'utilisation", lemlist: "Medium", emelia: "Tres facile", apollo: "Medium", instantly: "Facile", lgm: "Complexe" },
                         { label: "Support en francais", lemlist: "Non", emelia: "Oui", apollo: "Non", instantly: "Non", lgm: "Oui" },
                         { label: "API", lemlist: "Oui", emelia: "Oui", apollo: "Oui", instantly: "Oui", lgm: "Limitee" },
                       ].map((row) => (

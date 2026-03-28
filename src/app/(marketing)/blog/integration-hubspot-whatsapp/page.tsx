@@ -263,7 +263,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                       },
                       {
                         name: "WhatsApp Business (app gratuite)",
-                        desc: "L\u2019application gratuite pour les petites entreprises. Profil entreprise, catalogue produits, reponses rapides. Mais toujours pas d\u2019API officielle. Certains outils tiers proposent des workarounds, mais ce n\u2019est pas supporte par Meta et ca peut entrainer la suspension de votre numero.",
+                        desc: "L\u2019application gratuite pour les petites entreprises. Profile entreprise, catalogue produits, reponses rapides. Mais toujours pas d\u2019API officielle. Certains outils tiers proposent des workarounds, mais ce n\u2019est pas supporte par Meta et ca peut entrainer la suspension de votre numero.",
                         usable: false,
                       },
                       {
@@ -328,7 +328,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                       {
                         step: "1",
                         title: "Connecter votre compte WhatsApp Business a HubSpot",
-                        details: "Allez dans Parametres > Boite de reception et service d\u2019assistance > Canaux. Cliquez sur \"Connecter un canal\" puis selectionnez \"WhatsApp\". HubSpot vous redirigera vers Meta pour autoriser la connexion. Connectez-vous avec votre compte Meta Business Manager et selectionnez le numero WhatsApp Business a associer.",
+                        details: "Allez dans Settings > Boite de reception et service d\u2019assistance > Canaux. Cliquez sur \"Connecter un canal\" puis selectionnez \"WhatsApp\". HubSpot vous redirigera vers Meta pour autoriser la connexion. Connectez-vous avec votre compte Meta Business Manager et selectionnez le numero WhatsApp Business a associer.",
                       },
                       {
                         step: "2",
@@ -343,7 +343,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                       {
                         step: "4",
                         title: "Creer vos templates de messages",
-                        details: "WhatsApp impose d\u2019utiliser des modeles de messages pre-approuves pour envoyer des messages proactifs (hors fenetre de 24h). Allez dans Parametres > Boite de reception > WhatsApp > Modeles. Creez vos modeles et soumettez-les a Meta pour approbation. L\u2019approbation prend generalement entre 1 heure et 24 heures.",
+                        details: "WhatsApp impose d\u2019utiliser des modeles de messages pre-approuves pour envoyer des messages proactifs (hors fenetre de 24h). Allez dans Settings > Boite de reception > WhatsApp > Modeles. Creez vos modeles et soumettez-les a Meta pour approbation. L\u2019approbation prend generalement entre 1 heure et 24 heures.",
                       },
                       {
                         step: "5",
@@ -454,8 +454,8 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                     {[
                       {
                         step: "1",
-                        title: "Creer un compte Twilio et activer le canal WhatsApp",
-                        details: "Inscrivez-vous sur twilio.com, creez un projet, puis allez dans Messaging > WhatsApp. Twilio propose un Sandbox pour tester gratuitement avant d\u2019associer votre propre numero. Pour la production, vous devrez soumettre votre Business Profile a Meta via Twilio (le processus est guide).",
+                        title: "Create account Twilio et activer le canal WhatsApp",
+                        details: "Inscrivez-vous sur twilio.com, creez un projet, puis allez dans Messaging > WhatsApp. Twilio propose un Sandbox pour tester gratuitement avant d\u2019associer votre propre numero. Pour la production, vous devrez soumettre votre Business Profilee a Meta via Twilio (le processus est guide).",
                       },
                       {
                         step: "2",

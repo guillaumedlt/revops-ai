@@ -292,11 +292,11 @@ function SaveMessageToDashboard({ blocks, title }: { blocks: any[]; title: strin
     <div ref={ref} className="relative">
       <button onClick={function() { setOpen(!open); }}
         className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] text-[#999] hover:text-[#111] hover:bg-[#F5F5F5] transition-colors">
-        <LayoutDashboard size={12} /> Sauvegarder dans un dashboard
+        <LayoutDashboard size={12} /> Save to Dashboard
       </button>
       {open && (
         <div className="absolute bottom-full right-0 mb-1 w-[220px] rounded-lg border border-[#EAEAEA] bg-white shadow-lg p-2 z-50">
-          <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#BBB]">Sauvegarder dans un dashboard</p>
+          <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#BBB]">Save to Dashboard</p>
           {dashboards.length === 0 ? (
             <p className="px-2 py-2 text-xs text-[#999]">No dashboards yet</p>
           ) : dashboards.map(function(d) {
@@ -308,7 +308,7 @@ function SaveMessageToDashboard({ blocks, title }: { blocks: any[]; title: strin
               </button>
             );
           })}
-          <a href="/dashboards" className="flex items-center gap-1 px-2 py-2 text-xs text-[#999] hover:text-[#111]"><Plus size={12} /> Nouveau dashboard</a>
+          <a href="/dashboards" className="flex items-center gap-1 px-2 py-2 text-xs text-[#999] hover:text-[#111]"><Plus size={12} /> New dashboard</a>
         </div>
       )}
     </div>
@@ -369,7 +369,7 @@ function AssistantMessage({ msg, onSendSuggestion }: { msg: Message; onSendSugge
           <button
             onClick={function() { navigator.clipboard.writeText(msg.content); }}
             className="absolute top-2 right-2 opacity-0 group-hover/msg:opacity-100 h-7 w-7 flex items-center justify-center rounded-lg text-[#BBB] hover:text-[#111] hover:bg-[#F5F5F5] transition-all"
-            title="Copier"
+            title="Copy"
           >
             <Copy size={13} />
           </button>
@@ -385,7 +385,7 @@ function AssistantMessage({ msg, onSendSuggestion }: { msg: Message; onSendSugge
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold text-white bg-[#111] hover:bg-[#333] transition-colors"
               >
                 <CheckSquare size={11} />
-                Ajouter au board
+                Add au board
               </button>
             )}
             {/* Other suggestions */}

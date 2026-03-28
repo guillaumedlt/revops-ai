@@ -1006,7 +1006,7 @@ CONTEXTE :
 - Event : {event_name}
 - Theme : {event_topic}
 - Participation : {attended_live / watched_replay}
-- Profil : {first_name}, {job_title} chez {company}
+- Profile : {first_name}, {job_title} chez {company}
 
 REGLES :
 - Faire reference a un point specifique du webinar

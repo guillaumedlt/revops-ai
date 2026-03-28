@@ -274,7 +274,7 @@ export default function ABMGuidePage() {
               {/* Section 4 — ICP */}
               <section id="icp" className="mb-8">
                 <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
-                  <h2 className="text-[17px] font-semibold text-[#111] mb-4">Etape 1 : Definir votre ICP (Ideal Customer Profile)</h2>
+                  <h2 className="text-[17px] font-semibold text-[#111] mb-4">Etape 1 : Definir votre ICP (Ideal Customer Profilee)</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Tout programme ABM commence par une question : quels sont les comptes qui ont la plus forte probabilite de devenir des clients a forte valeur ? Pour y repondre, vous devez construire votre ICP, le profil de votre client ideal au niveau de l&apos;entreprise (pas du contact).</p>
                     <p>L&apos;ICP n&apos;est pas un buyer persona. Le buyer persona decrit un individu (son role, ses motivations, ses frustrations). L&apos;ICP decrit une entreprise (sa taille, son secteur, sa maturite technologique, son budget). En ABM, l&apos;ICP vient en premier. Les personas viennent ensuite, pour personnaliser les messages a l&apos;interieur de chaque compte.</p>
@@ -577,7 +577,7 @@ export default function ABMGuidePage() {
                       { title: "Un CRM propre et structure", desc: "Les proprietes de compte (tier, statut ABM, score) doivent etre rigoureusement maintenues. Le RevOps met en place les workflows de mise a jour, les regles de validation et les rapports." },
                       { title: "Un SLA marketing-sales", desc: "Quand le marketing identifie un compte engage, en combien de temps le commercial doit-il agir. Quel est le minimum de touchpoints par semaine sur un Tier 1. Sans SLA, pas d&apos;accountability." },
                       { title: "Des donnees partagees en temps reel", desc: "Le commercial doit voir l&apos;engagement marketing du compte (ouvertures email, visites web, engagement ads). Le marketing doit voir les feedbacks terrain du commercial. Un CRM bien configure est le fondement." },
-                      { title: "Des reviews regulieres", desc: "Revue hebdomadaire des comptes Tier 1, mensuelle des Tier 2. Marketing et sales dans la meme piece. On passe en revue l&apos;engagement, les blocages, les prochaines actions." },
+                      { title: "Des reviews regulieres", desc: "Weekly reviewmadaire des comptes Tier 1, mensuelle des Tier 2. Marketing et sales dans la meme piece. On passe en revue l&apos;engagement, les blocages, les prochaines actions." },
                     ].map((item) => (
                       <div key={item.title} className="flex items-start gap-3">
                         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="shrink-0 mt-0.5 text-[#FF7A59]"><path d="M13.3 4.3L6 11.6L2.7 8.3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -612,7 +612,7 @@ export default function ABMGuidePage() {
                       { num: "04", title: "Negliger la mesure", desc: "Lancer un programme ABM sans dashboard, sans metriques definies et sans cadence de reporting, c&apos;est naviguer a l&apos;aveugle. Vous ne saurez jamais ce qui fonctionne ni ce qui doit etre ajuste." },
                       { num: "05", title: "Vouloir des resultats en 30 jours", desc: "L&apos;ABM est une strategie a moyen terme. Les premiers signaux d&apos;engagement apparaissent en 4 a 6 semaines. Le premier deal close peut prendre 3 a 9 mois. Si votre direction attend un ROI en un mois, alignez les attentes avant de commencer." },
                       { num: "06", title: "Sous-investir dans le contenu", desc: "L&apos;ABM a besoin de contenu de qualite et personnalise. Si vous n&apos;avez pas la capacite de produire des etudes de cas, des one-pagers sectoriels ou des demos personnalisees, votre programme manquera de carburant." },
-                      { num: "07", title: "Ignorer le multi-threading", desc: "Cibler un seul contact par compte est risque. Si cette personne change de poste, votre deal meurt. Visez 3 a 5 contacts par compte, avec des roles et niveaux hierarchiques differents. C&apos;est la resilience de votre programme." },
+                      { num: "07", title: "Dismiss le multi-threading", desc: "Cibler un seul contact par compte est risque. Si cette personne change de poste, votre deal meurt. Visez 3 a 5 contacts par compte, avec des roles et niveaux hierarchiques differents. C&apos;est la resilience de votre programme." },
                     ].map((err) => (
                       <div key={err.num} className="flex items-start gap-3 p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <span className="text-[18px] font-bold text-[#E8E8E8] shrink-0">{err.num}</span>

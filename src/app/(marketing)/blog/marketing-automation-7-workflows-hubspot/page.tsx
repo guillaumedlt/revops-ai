@@ -452,7 +452,7 @@ export default function BlogPostPage() {
                     </div>
                     <div>
                       <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-1">Objectif du workflow</p>
-                      <p className="text-[13px] text-[#555] leading-[1.75]">Reduire le temps de premier contact a moins de 5 minutes et garantir une repartition equitable de la charge entre les commerciaux.</p>
+                      <p className="text-[13px] text-[#555] leading-[1.75]">Show less le temps de premier contact a moins de 5 minutes et garantir une repartition equitable de la charge entre les commerciaux.</p>
                     </div>
                   </div>
 

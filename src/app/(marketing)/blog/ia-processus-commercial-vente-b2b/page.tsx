@@ -391,7 +391,7 @@ export default function IAProcessusCommercialArticle() {
                         <p className="text-[9px] text-[#999] mb-1">De : commercial@acme.com</p>
                         <p className="text-[9px] text-[#999] mb-2">Objet : Solution CRM pour votre entreprise</p>
                         <div className="text-[9px] text-[#666] leading-[1.6] space-y-2">
-                          <p>Bonjour [Prenom],</p>
+                          <p>Bonjour [First name],</p>
                           <p>Je me permets de vous contacter car notre solution pourrait vous interesser. Nous aidons les entreprises comme la votre a ameliorer leur processus commercial.</p>
                           <p>Seriez-vous disponible pour un appel de 15 minutes cette semaine ?</p>
                           <p>Cordialement,<br/>Martin Dupont</p>
@@ -1096,7 +1096,7 @@ export default function IAProcessusCommercialArticle() {
                           </div>
                           <div className="rounded bg-[#222] p-2 text-center">
                             <p className="text-[8px] text-[#666]">Sante du deal</p>
-                            <p className="text-[12px] font-bold text-[#FF7A59]">Moyenne</p>
+                            <p className="text-[12px] font-bold text-[#FF7A59]">Medium</p>
                           </div>
                           <div className="rounded bg-[#222] p-2 text-center">
                             <p className="text-[8px] text-[#666]">Closing estime</p>

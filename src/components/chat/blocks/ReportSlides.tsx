@@ -122,11 +122,11 @@ function AddReportToDashboard({ title, sections }: { title: string; sections: Co
   return (
     <div className="relative">
       <button onClick={handleOpen} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#111] text-white hover:bg-[#333] shadow-sm transition-colors">
-        <LayoutDashboard size={12} /> Ajouter au dashboard
+        <LayoutDashboard size={12} /> Add to Dashboard
       </button>
       {open && (
         <div className="absolute bottom-full right-0 mb-1 w-[220px] rounded-lg border border-[#EAEAEA] bg-white shadow-lg p-2 z-50">
-          <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#BBB]">Ajouter au dashboard</p>
+          <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#BBB]">Add to Dashboard</p>
           {dashboards.length === 0 ? (
             <p className="px-2 py-2 text-xs text-[#999]">No dashboards yet</p>
           ) : dashboards.map(function(d) {
@@ -161,7 +161,7 @@ export default function ReportSlides({ title, sections }: ReportSlidesProps) {
 
   return (
     <div className="group/report relative">
-      {/* Ajouter au dashboard button on hover */}
+      {/* Add to Dashboard button on hover */}
       <div className="absolute -top-3 right-0 z-10 opacity-0 group-hover/report:opacity-100 transition-opacity">
         <AddReportToDashboard title={title} sections={sections} />
       </div>

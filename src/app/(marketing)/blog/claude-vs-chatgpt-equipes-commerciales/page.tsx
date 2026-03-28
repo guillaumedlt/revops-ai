@@ -292,7 +292,7 @@ export default function ClaudeVsChatGPTArticle() {
                       <div className="p-3 bg-white">
                         <div className="text-[10px] text-[#555] leading-[1.7] space-y-2">
                           <p><strong className="text-[#111]">Objet :</strong> Question sur votre visibilite pipeline</p>
-                          <p>Bonjour [Prenom],</p>
+                          <p>Bonjour [First name],</p>
                           <p>Je regarde votre profil et je vois que vous gerez une equipe commerciale chez [Entreprise]. Question directe : est-ce que vous avez une vue fiable sur votre taux de conversion par etape de pipeline ?</p>
                           <p>On a construit un outil qui se branche sur HubSpot et donne aux VP Sales les metriques RevOps que le CRM seul ne fournit pas. Pas de dashboards compliques, juste les chiffres qui comptent.</p>
                           <p>Ca vaut 15 minutes de votre temps pour voir si c&apos;est pertinent pour [Entreprise] ?</p>
@@ -314,7 +314,7 @@ export default function ClaudeVsChatGPTArticle() {
                       <div className="p-3 bg-white">
                         <div className="text-[10px] text-[#555] leading-[1.7] space-y-2">
                           <p><strong className="text-[#111]">Objet :</strong> Optimiser la performance de votre equipe commerciale</p>
-                          <p>Bonjour [Prenom],</p>
+                          <p>Bonjour [First name],</p>
                           <p>En tant que VP Sales chez [Entreprise], vous savez a quel point il est crucial d&apos;avoir une visibilite claire sur les performances de votre equipe. C&apos;est exactement ce que notre outil d&apos;analytics RevOps vous apporte.</p>
                           <p>Nous nous connectons directement a HubSpot pour vous fournir des insights actionnables sur votre pipeline, vos taux de conversion et la productivite de vos commerciaux.</p>
                           <p>Seriez-vous disponible pour un echange de 15 minutes cette semaine ?</p>

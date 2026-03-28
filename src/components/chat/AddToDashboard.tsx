@@ -106,7 +106,7 @@ export default function AddToDashboard({ block, blockTitle, messageId, conversat
       <button
         onClick={function () { setOpen(!open); }}
         className="flex h-7 w-7 items-center justify-center rounded-lg text-[#BBB] hover:text-[#111] hover:bg-[#F5F5F5] transition-colors"
-        title="Ajouter au dashboard"
+        title="Add to Dashboard"
       >
         <LayoutDashboard size={14} />
       </button>
@@ -114,7 +114,7 @@ export default function AddToDashboard({ block, blockTitle, messageId, conversat
       {open && (
         <div className="absolute bottom-full right-0 mb-1 w-[220px] rounded-lg border border-[#EAEAEA] bg-white shadow-lg p-2 z-50">
           <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#BBB]">
-            Ajouter au dashboard
+            Add to Dashboard
           </p>
           {dashboards.length === 0 ? (
             <p className="px-2 py-2 text-xs text-[#999]">No dashboards yet</p>
@@ -140,7 +140,7 @@ export default function AddToDashboard({ block, blockTitle, messageId, conversat
             })
           )}
           <a href="/dashboards" className="flex items-center gap-1 px-2 py-2 text-xs text-[#999] hover:text-[#111]">
-            <Plus size={12} /> Nouveau dashboard
+            <Plus size={12} /> New dashboard
           </a>
         </div>
       )}

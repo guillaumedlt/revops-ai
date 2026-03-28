@@ -436,7 +436,7 @@ export default function AcquisitionMarketingGuidePage() {
                       {
                         num: "02",
                         title: "Identifier votre cible (ICP et persona)",
-                        desc: "Qui sont vos clients ideaux ? Definissez votre ICP (Ideal Customer Profile) au niveau de l&apos;entreprise : secteur, taille, maturite, budget. Puis construisez vos buyer personas : role, enjeux, motivations, objections. La precision de votre ciblage determine l&apos;efficacite de tous vos canaux.",
+                        desc: "Qui sont vos clients ideaux ? Definissez votre ICP (Ideal Customer Profilee) au niveau de l&apos;entreprise : secteur, taille, maturite, budget. Puis construisez vos buyer personas : role, enjeux, motivations, objections. La precision de votre ciblage determine l&apos;efficacite de tous vos canaux.",
                       },
                       {
                         num: "03",
@@ -530,7 +530,7 @@ export default function AcquisitionMarketingGuidePage() {
                     {[
                       { num: "01", title: "Se disperser sur trop de canaux", desc: "Vouloir etre present partout en meme temps, c&apos;est etre mediocre partout. Mieux vaut maitriser 2 canaux que survoler 8. Concentrez vos ressources, obtenez des resultats, puis elargissez progressivement." },
                       { num: "02", title: "Ne pas mesurer le CAC par canal", desc: "Connaitre votre CAC global ne suffit pas. Vous devez savoir combien coute un client acquis via Google Ads, via LinkedIn, via l&apos;outbound. Sans cette granularite, vous ne pouvez pas optimiser votre mix." },
-                      { num: "03", title: "Ignorer la qualite des leads", desc: "Generer 500 leads par mois ne sert a rien si 95% ne sont pas qualifies. Le volume flatte l&apos;ego mais c&apos;est le revenu qui compte. Mesurez le taux de conversion lead-to-client, pas juste le nombre de leads." },
+                      { num: "03", title: "Dismiss la qualite des leads", desc: "Generer 500 leads par mois ne sert a rien si 95% ne sont pas qualifies. Le volume flatte l&apos;ego mais c&apos;est le revenu qui compte. Mesurez le taux de conversion lead-to-client, pas juste le nombre de leads." },
                       { num: "04", title: "Pas de tracking en place avant de lancer", desc: "Lancer des campagnes sans tracking, c&apos;est jeter de l&apos;argent par la fenetre. Configurez vos UTM, votre CRM, votre attribution avant de depenser. Chaque lead doit etre tracable jusqu&apos;a sa source." },
                       { num: "05", title: "Copier la strategie d&apos;un concurrent", desc: "Ce qui fonctionne pour une entreprise ne fonctionnera pas forcement pour vous. Votre cible, votre produit, vos ressources et votre marque sont differents. Inspirez-vous, mais testez et adaptez a votre contexte." },
                       { num: "06", title: "Sous-estimer le temps du SEO", desc: "Attendre des resultats SEO en 30 jours, c&apos;est se condamner a l&apos;abandon premature. Le SEO est un investissement a 6-12 mois. Planifiez en consequence et combinez avec des canaux a resultats rapides (ads, outbound) en attendant." },

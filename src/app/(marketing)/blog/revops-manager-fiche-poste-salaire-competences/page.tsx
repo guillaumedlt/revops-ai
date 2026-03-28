@@ -401,7 +401,7 @@ export default function RevOpsManagerFichePostePage() {
 
                   {/* CSS Skills Radar Mockup */}
                   <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
-                    <p className="text-[12px] font-semibold text-[#111] mb-4">Radar de competences -- Profil ideal</p>
+                    <p className="text-[12px] font-semibold text-[#111] mb-4">Radar de competences -- Profile ideal</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
                         { skill: "CRM / Admin", level: 95, color: "#FF7A59" },

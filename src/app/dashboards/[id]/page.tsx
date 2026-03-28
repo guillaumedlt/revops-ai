@@ -73,9 +73,9 @@ function WidgetContent({ widget }: { widget: Widget }) {
     case "scorecard":
       return <ScorecardBlock title="" value={c.value || ""} target={c.target} score={c.score || 0} breakdown={c.breakdown} />;
     case "report":
-      return c.blocks ? <BlockRenderer blocks={c.blocks} /> : <p className="text-xs text-[#BBB]">Rapport vide</p>;
+      return c.blocks ? <BlockRenderer blocks={c.blocks} /> : <p className="text-xs text-[#BBB]">Empty report</p>;
     default:
-      return <p className="text-xs text-[#BBB]">Type inconnu</p>;
+      return <p className="text-xs text-[#BBB]">Unknown widget</p>;
   }
 }
 
@@ -333,16 +333,16 @@ export default function DashboardViewPage() {
         {widgets.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-sm text-[#555] font-medium">
-              Aucun widget
+              No widgets yet
             </p>
             <p className="text-sm text-[#BBB] mt-1">
-              Va dans le chat et utilise le bouton pour epingler des rapports ici.
+              Go to Chat and pin reports here.
             </p>
             <button
               onClick={() => router.push("/chat")}
               className="mt-4 bg-[#111] text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-[#262626] transition-colors"
             >
-              Aller au chat
+              Go to Chat
             </button>
           </div>
         ) : (

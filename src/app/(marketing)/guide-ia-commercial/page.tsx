@@ -288,7 +288,7 @@ Regles :
 - Ne mentionne PAS que tu as "vu" leur profil LinkedIn
 - Maximum 30 mots
 
-Profil : {linkedin_summary}
+Profile : {linkedin_summary}
 Entreprise : {company_name}
 Actualite recente : {recent_news}`}
               </pre>

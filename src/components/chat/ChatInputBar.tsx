@@ -88,7 +88,7 @@ var SLASH_COMMANDS = [
   { command: "/deal", label: "Deal Review", description: "Analyse approfondie d'un deal specifique", icon: "FileText" },
   // Marketing Ops
   { command: "/outreach", label: "Outreach Report", description: "Performance campagnes Lemlist + correlation pipeline", icon: "GitCompare" },
-  { command: "/icp", label: "ICP Analysis", description: "Profil client ideal base sur les deals gagnes", icon: "Search" },
+  { command: "/icp", label: "ICP Analysis", description: "Profile client ideal base sur les deals gagnes", icon: "Search" },
   // RevOps
   { command: "/report", label: "Rapport Complet", description: "Rapport RevOps avec KPIs, charts, recommandations", icon: "FileText" },
   { command: "/audit", label: "Audit CRM", description: "Qualite des donnees, champs manquants, hygiene", icon: "Shield" },
@@ -342,7 +342,7 @@ export default function ChatInputBar({
               onChange={function(e) { setValue(e.target.value); }}
               onKeyDown={handleKeyDown}
               disabled={disabled || uploading}
-              placeholder="Demande a Kairo... (tape / pour les commandes)"
+              placeholder="Ask Kairo anything... (type / for commands)"
               rows={1}
               className="w-full resize-none bg-transparent text-sm text-[#111] placeholder:text-[#BBB] focus:outline-none min-h-[36px] max-h-[200px] py-1"
             />
@@ -361,7 +361,7 @@ export default function ChatInputBar({
                   onClick={function() { setShowConnectors(!showConnectors); }}
                   type="button"
                   className="flex h-8 w-8 items-center justify-center rounded-lg text-[#999] hover:bg-[#F5F5F5] hover:text-[#111] transition-colors shrink-0"
-                  title="Connecteurs"
+                  title="Connectors"
                 >
                   <SlidersHorizontal size={16} />
                 </button>

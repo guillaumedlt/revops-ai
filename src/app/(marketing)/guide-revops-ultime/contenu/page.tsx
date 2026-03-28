@@ -376,7 +376,7 @@ export default function GuideRevOpsContenuPage() {
                   { cat: "2. Processus de vente", pts: "10 pts", items: ["Pipeline stages definis avec criteres objectifs", "Deal stages utilises correctement (pas de deals stagnants)", "Processus de qualification documente (BANT, MEDDIC)", "Cycle de vente moyen mesure et suivi", "Processus de handoff marketing-sales formalise"], flags: "Plus de 40% des deals stagnent dans le meme stage depuis plus de 30 jours", wins: "Definir des criteres de sortie obligatoires par stage" },
                   { cat: "3. Stack technologique", pts: "10 pts", items: ["CRM comme source de verite unique", "Integrations fonctionnelles entre outils cles", "Pas de donnees en double entre systemes", "Automatisations en place (workflows, sequences)", "Documentation technique du stack existante"], flags: "Equipes qui gerent des donnees dans des fichiers Excel paralleles", wins: "Mapper les integrations existantes, identifier les flux casses" },
                   { cat: "4. Alignement des equipes", pts: "10 pts", items: ["Definitions communes MQL/SQL/Opportunity", "SLA marketing-sales en place", "Rituels d\u2019alignement (weekly, monthly review)", "Objectifs communs sur le revenu", "Feedback loop formalise sales vers marketing"], flags: "Marketing et sales n\u2019utilisent pas la meme definition de MQL", wins: "Organiser un atelier de 2h pour aligner les definitions" },
-                  { cat: "5. Reporting et analytics", pts: "10 pts", items: ["Dashboards operationnels pour chaque equipe", "Reporting unifie du funnel (marketing a CS)", "Attribution marketing en place", "Forecasting formalise et suivi", "Metriques de retention et expansion suivies"], flags: "Les chiffres marketing et sales ne coincident pas sur le nombre de leads", wins: "Creer un dashboard funnel unifie dans HubSpot" },
+                  { cat: "5. Reporting et analytics", pts: "10 pts", items: ["Dashboards operationnels pour chaque equipe", "Reporting unifie du funnel (marketing a CS)", "Attribution marketing en place", "Forecasting formalise et suivi", "Metriques de retention et expansion suivies"], flags: "Les chiffres marketing et sales ne coincident pas sur le nombre de leads", wins: "Create Dashboard funnel unifie dans HubSpot" },
                   { cat: "6. Lead management", pts: "10 pts", items: ["Lead scoring implemente et utilise", "Routing automatique des leads", "Temps de reponse aux leads mesure", "Nurturing en place pour les leads non prets", "Processus de recyclage des leads existant"], flags: "Temps de reponse moyen superieur a 24h sur les leads inbound", wins: "Mettre en place un routing automatique avec notification" },
                   { cat: "7. Customer success", pts: "10 pts", items: ["Onboarding client structure", "Health score en place", "Processus de renouvellement formalise", "Upsell/cross-sell identifie et suivi", "Churn predit et anticipe"], flags: "Aucun suivi de l\u2019onboarding, decouvertes de churn au moment du renouvellement", wins: "Creer un pipeline CS avec etapes d\u2019onboarding" },
                   { cat: "8. Gouvernance et adoption", pts: "10 pts", items: ["Responsable RevOps ou equivalent identifie", "Politique d\u2019utilisation du CRM documentee", "Taux d\u2019adoption du CRM superieur a 80%", "Formation reguliere des equipes", "Roadmap RevOps a 90 jours existante"], flags: "Moins de 50% des commerciaux remplissent le CRM correctement", wins: "Nommer un owner RevOps, meme a temps partiel" },
@@ -490,7 +490,7 @@ export default function GuideRevOpsContenuPage() {
               </div>
 
               <p className="text-[14px] text-[#555] leading-[1.8] mb-4">
-                L&apos;Ideal Customer Profile (ICP) est la pierre angulaire de toute strategie RevOps. Sans ICP clair, vos equipes marketing generent des leads non qualifies, vos commerciaux perdent du temps sur des deals sans potentiel, et votre customer success gere des clients qui ne renouvellent pas. Tout commence par la definition precise de votre client ideal.
+                L&apos;Ideal Customer Profilee (ICP) est la pierre angulaire de toute strategie RevOps. Sans ICP clair, vos equipes marketing generent des leads non qualifies, vos commerciaux perdent du temps sur des deals sans potentiel, et votre customer success gere des clients qui ne renouvellent pas. Tout commence par la definition precise de votre client ideal.
               </p>
 
               <h3 className="text-[17px] font-semibold text-[#111] mb-3">Le framework ICP Ceres</h3>
@@ -506,7 +506,7 @@ export default function GuideRevOpsContenuPage() {
                   </div>
                   <div>
                     <p className="text-[15px] font-semibold text-[#111]">Exemple : SaaS B2B en croissance</p>
-                    <p className="text-[11px] text-[#888]">Ideal Customer Profile -- Ceres</p>
+                    <p className="text-[11px] text-[#888]">Ideal Customer Profilee -- Ceres</p>
                   </div>
                 </div>
 
@@ -559,7 +559,7 @@ export default function GuideRevOpsContenuPage() {
                     <ul className="space-y-1.5 text-[#666]">
                       <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-[#22C55E] mt-1.5 shrink-0" />Atteindre les quotas trimestriels</li>
                       <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-[#22C55E] mt-1.5 shrink-0" />Ameliorer la previsibilite du pipeline</li>
-                      <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-[#22C55E] mt-1.5 shrink-0" />Reduire le cycle de vente</li>
+                      <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-[#22C55E] mt-1.5 shrink-0" />Show less le cycle de vente</li>
                       <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-[#22C55E] mt-1.5 shrink-0" />Retenir ses meilleurs commerciaux</li>
                     </ul>
                   </div>
@@ -911,7 +911,7 @@ export default function GuideRevOpsContenuPage() {
                     { err: "Pas de criteres objectifs", desc: "Si le passage d\u2019un stage a l\u2019autre depend du feeling du commercial, votre pipeline n\u2019est pas fiable. Chaque transition doit avoir un critere mesurable." },
                     { err: "Pas de pipeline CS", desc: "Le funnel ne s\u2019arrete pas a la signature. Le pipeline customer success (onboarding, adoption, expansion, renouvellement) est essentiel." },
                     { err: "Ne pas mesurer le temps par stage", desc: "Connaitre le temps moyen a chaque etape permet d\u2019identifier les goulots d\u2019etranglement et de predire le revenu." },
-                    { err: "Ignorer les deals perdus", desc: "Analyser les raisons de perte par stage revele des patterns : pricing, timing, concurrence, bad fit. Ces donnees sont precieuses pour le marketing et le produit." },
+                    { err: "Dismiss les deals perdus", desc: "Analyser les raisons de perte par stage revele des patterns : pricing, timing, concurrence, bad fit. Ces donnees sont precieuses pour le marketing et le produit." },
                   ].map((e, i) => (
                     <div key={i} className="flex items-start gap-3">
                       <span className="w-5 h-5 rounded-full bg-red-500/20 flex items-center justify-center text-[10px] font-bold text-red-400 shrink-0 mt-0.5">{i + 1}</span>
@@ -1270,7 +1270,7 @@ export default function GuideRevOpsContenuPage() {
                   { name: "Pipeline velocity", formula: "(Nb opportunites x Deal size x Win rate) / Cycle de vente", bench: "Variable par industrie", insight: "La metrique la plus complete du RevOps. Mesure le debit du revenu a travers le pipeline." },
                   { name: "Couverture pipeline", formula: "Pipeline total / Objectif CA trimestriel", bench: "3x -- 5x", insight: "Ratio de couverture. Sous 3x en debut de trimestre, le quota est en danger." },
                   { name: "Taux de creation d\u2019opportunites", formula: "Nb nouvelles opportunites / Periode", bench: "Varie selon le modele de vente", insight: "Mesure la capacite a generer de nouvelles affaires. Trend en baisse = probleme en amont du funnel." },
-                  { name: "Age moyen du pipeline", formula: "Moyenne des jours d\u2019ouverture de toutes les opportunites", bench: "Inferieur a 1.5x le cycle de vente moyen", insight: "Si l\u2019age moyen depasse le cycle moyen, des deals zombies polluent votre pipeline." },
+                  { name: "Age moyen du pipeline", formula: "Medium des jours d\u2019ouverture de toutes les opportunites", bench: "Inferieur a 1.5x le cycle de vente moyen", insight: "Si l\u2019age moyen depasse le cycle moyen, des deals zombies polluent votre pipeline." },
                   { name: "Taux de deals stagnants", formula: "Deals sans activite depuis 14 jours / Total des deals ouverts", bench: "Inferieur a 15%", insight: "Les deals stagnants gonflent artificiellement le pipeline et faussent le forecast." },
                 ]},
                 { cat: "Closing", color: "#6C5CE7", metrics: [
@@ -1482,7 +1482,7 @@ export default function GuideRevOpsContenuPage() {
                     <p className="text-[13px] font-semibold text-[#111] mb-2">Semaine 6 : Configuration pipeline</p>
                     <ul className="space-y-1.5 text-[12px] text-[#666]">
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Configurer les stages du pipeline avec les criteres definis en phase 2</li>
-                      <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Ajouter les proprietes obligatoires par stage (BANT, next steps, close date)</li>
+                      <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Add les proprietes obligatoires par stage (BANT, next steps, close date)</li>
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Implementer le scoring dans le CRM (proprietes HubSpot Score)</li>
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Configurer le lead routing automatique (round-robin ou par territoire)</li>
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Creer le pipeline CS (onboarding, adoption, expansion, renouvellement)</li>

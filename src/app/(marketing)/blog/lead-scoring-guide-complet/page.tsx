@@ -246,7 +246,7 @@ export default function LeadScoringGuidePage() {
                         {/* Bottom row */}
                         <div className="grid grid-cols-2 gap-2">
                           <div className="p-4 rounded-lg bg-[#E8E8E8]/40 border border-[#EAEAEA] text-center">
-                            <div className="text-[11px] font-semibold text-[#999] mb-1">Ignorer</div>
+                            <div className="text-[11px] font-semibold text-[#999] mb-1">Dismiss</div>
                             <p className="text-[10px] text-[#BBB] leading-[1.4]">Fit faible + Engagement faible</p>
                             <p className="text-[9px] text-[#CCC] mt-1">Pas votre cible, pas interesse. Aucune action requise.</p>
                           </div>
@@ -270,7 +270,7 @@ export default function LeadScoringGuidePage() {
                 <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Fit scoring : les criteres demographiques</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
-                    <p>Le Fit Score evalue la correspondance entre le lead et votre Ideal Customer Profile (ICP). Il se base sur des criteres statiques, c&apos;est-a-dire des informations qui ne changent pas (ou rarement) dans le temps : la taille de l&apos;entreprise, le secteur d&apos;activite, le poste occupe, la localisation geographique, le budget estime.</p>
+                    <p>Le Fit Score evalue la correspondance entre le lead et votre Ideal Customer Profilee (ICP). Il se base sur des criteres statiques, c&apos;est-a-dire des informations qui ne changent pas (ou rarement) dans le temps : la taille de l&apos;entreprise, le secteur d&apos;activite, le poste occupe, la localisation geographique, le budget estime.</p>
                     <p>L&apos;idee est de repondre a une question simple : independamment de son niveau d&apos;interet, ce lead a-t-il le profil d&apos;un futur client ? Un directeur marketing dans une entreprise SaaS de 100 personnes a un meilleur profil qu&apos;un stagiaire dans une association de 3 personnes, meme si le second visite votre site tous les jours.</p>
                     <p>Pour construire votre Fit Score, analysez vos 20 a 50 meilleurs clients. Quels sont les patterns communs ? Quelle taille d&apos;entreprise, quel secteur, quel role, quel chiffre d&apos;affaires ? Ces patterns deviennent vos criteres de scoring. Chaque critere recoit un nombre de points proportionnel a son importance dans la prediction de la conversion.</p>
                   </div>
@@ -379,7 +379,7 @@ export default function LeadScoringGuidePage() {
 
                   <div className="mt-6 space-y-2">
                     {[
-                      { critere: "Email professionnel = adresse personnelle (gmail, hotmail)", pts: "-10", reason: "Probablement pas un decideur B2B" },
+                      { critere: "Work email = adresse personnelle (gmail, hotmail)", pts: "-10", reason: "Probablement pas un decideur B2B" },
                       { critere: "Entreprise identifiee comme concurrent", pts: "-50", reason: "Disqualification immediate" },
                       { critere: "Poste : etudiant, stagiaire, freelance", pts: "-15", reason: "Hors cible, sauf exception" },
                       { critere: "Desabonnement emails marketing", pts: "-20", reason: "Signal de desinteret explicite" },
@@ -517,7 +517,7 @@ export default function LeadScoringGuidePage() {
                           <p className="text-[10px] text-[#7C98B6]">Propriete par defaut | Score maximum : 100</p>
                         </div>
                         <div className="flex gap-2">
-                          <button className="px-3 py-1.5 rounded text-[11px] font-medium bg-[#FF7A59] text-white">+ Ajouter des criteres</button>
+                          <button className="px-3 py-1.5 rounded text-[11px] font-medium bg-[#FF7A59] text-white">+ Add des criteres</button>
                           <button className="px-3 py-1.5 rounded text-[11px] font-medium border border-[#CBD6E2] text-[#33475B]">Tester le scoring</button>
                         </div>
                       </div>
@@ -577,7 +577,7 @@ export default function LeadScoringGuidePage() {
                   {/* Step by step */}
                   <div className="mt-6 space-y-3">
                     {[
-                      { step: "1", title: "Creer la propriete de scoring", desc: "Dans HubSpot, allez dans Parametres > Proprietes > Proprietes du contact. Cliquez sur Creer une propriete. Type : Score. Nom : HubSpot Score (ou Score personnalise si vous voulez un score dedie). Si vous utilisez deux scores separes (Fit + Engagement), creez deux proprietes distinctes.", color: "#6C5CE7" },
+                      { step: "1", title: "Creer la propriete de scoring", desc: "Dans HubSpot, allez dans Settings > Proprietes > Proprietes du contact. Cliquez sur Creer une propriete. Type : Score. Nom : HubSpot Score (ou Score personnalise si vous voulez un score dedie). Si vous utilisez deux scores separes (Fit + Engagement), creez deux proprietes distinctes.", color: "#6C5CE7" },
                       { step: "2", title: "Configurer les regles positives", desc: "Pour chaque critere de votre grille de scoring, ajoutez une regle positive. HubSpot permet de scorer sur les proprietes du contact, les proprietes de l&apos;entreprise, les soumissions de formulaire, les pages vues, les ouvertures email, et bien d&apos;autres. Associez un nombre de points a chaque regle.", color: "#4B5EFC" },
                       { step: "3", title: "Configurer les regles negatives", desc: "Ajoutez vos criteres de negative scoring : adresses email personnelles, concurrents, desabonnements, inactivite. HubSpot permet de creer des regles basees sur la date de derniere activite pour la decroissance temporelle.", color: "#FF7A59" },
                       { step: "4", title: "Automatiser les actions sur les seuils", desc: "Creez des workflows HubSpot declenches par le score. Quand le score depasse 30 (MQL), le lead entre dans un workflow de nurturing avance. Quand il depasse 50 (SQL), une tache est creee pour le commercial et le lead change de statut de cycle de vie. Quand il depasse 75, une notification urgente est envoyee au commercial.", color: "#22C55E" },

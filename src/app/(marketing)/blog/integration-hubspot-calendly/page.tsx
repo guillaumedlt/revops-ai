@@ -439,7 +439,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
                         steps: [
                           "Envoyer une notification dans le canal Slack #new-meetings",
                           "Inclure le nom du prospect, l\u2019entreprise, le type de rendez-vous, et la date",
-                          "Ajouter un lien direct vers la fiche contact HubSpot",
+                          "Add un lien direct vers la fiche contact HubSpot",
                           "Si le prospect est une entreprise de plus de 50 employes, envoyer aussi au canal #enterprise",
                         ],
                         color: "#611F69",

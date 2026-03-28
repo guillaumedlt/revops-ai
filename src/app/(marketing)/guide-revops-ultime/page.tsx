@@ -20,7 +20,7 @@ const jsonLd = {
 const chapters = [
   { num: "01", title: "Qu\u2019est-ce que le RevOps", desc: "Definition, historique, pourquoi c\u2019est devenu strategique. La difference entre RevOps, Sales Ops et Marketing Ops.", pages: "p. 4-9" },
   { num: "02", title: "Audit de votre situation actuelle", desc: "Notre framework 80 points pour evaluer votre maturite RevOps. Scoring, diagnostic et identification des quick wins.", pages: "p. 10-17" },
-  { num: "03", title: "Definir votre ICP et personas", desc: "Comment construire un Ideal Customer Profile data-driven. Template ICP, buyer personas et segmentation.", pages: "p. 18-23" },
+  { num: "03", title: "Definir votre ICP et personas", desc: "Comment construire un Ideal Customer Profilee data-driven. Template ICP, buyer personas et segmentation.", pages: "p. 18-23" },
   { num: "04", title: "Aligner marketing, sales et CS", desc: "Le SLA marketing-sales, les definitions communes (MQL, SQL), le funnel unifie et les rituels d\u2019alignement.", pages: "p. 24-29" },
   { num: "05", title: "Construire votre funnel", desc: "Definir chaque stage du funnel, les criteres de passage, les taux de conversion cibles et les automations.", pages: "p. 30-35" },
   { num: "06", title: "Lead scoring : fit + engagement", desc: "Mettre en place un scoring qui convertit. Grille de points, seuils MQL/SQL, implementation HubSpot.", pages: "p. 36-41" },
@@ -228,7 +228,7 @@ export default function GuideRevOpsLandingPage() {
                 { title: "Grille de Lead Scoring", desc: "Matrice fit + engagement avec points, seuils et regles. Format Google Sheets.", icon: "grid" },
                 { title: "Checklist Audit RevOps 80 points", desc: "80 points de controle en 8 categories avec scoring automatique. Format Sheets.", icon: "check" },
                 { title: "Dashboard HubSpot (10 rapports)", desc: "10 rapports pre-configures couvrant pipeline, activite et revenue. Importable.", icon: "chart" },
-                { title: "Framework ICP", desc: "Template structure pour definir votre Ideal Customer Profile. Format Notion.", icon: "target" },
+                { title: "Framework ICP", desc: "Template structure pour definir votre Ideal Customer Profilee. Format Notion.", icon: "target" },
                 { title: "Matrice RACI Marketing-Sales", desc: "Qui fait quoi entre marketing et sales. Responsabilites claires. Format Sheets.", icon: "users" },
                 { title: "Plan 90 jours", desc: "Roadmap semaine par semaine avec milestones et KPIs de validation. Format Notion.", icon: "cal" },
               ].map((t) => (

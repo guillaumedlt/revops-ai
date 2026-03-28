@@ -378,7 +378,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                 <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Couche 3 : Enrichissement -- La qualite des donnees a la source</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
-                    <p>Un contact dans votre CRM avec juste un email et un prenom ne vaut pas grand-chose. L&apos;enrichissement consiste a completer automatiquement les fiches contacts et entreprises avec des donnees firmographiques (taille, secteur, CA, technologie utilisee), des donnees de contact (numero de telephone, profil LinkedIn, poste exact), et des signaux d&apos;intent (levee de fonds, recrutement, publication).</p>
+                    <p>Un contact dans votre CRM avec juste un email et un prenom ne vaut pas grand-chose. L&apos;enrichissement consiste type to complete automatiquement les fiches contacts et entreprises avec des donnees firmographiques (taille, secteur, CA, technologie utilisee), des donnees de contact (numero de telephone, profil LinkedIn, poste exact), et des signaux d&apos;intent (levee de fonds, recrutement, publication).</p>
                     <p>L&apos;enrichissement est devenu un enjeu strategique en 2026 pour deux raisons. D&apos;abord, la qualite de votre scoring depend directement de la completude de vos donnees. Un lead scoring base sur des champs vides est un scoring inutile. Ensuite, les outils d&apos;IA generative que vous deploierez dans la couche 6 ne peuvent produire des resultats pertinents que s&apos;ils disposent de donnees riches en entree.</p>
                   </div>
 

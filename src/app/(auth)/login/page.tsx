@@ -24,7 +24,7 @@ export default function LoginPage() {
 
     if (authError) {
       setError(authError.message === "Invalid login credentials"
-        ? "Email ou mot de passe incorrect"
+        ? "Invalid email or password"
         : authError.message);
       setLoading(false);
     } else {
@@ -42,8 +42,8 @@ export default function LoginPage() {
             <div className="h-10 w-10 rounded-lg bg-[#111] flex items-center justify-center mb-6">
               <span className="text-white text-sm font-bold">K</span>
             </div>
-            <h1 className="text-2xl font-bold text-[#111] tracking-tight">Bon retour</h1>
-            <p className="text-sm text-[#999] mt-1">Connecte-toi pour acceder a Kairo</p>
+            <h1 className="text-2xl font-bold text-[#111] tracking-tight">Welcome back</h1>
+            <p className="text-sm text-[#999] mt-1">Sign in to your account</p>
           </div>
 
           {error && (
@@ -60,7 +60,7 @@ export default function LoginPage() {
               />
             </div>
             <div>
-              <label className="block text-[12px] font-medium text-[#555] mb-1.5">Mot de passe</label>
+              <label className="block text-[12px] font-medium text-[#555] mb-1.5">Password</label>
               <input
                 type="password" value={password} onChange={function(e) { setPassword(e.target.value); }}
                 placeholder="••••••••" required minLength={8}
@@ -74,14 +74,14 @@ export default function LoginPage() {
               {loading ? (
                 <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               ) : (
-                <>Se connecter <ArrowRight size={15} /></>
+                <>Sign in <ArrowRight size={15} /></>
               )}
             </button>
           </form>
 
           <p className="mt-8 text-center text-[13px] text-[#BBB]">
-            {"Pas encore de compte ? "}
-            <Link href="/signup" className="text-[#111] font-medium hover:underline">Creer un compte</Link>
+            {"No account yet? "}
+            <Link href="/signup" className="text-[#111] font-medium hover:underline">Create account</Link>
           </p>
         </div>
       </div>
@@ -92,7 +92,7 @@ export default function LoginPage() {
           <div className="h-16 w-16 rounded-lg bg-white/10 flex items-center justify-center mx-auto mb-6">
             <span className="text-white text-2xl font-bold">K</span>
           </div>
-          <h2 className="text-xl font-semibold text-white mb-3">Ton RevOps IA</h2>
+          <h2 className="text-xl font-semibold text-white mb-3">Your AI RevOps</h2>
           <p className="text-sm text-white/50 leading-relaxed max-w-[280px] mx-auto">
             Analyse ta pipeline, detecte les problemes, et prends de meilleures decisions commerciales — propulse par l&apos;IA.
           </p>

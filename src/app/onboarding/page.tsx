@@ -58,9 +58,9 @@ export default function OnboardingPage() {
   }
 
   var suggestions = [
-    { text: "Analyse la sante de ma pipeline", icon: "📊" },
-    { text: "Quel est mon win rate ?", icon: "🎯" },
-    { text: "Quels deals sont en danger ?", icon: "⚠️" },
+    { text: "Analyze my pipeline health", icon: "📊" },
+    { text: "What is my win rate?", icon: "🎯" },
+    { text: "Which deals are at risk?", icon: "⚠️" },
   ];
 
   return (
@@ -75,7 +75,7 @@ export default function OnboardingPage() {
 
       {/* Step indicators */}
       <div className="flex items-center gap-3 mb-12">
-        {["Profil", "CRM", "Premier pas"].map(function(label, i) {
+        {["Profile", "CRM", "First step"].map(function(label, i) {
           return (
             <div key={i} className="flex items-center gap-2">
               <div className={"h-7 w-7 rounded-full flex items-center justify-center text-[11px] font-bold transition-all " + (
@@ -98,10 +98,10 @@ export default function OnboardingPage() {
           <div className="h-14 w-14 rounded-lg bg-[#111] flex items-center justify-center mx-auto mb-6">
             <span className="text-white text-xl font-bold">K</span>
           </div>
-          <h1 className="text-2xl font-bold text-[#111] mb-2 tracking-tight">Bienvenue sur Kairo</h1>
-          <p className="text-sm text-[#999] mb-8">Ton assistant IA RevOps. On configure tout en 2 minutes.</p>
+          <h1 className="text-2xl font-bold text-[#111] mb-2 tracking-tight">Welcome to Kairo</h1>
+          <p className="text-sm text-[#999] mb-8">Your AI RevOps assistant. Setup in 2 minutes.</p>
           <div className="mb-4">
-            <label className="block text-[12px] font-medium text-[#555] mb-1.5 text-left">Ton prenom</label>
+            <label className="block text-[12px] font-medium text-[#555] mb-1.5 text-left">Your first name</label>
             <input
               type="text" value={name}
               onChange={function(e) { setName(e.target.value); }}
@@ -116,7 +116,7 @@ export default function OnboardingPage() {
             disabled={!name.trim() || saving}
             className="w-full h-11 rounded-lg bg-[#111] text-white text-sm font-medium hover:bg-[#262626] disabled:opacity-40 transition-colors flex items-center justify-center gap-2"
           >
-            {saving ? <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <>Continuer <ArrowRight size={15} /></>}
+            {saving ? <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <>Continue <ArrowRight size={15} /></>}
           </button>
         </div>
       )}
@@ -124,22 +124,22 @@ export default function OnboardingPage() {
       {/* Step 1: Connect HubSpot */}
       {step === 1 && (
         <div className="w-full max-w-md text-center">
-          <h1 className="text-2xl font-bold text-[#111] mb-2 tracking-tight">Connecte ton CRM</h1>
-          <p className="text-sm text-[#999] mb-8">Kairo analyse tes donnees HubSpot pour te donner des insights.</p>
+          <h1 className="text-2xl font-bold text-[#111] mb-2 tracking-tight">Connect your CRM</h1>
+          <p className="text-sm text-[#999] mb-8">Kairo needs your HubSpot data to analyze your pipeline.</p>
 
           {hsConnected ? (
             <div className="mb-8 py-6 rounded-lg bg-[#F0FDF4] border border-[#BBF7D0]">
               <div className="h-12 w-12 rounded-full bg-[#22C55E]/20 flex items-center justify-center mx-auto mb-3">
                 <Check size={24} className="text-[#22C55E]" />
               </div>
-              <p className="text-sm font-semibold text-[#22C55E]">HubSpot connecte</p>
+              <p className="text-sm font-semibold text-[#22C55E]">HubSpot connected</p>
             </div>
           ) : (
             <button
               onClick={handleConnectHubspot}
               className="w-full h-12 rounded-lg bg-[#FF7A59] text-white text-sm font-medium hover:bg-[#E5684A] transition-colors flex items-center justify-center gap-2 mb-4"
             >
-              <ExternalLink size={16} /> Connecter HubSpot
+              <ExternalLink size={16} /> Connect HubSpot
             </button>
           )}
 
@@ -147,7 +147,7 @@ export default function OnboardingPage() {
             onClick={function() { setStep(2); }}
             className={"w-full h-11 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2 " + (hsConnected ? "bg-[#111] text-white hover:bg-[#262626]" : "border border-[#EAEAEA] text-[#999] hover:bg-[#FAFAFA]")}
           >
-            {hsConnected ? <>Continuer <ArrowRight size={15} /></> : "Passer pour l'instant"}
+            {hsConnected ? <>Continue <ArrowRight size={15} /></> : "Skip for now"}
           </button>
         </div>
       )}
@@ -158,8 +158,8 @@ export default function OnboardingPage() {
           <div className="h-12 w-12 rounded-lg bg-[#F0FDF4] flex items-center justify-center mx-auto mb-6">
             <Sparkles size={24} className="text-[#22C55E]" />
           </div>
-          <h1 className="text-2xl font-bold text-[#111] mb-2 tracking-tight">{"C'est pret !"}</h1>
-          <p className="text-sm text-[#999] mb-8">Pose ta premiere question a Kairo.</p>
+          <h1 className="text-2xl font-bold text-[#111] mb-2 tracking-tight">{"You're all set!"}</h1>
+          <p className="text-sm text-[#999] mb-8">Try asking Kairo something.</p>
           <div className="space-y-2.5 mb-6">
             {suggestions.map(function(s) {
               return (
@@ -178,7 +178,7 @@ export default function OnboardingPage() {
             onClick={function() { handleFinish(); }}
             className="w-full h-11 rounded-lg bg-[#111] text-white text-sm font-medium hover:bg-[#262626] transition-colors flex items-center justify-center gap-2"
           >
-            Aller sur Kairo <ArrowRight size={15} />
+            Go to Kairo <ArrowRight size={15} />
           </button>
         </div>
       )}

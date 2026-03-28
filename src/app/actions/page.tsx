@@ -19,9 +19,9 @@ interface Action {
 }
 
 var COLUMNS: Array<{ id: Action["status"]; label: string; icon: any; color: string; emptyText: string }> = [
-  { id: "todo", label: "A faire", icon: Circle, color: "#525252", emptyText: "Drop une action ici" },
-  { id: "in_progress", label: "En cours", icon: Clock, color: "#F59E0B", emptyText: "Drag une action ici" },
-  { id: "done", label: "Termine", icon: Check, color: "#22C55E", emptyText: "Rien de fini encore" },
+  { id: "todo", label: "To do", icon: Circle, color: "#525252", emptyText: "Drop an action here" },
+  { id: "in_progress", label: "In progress", icon: Clock, color: "#F59E0B", emptyText: "Drag an action here" },
+  { id: "done", label: "Done", icon: Check, color: "#22C55E", emptyText: "Nothing done yet" },
 ];
 
 var PRIORITY_DOT: Record<string, string> = {
@@ -33,9 +33,9 @@ var PRIORITY_DOT: Record<string, string> = {
 
 var PRIORITY_LABEL: Record<string, string> = {
   urgent: "Urgent",
-  high: "Haute",
-  medium: "Moyenne",
-  low: "Basse",
+  high: "High",
+  medium: "Medium",
+  low: "Low",
 };
 
 var SOURCE_LABELS: Record<string, string> = {
@@ -48,9 +48,9 @@ var SOURCE_LABELS: Record<string, string> = {
 
 function dueLabel(date: string): { text: string; overdue: boolean } {
   var diff = Math.floor((new Date(date).getTime() - Date.now()) / 86400000);
-  if (diff < 0) return { text: Math.abs(diff) + "j retard", overdue: true };
-  if (diff === 0) return { text: "Aujourd'hui", overdue: false };
-  if (diff === 1) return { text: "Demain", overdue: false };
+  if (diff < 0) return { text: Math.abs(diff) + "j overdue", overdue: true };
+  if (diff === 0) return { text: "Today", overdue: false };
+  if (diff === 1) return { text: "Tomorrow", overdue: false };
   return { text: diff + "j", overdue: false };
 }
 
@@ -186,14 +186,14 @@ export default function ActionsPage() {
           <div>
             <h1 className="text-xl font-semibold text-[#111]">Actions</h1>
             <p className="text-[13px] text-[#999] mt-0.5">
-              {todo.length + inProgress.length} active{todo.length + inProgress.length > 1 ? "s" : ""} · {done.length} terminee{done.length > 1 ? "s" : ""}
+              {todo.length + inProgress.length} active{todo.length + inProgress.length > 1 ? "s" : ""} · {done.length} completed{done.length > 1 ? "s" : ""}
             </p>
           </div>
           <button
             onClick={handleAskKairo}
             className="h-9 px-4 rounded-lg text-[12px] font-medium text-[#6366F1] border border-[#C7D2FE] hover:bg-[#EEF2FF] transition-colors flex items-center gap-1.5"
           >
-            <Sparkles size={13} /> Prioriser avec Kairo
+            <Sparkles size={13} /> Prioritize with Kairo
           </button>
         </div>
       </div>
@@ -247,7 +247,7 @@ export default function ActionsPage() {
                           if (e.key === "Enter") handleAdd(col.id);
                           if (e.key === "Escape") { setAddingIn(null); setNewTitle(""); }
                         }}
-                        placeholder="Titre de l'action..."
+                        placeholder="Action title..."
                         className="w-full text-[13px] bg-transparent focus:outline-none text-[#111] placeholder:text-[#C0C0C0]"
                       />
                       <div className="flex items-center justify-between mt-2">
@@ -256,9 +256,9 @@ export default function ActionsPage() {
                           disabled={!newTitle.trim()}
                           className="text-[11px] font-medium text-white bg-[#111] rounded-md px-2.5 py-1 hover:bg-[#333] disabled:opacity-40"
                         >
-                          Ajouter
+                          Add
                         </button>
-                        <button onClick={function() { setAddingIn(null); setNewTitle(""); }} className="text-[11px] text-[#BBB]">Annuler</button>
+                        <button onClick={function() { setAddingIn(null); setNewTitle(""); }} className="text-[11px] text-[#BBB]">Cancel</button>
                       </div>
                     </div>
                   )}

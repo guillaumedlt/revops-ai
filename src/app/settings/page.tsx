@@ -11,8 +11,8 @@ type Tab = "general" | "llm" | "connectors" | "billing";
 const TABS: { id: Tab; label: string }[] = [
   { id: "general", label: "General" },
   { id: "llm", label: "LLM" },
-  { id: "connectors", label: "Connecteurs" },
-  { id: "billing", label: "Facturation" },
+  { id: "connectors", label: "Connectors" },
+  { id: "billing", label: "Billing" },
 ];
 
 interface LlmConfig {
@@ -136,10 +136,10 @@ function BillingTab() {
       <div className="bg-white rounded-lg border border-[#EAEAEA] p-6">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-sm font-semibold text-[#111]">Plan actuel</h2>
+            <h2 className="text-sm font-semibold text-[#111]">Current plan</h2>
             <div className="flex items-center gap-2 mt-1">
               <span className="text-lg font-bold text-[#111]">{planLabels[credits?.plan || "free"] || "Free"}</span>
-              <span className="text-[10px] bg-[#22C55E]/10 text-[#22C55E] font-medium px-2 py-0.5 rounded-full">Actif</span>
+              <span className="text-[10px] bg-[#22C55E]/10 text-[#22C55E] font-medium px-2 py-0.5 rounded-full">Active</span>
             </div>
           </div>
           {credits?.plan !== "free" && (
@@ -151,7 +151,7 @@ function BillingTab() {
         {credits && (
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs text-[#999]">Credits utilises ce mois</span>
+              <span className="text-xs text-[#999]">Credits used this month</span>
               <span className="text-xs font-semibold text-[#111] tabular-nums">{credits.used} / {credits.total}</span>
             </div>
             <div className="h-2.5 bg-[#F0F0F0] rounded-full overflow-hidden">
@@ -163,7 +163,7 @@ function BillingTab() {
                 }}
               />
             </div>
-            <p className="text-[11px] text-[#BBB] mt-1.5">{credits.remaining} credits restants</p>
+            <p className="text-[11px] text-[#BBB] mt-1.5">{credits.remaining} credits remaining</p>
           </div>
         )}
       </div>
@@ -171,8 +171,8 @@ function BillingTab() {
       {/* Upgrade plan */}
       {credits?.plan === "free" && (
         <div className="bg-[#111] rounded-lg p-6 text-white">
-          <h3 className="text-sm font-semibold mb-1">Passe au Pro</h3>
-          <p className="text-xs text-white/60 mb-4">500 credits/mois, alertes proactives, tous les connecteurs, export PDF.</p>
+          <h3 className="text-sm font-semibold mb-1">Upgrade to Pro</h3>
+          <p className="text-xs text-white/60 mb-4">500 credits/mois, proactive alerts, all connectors, PDF export.</p>
           <div className="flex items-center gap-3">
             <button
               onClick={async function() {
@@ -201,7 +201,7 @@ function BillingTab() {
 
       {/* Buy credit packs */}
       <div className="bg-white rounded-lg border border-[#EAEAEA] p-6">
-        <h2 className="text-sm font-semibold text-[#111] mb-1">Acheter des credits</h2>
+        <h2 className="text-sm font-semibold text-[#111] mb-1">Buy credits</h2>
         <p className="text-xs text-[#999] mb-4">Credits bonus ajoutes instantanement. Valides jusqu&apos;a la fin du mois.</p>
         <div className="grid grid-cols-3 gap-3">
           {packs.map(function(pack) {
@@ -235,7 +235,7 @@ function SettingsContent() {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [llmConfig, setLlmConfig] = useState<LlmConfig | null>(null);
-  const [editingKey, setModifieringKey] = useState<string | null>(null);
+  const [editingKey, setEditingKey] = useState<string | null>(null);
   const [keyInput, setKeyInput] = useState("");
   const [hubspotConnected, setHubspotConnected] = useState(false);
   const [hubspotHealthy, setHubspotHealthy] = useState(true);
@@ -331,7 +331,7 @@ function SettingsContent() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ [bodyKey]: keyInput }),
     });
-    setModifieringKey(null);
+    setEditingKey(null);
     setKeyInput("");
     const res = await fetch("/api/settings/llm");
     const json = await res.json();
@@ -531,7 +531,7 @@ function SettingsContent() {
                         Save
                       </button>
                       <button
-                        onClick={() => { setModifieringKey(null); setKeyInput(""); }}
+                        onClick={() => { setEditingKey(null); setKeyInput(""); }}
                         className="text-xs text-[#999]"
                       >
                         Cancel
@@ -539,10 +539,10 @@ function SettingsContent() {
                     </div>
                   ) : (
                     <button
-                      onClick={() => setModifieringKey(provider.id)}
+                      onClick={() => setEditingKey(provider.id)}
                       className="text-xs text-[#999] hover:text-[#111] transition-colors"
                     >
-                      Modifier
+                      Edit
                     </button>
                   )}
                 </div>
@@ -562,7 +562,7 @@ function SettingsContent() {
             var isConnected = (c.id === "hubspot" && hubspotConnected) || (c.id === "notion" && notionConnected) || (c.id === "lemlist" && lemlistConnected);
             var hasError = c.id === "hubspot" && hubspotConnected && !hubspotHealthy;
             var statusText = c.id === "hubspot" && hubspotConnected && !hubspotHealthy
-              ? "Connexion perdue — reconnexion necessaire"
+              ? "Connection lost — reconnect needed"
               : c.id === "hubspot" && hubspotConnected ? "Connected — SSO active"
               : c.id === "notion" && notionConnected ? "Connected — Workspace linked"
               : c.id === "lemlist" && lemlistConnected ? "Connected — API key active"
@@ -601,7 +601,7 @@ function SettingsContent() {
                         disabled={hubspotLoading}
                         className={"text-xs font-medium rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50 " + (hasError ? "text-white bg-[#EF4444] hover:bg-[#DC2626]" : hubspotConnected ? "text-[#999] border border-[#EAEAEA] hover:bg-[#F5F5F5]" : "text-white bg-[#111] hover:bg-[#333]")}
                       >
-                        {hubspotLoading ? "Redirecting..." : hasError ? "Reconnecter" : hubspotConnected ? "Reconnect" : "Connect"}
+                        {hubspotLoading ? "Redirecting..." : hasError ? "Reconnect" : hubspotConnected ? "Reconnect" : "Connect"}
                       </button>
                     ) : c.id === "notion" ? (
                       notionConnected ? (

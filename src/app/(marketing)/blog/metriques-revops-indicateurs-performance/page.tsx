@@ -229,7 +229,7 @@ export default function MetriquesRevopsArticle() {
                           <span className="text-[11px] font-bold text-white bg-[#FF7A59] w-5 h-5 rounded-md flex items-center justify-center">1</span>
                           <h3 className="text-[14px] font-semibold text-[#111]">Customer Acquisition Cost (CAC)</h3>
                         </div>
-                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#FF7A59]/10 text-[#FF7A59]">Critique</span>
+                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#FF7A59]/10 text-[#FF7A59]">Critical</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Cout total pour acquerir un nouveau client, incluant les depenses marketing et commerciales. Le CAC est la metrique fondatrice de toute analyse d&apos;acquisition. Il ne suffit pas de generer du revenu, il faut le generer de maniere rentable. Un CAC qui augmente trimestre apres trimestre sans que le LTV suive est le signe d&apos;un modele qui s&apos;essouffle.</p>
                       <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
@@ -321,9 +321,9 @@ export default function MetriquesRevopsArticle() {
                           <span className="text-[11px] font-bold text-white bg-[#FF7A59] w-5 h-5 rounded-md flex items-center justify-center">5</span>
                           <h3 className="text-[14px] font-semibold text-[#111]">Lead Velocity Rate (LVR)</h3>
                         </div>
-                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#EF4444]/10 text-[#EF4444]">Critique</span>
+                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#EF4444]/10 text-[#EF4444]">Critical</span>
                       </div>
-                      <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Taux de croissance mensuel du nombre de leads qualifies. Le LVR est considere par beaucoup de VCs et de dirigeants SaaS comme le meilleur predicteur de croissance future. Contrairement au MRR qui est un indicateur retarde, le LVR est un indicateur avance. Si votre LVR est positif et constant, votre revenu futur est quasiment assure.</p>
+                      <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Taux de croissance mensuel du nombre de leads qualifies. Le LVR est considere par beaucoup de VCs et de dirigeants SaaS comme le meilleur predicteur de croissance future. Contrairement au MRR qui est un indicateur overduee, le LVR est un indicateur avance. Si votre LVR est positif et constant, votre revenu futur est quasiment assure.</p>
                       <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">LVR = (MQL ce mois - MQL mois precedent) / MQL mois precedent x 100</p>
@@ -349,7 +349,7 @@ export default function MetriquesRevopsArticle() {
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Duree moyenne entre la premiere interaction d&apos;un lead et son passage au statut MQL. Le time to MQL mesure l&apos;efficacite de votre nurturing. Un time to MQL court indique que vos contenus, vos sequences et votre lead scoring fonctionnent bien. Un time to MQL long peut signaler un decalage entre votre contenu et les attentes de votre audience.</p>
                       <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
-                        <p className="text-[13px] font-mono text-[#111] mt-1">Time to MQL = Moyenne(Date MQL - Date de creation du contact)</p>
+                        <p className="text-[13px] font-mono text-[#111] mt-1">Time to MQL = Medium(Date MQL - Date de creation du contact)</p>
                       </div>
                       <div className="flex items-center gap-4 text-[11px]">
                         <div><span className="text-[#999]">Benchmark :</span> <strong className="text-[#111]">Inbound : 7-14 jours | Outbound : 21-45 jours</strong></div>
@@ -404,7 +404,7 @@ export default function MetriquesRevopsArticle() {
                         num: "10",
                         title: "Sales cycle (duree du cycle de vente)",
                         definition: "Duree moyenne entre la creation d&apos;une opportunite et son closing (won ou lost). Le sales cycle impacte directement la pipeline velocity et la predictibilite de votre revenu. Un cycle long immobilise vos commerciaux, reduit leur capacite a traiter de nouveaux deals et complique le forecasting.",
-                        formula: "Sales Cycle = Moyenne(Date closing - Date creation opportunite)",
+                        formula: "Sales Cycle = Medium(Date closing - Date creation opportunite)",
                         benchmark: "SMB : 14-30 jours | Mid-Market : 30-90 jours | Enterprise : 90-180 jours",
                         reveals: "Un cycle qui s&apos;allonge peut signaler des deals mal qualifies qui trainent, un processus de decision client qui se complexifie, ou un manque de pression commerciale. Segmentez par taille de deal et par segment pour identifier les causes.",
                       },
@@ -571,7 +571,7 @@ export default function MetriquesRevopsArticle() {
                         title: "Contraction rate",
                         definition: "Pourcentage de revenu perdu par les clients qui downgrade leur abonnement sans partir completement. La contraction est un signal d&apos;alerte precoce. Les clients qui downgrade sont souvent des futurs churners. C&apos;est une perte de revenu insidieuse car elle ne declenche pas les memes alertes que le churn pur.",
                         formula: "Contraction Rate = Contraction MRR du mois / MRR debut du mois x 100",
-                        benchmark: "Sain : &lt;1% mensuel | Attention : 1-2% | Critique : &gt;2%",
+                        benchmark: "Sain : &lt;1% mensuel | Attention : 1-2% | Critical : &gt;2%",
                         reveals: "Analysez les patterns de contraction. Quelles features les clients cessent-ils d&apos;utiliser avant de downgrade ? Quels segments sont les plus touches ? La contraction est souvent le meilleur feedback produit que vous pouvez obtenir. Chaque downgrade est une conversation a avoir.",
                       },
                       {
@@ -649,9 +649,9 @@ export default function MetriquesRevopsArticle() {
                         num: "26",
                         title: "Time to Value (TTV)",
                         definition: "Duree entre la signature du contrat et le moment ou le client atteint son premier &ldquo;aha moment&rdquo; ou sa premiere valeur tangible. Le time to value est l&apos;indicateur le plus predictif du churn a 90 jours. Plus un client met de temps a percevoir de la valeur, plus la probabilite qu&apos;il churne est elevee.",
-                        formula: "TTV = Moyenne(Date premier milestone atteint - Date de signature)",
+                        formula: "TTV = Medium(Date premier milestone atteint - Date de signature)",
                         benchmark: "Self-service : &lt;24h | SMB : &lt;7 jours | Enterprise : &lt;30 jours",
-                        reveals: "Un TTV qui s&apos;allonge signale un onboarding trop complexe, un produit trop difficile a configurer ou un manque d&apos;accompagnement post-vente. Reduire le TTV de 50% peut avoir un impact plus fort sur le churn que n&apos;importe quelle fonctionnalite produit.",
+                        reveals: "Un TTV qui s&apos;allonge signale un onboarding trop complexe, un produit trop difficile a configurer ou un manque d&apos;accompagnement post-vente. Show less le TTV de 50% peut avoir un impact plus fort sur le churn que n&apos;importe quelle fonctionnalite produit.",
                       },
                     ].map((kpi) => (
                       <div key={kpi.num} className="rounded-lg border border-[#FFF0D0] bg-[#FFFBF0] p-5">

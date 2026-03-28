@@ -14,7 +14,7 @@ type GroupedConversations = { label: string; items: Conversation[] }[];
 function groupByDate(convs: Conversation[]): GroupedConversations {
   var now = new Date(), today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   var yesterday = new Date(today.getTime() - 86400000), weekAgo = new Date(today.getTime() - 7 * 86400000);
-  var g: GroupedConversations = [{ label: "Aujourd'hui", items: [] }, { label: "Hier", items: [] }, { label: "7 derniers jours", items: [] }, { label: "Plus ancien", items: [] }];
+  var g: GroupedConversations = [{ label: "Today", items: [] }, { label: "Yesterday", items: [] }, { label: "Last 7 days", items: [] }, { label: "Older", items: [] }];
   convs.forEach(function(c) { var d = new Date(c.last_message_at || c.created_at); if (d >= today) g[0].items.push(c); else if (d >= yesterday) g[1].items.push(c); else if (d >= weekAgo) g[2].items.push(c); else g[3].items.push(c); });
   return g.filter(function(x) { return x.items.length > 0; });
 }
@@ -74,7 +74,7 @@ export default function ConversationSidebar() {
       <div className="px-3 pt-3 pb-1.5">
         <div className="relative">
           <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#CCC]" />
-          <input ref={searchRef} type="text" value={searchQuery} onChange={function(e) { setSearchQuery(e.target.value); }} placeholder="Rechercher..." className="w-full h-[30px] pl-8 pr-8 text-[12px] rounded border border-[#EAEAEA] bg-white text-[#111] placeholder:text-[#CCC] focus:outline-none focus:border-[#111] transition-colors" />
+          <input ref={searchRef} type="text" value={searchQuery} onChange={function(e) { setSearchQuery(e.target.value); }} placeholder="Search..." className="w-full h-[30px] pl-8 pr-8 text-[12px] rounded border border-[#EAEAEA] bg-white text-[#111] placeholder:text-[#CCC] focus:outline-none focus:border-[#111] transition-colors" />
           {!searchQuery && <kbd className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[8px] text-[#CCC] border border-[#EAEAEA] rounded px-1 py-[1px] font-mono bg-[#FAFAFA]">⌘K</kbd>}
           {searchQuery && <button onClick={function() { setSearchQuery(""); }} className="absolute right-2 top-1/2 -translate-y-1/2 text-[#CCC] hover:text-[#999]"><Plus size={10} className="rotate-45" /></button>}
         </div>
@@ -98,8 +98,8 @@ export default function ConversationSidebar() {
 
       {/* Conversation list */}
       <div className="flex-1 overflow-y-auto px-2">
-        {filtered.length === 0 && !searchQuery && <div className="px-2 py-8 text-center"><MessageSquare size={16} className="text-[#DDD] mx-auto mb-1" /><p className="text-[11px] text-[#CCC]">Aucune conversation</p></div>}
-        {filtered.length === 0 && searchQuery && <p className="px-2 py-4 text-[11px] text-[#CCC] text-center">Aucun resultat</p>}
+        {filtered.length === 0 && !searchQuery && <div className="px-2 py-8 text-center"><MessageSquare size={16} className="text-[#DDD] mx-auto mb-1" /><p className="text-[11px] text-[#CCC]">No conversations yet</p></div>}
+        {filtered.length === 0 && searchQuery && <p className="px-2 py-4 text-[11px] text-[#CCC] text-center">No results</p>}
         {filtered.map(function(group) {
           return (
             <div key={group.label} className="mb-0.5">
@@ -110,7 +110,7 @@ export default function ConversationSidebar() {
                   <div key={conv.id} className="group relative">
                     <button onClick={function() { router.push("/chat/" + conv.id); }}
                       className={"w-full text-left text-[13px] truncate px-2 pr-7 h-[30px] flex items-center rounded transition-colors " + (isActive ? "bg-[#F5F5F5] text-[#111] font-medium" : "text-[#555] hover:bg-[#FAFAFA] hover:text-[#111]")}>
-                      <span className="block truncate">{conv.title || "Nouvelle conversation"}</span>
+                      <span className="block truncate">{conv.title || "New conversation"}</span>
                     </button>
                     <button onClick={function(e) { e.stopPropagation(); handleDelete(conv.id); }}
                       className="absolute right-1 top-1/2 -translate-y-1/2 hidden group-hover:flex h-5 w-5 items-center justify-center rounded text-[#DDD] hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-colors">
@@ -142,7 +142,7 @@ export default function ConversationSidebar() {
         <div className="space-y-[1px]">
           <button onClick={function() { router.push("/settings"); }}
             className="w-full flex items-center gap-2.5 px-1 h-[30px] rounded text-[12px] text-[#999] hover:text-[#111] hover:bg-[#FAFAFA] transition-colors">
-            <Settings size={14} className="text-[#CCC]" /> Parametres
+            <Settings size={14} className="text-[#CCC]" /> Settings
           </button>
         </div>
 
@@ -161,7 +161,7 @@ export default function ConversationSidebar() {
               </div>
               <div className="p-1">
                 <button onClick={function() { setUserMenuOpen(false); handleLogout(); }} className="w-full flex items-center gap-2 px-2 py-1.5 rounded text-[12px] text-[#555] hover:bg-[#FEF2F2] hover:text-[#EF4444] transition-colors">
-                  <LogOut size={13} className="text-[#CCC]" /> Deconnexion
+                  <LogOut size={13} className="text-[#CCC]" /> Log out
                 </button>
               </div>
             </div>

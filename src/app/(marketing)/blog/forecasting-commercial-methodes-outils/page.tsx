@@ -349,7 +349,7 @@ export default function ForecastingCommercialArticle() {
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">On utilise les performances passees pour projeter le futur. Si votre equipe a signe en moyenne 280K EUR par mois sur les 6 derniers mois avec un taux de croissance de 5% MoM, on projette 294K EUR le mois suivant. Cette methode fonctionne bien quand le marche est stable et que l&apos;equipe ne change pas.</p>
                       <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
-                        <p className="text-[13px] font-mono text-[#111] mt-1">Forecast M+1 = Moyenne des 6 derniers mois x (1 + taux croissance MoM)</p>
+                        <p className="text-[13px] font-mono text-[#111] mt-1">Forecast M+1 = Medium des 6 derniers mois x (1 + taux croissance MoM)</p>
                       </div>
                       <div className="grid grid-cols-2 gap-2 text-[11px]">
                         <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
@@ -824,7 +824,7 @@ export default function ForecastingCommercialArticle() {
                         tagColor: "#FF7A59",
                         description: "L&apos;outil natif de HubSpot combine pipeline weighted, categories manuelles et objectifs. Suffisant pour 80% des equipes B2B. Avantage majeur : tout est dans le CRM, pas de sync a gerer. Limitation : pas d&apos;IA predictive et peu de flexibilite dans les modeles de calcul.",
                         ideal: "Equipe de 3 a 20 reps, deja sur HubSpot, besoin standard.",
-                        scores: { precision: "70-85%", automatisation: "Haute", integration: "Native HubSpot", cout: "Inclus Sales Hub Pro (90 EUR/mois/utilisateur)" },
+                        scores: { precision: "70-85%", automatisation: "High", integration: "Native HubSpot", cout: "Inclus Sales Hub Pro (90 EUR/mois/utilisateur)" },
                       },
                       {
                         name: "Clari",

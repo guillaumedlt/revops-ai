@@ -148,16 +148,16 @@ export default function AlertsPage() {
           <div className="h-14 w-14 rounded-lg bg-[#F5F5F5] flex items-center justify-center mx-auto mb-4">
             <Plug size={28} className="text-[#BBB]" />
           </div>
-          <h2 className="text-lg font-semibold text-[#111] mb-2">Connecte HubSpot pour activer les alertes</h2>
+          <h2 className="text-lg font-semibold text-[#111] mb-2">Connect HubSpot to enable alerts</h2>
           <p className="text-sm text-[#999] mb-6">
-            Kairo analyse tes donnees CRM chaque jour et detecte automatiquement les problemes :
-            deals bloques, pipeline insuffisant, win rate en baisse, donnees manquantes...
+            Kairo analyzes your CRM data daily and automatically detects issues:
+            stalled deals, insufficient pipeline, declining win rate, missing data...
           </p>
           <button
             onClick={function() { router.push("/settings?tab=connectors"); }}
             className="bg-[#111] text-white rounded-lg px-5 py-2.5 text-sm font-medium hover:bg-[#262626] transition-colors"
           >
-            Connecter HubSpot
+            Connect HubSpot
           </button>
         </div>
       </div>
@@ -170,7 +170,7 @@ export default function AlertsPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-xl font-semibold text-[#111]">Command Center</h1>
-          <p className="text-sm text-[#999] mt-0.5">Sante de ton CRM, scores et alertes en temps reel.</p>
+          <p className="text-sm text-[#999] mt-0.5">CRM health, scores and alerts in real-time.</p>
         </div>
 
         {/* ═══ SCORES SECTION ═══ */}
@@ -225,7 +225,7 @@ export default function AlertsPage() {
             {/* Recommendations */}
             {scores.domainHealth.recommendations.length > 0 && (
               <div className="mt-4 bg-[#FFFBEB] border border-[#FDE68A] rounded-lg px-5 py-4">
-                <h4 className="text-[12px] font-semibold text-[#92400E] mb-2">Recommandations prioritaires</h4>
+                <h4 className="text-[12px] font-semibold text-[#92400E] mb-2">Priority recommendations</h4>
                 <div className="space-y-1.5">
                   {scores.domainHealth.recommendations.map(function(rec, i) {
                     return (
@@ -254,11 +254,11 @@ export default function AlertsPage() {
           {alerts.length > 0 && (
             <div className="flex items-center gap-2 mb-4">
               <button onClick={function() { setFilter("all"); }} className={"px-3 py-1.5 rounded-lg text-[12px] font-medium border transition-colors " + (filter === "all" ? "bg-[#111] text-white border-[#111]" : "text-[#999] border-[#EAEAEA] hover:border-[#D4D4D4]")}>
-                Tout ({alerts.length})
+                All ({alerts.length})
               </button>
               {critical > 0 && (
                 <button onClick={function() { setFilter("critical"); }} className={"px-3 py-1.5 rounded-lg text-[12px] font-medium border transition-colors " + (filter === "critical" ? "bg-[#EF4444] text-white border-[#EF4444]" : "text-[#EF4444] border-[#FECACA] hover:bg-red-50")}>
-                  Critique ({critical})
+                  Critical ({critical})
                 </button>
               )}
               {warning > 0 && (
@@ -280,8 +280,8 @@ export default function AlertsPage() {
               <div className="h-12 w-12 rounded-lg bg-[#F0FDF4] flex items-center justify-center mx-auto mb-3">
                 <Check size={24} className="text-[#22C55E]" />
               </div>
-              <p className="text-sm font-medium text-[#111]">Aucune alerte active</p>
-              <p className="text-xs text-[#BBB] mt-1">Kairo analyse ton CRM chaque jour. Tout est en ordre.</p>
+              <p className="text-sm font-medium text-[#111]">No active alerts</p>
+              <p className="text-xs text-[#BBB] mt-1">Kairo analyzes your CRM daily. Everything looks good.</p>
             </div>
           )}
 
@@ -312,16 +312,16 @@ export default function AlertsPage() {
                         <p className="text-[13px] text-[#555] leading-relaxed">{alert.description}</p>
                         {alert.ai_suggestion && (
                           <div className="mt-3 px-3 py-2.5 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
-                            <p className="text-[11px] font-medium text-[#BBB] uppercase tracking-wider mb-1">Recommandation Kairo</p>
+                            <p className="text-[11px] font-medium text-[#BBB] uppercase tracking-wider mb-1">Kairo recommendation</p>
                             <p className="text-[12px] text-[#555] leading-relaxed">{alert.ai_suggestion}</p>
                           </div>
                         )}
                         <div className="flex items-center gap-2 mt-3">
                           <button onClick={function() { handleInvestigate(alert); }} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-medium bg-[#111] text-white hover:bg-[#333] transition-colors">
-                            Investiguer <ChevronRight size={11} />
+                            Investigate <ChevronRight size={11} />
                           </button>
                           <button onClick={function() { handleDismiss(alert.id); }} className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] text-[#BBB] hover:text-[#EF4444] hover:bg-red-50 transition-colors">
-                            <X size={11} /> Ignorer
+                            <X size={11} /> Dismiss
                           </button>
                           <span className="text-[10px] text-[#C0C0C0] ml-auto">{timeSince(alert.created_at)}</span>
                         </div>

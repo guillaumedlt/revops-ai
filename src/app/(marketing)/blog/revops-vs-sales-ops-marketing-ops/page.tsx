@@ -695,11 +695,11 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                   {/* Readiness assessment */}
                   <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {[
-                      { signal: "Donnees fragmentees", desc: "Marketing et sales ne s&apos;accordent pas sur les chiffres. Rapports contradictoires en comite.", seuil: "3+ sources de verite differentes", severity: "Critique", color: "#FF7A59" },
+                      { signal: "Donnees fragmentees", desc: "Marketing et sales ne s&apos;accordent pas sur les chiffres. Rapports contradictoires en comite.", seuil: "3+ sources de verite differentes", severity: "Critical", color: "#FF7A59" },
                       { signal: "Equipe en croissance", desc: "Plus de 5 commerciaux, 3 marketeurs, 2 CSMs. Les processus informels ne tiennent plus.", seuil: "10+ personnes en go-to-market", severity: "Eleve", color: "#FF7A59" },
                       { signal: "Funnel complexe", desc: "Cycle de vente multi-touch, nurturing, qualification en etapes, onboarding et renouvellements.", seuil: "Cycle > 30 jours, 5+ touchpoints", severity: "Eleve", color: "#6C5CE7" },
                       { signal: "Stack eclatee", desc: "Plus de 5 outils go-to-market mal integres. Donnees en silo, synchronisation manuelle.", seuil: "5+ outils sans integration native", severity: "Modere", color: "#4B5EFC" },
-                      { signal: "Blame game installe", desc: "Marketing accuse les sales, les sales accusent le marketing. Les reunions sont tendues.", seuil: "Desaccords recurrents", severity: "Critique", color: "#FF7A59" },
+                      { signal: "Blame game installe", desc: "Marketing accuse les sales, les sales accusent le marketing. Les reunions sont tendues.", seuil: "Desaccords recurrents", severity: "Critical", color: "#FF7A59" },
                       { signal: "Churn inexplique", desc: "Perte de clients sans comprendre les causes. Pas de visibilite sur les promesses faites en avant-vente.", seuil: "Churn > 10% annuel sans diagnostic", severity: "Eleve", color: "#6C5CE7" },
                     ].map((item) => (
                       <div key={item.signal} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
