@@ -109,6 +109,31 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  // Load conversation history (last 20 messages for context)
+  var historyMessages: Array<{ role: string; content: string }> = [];
+  if (convId) {
+    const { data: history } = await supabase
+      .from("messages")
+      .select("role, content")
+      .eq("conversation_id", convId)
+      .eq("tenant_id", auth.tenantId)
+      .order("created_at", { ascending: true })
+      .limit(20);
+
+    if (history && history.length > 1) {
+      // Exclude the last message (it's the current one we just inserted)
+      historyMessages = history.slice(0, -1).map(function(m: any) {
+        // Truncate long assistant responses to save tokens (keep first 500 chars)
+        var content = m.content || "";
+        if (m.role === "assistant" && content.length > 500) {
+          // Strip block syntax from history to save tokens
+          content = content.replace(/:::[a-z_]+(\{[^}]*\})?\n[\s\S]*?:::/g, "[bloc visuel]").slice(0, 500) + "...";
+        }
+        return { role: m.role, content: content };
+      });
+    }
+  }
+
   // Get connector tools for this tenant
   const connectorTools = await getToolsForTenant(auth.tenantId);
 
@@ -191,6 +216,7 @@ export async function POST(request: NextRequest) {
             // ── OpenAI with tool calling loop ──
             let oaiMessages: any[] = [
               { role: "system", content: systemPrompt },
+              ...historyMessages,
               { role: "user", content: message },
             ];
             let oaiLoop = true;
@@ -289,7 +315,13 @@ export async function POST(request: NextRequest) {
 
           } else {
             // ── Gemini with tool calling loop ──
-            let gemContents: any[] = [{ role: "user", parts: [{ text: message }] }];
+            // Build Gemini history (user/model alternating)
+            var gemHistory: any[] = [];
+            for (var hi = 0; hi < historyMessages.length; hi++) {
+              var hm = historyMessages[hi];
+              gemHistory.push({ role: hm.role === "assistant" ? "model" : "user", parts: [{ text: hm.content }] });
+            }
+            let gemContents: any[] = [...gemHistory, { role: "user", parts: [{ text: message }] }];
             let gemLoop = true;
 
             while (gemLoop) {
@@ -389,7 +421,10 @@ export async function POST(request: NextRequest) {
         }
 
         // Anthropic provider path (kairo, claude-opus, claude-sonnet, claude-haiku)
-        let messages: Array<{ role: string; content: any }> = [{ role: "user", content: message }];
+        let messages: Array<{ role: string; content: any }> = [
+          ...historyMessages,
+          { role: "user", content: message },
+        ];
         let continueLoop = true;
         let finalText = "";
         let retryAttempt = 0;
