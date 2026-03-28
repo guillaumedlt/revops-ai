@@ -280,7 +280,7 @@ export default function ChatInputBar({
 
   return (
     <div className="relative w-full px-4 pb-4">
-      <div className="mx-auto max-w-2xl w-full">
+      <div className="mx-auto max-w-3xl w-full">
         <div className="relative border border-[#E5E5E5] rounded-2xl bg-white shadow-sm focus-within:ring-1 focus-within:ring-[#D4D4D4] transition-shadow">
           {/* Slash command popover */}
           {showSlash && filteredSlash.length > 0 && (
