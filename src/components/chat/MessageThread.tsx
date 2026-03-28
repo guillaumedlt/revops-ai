@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { RotateCcw, LayoutDashboard, Plus, Check, Copy } from "lucide-react";
+import { RotateCcw, LayoutDashboard, Plus, Check, Copy, BarChart3 } from "lucide-react";
 import BlockRenderer from "./blocks/BlockRenderer";
 import TextBlock from "./blocks/TextBlock";
 import type { ContentBlock } from "@/types/chat-blocks";
@@ -62,10 +62,58 @@ var TOOL_LABELS: Record<string, string> = {
 };
 
 var THINKING_STEPS = [
-  { label: "Analyzing your request...", delay: 0 },
-  { label: "Querying connected tools...", delay: 2000 },
-  { label: "Building response...", delay: 5000 },
+  { label: "Analyse de la demande...", delay: 0 },
+  { label: "Requete aux outils connectes...", delay: 2000 },
+  { label: "Construction de la reponse...", delay: 5000 },
 ];
+
+// Strip :::block{...}\n...::: syntax from streaming text so user sees clean text
+// Returns { cleanText, blockCount, isBuilding }
+function processStreamingText(text: string): { cleanText: string; blockCount: number; isBuilding: boolean } {
+  if (!text.includes(":::")) return { cleanText: text, blockCount: 0, isBuilding: false };
+
+  var blockTypes = "kpi_grid|kpi|chart|table|alert|progress|funnel|comparison|scorecard|report";
+  // Count completed blocks
+  var completedPattern = new RegExp(":::(" + blockTypes + ")(?:\\{[^}]*\\})?\\n[\\s\\S]*?:::", "g");
+  var completed = (text.match(completedPattern) || []).length;
+
+  // Check if there's an unclosed block (currently building)
+  var openPattern = new RegExp(":::(" + blockTypes + ")(?:\\{[^}]*\\})?\\n(?:(?!:::)[\\s\\S])*$");
+  var isBuilding = openPattern.test(text);
+
+  // Remove all block syntax (both completed and in-progress)
+  var cleanText = text
+    .replace(new RegExp(":::(" + blockTypes + ")(?:\\{[^}]*\\})?\\n[\\s\\S]*?:::", "g"), "")  // completed blocks
+    .replace(new RegExp(":::(" + blockTypes + ")(?:\\{[^}]*\\})?\\n[\\s\\S]*$"), "")           // unclosed block
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+
+  return { cleanText, blockCount: completed + (isBuilding ? 1 : 0), isBuilding: isBuilding || completed > 0 };
+}
+
+function BuildingBlocksIndicator({ count }: { count: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 4 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="flex items-center gap-3 mt-3 px-3.5 py-2.5 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]"
+    >
+      <div className="relative h-5 w-5 shrink-0">
+        <div className="absolute inset-0 rounded-md bg-[#6366F1]/10" />
+        <BarChart3 size={13} className="absolute top-1 left-1 text-[#6366F1] animate-pulse" />
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="text-[12px] font-medium text-[#525252]">Construction des visuels...</p>
+        <p className="text-[10px] text-[#A3A3A3]">{count} bloc{count > 1 ? "s" : ""} en cours</p>
+      </div>
+      <div className="flex gap-0.5">
+        <div className="h-1 w-1 rounded-full bg-[#6366F1] animate-bounce" style={{ animationDelay: "0ms" }} />
+        <div className="h-1 w-1 rounded-full bg-[#6366F1] animate-bounce" style={{ animationDelay: "150ms" }} />
+        <div className="h-1 w-1 rounded-full bg-[#6366F1] animate-bounce" style={{ animationDelay: "300ms" }} />
+      </div>
+    </motion.div>
+  );
+}
 
 function PulsingDot() {
   return (
@@ -260,6 +308,33 @@ function ErrorCard({
   );
 }
 
+function StreamingMessage({ streamingText, streamingBlocks, activeTools }: { streamingText: string; streamingBlocks?: ContentBlock[] | null; activeTools: string[] }) {
+  var processed = useMemo(function() { return processStreamingText(streamingText); }, [streamingText]);
+
+  return (
+    <div className="flex gap-3">
+      <KairoAvatar />
+      <div className="flex-1 min-w-0">
+        <div className="w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A]">
+          {activeTools.length > 0 && (
+            <div className="mb-3">
+              <ThinkingIndicator activeTools={activeTools} />
+            </div>
+          )}
+          {streamingBlocks && streamingBlocks.length > 0 ? (
+            <BlockRenderer blocks={streamingBlocks} />
+          ) : (
+            <>
+              {processed.cleanText && <TextBlock text={processed.cleanText} />}
+              {processed.isBuilding && <BuildingBlocksIndicator count={processed.blockCount} />}
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function MessageThread({
   messages,
   streamingText,
@@ -320,23 +395,11 @@ export default function MessageThread({
 
         {/* Streaming / thinking state */}
         {streamingText ? (
-          <div className="flex gap-3">
-            <KairoAvatar />
-            <div className="flex-1 min-w-0">
-              <div className="w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A]">
-                {activeTools.length > 0 && (
-                  <div className="mb-3">
-                    <ThinkingIndicator activeTools={activeTools} />
-                  </div>
-                )}
-                {streamingBlocks && streamingBlocks.length > 0 ? (
-                  <BlockRenderer blocks={streamingBlocks} />
-                ) : (
-                  <TextBlock text={streamingText} />
-                )}
-              </div>
-            </div>
-          </div>
+          <StreamingMessage
+            streamingText={streamingText}
+            streamingBlocks={streamingBlocks}
+            activeTools={activeTools}
+          />
         ) : isThinking && !error ? (
           <div className="flex gap-3">
             <KairoAvatar />
