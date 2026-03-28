@@ -99,7 +99,7 @@ export default function OnboardingPage() {
             <span className="text-white text-xl font-bold">K</span>
           </div>
           <h1 className="text-2xl font-bold text-[#111] mb-2 tracking-tight">Welcome to Kairo</h1>
-          <p className="text-sm text-[#999] mb-8">Your AI RevOps assistant. Setup in 2 minutes.</p>
+          <p className="text-[13px] text-[#999] mb-8">Your AI RevOps assistant. Setup in 2 minutes.</p>
           <div className="mb-4">
             <label className="block text-[12px] font-medium text-[#555] mb-1.5 text-left">Your first name</label>
             <input
@@ -107,14 +107,14 @@ export default function OnboardingPage() {
               onChange={function(e) { setName(e.target.value); }}
               onKeyDown={function(e) { if (e.key === "Enter") handleSaveName(); }}
               placeholder="Guillaume"
-              className="w-full h-12 px-4 text-sm rounded-lg border border-[#EAEAEA] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent transition-shadow"
+              className="w-full h-12 px-4 text-[13px] rounded-lg border border-[#EAEAEA] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent transition-shadow"
               autoFocus
             />
           </div>
           <button
             onClick={handleSaveName}
             disabled={!name.trim() || saving}
-            className="w-full h-11 rounded-lg bg-[#111] text-white text-sm font-medium hover:bg-[#262626] disabled:opacity-40 transition-colors flex items-center justify-center gap-2"
+            className="w-full h-11 rounded-lg bg-[#111] text-white text-[13px] font-medium hover:bg-[#262626] disabled:opacity-40 transition-colors flex items-center justify-center gap-2"
           >
             {saving ? <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <>Continue <ArrowRight size={15} /></>}
           </button>
@@ -125,19 +125,19 @@ export default function OnboardingPage() {
       {step === 1 && (
         <div className="w-full max-w-md text-center">
           <h1 className="text-2xl font-bold text-[#111] mb-2 tracking-tight">Connect your CRM</h1>
-          <p className="text-sm text-[#999] mb-8">Kairo needs your HubSpot data to analyze your pipeline.</p>
+          <p className="text-[13px] text-[#999] mb-8">Kairo needs your HubSpot data to analyze your pipeline.</p>
 
           {hsConnected ? (
             <div className="mb-8 py-6 rounded-lg bg-[#F0FDF4] border border-[#BBF7D0]">
               <div className="h-12 w-12 rounded-full bg-[#22C55E]/20 flex items-center justify-center mx-auto mb-3">
                 <Check size={24} className="text-[#22C55E]" />
               </div>
-              <p className="text-sm font-semibold text-[#22C55E]">HubSpot connected</p>
+              <p className="text-[13px] font-semibold text-[#22C55E]">HubSpot connected</p>
             </div>
           ) : (
             <button
               onClick={handleConnectHubspot}
-              className="w-full h-12 rounded-lg bg-[#FF7A59] text-white text-sm font-medium hover:bg-[#E5684A] transition-colors flex items-center justify-center gap-2 mb-4"
+              className="w-full h-12 rounded-lg bg-[#FF7A59] text-white text-[13px] font-medium hover:bg-[#E5684A] transition-colors flex items-center justify-center gap-2 mb-4"
             >
               <ExternalLink size={16} /> Connect HubSpot
             </button>
@@ -145,7 +145,7 @@ export default function OnboardingPage() {
 
           <button
             onClick={function() { setStep(2); }}
-            className={"w-full h-11 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2 " + (hsConnected ? "bg-[#111] text-white hover:bg-[#262626]" : "border border-[#EAEAEA] text-[#999] hover:bg-[#FAFAFA]")}
+            className={"w-full h-11 rounded-lg text-[13px] font-medium transition-colors flex items-center justify-center gap-2 " + (hsConnected ? "bg-[#111] text-white hover:bg-[#262626]" : "border border-[#EAEAEA] text-[#999] hover:bg-[#FAFAFA]")}
           >
             {hsConnected ? <>Continue <ArrowRight size={15} /></> : "Skip for now"}
           </button>
@@ -159,14 +159,14 @@ export default function OnboardingPage() {
             <Sparkles size={24} className="text-[#22C55E]" />
           </div>
           <h1 className="text-2xl font-bold text-[#111] mb-2 tracking-tight">{"You're all set!"}</h1>
-          <p className="text-sm text-[#999] mb-8">Try asking Kairo something.</p>
+          <p className="text-[13px] text-[#999] mb-8">Try asking Kairo something.</p>
           <div className="space-y-2.5 mb-6">
             {suggestions.map(function(s) {
               return (
                 <button
                   key={s.text}
                   onClick={function() { handleFinish(s.text); }}
-                  className="w-full h-12 rounded-lg border border-[#EAEAEA] text-sm text-[#555] hover:bg-[#FAFAFA] hover:border-[#D4D4D4] hover:text-[#111] transition-all flex items-center gap-3 px-4"
+                  className="w-full h-12 rounded-lg border border-[#EAEAEA] text-[13px] text-[#555] hover:bg-[#FAFAFA] hover:border-[#D4D4D4] hover:text-[#111] transition-all flex items-center gap-3 px-4"
                 >
                   <span className="text-base">{s.icon}</span>
                   <span>{s.text}</span>
@@ -176,7 +176,7 @@ export default function OnboardingPage() {
           </div>
           <button
             onClick={function() { handleFinish(); }}
-            className="w-full h-11 rounded-lg bg-[#111] text-white text-sm font-medium hover:bg-[#262626] transition-colors flex items-center justify-center gap-2"
+            className="w-full h-11 rounded-lg bg-[#111] text-white text-[13px] font-medium hover:bg-[#262626] transition-colors flex items-center justify-center gap-2"
           >
             Go to Kairo <ArrowRight size={15} />
           </button>

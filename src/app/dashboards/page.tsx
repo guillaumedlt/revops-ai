@@ -26,7 +26,7 @@ function CreateModal({ onClose, onCreate }: { onClose: () => void; onCreate: (na
 
   return (
     <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
+      <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-[#111]">Create Dashboard</h2>
           <button onClick={onClose} className="text-[#BBB] hover:text-[#111]">
@@ -35,34 +35,34 @@ function CreateModal({ onClose, onCreate }: { onClose: () => void; onCreate: (na
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-[#555] mb-1">Name</label>
+            <label className="block text-[13px] font-medium text-[#555] mb-1">Name</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Weekly Pipeline Review"
               autoFocus
-              className="w-full h-10 px-3 text-sm rounded-lg border border-[#EAEAEA] bg-white text-[#111] placeholder:text-[#BBB] focus:outline-none focus:ring-1 focus:ring-[#111]"
+              className="w-full h-10 px-3 text-[13px] rounded-lg border border-[#EAEAEA] bg-white text-[#111] placeholder:text-[#BBB] focus:outline-none focus:ring-1 focus:ring-[#111]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#555] mb-1">Description (optional)</label>
+            <label className="block text-[13px] font-medium text-[#555] mb-1">Description (optional)</label>
             <input
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="What is this dashboard for?"
-              className="w-full h-10 px-3 text-sm rounded-lg border border-[#EAEAEA] bg-white text-[#111] placeholder:text-[#BBB] focus:outline-none focus:ring-1 focus:ring-[#111]"
+              className="w-full h-10 px-3 text-[13px] rounded-lg border border-[#EAEAEA] bg-white text-[#111] placeholder:text-[#BBB] focus:outline-none focus:ring-1 focus:ring-[#111]"
             />
           </div>
           <div className="flex justify-end gap-2 pt-2">
-            <button type="button" onClick={onClose} className="px-4 py-2 text-sm text-[#555] hover:bg-[#F5F5F5] rounded-lg">
+            <button type="button" onClick={onClose} className="px-4 py-2 text-[13px] text-[#555] hover:bg-[#F5F5F5] rounded-lg">
               Cancel
             </button>
             <button
               type="submit"
               disabled={!name.trim() || loading}
-              className="bg-[#111] text-white rounded-lg px-4 py-2 text-sm font-medium disabled:opacity-50 hover:bg-[#262626] transition-colors"
+              className="bg-[#111] text-white rounded-lg px-4 py-2 text-[13px] font-medium disabled:opacity-50 hover:bg-[#262626] transition-colors"
             >
               {loading ? "Creating..." : "Create"}
             </button>
@@ -141,11 +141,11 @@ export default function DashboardsPage() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-xl font-semibold text-[#111]">Dashboards</h1>
-            <p className="text-sm text-[#999] mt-0.5">Pin reports and metrics from chat into custom dashboards.</p>
+            <p className="text-[13px] text-[#999] mt-0.5">Pin reports and metrics from chat into custom dashboards.</p>
           </div>
           <button
             onClick={() => setShowCreate(true)}
-            className="bg-[#111] text-white rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-1.5 hover:bg-[#262626] transition-colors"
+            className="bg-[#111] text-white rounded-lg px-4 py-2 text-[13px] font-medium flex items-center gap-1.5 hover:bg-[#262626] transition-colors"
           >
             <Plus size={16} />
             Create Dashboard
@@ -158,8 +158,8 @@ export default function DashboardsPage() {
             <div className="h-12 w-12 rounded-lg bg-[#F5F5F5] flex items-center justify-center mx-auto mb-3">
               <LayoutDashboard size={24} className="text-[#BBB]" />
             </div>
-            <p className="text-sm text-[#555] font-medium">No dashboards yet</p>
-            <p className="text-sm text-[#BBB] mt-1">Create one to start pinning reports.</p>
+            <p className="text-[13px] text-[#555] font-medium">No dashboards yet</p>
+            <p className="text-[13px] text-[#BBB] mt-1">Create one to start pinning reports.</p>
           </div>
         ) : (
           <div className="grid grid-cols-3 gap-4">
@@ -184,7 +184,7 @@ export default function DashboardsPage() {
                   </button>
                   <h3 className="text-base font-medium text-[#111] pr-6">{d.name}</h3>
                   {d.description && (
-                    <p className="text-sm text-[#999] mt-1 line-clamp-2">{d.description}</p>
+                    <p className="text-[13px] text-[#999] mt-1 line-clamp-2">{d.description}</p>
                   )}
                   <p className="text-xs text-[#BBB] mt-3">
                     {d.widget_count} widget{d.widget_count !== 1 ? "s" : ""} &middot; {formatDate(d.updated_at)}

@@ -136,7 +136,7 @@ function BillingTab() {
       <div className="bg-white rounded-lg border border-[#EAEAEA] p-6">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-sm font-semibold text-[#111]">Current plan</h2>
+            <h2 className="text-[13px] font-semibold text-[#111]">Current plan</h2>
             <div className="flex items-center gap-2 mt-1">
               <span className="text-lg font-bold text-[#111]">{planLabels[credits?.plan || "free"] || "Free"}</span>
               <span className="text-[10px] bg-[#22C55E]/10 text-[#22C55E] font-medium px-2 py-0.5 rounded-full">Active</span>
@@ -171,7 +171,7 @@ function BillingTab() {
       {/* Upgrade plan */}
       {credits?.plan === "free" && (
         <div className="bg-[#111] rounded-lg p-6 text-white">
-          <h3 className="text-sm font-semibold mb-1">Upgrade to Pro</h3>
+          <h3 className="text-[13px] font-semibold mb-1">Upgrade to Pro</h3>
           <p className="text-xs text-white/60 mb-4">500 credits/mois, proactive alerts, all connectors, PDF export.</p>
           <div className="flex items-center gap-3">
             <button
@@ -201,7 +201,7 @@ function BillingTab() {
 
       {/* Buy credit packs */}
       <div className="bg-white rounded-lg border border-[#EAEAEA] p-6">
-        <h2 className="text-sm font-semibold text-[#111] mb-1">Buy credits</h2>
+        <h2 className="text-[13px] font-semibold text-[#111] mb-1">Buy credits</h2>
         <p className="text-xs text-[#999] mb-4">Credits bonus ajoutes instantanement. Valides jusqu&apos;a la fin du mois.</p>
         <div className="grid grid-cols-3 gap-3">
           {packs.map(function(pack) {
@@ -217,7 +217,7 @@ function BillingTab() {
                 )}
                 <p className="text-lg font-bold text-[#111]">{pack.credits}</p>
                 <p className="text-[10px] text-[#BBB] mb-2">credits</p>
-                <p className="text-sm font-semibold text-[#111]">{pack.price} EUR</p>
+                <p className="text-[13px] font-semibold text-[#111]">{pack.price} EUR</p>
                 <p className="text-[10px] text-[#BBB]">{(pack.price / pack.credits * 100).toFixed(1)} c/credit</p>
               </button>
             );
@@ -401,7 +401,7 @@ function SettingsContent() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-xl font-semibold text-[#111]">Settings</h1>
-        <a href="/chat" className="text-sm text-[#999] hover:text-[#111] transition-colors">
+        <a href="/chat" className="text-[13px] text-[#999] hover:text-[#111] transition-colors">
           Back to chat
         </a>
       </div>
@@ -413,7 +413,7 @@ function SettingsContent() {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={
-              "px-4 py-2.5 text-sm transition-colors -mb-px " +
+              "px-4 py-2.5 text-[13px] transition-colors -mb-px " +
               (activeTab === tab.id
                 ? "text-[#111] font-medium border-b-2 border-[#111]"
                 : "text-[#999] hover:text-[#111]")
@@ -428,22 +428,22 @@ function SettingsContent() {
       {activeTab === "general" && (
         <div className="space-y-6">
           <div className="bg-white rounded-lg border border-[#EAEAEA] p-6 space-y-4">
-            <h2 className="text-sm font-medium text-[#111]">Account</h2>
+            <h2 className="text-[13px] font-medium text-[#111]">Account</h2>
             <div className="space-y-3">
               <div>
                 <label className="text-xs text-[#999]">Email</label>
-                <p className="text-sm text-[#111] mt-0.5">{userEmail}</p>
+                <p className="text-[13px] text-[#111] mt-0.5">{userEmail}</p>
               </div>
               <div>
                 <label className="text-xs text-[#999]">Name</label>
-                <p className="text-sm text-[#111] mt-0.5">{userName || "Not set"}</p>
+                <p className="text-[13px] text-[#111] mt-0.5">{userName || "Not set"}</p>
               </div>
             </div>
           </div>
 
           <button
             onClick={handleLogout}
-            className="px-4 py-2 text-sm rounded-lg border border-[#EAEAEA] text-[#999] hover:text-red-600 hover:border-red-200 transition-colors"
+            className="px-4 py-2 text-[13px] rounded-lg border border-[#EAEAEA] text-[#999] hover:text-red-600 hover:border-red-200 transition-colors"
           >
             Log out
           </button>
@@ -454,7 +454,7 @@ function SettingsContent() {
       {activeTab === "llm" && (
         <div className="space-y-6">
           <div className="bg-white rounded-lg border border-[#EAEAEA] p-6 space-y-4">
-            <h2 className="text-sm font-medium text-[#111]">Default model</h2>
+            <h2 className="text-[13px] font-medium text-[#111]">Default model</h2>
             <p className="text-xs text-[#999]">Choose which model Kairo uses by default</p>
             <div className="space-y-1">
               {MODELS.map((model) => {
@@ -472,7 +472,7 @@ function SettingsContent() {
                       <ProviderIcon provider={model.provider} size={18} />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className={"text-sm " + (isSelected ? "font-medium text-[#111]" : "text-[#555]")}>{model.label}</p>
+                      <p className={"text-[13px] " + (isSelected ? "font-medium text-[#111]" : "text-[#555]")}>{model.label}</p>
                       <p className="text-[11px] text-[#BBB]">{model.description}</p>
                     </div>
                     {isSelected && (
@@ -485,7 +485,7 @@ function SettingsContent() {
           </div>
 
           <div className="bg-white rounded-lg border border-[#EAEAEA] p-6 space-y-4">
-            <h2 className="text-sm font-medium text-[#111]">API Keys</h2>
+            <h2 className="text-[13px] font-medium text-[#111]">API Keys</h2>
             <p className="text-xs text-[#999]">
               Optional — if not configured, Kairo platform keys will be used
             </p>
@@ -505,7 +505,7 @@ function SettingsContent() {
                       <ProviderIcon provider={provider.provider} size={20} />
                     </div>
                     <div>
-                      <p className="text-sm text-[#111] font-medium">{provider.name}</p>
+                      <p className="text-[13px] text-[#111] font-medium">{provider.name}</p>
                       <p className="text-xs text-[#999] mt-0.5">
                         {config?.configured ? (
                           <span className="text-green-600">{"Connected — ****" + config.last4}</span>
@@ -576,7 +576,7 @@ function SettingsContent() {
                     <img src={c.logo} alt="" className="h-6 w-6 rounded" />
                     <div>
                       <div className="flex items-center gap-2">
-                        <p className="text-sm font-medium text-[#111]">{c.name}</p>
+                        <p className="text-[13px] font-medium text-[#111]">{c.name}</p>
                         {c.toolCount > 0 && (
                           <span className="text-[10px] bg-[#F5F5F5] text-[#999] px-1.5 py-0.5 rounded-full">{c.toolCount} tools</span>
                         )}

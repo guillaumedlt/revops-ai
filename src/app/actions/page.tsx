@@ -237,7 +237,7 @@ export default function ActionsPage() {
                 <div className={"flex-1 rounded-lg border-2 border-dashed p-2 space-y-2 overflow-y-auto transition-colors " + (isOver ? "border-[#6366F1] bg-[#EEF2FF]" : "border-transparent bg-[#FAFAFA]")}>
                   {/* Quick add inline */}
                   {addingIn === col.id && (
-                    <div className="bg-white rounded-lg border border-[#EAEAEA] p-2.5 shadow-sm">
+                    <div className="bg-white rounded-lg border border-[#EAEAEA] p-2.5">
                       <input
                         ref={addInputRef}
                         type="text"

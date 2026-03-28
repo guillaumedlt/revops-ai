@@ -73,14 +73,14 @@ export default function IcpPage() {
         <div className="w-full max-w-md text-center">
           <div className="h-14 w-14 rounded-lg bg-[#111] flex items-center justify-center mx-auto mb-5"><Target size={24} className="text-white" /></div>
           <h1 className="text-2xl font-bold text-[#111] mb-2">Build your ICP</h1>
-          <p className="text-sm text-[#999] mb-8">Enter your company website and Kairo AI will analyze your business to define your Ideal Customer Profilee</p>
+          <p className="text-[13px] text-[#999] mb-8">Enter your company website and Kairo AI will analyze your business to define your Ideal Customer Profilee</p>
           <div className="relative mb-4">
             <Globe size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#BBB]" />
             <input type="text" value={input} onChange={function(e) { setInput(e.target.value); setError(null); }} onKeyDown={function(e) { if (e.key === "Enter") handleSubmit(); }}
-              placeholder="yourcompany.com or you@company.com" className="w-full h-12 pl-11 pr-4 text-sm rounded-lg border border-[#EAEAEA] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent" autoFocus />
+              placeholder="yourcompany.com or you@company.com" className="w-full h-12 pl-11 pr-4 text-[13px] rounded-lg border border-[#EAEAEA] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent" autoFocus />
           </div>
-          {error && <p className="text-sm text-[#EF4444] mb-4">{error}</p>}
-          <button onClick={handleSubmit} disabled={loading || !input.trim()} className="w-full h-11 rounded-lg bg-[#111] text-white text-sm font-medium hover:bg-[#333] disabled:opacity-40 transition-colors flex items-center justify-center gap-2">
+          {error && <p className="text-[13px] text-[#EF4444] mb-4">{error}</p>}
+          <button onClick={handleSubmit} disabled={loading || !input.trim()} className="w-full h-11 rounded-lg bg-[#111] text-white text-[13px] font-medium hover:bg-[#333] disabled:opacity-40 transition-colors flex items-center justify-center gap-2">
             <Search size={16} /> Analyze & Generate ICP
           </button>
         </div>
@@ -94,7 +94,7 @@ export default function IcpPage() {
         <div className="text-center">
           <div className="h-12 w-12 border-2 border-[#EAEAEA] border-t-[#111] rounded-full animate-spin mx-auto mb-6" />
           <h2 className="text-lg font-semibold text-[#111] mb-3">Analyzing your company...</h2>
-          <div className="space-y-1.5 text-sm text-[#999]">
+          <div className="space-y-1.5 text-[13px] text-[#999]">
             <p>Researching your business</p>
             <p>Identifying target market</p>
             <p>Building ideal customer profile</p>
@@ -115,9 +115,9 @@ export default function IcpPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl font-bold text-[#111]">Ideal Customer Profilee</h1>
-            <p className="text-sm text-[#999] mt-1">AI-generated from company analysis</p>
+            <p className="text-[13px] text-[#999] mt-1">AI-generated from company analysis</p>
           </div>
-          <button onClick={function() { setStep("input"); setInput(""); }} className="flex items-center gap-2 px-4 h-9 rounded-lg border border-[#EAEAEA] text-sm text-[#555] hover:bg-[#F5F5F5] transition-colors">
+          <button onClick={function() { setStep("input"); setInput(""); }} className="flex items-center gap-2 px-4 h-9 rounded-lg border border-[#EAEAEA] text-[13px] text-[#555] hover:bg-[#F5F5F5] transition-colors">
             <RefreshCw size={14} /> Regenerate
           </button>
         </div>
@@ -128,18 +128,18 @@ export default function IcpPage() {
             {co.favicon && <img src={co.favicon} alt="" className="h-11 w-11 rounded-lg bg-white p-1.5" />}
             <div className="flex-1">
               <h2 className="text-lg font-semibold text-white">{co.name || co.domain}</h2>
-              <p className="text-sm text-white/40">{co.domain}</p>
+              <p className="text-[13px] text-white/40">{co.domain}</p>
             </div>
             {co.estimatedSize && <span className="px-3 py-1 rounded-full bg-white/10 text-xs text-white/60">{co.estimatedSize} employees</span>}
           </div>
-          {co.description && <p className="text-sm text-white/60 mb-4 leading-relaxed">{co.description}</p>}
+          {co.description && <p className="text-[13px] text-white/60 mb-4 leading-relaxed">{co.description}</p>}
           <div className="flex flex-wrap gap-2">
             {(co.services || []).map(function(s: string) { return <span key={s} className="px-2.5 py-1 rounded-lg bg-white/10 text-[11px] text-white/70">{s}</span>; })}
           </div>
           <div className="flex items-center gap-6 mt-4 pt-4 border-t border-white/10">
-            {co.industry && <div><p className="text-[10px] text-white/30 uppercase">Industry</p><p className="text-sm text-white/80">{co.industry}</p></div>}
-            {co.targetMarket && <div><p className="text-[10px] text-white/30 uppercase">Target market</p><p className="text-sm text-white/80">{co.targetMarket}</p></div>}
-            {co.location && <div><p className="text-[10px] text-white/30 uppercase">Location</p><p className="text-sm text-white/80">{co.location}</p></div>}
+            {co.industry && <div><p className="text-[10px] text-white/30 uppercase">Industry</p><p className="text-[13px] text-white/80">{co.industry}</p></div>}
+            {co.targetMarket && <div><p className="text-[10px] text-white/30 uppercase">Target market</p><p className="text-[13px] text-white/80">{co.targetMarket}</p></div>}
+            {co.location && <div><p className="text-[10px] text-white/30 uppercase">Location</p><p className="text-[13px] text-white/80">{co.location}</p></div>}
           </div>
         </div>
 
@@ -149,8 +149,8 @@ export default function IcpPage() {
             <div className="flex items-start gap-3">
               <div className="h-8 w-8 rounded-lg bg-[#111] flex items-center justify-center shrink-0 mt-0.5"><Target size={14} className="text-white" /></div>
               <div>
-                <h3 className="text-sm font-semibold text-[#111] mb-1">ICP Summary</h3>
-                <p className="text-sm text-[#555] leading-relaxed">{icp.summary}</p>
+                <h3 className="text-[13px] font-semibold text-[#111] mb-1">ICP Summary</h3>
+                <p className="text-[13px] text-[#555] leading-relaxed">{icp.summary}</p>
               </div>
             </div>
           </div>
@@ -162,7 +162,7 @@ export default function IcpPage() {
           <div className="bg-white rounded-lg border border-[#EAEAEA] p-5">
             <div className="flex items-center gap-2 mb-4">
               <div className="h-8 w-8 rounded-lg bg-[#F5F5F5] flex items-center justify-center"><Zap size={16} className="text-[#555]" /></div>
-              <h3 className="text-sm font-semibold text-[#111]">Target Industries</h3>
+              <h3 className="text-[13px] font-semibold text-[#111]">Target Industries</h3>
             </div>
             <div className="space-y-3">
               {(criteria.industries || []).map(function(ind: any) {
@@ -186,7 +186,7 @@ export default function IcpPage() {
           <div className="bg-white rounded-lg border border-[#EAEAEA] p-5">
             <div className="flex items-center gap-2 mb-4">
               <div className="h-8 w-8 rounded-lg bg-[#F5F5F5] flex items-center justify-center"><Users size={16} className="text-[#555]" /></div>
-              <h3 className="text-sm font-semibold text-[#111]">Company Size</h3>
+              <h3 className="text-[13px] font-semibold text-[#111]">Company Size</h3>
             </div>
             {criteria.companySize && (
               <div>
@@ -207,7 +207,7 @@ export default function IcpPage() {
           <div className="bg-white rounded-lg border border-[#EAEAEA] p-5">
             <div className="flex items-center gap-2 mb-4">
               <div className="h-8 w-8 rounded-lg bg-[#F5F5F5] flex items-center justify-center"><DollarSign size={16} className="text-[#555]" /></div>
-              <h3 className="text-sm font-semibold text-[#111]">Revenue Range</h3>
+              <h3 className="text-[13px] font-semibold text-[#111]">Revenue Range</h3>
             </div>
             {criteria.revenue && (
               <div>
@@ -227,7 +227,7 @@ export default function IcpPage() {
           <div className="bg-white rounded-lg border border-[#EAEAEA] p-5">
             <div className="flex items-center gap-2 mb-4">
               <div className="h-8 w-8 rounded-lg bg-[#F5F5F5] flex items-center justify-center"><UserCheck size={16} className="text-[#555]" /></div>
-              <h3 className="text-sm font-semibold text-[#111]">Buyer Personas</h3>
+              <h3 className="text-[13px] font-semibold text-[#111]">Buyer Personas</h3>
             </div>
             <div className="space-y-3">
               {(criteria.buyerPersonas || []).map(function(p: any) {
@@ -249,7 +249,7 @@ export default function IcpPage() {
             <div className="bg-white rounded-lg border border-[#EAEAEA] p-5">
               <div className="flex items-center gap-2 mb-3">
                 <div className="h-8 w-8 rounded-lg bg-[#F5F5F5] flex items-center justify-center"><Clock size={14} className="text-[#555]" /></div>
-                <h3 className="text-sm font-semibold text-[#111]">Deal Profilee</h3>
+                <h3 className="text-[13px] font-semibold text-[#111]">Deal Profilee</h3>
               </div>
               {icp.dealSize && (
                 <div className="grid grid-cols-3 gap-3">
@@ -272,7 +272,7 @@ export default function IcpPage() {
             <div className="bg-white rounded-lg border border-[#EAEAEA] p-5">
               <div className="flex items-center gap-2 mb-3">
                 <div className="h-8 w-8 rounded-lg bg-[#F5F5F5] flex items-center justify-center"><MapPin size={14} className="text-[#555]" /></div>
-                <h3 className="text-sm font-semibold text-[#111]">Geography</h3>
+                <h3 className="text-[13px] font-semibold text-[#111]">Geography</h3>
               </div>
               <div className="flex flex-wrap gap-2">
                 {(criteria.geography || []).map(function(g: string) { return <span key={g} className="px-3 py-1.5 rounded-full bg-[#F5F5F5] text-xs font-medium text-[#555]">{g}</span>; })}
@@ -286,7 +286,7 @@ export default function IcpPage() {
           <div className="bg-white rounded-lg border border-[#EAEAEA] p-5">
             <div className="flex items-center gap-2 mb-3">
               <div className="h-8 w-8 rounded-lg bg-red-50 flex items-center justify-center"><AlertTriangle size={14} className="text-red-400" /></div>
-              <h3 className="text-sm font-semibold text-[#111]">Pain Points</h3>
+              <h3 className="text-[13px] font-semibold text-[#111]">Pain Points</h3>
             </div>
             <div className="space-y-2">
               {(criteria.painPoints || []).map(function(p: string, i: number) { return <div key={i} className="flex items-start gap-2 text-xs text-[#555]"><span className="text-red-400 mt-0.5 shrink-0">!</span>{p}</div>; })}
@@ -296,7 +296,7 @@ export default function IcpPage() {
           <div className="bg-white rounded-lg border border-[#EAEAEA] p-5">
             <div className="flex items-center gap-2 mb-3">
               <div className="h-8 w-8 rounded-lg bg-green-50 flex items-center justify-center"><ShieldCheck size={14} className="text-green-500" /></div>
-              <h3 className="text-sm font-semibold text-[#111]">Buying Signals</h3>
+              <h3 className="text-[13px] font-semibold text-[#111]">Buying Signals</h3>
             </div>
             <div className="space-y-2">
               {(criteria.buyingSignals || []).map(function(s: string, i: number) { return <div key={i} className="flex items-start gap-2 text-xs text-[#555]"><ArrowRight size={10} className="text-green-500 mt-0.5 shrink-0" />{s}</div>; })}
@@ -305,8 +305,8 @@ export default function IcpPage() {
 
           <div className="bg-white rounded-lg border border-[#EAEAEA] p-5">
             <div className="flex items-center gap-2 mb-3">
-              <div className="h-8 w-8 rounded-lg bg-[#F5F5F5] flex items-center justify-center"><span className="text-sm text-[#BBB]">X</span></div>
-              <h3 className="text-sm font-semibold text-[#111]">Disqualifiers</h3>
+              <div className="h-8 w-8 rounded-lg bg-[#F5F5F5] flex items-center justify-center"><span className="text-[13px] text-[#BBB]">X</span></div>
+              <h3 className="text-[13px] font-semibold text-[#111]">Disqualifiers</h3>
             </div>
             <div className="space-y-2">
               {(criteria.disqualifiers || []).map(function(d: string, i: number) { return <div key={i} className="flex items-start gap-2 text-xs text-[#999]"><span className="text-[#BBB] shrink-0">—</span>{d}</div>; })}
@@ -318,7 +318,7 @@ export default function IcpPage() {
         <div className="mt-8 border-t border-[#EAEAEA] pt-6">
           <div className="flex items-center gap-2 mb-4">
             <MessageSquare size={16} className="text-[#BBB]" />
-            <h3 className="text-sm font-semibold text-[#111]">Refine your ICP</h3>
+            <h3 className="text-[13px] font-semibold text-[#111]">Refine your ICP</h3>
             <span className="text-[11px] text-[#BBB]">Tell Kairo what to adjust</span>
           </div>
 
@@ -351,7 +351,7 @@ export default function IcpPage() {
               onChange={function(e) { setChatInput(e.target.value); }}
               onKeyDown={function(e) { if (e.key === "Enter") handleRefine(); }}
               placeholder="Ex: Our sweet spot is 20-50 employees, add fintech industry..."
-              className="flex-1 h-10 px-4 text-sm rounded-lg border border-[#EAEAEA] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent"
+              className="flex-1 h-10 px-4 text-[13px] rounded-lg border border-[#EAEAEA] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent"
               disabled={refining}
             />
             <button onClick={handleRefine} disabled={refining || !chatInput.trim()}

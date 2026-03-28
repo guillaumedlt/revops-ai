@@ -332,15 +332,15 @@ export default function DashboardViewPage() {
       <div className="px-6 py-4 max-w-7xl mx-auto">
         {widgets.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-sm text-[#555] font-medium">
+            <p className="text-[13px] text-[#555] font-medium">
               No widgets yet
             </p>
-            <p className="text-sm text-[#BBB] mt-1">
+            <p className="text-[13px] text-[#BBB] mt-1">
               Go to Chat and pin reports here.
             </p>
             <button
               onClick={() => router.push("/chat")}
-              className="mt-4 bg-[#111] text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-[#262626] transition-colors"
+              className="mt-4 bg-[#111] text-white rounded-lg px-4 py-2 text-[13px] font-medium hover:bg-[#262626] transition-colors"
             >
               Go to Chat
             </button>

@@ -121,7 +121,7 @@ function AddReportToDashboard({ title, sections }: { title: string; sections: Co
 
   return (
     <div className="relative">
-      <button onClick={handleOpen} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#111] text-white hover:bg-[#333] shadow-sm transition-colors">
+      <button onClick={handleOpen} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#111] text-white hover:bg-[#333] transition-colors">
         <LayoutDashboard size={12} /> Add to Dashboard
       </button>
       {open && (
@@ -166,7 +166,7 @@ export default function ReportSlides({ title, sections }: ReportSlidesProps) {
         <AddReportToDashboard title={title} sections={sections} />
       </div>
 
-      <div className="rounded-lg overflow-hidden border border-[#EAEAEA] shadow-sm mt-6">
+      <div className="rounded-lg overflow-hidden border border-[#EAEAEA] mt-6">
         <div className="bg-white aspect-[16/9] flex flex-col overflow-hidden">
           {isFirstSlide ? (
             <div className="flex-1 flex flex-col items-center justify-center text-center px-8">
