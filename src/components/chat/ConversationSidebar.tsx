@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import {
-  MessageSquarePlus,
+  Plus,
   Search,
   Settings,
   LogOut,
@@ -12,6 +12,9 @@ import {
   LayoutDashboard,
   Target,
   Bell,
+  MessageSquare,
+  ChevronsUpDown,
+  Sparkles,
 } from "lucide-react";
 
 interface Conversation {
@@ -33,10 +36,10 @@ function groupByDate(conversations: Conversation[]): GroupedConversations {
   var weekAgo = new Date(today.getTime() - 7 * 86400000);
 
   var groups: GroupedConversations = [
-    { label: "Today", items: [] },
-    { label: "Yesterday", items: [] },
-    { label: "Previous 7 days", items: [] },
-    { label: "Older", items: [] },
+    { label: "Aujourd'hui", items: [] },
+    { label: "Hier", items: [] },
+    { label: "7 derniers jours", items: [] },
+    { label: "Plus ancien", items: [] },
   ];
 
   for (var i = 0; i < conversations.length; i++) {
@@ -51,13 +54,22 @@ function groupByDate(conversations: Conversation[]): GroupedConversations {
   return groups.filter(function(g) { return g.items.length > 0; });
 }
 
+var NAV_ITEMS = [
+  { id: "dashboards", label: "Dashboards", icon: LayoutDashboard, path: "/dashboards" },
+  { id: "icp", label: "ICP", icon: Target, path: "/dashboards/icp" },
+  { id: "alerts", label: "Monitoring", icon: Bell, path: "/alerts" },
+];
+
 export default function ConversationSidebar() {
   var [conversations, setConversations] = useState<Conversation[]>([]);
   var [userEmail, setUserEmail] = useState("");
-  var [searchOpen, setSearchOpen] = useState(false);
   var [searchQuery, setSearchQuery] = useState("");
+  var [searchFocused, setSearchFocused] = useState(false);
   var [credits, setCredits] = useState<{ used: number; total: number; remaining: number; plan: string } | null>(null);
   var [alertCount, setAlertCount] = useState(0);
+  var [userMenuOpen, setUserMenuOpen] = useState(false);
+  var searchRef = useRef<HTMLInputElement>(null);
+  var userMenuRef = useRef<HTMLDivElement>(null);
   var pathname = usePathname();
   var router = useRouter();
 
@@ -88,17 +100,36 @@ export default function ConversationSidebar() {
     }).catch(function() {});
   }, [pathname]);
 
+  // Close user menu on outside click
+  useEffect(function() {
+    if (!userMenuOpen) return;
+    function handleClick(e: MouseEvent) {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) setUserMenuOpen(false);
+    }
+    document.addEventListener("mousedown", handleClick);
+    return function() { document.removeEventListener("mousedown", handleClick); };
+  }, [userMenuOpen]);
+
+  // Keyboard shortcut: Cmd+K for search
+  useEffect(function() {
+    function handleKeyDown(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        searchRef.current?.focus();
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return function() { document.removeEventListener("keydown", handleKeyDown); };
+  }, []);
+
   function handleNew() {
     router.push("/chat");
   }
 
   async function handleDelete(id: string) {
     setConversations(function(prev) { return prev.filter(function(c) { return c.id !== id; }); });
-    
     await fetch("/api/conversations/" + id, { method: "DELETE" });
-    if (pathname === "/chat/" + id) {
-      router.push("/chat");
-    }
+    if (pathname === "/chat/" + id) router.push("/chat");
   }
 
   async function handleLogout() {
@@ -107,128 +138,137 @@ export default function ConversationSidebar() {
     router.push("/login");
   }
 
-  function handleHover(id: string) {
-    // Prefetch handled by Next.js
-  }
-
   var grouped = groupByDate(conversations);
 
   var filteredGrouped = searchQuery
     ? grouped
         .map(function(g) {
-          return {
-            label: g.label,
-            items: g.items.filter(function(c) {
-              return c.title.toLowerCase().includes(searchQuery.toLowerCase());
-            }),
-          };
+          return { label: g.label, items: g.items.filter(function(c) { return c.title.toLowerCase().includes(searchQuery.toLowerCase()); }) };
         })
         .filter(function(g) { return g.items.length > 0; })
     : grouped;
 
   var userInitial = userEmail ? userEmail[0].toUpperCase() : "?";
+  var userName = userEmail ? userEmail.split("@")[0] : "";
+  var creditPct = credits ? credits.remaining / credits.total : 1;
 
   return (
-    <aside className="w-[240px] bg-white border-r border-[#E5E5E5] flex flex-col h-full shrink-0">
-      {/* Logo */}
-      <div className="px-3 pt-4 pb-2 flex items-center gap-2">
-        <div className="h-7 w-7 rounded-lg bg-[#F0F0F0] text-[#0A0A0A] flex items-center justify-center text-xs font-bold">
-          K
+    <aside className="w-[260px] bg-[#FAFAFA] border-r border-[#EBEBEB] flex flex-col h-full shrink-0">
+
+      {/* ── Header ── */}
+      <div className="px-3 pt-3.5 pb-1">
+        {/* Logo + New Chat */}
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <div className="h-7 w-7 rounded-lg bg-[#0A0A0A] flex items-center justify-center">
+              <span className="text-white text-[10px] font-bold tracking-tight">K</span>
+            </div>
+            <span className="text-[13px] font-semibold text-[#0A0A0A]">Kairo</span>
+            {credits && (
+              <span className="text-[9px] font-medium text-[#A3A3A3] bg-[#F0F0F0] px-1.5 py-0.5 rounded uppercase tracking-wider">
+                {credits.plan}
+              </span>
+            )}
+          </div>
+          <button
+            onClick={handleNew}
+            className="h-7 w-7 rounded-lg bg-[#0A0A0A] hover:bg-[#333] text-white flex items-center justify-center transition-colors"
+            title="Nouvelle conversation"
+          >
+            <Plus size={14} strokeWidth={2.5} />
+          </button>
         </div>
-        <span className="text-sm font-semibold text-[#0A0A0A]">Kairo</span>
-      </div>
 
-      {/* Action buttons */}
-      <div className="px-2 space-y-0.5 mt-1">
-        <button
-          onClick={handleNew}
-          className="w-full flex items-center gap-2 px-3 h-9 rounded-lg text-sm text-[#525252] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors"
-        >
-          <MessageSquarePlus size={16} className="text-[#A3A3A3]" />
-          New Chat
-        </button>
-        <button
-          onClick={function() { router.push("/dashboards"); }}
-          className={"w-full flex items-center gap-2 px-3 h-9 rounded-lg text-sm transition-colors " + (pathname.startsWith("/dashboards") ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium" : "text-[#525252] hover:bg-[#F5F5F5] hover:text-[#0A0A0A]")}
-        >
-          <LayoutDashboard size={16} className={pathname.startsWith("/dashboards") ? "text-[#0A0A0A]" : "text-[#A3A3A3]"} />
-          Dashboards
-        </button>
-        <button
-          onClick={function() { router.push("/dashboards/icp"); }}
-          className={"w-full flex items-center gap-2 px-3 h-9 rounded-lg text-sm transition-colors " + (pathname === "/dashboards/icp" ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium" : "text-[#525252] hover:bg-[#F5F5F5] hover:text-[#0A0A0A]")}
-        >
-          <Target size={16} className={pathname === "/dashboards/icp" ? "text-[#0A0A0A]" : "text-[#A3A3A3]"} />
-          ICP
-        </button>
-        <button
-          onClick={function() { router.push("/alerts"); }}
-          className={"w-full flex items-center gap-2 px-3 h-9 rounded-lg text-sm transition-colors " + (pathname === "/alerts" ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium" : "text-[#525252] hover:bg-[#F5F5F5] hover:text-[#0A0A0A]")}
-        >
-          <Bell size={16} className={pathname === "/alerts" ? "text-[#0A0A0A]" : "text-[#A3A3A3]"} />
-          <span className="flex-1">Monitoring</span>
-          {alertCount > 0 && (
-            <span className="text-[10px] font-bold text-white bg-[#EF4444] rounded-full h-4 min-w-[16px] flex items-center justify-center px-1">
-              {alertCount}
-            </span>
-          )}
-        </button>
-        <button
-          onClick={function() { setSearchOpen(!searchOpen); }}
-          className="w-full flex items-center gap-2 px-3 h-9 rounded-lg text-sm text-[#525252] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors"
-        >
-          <Search size={16} className="text-[#A3A3A3]" />
-          Search
-        </button>
-      </div>
-
-      {/* Search input */}
-      {searchOpen && (
-        <div className="px-3 mt-2">
+        {/* Search */}
+        <div className="relative mb-2">
+          <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#B0B0B0]" />
           <input
+            ref={searchRef}
             type="text"
             value={searchQuery}
             onChange={function(e) { setSearchQuery(e.target.value); }}
-            placeholder="Search conversations..."
-            autoFocus
-            className="w-full h-8 px-2.5 text-xs rounded-lg border border-[#E5E5E5] bg-[#FAFAFA] text-[#0A0A0A] placeholder:text-[#A3A3A3] focus:outline-none focus:ring-1 focus:ring-white/20"
+            onFocus={function() { setSearchFocused(true); }}
+            onBlur={function() { setSearchFocused(false); }}
+            placeholder="Rechercher..."
+            className={"w-full h-8 pl-8 pr-8 text-[12px] rounded-lg border bg-white text-[#0A0A0A] placeholder:text-[#C0C0C0] focus:outline-none transition-all " + (searchFocused ? "border-[#D4D4D4] ring-1 ring-[#E5E5E5]" : "border-[#EBEBEB]")}
           />
+          {!searchQuery && !searchFocused && (
+            <kbd className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[9px] text-[#C0C0C0] bg-[#F5F5F5] border border-[#E5E5E5] rounded px-1 py-0.5 font-mono">
+              ⌘K
+            </kbd>
+          )}
+          {searchQuery && (
+            <button
+              onClick={function() { setSearchQuery(""); }}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-[#C0C0C0] hover:text-[#737373]"
+            >
+              <Plus size={12} className="rotate-45" />
+            </button>
+          )}
         </div>
-      )}
+      </div>
 
-      {/* Separator */}
-      <div className="mx-3 my-2 border-t border-[#E5E5E5]" />
+      {/* ── Navigation ── */}
+      <div className="px-2 space-y-0.5">
+        {NAV_ITEMS.map(function(item) {
+          var isActive = item.path === "/dashboards"
+            ? pathname.startsWith("/dashboards") && pathname !== "/dashboards/icp"
+            : pathname === item.path;
+          var Icon = item.icon;
 
-      {/* Conversation list */}
-      <div className="flex-1 overflow-y-auto px-2">
-        {filteredGrouped.length === 0 && (
-          <p className="px-3 py-4 text-xs text-[#A3A3A3]">No conversations yet</p>
+          return (
+            <button
+              key={item.id}
+              onClick={function() { router.push(item.path); }}
+              className={"w-full flex items-center gap-2.5 px-3 h-8 rounded-lg text-[13px] transition-all " + (isActive ? "bg-white text-[#0A0A0A] font-medium shadow-[0_1px_2px_rgba(0,0,0,0.04)] border border-[#EBEBEB]" : "text-[#737373] hover:text-[#0A0A0A] hover:bg-white/60")}
+            >
+              <Icon size={15} className={isActive ? "text-[#0A0A0A]" : "text-[#A3A3A3]"} strokeWidth={isActive ? 2 : 1.75} />
+              <span className="flex-1 text-left">{item.label}</span>
+              {item.id === "alerts" && alertCount > 0 && (
+                <span className="text-[9px] font-bold text-white bg-[#EF4444] rounded-full h-[18px] min-w-[18px] flex items-center justify-center px-1 leading-none">
+                  {alertCount > 9 ? "9+" : alertCount}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* ── Separator ── */}
+      <div className="mx-3 my-2.5 border-t border-[#EBEBEB]" />
+
+      {/* ── Conversation list ── */}
+      <div className="flex-1 overflow-y-auto px-2 pb-2">
+        {filteredGrouped.length === 0 && !searchQuery && (
+          <div className="px-3 py-8 text-center">
+            <MessageSquare size={20} className="text-[#D4D4D4] mx-auto mb-2" />
+            <p className="text-[11px] text-[#B0B0B0]">Aucune conversation</p>
+          </div>
+        )}
+        {filteredGrouped.length === 0 && searchQuery && (
+          <p className="px-3 py-4 text-[11px] text-[#B0B0B0] text-center">Aucun resultat pour &ldquo;{searchQuery}&rdquo;</p>
         )}
         {filteredGrouped.map(function(group) {
           return (
-            <div key={group.label} className="mb-2">
-              <div className="text-[10px] uppercase tracking-wider text-[#A3A3A3] font-medium px-3 mt-3 mb-1">
+            <div key={group.label} className="mb-1">
+              <div className="text-[10px] uppercase tracking-wider text-[#B0B0B0] font-medium px-3 mt-3 mb-1 select-none">
                 {group.label}
               </div>
               {group.items.map(function(conv) {
+                var isActive = activeId === conv.id;
                 return (
                   <div key={conv.id} className="group relative">
                     <button
-                      onMouseEnter={function() { handleHover(conv.id); }}
                       onClick={function() { router.push("/chat/" + conv.id); }}
-                      className={"w-full text-left text-sm truncate px-3 pr-8 h-8 flex items-center rounded-lg transition-colors " + (activeId === conv.id ? "bg-[#F0F0F0] text-[#0A0A0A] font-medium" : "text-[#525252] hover:bg-[#F5F5F5]")}
+                      className={"w-full text-left text-[13px] truncate px-3 pr-8 h-8 flex items-center rounded-lg transition-all " + (isActive ? "bg-white text-[#0A0A0A] font-medium shadow-[0_1px_2px_rgba(0,0,0,0.04)] border border-[#EBEBEB]" : "text-[#737373] hover:text-[#0A0A0A] hover:bg-white/60")}
                     >
-                      <span className="block truncate max-w-[140px]">{conv.title || "New Chat"}</span>
+                      <span className="block truncate">{conv.title || "Nouvelle conversation"}</span>
                     </button>
                     <button
-                      onClick={function(e) {
-                        e.stopPropagation();
-                        handleDelete(conv.id);
-                      }}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 hidden group-hover:flex h-6 w-6 items-center justify-center rounded text-[#A3A3A3] hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-colors"
-                      title="Delete conversation"
+                      onClick={function(e) { e.stopPropagation(); handleDelete(conv.id); }}
+                      className="absolute right-1.5 top-1/2 -translate-y-1/2 hidden group-hover:flex h-6 w-6 items-center justify-center rounded-md text-[#C0C0C0] hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-colors"
                     >
-                      <Trash2 size={14} />
+                      <Trash2 size={13} />
                     </button>
                   </div>
                 );
@@ -238,60 +278,79 @@ export default function ConversationSidebar() {
         })}
       </div>
 
-      {/* Bottom section */}
-      <div className="border-t border-[#E5E5E5] px-3 py-3 space-y-2.5">
-        {/* Credit usage bar */}
+      {/* ── Bottom ── */}
+      <div className="border-t border-[#EBEBEB] p-3 space-y-3">
+        {/* Credits */}
         {credits && (
-          <div>
+          <button
+            onClick={function() { router.push("/settings?tab=billing"); }}
+            className="w-full group"
+          >
             <div className="flex items-center justify-between mb-1">
-              <span className="text-[10px] font-medium text-[#A3A3A3] uppercase tracking-wider">Credits</span>
-              <span className="text-[10px] text-[#737373] tabular-nums">{credits.remaining} / {credits.total}</span>
+              <div className="flex items-center gap-1.5">
+                <Sparkles size={11} className="text-[#A3A3A3] group-hover:text-[#6366F1] transition-colors" />
+                <span className="text-[10px] font-medium text-[#A3A3A3] group-hover:text-[#525252] transition-colors">
+                  {credits.remaining.toLocaleString()} credits
+                </span>
+              </div>
+              <span className="text-[9px] text-[#C0C0C0] tabular-nums">
+                {Math.round(creditPct * 100)}%
+              </span>
             </div>
-            <div className="h-1.5 bg-[#F0F0F0] rounded-full overflow-hidden">
+            <div className="h-1 bg-[#EBEBEB] rounded-full overflow-hidden">
               <div
-                className="h-full rounded-full transition-all duration-300"
+                className="h-full rounded-full transition-all duration-500"
                 style={{
-                  width: Math.max(2, Math.round((credits.remaining / credits.total) * 100)) + "%",
-                  backgroundColor: credits.remaining / credits.total > 0.2 ? "#0A0A0A" : credits.remaining / credits.total > 0.05 ? "#F59E0B" : "#EF4444",
+                  width: Math.max(1, Math.round(creditPct * 100)) + "%",
+                  backgroundColor: creditPct > 0.2 ? "#0A0A0A" : creditPct > 0.05 ? "#F59E0B" : "#EF4444",
                 }}
               />
             </div>
-            {credits.plan === "free" && credits.remaining < 15 && (
-              <button
-                onClick={function() { router.push("/settings?tab=billing"); }}
-                className="mt-1.5 w-full text-[10px] font-medium text-[#6366F1] hover:text-[#4F46E5] text-center"
-              >
-                Upgrade to Pro
-              </button>
-            )}
-          </div>
+          </button>
         )}
 
-        {/* User info */}
-        <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-full bg-[#F0F0F0] flex items-center justify-center text-xs font-medium text-[#0A0A0A] shrink-0">
-            {userInitial}
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-[#0A0A0A] truncate">{userEmail}</p>
-            {credits && <p className="text-[10px] text-[#A3A3A3] capitalize">{credits.plan} plan</p>}
-          </div>
-        </div>
-        <div className="flex items-center gap-1">
+        {/* User */}
+        <div ref={userMenuRef} className="relative">
           <button
-            onClick={function() { router.push("/settings"); }}
-            className="flex-1 flex items-center justify-center gap-1.5 h-8 rounded-lg text-xs text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
+            onClick={function() { setUserMenuOpen(!userMenuOpen); }}
+            className="w-full flex items-center gap-2.5 px-2 py-1.5 -mx-0.5 rounded-lg hover:bg-white transition-colors"
           >
-            <Settings size={14} />
-            <span>Settings</span>
+            <div className="h-7 w-7 rounded-full bg-gradient-to-br from-[#0A0A0A] to-[#525252] flex items-center justify-center text-[10px] font-semibold text-white shrink-0">
+              {userInitial}
+            </div>
+            <div className="flex-1 min-w-0 text-left">
+              <p className="text-[12px] font-medium text-[#0A0A0A] truncate">{userName}</p>
+            </div>
+            <ChevronsUpDown size={13} className="text-[#C0C0C0] shrink-0" />
           </button>
-          <button
-            onClick={handleLogout}
-            className="flex-1 flex items-center justify-center gap-1.5 h-8 rounded-lg text-xs text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#525252] transition-colors"
-          >
-            <LogOut size={14} />
-            <span>Log out</span>
-          </button>
+
+          {/* User menu popover */}
+          {userMenuOpen && (
+            <div className="absolute bottom-full left-0 right-0 mb-1.5 bg-white rounded-xl border border-[#EBEBEB] shadow-lg overflow-hidden z-50">
+              <div className="px-3 py-2.5 border-b border-[#F5F5F5]">
+                <p className="text-[12px] font-medium text-[#0A0A0A] truncate">{userEmail}</p>
+                {credits && (
+                  <p className="text-[10px] text-[#A3A3A3] mt-0.5 capitalize">{credits.plan} plan</p>
+                )}
+              </div>
+              <div className="p-1">
+                <button
+                  onClick={function() { setUserMenuOpen(false); router.push("/settings"); }}
+                  className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[12px] text-[#525252] hover:bg-[#F5F5F5] transition-colors"
+                >
+                  <Settings size={13} className="text-[#A3A3A3]" />
+                  Parametres
+                </button>
+                <button
+                  onClick={function() { setUserMenuOpen(false); handleLogout(); }}
+                  className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[12px] text-[#525252] hover:bg-[#FEF2F2] hover:text-[#EF4444] transition-colors"
+                >
+                  <LogOut size={13} className="text-[#A3A3A3]" />
+                  Deconnexion
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </aside>
