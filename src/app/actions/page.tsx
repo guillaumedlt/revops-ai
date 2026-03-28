@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Plus, Check, Clock, Circle, X, AlertTriangle, Zap, ArrowRight, Sparkles, ChevronDown } from "lucide-react";
+import { Plus, Check, Clock, Circle, X, Sparkles, GripVertical, Trash2, Calendar } from "lucide-react";
 
 interface Action {
   id: string;
@@ -18,47 +18,51 @@ interface Action {
   completed_at?: string;
 }
 
-var PRIORITY_CONFIG: Record<string, { label: string; color: string; bg: string }> = {
-  urgent: { label: "Urgent", color: "#EF4444", bg: "#FEF2F2" },
-  high: { label: "Haute", color: "#F97316", bg: "#FFF7ED" },
-  medium: { label: "Moyenne", color: "#F59E0B", bg: "#FFFBEB" },
-  low: { label: "Basse", color: "#22C55E", bg: "#F0FDF4" },
+var COLUMNS: Array<{ id: Action["status"]; label: string; icon: any; color: string; emptyText: string }> = [
+  { id: "todo", label: "A faire", icon: Circle, color: "#525252", emptyText: "Drop une action ici" },
+  { id: "in_progress", label: "En cours", icon: Clock, color: "#F59E0B", emptyText: "Drag une action ici" },
+  { id: "done", label: "Termine", icon: Check, color: "#22C55E", emptyText: "Rien de fini encore" },
+];
+
+var PRIORITY_DOT: Record<string, string> = {
+  urgent: "#EF4444",
+  high: "#F97316",
+  medium: "#F59E0B",
+  low: "#22C55E",
+};
+
+var PRIORITY_LABEL: Record<string, string> = {
+  urgent: "Urgent",
+  high: "Haute",
+  medium: "Moyenne",
+  low: "Basse",
 };
 
 var SOURCE_LABELS: Record<string, string> = {
-  ai_suggestion: "Kairo AI",
+  ai_suggestion: "Kairo",
   alert: "Alerte",
   quick_win: "Quick Win",
-  manual: "Manuel",
-  weekly_review: "Revue hebdo",
+  manual: "",
+  weekly_review: "Revue",
 };
-
-function timeSince(date: string): string {
-  var ms = Date.now() - new Date(date).getTime();
-  if (isNaN(ms) || ms < 0) return "";
-  var d = Math.floor(ms / 86400000);
-  if (d === 0) return "Aujourd'hui";
-  if (d === 1) return "Hier";
-  return "Il y a " + d + "j";
-}
 
 function dueLabel(date: string): { text: string; overdue: boolean } {
   var diff = Math.floor((new Date(date).getTime() - Date.now()) / 86400000);
-  if (diff < 0) return { text: "En retard (" + Math.abs(diff) + "j)", overdue: true };
+  if (diff < 0) return { text: Math.abs(diff) + "j retard", overdue: true };
   if (diff === 0) return { text: "Aujourd'hui", overdue: false };
   if (diff === 1) return { text: "Demain", overdue: false };
-  return { text: "Dans " + diff + "j", overdue: false };
+  return { text: diff + "j", overdue: false };
 }
 
 export default function ActionsPage() {
   var router = useRouter();
   var [actions, setActions] = useState<Action[]>([]);
   var [loading, setLoading] = useState(true);
-  var [showAdd, setShowAdd] = useState(false);
+  var [dragId, setDragId] = useState<string | null>(null);
+  var [dragOver, setDragOver] = useState<string | null>(null);
+  var [addingIn, setAddingIn] = useState<string | null>(null);
   var [newTitle, setNewTitle] = useState("");
-  var [newPriority, setNewPriority] = useState<"low" | "medium" | "high" | "urgent">("medium");
-  var [filter, setFilter] = useState<"all" | "todo" | "in_progress" | "done">("all");
-  var [adding, setAdding] = useState(false);
+  var addInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(function() {
     fetch("/api/pilot/actions?perPage=100").then(function(r) { return r.json(); }).then(function(json) {
@@ -66,22 +70,9 @@ export default function ActionsPage() {
     }).catch(function() {}).finally(function() { setLoading(false); });
   }, []);
 
-  async function handleAdd() {
-    if (!newTitle.trim() || adding) return;
-    setAdding(true);
-    var res = await fetch("/api/pilot/actions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title: newTitle, priority: newPriority, source: "manual" }),
-    });
-    if (res.ok) {
-      var json = await res.json();
-      if (json.data) setActions(function(prev) { return [json.data, ...prev]; });
-      setNewTitle("");
-      setShowAdd(false);
-    }
-    setAdding(false);
-  }
+  useEffect(function() {
+    if (addingIn && addInputRef.current) addInputRef.current.focus();
+  }, [addingIn]);
 
   async function handleStatusChange(id: string, status: string) {
     setActions(function(prev) {
@@ -94,13 +85,37 @@ export default function ActionsPage() {
     });
   }
 
+  async function handleAdd(status: string) {
+    if (!newTitle.trim()) return;
+    var res = await fetch("/api/pilot/actions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: newTitle, priority: "medium", status, source: "manual" }),
+    });
+    if (res.ok) {
+      var json = await res.json();
+      if (json.data) setActions(function(prev) { return [json.data, ...prev]; });
+    }
+    setNewTitle("");
+    setAddingIn(null);
+  }
+
+  async function handleDelete(id: string) {
+    setActions(function(prev) { return prev.filter(function(a) { return a.id !== id; }); });
+    await fetch("/api/pilot/actions", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, status: "cancelled" }),
+    });
+  }
+
   async function handleAskKairo() {
-    var todoActions = actions.filter(function(a) { return a.status === "todo" || a.status === "in_progress"; });
-    var prompt = "Voici mes actions en cours :\n" + todoActions.slice(0, 10).map(function(a, i) { return (i + 1) + ". " + a.title + " (priorite: " + a.priority + ")"; }).join("\n") + "\n\nAnalyse ces actions, priorise-les, et dis-moi par quoi commencer cette semaine. Ajoute des actions manquantes si tu detectes des problemes dans mes donnees.";
+    var active = actions.filter(function(a) { return a.status === "todo" || a.status === "in_progress"; });
+    var prompt = "Voici mes " + active.length + " actions en cours :\n" + active.slice(0, 15).map(function(a, i) { return (i + 1) + ". [" + a.priority.toUpperCase() + "] " + a.title; }).join("\n") + "\n\nAnalyse, repriorise si necessaire, et identifie les actions manquantes en checkant mes donnees HubSpot. Cree les actions manquantes directement.";
     var res = await fetch("/api/conversations", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title: "Priorisation des actions" }),
+      body: JSON.stringify({ title: "Priorisation actions" }),
     });
     var json = await res.json();
     if (json.data?.id) {
@@ -109,16 +124,51 @@ export default function ActionsPage() {
     }
   }
 
-  var todo = actions.filter(function(a) { return a.status === "todo"; });
-  var inProgress = actions.filter(function(a) { return a.status === "in_progress"; });
-  var done = actions.filter(function(a) { return a.status === "done"; });
+  // Drag handlers
+  function onDragStart(e: React.DragEvent, id: string) {
+    setDragId(id);
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", id);
+    // Make drag image semi-transparent
+    if (e.currentTarget instanceof HTMLElement) {
+      e.currentTarget.style.opacity = "0.5";
+    }
+  }
 
-  var filtered = filter === "all" ? actions.filter(function(a) { return a.status !== "cancelled"; }) :
-    actions.filter(function(a) { return a.status === filter; });
+  function onDragEnd(e: React.DragEvent) {
+    if (e.currentTarget instanceof HTMLElement) {
+      e.currentTarget.style.opacity = "1";
+    }
+    setDragId(null);
+    setDragOver(null);
+  }
 
-  // Sort: urgent first, then high, medium, low
+  function onDragOver(e: React.DragEvent, colId: string) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    setDragOver(colId);
+  }
+
+  function onDragLeave() {
+    setDragOver(null);
+  }
+
+  function onDrop(e: React.DragEvent, colId: string) {
+    e.preventDefault();
+    var id = e.dataTransfer.getData("text/plain");
+    if (id) handleStatusChange(id, colId);
+    setDragId(null);
+    setDragOver(null);
+  }
+
+  // Sort actions by priority within each column
   var priorityOrder: Record<string, number> = { urgent: 0, high: 1, medium: 2, low: 3 };
-  filtered.sort(function(a, b) { return (priorityOrder[a.priority] ?? 2) - (priorityOrder[b.priority] ?? 2); });
+
+  var todo = actions.filter(function(a) { return a.status === "todo"; }).sort(function(a, b) { return (priorityOrder[a.priority] ?? 2) - (priorityOrder[b.priority] ?? 2); });
+  var inProgress = actions.filter(function(a) { return a.status === "in_progress"; }).sort(function(a, b) { return (priorityOrder[a.priority] ?? 2) - (priorityOrder[b.priority] ?? 2); });
+  var done = actions.filter(function(a) { return a.status === "done"; }).sort(function(a, b) { return new Date(b.completed_at || b.created_at).getTime() - new Date(a.completed_at || a.created_at).getTime(); });
+
+  var columnData: Record<string, Action[]> = { todo: todo, in_progress: inProgress, done: done };
 
   if (loading) {
     return (
@@ -129,147 +179,154 @@ export default function ActionsPage() {
   }
 
   return (
-    <div className="flex-1 overflow-y-auto">
-      <div className="max-w-4xl mx-auto px-6 py-8">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+    <div className="flex-1 flex flex-col overflow-hidden">
+      {/* Header */}
+      <div className="shrink-0 px-6 pt-6 pb-4 border-b border-[#EBEBEB] bg-white">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div>
             <h1 className="text-xl font-semibold text-[#0A0A0A]">Actions</h1>
-            <p className="text-sm text-[#737373] mt-0.5">
-              {todo.length} a faire, {inProgress.length} en cours, {done.length} terminees
+            <p className="text-[13px] text-[#737373] mt-0.5">
+              {todo.length + inProgress.length} active{todo.length + inProgress.length > 1 ? "s" : ""} · {done.length} terminee{done.length > 1 ? "s" : ""}
             </p>
           </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={handleAskKairo}
-              className="h-9 px-3 rounded-lg text-[12px] font-medium text-[#6366F1] border border-[#C7D2FE] hover:bg-[#EEF2FF] transition-colors flex items-center gap-1.5"
-            >
-              <Sparkles size={13} /> Prioriser avec Kairo
-            </button>
-            <button
-              onClick={function() { setShowAdd(true); }}
-              className="h-9 px-3 rounded-lg text-[12px] font-medium text-white bg-[#0A0A0A] hover:bg-[#333] transition-colors flex items-center gap-1.5"
-            >
-              <Plus size={14} /> Nouvelle action
-            </button>
-          </div>
+          <button
+            onClick={handleAskKairo}
+            className="h-9 px-4 rounded-lg text-[12px] font-medium text-[#6366F1] border border-[#C7D2FE] hover:bg-[#EEF2FF] transition-colors flex items-center gap-1.5"
+          >
+            <Sparkles size={13} /> Prioriser avec Kairo
+          </button>
         </div>
+      </div>
 
-        {/* Quick add */}
-        {showAdd && (
-          <div className="mb-6 bg-white rounded-xl border border-[#E5E5E5] p-4">
-            <div className="flex items-center gap-3">
-              <input
-                type="text"
-                value={newTitle}
-                onChange={function(e) { setNewTitle(e.target.value); }}
-                onKeyDown={function(e) { if (e.key === "Enter") handleAdd(); }}
-                placeholder="Titre de l'action..."
-                autoFocus
-                className="flex-1 h-10 px-3 text-sm rounded-lg border border-[#E5E5E5] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] focus:border-transparent"
-              />
-              <select
-                value={newPriority}
-                onChange={function(e) { setNewPriority(e.target.value as any); }}
-                className="h-10 px-2 text-xs rounded-lg border border-[#E5E5E5] bg-white text-[#525252] focus:outline-none"
-              >
-                <option value="urgent">Urgent</option>
-                <option value="high">Haute</option>
-                <option value="medium">Moyenne</option>
-                <option value="low">Basse</option>
-              </select>
-              <button onClick={handleAdd} disabled={!newTitle.trim() || adding} className="h-10 px-4 rounded-lg bg-[#0A0A0A] text-white text-xs font-medium hover:bg-[#333] disabled:opacity-40">
-                {adding ? "..." : "Ajouter"}
-              </button>
-              <button onClick={function() { setShowAdd(false); setNewTitle(""); }} className="text-[#A3A3A3] hover:text-[#737373]">
-                <X size={16} />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Stats cards */}
-        <div className="grid grid-cols-4 gap-3 mb-6">
-          {[
-            { label: "A faire", count: todo.length, icon: Circle, color: "#525252", filterVal: "todo" as const },
-            { label: "En cours", count: inProgress.length, icon: Clock, color: "#F59E0B", filterVal: "in_progress" as const },
-            { label: "Terminees", count: done.length, icon: Check, color: "#22C55E", filterVal: "done" as const },
-            { label: "Total", count: actions.filter(function(a) { return a.status !== "cancelled"; }).length, icon: Zap, color: "#0A0A0A", filterVal: "all" as const },
-          ].map(function(stat) {
-            var isActive = filter === stat.filterVal;
-            var Icon = stat.icon;
-            return (
-              <button
-                key={stat.label}
-                onClick={function() { setFilter(stat.filterVal); }}
-                className={"rounded-xl border p-4 text-left transition-all " + (isActive ? "border-[#0A0A0A] bg-[#FAFAFA] ring-1 ring-[#0A0A0A]" : "border-[#EBEBEB] hover:border-[#D4D4D4]")}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <Icon size={16} style={{ color: stat.color }} />
-                  <span className="text-2xl font-bold text-[#0A0A0A] tabular-nums">{stat.count}</span>
-                </div>
-                <p className="text-[11px] text-[#737373] font-medium">{stat.label}</p>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Action list */}
-        {filtered.length === 0 && (
-          <div className="text-center py-12 bg-[#FAFAFA] rounded-xl border border-[#EBEBEB]">
-            <Check size={24} className="text-[#22C55E] mx-auto mb-2" />
-            <p className="text-sm font-medium text-[#0A0A0A]">Aucune action</p>
-            <p className="text-xs text-[#A3A3A3] mt-1">Les actions creees par Kairo ou manuellement apparaitront ici.</p>
-          </div>
-        )}
-
-        <div className="space-y-2">
-          {filtered.map(function(action) {
-            var prio = PRIORITY_CONFIG[action.priority] || PRIORITY_CONFIG.medium;
-            var isDone = action.status === "done";
-            var due = action.due_date ? dueLabel(action.due_date) : null;
+      {/* Kanban board */}
+      <div className="flex-1 overflow-x-auto overflow-y-hidden p-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-3 gap-4 h-full min-h-0">
+          {COLUMNS.map(function(col) {
+            var items = columnData[col.id] || [];
+            var Icon = col.icon;
+            var isOver = dragOver === col.id;
 
             return (
-              <div key={action.id} className={"rounded-xl border border-[#EBEBEB] bg-white px-4 py-3 transition-all " + (isDone ? "opacity-60" : "hover:border-[#D4D4D4]")}>
-                <div className="flex items-start gap-3">
-                  {/* Status toggle */}
-                  <button
-                    onClick={function() {
-                      if (action.status === "todo") handleStatusChange(action.id, "in_progress");
-                      else if (action.status === "in_progress") handleStatusChange(action.id, "done");
-                      else if (action.status === "done") handleStatusChange(action.id, "todo");
-                    }}
-                    className="mt-0.5 shrink-0"
-                  >
-                    {action.status === "done" ? (
-                      <div className="h-5 w-5 rounded-full bg-[#22C55E] flex items-center justify-center"><Check size={12} className="text-white" /></div>
-                    ) : action.status === "in_progress" ? (
-                      <div className="h-5 w-5 rounded-full border-2 border-[#F59E0B] flex items-center justify-center"><div className="h-2 w-2 rounded-full bg-[#F59E0B]" /></div>
-                    ) : (
-                      <div className="h-5 w-5 rounded-full border-2 border-[#D4D4D4] hover:border-[#A3A3A3] transition-colors" />
-                    )}
-                  </button>
-
-                  {/* Content */}
-                  <div className="flex-1 min-w-0">
-                    <p className={"text-[13px] font-medium leading-snug " + (isDone ? "line-through text-[#A3A3A3]" : "text-[#0A0A0A]")}>{action.title}</p>
-                    {action.description && (
-                      <p className="text-[11px] text-[#737373] mt-0.5 line-clamp-1">{action.description}</p>
-                    )}
-                    <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-                      <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded" style={{ color: prio.color, backgroundColor: prio.bg }}>{prio.label}</span>
-                      {action.source && action.source !== "manual" && (
-                        <span className="text-[9px] text-[#A3A3A3] bg-[#F5F5F5] px-1.5 py-0.5 rounded">{SOURCE_LABELS[action.source] || action.source}</span>
-                      )}
-                      {action.domain && (
-                        <span className="text-[9px] text-[#A3A3A3]">{action.domain}</span>
-                      )}
-                      {due && (
-                        <span className={"text-[9px] font-medium " + (due.overdue ? "text-[#EF4444]" : "text-[#737373]")}>{due.text}</span>
-                      )}
-                      <span className="text-[9px] text-[#D4D4D4]">{timeSince(action.created_at)}</span>
-                    </div>
+              <div
+                key={col.id}
+                className="flex flex-col min-h-0"
+                onDragOver={function(e) { onDragOver(e, col.id); }}
+                onDragLeave={onDragLeave}
+                onDrop={function(e) { onDrop(e, col.id); }}
+              >
+                {/* Column header */}
+                <div className="flex items-center justify-between mb-3 shrink-0">
+                  <div className="flex items-center gap-2">
+                    <Icon size={14} style={{ color: col.color }} />
+                    <span className="text-[13px] font-semibold text-[#0A0A0A]">{col.label}</span>
+                    <span className="text-[11px] text-[#A3A3A3] bg-[#F5F5F5] rounded-full h-5 min-w-[20px] flex items-center justify-center px-1.5 font-medium">
+                      {items.length}
+                    </span>
                   </div>
+                  {col.id !== "done" && (
+                    <button
+                      onClick={function() { setAddingIn(addingIn === col.id ? null : col.id); }}
+                      className="h-6 w-6 rounded-md text-[#C0C0C0] hover:text-[#0A0A0A] hover:bg-[#F5F5F5] flex items-center justify-center transition-colors"
+                    >
+                      <Plus size={14} />
+                    </button>
+                  )}
+                </div>
+
+                {/* Drop zone */}
+                <div className={"flex-1 rounded-xl border-2 border-dashed p-2 space-y-2 overflow-y-auto transition-colors " + (isOver ? "border-[#6366F1] bg-[#EEF2FF]" : "border-transparent bg-[#FAFAFA]")}>
+                  {/* Quick add inline */}
+                  {addingIn === col.id && (
+                    <div className="bg-white rounded-lg border border-[#E5E5E5] p-2.5 shadow-sm">
+                      <input
+                        ref={addInputRef}
+                        type="text"
+                        value={newTitle}
+                        onChange={function(e) { setNewTitle(e.target.value); }}
+                        onKeyDown={function(e) {
+                          if (e.key === "Enter") handleAdd(col.id);
+                          if (e.key === "Escape") { setAddingIn(null); setNewTitle(""); }
+                        }}
+                        placeholder="Titre de l'action..."
+                        className="w-full text-[13px] bg-transparent focus:outline-none text-[#0A0A0A] placeholder:text-[#C0C0C0]"
+                      />
+                      <div className="flex items-center justify-between mt-2">
+                        <button
+                          onClick={function() { handleAdd(col.id); }}
+                          disabled={!newTitle.trim()}
+                          className="text-[11px] font-medium text-white bg-[#0A0A0A] rounded-md px-2.5 py-1 hover:bg-[#333] disabled:opacity-40"
+                        >
+                          Ajouter
+                        </button>
+                        <button onClick={function() { setAddingIn(null); setNewTitle(""); }} className="text-[11px] text-[#A3A3A3]">Annuler</button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Cards */}
+                  {items.map(function(action) {
+                    var dotColor = PRIORITY_DOT[action.priority] || "#F59E0B";
+                    var isDragging = dragId === action.id;
+                    var due = action.due_date ? dueLabel(action.due_date) : null;
+                    var sourceLabel = action.source ? SOURCE_LABELS[action.source] : "";
+
+                    return (
+                      <div
+                        key={action.id}
+                        draggable
+                        onDragStart={function(e) { onDragStart(e, action.id); }}
+                        onDragEnd={onDragEnd}
+                        className={"group bg-white rounded-lg border border-[#EBEBEB] p-3 cursor-grab active:cursor-grabbing hover:border-[#D4D4D4] hover:shadow-sm transition-all select-none " + (isDragging ? "opacity-50 ring-2 ring-[#6366F1]" : "") + (col.id === "done" ? " opacity-70" : "")}
+                      >
+                        {/* Top row: grip + title + delete */}
+                        <div className="flex items-start gap-2">
+                          <GripVertical size={12} className="text-[#D4D4D4] mt-0.5 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <p className={"flex-1 text-[13px] font-medium leading-snug " + (col.id === "done" ? "line-through text-[#A3A3A3]" : "text-[#0A0A0A]")}>
+                            {action.title}
+                          </p>
+                          <button
+                            onClick={function(e) { e.stopPropagation(); handleDelete(action.id); }}
+                            className="shrink-0 opacity-0 group-hover:opacity-100 h-5 w-5 flex items-center justify-center rounded text-[#D4D4D4] hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-all"
+                          >
+                            <Trash2 size={11} />
+                          </button>
+                        </div>
+
+                        {/* Meta row */}
+                        <div className="flex items-center gap-1.5 mt-2 flex-wrap">
+                          {/* Priority dot */}
+                          <div className="flex items-center gap-1">
+                            <div className="h-2 w-2 rounded-full" style={{ backgroundColor: dotColor }} />
+                            <span className="text-[9px] text-[#A3A3A3]">{PRIORITY_LABEL[action.priority]}</span>
+                          </div>
+
+                          {/* Source */}
+                          {sourceLabel && (
+                            <span className="text-[9px] text-[#6366F1] bg-[#EEF2FF] px-1.5 py-0.5 rounded font-medium">{sourceLabel}</span>
+                          )}
+
+                          {/* Domain */}
+                          {action.domain && (
+                            <span className="text-[9px] text-[#A3A3A3] bg-[#F5F5F5] px-1.5 py-0.5 rounded">{action.domain}</span>
+                          )}
+
+                          {/* Due date */}
+                          {due && (
+                            <span className={"text-[9px] font-medium flex items-center gap-0.5 " + (due.overdue ? "text-[#EF4444]" : "text-[#737373]")}>
+                              <Calendar size={8} /> {due.text}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                  {/* Empty state */}
+                  {items.length === 0 && !addingIn && (
+                    <div className="flex items-center justify-center h-24 text-[11px] text-[#C0C0C0]">
+                      {col.emptyText}
+                    </div>
+                  )}
                 </div>
               </div>
             );
