@@ -15,6 +15,7 @@ import {
   MessageSquare,
   ChevronsUpDown,
   Sparkles,
+  CheckSquare,
 } from "lucide-react";
 
 interface Conversation {
@@ -56,8 +57,9 @@ function groupByDate(conversations: Conversation[]): GroupedConversations {
 
 var NAV_ITEMS = [
   { id: "dashboards", label: "Dashboards", icon: LayoutDashboard, path: "/dashboards" },
-  { id: "icp", label: "ICP", icon: Target, path: "/dashboards/icp" },
+  { id: "actions", label: "Actions", icon: CheckSquare, path: "/actions" },
   { id: "alerts", label: "Monitoring", icon: Bell, path: "/alerts" },
+  { id: "icp", label: "ICP", icon: Target, path: "/dashboards/icp" },
 ];
 
 export default function ConversationSidebar() {
