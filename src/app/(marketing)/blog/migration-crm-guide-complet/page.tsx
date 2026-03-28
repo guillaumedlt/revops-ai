@@ -148,7 +148,7 @@ export default function MigrationCrmGuidePage() {
             <article>
               {/* Section 1 : Quand faut-il changer de CRM */}
               <section id="quand-changer" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Quand faut-il changer de CRM ?</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-6">
                     <p>La decision de changer de CRM ne se prend jamais a la legere. C&apos;est un investissement en temps, en budget et en energie pour toute l&apos;equipe. La question n&apos;est pas de savoir si votre CRM actuel a des defauts (ils en ont tous), mais si ces defauts sont devenus des freins structurels a votre croissance.</p>
@@ -163,7 +163,7 @@ export default function MigrationCrmGuidePage() {
                       { signal: "Le reporting est insuffisant ou inexistant", desc: "Impossible de sortir un tableau de bord fiable sans passer par un outil tiers. Les metriques cles (taux de conversion, cycle de vente, velocity) necessitent des calculs manuels. Votre directeur commercial prend ses decisions a l&apos;instinct.", color: "#4B5EFC" },
                       { signal: "L&apos;outil ne suit plus votre croissance", desc: "Ce qui fonctionnait pour 5 commerciaux ne tient plus a 20. Les pipelines sont devenus illisibles, les automatisations basiques sont impossibles, la gestion des territoires n&apos;existe pas. Le CRM est devenu un frein, pas un accelerateur.", color: "#22C55E" },
                     ].map((item) => (
-                      <div key={item.signal} className="rounded-xl border-l-4 bg-[#FAFAFA] p-4" style={{ borderLeftColor: item.color }}>
+                      <div key={item.signal} className="rounded-lg border-l-4 bg-[#FAFAFA] p-4" style={{ borderLeftColor: item.color }}>
                         <div className="flex items-center gap-2 mb-2">
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={item.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
                           <p className="text-[12px] font-semibold text-[#111]">{item.signal}</p>
@@ -182,7 +182,7 @@ export default function MigrationCrmGuidePage() {
 
               {/* Section 2 : Les risques d'une migration mal geree */}
               <section id="risques" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les risques d&apos;une migration mal geree</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-6">
                     <p>Avant de foncer tete baissee, il faut comprendre ce qui peut mal tourner. Une migration CRM ratee ne se repare pas facilement. Les degats sont souvent irreversibles ou extremement couteux a corriger. Voici les trois scenarios catastrophes les plus frequents que nous avons observes chez nos clients.</p>
@@ -194,7 +194,7 @@ export default function MigrationCrmGuidePage() {
                       { title: "Downtime prolonge du pipeline", desc: "Une startup SaaS decide de migrer un vendredi pour que tout soit pret lundi. Le mapping des champs n&apos;a pas ete teste. Les deals changent de stage, les montants disparaissent, les dates de closing sont ecrasees. L&apos;equipe commerciale passe 3 semaines a reconstituer son pipeline manuellement. Pendant ce temps, aucun reporting fiable, aucune prevision possible.", impact: "3 semaines de pipeline aveugle, 2 deals perdus par manque de suivi" },
                       { title: "Echec d&apos;adoption par les equipes", desc: "Une PME migre vers un CRM plus puissant sans former ses equipes. L&apos;interface est differente, les habitudes sont brisees, les raccourcis n&apos;existent plus. Les commerciaux regressent vers Excel. Apres 6 mois, le taux d&apos;adoption est a 25%. L&apos;entreprise paie deux outils (le nouveau CRM et les licences Excel/Google Sheets que tout le monde utilise en parallele).", impact: "25% d&apos;adoption apres 6 mois, ROI negatif sur le projet" },
                     ].map((item) => (
-                      <div key={item.title} className="rounded-xl border-2 border-[#FEE2E2] bg-[#FFF5F5] p-4">
+                      <div key={item.title} className="rounded-lg border-2 border-[#FEE2E2] bg-[#FFF5F5] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-5 h-5 rounded-full bg-[#EF4444]/10 flex items-center justify-center">
                             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
@@ -218,7 +218,7 @@ export default function MigrationCrmGuidePage() {
 
               {/* Section 3 : Etape 1 - Audit de l'existant */}
               <section id="audit-existant" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-[10px] font-bold text-[#4B5EFC] bg-[#4B5EFC]/10 px-2 py-0.5 rounded">ETAPE 1</span>
                   </div>
@@ -229,8 +229,8 @@ export default function MigrationCrmGuidePage() {
                   </div>
 
                   {/* CSS Mockup: Data Inventory Table */}
-                  <div className="rounded-xl border border-[#E8E8E8] overflow-hidden mb-5">
-                    <div className="bg-[#FAFAFA] border-b border-[#E8E8E8] px-4 py-2.5">
+                  <div className="rounded-lg border border-[#EAEAEA] overflow-hidden mb-5">
+                    <div className="bg-[#FAFAFA] border-b border-[#EAEAEA] px-4 py-2.5">
                       <p className="text-[11px] font-semibold text-[#111]">Inventaire des donnees a documenter</p>
                     </div>
                     <div className="overflow-x-auto">
@@ -287,7 +287,7 @@ export default function MigrationCrmGuidePage() {
 
               {/* Section 4 : Etape 2 - Choix du nouveau CRM */}
               <section id="choix-crm" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-[10px] font-bold text-[#4B5EFC] bg-[#4B5EFC]/10 px-2 py-0.5 rounded">ETAPE 2</span>
                   </div>
@@ -303,7 +303,7 @@ export default function MigrationCrmGuidePage() {
                       { critere: "Cout total de possession", desc: "Pas seulement la licence. Ajoutez les couts d&apos;implementation, de formation, d&apos;integrations tierces et de maintenance annuelle. Un CRM a 50 EUR/mois peut couter plus cher qu&apos;un CRM a 100 EUR/mois.", icon: "M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" },
                       { critere: "Scalabilite", desc: "Le CRM tiendra-t-il quand vous passerez de 10 a 50 commerciaux ? De 5 000 a 100 000 contacts ? Les limites techniques arrivent souvent plus vite que prevu.", icon: "M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" },
                     ].map((item) => (
-                      <div key={item.critere} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={item.critere} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4B5EFC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={item.icon} /></svg>
                           <p className="text-[12px] font-semibold text-[#111]">{item.critere}</p>
@@ -313,7 +313,7 @@ export default function MigrationCrmGuidePage() {
                     ))}
                   </div>
 
-                  <div className="rounded-xl border border-[#4B5EFC]/20 bg-[#4B5EFC]/5 p-4 mb-5">
+                  <div className="rounded-lg border border-[#4B5EFC]/20 bg-[#4B5EFC]/5 p-4 mb-5">
                     <div className="flex items-center gap-2 mb-2">
                       <div className="w-2 h-2 rounded-full bg-[#4B5EFC]" />
                       <p className="text-[12px] font-semibold text-[#111]">Pourquoi HubSpot gagne souvent la comparaison</p>
@@ -332,7 +332,7 @@ export default function MigrationCrmGuidePage() {
 
               {/* Section 5 : Etape 3 - Nettoyage des donnees */}
               <section id="nettoyage" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-[10px] font-bold text-[#4B5EFC] bg-[#4B5EFC]/10 px-2 py-0.5 rounded">ETAPE 3</span>
                   </div>
@@ -345,7 +345,7 @@ export default function MigrationCrmGuidePage() {
                   {/* Before/After Cards */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
                     {/* Before */}
-                    <div className="rounded-xl border-2 border-[#FEE2E2] bg-[#FFF5F5] p-4">
+                    <div className="rounded-lg border-2 border-[#FEE2E2] bg-[#FFF5F5] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-5 h-5 rounded-full bg-[#EF4444]/10 flex items-center justify-center">
                           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
@@ -376,7 +376,7 @@ export default function MigrationCrmGuidePage() {
                     </div>
 
                     {/* After */}
-                    <div className="rounded-xl border-2 border-[#DCFCE7] bg-[#F0FFF4] p-4">
+                    <div className="rounded-lg border-2 border-[#DCFCE7] bg-[#F0FFF4] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-5 h-5 rounded-full bg-[#22C55E]/10 flex items-center justify-center">
                           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
@@ -419,7 +419,7 @@ export default function MigrationCrmGuidePage() {
 
               {/* Section 6 : Etape 4 - Mapping des champs */}
               <section id="mapping" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-[10px] font-bold text-[#4B5EFC] bg-[#4B5EFC]/10 px-2 py-0.5 rounded">ETAPE 4</span>
                   </div>
@@ -430,8 +430,8 @@ export default function MigrationCrmGuidePage() {
                   </div>
 
                   {/* CSS Visual Field Mapping Table */}
-                  <div className="rounded-xl border border-[#E8E8E8] overflow-hidden mb-5">
-                    <div className="bg-[#FAFAFA] border-b border-[#E8E8E8] px-4 py-2.5">
+                  <div className="rounded-lg border border-[#EAEAEA] overflow-hidden mb-5">
+                    <div className="bg-[#FAFAFA] border-b border-[#EAEAEA] px-4 py-2.5">
                       <p className="text-[11px] font-semibold text-[#111]">Mapping des champs Contact : Salesforce vers HubSpot</p>
                     </div>
                     <div className="overflow-x-auto">
@@ -481,7 +481,7 @@ export default function MigrationCrmGuidePage() {
                     </div>
                   </div>
 
-                  <div className="rounded-xl bg-[#FFF7ED] border border-[#FFEDD5] p-4 mb-5">
+                  <div className="rounded-lg bg-[#FFF7ED] border border-[#FFEDD5] p-4 mb-5">
                     <div className="flex items-start gap-2">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF7A59" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 mt-0.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
                       <div>
@@ -500,7 +500,7 @@ export default function MigrationCrmGuidePage() {
 
               {/* Section 7 : Etape 5 - Migration technique */}
               <section id="migration-technique" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-[10px] font-bold text-[#4B5EFC] bg-[#4B5EFC]/10 px-2 py-0.5 rounded">ETAPE 5</span>
                   </div>
@@ -516,7 +516,7 @@ export default function MigrationCrmGuidePage() {
                       { tool: "Make (ex-Integromat) / Zapier", desc: "Outils d&apos;automatisation qui permettent de creer des flux de migration personnalises. Plus flexibles que les outils dedies mais necessitent une configuration manuelle des scenarios. Bons pour les migrations incrementales ou les synchronisations en continu pendant la phase de transition.", price: "A partir de 50 EUR/mois", complexity: "Moyenne-haute", best: "Migrations avec logique conditionnelle, synchronisation bidirectionnelle temporaire", color: "#6C5CE7" },
                       { tool: "Scripts custom (API)", desc: "Developpement sur mesure de scripts de migration via les APIs des deux CRM. Flexibilite totale sur la logique de transformation, le mapping complexe et les regles de deduplication. Necessite un developpeur et du temps de tests. L&apos;approche la plus fiable pour les migrations complexes.", price: "2 000 a 15 000 EUR", complexity: "Haute", best: "Migrations complexes, gros volumes, logique metier specifique", color: "#FF7A59" },
                     ].map((item) => (
-                      <div key={item.tool} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={item.tool} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-3 mb-3">
                           <div className="w-2 h-2 rounded-full" style={{ background: item.color }} />
                           <p className="text-[12px] font-semibold text-[#111]">{item.tool}</p>
@@ -550,7 +550,7 @@ export default function MigrationCrmGuidePage() {
 
               {/* Section 8 : Etape 6 - Tests et validation */}
               <section id="tests-validation" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-[10px] font-bold text-[#4B5EFC] bg-[#4B5EFC]/10 px-2 py-0.5 rounded">ETAPE 6</span>
                   </div>
@@ -597,7 +597,7 @@ export default function MigrationCrmGuidePage() {
                         ],
                       },
                     ].map((phase) => (
-                      <div key={phase.phase} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={phase.phase} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-2 h-2 rounded-full" style={{ background: phase.color }} />
                           <p className="text-[12px] font-semibold text-[#111]">{phase.phase}</p>
@@ -625,7 +625,7 @@ export default function MigrationCrmGuidePage() {
 
               {/* Section 9 : Etape 7 - Formation et adoption */}
               <section id="formation-adoption" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-[10px] font-bold text-[#4B5EFC] bg-[#4B5EFC]/10 px-2 py-0.5 rounded">ETAPE 7</span>
                   </div>
@@ -642,7 +642,7 @@ export default function MigrationCrmGuidePage() {
                       { title: "Creer des guides visuels accessibles", desc: "Des documents de reference courts (1-2 pages max) avec des captures d&apos;ecran pour les actions quotidiennes : creer un contact, logger un appel, avancer un deal, sortir un rapport. Disponibles dans un wiki interne ou un canal Slack dedie.", color: "#6C5CE7" },
                       { title: "Mesurer et suivre l&apos;adoption", desc: "Definissez des metriques d&apos;adoption claires : nombre de connexions quotidiennes, taux de remplissage des champs obligatoires, nombre d&apos;activites loggees par semaine. Faites un point hebdomadaire les 4 premieres semaines.", color: "#FF7A59" },
                     ].map((item) => (
-                      <div key={item.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={item.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-full" style={{ background: item.color }} />
                           <p className="text-[12px] font-semibold text-[#111]">{item.title}</p>
@@ -662,7 +662,7 @@ export default function MigrationCrmGuidePage() {
 
               {/* Section 10 : Les migrations courantes */}
               <section id="migrations-courantes" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les migrations courantes vers HubSpot</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-6">
                     <p>Chaque migration a ses specificites selon le CRM d&apos;origine. Voici les trois scenarios que nous rencontrons le plus souvent, avec les points d&apos;attention specifiques a chacun.</p>
@@ -670,7 +670,7 @@ export default function MigrationCrmGuidePage() {
 
                   <div className="space-y-4">
                     {/* Salesforce → HubSpot */}
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-3">
                           <div className="flex items-center gap-1.5">
@@ -694,7 +694,7 @@ export default function MigrationCrmGuidePage() {
                     </div>
 
                     {/* Pipedrive → HubSpot */}
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-3">
                           <div className="flex items-center gap-1.5">
@@ -718,7 +718,7 @@ export default function MigrationCrmGuidePage() {
                     </div>
 
                     {/* Excel → HubSpot */}
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-3">
                           <div className="flex items-center gap-1.5">
@@ -747,14 +747,14 @@ export default function MigrationCrmGuidePage() {
 
               {/* Section 11 : Timeline et budget — Dark section */}
               <section id="timeline-budget" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <h2 className="text-[17px] font-semibold text-white mb-4">Timeline et budget d&apos;une migration CRM</h2>
                   <div className="space-y-3 text-[13px] text-[#999] leading-[1.75] mb-6">
                     <p>Une migration CRM bien geree prend entre 8 et 12 semaines pour une PME de taille moyenne. C&apos;est plus long que ce que la plupart des entreprises anticipent, mais c&apos;est le temps necessaire pour faire les choses correctement. Voici la timeline type avec la repartition des efforts.</p>
                   </div>
 
                   {/* CSS Gantt-like Timeline */}
-                  <div className="rounded-xl border border-[#333] bg-[#1A1A1A] p-4 mb-6 overflow-x-auto">
+                  <div className="rounded-lg border border-[#333] bg-[#1A1A1A] p-4 mb-6 overflow-x-auto">
                     <p className="text-[11px] font-semibold text-white mb-4">Timeline type : migration CRM en 10 semaines</p>
                     <div className="space-y-2 min-w-[500px]">
                       {/* Week headers */}
@@ -805,7 +805,7 @@ export default function MigrationCrmGuidePage() {
                   </div>
 
                   {/* Cost Breakdown Table */}
-                  <div className="rounded-xl border border-[#333] bg-[#1A1A1A] p-4 mb-6">
+                  <div className="rounded-lg border border-[#333] bg-[#1A1A1A] p-4 mb-6">
                     <p className="text-[11px] font-semibold text-white mb-3">Estimation budgetaire par poste</p>
                     <div className="space-y-0">
                       {[
@@ -840,7 +840,7 @@ export default function MigrationCrmGuidePage() {
 
               {/* Section 12 : Notre methode chez Ceres — Dark section */}
               <section id="methode-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <div className="flex items-center gap-3 mb-5">
                     <div className="w-8 h-8 rounded-lg bg-[#4B5EFC]/20 flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4B5EFC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
@@ -861,7 +861,7 @@ export default function MigrationCrmGuidePage() {
                       { title: "Support post-migration de 30 jours", desc: "Nous restons disponibles 30 jours apres le deploiement pour corriger les ajustements, repondre aux questions des utilisateurs et optimiser les premieres semaines d&apos;utilisation. Pas de migration livree et oubliee.", color: "#4B5EFC" },
                       { title: "Garantie zero perte de donnees", desc: "Nous nous engageons contractuellement sur l&apos;integralite de vos donnees. Chaque enregistrement migre est verifie. En cas de probleme, nous avons les sauvegardes et les scripts pour corriger immediatement.", color: "#EF4444" },
                     ].map((item) => (
-                      <div key={item.title} className="rounded-xl border border-[#333] bg-[#1A1A1A] p-4">
+                      <div key={item.title} className="rounded-lg border border-[#333] bg-[#1A1A1A] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-full" style={{ background: item.color }} />
                           <p className="text-[12px] font-semibold text-white">{item.title}</p>
@@ -872,7 +872,7 @@ export default function MigrationCrmGuidePage() {
                   </div>
 
                   {/* Results */}
-                  <div className="rounded-xl border border-[#333] bg-[#1A1A1A] p-4 mb-6">
+                  <div className="rounded-lg border border-[#333] bg-[#1A1A1A] p-4 mb-6">
                     <p className="text-[12px] font-semibold text-white mb-3">Resultats moyens de nos migrations</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -896,7 +896,7 @@ export default function MigrationCrmGuidePage() {
               </section>
 
               {/* CTA */}
-              <div className="mb-12 rounded-2xl bg-gradient-to-br from-[#111] to-[#1A1A1A] p-6 md:p-8 text-center border border-[#333]">
+              <div className="mb-12 rounded-lg bg-gradient-to-br from-[#111] to-[#1A1A1A] p-6 md:p-8 text-center border border-[#333]">
                 <h3 className="text-[17px] font-semibold text-white mb-3">Vous envisagez une migration CRM ?</h3>
                 <p className="text-[13px] text-[#999] leading-[1.7] mb-5 max-w-[500px] mx-auto">Chez Ceres, on audite votre CRM actuel, on planifie la migration et on l&apos;execute de A a Z. Un premier audit gratuit de 30 minutes pour evaluer la complexite de votre migration et vous donner une estimation realiste.</p>
                 <Link href="https://calendly.com/ceres-revops/30min" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#4B5EFC] text-white rounded-lg text-[13px] font-medium hover:bg-[#3D4FD9] transition-colors">
@@ -910,7 +910,7 @@ export default function MigrationCrmGuidePage() {
                 <h3 className="text-[14px] font-semibold text-[#111] mb-4">Articles complementaires</h3>
                 <div className="grid gap-3">
                   {relatedArticles.map((a) => (
-                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
+                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
                       <div className="w-1 h-10 rounded-full" style={{ background: a.color }} />
                       <div className="flex-1 min-w-0">
                         <p className="text-[9px] font-medium mb-1" style={{ color: a.color }}>{a.category}</p>

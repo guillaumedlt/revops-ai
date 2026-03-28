@@ -151,7 +151,7 @@ export default function HubSpotVsSalesforceArticle() {
               {/* Section 1 : Deux geants, deux visions */}
               {/* ================================================================ */}
               <section id="deux-visions" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=32" alt="HubSpot" className="w-5 h-5" />
                     <img src="https://www.google.com/s2/favicons?domain=salesforce.com&sz=32" alt="Salesforce" className="w-5 h-5" />
@@ -166,7 +166,7 @@ export default function HubSpotVsSalesforceArticle() {
                   </div>
 
                   <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=32" alt="HubSpot" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">HubSpot</span>
@@ -178,7 +178,7 @@ export default function HubSpotVsSalesforceArticle() {
                         ))}
                       </ul>
                     </div>
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <img src="https://www.google.com/s2/favicons?domain=salesforce.com&sz=32" alt="Salesforce" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Salesforce</span>
@@ -199,7 +199,7 @@ export default function HubSpotVsSalesforceArticle() {
                       { stat: "150K+", label: "clients Salesforce dans le monde", color: "#00A1E0" },
                       { stat: "73%", label: "du marche CRM cloud domine par les deux", color: "#4B5EFC" },
                     ].map((s) => (
-                      <div key={s.label} className="rounded-xl border border-[#F2F2F2] p-4 text-center">
+                      <div key={s.label} className="rounded-lg border border-[#F2F2F2] p-4 text-center">
                         <p className="text-[22px] font-bold mb-1" style={{ color: s.color }}>{s.stat}</p>
                         <p className="text-[10px] text-[#999] leading-[1.4]">{s.label}</p>
                       </div>
@@ -213,7 +213,7 @@ export default function HubSpotVsSalesforceArticle() {
               {/* Section 2 : Interface et experience utilisateur */}
               {/* ================================================================ */}
               <section id="interface-ux" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Interface et experience utilisateur</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-6">
                     <p>L&apos;interface est le critere le plus sous-estime dans le choix d&apos;un CRM, et pourtant c&apos;est celui qui determine si vos equipes vont reellement utiliser l&apos;outil au quotidien. Un CRM mal adopte, meme puissant, ne sert a rien. La difference d&apos;approche UX entre HubSpot et Salesforce est frappante.</p>
@@ -225,7 +225,7 @@ export default function HubSpotVsSalesforceArticle() {
                   <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-3">Comparaison des vues pipeline</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                     {/* HubSpot Pipeline Mockup */}
-                    <div className="rounded-xl border border-[#F2F2F2] overflow-hidden">
+                    <div className="rounded-lg border border-[#F2F2F2] overflow-hidden">
                       <div className="bg-[#2D3E50] px-3 py-2 flex items-center gap-2">
                         <div className="flex gap-1">
                           <div className="w-2 h-2 rounded-full bg-[#FF5F57]" />
@@ -267,7 +267,7 @@ export default function HubSpotVsSalesforceArticle() {
                     </div>
 
                     {/* Salesforce Pipeline Mockup */}
-                    <div className="rounded-xl border border-[#F2F2F2] overflow-hidden">
+                    <div className="rounded-lg border border-[#F2F2F2] overflow-hidden">
                       <div className="bg-[#032D60] px-3 py-2 flex items-center gap-2">
                         <div className="flex gap-1">
                           <div className="w-2 h-2 rounded-full bg-[#FF5F57]" />
@@ -313,7 +313,7 @@ export default function HubSpotVsSalesforceArticle() {
                   <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-3">Comparaison des fiches contact</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {/* HubSpot Contact Record */}
-                    <div className="rounded-xl border border-[#F2F2F2] overflow-hidden">
+                    <div className="rounded-lg border border-[#F2F2F2] overflow-hidden">
                       <div className="bg-[#2D3E50] px-3 py-2 flex items-center gap-2">
                         <div className="flex gap-1">
                           <div className="w-2 h-2 rounded-full bg-[#FF5F57]" />
@@ -365,7 +365,7 @@ export default function HubSpotVsSalesforceArticle() {
                     </div>
 
                     {/* Salesforce Contact Record */}
-                    <div className="rounded-xl border border-[#F2F2F2] overflow-hidden">
+                    <div className="rounded-lg border border-[#F2F2F2] overflow-hidden">
                       <div className="bg-[#032D60] px-3 py-2 flex items-center gap-2">
                         <div className="flex gap-1">
                           <div className="w-2 h-2 rounded-full bg-[#FF5F57]" />
@@ -434,7 +434,7 @@ export default function HubSpotVsSalesforceArticle() {
               {/* Section 3 : Fonctionnalites CRM */}
               {/* ================================================================ */}
               <section id="fonctionnalites-crm" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Fonctionnalites CRM : pipeline, contacts, deals</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le coeur d&apos;un CRM, c&apos;est la gestion des contacts, des entreprises et des opportunites. Sur ce terrain, les deux outils sont excellents, mais avec des approches differentes.</p>
@@ -454,7 +454,7 @@ export default function HubSpotVsSalesforceArticle() {
                       { critere: "Recherche et filtres", hubspot: "Filtres avances, listes actives/statiques, vues enregistrees. Interface claire mais requetes limitees.", salesforce: "SOQL, list views, reports as filters, dynamic dashboards. Puissance de requetage superieure.", winner: "Salesforce", winColor: "#00A1E0" },
                       { critere: "Gestion de territoire", hubspot: "Basique (equipes et vues). Pas de territory management natif.", salesforce: "Territory Management Enterprise natif. Hierarchies, regles d'attribution, forecasting par territoire.", winner: "Salesforce", winColor: "#00A1E0" },
                     ].map((r) => (
-                      <div key={r.critere} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={r.critere} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-3">
                           <p className="text-[12px] font-semibold text-[#111] flex-1">{r.critere}</p>
                           <span className="text-[9px] px-1.5 py-0.5 rounded font-medium" style={{ background: `${r.winColor}15`, color: r.winColor }}>Avantage {r.winner}</span>
@@ -486,7 +486,7 @@ export default function HubSpotVsSalesforceArticle() {
               {/* Section 4 : Marketing automation */}
               {/* ================================================================ */}
               <section id="marketing-automation" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Marketing automation : HubSpot natif vs Salesforce + Pardot/MCAE</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>C&apos;est probablement le domaine ou la difference entre les deux est la plus marquee. HubSpot a ete construit comme une plateforme marketing avant d&apos;etre un CRM. Salesforce, a l&apos;inverse, a acquis ses capacites marketing par acquisitions successives (Pardot en 2013, ExactTarget devenu Marketing Cloud en 2014).</p>
@@ -500,7 +500,7 @@ export default function HubSpotVsSalesforceArticle() {
 
                   {/* Comparison bubbles */}
                   <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#FFF5F0] border border-[#FF7A59]/20 p-4">
+                    <div className="rounded-lg bg-[#FFF5F0] border border-[#FF7A59]/20 p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=32" alt="HubSpot" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#FF7A59]">HubSpot Marketing Hub</span>
@@ -522,7 +522,7 @@ export default function HubSpotVsSalesforceArticle() {
                         ))}
                       </ul>
                     </div>
-                    <div className="rounded-xl bg-[#E8F4FD] border border-[#00A1E0]/20 p-4">
+                    <div className="rounded-lg bg-[#E8F4FD] border border-[#00A1E0]/20 p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <img src="https://www.google.com/s2/favicons?domain=salesforce.com&sz=32" alt="Salesforce" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#00A1E0]">Salesforce MCAE (Pardot)</span>
@@ -546,7 +546,7 @@ export default function HubSpotVsSalesforceArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-5 rounded-xl border border-[#22C55E]/30 bg-[#F0FDF4] p-4">
+                  <div className="mt-5 rounded-lg border border-[#22C55E]/30 bg-[#F0FDF4] p-4">
                     <p className="text-[12px] font-semibold text-[#22C55E] mb-2">Verdict marketing automation</p>
                     <p className="text-[11px] text-[#555] leading-[1.6]">HubSpot gagne largement sur le marketing automation pour les PME B2B. L&apos;experience native, la coherence de l&apos;interface et le rapport qualite/prix sont superieurs. Salesforce + MCAE est une option viable pour les entreprises deja sur Salesforce CRM qui veulent eviter une migration, mais le cout et la complexite sont plus eleves pour un resultat souvent equivalent. La seule exception : si vous avez des besoins B2C ou omnicanal avances, Marketing Cloud (pas MCAE) est plus puissant que HubSpot.</p>
                   </div>
@@ -558,7 +558,7 @@ export default function HubSpotVsSalesforceArticle() {
               {/* Section 5 : Reporting et analytics */}
               {/* ================================================================ */}
               <section id="reporting" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Reporting et analytics</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-6">
                     <p>Le reporting est un domaine ou les deux outils excellent, mais avec des niveaux de profondeur tres differents. HubSpot a fait d&apos;enormes progres ces dernieres annees, mais Salesforce reste la reference en matiere de reporting et d&apos;analytics CRM.</p>
@@ -570,7 +570,7 @@ export default function HubSpotVsSalesforceArticle() {
                   <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-3">Comparaison des dashboards</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {/* HubSpot Dashboard Mockup */}
-                    <div className="rounded-xl border border-[#F2F2F2] overflow-hidden">
+                    <div className="rounded-lg border border-[#F2F2F2] overflow-hidden">
                       <div className="bg-[#2D3E50] px-3 py-2 flex items-center gap-2">
                         <div className="flex gap-1">
                           <div className="w-2 h-2 rounded-full bg-[#FF5F57]" />
@@ -618,7 +618,7 @@ export default function HubSpotVsSalesforceArticle() {
                     </div>
 
                     {/* Salesforce Dashboard Mockup */}
-                    <div className="rounded-xl border border-[#F2F2F2] overflow-hidden">
+                    <div className="rounded-lg border border-[#F2F2F2] overflow-hidden">
                       <div className="bg-[#032D60] px-3 py-2 flex items-center gap-2">
                         <div className="flex gap-1">
                           <div className="w-2 h-2 rounded-full bg-[#FF5F57]" />
@@ -693,7 +693,7 @@ export default function HubSpotVsSalesforceArticle() {
               {/* Section 6 : Automatisation et workflows */}
               {/* ================================================================ */}
               <section id="automatisation" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Automatisation et workflows</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;automatisation est devenue le nerf de la guerre dans les operations commerciales et marketing. Les deux plateformes proposent des outils puissants, mais avec des philosophies differentes.</p>
@@ -706,7 +706,7 @@ export default function HubSpotVsSalesforceArticle() {
                   </div>
 
                   <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=32" alt="HubSpot" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">HubSpot Workflows</span>
@@ -727,7 +727,7 @@ export default function HubSpotVsSalesforceArticle() {
                         ))}
                       </div>
                     </div>
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <img src="https://www.google.com/s2/favicons?domain=salesforce.com&sz=32" alt="Salesforce" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Salesforce Flow</span>
@@ -757,7 +757,7 @@ export default function HubSpotVsSalesforceArticle() {
               {/* Section 7 : Integrations et ecosysteme */}
               {/* ================================================================ */}
               <section id="integrations" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Integrations et ecosysteme</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Un CRM n&apos;existe pas en isolation. Il doit se connecter a votre stack technologique : email, telephonie, facturation, ERP, outils de prospection, BI, service client. La richesse de l&apos;ecosysteme d&apos;integrations est un critere decisif.</p>
@@ -775,7 +775,7 @@ export default function HubSpotVsSalesforceArticle() {
                       { platform: "AppExchange", count: "7 000+", logo: "salesforce.com", color: "#00A1E0", examples: ["Conga", "DocuSign", "Gong", "Outreach", "LeanData", "Salesforce CPQ"] },
                       { platform: "HubSpot Marketplace", count: "1 700+", logo: "hubspot.com", color: "#FF7A59", examples: ["Aircall", "PandaDoc", "Databox", "Vidyard", "Drift", "Clearbit"] },
                     ].map((e) => (
-                      <div key={e.platform} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={e.platform} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <img src={`https://www.google.com/s2/favicons?domain=${e.logo}&sz=32`} alt={e.platform} className="w-4 h-4" />
                           <span className="text-[12px] font-semibold text-[#111]">{e.platform}</span>
@@ -798,7 +798,7 @@ export default function HubSpotVsSalesforceArticle() {
               {/* Section 8 : Implementation et time-to-value */}
               {/* ================================================================ */}
               <section id="implementation" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Implementation et time-to-value</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le time-to-value, c&apos;est le temps necessaire entre la signature du contrat et le moment ou votre equipe utilise reellement le CRM au quotidien et en tire de la valeur. C&apos;est un critere fondamental que beaucoup d&apos;entreprises sous-estiment lors du choix.</p>
@@ -812,7 +812,7 @@ export default function HubSpotVsSalesforceArticle() {
 
                   {/* Timeline comparison */}
                   <div className="mt-5 space-y-3">
-                    <div className="rounded-xl border border-[#FF7A59]/20 bg-[#FFF5F0] p-4">
+                    <div className="rounded-lg border border-[#FF7A59]/20 bg-[#FFF5F0] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=32" alt="HubSpot" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#FF7A59]">HubSpot : timeline d&apos;implementation</span>
@@ -838,7 +838,7 @@ export default function HubSpotVsSalesforceArticle() {
                       <p className="text-[10px] text-[#888] mt-2">Time-to-value moyen : 3-6 semaines</p>
                     </div>
 
-                    <div className="rounded-xl border border-[#00A1E0]/20 bg-[#E8F4FD] p-4">
+                    <div className="rounded-lg border border-[#00A1E0]/20 bg-[#E8F4FD] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <img src="https://www.google.com/s2/favicons?domain=salesforce.com&sz=32" alt="Salesforce" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#00A1E0]">Salesforce : timeline d&apos;implementation</span>
@@ -872,7 +872,7 @@ export default function HubSpotVsSalesforceArticle() {
               {/* Section 9 : Prix - le vrai comparatif */}
               {/* ================================================================ */}
               <section id="prix" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Prix : le vrai comparatif (total cost of ownership)</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Comparer les prix de HubSpot et Salesforce sur la base des licences seules est trompeur. Le vrai cout d&apos;un CRM, c&apos;est le TCO (Total Cost of Ownership) qui inclut les licences, l&apos;implementation, la maintenance, les add-ons et les ressources internes necessaires.</p>
@@ -885,7 +885,7 @@ export default function HubSpotVsSalesforceArticle() {
                   </div>
 
                   {/* TCO comparison */}
-                  <div className="mt-5 rounded-xl bg-[#111] p-4">
+                  <div className="mt-5 rounded-lg bg-[#111] p-4">
                     <p className="text-[12px] font-semibold text-white mb-3">TCO annuel estime pour 20 utilisateurs commerciaux + marketing</p>
                     <div className="space-y-1">
                       <div className="flex items-center py-2 border-b border-white/10">
@@ -933,7 +933,7 @@ export default function HubSpotVsSalesforceArticle() {
               {/* Section 10 : Scalabilite */}
               {/* ================================================================ */}
               <section id="scalabilite" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Scalabilite : quand HubSpot suffit, quand Salesforce s&apos;impose</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La question de la scalabilite est centrale dans le choix entre HubSpot et Salesforce. Beaucoup d&apos;entreprises choisissent Salesforce &ldquo;au cas ou&rdquo; elles grossissent, et se retrouvent avec un outil surdimensionne qu&apos;elles n&apos;exploitent qu&apos;a 20% de ses capacites. A l&apos;inverse, certaines entreprises restent sur HubSpot trop longtemps et finissent par se heurter aux limites de la plateforme.</p>
@@ -946,7 +946,7 @@ export default function HubSpotVsSalesforceArticle() {
                   </div>
 
                   {/* Scale spectrum */}
-                  <div className="mt-5 rounded-xl border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg border border-[#F2F2F2] p-4">
                     <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4">Spectre de scalabilite</p>
                     <div className="space-y-3">
                       {[
@@ -978,7 +978,7 @@ export default function HubSpotVsSalesforceArticle() {
               {/* Section 11 : Tableau comparatif global (dark section) */}
               {/* ================================================================ */}
               <section id="tableau-comparatif" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <h2 className="text-[17px] font-semibold text-white mb-5">Tableau comparatif global : 22 criteres</h2>
                   <div className="space-y-1">
                     {/* Header */}
@@ -1032,14 +1032,14 @@ export default function HubSpotVsSalesforceArticle() {
               {/* Section 12 : Notre verdict selon votre profil */}
               {/* ================================================================ */}
               <section id="verdict" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Notre verdict : quel CRM choisir selon votre profil</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Apres avoir deploye les deux plateformes chez des dizaines de clients, notre conviction est claire : il n&apos;y a pas de meilleur CRM dans l&apos;absolu. Le debat &ldquo;HubSpot vs Salesforce&rdquo; est un faux debat si on ne le contextualise pas. Le bon choix depend de votre taille, de votre complexite operationnelle, de votre budget et de vos ambitions de croissance. Voici notre recommandation par profil.</p>
                   </div>
 
                   <div className="mt-5 space-y-3">
-                    <div className="rounded-xl border border-[#FF7A59]/30 bg-[#FFF5F0] p-4">
+                    <div className="rounded-lg border border-[#FF7A59]/30 bg-[#FFF5F0] p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=32" alt="HubSpot" className="w-4 h-4" />
                         <p className="text-[12px] font-semibold text-[#FF7A59]">Choisissez HubSpot si...</p>
@@ -1060,7 +1060,7 @@ export default function HubSpotVsSalesforceArticle() {
                       </ul>
                     </div>
 
-                    <div className="rounded-xl border border-[#00A1E0]/30 bg-[#E8F4FD] p-4">
+                    <div className="rounded-lg border border-[#00A1E0]/30 bg-[#E8F4FD] p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=salesforce.com&sz=32" alt="Salesforce" className="w-4 h-4" />
                         <p className="text-[12px] font-semibold text-[#00A1E0]">Choisissez Salesforce si...</p>
@@ -1100,7 +1100,7 @@ export default function HubSpotVsSalesforceArticle() {
               <p className="text-[13px] font-semibold text-[#111] mb-4">Articles similaires</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedArticles.map((a) => (
-                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
+                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold text-white mb-3" style={{ background: a.color }}>
                       {a.category[0]}
                     </div>
@@ -1113,14 +1113,14 @@ export default function HubSpotVsSalesforceArticle() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide pour choisir entre HubSpot et Salesforce ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[500px] mx-auto">On vous aide a evaluer vos besoins reels, a choisir le bon CRM et a le deployer correctement. Pas de discours commercial : une recommandation honnete basee sur votre contexte.</p>
                 <div className="flex items-center justify-center gap-3">
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                     <span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Reserver un appel
                   </a>
-                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                     Nos services
                   </Link>
                 </div>

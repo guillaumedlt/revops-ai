@@ -136,7 +136,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
               </div>
 
               {/* Tools involved */}
-              <div className="mt-8 rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+              <div className="mt-8 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                 <span className="text-[13px] font-semibold text-[#111] mb-4 block">Outils concernes</span>
                 <div className="flex flex-wrap gap-3">
                   {[
@@ -159,7 +159,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
             <article>
               {/* Section 1 : Pourquoi connecter Calendly a HubSpot */}
               <section id="pourquoi" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi connecter Calendly a HubSpot</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Calendly est utilise par des millions d&apos;equipes commerciales et marketing pour planifier leurs rendez-vous. Le lien de booking est partout : dans les signatures d&apos;email, les landing pages, les sequences de prospection, les formulaires de contact. C&apos;est simple, rapide, et ca evite les allers-retours pour trouver un creneau.</p>
@@ -179,7 +179,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
 
               {/* Section 2 : HubSpot Meetings vs Calendly */}
               <section id="comparaison" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">HubSpot Meetings vs Calendly : quelle solution choisir ?</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Avant de parler d&apos;integration, il faut poser la question que tout le monde se pose : pourquoi ne pas simplement utiliser HubSpot Meetings, l&apos;outil de prise de rendez-vous natif de HubSpot ? C&apos;est une bonne question, et la reponse depend de votre contexte.</p>
@@ -232,11 +232,11 @@ export default function IntegrationHubSpotCalendlyArticle() {
                   </div>
 
                   <div className="mt-6 space-y-3">
-                    <div className="rounded-xl bg-[#EFF6FF] border border-[#DBEAFE] p-4">
+                    <div className="rounded-lg bg-[#EFF6FF] border border-[#DBEAFE] p-4">
                       <p className="text-[12px] font-semibold text-[#111] mb-2">Quand utiliser HubSpot Meetings</p>
                       <p className="text-[11px] text-[#777] leading-[1.65]">Votre equipe est petite (1-5 commerciaux), vous n&apos;avez pas besoin de routing avance, et vous voulez eviter un outil supplementaire. HubSpot Meetings est gratuit, natif, et les donnees sont deja dans le CRM sans aucune configuration. C&apos;est le choix logique si la simplicite est votre priorite.</p>
                     </div>
-                    <div className="rounded-xl bg-[#F0F0FF] border border-[#E0E0FF] p-4">
+                    <div className="rounded-lg bg-[#F0F0FF] border border-[#E0E0FF] p-4">
                       <p className="text-[12px] font-semibold text-[#111] mb-2">Quand utiliser Calendly</p>
                       <p className="text-[11px] text-[#777] leading-[1.65]">Votre equipe est plus grande (5+ commerciaux), vous avez besoin de routing intelligent (qualifier le prospect avant de l&apos;envoyer vers le bon commercial), vous voulez des pages de booking avec un branding pro, ou vous avez besoin de fonctionnalites avancees comme les paiements a la reservation ou les rappels SMS. Calendly est aussi le meilleur choix si vous utilisez d&apos;autres CRM en parallele ou si vous avez des processus de booking complexes (events collectifs, enchainements de meetings).</p>
                     </div>
@@ -252,7 +252,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
 
               {/* Section 3 : Configurer l'integration native */}
               <section id="configurer" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Configurer l&apos;integration native Calendly-HubSpot</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Calendly propose une integration officielle avec HubSpot, disponible a partir du plan Calendly Standard (10$/mois par utilisateur). Le setup est rapide : comptez 10 a 15 minutes pour la connexion de base, et une heure supplementaire pour configurer les mappings de champs et les workflows.</p>
@@ -304,7 +304,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#F0FDF4] border border-[#DCFCE7] p-4">
+                  <div className="mt-5 rounded-lg bg-[#F0FDF4] border border-[#DCFCE7] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Astuce Ceres</p>
                     <p className="text-[11px] text-[#777] leading-[1.65]">Creez une propriete HubSpot dediee &ldquo;Source du rendez-vous&rdquo; (enumeration) avec des valeurs comme &ldquo;Calendly - Demo&rdquo;, &ldquo;Calendly - Decouverte&rdquo;, &ldquo;Calendly - Support&rdquo;. Mappez-la depuis le type d&apos;evenement Calendly. Ca vous permettra de filtrer vos rapports et vos workflows par type de rendez-vous, ce qui est indispensable quand votre equipe gere plusieurs types de meetings.</p>
                   </div>
@@ -314,7 +314,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
 
               {/* Section 4 : Que synchronise l'integration */}
               <section id="synchronisation" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Que synchronise l&apos;integration Calendly-HubSpot</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Comprendre exactement ce qui est synchronise entre Calendly et HubSpot est essentiel pour configurer vos workflows correctement. Voici le detail complet de ce que l&apos;integration native transmet :</p>
@@ -363,7 +363,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
                         ],
                       },
                     ].map((block) => (
-                      <div key={block.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={block.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-3">
                           <span className="w-2 h-2 rounded-full shrink-0" style={{ background: block.color }} />
                           <p className="text-[13px] font-semibold text-[#111]">{block.title}</p>
@@ -380,7 +380,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FFF7ED] border border-[#FFEDD5] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FFF7ED] border border-[#FFEDD5] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Point d&apos;attention sur le matching des contacts</p>
                     <p className="text-[11px] text-[#777] leading-[1.65]">Le matching entre Calendly et HubSpot se fait exclusivement par email. Si un prospect prend rendez-vous avec un email personnel (gmail) puis revient avec son email professionnel, deux contacts differents seront crees dans HubSpot. Pensez a mettre en place un processus de deduplication regulier, ou configurez vos formulaires Calendly pour demander l&apos;email professionnel en priorite.</p>
                   </div>
@@ -390,7 +390,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
 
               {/* Section 5 : Automatiser apres la prise de RDV */}
               <section id="automatiser" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Automatiser apres la prise de rendez-vous</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;integration Calendly-HubSpot cree le contact et l&apos;activite. Mais la vraie valeur vient des workflows que vous construisez par-dessus. Voici les cinq automatisations qu&apos;on met en place systematiquement chez nos clients :</p>
@@ -456,7 +456,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
                         color: "#EF4444",
                       },
                     ].map((wf) => (
-                      <div key={wf.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={wf.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-1">
                           <span className="w-2 h-2 rounded-full shrink-0" style={{ background: wf.color }} />
                           <p className="text-[13px] font-semibold text-[#111]">{wf.title}</p>
@@ -485,13 +485,13 @@ export default function IntegrationHubSpotCalendlyArticle() {
 
               {/* Section 6 : Tracker les RDV dans le pipeline */}
               <section id="pipeline" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Tracker les rendez-vous dans le pipeline</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;integration Calendly-HubSpot prend tout son sens quand vous l&apos;utilisez pour alimenter votre pipeline commercial. Voici comment on structure le tracking chez nos clients :</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pipeline type avec Calendly comme point d&apos;entree</p>
                     <div className="space-y-2">
                       {[
@@ -542,7 +542,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
 
               {/* Section 7 : Les limites de l'integration */}
               <section id="limites" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les limites de l&apos;integration Calendly-HubSpot</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;integration est solide et couvre la majorite des besoins, mais elle n&apos;est pas parfaite. Voici les limites et les frustrations qu&apos;on rencontre regulierement en deploiement :</p>
@@ -587,7 +587,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#EFF6FF] border border-[#DBEAFE] p-4">
+                  <div className="mt-5 rounded-lg bg-[#EFF6FF] border border-[#DBEAFE] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Notre avis</p>
                     <p className="text-[11px] text-[#777] leading-[1.65]">Ces limites sont reelles mais aucune n&apos;est bloquante. La plupart se resolvent avec un ou deux workflows HubSpot bien configures. L&apos;integration Calendly-HubSpot reste l&apos;une des plus matures et des plus fiables du marche. On la deploie depuis plus de deux ans chez nos clients et les incidents sont exceptionnels.</p>
                   </div>
@@ -597,7 +597,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
 
               {/* Section 8 : Tips avances */}
               <section id="tips" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Tips avances pour tirer le maximum de l&apos;integration</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Une fois l&apos;integration de base en place, voici les techniques avancees qu&apos;on utilise chez Ceres pour en tirer le maximum :</p>
@@ -636,7 +636,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
                         icon: "hubspot.com",
                       },
                     ].map((tip) => (
-                      <div key={tip.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={tip.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <img src={`https://www.google.com/s2/favicons?domain=${tip.icon}&sz=32`} alt="" className="w-4 h-4" />
                           <p className="text-[13px] font-semibold text-[#111]">{tip.title}</p>
@@ -655,7 +655,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
 
               {/* Section 9 : Notre recommandation */}
               <section id="recommandation" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Recommandation</span>
                   <h2 className="text-[20px] font-semibold text-white mb-4">Notre recommandation selon votre situation</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -663,21 +663,21 @@ export default function IntegrationHubSpotCalendlyArticle() {
                   </div>
 
                   <div className="mt-5 space-y-3">
-                    <div className="rounded-xl bg-white/5 p-4">
+                    <div className="rounded-lg bg-white/5 p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=32" alt="HubSpot" className="w-4 h-4" />
                         <p className="text-[12px] font-semibold text-white">Equipe de 1-5 commerciaux, budget serre</p>
                       </div>
                       <p className="text-[11px] text-white/50 leading-[1.65]">Utilisez HubSpot Meetings. C&apos;est gratuit, natif, et les donnees sont automatiquement dans le CRM. Vous n&apos;avez pas besoin de configurer d&apos;integration, le round-robin est disponible des le plan Starter, et les rapports fonctionnent nativement. C&apos;est la solution la plus simple et la plus economique.</p>
                     </div>
-                    <div className="rounded-xl bg-white/5 p-4">
+                    <div className="rounded-lg bg-white/5 p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=calendly.com&sz=32" alt="Calendly" className="w-4 h-4" />
                         <p className="text-[12px] font-semibold text-white">Equipe de 5+ commerciaux, besoins de routing et de branding</p>
                       </div>
                       <p className="text-[11px] text-white/50 leading-[1.65]">Passez a Calendly Teams (16$/utilisateur/mois). Le routing intelligent, les pages de booking personnalisees, les rappels SMS, et l&apos;integration HubSpot mature en font le meilleur choix pour les equipes de vente structurees. L&apos;investissement supplementaire est largement compense par le temps gagne et la qualite de l&apos;experience prospect.</p>
                     </div>
-                    <div className="rounded-xl bg-white/5 p-4">
+                    <div className="rounded-lg bg-white/5 p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=calendly.com&sz=32" alt="Calendly" className="w-4 h-4" />
                         <p className="text-[12px] font-semibold text-white">Vous utilisez deja Calendly dans votre equipe</p>
@@ -699,7 +699,7 @@ export default function IntegrationHubSpotCalendlyArticle() {
               <p className="text-[13px] font-semibold text-[#111] mb-4">Articles similaires</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedArticles.map((a) => (
-                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
+                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold text-white mb-3" style={{ background: a.color }}>
                       {a.category[0]}
                     </div>
@@ -712,14 +712,14 @@ export default function IntegrationHubSpotCalendlyArticle() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide pour connecter Calendly a HubSpot ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[450px] mx-auto">On configure l&apos;integration Calendly-HubSpot de A a Z : connexion, mapping, workflows post-RDV, pipeline tracking. Operationnel en moins d&apos;une semaine.</p>
                 <div className="flex items-center justify-center gap-3">
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                     <span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Reserver un appel
                   </a>
-                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                     Nos services
                   </Link>
                 </div>

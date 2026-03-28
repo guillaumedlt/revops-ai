@@ -14,10 +14,10 @@ export default function ProgressBlock({ label, value, max, target, color }: Prop
   var barColor = color || (pct >= 80 ? "#22C55E" : pct >= 50 ? "#F59E0B" : "#EF4444");
 
   return (
-    <div className="border border-[#E5E5E5] rounded-xl p-4 bg-white">
+    <div className="border border-[#EAEAEA] rounded-lg p-4 bg-white">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-[11px] font-medium uppercase tracking-wider text-[#A3A3A3]">{label}</span>
-        <span className="text-sm font-bold text-[#0A0A0A] tabular-nums">{value.toLocaleString()} / {max.toLocaleString()}</span>
+        <span className="text-[11px] font-medium uppercase tracking-wider text-[#BBB]">{label}</span>
+        <span className="text-sm font-bold text-[#111] tabular-nums">{value.toLocaleString()} / {max.toLocaleString()}</span>
       </div>
       <div className="relative h-3 bg-[#F0F0F0] rounded-full overflow-hidden">
         <div
@@ -26,7 +26,7 @@ export default function ProgressBlock({ label, value, max, target, color }: Prop
         />
         {targetPct !== null && (
           <div
-            className="absolute top-0 h-full w-0.5 bg-[#0A0A0A]"
+            className="absolute top-0 h-full w-0.5 bg-[#111]"
             style={{ left: targetPct + "%" }}
             title={"Target: " + target}
           />
@@ -35,7 +35,7 @@ export default function ProgressBlock({ label, value, max, target, color }: Prop
       <div className="flex items-center justify-between mt-1.5">
         <span className="text-[11px] font-semibold tabular-nums" style={{ color: barColor }}>{pct}%</span>
         {target !== undefined && (
-          <span className="text-[10px] text-[#A3A3A3]">Target: {target.toLocaleString()}</span>
+          <span className="text-[10px] text-[#BBB]">Target: {target.toLocaleString()}</span>
         )}
       </div>
     </div>

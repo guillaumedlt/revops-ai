@@ -144,12 +144,12 @@ export default function ClaudeVsChatGPTArticle() {
 
               {/* Interface comparison hero */}
               <div className="mt-8 grid grid-cols-2 gap-3">
-                <div className="rounded-xl border border-[#D97757]/30 bg-[#FDF4EF] p-4 text-center">
+                <div className="rounded-lg border border-[#D97757]/30 bg-[#FDF4EF] p-4 text-center">
                   <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude" className="w-8 h-8 mx-auto mb-2" />
                   <p className="text-[13px] font-semibold text-[#111]">Claude</p>
                   <p className="text-[10px] text-[#999] mt-1">Anthropic</p>
                 </div>
-                <div className="rounded-xl border border-[#10A37F]/30 bg-[#F0FAF6] p-4 text-center">
+                <div className="rounded-lg border border-[#10A37F]/30 bg-[#F0FAF6] p-4 text-center">
                   <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=32" alt="ChatGPT" className="w-8 h-8 mx-auto mb-2" />
                   <p className="text-[13px] font-semibold text-[#111]">ChatGPT</p>
                   <p className="text-[10px] text-[#999] mt-1">OpenAI</p>
@@ -160,7 +160,7 @@ export default function ClaudeVsChatGPTArticle() {
             <article>
               {/* Section 1 : Pourquoi comparer */}
               <section id="pourquoi-comparer" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi comparer Claude et ChatGPT pour la vente</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Depuis fin 2024, l&apos;IA generative est devenue un outil de travail quotidien pour les equipes commerciales B2B. On ne parle plus d&apos;un gadget ou d&apos;une curiosite technologique. On parle d&apos;un levier concret qui permet a un commercial de rediger un email de prospection en 30 secondes, d&apos;analyser un pipeline de 200 deals en deux minutes, ou de preparer un rendez-vous client a partir d&apos;un transcript de call.</p>
@@ -170,7 +170,7 @@ export default function ClaudeVsChatGPTArticle() {
                     <p>Precisons d&apos;emblee : nous utilisons Claude comme outil principal et Claude Code pour le developpement de nos outils internes. Nous expliquerons pourquoi dans la derniere section. Mais nous continuons d&apos;utiliser ChatGPT pour certains cas d&apos;usage ou il excelle. L&apos;objectif ici n&apos;est pas de designer un &ldquo;gagnant&rdquo; mais de vous aider a choisir le bon outil selon votre contexte.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Ce que cet article couvre</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {[
@@ -194,7 +194,7 @@ export default function ClaudeVsChatGPTArticle() {
 
               {/* Section 2 : Les modeles en 2026 */}
               <section id="modeles-2026" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les modeles en 2026 : ou en est-on ?</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Avant de plonger dans les cas d&apos;usage, un point rapide sur les modeles disponibles de chaque cote. Les deux ecosystemes proposent une gamme de modeles adaptes a differents besoins en termes de performance, de vitesse et de cout.</p>
@@ -203,7 +203,7 @@ export default function ClaudeVsChatGPTArticle() {
                   </div>
 
                   <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-[#D97757]/20 p-4">
+                    <div className="rounded-lg border border-[#D97757]/20 p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Gamme Claude</span>
@@ -228,7 +228,7 @@ export default function ClaudeVsChatGPTArticle() {
                       </div>
                     </div>
 
-                    <div className="rounded-xl border border-[#10A37F]/20 p-4">
+                    <div className="rounded-lg border border-[#10A37F]/20 p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=32" alt="ChatGPT" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Gamme OpenAI</span>
@@ -265,7 +265,7 @@ export default function ClaudeVsChatGPTArticle() {
 
               {/* Section 3 : Emails de prospection */}
               <section id="emails-prospection" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="w-6 h-6 rounded-md bg-[#6D00CC] flex items-center justify-center text-white text-[10px] font-bold">1</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Redaction d&apos;emails de prospection</h2>
@@ -276,15 +276,15 @@ export default function ClaudeVsChatGPTArticle() {
                   </div>
 
                   {/* Side-by-side prompt */}
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-2">Prompt identique</p>
-                    <p className="text-[11px] text-[#555] leading-[1.6] font-mono bg-white rounded-lg border border-[#E8E8E8] p-3">&ldquo;Redige un email de prospection pour un VP Sales d&apos;une entreprise SaaS B2B de 50-200 salaries en France. Notre produit est un outil d&apos;analytics RevOps qui se connecte a HubSpot. L&apos;email doit faire moins de 100 mots, etre direct, sans jargon marketing, et terminer par une question ouverte. Ton : professionnel mais decontracte.&rdquo;</p>
+                    <p className="text-[11px] text-[#555] leading-[1.6] font-mono bg-white rounded-lg border border-[#EAEAEA] p-3">&ldquo;Redige un email de prospection pour un VP Sales d&apos;une entreprise SaaS B2B de 50-200 salaries en France. Notre produit est un outil d&apos;analytics RevOps qui se connecte a HubSpot. L&apos;email doit faire moins de 100 mots, etre direct, sans jargon marketing, et terminer par une question ouverte. Ton : professionnel mais decontracte.&rdquo;</p>
                   </div>
 
                   {/* Side-by-side mockup responses */}
                   <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {/* Claude response mockup */}
-                    <div className="rounded-xl border border-[#D97757]/30 overflow-hidden">
+                    <div className="rounded-lg border border-[#D97757]/30 overflow-hidden">
                       <div className="bg-[#FDF4EF] px-3 py-2 flex items-center gap-2 border-b border-[#D97757]/20">
                         <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude" className="w-3.5 h-3.5" />
                         <span className="text-[10px] font-semibold text-[#111]">Claude Sonnet</span>
@@ -306,7 +306,7 @@ export default function ClaudeVsChatGPTArticle() {
                     </div>
 
                     {/* ChatGPT response mockup */}
-                    <div className="rounded-xl border border-[#10A37F]/30 overflow-hidden">
+                    <div className="rounded-lg border border-[#10A37F]/30 overflow-hidden">
                       <div className="bg-[#F0FAF6] px-3 py-2 flex items-center gap-2 border-b border-[#10A37F]/20">
                         <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=32" alt="ChatGPT" className="w-3.5 h-3.5" />
                         <span className="text-[10px] font-semibold text-[#111]">GPT-4o</span>
@@ -336,7 +336,7 @@ export default function ClaudeVsChatGPTArticle() {
                     <p>Cela dit, ChatGPT reprend l&apos;avantage quand on lui donne des exemples dans le prompt (few-shot). Sa capacite a imiter un style a partir d&apos;exemples est legerement superieure. Si vous avez un email de reference qui performe bien, ChatGPT reproduira le pattern de facon plus fidele.</p>
                   </div>
 
-                  <div className="mt-4 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-4 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Verdict : emails de prospection</p>
                     <div className="grid grid-cols-2 gap-3">
                       <div className="flex items-center gap-2">
@@ -367,7 +367,7 @@ export default function ClaudeVsChatGPTArticle() {
 
               {/* Section 4 : Analyse CRM */}
               <section id="analyse-crm" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="w-6 h-6 rounded-md bg-[#6D00CC] flex items-center justify-center text-white text-[10px] font-bold">2</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Analyse de donnees CRM</h2>
@@ -379,7 +379,7 @@ export default function ClaudeVsChatGPTArticle() {
 
                   {/* Side-by-side analysis mockup */}
                   <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-[#D97757]/30 overflow-hidden">
+                    <div className="rounded-lg border border-[#D97757]/30 overflow-hidden">
                       <div className="bg-[#FDF4EF] px-3 py-2 flex items-center gap-2 border-b border-[#D97757]/20">
                         <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude" className="w-3.5 h-3.5" />
                         <span className="text-[10px] font-semibold text-[#111]">Claude : approche narrative</span>
@@ -393,7 +393,7 @@ export default function ClaudeVsChatGPTArticle() {
                       </div>
                     </div>
 
-                    <div className="rounded-xl border border-[#10A37F]/30 overflow-hidden">
+                    <div className="rounded-lg border border-[#10A37F]/30 overflow-hidden">
                       <div className="bg-[#F0FAF6] px-3 py-2 flex items-center gap-2 border-b border-[#10A37F]/20">
                         <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=32" alt="ChatGPT" className="w-3.5 h-3.5" />
                         <span className="text-[10px] font-semibold text-[#111]">ChatGPT : approche analytique</span>
@@ -420,7 +420,7 @@ export default function ClaudeVsChatGPTArticle() {
                     <p>En pratique, notre workflow optimal est le suivant : on utilise ChatGPT pour le traitement numerique brut (calculs, tableaux, graphiques) quand on a un gros fichier CSV, puis on passe le resultat a Claude pour l&apos;interpretation strategique et les recommandations. Mais pour une analyse conversationnelle rapide (&ldquo;voici mes 50 deals, qu&apos;est-ce qui cloche ?&rdquo;), Claude est plus efficace car il va droit aux insights.</p>
                   </div>
 
-                  <div className="mt-4 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-4 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Verdict : analyse CRM</p>
                     <div className="grid grid-cols-2 gap-3">
                       <div className="flex items-center gap-2">
@@ -451,7 +451,7 @@ export default function ClaudeVsChatGPTArticle() {
 
               {/* Section 5 : Resume de calls */}
               <section id="resume-calls" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="w-6 h-6 rounded-md bg-[#6D00CC] flex items-center justify-center text-white text-[10px] font-bold">3</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Resume de calls et meeting notes</h2>
@@ -474,7 +474,7 @@ export default function ClaudeVsChatGPTArticle() {
                       { critere: "Vitesse de traitement", claude: "Rapide", gpt: "Tres rapide", winner: "gpt" },
                       { critere: "Integration outils de call", claude: "API disponible", gpt: "Plugins natifs Gong/Chorus", winner: "gpt" },
                     ].map((r) => (
-                      <div key={r.critere} className={`rounded-xl border p-3 ${r.winner === "claude" ? "border-[#D97757]/20 bg-[#FDF4EF]/30" : r.winner === "gpt" ? "border-[#10A37F]/20 bg-[#F0FAF6]/30" : "border-[#F2F2F2]"}`}>
+                      <div key={r.critere} className={`rounded-lg border p-3 ${r.winner === "claude" ? "border-[#D97757]/20 bg-[#FDF4EF]/30" : r.winner === "gpt" ? "border-[#10A37F]/20 bg-[#F0FAF6]/30" : "border-[#F2F2F2]"}`}>
                         <p className="text-[11px] font-semibold text-[#111] mb-2">{r.critere}</p>
                         <div className="space-y-1">
                           <div className="flex items-start gap-2">
@@ -490,7 +490,7 @@ export default function ClaudeVsChatGPTArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-4 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-4 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Verdict : resume de calls</p>
                     <div className="grid grid-cols-2 gap-3">
                       <div className="flex items-center gap-2">
@@ -521,7 +521,7 @@ export default function ClaudeVsChatGPTArticle() {
 
               {/* Section 6 : Enrichissement de comptes */}
               <section id="enrichissement" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="w-6 h-6 rounded-md bg-[#6D00CC] flex items-center justify-center text-white text-[10px] font-bold">4</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Recherche et enrichissement de comptes</h2>
@@ -534,7 +534,7 @@ export default function ClaudeVsChatGPTArticle() {
                     <p>Notre usage en pratique : on utilise ChatGPT pour la collecte d&apos;informations brutes (parcours du site web, derniers articles de presse, profils LinkedIn des dirigeants), puis Claude pour structurer ces informations en un plan de compte actionnable avec des angles d&apos;approche specifiques.</p>
                   </div>
 
-                  <div className="mt-4 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-4 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Verdict : enrichissement de comptes</p>
                     <div className="grid grid-cols-2 gap-3">
                       <div className="flex items-center gap-2">
@@ -565,7 +565,7 @@ export default function ClaudeVsChatGPTArticle() {
 
               {/* Section 7 : Coaching commercial */}
               <section id="coaching" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="w-6 h-6 rounded-md bg-[#6D00CC] flex items-center justify-center text-white text-[10px] font-bold">5</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Coaching commercial et roleplay</h2>
@@ -581,7 +581,7 @@ export default function ClaudeVsChatGPTArticle() {
 
                   {/* Roleplay quality comparison */}
                   <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-[#D97757]/30 overflow-hidden">
+                    <div className="rounded-lg border border-[#D97757]/30 overflow-hidden">
                       <div className="bg-[#FDF4EF] px-3 py-2 flex items-center gap-2 border-b border-[#D97757]/20">
                         <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude" className="w-3.5 h-3.5" />
                         <span className="text-[10px] font-semibold text-[#111]">Roleplay Claude</span>
@@ -593,7 +593,7 @@ export default function ClaudeVsChatGPTArticle() {
                       </div>
                     </div>
 
-                    <div className="rounded-xl border border-[#10A37F]/30 overflow-hidden">
+                    <div className="rounded-lg border border-[#10A37F]/30 overflow-hidden">
                       <div className="bg-[#F0FAF6] px-3 py-2 flex items-center gap-2 border-b border-[#10A37F]/20">
                         <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=32" alt="ChatGPT" className="w-3.5 h-3.5" />
                         <span className="text-[10px] font-semibold text-[#111]">Roleplay ChatGPT</span>
@@ -606,7 +606,7 @@ export default function ClaudeVsChatGPTArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-4 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Verdict : coaching commercial</p>
                     <div className="grid grid-cols-2 gap-3">
                       <div className="flex items-center gap-2">
@@ -637,7 +637,7 @@ export default function ClaudeVsChatGPTArticle() {
 
               {/* Section 8 : API et integrations */}
               <section id="api-integration" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude" className="w-5 h-5" />
                     <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=32" alt="ChatGPT" className="w-5 h-5" />
@@ -653,7 +653,7 @@ export default function ClaudeVsChatGPTArticle() {
 
                   {/* Code concept mockups */}
                   <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-[#D97757]/20 overflow-hidden">
+                    <div className="rounded-lg border border-[#D97757]/20 overflow-hidden">
                       <div className="bg-[#FDF4EF] px-3 py-2 border-b border-[#D97757]/20">
                         <span className="text-[10px] font-semibold text-[#111]">Claude API + MCP</span>
                       </div>
@@ -688,7 +688,7 @@ const response = await anthropic
                       </div>
                     </div>
 
-                    <div className="rounded-xl border border-[#10A37F]/20 overflow-hidden">
+                    <div className="rounded-lg border border-[#10A37F]/20 overflow-hidden">
                       <div className="bg-[#F0FAF6] px-3 py-2 border-b border-[#10A37F]/20">
                         <span className="text-[10px] font-semibold text-[#111]">OpenAI API + Plugins</span>
                       </div>
@@ -729,7 +729,7 @@ const response = await openai
                     <p>Un point notable : <strong className="text-[#111]">Claude Code</strong>, l&apos;outil de developpement d&apos;Anthropic, est devenu un atout majeur pour les equipes techniques qui construisent des outils internes. Chez Ceres, on utilise Claude Code pour developper et maintenir notre plateforme RevOps AI. La capacite de Claude Code a comprendre une codebase complete, a naviguer dans les fichiers, et a produire du code production-ready est significativement superieure a ce que propose Copilot (base sur les modeles OpenAI). C&apos;est un facteur indirect mais important : si vous construisez des outils custom pour votre equipe commerciale, Claude Code accelere considerablement le developpement.</p>
                   </div>
 
-                  <div className="mt-4 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-4 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Verdict : API et integrations</p>
                     <div className="grid grid-cols-2 gap-3">
                       <div className="flex items-center gap-2">
@@ -760,7 +760,7 @@ const response = await openai
 
               {/* Section 9 : Prix et tokens */}
               <section id="prix-tokens" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Prix et tokens : le cout reel pour une equipe sales</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La question du prix est incontournable. Elle se pose a deux niveaux : le cout des abonnements web (pour un usage en interface) et le cout API (pour un usage integre dans vos outils).</p>
@@ -770,7 +770,7 @@ const response = await openai
                   <div className="mt-5 space-y-3">
                     <p className="text-[12px] font-semibold text-[#111]">Abonnements web (par utilisateur, par mois)</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div className="rounded-xl border border-[#D97757]/20 p-4">
+                      <div className="rounded-lg border border-[#D97757]/20 p-4">
                         <div className="flex items-center gap-2 mb-3">
                           <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude" className="w-4 h-4" />
                           <span className="text-[12px] font-semibold text-[#111]">Claude</span>
@@ -793,7 +793,7 @@ const response = await openai
                         </div>
                       </div>
 
-                      <div className="rounded-xl border border-[#10A37F]/20 p-4">
+                      <div className="rounded-lg border border-[#10A37F]/20 p-4">
                         <div className="flex items-center gap-2 mb-3">
                           <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=32" alt="ChatGPT" className="w-4 h-4" />
                           <span className="text-[12px] font-semibold text-[#111]">ChatGPT</span>
@@ -827,7 +827,7 @@ const response = await openai
                     <div className="overflow-x-auto">
                       <table className="w-full text-[10px]">
                         <thead>
-                          <tr className="border-b border-[#E8E8E8]">
+                          <tr className="border-b border-[#EAEAEA]">
                             <th className="text-left py-2 text-[#999] font-semibold">Modele</th>
                             <th className="text-left py-2 text-[#999] font-semibold">Input / 1M tokens</th>
                             <th className="text-left py-2 text-[#999] font-semibold">Output / 1M tokens</th>
@@ -860,7 +860,7 @@ const response = await openai
                   </div>
 
                   <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-[#D97757]/20 p-3">
+                    <div className="rounded-lg border border-[#D97757]/20 p-3">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude" className="w-3 h-3" />
                         <span className="text-[11px] font-semibold text-[#111]">Claude (Sonnet principal)</span>
@@ -876,7 +876,7 @@ const response = await openai
                         </div>
                       </div>
                     </div>
-                    <div className="rounded-xl border border-[#10A37F]/20 p-3">
+                    <div className="rounded-lg border border-[#10A37F]/20 p-3">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=32" alt="ChatGPT" className="w-3 h-3" />
                         <span className="text-[11px] font-semibold text-[#111]">ChatGPT (GPT-4o principal)</span>
@@ -903,7 +903,7 @@ const response = await openai
 
               {/* Section 10 : Tableau comparatif global - DARK SECTION */}
               <section id="tableau-comparatif" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <h2 className="text-[17px] font-semibold text-white mb-5">Tableau comparatif global : 16 criteres</h2>
                   <div className="space-y-1">
                     {/* Header */}
@@ -956,7 +956,7 @@ const response = await openai
                       { label: "Victoires ChatGPT", count: "5", color: "#10A37F" },
                       { label: "Egalites", count: "2", color: "#666" },
                     ].map((s) => (
-                      <div key={s.label} className="rounded-xl bg-white/5 p-3 text-center">
+                      <div key={s.label} className="rounded-lg bg-white/5 p-3 text-center">
                         <p className="text-[20px] font-bold" style={{ color: s.color }}>{s.count}</p>
                         <p className="text-[9px] text-white/40 mt-1">{s.label}</p>
                       </div>
@@ -968,7 +968,7 @@ const response = await openai
 
               {/* Section 11 : Notre choix chez Ceres - DARK SECTION */}
               <section id="choix-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#6D00CC] flex items-center justify-center">
                       <span className="text-white text-[11px] font-bold">C</span>
@@ -989,7 +989,7 @@ const response = await openai
                       { raison: "Claude Code pour le developpement", desc: "Notre plateforme est entierement developpee avec Claude Code. La productivite est incomparable sur les projets Next.js / TypeScript complexes." },
                       { raison: "Suivi d'instructions precis", desc: "Quand on donne un prompt detaille avec des contraintes specifiques (format, ton, longueur, structure), Claude les respecte mieux. C'est essentiel pour des workflows automatises." },
                     ].map((r) => (
-                      <div key={r.raison} className="flex gap-3 rounded-xl bg-white/5 p-4">
+                      <div key={r.raison} className="flex gap-3 rounded-lg bg-white/5 p-4">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#6D00CC] mt-2 shrink-0" />
                         <div>
                           <p className="text-[12px] font-semibold text-white mb-0.5">{r.raison}</p>
@@ -999,7 +999,7 @@ const response = await openai
                     ))}
                   </div>
 
-                  <div className="mt-6 rounded-xl bg-white/5 border border-white/10 p-4">
+                  <div className="mt-6 rounded-lg bg-white/5 border border-white/10 p-4">
                     <p className="text-[12px] font-semibold text-white mb-3">Mais on utilise aussi ChatGPT pour...</p>
                     <div className="space-y-2">
                       {[
@@ -1033,7 +1033,7 @@ const response = await openai
               <p className="text-[13px] font-semibold text-[#111] mb-4">Articles similaires</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedArticles.map((a) => (
-                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
+                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold text-white mb-3" style={{ background: a.color }}>
                       {a.category[0]}
                     </div>
@@ -1046,14 +1046,14 @@ const response = await openai
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Envie d&apos;integrer l&apos;IA dans vos processus commerciaux ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[500px] mx-auto">On aide les equipes B2B a connecter Claude et ChatGPT a leur CRM, automatiser la redaction, analyser le pipeline, et structurer le coaching commercial avec l&apos;IA.</p>
                 <div className="flex items-center justify-center gap-3">
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                     <span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Reserver un appel
                   </a>
-                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                     Nos services
                   </Link>
                 </div>

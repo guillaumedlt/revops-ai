@@ -19,8 +19,8 @@ export default function FunnelBlock({ title, steps }: Props) {
   var maxValue = steps[0].value || 1;
 
   return (
-    <div className="border border-[#E5E5E5] rounded-xl p-5 bg-white">
-      {title && <div className="text-sm font-semibold text-[#0A0A0A] mb-4">{title}</div>}
+    <div className="border border-[#EAEAEA] rounded-lg p-5 bg-white">
+      {title && <div className="text-sm font-semibold text-[#111] mb-4">{title}</div>}
       <div className="space-y-2">
         {steps.map(function(step, i) {
           var widthPct = Math.max(20, Math.round((step.value / maxValue) * 100));
@@ -35,7 +35,7 @@ export default function FunnelBlock({ title, steps }: Props) {
               {/* Conversion rate arrow between steps */}
               {i > 0 && convRate !== null && (
                 <div className="flex items-center gap-2 py-1 pl-2">
-                  <svg width="12" height="12" viewBox="0 0 12 12" className="text-[#A3A3A3] shrink-0">
+                  <svg width="12" height="12" viewBox="0 0 12 12" className="text-[#BBB] shrink-0">
                     <path d="M6 2 L6 10 M3 7 L6 10 L9 7" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                   <span className={"text-[11px] font-medium " + (convRate >= 50 ? "text-[#22C55E]" : convRate >= 25 ? "text-[#F59E0B]" : "text-[#EF4444]")}>
@@ -57,7 +57,7 @@ export default function FunnelBlock({ title, steps }: Props) {
                     <span className="text-[12px] font-medium text-white truncate">{step.label}</span>
                   </div>
                 </div>
-                <span className="text-sm font-bold text-[#0A0A0A] tabular-nums shrink-0 w-16 text-right">
+                <span className="text-sm font-bold text-[#111] tabular-nums shrink-0 w-16 text-right">
                   {step.value.toLocaleString()}
                 </span>
               </div>

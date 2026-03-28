@@ -144,7 +144,7 @@ export default function AcquisitionMarketingGuidePage() {
             <article>
               {/* Section 1 — Definition */}
               <section id="definition" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Qu&apos;est-ce que l&apos;acquisition marketing</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;acquisition marketing designe l&apos;ensemble des strategies, canaux et actions mis en place pour attirer de nouveaux prospects et les convertir en clients. C&apos;est le premier maillon de la chaine de croissance : sans acquisition, pas de revenus, pas d&apos;entreprise.</p>
@@ -154,7 +154,7 @@ export default function AcquisitionMarketingGuidePage() {
                   </div>
 
                   {/* Funnel visual */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#111] mb-4">L&apos;entonnoir d&apos;acquisition simplifie</p>
                     <div className="space-y-2">
                       {[
@@ -164,7 +164,7 @@ export default function AcquisitionMarketingGuidePage() {
                         { step: "Monetisation", desc: "Generer du revenu a partir du nouveau client", color: "#FF7A59", width: "40%" },
                       ].map((s) => (
                         <div key={s.step} className="flex items-center gap-3">
-                          <div className="rounded-lg p-3 border border-[#E8E8E8] bg-white" style={{ width: s.width }}>
+                          <div className="rounded-lg p-3 border border-[#EAEAEA] bg-white" style={{ width: s.width }}>
                             <p className="text-[11px] font-semibold" style={{ color: s.color }}>{s.step}</p>
                             <p className="text-[10px] text-[#999] mt-0.5">{s.desc}</p>
                           </div>
@@ -178,7 +178,7 @@ export default function AcquisitionMarketingGuidePage() {
 
               {/* Section 2 — Acquisition vs Retention vs Activation */}
               <section id="acquisition-vs-retention" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Acquisition vs Retention vs Activation</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Ces trois termes sont souvent confondus, pourtant ils designent des etapes tres differentes du cycle de vie client. Les comprendre est essentiel pour allouer vos budgets correctement.</p>
@@ -191,7 +191,7 @@ export default function AcquisitionMarketingGuidePage() {
                   <div className="mt-6 overflow-x-auto">
                     <table className="w-full text-[12px]">
                       <thead>
-                        <tr className="border-b border-[#E8E8E8]">
+                        <tr className="border-b border-[#EAEAEA]">
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">Critere</th>
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">Acquisition</th>
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">Activation</th>
@@ -222,7 +222,7 @@ export default function AcquisitionMarketingGuidePage() {
 
               {/* Section 3 — Les canaux d&apos;acquisition */}
               <section id="canaux" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les canaux d&apos;acquisition : panorama complet</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Il n&apos;existe pas de canal magique qui fonctionne pour toutes les entreprises. Le bon canal depend de votre cible, de votre produit, de votre budget et de votre capacite d&apos;execution. Voici les principaux canaux, avec leurs forces et leurs limites.</p>
@@ -303,19 +303,19 @@ export default function AcquisitionMarketingGuidePage() {
                         cons: "Cout eleve (surtout physique), difficilement scalable, logistique lourde",
                       },
                     ].map((channel) => (
-                      <div key={channel.name} className="p-5 rounded-xl border border-[#F0F0F0] bg-[#FAFAFA]">
+                      <div key={channel.name} className="p-5 rounded-lg border border-[#F0F0F0] bg-[#FAFAFA]">
                         <div className="flex items-center gap-3 mb-3">
                           <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: channel.color }} />
                           <span className="text-[14px] font-semibold text-[#111]">{channel.name}</span>
-                          <span className="text-[10px] px-2 py-0.5 rounded-full border border-[#E8E8E8] bg-white text-[#999] ml-auto">{channel.type}</span>
+                          <span className="text-[10px] px-2 py-0.5 rounded-full border border-[#EAEAEA] bg-white text-[#999] ml-auto">{channel.type}</span>
                         </div>
                         <p className="text-[12px] text-[#666] leading-[1.7] mb-3">{channel.desc}</p>
                         <div className="flex flex-col sm:flex-row gap-2">
-                          <div className="flex-1 p-2.5 rounded-lg bg-white border border-[#E8E8E8]">
+                          <div className="flex-1 p-2.5 rounded-lg bg-white border border-[#EAEAEA]">
                             <p className="text-[10px] font-semibold text-[#22C55E] mb-1">Avantages</p>
                             <p className="text-[10px] text-[#777] leading-[1.5]">{channel.pros}</p>
                           </div>
-                          <div className="flex-1 p-2.5 rounded-lg bg-white border border-[#E8E8E8]">
+                          <div className="flex-1 p-2.5 rounded-lg bg-white border border-[#EAEAEA]">
                             <p className="text-[10px] font-semibold text-[#EF4444] mb-1">Limites</p>
                             <p className="text-[10px] text-[#777] leading-[1.5]">{channel.cons}</p>
                           </div>
@@ -329,7 +329,7 @@ export default function AcquisitionMarketingGuidePage() {
 
               {/* Section 4 — Metriques cles */}
               <section id="metriques" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les metriques cles de l&apos;acquisition</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Sans metriques, l&apos;acquisition est un exercice a l&apos;aveugle. Vous devez mesurer chaque canal, chaque campagne et chaque euro depense pour identifier ce qui fonctionne et ce qui doit etre arrete. Voici les metriques incontournables.</p>
@@ -371,18 +371,18 @@ export default function AcquisitionMarketingGuidePage() {
                         desc: "Le payback period mesure le temps necessaire pour recuperer le cout d&apos;acquisition d&apos;un client. Plus il est court, plus votre tresorerie est saine. Un payback period de 18 mois signifie que vous financez 18 mois d&apos;acquisition avant de commencer a generer du profit sur chaque client.",
                       },
                     ].map((m) => (
-                      <div key={m.metric} className="p-5 rounded-xl border border-[#F0F0F0] bg-[#FAFAFA]">
+                      <div key={m.metric} className="p-5 rounded-lg border border-[#F0F0F0] bg-[#FAFAFA]">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2.5 h-2.5 rounded-sm" style={{ backgroundColor: m.color }} />
                           <span className="text-[16px] font-bold" style={{ color: m.color }}>{m.metric}</span>
                         </div>
                         <p className="text-[11px] font-semibold text-[#333] mb-2">{m.fullName}</p>
                         <p className="text-[11px] text-[#666] leading-[1.6] mb-3">{m.desc}</p>
-                        <div className="p-2.5 rounded-lg bg-white border border-[#E8E8E8] mb-2">
+                        <div className="p-2.5 rounded-lg bg-white border border-[#EAEAEA] mb-2">
                           <p className="text-[10px] text-[#999] mb-0.5">Formule</p>
                           <p className="text-[10px] font-mono text-[#333]">{m.formula}</p>
                         </div>
-                        <div className="p-2.5 rounded-lg bg-white border border-[#E8E8E8]">
+                        <div className="p-2.5 rounded-lg bg-white border border-[#EAEAEA]">
                           <p className="text-[10px] text-[#999] mb-0.5">Benchmark</p>
                           <p className="text-[10px] text-[#333]">{m.benchmark}</p>
                         </div>
@@ -391,7 +391,7 @@ export default function AcquisitionMarketingGuidePage() {
                   </div>
 
                   {/* Conversion rate par canal */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#111] mb-4">Taux de conversion moyens par canal (B2B)</p>
                     <div className="space-y-2.5">
                       {[
@@ -420,7 +420,7 @@ export default function AcquisitionMarketingGuidePage() {
 
               {/* Section 5 — Construire sa strategie */}
               <section id="strategie" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Construire sa strategie d&apos;acquisition en 6 etapes</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Une strategie d&apos;acquisition ne se resume pas a ouvrir un compte Google Ads et voir ce qui se passe. C&apos;est un processus structure qui part de vos objectifs business et descend jusqu&apos;a l&apos;execution operationnelle. Voici les 6 etapes.</p>
@@ -459,7 +459,7 @@ export default function AcquisitionMarketingGuidePage() {
                         desc: "Lancez vos campagnes avec des budgets modestes. Mesurez les resultats chaque semaine. Identifiez ce qui fonctionne (taux de conversion, cout par lead, qualite des leads). Doublez ce qui marche, coupez ce qui ne marche pas. L&apos;acquisition est un processus iteratif, pas un coup unique.",
                       },
                     ].map((step) => (
-                      <div key={step.num} className="flex items-start gap-3 p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={step.num} className="flex items-start gap-3 p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <span className="text-[18px] font-bold text-[#FF7A59] shrink-0">{step.num}</span>
                         <div>
                           <p className="text-[12px] font-semibold text-[#111] mb-1">{step.title}</p>
@@ -474,7 +474,7 @@ export default function AcquisitionMarketingGuidePage() {
 
               {/* Section 6 — B2B vs B2C */}
               <section id="b2b-vs-b2c" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Acquisition B2B vs B2C : les differences</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;acquisition ne se pratique pas de la meme maniere en B2B et en B2C. Les cycles de vente, les decideurs, les canaux efficaces et les metriques pertinentes different fondamentalement. Comprendre ces differences evite d&apos;appliquer des recettes B2C a un contexte B2B, et inversement.</p>
@@ -483,7 +483,7 @@ export default function AcquisitionMarketingGuidePage() {
                   <div className="mt-6 overflow-x-auto">
                     <table className="w-full text-[12px]">
                       <thead>
-                        <tr className="border-b border-[#E8E8E8]">
+                        <tr className="border-b border-[#EAEAEA]">
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">Critere</th>
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">B2B</th>
                           <th className="text-left py-3 text-[#999] font-medium">B2C</th>
@@ -520,7 +520,7 @@ export default function AcquisitionMarketingGuidePage() {
 
               {/* Section 7 — Erreurs classiques */}
               <section id="erreurs" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les erreurs classiques en acquisition</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Apres avoir travaille avec des dizaines d&apos;entreprises B2B sur leur strategie d&apos;acquisition, voici les erreurs que nous observons le plus frequemment.</p>
@@ -536,7 +536,7 @@ export default function AcquisitionMarketingGuidePage() {
                       { num: "06", title: "Sous-estimer le temps du SEO", desc: "Attendre des resultats SEO en 30 jours, c&apos;est se condamner a l&apos;abandon premature. Le SEO est un investissement a 6-12 mois. Planifiez en consequence et combinez avec des canaux a resultats rapides (ads, outbound) en attendant." },
                       { num: "07", title: "Oublier l&apos;alignement marketing-sales", desc: "En B2B, le marketing genere des leads que les commerciaux doivent convertir. Si les deux equipes ne partagent pas la meme definition d&apos;un lead qualifie, le resultat est un pipeline de leads non traites et des commerciaux frustres." },
                     ].map((err) => (
-                      <div key={err.num} className="flex items-start gap-3 p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={err.num} className="flex items-start gap-3 p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <span className="text-[18px] font-bold text-[#E8E8E8] shrink-0">{err.num}</span>
                         <div>
                           <p className="text-[12px] font-semibold text-[#111] mb-1">{err.title}</p>
@@ -551,7 +551,7 @@ export default function AcquisitionMarketingGuidePage() {
 
               {/* Section 8 — Acquisition et RevOps */}
               <section id="revops" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">RevOps</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">Acquisition et RevOps : structurer pour scaler</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -569,7 +569,7 @@ export default function AcquisitionMarketingGuidePage() {
                       { pillar: "Sales Ops", items: "Pipeline management, SLA, qualification, previsions, coaching", color: "#4B5EFC" },
                       { pillar: "CS Ops", items: "Onboarding, health score, churn prevention, expansion, NPS", color: "#22C55E" },
                     ].map((p) => (
-                      <div key={p.pillar} className="p-4 rounded-xl bg-white/5 border border-white/10">
+                      <div key={p.pillar} className="p-4 rounded-lg bg-white/5 border border-white/10">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2.5 h-2.5 rounded-sm" style={{ backgroundColor: p.color }} />
                           <p className="text-[12px] font-semibold text-white">{p.pillar}</p>
@@ -584,7 +584,7 @@ export default function AcquisitionMarketingGuidePage() {
 
               {/* Section 9 — Les outils de la stack acquisition */}
               <section id="outils" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les outils de la stack acquisition</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La stack d&apos;acquisition est l&apos;ensemble des outils que vous utilisez pour executer, mesurer et optimiser votre acquisition. Le choix des outils depend de vos canaux prioritaires, de votre budget et de votre niveau de maturite. Voici les incontournables.</p>
@@ -628,14 +628,14 @@ export default function AcquisitionMarketingGuidePage() {
                         useCase: "Sequences outbound, cold email, prospection LinkedIn, suivi de delivrabilite",
                       },
                     ].map((t) => (
-                      <div key={t.tool} className="p-5 rounded-xl border border-[#F0F0F0] bg-[#FAFAFA]">
+                      <div key={t.tool} className="p-5 rounded-lg border border-[#F0F0F0] bg-[#FAFAFA]">
                         <div className="flex items-center gap-3 mb-2">
                           <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: t.color }} />
                           <span className="text-[14px] font-semibold text-[#111]">{t.tool}</span>
-                          <span className="text-[10px] px-2 py-0.5 rounded-full border border-[#E8E8E8] bg-white text-[#999] ml-auto">{t.category}</span>
+                          <span className="text-[10px] px-2 py-0.5 rounded-full border border-[#EAEAEA] bg-white text-[#999] ml-auto">{t.category}</span>
                         </div>
                         <p className="text-[12px] text-[#666] leading-[1.7] mb-3">{t.desc}</p>
-                        <div className="p-2.5 rounded-lg bg-white border border-[#E8E8E8]">
+                        <div className="p-2.5 rounded-lg bg-white border border-[#EAEAEA]">
                           <p className="text-[10px] text-[#999] mb-0.5">Cas d&apos;usage</p>
                           <p className="text-[10px] text-[#333]">{t.useCase}</p>
                         </div>
@@ -652,7 +652,7 @@ export default function AcquisitionMarketingGuidePage() {
 
               {/* Section 10 — Notre approche */}
               <section id="approche-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Notre methode</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">Notre approche acquisition chez Ceres</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -683,7 +683,7 @@ export default function AcquisitionMarketingGuidePage() {
 
               {/* Related articles */}
               <section className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((a) => (
@@ -701,7 +701,7 @@ export default function AcquisitionMarketingGuidePage() {
 
               {/* CTA */}
               <section>
-                <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+                <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                   <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Pret a structurer votre acquisition ?</h2>
                   <p className="text-[13px] text-[#999] mb-6 max-w-[420px] mx-auto">On audite votre stack, on definit vos canaux prioritaires et on met en place le tracking pour mesurer chaque euro investi. Premiers resultats en 6 semaines.</p>
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

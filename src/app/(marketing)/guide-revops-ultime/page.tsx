@@ -134,10 +134,10 @@ export default function GuideRevOpsLandingPage() {
 
         {/* Book mockup */}
         <section className="mb-16">
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
             <div className="flex flex-col md:flex-row gap-8 items-center">
               {/* Book cover mockup */}
-              <div className="w-[200px] h-[260px] rounded-xl shadow-[8px_8px_30px_-10px_rgba(0,0,0,0.2)] shrink-0 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #FF7A59 0%, #FF5733 50%, #C0392B 100%)" }}>
+              <div className="w-[200px] h-[260px] rounded-lg shadow-[8px_8px_30px_-10px_rgba(0,0,0,0.2)] shrink-0 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #FF7A59 0%, #FF5733 50%, #C0392B 100%)" }}>
                 <div className="absolute inset-0 flex flex-col justify-between p-5">
                   <div>
                     <div className="w-8 h-0.5 bg-white/40 mb-3" />
@@ -199,9 +199,9 @@ export default function GuideRevOpsLandingPage() {
 
           <div className="space-y-3">
             {chapters.map((ch, i) => (
-              <div key={ch.num} className="rounded-2xl border border-[#E8E8E8] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] hover:border-[#DDD] transition-colors">
+              <div key={ch.num} className="rounded-lg border border-[#EAEAEA] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] hover:border-[#DDD] transition-colors">
                 <div className="flex gap-4 items-start">
-                  <div className="w-10 h-10 rounded-xl bg-[#FF7A59]/10 flex items-center justify-center text-[#FF7A59] text-[13px] font-bold shrink-0">
+                  <div className="w-10 h-10 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center text-[#FF7A59] text-[13px] font-bold shrink-0">
                     {ch.num}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -219,7 +219,7 @@ export default function GuideRevOpsLandingPage() {
 
         {/* Templates inclus */}
         <section className="mb-16">
-          <div className="rounded-2xl bg-[#111] p-6 md:p-10">
+          <div className="rounded-lg bg-[#111] p-6 md:p-10">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Inclus dans le guide</span>
             <h2 className="text-[20px] sm:text-[28px] font-semibold text-white tracking-[-0.02em] mb-6">7 templates prets a l&apos;emploi</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -232,7 +232,7 @@ export default function GuideRevOpsLandingPage() {
                 { title: "Matrice RACI Marketing-Sales", desc: "Qui fait quoi entre marketing et sales. Responsabilites claires. Format Sheets.", icon: "users" },
                 { title: "Plan 90 jours", desc: "Roadmap semaine par semaine avec milestones et KPIs de validation. Format Notion.", icon: "cal" },
               ].map((t) => (
-                <div key={t.title} className="rounded-xl bg-white/5 p-4 flex gap-3 items-start">
+                <div key={t.title} className="rounded-lg bg-white/5 p-4 flex gap-3 items-start">
                   <div className="w-8 h-8 rounded-lg bg-[#FF7A59]/20 flex items-center justify-center shrink-0">
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#FF7A59" strokeWidth="1.5" strokeLinecap="round">
                       {t.icon === "doc" && <><path d="M9 2H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6z" /><path d="M9 2v4h4" /></>}
@@ -262,7 +262,7 @@ export default function GuideRevOpsLandingPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {testimonials.map((t) => (
-              <div key={t.author} className="rounded-2xl border border-[#E8E8E8] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div key={t.author} className="rounded-lg border border-[#EAEAEA] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <p className="text-[13px] text-[#555] leading-[1.75] mb-4">&ldquo;{t.quote}&rdquo;</p>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-[#FF7A59]/10 flex items-center justify-center text-[#FF7A59] text-[10px] font-bold">
@@ -280,9 +280,9 @@ export default function GuideRevOpsLandingPage() {
 
         {/* About Ceres */}
         <section className="mb-16">
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="flex flex-col sm:flex-row gap-6 items-start">
-              <div className="w-12 h-12 rounded-xl bg-[#111] flex items-center justify-center text-white text-[14px] font-bold shrink-0">C</div>
+              <div className="w-12 h-12 rounded-lg bg-[#111] flex items-center justify-center text-white text-[14px] font-bold shrink-0">C</div>
               <div>
                 <h3 className="text-[15px] font-semibold text-[#111] mb-2">A propos de Ceres</h3>
                 <p className="text-[13px] text-[#555] leading-[1.75] mb-3">Ceres est une agence RevOps et IA basee en France. On accompagne les entreprises B2B de 15 a 500 personnes pour structurer leurs operations commerciales, deployer HubSpot et integrer l&apos;IA dans leurs processus de vente.</p>
@@ -303,7 +303,7 @@ export default function GuideRevOpsLandingPage() {
             <h2 className="text-[20px] sm:text-[28px] font-semibold text-[#111] tracking-[-0.02em] mt-4">Ce guide est fait pour vous si</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
               <p className="text-[12px] font-semibold text-[#22C55E] mb-3">Ideal pour</p>
               {[
                 "Vous dirigez une entreprise B2B de 15 a 200 personnes",
@@ -316,7 +316,7 @@ export default function GuideRevOpsLandingPage() {
                 <p key={i} className="text-[12px] text-[#555] mb-2 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
               ))}
             </div>
-            <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
               <p className="text-[12px] font-semibold text-[#999] mb-3">Moins pertinent si</p>
               {[
                 "Votre equipe fait moins de 5 personnes (trop tot)",
@@ -332,7 +332,7 @@ export default function GuideRevOpsLandingPage() {
 
         {/* Download form section */}
         <section id="telecharger" className="mb-16 scroll-mt-24">
-          <div className="rounded-2xl border-2 border-[#FF7A59]/20 bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(255,122,89,0.15)]">
+          <div className="rounded-lg border-2 border-[#FF7A59]/20 bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(255,122,89,0.15)]">
             <div className="flex flex-col lg:flex-row gap-8">
               {/* Left: recap */}
               <div className="flex-1">
@@ -363,7 +363,7 @@ export default function GuideRevOpsLandingPage() {
 
               {/* Right: HubSpot form */}
               <div className="lg:w-[380px] shrink-0">
-                <div className="rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-5">
+                <div className="rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-5">
                   <p className="text-[12px] font-semibold text-[#111] mb-4">Acceder au guide</p>
                   <div ref={formRef} id="hs-guide-form" className="min-h-[200px]">
                     <div className="flex items-center justify-center h-[200px] text-[#CCC]">
@@ -394,7 +394,7 @@ export default function GuideRevOpsLandingPage() {
               { q: "Les templates sont-ils personnalisables ?", a: "Oui, tous les templates sont en Notion ou Google Sheets et sont entierement modifiables. Vous les adaptez a votre contexte." },
               { q: "Peut-on etre accompagne par Ceres pour implementer le guide ?", a: "Oui, c\u2019est meme ce qu\u2019on recommande. Le guide est un excellent point de depart. Si vous voulez aller plus vite, notre offre RevOps Part-Time permet de deployer ces frameworks avec un consultant dedie." },
             ].map((faq) => (
-              <div key={faq.q} className="rounded-2xl border border-[#E8E8E8] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div key={faq.q} className="rounded-lg border border-[#EAEAEA] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <h3 className="text-[13px] font-semibold text-[#111] mb-2">{faq.q}</h3>
                 <p className="text-[12px] text-[#777] leading-[1.65]">{faq.a}</p>
               </div>
@@ -404,7 +404,7 @@ export default function GuideRevOpsLandingPage() {
 
         {/* Final CTA */}
         <section>
-          <div className="rounded-2xl bg-[#111] p-6 md:p-10 text-center">
+          <div className="rounded-lg bg-[#111] p-6 md:p-10 text-center">
             <h2 className="text-[20px] sm:text-[28px] font-semibold text-white tracking-[-0.02em] mb-3">Pret a structurer votre RevOps ?</h2>
             <p className="text-[14px] text-white/50 mb-6 max-w-[400px] mx-auto leading-[1.7]">Telechargez le guide gratuitement ou reservez un appel avec notre equipe pour un accompagnement personnalise.</p>
             <div className="flex items-center justify-center gap-3">

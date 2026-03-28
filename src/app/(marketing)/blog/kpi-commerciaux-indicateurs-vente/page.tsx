@@ -146,7 +146,7 @@ export default function KpiCommerciauxArticle() {
               </div>
 
               {/* Quick KPI overview */}
-              <div className="mt-8 rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+              <div className="mt-8 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                 <span className="text-[13px] font-semibold text-[#111] mb-4 block">Ce que vous allez decouvrir</span>
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
                   {[
@@ -156,7 +156,7 @@ export default function KpiCommerciauxArticle() {
                     { label: "KPIs Productivite", value: "5", color: "#FF7A59" },
                     { label: "KPIs Qualite", value: "4", color: "#F59E0B" },
                   ].map((s) => (
-                    <div key={s.label} className="text-center p-3 rounded-xl bg-white border border-[#F0F0F0]">
+                    <div key={s.label} className="text-center p-3 rounded-lg bg-white border border-[#F0F0F0]">
                       <div className="text-[22px] font-bold" style={{ color: s.color }}>{s.value}</div>
                       <div className="text-[10px] text-[#999] mt-1">{s.label}</div>
                     </div>
@@ -168,7 +168,7 @@ export default function KpiCommerciauxArticle() {
             <article>
               {/* ===================== SECTION 1 : Pourquoi suivre des KPI ===================== */}
               <section id="pourquoi-kpi" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi suivre des KPI commerciaux en 2026</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>En 2024, Gartner estimait que 72% des equipes commerciales B2B utilisaient moins de 5 indicateurs pour piloter leur activite. Deux ans plus tard, le constat n&apos;a pas fondamentalement change. La majorite des equipes de vente se contentent de suivre le chiffre d&apos;affaires signe et le nombre de deals en cours. C&apos;est insuffisant.</p>
@@ -194,7 +194,7 @@ export default function KpiCommerciauxArticle() {
                         color: "#6C5CE7",
                       },
                     ].map((item) => (
-                      <div key={item.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={item.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: item.color }} />
                           <h3 className="text-[13px] font-semibold text-[#111]" dangerouslySetInnerHTML={{ __html: item.title }} />
@@ -214,7 +214,7 @@ export default function KpiCommerciauxArticle() {
 
               {/* ===================== SECTION 2 : KPIs Pipeline ===================== */}
               <section id="kpi-pipeline" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#22C55E]" />
                     <span className="text-[11px] font-semibold text-[#22C55E] uppercase tracking-wider">Categorie 1 / 5</span>
@@ -224,7 +224,7 @@ export default function KpiCommerciauxArticle() {
 
                   <div className="space-y-5">
                     {/* KPI 1 — Volume Pipeline */}
-                    <div className="rounded-xl border border-[#E8F5E9] bg-[#F6FBF6] p-5">
+                    <div className="rounded-lg border border-[#E8F5E9] bg-[#F6FBF6] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#22C55E] w-5 h-5 rounded-md flex items-center justify-center">1</span>
@@ -233,7 +233,7 @@ export default function KpiCommerciauxArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#22C55E]/10 text-[#22C55E]">Essentiel</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Valeur totale des deals ouverts dans votre pipeline a un instant T. C&apos;est l&apos;indicateur le plus basique mais aussi le plus fondamental. Un pipeline vide signifie zero closing dans les semaines a venir, quelle que soit la qualite de votre equipe.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">Volume Pipeline = SUM(montant de tous les deals ouverts)</p>
                       </div>
@@ -247,7 +247,7 @@ export default function KpiCommerciauxArticle() {
                     </div>
 
                     {/* KPI 2 — Pipeline Velocity */}
-                    <div className="rounded-xl border border-[#E8F5E9] bg-[#F6FBF6] p-5">
+                    <div className="rounded-lg border border-[#E8F5E9] bg-[#F6FBF6] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#22C55E] w-5 h-5 rounded-md flex items-center justify-center">2</span>
@@ -256,7 +256,7 @@ export default function KpiCommerciauxArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#22C55E]/10 text-[#22C55E]">Essentiel</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Mesure la vitesse a laquelle votre pipeline genere du revenu. C&apos;est l&apos;indicateur le plus complet du pipeline car il combine quatre variables : le nombre d&apos;opportunites, le montant moyen, le taux de conversion et la duree du cycle. Si un seul KPI devait resumer la sante de votre pipeline, ce serait celui-ci.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">Velocity = (Nb opportunites x Montant moyen x Win rate) / Duree cycle (jours)</p>
                       </div>
@@ -270,7 +270,7 @@ export default function KpiCommerciauxArticle() {
                     </div>
 
                     {/* KPI 3 — Win Rate */}
-                    <div className="rounded-xl border border-[#E8F5E9] bg-[#F6FBF6] p-5">
+                    <div className="rounded-lg border border-[#E8F5E9] bg-[#F6FBF6] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#22C55E] w-5 h-5 rounded-md flex items-center justify-center">3</span>
@@ -279,7 +279,7 @@ export default function KpiCommerciauxArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#22C55E]/10 text-[#22C55E]">Essentiel</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Pourcentage de deals gagnes parmi tous les deals qui ont atteint un stade qualifie. Le win rate est le reflet direct de l&apos;efficacite commerciale de votre equipe. Un win rate en baisse indique un probleme de qualification, de positionnement prix ou de concurrence accrue.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">Win Rate = Deals Closed Won / (Deals Closed Won + Deals Closed Lost) x 100</p>
                       </div>
@@ -293,7 +293,7 @@ export default function KpiCommerciauxArticle() {
                     </div>
 
                     {/* KPI 4 — Average Deal Size */}
-                    <div className="rounded-xl border border-[#E8F5E9] bg-[#F6FBF6] p-5">
+                    <div className="rounded-lg border border-[#E8F5E9] bg-[#F6FBF6] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#22C55E] w-5 h-5 rounded-md flex items-center justify-center">4</span>
@@ -302,7 +302,7 @@ export default function KpiCommerciauxArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#22C55E]/10 text-[#22C55E]">Important</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Valeur moyenne annuelle des deals signes. Cet indicateur revele votre positionnement marche. Un ACV en hausse peut indiquer un mouvement vers l&apos;enterprise, une montee en gamme produit, ou simplement une meilleure negociation. Un ACV en baisse peut signaler une erosion des prix face a la concurrence.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">ACV = Total revenu Closed Won / Nombre de deals Closed Won</p>
                       </div>
@@ -316,7 +316,7 @@ export default function KpiCommerciauxArticle() {
                     </div>
 
                     {/* KPI 5 — Conversion par stage */}
-                    <div className="rounded-xl border border-[#E8F5E9] bg-[#F6FBF6] p-5">
+                    <div className="rounded-lg border border-[#E8F5E9] bg-[#F6FBF6] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#22C55E] w-5 h-5 rounded-md flex items-center justify-center">5</span>
@@ -325,7 +325,7 @@ export default function KpiCommerciauxArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#22C55E]/10 text-[#22C55E]">Important</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Pourcentage de deals qui passent d&apos;une etape du pipeline a la suivante. C&apos;est l&apos;indicateur qui vous permet de localiser exactement ou votre pipeline fuit. Si 60% de vos deals passent de Discovery a Demo mais seulement 25% passent de Demo a Proposal, le probleme est clair : votre demo ne convainc pas.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">Conversion Stage N = Deals entrant Stage N+1 / Deals entrant Stage N x 100</p>
                       </div>
@@ -339,7 +339,7 @@ export default function KpiCommerciauxArticle() {
                     </div>
 
                     {/* KPI 6 — Pipeline Coverage Ratio */}
-                    <div className="rounded-xl border border-[#E8F5E9] bg-[#F6FBF6] p-5">
+                    <div className="rounded-lg border border-[#E8F5E9] bg-[#F6FBF6] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#22C55E] w-5 h-5 rounded-md flex items-center justify-center">6</span>
@@ -348,7 +348,7 @@ export default function KpiCommerciauxArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#EF4444]/10 text-[#EF4444]">Critique</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Ratio entre la valeur totale du pipeline et le quota a atteindre. C&apos;est le thermometre de votre capacite a atteindre vos objectifs. Un ratio de 3x signifie que vous avez 3 euros de pipeline pour chaque euro de quota. En dessous de 3x, la probabilite d&apos;atteindre le quota chute drastiquement.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">Pipeline Coverage = Volume pipeline ouvert / Quota de la periode</p>
                       </div>
@@ -367,7 +367,7 @@ export default function KpiCommerciauxArticle() {
 
               {/* ===================== SECTION 3 : KPIs Activite ===================== */}
               <section id="kpi-activite" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#4B5EFC]" />
                     <span className="text-[11px] font-semibold text-[#4B5EFC] uppercase tracking-wider">Categorie 2 / 5</span>
@@ -418,7 +418,7 @@ export default function KpiCommerciauxArticle() {
                         hubspot: "Creez un rapport personnalise croisant les contacts assignes avec les activites loguees. Utilisez les proprietes &ldquo;Last activity date&rdquo; et &ldquo;Number of times contacted&rdquo; pour identifier les leads sans follow-up. Un workflow d&apos;alerte peut notifier le manager en cas de lead non contacte apres 24h.",
                       },
                     ].map((kpi) => (
-                      <div key={kpi.num} className="rounded-xl border border-[#E8EAF6] bg-[#F5F6FF] p-5">
+                      <div key={kpi.num} className="rounded-lg border border-[#E8EAF6] bg-[#F5F6FF] p-5">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
                             <span className="text-[11px] font-bold text-white bg-[#4B5EFC] w-5 h-5 rounded-md flex items-center justify-center">{kpi.num}</span>
@@ -426,7 +426,7 @@ export default function KpiCommerciauxArticle() {
                           </div>
                         </div>
                         <p className="text-[12px] text-[#555] leading-[1.7] mb-3" dangerouslySetInnerHTML={{ __html: kpi.definition }} />
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                           <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                           <p className="text-[13px] font-mono text-[#111] mt-1" dangerouslySetInnerHTML={{ __html: kpi.formula }} />
                         </div>
@@ -446,7 +446,7 @@ export default function KpiCommerciauxArticle() {
 
               {/* ===================== SECTION 4 : KPIs Revenue ===================== */}
               <section id="kpi-revenue" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#6C5CE7]" />
                     <span className="text-[11px] font-semibold text-[#6C5CE7] uppercase tracking-wider">Categorie 3 / 5</span>
@@ -497,7 +497,7 @@ export default function KpiCommerciauxArticle() {
                         hubspot: "Le NRR necessite un suivi rigoureux des mouvements MRR par cohorte. Utilisez les proprietes custom MRR avec un workflow qui enregistre le MRR mensuel de chaque company. Le calcul final se fait generalement dans un spreadsheet ou un outil BI connecte a HubSpot.",
                       },
                     ].map((kpi) => (
-                      <div key={kpi.num} className="rounded-xl border border-[#EDE7F6] bg-[#F8F5FF] p-5">
+                      <div key={kpi.num} className="rounded-lg border border-[#EDE7F6] bg-[#F8F5FF] p-5">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
                             <span className="text-[11px] font-bold text-white bg-[#6C5CE7] w-5 h-5 rounded-md flex items-center justify-center">{kpi.num}</span>
@@ -505,7 +505,7 @@ export default function KpiCommerciauxArticle() {
                           </div>
                         </div>
                         <p className="text-[12px] text-[#555] leading-[1.7] mb-3" dangerouslySetInnerHTML={{ __html: kpi.definition }} />
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                           <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                           <p className="text-[13px] font-mono text-[#111] mt-1" dangerouslySetInnerHTML={{ __html: kpi.formula }} />
                         </div>
@@ -525,7 +525,7 @@ export default function KpiCommerciauxArticle() {
 
               {/* ===================== SECTION 5 : KPIs Productivite ===================== */}
               <section id="kpi-productivite" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#FF7A59]" />
                     <span className="text-[11px] font-semibold text-[#FF7A59] uppercase tracking-wider">Categorie 4 / 5</span>
@@ -576,7 +576,7 @@ export default function KpiCommerciauxArticle() {
                         hubspot: "Rapport sur les deals Closed Won regroupes par &ldquo;Deal owner&rdquo; avec la metrique &ldquo;Sum of amount&rdquo;. Creez un tableau de classement (leaderboard) mensuel. Attention : ne comparez que des roles equivalents (AE vs AE, pas AE vs SDR).",
                       },
                     ].map((kpi) => (
-                      <div key={kpi.num} className="rounded-xl border border-[#FBE9E7] bg-[#FFF8F6] p-5">
+                      <div key={kpi.num} className="rounded-lg border border-[#FBE9E7] bg-[#FFF8F6] p-5">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
                             <span className="text-[11px] font-bold text-white bg-[#FF7A59] w-5 h-5 rounded-md flex items-center justify-center">{kpi.num}</span>
@@ -584,7 +584,7 @@ export default function KpiCommerciauxArticle() {
                           </div>
                         </div>
                         <p className="text-[12px] text-[#555] leading-[1.7] mb-3" dangerouslySetInnerHTML={{ __html: kpi.definition }} />
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                           <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                           <p className="text-[13px] font-mono text-[#111] mt-1" dangerouslySetInnerHTML={{ __html: kpi.formula }} />
                         </div>
@@ -604,7 +604,7 @@ export default function KpiCommerciauxArticle() {
 
               {/* ===================== SECTION 6 : KPIs Qualite ===================== */}
               <section id="kpi-qualite" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#F59E0B]" />
                     <span className="text-[11px] font-semibold text-[#F59E0B] uppercase tracking-wider">Categorie 5 / 5</span>
@@ -647,7 +647,7 @@ export default function KpiCommerciauxArticle() {
                         hubspot: "Creez des listes actives filtrant les contacts/deals avec des champs vides. Rapport sur le nombre de fiches incompletes par propriete. Utilisez les workflows pour forcer le remplissage (ex: un deal ne peut pas avancer au stade suivant si le montant est vide). HubSpot propose aussi un score de completude des donnees dans les parametres.",
                       },
                     ].map((kpi) => (
-                      <div key={kpi.num} className="rounded-xl border border-[#FFF3E0] bg-[#FFFBF5] p-5">
+                      <div key={kpi.num} className="rounded-lg border border-[#FFF3E0] bg-[#FFFBF5] p-5">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
                             <span className="text-[11px] font-bold text-white bg-[#F59E0B] w-5 h-5 rounded-md flex items-center justify-center">{kpi.num}</span>
@@ -655,7 +655,7 @@ export default function KpiCommerciauxArticle() {
                           </div>
                         </div>
                         <p className="text-[12px] text-[#555] leading-[1.7] mb-3" dangerouslySetInnerHTML={{ __html: kpi.definition }} />
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                           <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                           <p className="text-[13px] font-mono text-[#111] mt-1" dangerouslySetInnerHTML={{ __html: kpi.formula }} />
                         </div>
@@ -675,13 +675,13 @@ export default function KpiCommerciauxArticle() {
 
               {/* ===================== SECTION 7 : Dashboard Mockup ===================== */}
               <section id="dashboard-mockup" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Dashboard ideal</span>
                   <h2 className="text-[17px] font-semibold text-white mb-2">A quoi ressemble un dashboard commercial ideal</h2>
                   <p className="text-[12px] text-white/50 leading-[1.75] mb-6">Voici une representation du dashboard que nous deploiement chez nos clients. Chaque widget correspond a un ou plusieurs KPI decrits dans cet article. L&apos;objectif : avoir une vue complete de la performance commerciale en un seul ecran.</p>
 
                   {/* Dashboard mockup - Row 1: KPI cards */}
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-4 mb-4">
+                  <div className="rounded-lg border border-white/10 bg-white/5 p-4 mb-4">
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-[11px] font-semibold text-white/40 uppercase tracking-wider">Vue d&apos;ensemble -- Mars 2026</span>
                       <div className="flex items-center gap-2">
@@ -713,7 +713,7 @@ export default function KpiCommerciauxArticle() {
                   {/* Dashboard mockup - Row 2: Charts */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                     {/* Sparkline chart mockup - Pipeline evolution */}
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <div className="rounded-lg border border-white/10 bg-white/5 p-4">
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-[11px] font-semibold text-white/60">Pipeline Evolution (6 mois)</span>
                         <span className="text-[9px] px-2 py-0.5 rounded bg-[#22C55E]/20 text-[#22C55E]">+34% YoY</span>
@@ -736,7 +736,7 @@ export default function KpiCommerciauxArticle() {
                     </div>
 
                     {/* Funnel chart mockup */}
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <div className="rounded-lg border border-white/10 bg-white/5 p-4">
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-[11px] font-semibold text-white/60">Funnel de conversion</span>
                         <span className="text-[9px] px-2 py-0.5 rounded bg-white/10 text-white/30">Ce trimestre</span>
@@ -765,7 +765,7 @@ export default function KpiCommerciauxArticle() {
                   {/* Dashboard mockup - Row 3: Activity & Revenue */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                     {/* Activity metrics */}
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <div className="rounded-lg border border-white/10 bg-white/5 p-4">
                       <span className="text-[11px] font-semibold text-white/60 mb-3 block">Activite cette semaine</span>
                       <div className="space-y-3">
                         {[
@@ -788,7 +788,7 @@ export default function KpiCommerciauxArticle() {
                     </div>
 
                     {/* Revenue breakdown */}
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <div className="rounded-lg border border-white/10 bg-white/5 p-4">
                       <span className="text-[11px] font-semibold text-white/60 mb-3 block">Decomposition MRR</span>
                       <div className="space-y-2.5">
                         {[
@@ -817,7 +817,7 @@ export default function KpiCommerciauxArticle() {
                   {/* Dashboard mockup - Row 4: Leaderboard & Gauges */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                     {/* Leaderboard */}
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <div className="rounded-lg border border-white/10 bg-white/5 p-4">
                       <span className="text-[11px] font-semibold text-white/60 mb-3 block">Leaderboard -- Revenu signe (ce mois)</span>
                       <div className="space-y-2">
                         {[
@@ -842,7 +842,7 @@ export default function KpiCommerciauxArticle() {
                     </div>
 
                     {/* Gauge cards */}
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <div className="rounded-lg border border-white/10 bg-white/5 p-4">
                       <span className="text-[11px] font-semibold text-white/60 mb-3 block">Indicateurs cles de sante</span>
                       <div className="grid grid-cols-2 gap-3">
                         {[
@@ -866,7 +866,7 @@ export default function KpiCommerciauxArticle() {
                   </div>
 
                   {/* HubSpot report mockup */}
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                  <div className="rounded-lg border border-white/10 bg-white/5 p-4">
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
                         <div className="w-4 h-4 rounded bg-[#FF7A59] flex items-center justify-center">
@@ -899,7 +899,7 @@ export default function KpiCommerciauxArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-5 rounded-xl border border-white/10 bg-white/5 p-4">
+                  <div className="mt-5 rounded-lg border border-white/10 bg-white/5 p-4">
                     <p className="text-[12px] text-white/45 leading-[1.65]">
                       <strong className="text-white/60">Note :</strong> ce dashboard combine des donnees issues de HubSpot (pipeline, activites, deals) avec des calculs externes (CAC, LTV/CAC, NRR). Dans HubSpot natif, vous obtiendrez environ 70% de ces widgets. Pour les 30% restants (metriques financieres, cohortes), vous aurez besoin d&apos;Operations Hub Pro ou d&apos;un outil BI complementaire.
                     </p>
@@ -910,7 +910,7 @@ export default function KpiCommerciauxArticle() {
 
               {/* ===================== SECTION 8 : Tracker dans HubSpot ===================== */}
               <section id="tracker-hubspot" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Comment tracker ces KPI dans HubSpot</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>HubSpot est l&apos;outil central de la plupart de nos clients pour le suivi des KPI commerciaux. Mais entre les rapports standards, les rapports personnalises, les proprietes calculees et les dashboards, il est facile de s&apos;y perdre. Voici la methode structuree que nous utilisons.</p>
@@ -967,7 +967,7 @@ export default function KpiCommerciauxArticle() {
                         color: "#FF7A59",
                       },
                     ].map((step) => (
-                      <div key={step.num} className="rounded-xl border border-[#F2F2F2] p-5">
+                      <div key={step.num} className="rounded-lg border border-[#F2F2F2] p-5">
                         <div className="flex items-center gap-3 mb-3">
                           <span className="text-[20px] font-bold" style={{ color: `${step.color}30` }}>{step.num}</span>
                           <h3 className="text-[14px] font-semibold text-[#111]">{step.title}</h3>
@@ -994,7 +994,7 @@ export default function KpiCommerciauxArticle() {
 
               {/* ===================== SECTION 9 : KPIs selon votre stade ===================== */}
               <section id="kpi-par-stade" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les KPI qui comptent selon votre stade de croissance</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-6">
                     <p>Tous les KPI n&apos;ont pas la meme importance a chaque etape de la vie de votre entreprise. Une startup en pre-seed n&apos;a pas besoin de mesurer le NRR. Une scale-up a 50 commerciaux ne peut plus se contenter de suivre le nombre d&apos;appels. Voici notre grille de priorites par stade.</p>
@@ -1002,7 +1002,7 @@ export default function KpiCommerciauxArticle() {
 
                   <div className="space-y-5">
                     {/* Early Stage */}
-                    <div className="rounded-xl border border-[#E8F5E9] bg-[#F6FBF6] p-5">
+                    <div className="rounded-lg border border-[#E8F5E9] bg-[#F6FBF6] p-5">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-sm bg-[#22C55E]" />
                         <h3 className="text-[14px] font-semibold text-[#111]">Early Stage (0-10 commerciaux, &lt;1M ARR)</h3>
@@ -1017,7 +1017,7 @@ export default function KpiCommerciauxArticle() {
                     </div>
 
                     {/* Scale-up */}
-                    <div className="rounded-xl border border-[#E8EAF6] bg-[#F5F6FF] p-5">
+                    <div className="rounded-lg border border-[#E8EAF6] bg-[#F5F6FF] p-5">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-sm bg-[#4B5EFC]" />
                         <h3 className="text-[14px] font-semibold text-[#111]">Scale-up (10-50 commerciaux, 1-10M ARR)</h3>
@@ -1032,7 +1032,7 @@ export default function KpiCommerciauxArticle() {
                     </div>
 
                     {/* Enterprise */}
-                    <div className="rounded-xl border border-[#EDE7F6] bg-[#F8F5FF] p-5">
+                    <div className="rounded-lg border border-[#EDE7F6] bg-[#F8F5FF] p-5">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-sm bg-[#6C5CE7]" />
                         <h3 className="text-[14px] font-semibold text-[#111]">Enterprise (50+ commerciaux, 10M+ ARR)</h3>
@@ -1047,7 +1047,7 @@ export default function KpiCommerciauxArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] text-[#666] leading-[1.7]">
                       <strong className="text-[#111]">Regle d&apos;or :</strong> ne mesurez jamais un KPI sans avoir defini en amont qui le suit, a quelle frequence, et quelle action est declenchee quand il sort de la zone acceptable. Un KPI sans proprietaire et sans seuil d&apos;alerte est un chiffre de plus dans un tableau que personne ne regarde.
                     </p>
@@ -1058,7 +1058,7 @@ export default function KpiCommerciauxArticle() {
 
               {/* ===================== SECTION 10 : Notre dashboard chez Ceres (dark section) ===================== */}
               <section id="setup-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Notre approche</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">Notre dashboard commercial chez Ceres</h2>
                   <div className="space-y-3 text-[12px] text-white/50 leading-[1.75]">
@@ -1074,7 +1074,7 @@ export default function KpiCommerciauxArticle() {
                       { label: "Precision forecast", value: "89%", color: "#22C55E" },
                       { label: "Adoption du dashboard", value: "94%", color: "#6C5CE7" },
                     ].map((s) => (
-                      <div key={s.label} className="text-center p-3 rounded-xl bg-white/5 border border-white/10">
+                      <div key={s.label} className="text-center p-3 rounded-lg bg-white/5 border border-white/10">
                         <div className="text-[20px] font-bold" style={{ color: s.color }}>{s.value}</div>
                         <div className="text-[10px] text-white/35 mt-1">{s.label}</div>
                       </div>
@@ -1103,7 +1103,7 @@ export default function KpiCommerciauxArticle() {
 
               {/* Related articles */}
               <section className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((a) => (
@@ -1121,7 +1121,7 @@ export default function KpiCommerciauxArticle() {
 
               {/* CTA */}
               <section>
-                <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+                <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                   <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide pour mettre en place vos KPI commerciaux ?</h2>
                   <p className="text-[13px] text-[#999] mb-6 max-w-[460px] mx-auto">On deploie votre systeme de KPI complet en 1 a 2 semaines : audit CRM, proprietes custom, dashboards, alertes automatiques et formation equipe.</p>
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

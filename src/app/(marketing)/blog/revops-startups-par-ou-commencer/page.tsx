@@ -145,7 +145,7 @@ export default function RevOpsStartupsPage() {
             <article>
               {/* Section 1 -- Le RevOps n'est pas que pour les grands groupes */}
               <section id="pas-que-grands-groupes" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Le RevOps n&apos;est pas que pour les grands groupes</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Il y a un mythe tenace dans l&apos;ecosysteme startup : le RevOps, c&apos;est pour les boites qui ont deja 100 commerciaux, un CRM a 6 chiffres et une equipe operations dediee. C&apos;est faux. Le RevOps n&apos;est pas une couche de complexite qu&apos;on ajoute quand on est gros. C&apos;est un cadre de pensee qui structure la croissance des le depart. Et plus on l&apos;installe tot, moins on aura de dette technique et organisationnelle a rembourser plus tard.</p>
@@ -163,7 +163,7 @@ export default function RevOpsStartupsPage() {
                       { value: "85%", label: "des startups scalent sans RevOps et le regrettent", color: "#6C5CE7" },
                       { value: "2j", label: "pour poser les fondations", color: "#22C55E" },
                     ].map((stat) => (
-                      <div key={stat.label} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] text-center">
+                      <div key={stat.label} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] text-center">
                         <div className="text-[20px] font-bold" style={{ color: stat.color }}>{stat.value}</div>
                         <div className="text-[10px] text-[#999] mt-1 leading-[1.4]">{stat.label}</div>
                       </div>
@@ -175,7 +175,7 @@ export default function RevOpsStartupsPage() {
 
               {/* Section 2 -- Les 3 erreurs des startups sans RevOps */}
               <section id="trois-erreurs" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les 3 erreurs des startups sans RevOps</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Avant de parler de ce qu&apos;il faut faire, parlons de ce qui se passe quand on ne fait rien. Trois schemas reviennent systematiquement chez les startups qui n&apos;ont pas structure leurs operations revenue. Ces erreurs semblent anodines au debut. Elles deviennent des problemes structurels des qu&apos;on depasse 10 personnes.</p>
@@ -206,13 +206,13 @@ export default function RevOpsStartupsPage() {
                         impact: "30% du temps commercial perdu en taches administratives"
                       },
                     ].map((err) => (
-                      <div key={err.num} className="p-5 rounded-xl border border-[#F0F0F0] bg-[#FAFAFA]">
+                      <div key={err.num} className="p-5 rounded-lg border border-[#F0F0F0] bg-[#FAFAFA]">
                         <div className="flex items-center gap-3 mb-3">
                           <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-[12px] font-bold" style={{ backgroundColor: err.color }}>{err.num}</div>
                           <h3 className="text-[14px] font-semibold text-[#111]">{err.title}</h3>
                         </div>
                         <p className="text-[12px] text-[#666] leading-[1.7] mb-3">{err.desc}</p>
-                        <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white border border-[#E8E8E8]">
+                        <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white border border-[#EAEAEA]">
                           <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: err.color }} />
                           <span className="text-[11px] font-medium" style={{ color: err.color }}>{err.impact}</span>
                         </div>
@@ -225,7 +225,7 @@ export default function RevOpsStartupsPage() {
 
               {/* Section 3 -- Phase 1 : 5-15 personnes */}
               <section id="phase-1" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#FF7A59] flex items-center justify-center text-white text-[12px] font-bold">P1</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Phase 1 : 5-15 personnes -- le minimum vital</h2>
@@ -239,7 +239,7 @@ export default function RevOpsStartupsPage() {
                   </div>
 
                   {/* Maturity roadmap -- CSS timeline */}
-                  <div className="mt-8 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-8 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#FF7A59]" />
@@ -299,7 +299,7 @@ export default function RevOpsStartupsPage() {
                   </div>
 
                   {/* Phase 1 checklist */}
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                     <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-3">Checklist Phase 1</p>
                     <div className="space-y-2">
                       {[
@@ -322,7 +322,7 @@ export default function RevOpsStartupsPage() {
 
               {/* Section 4 -- Phase 2 : 15-30 personnes */}
               <section id="phase-2" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#4B5EFC] flex items-center justify-center text-white text-[12px] font-bold">P2</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Phase 2 : 15-30 personnes -- structurer</h2>
@@ -356,7 +356,7 @@ export default function RevOpsStartupsPage() {
 
               {/* Section 5 -- Phase 3 : 30-50 personnes */}
               <section id="phase-3" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#22C55E] flex items-center justify-center text-white text-[12px] font-bold">P3</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Phase 3 : 30-50 personnes -- optimiser</h2>
@@ -377,7 +377,7 @@ export default function RevOpsStartupsPage() {
                       { title: "BI et data warehouse", desc: "Connexion CRM + produit + facturation + support. Cohortes, unit economics, LTV, attribution multi-touch. Les decisions se prennent sur les donnees.", icon: "B", color: "#6C5CE7" },
                       { title: "Automation avancee", desc: "Workflows multi-canaux couvrant le cycle complet : nurturing, onboarding, churn prevention, expansion. 50+ automatisations actives.", icon: "A", color: "#FF7A59" },
                     ].map((cap) => (
-                      <div key={cap.title} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={cap.title} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <div className="flex items-center gap-3 mb-2">
                           <div className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-[11px] font-bold" style={{ backgroundColor: cap.color }}>{cap.icon}</div>
                           <span className="text-[12px] font-semibold text-[#111]">{cap.title}</span>
@@ -392,7 +392,7 @@ export default function RevOpsStartupsPage() {
 
               {/* Section 6 -- Le stack RevOps startup */}
               <section id="stack-startup" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Le stack RevOps startup : quel budget pour quels outils</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le choix du stack technique est critique pour une startup. Trop d&apos;outils tue l&apos;efficacite. Pas assez d&apos;outils limite la croissance. La regle d&apos;or : commencez avec le minimum, ajoutez un outil uniquement quand la douleur est insupportable, et privilegiez toujours les outils qui s&apos;integrent nativement les uns avec les autres.</p>
@@ -400,7 +400,7 @@ export default function RevOpsStartupsPage() {
                   </div>
 
                   {/* Budget allocation chart -- CSS mockup */}
-                  <div className="mt-6 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-6 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3">
                       <span className="text-[12px] font-semibold text-white">Budget allocation par phase</span>
                     </div>
@@ -479,7 +479,7 @@ export default function RevOpsStartupsPage() {
 
               {/* Section 7 -- Recruter un RevOps vs externaliser */}
               <section id="recruter-vs-externaliser" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Recruter un RevOps vs externaliser : que choisir</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>C&apos;est la question que chaque fondateur se pose a un moment : est-ce que je recrute un profil RevOps en interne, ou est-ce que je fais appel a un prestataire externe ? La reponse depend de trois facteurs : votre stade de croissance, votre budget, et l&apos;urgence de votre besoin.</p>
@@ -489,7 +489,7 @@ export default function RevOpsStartupsPage() {
                   </div>
 
                   {/* Comparison table */}
-                  <div className="mt-6 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-6 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3">
                       <span className="text-[12px] font-semibold text-white">Comparatif : recrutement interne vs externalisation</span>
                     </div>
@@ -524,7 +524,7 @@ export default function RevOpsStartupsPage() {
                   </div>
 
                   {/* Recommendation */}
-                  <div className="mt-5 p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                  <div className="mt-5 p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                     <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-2">Notre recommandation</p>
                     <div className="space-y-2">
                       {[
@@ -548,7 +548,7 @@ export default function RevOpsStartupsPage() {
 
               {/* Section 8 -- Les 5 premiers chantiers */}
               <section id="cinq-chantiers" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les 5 premiers chantiers a lancer</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Si vous ne retenez qu&apos;une chose de cet article, retenez cette matrice. Elle classe les chantiers RevOps par impact et par effort. L&apos;objectif est de commencer par le coin en haut a gauche : fort impact, faible effort. Les quick wins qui generent des resultats visibles rapidement et qui creent le momentum pour les chantiers suivants.</p>
@@ -556,7 +556,7 @@ export default function RevOpsStartupsPage() {
                   </div>
 
                   {/* Prioritization matrix CSS mockup */}
-                  <div className="mt-6 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-6 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#22C55E]" />
@@ -616,7 +616,7 @@ export default function RevOpsStartupsPage() {
                           <div className="bg-[#F8FAFC] p-4 min-h-[120px]">
                             <p className="text-[9px] font-semibold text-[#999] uppercase tracking-wider mb-3">Nice to have</p>
                             <div className="space-y-2">
-                              <div className="flex items-center gap-2 p-2 rounded-md bg-white border border-[#E8E8E8]">
+                              <div className="flex items-center gap-2 p-2 rounded-md bg-white border border-[#EAEAEA]">
                                 <div className="w-5 h-5 rounded-full bg-[#CCC] flex items-center justify-center text-white text-[9px] font-bold shrink-0">-</div>
                                 <div>
                                   <span className="text-[10px] text-[#999] block">Templates email</span>
@@ -630,7 +630,7 @@ export default function RevOpsStartupsPage() {
                           <div className="bg-[#FAFAFA] p-4 min-h-[120px]">
                             <p className="text-[9px] font-semibold text-[#999] uppercase tracking-wider mb-3">A eviter (pour l&apos;instant)</p>
                             <div className="space-y-2">
-                              <div className="flex items-center gap-2 p-2 rounded-md bg-white border border-[#E8E8E8]">
+                              <div className="flex items-center gap-2 p-2 rounded-md bg-white border border-[#EAEAEA]">
                                 <div className="w-5 h-5 rounded-full bg-[#E8E8E8] flex items-center justify-center text-[#999] text-[9px] font-bold shrink-0">x</div>
                                 <div>
                                   <span className="text-[10px] text-[#999] block">BI / data warehouse</span>
@@ -665,7 +665,7 @@ export default function RevOpsStartupsPage() {
                       { num: "04", title: "Automatiser les taches repetitives", impact: "Fort", effort: "2-4 semaines", desc: "Commencer par les quick wins : notifications de nouveaux leads, relances automatiques pour les deals en retard, attribution automatique. Chaque automatisation liberee du temps commercial pur.", color: "#FF7A59" },
                       { num: "05", title: "Formaliser le handoff marketing-sales", impact: "Fort", effort: "2-3 semaines", desc: "Definir ce qu&apos;est un MQL, un SQL. Fixer les delais de suivi. Mettre en place les alertes. Installer le meeting hebdomadaire. C&apos;est la que les leads arretent de tomber entre les mailles.", color: "#FF7A59" },
                     ].map((chantier) => (
-                      <div key={chantier.num} className="p-4 rounded-xl border border-[#F0F0F0] bg-[#FAFAFA]">
+                      <div key={chantier.num} className="p-4 rounded-lg border border-[#F0F0F0] bg-[#FAFAFA]">
                         <div className="flex items-center gap-3 mb-2">
                           <div className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-[11px] font-bold" style={{ backgroundColor: chantier.color }}>{chantier.num}</div>
                           <span className="text-[12px] font-semibold text-[#111] flex-1">{chantier.title}</span>
@@ -690,7 +690,7 @@ export default function RevOpsStartupsPage() {
 
               {/* Section 9 -- Comment mesurer le ROI du RevOps en startup */}
               <section id="roi-revops" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Comment mesurer le ROI du RevOps en startup</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le ROI du RevOps ne se mesure pas comme celui d&apos;une campagne marketing. C&apos;est un investissement structurel dont les benefices s&apos;accumulent dans le temps. Mais il existe des metriques concretes qui permettent de quantifier l&apos;impact des le premier trimestre.</p>
@@ -701,7 +701,7 @@ export default function RevOpsStartupsPage() {
                   </div>
 
                   {/* Benchmarks */}
-                  <div className="mt-6 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-6 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3">
                       <span className="text-[12px] font-semibold text-white">Benchmarks : avant / apres RevOps (startups 10-50 pers.)</span>
                     </div>
@@ -747,13 +747,13 @@ export default function RevOpsStartupsPage() {
                   </div>
 
                   {/* ROI calculation */}
-                  <div className="mt-5 p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                  <div className="mt-5 p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                     <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-3">Calcul du ROI -- Exemple concret</p>
                     <div className="space-y-2 text-[11px] text-[#666]">
                       <div className="flex justify-between"><span>Investissement RevOps externalisee (3 mois)</span><span className="font-semibold text-[#FF7A59]">9 000 EUR</span></div>
                       <div className="flex justify-between"><span>Revenue supplementaire (conversion +10pts sur 100 leads/mois x 5K EUR)</span><span className="font-semibold text-[#22C55E]">+75 000 EUR</span></div>
                       <div className="flex justify-between"><span>Temps commercial economise (equiv. 0.5 FTE sur 3 mois)</span><span className="font-semibold text-[#22C55E]">+22 500 EUR</span></div>
-                      <div className="border-t border-[#E8E8E8] pt-2 mt-2 flex justify-between">
+                      <div className="border-t border-[#EAEAEA] pt-2 mt-2 flex justify-between">
                         <span className="font-semibold text-[#111]">ROI sur 3 mois</span>
                         <span className="font-bold text-[#22C55E] text-[13px]">+983%</span>
                       </div>
@@ -765,7 +765,7 @@ export default function RevOpsStartupsPage() {
 
               {/* Section 10 -- Notre offre pour les startups (dark section) */}
               <section id="offre-startups" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8 border border-[#222]">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8 border border-[#222]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#FF7A59] flex items-center justify-center text-white text-[12px] font-bold">C</div>
                     <h2 className="text-[17px] font-semibold text-white">Notre offre pour les startups : Ceres RevOps Part-Time</h2>
@@ -783,7 +783,7 @@ export default function RevOpsStartupsPage() {
                       { name: "Growth", days: "4 jours/mois", price: "3 800 EUR/mois", desc: "Starter + automatisations, scoring, SLA, dashboards", color: "#4B5EFC", features: ["Tout Starter +", "Lead scoring", "5-10 automatisations", "SLA marketing-sales", "3 dashboards", "Weekly sync call"] },
                       { name: "Scale", days: "8 jours/mois", price: "6 000 EUR/mois", desc: "Growth + BI, forecasting, integrations avancees", color: "#22C55E", features: ["Tout Growth +", "Forecasting avance", "Integrations BI", "Attribution multi-touch", "Formation equipes", "Slack dedie"] },
                     ].map((offer) => (
-                      <div key={offer.name} className="rounded-xl p-4 border border-white/10 bg-white/5">
+                      <div key={offer.name} className="rounded-lg p-4 border border-white/10 bg-white/5">
                         <div className="flex items-center gap-2 mb-1">
                           <div className="w-2 h-2 rounded-full" style={{ backgroundColor: offer.color }} />
                           <span className="text-[13px] font-semibold text-white">{offer.name}</span>
@@ -811,7 +811,7 @@ export default function RevOpsStartupsPage() {
                       { value: "< 2 sem", label: "pour les premieres fondations", color: "#22C55E" },
                       { value: "4.8/5", label: "note de satisfaction client", color: "#6C5CE7" },
                     ].map((stat) => (
-                      <div key={stat.label} className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
+                      <div key={stat.label} className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
                         <div className="text-[20px] font-bold" style={{ color: stat.color }}>{stat.value}</div>
                         <div className="text-[10px] text-white/40 mt-1 leading-[1.4]">{stat.label}</div>
                       </div>
@@ -822,7 +822,7 @@ export default function RevOpsStartupsPage() {
 
               {/* Related articles */}
               <section className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((a) => (
@@ -840,7 +840,7 @@ export default function RevOpsStartupsPage() {
 
               {/* CTA */}
               <section>
-                <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+                <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                   <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Pret a structurer votre RevOps startup ?</h2>
                   <p className="text-[13px] text-[#999] mb-6 max-w-[420px] mx-auto">On deploie les fondations RevOps en 2 semaines. Diagnostic, CRM, pipeline, reporting, automatisations. Adapte a votre stade et votre budget. Premiers resultats mesurables des le premier mois.</p>
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

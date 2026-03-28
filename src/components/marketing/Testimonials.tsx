@@ -31,7 +31,7 @@ export default function Testimonials() {
   return (
     <section className="relative z-20">
       <div className="max-w-[1000px] mx-auto px-6">
-        <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
+        <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
           <div className="mb-8">
             <div className="mb-4"><Badge>Témoignages</Badge></div>
             <h2 className="text-[22px] sm:text-[28px] font-semibold text-[#111] leading-[1.2] tracking-[-0.02em] mb-2">
@@ -41,7 +41,7 @@ export default function Testimonials() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {testimonials.map((t) => (
-              <figure key={t.name} className="rounded-xl border border-[#F2F2F2] p-5 flex flex-col">
+              <figure key={t.name} className="rounded-lg border border-[#F2F2F2] p-5 flex flex-col">
                 {/* Result badge */}
                 <div className="mb-4">
                   <span className="text-[10px] font-medium text-[#22C55E] bg-[#F0FDF4] px-2 py-0.5 rounded">{t.result}</span>

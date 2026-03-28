@@ -38,9 +38,9 @@ function Dropdown({ label, items, open, onOpen, onClose }: {
       </button>
       {open && (
         <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3">
-          <div className="w-[340px] rounded-2xl border border-[#E8E8E8] bg-white p-2 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.12)]">
+          <div className="w-[340px] rounded-lg border border-[#EAEAEA] bg-white p-2 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.12)]">
             {items.map((s) => (
-              <Link key={s.href} href={s.href} className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#F7F7F7] transition-colors group">
+              <Link key={s.href} href={s.href} className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#F7F7F7] transition-colors group">
                 <div className="w-9 h-9 rounded-lg shrink-0 flex items-center justify-center" style={{ backgroundColor: s.color + "10", color: s.color }}>
                   {s.icon}
                 </div>

@@ -78,8 +78,8 @@ export default function PricingPage() {
       <div className="max-w-5xl mx-auto px-6 py-20">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-3xl font-bold text-[#0A0A0A] mb-3">Pricing simple, sans surprise</h1>
-          <p className="text-base text-[#737373] max-w-lg mx-auto">
+          <h1 className="text-3xl font-bold text-[#111] mb-3">Pricing simple, sans surprise</h1>
+          <p className="text-base text-[#999] max-w-lg mx-auto">
             Commence gratuitement. Upgrade quand tu veux. Pas d'engagement.
           </p>
         </div>
@@ -90,27 +90,27 @@ export default function PricingPage() {
             return (
               <div
                 key={plan.id}
-                className={"rounded-2xl border p-6 flex flex-col " + (plan.highlighted ? "border-[#0A0A0A] ring-1 ring-[#0A0A0A] relative" : "border-[#E5E5E5]")}
+                className={"rounded-lg border p-6 flex flex-col " + (plan.highlighted ? "border-[#0A0A0A] ring-1 ring-[#0A0A0A] relative" : "border-[#EAEAEA]")}
               >
                 {plan.highlighted && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#0A0A0A] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#111] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
                     Populaire
                   </div>
                 )}
                 <div className="mb-5">
-                  <h3 className="text-lg font-semibold text-[#0A0A0A]">{plan.name}</h3>
-                  <p className="text-[13px] text-[#737373] mt-1">{plan.description}</p>
+                  <h3 className="text-lg font-semibold text-[#111]">{plan.name}</h3>
+                  <p className="text-[13px] text-[#999] mt-1">{plan.description}</p>
                 </div>
                 <div className="mb-5">
-                  <span className="text-3xl font-bold text-[#0A0A0A]">{plan.price === 0 ? "Gratuit" : plan.price + " EUR"}</span>
-                  {plan.period && <span className="text-sm text-[#A3A3A3]">{plan.period}</span>}
+                  <span className="text-3xl font-bold text-[#111]">{plan.price === 0 ? "Gratuit" : plan.price + " EUR"}</span>
+                  {plan.period && <span className="text-sm text-[#BBB]">{plan.period}</span>}
                   <div className="mt-1">
-                    <span className="text-xs text-[#A3A3A3]">{plan.credits} / mois</span>
+                    <span className="text-xs text-[#BBB]">{plan.credits} / mois</span>
                   </div>
                 </div>
                 <a
                   href={plan.href}
-                  className={"block text-center rounded-xl h-11 flex items-center justify-center text-sm font-medium transition-colors mb-6 " + (plan.highlighted ? "bg-[#0A0A0A] text-white hover:bg-[#333]" : "border border-[#E5E5E5] text-[#0A0A0A] hover:bg-[#FAFAFA]")}
+                  className={"block text-center rounded-lg h-11 flex items-center justify-center text-sm font-medium transition-colors mb-6 " + (plan.highlighted ? "bg-[#111] text-white hover:bg-[#333]" : "border border-[#EAEAEA] text-[#111] hover:bg-[#FAFAFA]")}
                 >
                   {plan.cta}
                 </a>
@@ -119,7 +119,7 @@ export default function PricingPage() {
                     return (
                       <div key={f} className="flex items-start gap-2">
                         <Check size={14} className="text-[#22C55E] mt-0.5 shrink-0" />
-                        <span className="text-[13px] text-[#525252]">{f}</span>
+                        <span className="text-[13px] text-[#555]">{f}</span>
                       </div>
                     );
                   })}
@@ -131,24 +131,24 @@ export default function PricingPage() {
 
         {/* Credit explainer */}
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-lg font-semibold text-[#0A0A0A] text-center mb-6">Comment marchent les credits ?</h2>
-          <div className="bg-[#FAFAFA] rounded-xl border border-[#E5E5E5] overflow-hidden">
-            <div className="grid grid-cols-3 gap-0 border-b border-[#E5E5E5] px-4 py-2.5 bg-[#F5F5F5]">
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#737373]">Action</span>
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#737373]">Cout</span>
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#737373]">Exemple</span>
+          <h2 className="text-lg font-semibold text-[#111] text-center mb-6">Comment marchent les credits ?</h2>
+          <div className="bg-[#FAFAFA] rounded-lg border border-[#EAEAEA] overflow-hidden">
+            <div className="grid grid-cols-3 gap-0 border-b border-[#EAEAEA] px-4 py-2.5 bg-[#F5F5F5]">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#999]">Action</span>
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#999]">Cout</span>
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#999]">Exemple</span>
             </div>
             {creditExamples.map(function(ex) {
               return (
                 <div key={ex.action} className="grid grid-cols-3 gap-0 px-4 py-3 border-b border-[#F0F0F0] last:border-0">
-                  <span className="text-sm font-medium text-[#0A0A0A]">{ex.action}</span>
-                  <span className="text-sm text-[#0A0A0A] font-semibold">{ex.cost}</span>
-                  <span className="text-sm text-[#737373] italic">{ex.example}</span>
+                  <span className="text-sm font-medium text-[#111]">{ex.action}</span>
+                  <span className="text-sm text-[#111] font-semibold">{ex.cost}</span>
+                  <span className="text-sm text-[#999] italic">{ex.example}</span>
                 </div>
               );
             })}
           </div>
-          <p className="text-xs text-[#A3A3A3] text-center mt-3">
+          <p className="text-xs text-[#BBB] text-center mt-3">
             Kairo optimise automatiquement le modele utilise (Haiku/Sonnet/Opus) selon ta question pour maximiser tes credits.
           </p>
         </div>

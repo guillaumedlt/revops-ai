@@ -5,7 +5,7 @@ function formatInline(str: string): React.ReactNode {
   var parts = str.split(/(\*\*[^*]+\*\*|`[^`]+`)/g);
   return parts.map(function(part, i) {
     if (part.startsWith("**") && part.endsWith("**")) {
-      return <strong key={i} className="font-semibold text-[#0A0A0A]">{part.slice(2, -2)}</strong>;
+      return <strong key={i} className="font-semibold text-[#111]">{part.slice(2, -2)}</strong>;
     }
     if (part.startsWith("`") && part.endsWith("`")) {
       return <code key={i} className="px-1 py-0.5 rounded bg-[#F5F5F5] text-[12px] font-mono">{part.slice(1, -1)}</code>;
@@ -46,16 +46,16 @@ export default function TextBlock({ text }: { text: string }) {
 
     if (line.startsWith("# ") && !line.startsWith("## ")) {
       flushList();
-      elements.push(<h2 key={key++} className="text-lg font-bold text-[#0A0A0A] mt-4 mb-2">{formatInline(line.slice(2))}</h2>);
+      elements.push(<h2 key={key++} className="text-lg font-bold text-[#111] mt-4 mb-2">{formatInline(line.slice(2))}</h2>);
     } else if (line.startsWith("## ")) {
       flushList();
-      elements.push(<h3 key={key++} className="text-base font-semibold text-[#0A0A0A] mt-3 mb-1.5">{formatInline(line.slice(3))}</h3>);
+      elements.push(<h3 key={key++} className="text-base font-semibold text-[#111] mt-3 mb-1.5">{formatInline(line.slice(3))}</h3>);
     } else if (line.startsWith("### ")) {
       flushList();
-      elements.push(<h4 key={key++} className="text-sm font-semibold text-[#0A0A0A] mt-2 mb-1">{formatInline(line.slice(4))}</h4>);
+      elements.push(<h4 key={key++} className="text-sm font-semibold text-[#111] mt-2 mb-1">{formatInline(line.slice(4))}</h4>);
     } else if (line.trim() === "---") {
       flushList();
-      elements.push(<hr key={key++} className="border-[#E5E5E5] my-3" />);
+      elements.push(<hr key={key++} className="border-[#EAEAEA] my-3" />);
     } else if (line.startsWith("- ") || line.startsWith("* ")) {
       if (listItems.length > 0 && listItems[0].ordered) flushList();
       listItems.push({ text: line.slice(2), ordered: false });

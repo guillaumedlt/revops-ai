@@ -165,7 +165,7 @@ export default function RevOpsManagerFichePostePage() {
               </div>
 
               {/* Quick overview */}
-              <div className="mt-8 rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+              <div className="mt-8 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                 <span className="text-[13px] font-semibold text-[#111] mb-4 block">Le RevOps Manager en chiffres</span>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {[
@@ -174,7 +174,7 @@ export default function RevOpsManagerFichePostePage() {
                     { label: "Offres LinkedIn FR", value: "1 200+", color: "#4B5EFC" },
                     { label: "Outils maitrises", value: "8-12", color: "#6C5CE7" },
                   ].map((s) => (
-                    <div key={s.label} className="text-center p-3 rounded-xl bg-white border border-[#F0F0F0]">
+                    <div key={s.label} className="text-center p-3 rounded-lg bg-white border border-[#F0F0F0]">
                       <div className="text-[22px] font-bold" style={{ color: s.color }}>{s.value}</div>
                       <div className="text-[10px] text-[#999] mt-1">{s.label}</div>
                     </div>
@@ -186,7 +186,7 @@ export default function RevOpsManagerFichePostePage() {
             <article>
               {/* ===================== SECTION 1 : Definition ===================== */}
               <section id="definition" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">C&apos;est quoi un RevOps Manager ?</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le RevOps Manager, pour Revenue Operations Manager, est le responsable de l&apos;alignement operationnel des equipes qui generent du revenu dans l&apos;entreprise : Sales, Marketing et Customer Success. Son role est de s&apos;assurer que ces trois departements travaillent avec les memes processus, les memes outils, les memes donnees et les memes objectifs. L&apos;objectif final est simple : maximiser le revenu de maniere previsible et scalable.</p>
@@ -198,7 +198,7 @@ export default function RevOpsManagerFichePostePage() {
 
                   {/* RevOps vs traditional ops comparison */}
                   <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                    <div className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                       <p className="text-[11px] font-semibold text-[#999] mb-3">Avant : Operations en silo</p>
                       <div className="space-y-2">
                         {[
@@ -215,7 +215,7 @@ export default function RevOpsManagerFichePostePage() {
                         ))}
                       </div>
                     </div>
-                    <div className="p-4 rounded-xl border-2 border-[#FF7A59]/20 bg-[#FF7A59]/5">
+                    <div className="p-4 rounded-lg border-2 border-[#FF7A59]/20 bg-[#FF7A59]/5">
                       <p className="text-[11px] font-semibold text-[#FF7A59] mb-3">Apres : Revenue Operations unifie</p>
                       <div className="space-y-2">
                         {[
@@ -239,7 +239,7 @@ export default function RevOpsManagerFichePostePage() {
 
               {/* ===================== SECTION 2 : Croissance en 2026 ===================== */}
               <section id="croissance-2026" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi le role de RevOps Manager explose en 2026</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le RevOps Manager n&apos;est plus un poste de niche reserve aux licornes de la Silicon Valley. En 2026, c&apos;est l&apos;un des roles qui croit le plus rapidement dans l&apos;ecosysteme B2B francais et mondial. Les chiffres sont sans ambiguite.</p>
@@ -258,7 +258,7 @@ export default function RevOpsManagerFichePostePage() {
                       { value: "1 200+", label: "offres actives sur LinkedIn France en mars 2026", color: "#22C55E" },
                       { value: "10-25%", label: "de gain de productivite commerciale apres implementation", color: "#6C5CE7" },
                     ].map((stat) => (
-                      <div key={stat.label} className="text-center p-4 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2]">
+                      <div key={stat.label} className="text-center p-4 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2]">
                         <div className="text-[22px] font-bold" style={{ color: stat.color }}>{stat.value}</div>
                         <div className="text-[10px] text-[#999] mt-1 leading-[1.4]">{stat.label}</div>
                       </div>
@@ -266,7 +266,7 @@ export default function RevOpsManagerFichePostePage() {
                   </div>
 
                   {/* Growth trend mini chart */}
-                  <div className="mt-5 rounded-xl border border-[#F0F0F0] p-4">
+                  <div className="mt-5 rounded-lg border border-[#F0F0F0] p-4">
                     <p className="text-[10px] text-[#999] mb-3">Evolution des offres RevOps en France -- 2021-2026</p>
                     <div className="flex items-end gap-3 h-24">
                       {[
@@ -291,7 +291,7 @@ export default function RevOpsManagerFichePostePage() {
 
               {/* ===================== SECTION 3 : Fiche de poste ===================== */}
               <section id="fiche-de-poste" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Fiche de poste complete du RevOps Manager</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le RevOps Manager porte une responsabilite large qui couvre trois grands domaines : les processus, la technologie et les donnees. Il est le garant de la coherence operationnelle entre les equipes revenue. Voici le detail de ses missions principales et de son rattachement dans l&apos;organisation.</p>
@@ -326,7 +326,7 @@ export default function RevOpsManagerFichePostePage() {
                         color: "#F59E0B",
                       },
                     ].map((item) => (
-                      <div key={item.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={item.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: item.color }} />
                           <h3 className="text-[13px] font-semibold text-[#111]">{item.title}</h3>
@@ -337,7 +337,7 @@ export default function RevOpsManagerFichePostePage() {
                   </div>
 
                   {/* CSS Org Chart Mockup */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#333] mb-5">Rattachement hierarchique -- ou se situe le RevOps</p>
                     <div className="flex flex-col items-center gap-0">
                       {/* CEO level */}
@@ -393,14 +393,14 @@ export default function RevOpsManagerFichePostePage() {
 
               {/* ===================== SECTION 4 : Competences ===================== */}
               <section id="competences" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les competences requises pour etre RevOps Manager</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le RevOps Manager est un profil hybride qui combine des competences techniques, analytiques et relationnelles. C&apos;est ce qui rend le recrutement si difficile : trouver quelqu&apos;un qui maitrise a la fois le CRM, l&apos;analyse de donnees, l&apos;automatisation et la gestion de projet, tout en etant un excellent communicant capable de travailler avec des profils tres differents (commerciaux, marketeurs, developpeurs, direction). Les candidats qui cochent toutes les cases sont rares, d&apos;ou la tension sur le marche.</p>
                   </div>
 
                   {/* CSS Skills Radar Mockup */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#333] mb-4">Radar de competences -- Profil ideal</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -413,7 +413,7 @@ export default function RevOpsManagerFichePostePage() {
                         { skill: "Gestion de projet", level: 80, color: "#4B5EFC" },
                         { skill: "Business Acumen", level: 75, color: "#22C55E" },
                       ].map((s) => (
-                        <div key={s.skill} className="p-3 rounded-lg bg-white border border-[#E8E8E8]">
+                        <div key={s.skill} className="p-3 rounded-lg bg-white border border-[#EAEAEA]">
                           <div className="flex items-center justify-between mb-2">
                             <span className="text-[9px] font-semibold text-[#555]">{s.skill}</span>
                             <span className="text-[9px] font-bold" style={{ color: s.color }}>{s.level}%</span>
@@ -457,7 +457,7 @@ export default function RevOpsManagerFichePostePage() {
                           color: "#F59E0B",
                         },
                       ].map((item) => (
-                        <div key={item.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                        <div key={item.title} className="rounded-lg border border-[#F2F2F2] p-4">
                           <div className="flex items-center gap-2 mb-2">
                             <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: item.color }} />
                             <h4 className="text-[12px] font-semibold text-[#111]">{item.title}</h4>
@@ -478,7 +478,7 @@ export default function RevOpsManagerFichePostePage() {
                         { title: "Esprit analytique", desc: "Raisonner en donnees et en metriques. Identifier les patterns, les anomalies et les opportunites d&apos;optimisation dans les chiffres.", color: "#22C55E" },
                         { title: "Conduite du changement", desc: "Faire adopter de nouveaux outils et processus par des equipes resistantes au changement. Patience, pedagogie et persistence.", color: "#6C5CE7" },
                       ].map((item) => (
-                        <div key={item.title} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                        <div key={item.title} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                           <div className="flex items-center gap-2 mb-2">
                             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
                             <span className="text-[11px] font-semibold text-[#333]">{item.title}</span>
@@ -494,14 +494,14 @@ export default function RevOpsManagerFichePostePage() {
 
               {/* ===================== SECTION 5 : Journee type ===================== */}
               <section id="journee-type" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">La journee type d&apos;un RevOps Manager</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Aucune journee ne se ressemble pour un RevOps Manager, mais certaines activites reviennent systematiquement. Voici a quoi ressemble une journee type, de 8h a 18h, pour un RevOps Manager dans une scale-up B2B de 50 a 200 salaries.</p>
                   </div>
 
                   {/* CSS Timeline Mockup: Day-in-the-life */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#333] mb-5">Timeline -- Une journee type</p>
                     <div className="relative">
                       {/* Timeline line */}
@@ -553,7 +553,7 @@ export default function RevOpsManagerFichePostePage() {
 
               {/* ===================== SECTION 6 : Outils ===================== */}
               <section id="outils" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les outils du RevOps Manager</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La stack technologique du RevOps Manager est vaste. Il n&apos;a pas besoin de maitriser chaque outil au niveau expert, mais il doit avoir une comprehension fonctionnelle de l&apos;ecosysteme et une expertise approfondie sur 3 a 4 outils cles. Voici les categories d&apos;outils et les solutions les plus courantes en 2026.</p>
@@ -571,7 +571,7 @@ export default function RevOpsManagerFichePostePage() {
                       { outil: "Slack", categorie: "Communication & Alertes", desc: "Canal de communication principal pour les alertes automatiques (nouveaux MQLs, deals bloques, data quality issues). Integrations CRM pour les notifications en temps reel aux equipes revenue.", color: "#4A154B", essential: true },
                       { outil: "Gong / Modjo", categorie: "Revenue Intelligence", desc: "Plateformes d&apos;analyse conversationnelle pour les appels commerciaux. Insights sur les objections, les patterns de vente gagnants et la performance individuelle. Donnees complementaires au CRM.", color: "#7B4FCF", essential: false },
                     ].map((item) => (
-                      <div key={item.outil} className="p-4 rounded-xl border-2 bg-white" style={{ borderColor: `${item.color}30` }}>
+                      <div key={item.outil} className="p-4 rounded-lg border-2 bg-white" style={{ borderColor: `${item.color}30` }}>
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
                             <span className="text-[13px] font-bold" style={{ color: item.color }}>{item.outil}</span>
@@ -593,14 +593,14 @@ export default function RevOpsManagerFichePostePage() {
 
               {/* ===================== SECTION 7 : Salaire ===================== */}
               <section id="salaire" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Salaire du RevOps Manager en France en 2026</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le salaire du RevOps Manager en France varie significativement selon quatre facteurs : le niveau d&apos;experience, la localisation geographique (Paris vs regions), la taille de l&apos;entreprise (startup vs corporate) et la stack technologique maitrisee. Voici les fourchettes observees sur le marche en mars 2026, basees sur notre analyse des offres LinkedIn, Welcome to the Jungle, et les remontees de notre reseau de candidats et clients.</p>
                   </div>
 
                   {/* CSS Salary Bar Chart Mockup */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#333] mb-2">Salaire brut annuel par niveau d&apos;experience -- Paris</p>
                     <p className="text-[9px] text-[#BBB] mb-5">En milliers d&apos;euros, package fixe + variable</p>
                     <div className="space-y-4">
@@ -656,7 +656,7 @@ export default function RevOpsManagerFichePostePage() {
 
                   {/* Paris vs Regions comparison */}
                   <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="p-4 rounded-xl bg-white border border-[#F0F0F0]">
+                    <div className="p-4 rounded-lg bg-white border border-[#F0F0F0]">
                       <p className="text-[11px] font-semibold text-[#FF7A59] mb-3">Paris / Ile-de-France</p>
                       <div className="space-y-2">
                         {[
@@ -672,7 +672,7 @@ export default function RevOpsManagerFichePostePage() {
                         ))}
                       </div>
                     </div>
-                    <div className="p-4 rounded-xl bg-white border border-[#F0F0F0]">
+                    <div className="p-4 rounded-lg bg-white border border-[#F0F0F0]">
                       <p className="text-[11px] font-semibold text-[#4B5EFC] mb-3">Regions (Lyon, Nantes, Bordeaux, Toulouse)</p>
                       <div className="space-y-2">
                         {[
@@ -691,7 +691,7 @@ export default function RevOpsManagerFichePostePage() {
                   </div>
 
                   {/* Startup vs Corporate */}
-                  <div className="mt-5 rounded-xl border border-[#F0F0F0] p-4">
+                  <div className="mt-5 rounded-lg border border-[#F0F0F0] p-4">
                     <p className="text-[11px] font-semibold text-[#333] mb-3">Startup / Scale-up vs Grand Groupe</p>
                     <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                       <p className="text-[11px] text-[#777] leading-[1.7]">Les startups et scale-ups proposent generalement un package fixe plus bas de 10 a 15% par rapport aux grands groupes, mais compensent avec des BSPCE (stock-options) et une autonomie plus grande. Un RevOps Manager confirme dans une scale-up parisienne gagnera typiquement 50K-60K fixe + BSPCE, contre 55K-70K fixe dans un grand groupe sans equity. Les scales-ups leves en Serie B+ commencent a s&apos;aligner sur les salaires corporate pour attirer les meilleurs profils.</p>
@@ -709,7 +709,7 @@ export default function RevOpsManagerFichePostePage() {
 
               {/* ===================== SECTION 8 : Parcours ===================== */}
               <section id="parcours" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Le parcours type pour devenir RevOps Manager</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Il n&apos;existe pas de formation academique &ldquo;Revenue Operations&rdquo; en France en 2026. Le RevOps Manager est un role emergent, et les profils qui l&apos;occupent viennent de parcours varies. C&apos;est a la fois une difficulte pour les recruteurs (les CV ne correspondent jamais exactement a la fiche de poste) et une opportunite pour les candidats (de nombreux profils peuvent pivoter vers le RevOps). Voici les quatre parcours les plus courants.</p>
@@ -750,7 +750,7 @@ export default function RevOpsManagerFichePostePage() {
                         color: "#6C5CE7",
                       },
                     ].map((item) => (
-                      <div key={item.origine} className="rounded-xl border border-[#F2F2F2] p-5">
+                      <div key={item.origine} className="rounded-lg border border-[#F2F2F2] p-5">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
                             <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: item.color }} />
@@ -796,7 +796,7 @@ export default function RevOpsManagerFichePostePage() {
 
               {/* ===================== SECTION 9 : Recruter un RevOps ===================== */}
               <section id="recruter" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Comment recruter un RevOps Manager</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Recruter un RevOps Manager est l&apos;un des recrutements les plus difficiles en 2026 pour les entreprises B2B en France. Le vivier de candidats est restreint, la concurrence est forte et les profils senior sont sollicites en permanence. Voici une approche structuree pour maximiser vos chances de trouver le bon profil.</p>
@@ -805,7 +805,7 @@ export default function RevOpsManagerFichePostePage() {
                   </div>
 
                   {/* Interview questions */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#333] mb-4">10 questions d&apos;entretien pour evaluer un RevOps Manager</p>
                     <div className="space-y-2.5">
                       {[
@@ -820,7 +820,7 @@ export default function RevOpsManagerFichePostePage() {
                         { q: "Decrivez une integration complexe que vous avez mise en place entre deux outils. Quels etaient les pieges ?", cat: "Tech", color: "#6C5CE7" },
                         { q: "Si vous aviez un budget de 50K pour des outils, comment le repartiriez-vous pour maximiser l&apos;impact RevOps ?", cat: "Strategie", color: "#FF7A59" },
                       ].map((item, idx) => (
-                        <div key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-white border border-[#E8E8E8]">
+                        <div key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-white border border-[#EAEAEA]">
                           <span className="text-[10px] font-bold text-[#CCC] mt-0.5 shrink-0 w-4">{idx + 1}.</span>
                           <div className="flex-1">
                             <p className="text-[11px] text-[#555] leading-[1.6]" dangerouslySetInnerHTML={{ __html: item.q }} />
@@ -832,7 +832,7 @@ export default function RevOpsManagerFichePostePage() {
                   </div>
 
                   {/* Red flags */}
-                  <div className="mt-5 rounded-xl border border-[#FF7A59]/20 bg-[#FF7A59]/5 p-5">
+                  <div className="mt-5 rounded-lg border border-[#FF7A59]/20 bg-[#FF7A59]/5 p-5">
                     <p className="text-[12px] font-semibold text-[#FF7A59] mb-3">Red flags en entretien</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {[
@@ -856,7 +856,7 @@ export default function RevOpsManagerFichePostePage() {
 
               {/* ===================== SECTION 10 : Externaliser le RevOps ===================== */}
               <section id="externaliser" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">L&apos;alternative : externaliser le RevOps a une agence</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Recruter un RevOps Manager en interne n&apos;est pas toujours la bonne option. Le recrutement prend 3 a 4 mois, le salaire annuel charges se situe entre 55K et 130K selon le profil, et il faut du temps pour que la personne soit productive (onboarding de 2 a 3 mois en moyenne). Pour les entreprises de 10 a 100 salaries qui n&apos;ont pas encore de fonction RevOps structuree, l&apos;externalisation a une agence specialisee est souvent la meilleure option pour demarrer.</p>
@@ -864,7 +864,7 @@ export default function RevOpsManagerFichePostePage() {
                   </div>
 
                   {/* Comparison table */}
-                  <div className="mt-6 rounded-xl border border-[#F0F0F0] overflow-hidden">
+                  <div className="mt-6 rounded-lg border border-[#F0F0F0] overflow-hidden">
                     <div className="grid grid-cols-3">
                       {/* Header */}
                       <div className="p-3 bg-[#FAFAFA] border-b border-r border-[#F0F0F0]">
@@ -913,7 +913,7 @@ export default function RevOpsManagerFichePostePage() {
 
               {/* ===================== SECTION 11 : Vision Ceres (dark) ===================== */}
               <section id="vision-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Notre vision</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">Notre vision du RevOps chez Ceres</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -931,7 +931,7 @@ export default function RevOpsManagerFichePostePage() {
                       { value: "2 sem.", label: "pour demarrer l&apos;accompagnement", color: "#22C55E" },
                       { value: "40+", label: "entreprises B2B accompagnees", color: "#6C5CE7" },
                     ].map((stat) => (
-                      <div key={stat.label} className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
+                      <div key={stat.label} className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
                         <div className="text-[20px] font-bold" style={{ color: stat.color }}>{stat.value}</div>
                         <div className="text-[10px] text-white/40 mt-1 leading-[1.4]" dangerouslySetInnerHTML={{ __html: stat.label }} />
                       </div>
@@ -960,7 +960,7 @@ export default function RevOpsManagerFichePostePage() {
 
               {/* Related articles */}
               <section className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((a) => (
@@ -978,7 +978,7 @@ export default function RevOpsManagerFichePostePage() {
 
               {/* CTA */}
               <section>
-                <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+                <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                   <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;un RevOps Manager sans recruter ?</h2>
                   <p className="text-[13px] text-[#999] mb-6 max-w-[420px] mx-auto">Ceres vous apporte l&apos;expertise d&apos;un RevOps Manager senior, en part-time, pour une fraction du cout d&apos;un recrutement. Audit, CRM, dashboards, automations, formation. Premiers resultats en 30 jours.</p>
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

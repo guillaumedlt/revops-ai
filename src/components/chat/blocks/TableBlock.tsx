@@ -97,26 +97,26 @@ export default function TableBlock({ title, headers, rows, sortable = true, sear
   }
 
   return (
-    <div className="rounded-xl border border-[#E5E5E5] overflow-hidden bg-white">
+    <div className="rounded-lg border border-[#EAEAEA] overflow-hidden bg-white">
       {/* Header bar */}
-      <div className="px-4 py-2.5 bg-[#FAFAFA] border-b border-[#E5E5E5] flex items-center justify-between gap-2">
-        <p className="text-sm font-semibold text-[#0A0A0A] truncate">{title || "Data"}</p>
+      <div className="px-4 py-2.5 bg-[#FAFAFA] border-b border-[#EAEAEA] flex items-center justify-between gap-2">
+        <p className="text-sm font-semibold text-[#111] truncate">{title || "Data"}</p>
         <div className="flex items-center gap-1.5 shrink-0">
           {searchable && rows.length > 5 && (
             <div className="relative">
-              <Search size={12} className="absolute left-2 top-1/2 -translate-y-1/2 text-[#A3A3A3]" />
+              <Search size={12} className="absolute left-2 top-1/2 -translate-y-1/2 text-[#BBB]" />
               <input
                 type="text"
                 value={search}
                 onChange={function(e) { handleSearch(e.target.value); }}
                 placeholder="Filter..."
-                className="h-7 w-32 pl-7 pr-2 text-[11px] rounded-lg border border-[#E5E5E5] bg-white text-[#0A0A0A] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]"
+                className="h-7 w-32 pl-7 pr-2 text-[11px] rounded-lg border border-[#EAEAEA] bg-white text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]"
               />
             </div>
           )}
           <button
             onClick={exportCSV}
-            className="h-7 px-2 flex items-center gap-1 rounded-lg text-[11px] text-[#737373] hover:text-[#0A0A0A] hover:bg-[#E5E5E5] transition-colors"
+            className="h-7 px-2 flex items-center gap-1 rounded-lg text-[11px] text-[#999] hover:text-[#111] hover:bg-[#E5E5E5] transition-colors"
             title="Export CSV"
           >
             <Download size={12} />
@@ -129,21 +129,21 @@ export default function TableBlock({ title, headers, rows, sortable = true, sear
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-[#E5E5E5] bg-[#FAFAFA]/50">
+            <tr className="border-b border-[#EAEAEA] bg-[#FAFAFA]/50">
               {headers.map(function(h, i) {
                 var isSorted = sortCol === i;
                 return (
                   <th
                     key={i}
                     onClick={function() { handleSort(i); }}
-                    className={"text-left text-[11px] font-semibold uppercase tracking-wider text-[#737373] px-4 py-2.5 " + (sortable ? "cursor-pointer hover:text-[#0A0A0A] select-none" : "")}
+                    className={"text-left text-[11px] font-semibold uppercase tracking-wider text-[#999] px-4 py-2.5 " + (sortable ? "cursor-pointer hover:text-[#111] select-none" : "")}
                   >
                     <div className="flex items-center gap-1">
                       {h}
                       {sortable && isSorted && (
                         sortAsc
-                          ? <ChevronUp size={12} className="text-[#0A0A0A]" />
-                          : <ChevronDown size={12} className="text-[#0A0A0A]" />
+                          ? <ChevronUp size={12} className="text-[#111]" />
+                          : <ChevronDown size={12} className="text-[#111]" />
                       )}
                     </div>
                   </th>
@@ -153,14 +153,14 @@ export default function TableBlock({ title, headers, rows, sortable = true, sear
           </thead>
           <tbody>
             {paginated.length === 0 ? (
-              <tr><td colSpan={headers.length} className="px-4 py-6 text-center text-xs text-[#A3A3A3]">No results</td></tr>
+              <tr><td colSpan={headers.length} className="px-4 py-6 text-center text-xs text-[#BBB]">No results</td></tr>
             ) : paginated.map(function(row, i) {
               return (
                 <tr key={i} className={"border-b border-[#F5F5F5] last:border-0 hover:bg-[#FAFAFA] transition-colors " + (i % 2 === 1 ? "bg-[#FAFAFA]/30" : "bg-white")}>
                   {row.map(function(cell, j) {
                     var style = getCellStyle(cell);
                     return (
-                      <td key={j} className={"px-4 py-2.5 text-[#0A0A0A] " + (j === 0 ? "font-medium " : "") + style}>
+                      <td key={j} className={"px-4 py-2.5 text-[#111] " + (j === 0 ? "font-medium " : "") + style}>
                         {cell}
                       </td>
                     );
@@ -173,21 +173,21 @@ export default function TableBlock({ title, headers, rows, sortable = true, sear
       </div>
 
       {/* Footer with pagination */}
-      <div className="px-4 py-2 bg-[#FAFAFA] border-t border-[#E5E5E5] flex items-center justify-between">
-        <p className="text-[10px] text-[#A3A3A3]">
+      <div className="px-4 py-2 bg-[#FAFAFA] border-t border-[#EAEAEA] flex items-center justify-between">
+        <p className="text-[10px] text-[#BBB]">
           {search ? filtered.length + " of " + rows.length + " rows" : rows.length + " row" + (rows.length !== 1 ? "s" : "")}
         </p>
         {showPagination && (
           <div className="flex items-center gap-1">
             <button onClick={function() { setPage(Math.max(0, page - 1)); }} disabled={page === 0}
-              className="h-6 w-6 flex items-center justify-center rounded text-[#525252] hover:bg-[#E5E5E5] disabled:opacity-30">
+              className="h-6 w-6 flex items-center justify-center rounded text-[#555] hover:bg-[#E5E5E5] disabled:opacity-30">
               <ChevronLeft size={14} />
             </button>
-            <span className="text-[10px] text-[#737373] min-w-[40px] text-center">
+            <span className="text-[10px] text-[#999] min-w-[40px] text-center">
               {(page + 1) + " / " + totalPages}
             </span>
             <button onClick={function() { setPage(Math.min(totalPages - 1, page + 1)); }} disabled={page >= totalPages - 1}
-              className="h-6 w-6 flex items-center justify-center rounded text-[#525252] hover:bg-[#E5E5E5] disabled:opacity-30">
+              className="h-6 w-6 flex items-center justify-center rounded text-[#555] hover:bg-[#E5E5E5] disabled:opacity-30">
               <ChevronRight size={14} />
             </button>
           </div>

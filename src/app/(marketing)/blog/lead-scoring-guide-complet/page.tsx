@@ -147,7 +147,7 @@ export default function LeadScoringGuidePage() {
             <article>
               {/* Section 1 — Definition */}
               <section id="definition" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">C&apos;est quoi le lead scoring</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le lead scoring est une methodologie qui consiste a attribuer un score numerique a chaque lead de votre base en fonction de criteres predetermines. L&apos;objectif est simple : hierarchiser vos prospects pour que vos commerciaux concentrent leur energie sur ceux qui ont la plus forte probabilite de devenir clients.</p>
@@ -158,22 +158,22 @@ export default function LeadScoringGuidePage() {
                   </div>
 
                   {/* Visual: scoring concept */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#111] mb-4">Le principe du lead scoring en un schema</p>
                     <div className="flex flex-col sm:flex-row items-center gap-4">
-                      <div className="flex-1 text-center p-4 rounded-lg bg-white border border-[#E8E8E8]">
+                      <div className="flex-1 text-center p-4 rounded-lg bg-white border border-[#EAEAEA]">
                         <div className="text-[20px] font-bold text-[#6C5CE7] mb-1">Qui</div>
                         <p className="text-[11px] text-[#999]">Fit Score</p>
                         <p className="text-[10px] text-[#BBB] mt-1">Correspond-il a votre ICP ?</p>
                       </div>
                       <div className="text-[18px] text-[#DDD] font-bold">+</div>
-                      <div className="flex-1 text-center p-4 rounded-lg bg-white border border-[#E8E8E8]">
+                      <div className="flex-1 text-center p-4 rounded-lg bg-white border border-[#EAEAEA]">
                         <div className="text-[20px] font-bold text-[#FF7A59] mb-1">Quoi</div>
                         <p className="text-[11px] text-[#999]">Engagement Score</p>
                         <p className="text-[10px] text-[#BBB] mt-1">Montre-t-il de l&apos;interet ?</p>
                       </div>
                       <div className="text-[18px] text-[#DDD] font-bold">=</div>
-                      <div className="flex-1 text-center p-4 rounded-lg bg-white border border-[#E8E8E8]">
+                      <div className="flex-1 text-center p-4 rounded-lg bg-white border border-[#EAEAEA]">
                         <div className="text-[20px] font-bold text-[#22C55E] mb-1">Score</div>
                         <p className="text-[11px] text-[#999]">Lead Score Total</p>
                         <p className="text-[10px] text-[#BBB] mt-1">Priorite de traitement</p>
@@ -186,7 +186,7 @@ export default function LeadScoringGuidePage() {
 
               {/* Section 2 — Pourquoi indispensable */}
               <section id="pourquoi-indispensable" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi le lead scoring est indispensable en B2B</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>En B2B, le lead scoring n&apos;est pas un luxe. C&apos;est une necessite operationnelle. Les cycles de vente sont longs (3 a 9 mois en moyenne), les paniers moyens sont eleves, et les ressources commerciales sont limitees. Chaque heure passee sur un mauvais lead est une heure perdue sur un bon prospect.</p>
@@ -203,7 +203,7 @@ export default function LeadScoringGuidePage() {
                       { value: "-14%", label: "de reduction du cycle de vente en moyenne", color: "#FF7A59" },
                       { value: "79%", label: "des leads marketing ne sont jamais convertis faute de scoring (MarketingSherpa)", color: "#22C55E" },
                     ].map((stat) => (
-                      <div key={stat.label} className="text-center p-4 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2]">
+                      <div key={stat.label} className="text-center p-4 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2]">
                         <div className="text-[22px] font-bold" style={{ color: stat.color }}>{stat.value}</div>
                         <div className="text-[10px] text-[#999] mt-1 leading-[1.4]">{stat.label}</div>
                       </div>
@@ -215,7 +215,7 @@ export default function LeadScoringGuidePage() {
 
               {/* Section 3 — Les 2 dimensions */}
               <section id="deux-dimensions" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les 2 dimensions du scoring : Fit vs Engagement</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Un systeme de lead scoring efficace repose sur deux axes complementaires. Le Fit Score (score demographique) mesure a quel point le lead correspond a votre profil de client ideal. L&apos;Engagement Score (score comportemental) mesure a quel point le lead montre de l&apos;interet pour votre solution. Les deux sont indispensables.</p>
@@ -224,7 +224,7 @@ export default function LeadScoringGuidePage() {
                   </div>
 
                   {/* Scoring Matrix CSS Mockup */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#111] mb-5">Matrice de scoring : Fit vs Engagement</p>
                     <div className="relative">
                       {/* Y-axis label */}
@@ -245,7 +245,7 @@ export default function LeadScoringGuidePage() {
                         </div>
                         {/* Bottom row */}
                         <div className="grid grid-cols-2 gap-2">
-                          <div className="p-4 rounded-lg bg-[#E8E8E8]/40 border border-[#E8E8E8] text-center">
+                          <div className="p-4 rounded-lg bg-[#E8E8E8]/40 border border-[#EAEAEA] text-center">
                             <div className="text-[11px] font-semibold text-[#999] mb-1">Ignorer</div>
                             <p className="text-[10px] text-[#BBB] leading-[1.4]">Fit faible + Engagement faible</p>
                             <p className="text-[9px] text-[#CCC] mt-1">Pas votre cible, pas interesse. Aucune action requise.</p>
@@ -267,7 +267,7 @@ export default function LeadScoringGuidePage() {
 
               {/* Section 4 — Fit scoring */}
               <section id="fit-scoring" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Fit scoring : les criteres demographiques</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le Fit Score evalue la correspondance entre le lead et votre Ideal Customer Profile (ICP). Il se base sur des criteres statiques, c&apos;est-a-dire des informations qui ne changent pas (ou rarement) dans le temps : la taille de l&apos;entreprise, le secteur d&apos;activite, le poste occupe, la localisation geographique, le budget estime.</p>
@@ -276,12 +276,12 @@ export default function LeadScoringGuidePage() {
                   </div>
 
                   {/* Fit scoring point values table */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#111] mb-4">Exemple de grille de Fit scoring (sur 50 points)</p>
                     <div className="overflow-x-auto">
                       <table className="w-full text-[12px]">
                         <thead>
-                          <tr className="border-b border-[#E8E8E8]">
+                          <tr className="border-b border-[#EAEAEA]">
                             <th className="text-left py-2.5 pr-4 text-[#999] font-medium">Critere</th>
                             <th className="text-left py-2.5 pr-4 text-[#999] font-medium">Valeur</th>
                             <th className="text-right py-2.5 text-[#999] font-medium">Points</th>
@@ -318,7 +318,7 @@ export default function LeadScoringGuidePage() {
 
               {/* Section 5 — Engagement scoring */}
               <section id="engagement-scoring" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Engagement scoring : les signaux comportementaux</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;Engagement Score mesure le niveau d&apos;interet d&apos;un lead base sur ses actions. Contrairement au Fit Score qui est statique, l&apos;Engagement Score evolue en temps reel. Chaque interaction avec votre marque (visite de page, ouverture d&apos;email, telechargement de contenu, participation a un evenement) ajoute des points au score.</p>
@@ -327,7 +327,7 @@ export default function LeadScoringGuidePage() {
                   </div>
 
                   {/* Engagement scoring point values */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#111] mb-4">Exemple de grille d&apos;Engagement scoring (sur 50 points)</p>
                     <div className="space-y-2">
                       {[
@@ -358,7 +358,7 @@ export default function LeadScoringGuidePage() {
                     </div>
                   </div>
 
-                  <div className="mt-5 p-4 rounded-xl bg-[#6C5CE7]/5 border border-[#6C5CE7]/15">
+                  <div className="mt-5 p-4 rounded-lg bg-[#6C5CE7]/5 border border-[#6C5CE7]/15">
                     <p className="text-[12px] font-semibold text-[#6C5CE7] mb-1">Score decay : la decroissance temporelle</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Retirez automatiquement des points si le lead n&apos;interagit pas pendant une periode donnee. Exemple : -5 points apres 30 jours d&apos;inactivite, -10 points apres 60 jours, reset apres 90 jours sans interaction. Cela garantit que votre scoring reflète la realite, pas l&apos;historique.</p>
                   </div>
@@ -368,7 +368,7 @@ export default function LeadScoringGuidePage() {
 
               {/* Section 6 — Negative scoring */}
               <section id="negative-scoring" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Avance</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">Negative scoring : quand retirer des points</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -404,7 +404,7 @@ export default function LeadScoringGuidePage() {
 
               {/* Section 7 — Seuils */}
               <section id="seuils" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Definir vos seuils : MQL, SQL, Hot Lead</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Avoir un score ne sert a rien sans seuils de qualification. Les seuils definissent a quel moment un lead change de statut et declenche une action specifique. Trois seuils sont generalement necessaires : le seuil MQL (Marketing Qualified Lead), le seuil SQL (Sales Qualified Lead) et le seuil Hot Lead.</p>
@@ -413,7 +413,7 @@ export default function LeadScoringGuidePage() {
                   </div>
 
                   {/* Lead Score Gauge / Meter CSS Mockup */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#111] mb-5">Jauge de qualification des leads</p>
                     {/* Gauge meter */}
                     <div className="relative">
@@ -459,7 +459,7 @@ export default function LeadScoringGuidePage() {
                           { score: "50 pts", label: "Seuil SQL", desc: "Transfert aux sales. Le commercial recoit une notification et doit qualifier dans les 48h.", color: "#FF7A59" },
                           { score: "75 pts", label: "Seuil Hot Lead", desc: "Urgence. Le lead a montre des signaux d&apos;achat forts. Contact dans les 24h obligatoire.", color: "#22C55E" },
                         ].map((t) => (
-                          <div key={t.label} className="flex-1 p-3 rounded-lg bg-white border border-[#E8E8E8]">
+                          <div key={t.label} className="flex-1 p-3 rounded-lg bg-white border border-[#EAEAEA]">
                             <div className="flex items-center gap-2 mb-1.5">
                               <div className="w-2 h-2 rounded-full" style={{ backgroundColor: t.color }} />
                               <span className="text-[11px] font-semibold" style={{ color: t.color }}>{t.score}</span>
@@ -481,7 +481,7 @@ export default function LeadScoringGuidePage() {
 
               {/* Section 8 — HubSpot Implementation */}
               <section id="hubspot-implementation" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Implementer le lead scoring dans HubSpot</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>HubSpot offre un systeme de lead scoring natif dans les plans Marketing Hub Professional et Enterprise. L&apos;implementation se fait en quatre etapes : creer les proprietes de scoring, configurer les regles positives, configurer les regles negatives, et automatiser les actions basees sur les seuils.</p>
@@ -489,7 +489,7 @@ export default function LeadScoringGuidePage() {
                   </div>
 
                   {/* HubSpot UI CSS Mockup */}
-                  <div className="mt-6 rounded-xl border-2 border-[#E8E8E8] overflow-hidden">
+                  <div className="mt-6 rounded-lg border-2 border-[#EAEAEA] overflow-hidden">
                     {/* HubSpot-style header bar */}
                     <div className="bg-[#2D3E50] px-4 py-2.5 flex items-center gap-3">
                       <div className="flex gap-1.5">
@@ -605,7 +605,7 @@ export default function LeadScoringGuidePage() {
 
               {/* Section 9 — Predictive scoring */}
               <section id="predictive-scoring" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Lead scoring + IA : le predictive scoring</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le scoring a regles (celui que nous avons decrit jusqu&apos;ici) fonctionne bien quand vos criteres sont clairs et votre volume de donnees est modere. Mais il a une limite fondamentale : ce sont des humains qui choisissent les criteres et les ponderations, ce qui introduit des biais et des angles morts.</p>
@@ -615,7 +615,7 @@ export default function LeadScoringGuidePage() {
 
                   {/* AI scoring comparison */}
                   <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="p-5 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                    <div className="p-5 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-3 h-3 rounded-sm bg-[#6C5CE7]" />
                         <span className="text-[13px] font-semibold text-[#111]">Scoring a regles</span>
@@ -628,7 +628,7 @@ export default function LeadScoringGuidePage() {
                         <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-[#6C5CE7] mt-1.5 shrink-0" />Disponible des HubSpot Marketing Pro</li>
                       </ul>
                     </div>
-                    <div className="p-5 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                    <div className="p-5 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-3 h-3 rounded-sm bg-[#FF7A59]" />
                         <span className="text-[13px] font-semibold text-[#111]">Predictive scoring (IA)</span>
@@ -653,7 +653,7 @@ export default function LeadScoringGuidePage() {
 
               {/* Section 10 — Erreurs classiques */}
               <section id="erreurs" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les erreurs classiques du lead scoring</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le lead scoring semble simple en theorie. En pratique, les equipes tombent regulierement dans les memes pieges. Voici les sept erreurs que nous rencontrons le plus souvent chez nos clients, et comment les eviter.</p>
@@ -669,7 +669,7 @@ export default function LeadScoringGuidePage() {
                       { num: "06", title: "Pas d&apos;alignement marketing-sales sur les definitions", desc: "Le marketing considere qu&apos;un MQL est un lead avec un score de 20. Les sales pensent qu&apos;un MQL devrait avoir un score de 60. Les deux equipes n&apos;ont jamais discute de ces definitions ensemble. C&apos;est la recette du conflit permanent. Alignez-vous avant de deployer." },
                       { num: "07", title: "Confondre activite et intention", desc: "Un lead qui ouvre tous vos emails marketing est actif, mais pas forcement interesse par votre solution. Il peut aimer vos contenus sans jamais avoir l&apos;intention d&apos;acheter. Le scoring doit donner plus de poids aux signaux d&apos;intention explicites (visite pricing, demande de demo) qu&apos;aux signaux d&apos;activite generiques (ouvertures email, visites blog)." },
                     ].map((err) => (
-                      <div key={err.num} className="flex items-start gap-3 p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={err.num} className="flex items-start gap-3 p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <span className="text-[18px] font-bold text-[#E8E8E8] shrink-0">{err.num}</span>
                         <div>
                           <p className="text-[12px] font-semibold text-[#111] mb-1">{err.title}</p>
@@ -684,7 +684,7 @@ export default function LeadScoringGuidePage() {
 
               {/* Section 11 — Mesurer l'efficacite */}
               <section id="mesurer-efficacite" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Mesurer l&apos;efficacite de votre scoring</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Un systeme de lead scoring n&apos;a de valeur que s&apos;il est mesure et itere. Deployer un scoring et ne jamais verifier s&apos;il fonctionne est aussi inutile que ne pas avoir de scoring du tout. Voici les KPIs a suivre pour evaluer la performance de votre scoring et l&apos;ameliorer dans le temps.</p>
@@ -700,7 +700,7 @@ export default function LeadScoringGuidePage() {
                       { metric: "Temps de conversion MQL > SQL", desc: "Combien de temps un lead reste-t-il en statut MQL avant de devenir SQL ? Si ce delai est trop long, vos workflows de nurturing ne sont pas assez efficaces ou vos seuils sont mal calibres.", category: "Velocite" },
                       { metric: "Distribution des scores", desc: "Comment les scores sont-ils repartis dans votre base ? Si 80% de vos leads ont un score entre 0 et 5, votre scoring manque de granularite. Si tout le monde est a 50+, vos criteres sont trop genereux. Visez une distribution en cloche avec un pic entre 20 et 40.", category: "Distribution" },
                     ].map((m) => (
-                      <div key={m.metric} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={m.metric} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="text-[9px] font-semibold text-[#6C5CE7] uppercase tracking-wider bg-[#6C5CE7]/10 px-2 py-0.5 rounded">{m.category}</span>
                         </div>
@@ -720,7 +720,7 @@ export default function LeadScoringGuidePage() {
 
               {/* Section 12 — Modele Ceres */}
               <section id="modele-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Notre methode</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">Notre modele de scoring chez Ceres</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -753,7 +753,7 @@ export default function LeadScoringGuidePage() {
 
               {/* Related articles */}
               <section className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((a) => (
@@ -771,7 +771,7 @@ export default function LeadScoringGuidePage() {
 
               {/* CTA */}
               <section>
-                <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+                <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                   <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Pret a mettre en place votre lead scoring ?</h2>
                   <p className="text-[13px] text-[#999] mb-6 max-w-[420px] mx-auto">On audite votre base, on construit votre grille de scoring et on deploie le tout dans HubSpot. Premiers resultats en 4 semaines.</p>
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

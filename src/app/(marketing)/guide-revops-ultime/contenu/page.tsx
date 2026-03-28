@@ -151,9 +151,9 @@ export default function GuideRevOpsContenuPage() {
             <Connector />
 
             {/* ==================== CHAPITRE 1 ==================== */}
-            <div id="chapitre-1" className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
+            <div id="chapitre-1" className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
               <div className="flex items-center gap-3 mb-6">
-                <span className="w-10 h-10 rounded-xl bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">01</span>
+                <span className="w-10 h-10 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">01</span>
                 <div>
                   <h2 className="text-[22px] font-semibold text-[#111] leading-tight">Qu&apos;est-ce que le RevOps</h2>
                   <p className="text-[12px] text-[#999]">Pages 4-9 -- Definition, historique et impact mesurable</p>
@@ -169,7 +169,7 @@ export default function GuideRevOpsContenuPage() {
               </p>
 
               {/* Visual schema */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-6 mb-6">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-6 mb-6">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4 text-center">Le modele RevOps unifie</p>
                 <div className="flex flex-col md:flex-row items-center justify-center gap-4">
                   <div className="w-full md:w-[140px] rounded-lg bg-[#4B5EFC]/10 border border-[#4B5EFC]/20 p-4 text-center">
@@ -239,21 +239,21 @@ export default function GuideRevOpsContenuPage() {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div className="rounded-xl border border-[#E8E8E8] p-5">
+                <div className="rounded-lg border border-[#EAEAEA] p-5">
                   <div className="w-8 h-8 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center mb-3">
                     <span className="text-[12px] font-bold text-[#FF7A59]">P</span>
                   </div>
                   <p className="text-[13px] font-semibold text-[#111] mb-1">Processus</p>
                   <p className="text-[12px] text-[#888] leading-[1.6]">Standardiser le parcours lead-to-cash. Definir les etapes, les criteres de passage, les SLA entre equipes, les handoffs et les rituels d\u2019alignement. Sans processus clair, chaque equipe invente ses propres regles.</p>
                 </div>
-                <div className="rounded-xl border border-[#E8E8E8] p-5">
+                <div className="rounded-lg border border-[#EAEAEA] p-5">
                   <div className="w-8 h-8 rounded-lg bg-[#4B5EFC]/10 flex items-center justify-center mb-3">
                     <span className="text-[12px] font-bold text-[#4B5EFC]">D</span>
                   </div>
                   <p className="text-[13px] font-semibold text-[#111] mb-1">Donnees</p>
                   <p className="text-[12px] text-[#888] leading-[1.6]">Creer une source de verite unique. Hygiene des donnees, normalisation des champs, enrichissement automatique, gouvernance. 91% des donnees CRM se degradent chaque annee. Sans donnees fiables, aucune decision n\u2019est pertinente.</p>
                 </div>
-                <div className="rounded-xl border border-[#E8E8E8] p-5">
+                <div className="rounded-lg border border-[#EAEAEA] p-5">
                   <div className="w-8 h-8 rounded-lg bg-[#22C55E]/10 flex items-center justify-center mb-3">
                     <span className="text-[12px] font-bold text-[#22C55E]">T</span>
                   </div>
@@ -271,7 +271,7 @@ export default function GuideRevOpsContenuPage() {
               <div className="overflow-x-auto mb-6">
                 <table className="w-full text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#E8E8E8]">
+                    <tr className="border-b border-[#EAEAEA]">
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Critere</th>
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Sales Ops</th>
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Marketing Ops</th>
@@ -325,19 +325,19 @@ export default function GuideRevOpsContenuPage() {
               </p>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4 text-center">
+                <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4 text-center">
                   <p className="text-[24px] font-bold text-[#FF7A59]">+19%</p>
                   <p className="text-[11px] text-[#888] mt-1">Croissance du revenu</p>
                 </div>
-                <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4 text-center">
+                <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4 text-center">
                   <p className="text-[24px] font-bold text-[#4B5EFC]">+15%</p>
                   <p className="text-[11px] text-[#888] mt-1">Profitabilite</p>
                 </div>
-                <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4 text-center">
+                <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4 text-center">
                   <p className="text-[24px] font-bold text-[#22C55E]">+10%</p>
                   <p className="text-[11px] text-[#888] mt-1">Productivite des equipes</p>
                 </div>
-                <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4 text-center">
+                <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4 text-center">
                   <p className="text-[24px] font-bold text-[#6C5CE7]">-30%</p>
                   <p className="text-[11px] text-[#888] mt-1">Cycle de vente</p>
                 </div>
@@ -351,9 +351,9 @@ export default function GuideRevOpsContenuPage() {
             <Connector />
 
             {/* ==================== CHAPITRE 2 ==================== */}
-            <div id="chapitre-2" className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
+            <div id="chapitre-2" className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
               <div className="flex items-center gap-3 mb-6">
-                <span className="w-10 h-10 rounded-xl bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">02</span>
+                <span className="w-10 h-10 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">02</span>
                 <div>
                   <h2 className="text-[22px] font-semibold text-[#111] leading-tight">Audit de votre situation actuelle</h2>
                   <p className="text-[12px] text-[#999]">Pages 10-17 -- Framework 80 points, diagnostic et quick wins</p>
@@ -381,7 +381,7 @@ export default function GuideRevOpsContenuPage() {
                   { cat: "7. Customer success", pts: "10 pts", items: ["Onboarding client structure", "Health score en place", "Processus de renouvellement formalise", "Upsell/cross-sell identifie et suivi", "Churn predit et anticipe"], flags: "Aucun suivi de l\u2019onboarding, decouvertes de churn au moment du renouvellement", wins: "Creer un pipeline CS avec etapes d\u2019onboarding" },
                   { cat: "8. Gouvernance et adoption", pts: "10 pts", items: ["Responsable RevOps ou equivalent identifie", "Politique d\u2019utilisation du CRM documentee", "Taux d\u2019adoption du CRM superieur a 80%", "Formation reguliere des equipes", "Roadmap RevOps a 90 jours existante"], flags: "Moins de 50% des commerciaux remplissent le CRM correctement", wins: "Nommer un owner RevOps, meme a temps partiel" },
                 ].map((c, i) => (
-                  <div key={i} className="rounded-xl border border-[#F0F0F0] p-4">
+                  <div key={i} className="rounded-lg border border-[#F0F0F0] p-4">
                     <div className="flex items-center justify-between mb-2">
                       <p className="text-[13px] font-semibold text-[#111]">{c.cat}</p>
                       <span className="text-[11px] font-medium text-[#FF7A59] bg-[#FF7A59]/10 px-2 py-0.5 rounded">{c.pts}</span>
@@ -409,7 +409,7 @@ export default function GuideRevOpsContenuPage() {
               </div>
 
               {/* Score gauge */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-6 mb-6">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-6 mb-6">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4 text-center">Votre score de maturite RevOps</p>
                 <div className="relative h-6 rounded-full bg-[#E8E8E8] overflow-hidden mb-3">
                   <div className="absolute inset-y-0 left-0 rounded-full" style={{ width: "25%", background: "linear-gradient(90deg, #EF4444, #F97316)" }} />
@@ -424,28 +424,28 @@ export default function GuideRevOpsContenuPage() {
 
               <h3 className="text-[17px] font-semibold text-[#111] mb-3">Les 4 niveaux de maturite</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                <div className="rounded-xl border-2 border-red-200 p-4">
+                <div className="rounded-lg border-2 border-red-200 p-4">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="w-3 h-3 rounded-full bg-red-500" />
                     <p className="text-[13px] font-semibold text-[#111]">Debutant (0-25)</p>
                   </div>
                   <p className="text-[12px] text-[#666] leading-[1.6]">Pas de processus formalise. CRM mal utilise ou inexistant. Equipes en silos complets. Donnees peu fiables. Reporting manuel et irregulier. Chaque commercial a ses propres methodes.</p>
                 </div>
-                <div className="rounded-xl border-2 border-orange-200 p-4">
+                <div className="rounded-lg border-2 border-orange-200 p-4">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="w-3 h-3 rounded-full bg-orange-500" />
                     <p className="text-[13px] font-semibold text-[#111]">En construction (25-50)</p>
                   </div>
                   <p className="text-[12px] text-[#666] leading-[1.6]">CRM en place mais mal configure. Quelques processus documentes. Debut de lead scoring. Dashboards basiques. Equipes communiquent mais sans cadre formel. Quick wins identifies mais non deployes.</p>
                 </div>
-                <div className="rounded-xl border-2 border-yellow-200 p-4">
+                <div className="rounded-lg border-2 border-yellow-200 p-4">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="w-3 h-3 rounded-full bg-yellow-500" />
                     <p className="text-[13px] font-semibold text-[#111]">Structure (50-75)</p>
                   </div>
                   <p className="text-[12px] text-[#666] leading-[1.6]">Pipeline structure avec criteres. SLA en place. Scoring fonctionnel. Reporting unifie. Rituels reguliers entre equipes. Stack integre. Quelques automatisations. Donnees globalement propres.</p>
                 </div>
-                <div className="rounded-xl border-2 border-green-200 p-4">
+                <div className="rounded-lg border-2 border-green-200 p-4">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="w-3 h-3 rounded-full bg-green-500" />
                     <p className="text-[13px] font-semibold text-[#111]">Optimise (75-100)</p>
@@ -458,7 +458,7 @@ export default function GuideRevOpsContenuPage() {
               <div className="overflow-x-auto mb-4">
                 <table className="w-full text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#E8E8E8]">
+                    <tr className="border-b border-[#EAEAEA]">
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Parametre</th>
                       <th className="text-left py-3 text-[#999] font-semibold">Recommandation</th>
                     </tr>
@@ -480,9 +480,9 @@ export default function GuideRevOpsContenuPage() {
             <Connector />
 
             {/* ==================== CHAPITRE 3 ==================== */}
-            <div id="chapitre-3" className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
+            <div id="chapitre-3" className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
               <div className="flex items-center gap-3 mb-6">
-                <span className="w-10 h-10 rounded-xl bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">03</span>
+                <span className="w-10 h-10 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">03</span>
                 <div>
                   <h2 className="text-[22px] font-semibold text-[#111] leading-tight">Definir votre ICP et personas</h2>
                   <p className="text-[12px] text-[#999]">Pages 18-23 -- Framework ICP, buyer personas et anti-personas</p>
@@ -499,7 +499,7 @@ export default function GuideRevOpsContenuPage() {
               </p>
 
               {/* ICP Card mockup */}
-              <div className="rounded-xl border-2 border-[#FF7A59]/30 bg-[#FF7A59]/5 p-6 mb-6">
+              <div className="rounded-lg border-2 border-[#FF7A59]/30 bg-[#FF7A59]/5 p-6 mb-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-full bg-[#FF7A59] flex items-center justify-center">
                     <span className="text-white text-[14px] font-bold">ICP</span>
@@ -542,7 +542,7 @@ export default function GuideRevOpsContenuPage() {
                 L&apos;ICP definit l\u2019entreprise ideale. Le buyer persona definit la personne a qui vous parlez dans cette entreprise. Vous aurez generalement 2 a 4 personas par ICP : le decisionnaire, l\u2019influenceur, l\u2019utilisateur final et parfois le bloqueur.
               </p>
 
-              <div className="rounded-xl border border-[#E8E8E8] p-5 mb-6">
+              <div className="rounded-lg border border-[#EAEAEA] p-5 mb-6">
                 <p className="text-[13px] font-semibold text-[#111] mb-3">Persona : &quot;Sophie, Head of Sales&quot;</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[12px]">
                   <div>
@@ -620,7 +620,7 @@ export default function GuideRevOpsContenuPage() {
               </div>
 
               <h3 className="text-[17px] font-semibold text-[#111] mb-3">Les anti-personas : qui NE PAS cibler</h3>
-              <div className="rounded-xl bg-[#111] p-5 mb-2">
+              <div className="rounded-lg bg-[#111] p-5 mb-2">
                 <p className="text-[13px] text-white font-semibold mb-3">Definir vos anti-personas est aussi important que definir votre ICP. Voici les profils a exclure systematiquement :</p>
                 <div className="space-y-2">
                   <div className="flex items-start gap-2">
@@ -650,9 +650,9 @@ export default function GuideRevOpsContenuPage() {
             <Connector />
 
             {/* ==================== CHAPITRE 4 ==================== */}
-            <div id="chapitre-4" className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
+            <div id="chapitre-4" className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
               <div className="flex items-center gap-3 mb-6">
-                <span className="w-10 h-10 rounded-xl bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">04</span>
+                <span className="w-10 h-10 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">04</span>
                 <div>
                   <h2 className="text-[22px] font-semibold text-[#111] leading-tight">Aligner Marketing, Sales et CS</h2>
                   <p className="text-[12px] text-[#999]">Pages 24-29 -- SLA, definitions communes et rituels d\u2019alignement</p>
@@ -665,15 +665,15 @@ export default function GuideRevOpsContenuPage() {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
-                <div className="rounded-xl bg-red-50 border border-red-100 p-4 text-center">
+                <div className="rounded-lg bg-red-50 border border-red-100 p-4 text-center">
                   <p className="text-[22px] font-bold text-red-600">10%</p>
                   <p className="text-[11px] text-red-700 mt-1">du CA perdu chaque annee a cause du desalignement</p>
                 </div>
-                <div className="rounded-xl bg-red-50 border border-red-100 p-4 text-center">
+                <div className="rounded-lg bg-red-50 border border-red-100 p-4 text-center">
                   <p className="text-[22px] font-bold text-red-600">60-70%</p>
                   <p className="text-[11px] text-red-700 mt-1">du contenu marketing jamais utilise par les sales</p>
                 </div>
-                <div className="rounded-xl bg-red-50 border border-red-100 p-4 text-center">
+                <div className="rounded-lg bg-red-50 border border-red-100 p-4 text-center">
                   <p className="text-[22px] font-bold text-red-600">79%</p>
                   <p className="text-[11px] text-red-700 mt-1">des leads marketing jamais convertis en ventes</p>
                 </div>
@@ -685,7 +685,7 @@ export default function GuideRevOpsContenuPage() {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div className="rounded-xl border border-[#4B5EFC]/20 bg-[#4B5EFC]/5 p-5">
+                <div className="rounded-lg border border-[#4B5EFC]/20 bg-[#4B5EFC]/5 p-5">
                   <p className="text-[13px] font-semibold text-[#4B5EFC] mb-3">Engagements Marketing</p>
                   <div className="space-y-2.5">
                     <div>
@@ -710,7 +710,7 @@ export default function GuideRevOpsContenuPage() {
                     </div>
                   </div>
                 </div>
-                <div className="rounded-xl border border-[#FF7A59]/20 bg-[#FF7A59]/5 p-5">
+                <div className="rounded-lg border border-[#FF7A59]/20 bg-[#FF7A59]/5 p-5">
                   <p className="text-[13px] font-semibold text-[#FF7A59] mb-3">Engagements Sales</p>
                   <div className="space-y-2.5">
                     <div>
@@ -743,7 +743,7 @@ export default function GuideRevOpsContenuPage() {
               </p>
 
               {/* Funnel definitions visual */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-6 mb-6">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-6 mb-6">
                 <div className="space-y-3">
                   {[
                     { stage: "Lead", color: "#E8E8E8", text: "#666", def: "Tout contact identifie dans votre CRM. A fourni au moins un moyen de contact (email, telephone). Aucune qualification encore realisee.", crit: "Email valide + source identifiee" },
@@ -769,7 +769,7 @@ export default function GuideRevOpsContenuPage() {
               <div className="overflow-x-auto mb-6">
                 <table className="w-full text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#E8E8E8]">
+                    <tr className="border-b border-[#EAEAEA]">
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Rituel</th>
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Frequence</th>
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Participants</th>
@@ -814,7 +814,7 @@ export default function GuideRevOpsContenuPage() {
               </p>
 
               {/* Feedback loop visual */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-6">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-6">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4 text-center">Boucle de feedback continue</p>
                 <div className="flex flex-col md:flex-row items-center justify-center gap-3">
                   <div className="rounded-lg bg-[#4B5EFC]/10 border border-[#4B5EFC]/20 px-4 py-3 text-center">
@@ -843,9 +843,9 @@ export default function GuideRevOpsContenuPage() {
             <Connector />
 
             {/* ==================== CHAPITRE 5 ==================== */}
-            <div id="chapitre-5" className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
+            <div id="chapitre-5" className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
               <div className="flex items-center gap-3 mb-6">
-                <span className="w-10 h-10 rounded-xl bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">05</span>
+                <span className="w-10 h-10 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">05</span>
                 <div>
                   <h2 className="text-[22px] font-semibold text-[#111] leading-tight">Construire votre funnel</h2>
                   <p className="text-[12px] text-[#999]">Pages 30-35 -- Stages, criteres de passage, benchmarks et automations</p>
@@ -857,7 +857,7 @@ export default function GuideRevOpsContenuPage() {
               </p>
 
               {/* CSS Funnel visual */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-6 mb-6">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-6 mb-6">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4 text-center">Le funnel RevOps complet</p>
                 <div className="space-y-2 max-w-[500px] mx-auto">
                   {[
@@ -891,7 +891,7 @@ export default function GuideRevOpsContenuPage() {
                   { stage: "Customer", def: "Contrat signe, revenu actif. Le client est dans le cycle de customer success.", critere: "Contrat signe + paiement recu ou engagements confirmes", benchmark: "Retention nette : 90-120% (NRR)", auto: "Trigger de la sequence d\u2019onboarding, creation du pipeline CS, alerte au CSM" },
                   { stage: "Advocate", def: "Client satisfait qui genere du revenu indirect : referrals, temoignages, etudes de cas.", critere: "NPS >= 9, reference active, etude de cas publiee", benchmark: "Taux de referral actif : 10-20% de la base client", auto: "Demande automatique de NPS a J+90, proposition de programme de referral" },
                 ].map((s, i) => (
-                  <div key={i} className="rounded-xl border border-[#F0F0F0] p-4">
+                  <div key={i} className="rounded-lg border border-[#F0F0F0] p-4">
                     <p className="text-[13px] font-semibold text-[#111] mb-2">{s.stage}</p>
                     <p className="text-[12px] text-[#666] leading-[1.6] mb-2">{s.def}</p>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
@@ -904,7 +904,7 @@ export default function GuideRevOpsContenuPage() {
               </div>
 
               <h3 className="text-[17px] font-semibold text-[#111] mb-3">Erreurs classiques de construction de funnel</h3>
-              <div className="rounded-xl bg-[#111] p-5">
+              <div className="rounded-lg bg-[#111] p-5">
                 <div className="space-y-3">
                   {[
                     { err: "Trop de stages", desc: "Un funnel avec 12 stages cree de la confusion. 5 a 7 stages suffisent pour la plupart des entreprises B2B." },
@@ -928,9 +928,9 @@ export default function GuideRevOpsContenuPage() {
             <Connector />
 
             {/* ==================== CHAPITRE 6 ==================== */}
-            <div id="chapitre-6" className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
+            <div id="chapitre-6" className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
               <div className="flex items-center gap-3 mb-6">
-                <span className="w-10 h-10 rounded-xl bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">06</span>
+                <span className="w-10 h-10 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">06</span>
                 <div>
                   <h2 className="text-[22px] font-semibold text-[#111] leading-tight">Lead Scoring : Fit + Engagement</h2>
                   <p className="text-[12px] text-[#999]">Pages 36-41 -- Grille de scoring, seuils et implementation HubSpot</p>
@@ -942,7 +942,7 @@ export default function GuideRevOpsContenuPage() {
               </p>
 
               {/* Matrix visual */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-6 mb-6">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-6 mb-6">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4 text-center">Matrice Fit x Engagement</p>
                 <div className="grid grid-cols-3 gap-2 max-w-[400px] mx-auto">
                   <div className="text-[10px] text-[#999] flex items-end justify-center pb-1">Fit eleve</div>
@@ -973,7 +973,7 @@ export default function GuideRevOpsContenuPage() {
               <div className="overflow-x-auto mb-6">
                 <table className="w-full text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#E8E8E8]">
+                    <tr className="border-b border-[#EAEAEA]">
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Critere</th>
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Match parfait</th>
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Match partiel</th>
@@ -1019,7 +1019,7 @@ export default function GuideRevOpsContenuPage() {
               <div className="overflow-x-auto mb-6">
                 <table className="w-full text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#E8E8E8]">
+                    <tr className="border-b border-[#EAEAEA]">
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Action</th>
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Points</th>
                       <th className="text-left py-3 text-[#999] font-semibold">Logique</th>
@@ -1045,7 +1045,7 @@ export default function GuideRevOpsContenuPage() {
               <div className="overflow-x-auto mb-6">
                 <table className="w-full text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#E8E8E8]">
+                    <tr className="border-b border-[#EAEAEA]">
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Critere</th>
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Points</th>
                       <th className="text-left py-3 text-[#999] font-semibold">Raison</th>
@@ -1063,17 +1063,17 @@ export default function GuideRevOpsContenuPage() {
 
               <h3 className="text-[17px] font-semibold text-[#111] mb-3">Seuils de qualification</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
-                <div className="rounded-xl border-2 border-yellow-200 p-4 text-center">
+                <div className="rounded-lg border-2 border-yellow-200 p-4 text-center">
                   <p className="text-[20px] font-bold text-yellow-600">50 pts</p>
                   <p className="text-[12px] font-semibold text-[#111] mt-1">Seuil MQL</p>
                   <p className="text-[11px] text-[#888] mt-1">Le lead entre dans la sequence de nurturing avancee et est visible par les SDR</p>
                 </div>
-                <div className="rounded-xl border-2 border-orange-200 p-4 text-center">
+                <div className="rounded-lg border-2 border-orange-200 p-4 text-center">
                   <p className="text-[20px] font-bold text-[#FF7A59]">70 pts</p>
                   <p className="text-[12px] font-semibold text-[#111] mt-1">Seuil SQL</p>
                   <p className="text-[11px] text-[#888] mt-1">Le lead est assigne a un AE pour qualification BANT dans les 24h</p>
                 </div>
-                <div className="rounded-xl border-2 border-red-200 p-4 text-center">
+                <div className="rounded-lg border-2 border-red-200 p-4 text-center">
                   <p className="text-[20px] font-bold text-red-600">85 pts</p>
                   <p className="text-[12px] font-semibold text-[#111] mt-1">Hot Lead</p>
                   <p className="text-[11px] text-[#888] mt-1">Notification immediate au sales manager. Contact dans les 5 minutes</p>
@@ -1089,7 +1089,7 @@ export default function GuideRevOpsContenuPage() {
                   { step: "4. Creer les workflows de transition", desc: "Workflow 1 : Si Total Score >= 50, passer lifecycle stage a MQL. Workflow 2 : Si Total Score >= 70, creer tache pour le SDR. Workflow 3 : Si Total Score >= 85, notifier le sales manager via Slack." },
                   { step: "5. Tester et calibrer", desc: "Appliquez le scoring retroactivement sur vos 100 derniers clients signes. Verifiez que 80% d\u2019entre eux auraient obtenu un score >= 70. Ajustez les poids si necessaire. Recalibrez tous les trimestres." },
                 ].map((s, i) => (
-                  <div key={i} className="rounded-xl border border-[#F0F0F0] p-4">
+                  <div key={i} className="rounded-lg border border-[#F0F0F0] p-4">
                     <p className="text-[13px] font-semibold text-[#111] mb-1">{s.step}</p>
                     <p className="text-[12px] text-[#666] leading-[1.6]">{s.desc}</p>
                   </div>
@@ -1100,9 +1100,9 @@ export default function GuideRevOpsContenuPage() {
             <Connector />
 
             {/* ==================== CHAPITRE 7 ==================== */}
-            <div id="chapitre-7" className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
+            <div id="chapitre-7" className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
               <div className="flex items-center gap-3 mb-6">
-                <span className="w-10 h-10 rounded-xl bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">07</span>
+                <span className="w-10 h-10 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">07</span>
                 <div>
                   <h2 className="text-[22px] font-semibold text-[#111] leading-tight">Stack technologique RevOps</h2>
                   <p className="text-[12px] text-[#999]">Pages 42-47 -- Les 7 couches, outils recommandes et budget par taille</p>
@@ -1116,7 +1116,7 @@ export default function GuideRevOpsContenuPage() {
               <h3 className="text-[17px] font-semibold text-[#111] mb-3">Les 7 couches du stack RevOps</h3>
 
               {/* Architecture diagram */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-6 mb-6">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-6 mb-6">
                 <div className="space-y-2 max-w-[550px] mx-auto">
                   {[
                     { layer: "7. Intelligence Artificielle", color: "#6C5CE7", tools: "ChatGPT, Claude, Gong, Clari", desc: "Insights, forecasting predictif, coaching" },
@@ -1147,7 +1147,7 @@ export default function GuideRevOpsContenuPage() {
                   { layer: "Analytics", tools: [{ name: "HubSpot Reports", note: "Dashboards natifs du CRM. Suffisant pour 80% des besoins. Inclus dans les plans Pro et Enterprise." }, { name: "Databox", note: "Agregateur de donnees multi-sources. Ideal pour les dashboards TV et rapports automatiques. 0 a 799 USD/mois." }, { name: "Looker Studio", note: "Outil Google gratuit pour les dashboards avances. Connecteurs pour la plupart des sources." }] },
                   { layer: "IA", tools: [{ name: "Ceres RevOps AI", note: "Assistant IA connecte a HubSpot. Analyse de pipeline, scoring et recommandations en temps reel." }, { name: "Gong", note: "Intelligence conversationnelle. Analyse des appels, coaching, deal intelligence. A partir de 100 USD/mois/utilisateur." }, { name: "Clari", note: "Revenue intelligence et forecasting predictif. Pour les equipes sales enterprise." }] },
                 ].map((l, i) => (
-                  <div key={i} className="rounded-xl border border-[#F0F0F0] p-4">
+                  <div key={i} className="rounded-lg border border-[#F0F0F0] p-4">
                     <p className="text-[13px] font-semibold text-[#111] mb-2">{l.layer}</p>
                     <div className="space-y-2">
                       {l.tools.map((t, j) => (
@@ -1165,7 +1165,7 @@ export default function GuideRevOpsContenuPage() {
               <div className="overflow-x-auto mb-6">
                 <table className="w-full text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#E8E8E8]">
+                    <tr className="border-b border-[#EAEAEA]">
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Taille</th>
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Budget mensuel</th>
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Stack essentiel</th>
@@ -1196,7 +1196,7 @@ export default function GuideRevOpsContenuPage() {
               </div>
 
               <h3 className="text-[17px] font-semibold text-[#111] mb-3">Erreurs courantes du stack technologique</h3>
-              <div className="rounded-xl bg-[#111] p-5">
+              <div className="rounded-lg bg-[#111] p-5">
                 <div className="space-y-3">
                   {[
                     { err: "Shiny object syndrome", desc: "Acheter un nouvel outil pour resoudre chaque probleme. Resultat : 15 outils dont 5 se chevauchent et aucun n\u2019est correctement configure." },
@@ -1219,9 +1219,9 @@ export default function GuideRevOpsContenuPage() {
             <Connector />
 
             {/* ==================== CHAPITRE 8 ==================== */}
-            <div id="chapitre-8" className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
+            <div id="chapitre-8" className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
               <div className="flex items-center gap-3 mb-6">
-                <span className="w-10 h-10 rounded-xl bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">08</span>
+                <span className="w-10 h-10 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">08</span>
                 <div>
                   <h2 className="text-[22px] font-semibold text-[#111] leading-tight">Les 30 metriques RevOps essentielles</h2>
                   <p className="text-[12px] text-[#999]">Pages 48-53 -- Formules, benchmarks et dashboards par categorie</p>
@@ -1233,7 +1233,7 @@ export default function GuideRevOpsContenuPage() {
               </p>
 
               {/* Dashboard mockup */}
-              <div className="rounded-xl bg-[#111] p-6 mb-6">
+              <div className="rounded-lg bg-[#111] p-6 mb-6">
                 <p className="text-[11px] font-semibold text-white/50 uppercase tracking-wider mb-4">Dashboard RevOps -- Vue d\u2019ensemble</p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {[
@@ -1307,7 +1307,7 @@ export default function GuideRevOpsContenuPage() {
                   </div>
                   <div className="space-y-2">
                     {cat.metrics.map((m, mi) => (
-                      <div key={mi} className="rounded-xl border border-[#F0F0F0] p-4">
+                      <div key={mi} className="rounded-lg border border-[#F0F0F0] p-4">
                         <p className="text-[13px] font-semibold text-[#111] mb-1">{ci * 6 + mi + 1}. {m.name}</p>
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
                           <div><span className="font-medium text-[#999]">Formule : </span><span className="text-[#666]">{m.formula}</span></div>
@@ -1324,7 +1324,7 @@ export default function GuideRevOpsContenuPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#E8E8E8]">
+                    <tr className="border-b border-[#EAEAEA]">
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Phase</th>
                       <th className="text-left py-3 pr-4 text-[#999] font-semibold">Focus metriques</th>
                       <th className="text-left py-3 text-[#999] font-semibold">Pourquoi</th>
@@ -1354,9 +1354,9 @@ export default function GuideRevOpsContenuPage() {
             <Connector />
 
             {/* ==================== CHAPITRE 9 ==================== */}
-            <div id="chapitre-9" className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
+            <div id="chapitre-9" className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] mb-6">
               <div className="flex items-center gap-3 mb-6">
-                <span className="w-10 h-10 rounded-xl bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">09</span>
+                <span className="w-10 h-10 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center text-[14px] font-bold text-[#FF7A59]">09</span>
                 <div>
                   <h2 className="text-[22px] font-semibold text-[#111] leading-tight">Plan d\u2019implementation en 90 jours</h2>
                   <p className="text-[12px] text-[#999]">Pages 54-62 -- Semaine par semaine, KPIs de validation et Gantt</p>
@@ -1368,7 +1368,7 @@ export default function GuideRevOpsContenuPage() {
               </p>
 
               {/* Gantt mockup */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-6 mb-6 overflow-x-auto">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-6 mb-6 overflow-x-auto">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4">Timeline 90 jours</p>
                 <div className="min-w-[600px]">
                   <div className="flex text-[9px] text-[#999] mb-2">
@@ -1405,7 +1405,7 @@ export default function GuideRevOpsContenuPage() {
                     <span className="w-3 h-3 rounded-full bg-[#FF7A59]" />
                     <h3 className="text-[15px] font-semibold text-[#111]">Phase 1 : Audit + ICP (Semaines 1-2)</h3>
                   </div>
-                  <div className="rounded-xl border border-[#F0F0F0] p-4 mb-3">
+                  <div className="rounded-lg border border-[#F0F0F0] p-4 mb-3">
                     <p className="text-[13px] font-semibold text-[#111] mb-2">Semaine 1 : Diagnostic</p>
                     <ul className="space-y-1.5 text-[12px] text-[#666]">
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Realiser l\u2019audit 80 points (chapitres 2)</li>
@@ -1415,7 +1415,7 @@ export default function GuideRevOpsContenuPage() {
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Produire le rapport d\u2019audit avec le score de maturite</li>
                     </ul>
                   </div>
-                  <div className="rounded-xl border border-[#F0F0F0] p-4 mb-3">
+                  <div className="rounded-lg border border-[#F0F0F0] p-4 mb-3">
                     <p className="text-[13px] font-semibold text-[#111] mb-2">Semaine 2 : ICP et segmentation</p>
                     <ul className="space-y-1.5 text-[12px] text-[#666]">
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Analyser les 20 meilleurs et 20 pires clients</li>
@@ -1437,7 +1437,7 @@ export default function GuideRevOpsContenuPage() {
                     <span className="w-3 h-3 rounded-full bg-[#4B5EFC]" />
                     <h3 className="text-[15px] font-semibold text-[#111]">Phase 2 : SLA + Definitions + Scoring (Semaines 3-4)</h3>
                   </div>
-                  <div className="rounded-xl border border-[#F0F0F0] p-4 mb-3">
+                  <div className="rounded-lg border border-[#F0F0F0] p-4 mb-3">
                     <p className="text-[13px] font-semibold text-[#111] mb-2">Semaine 3 : Alignement et definitions</p>
                     <ul className="space-y-1.5 text-[12px] text-[#666]">
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Organiser l\u2019atelier de definitions communes (MQL, SQL, Opportunity)</li>
@@ -1446,7 +1446,7 @@ export default function GuideRevOpsContenuPage() {
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Planifier les rituels d\u2019alignement (weekly, monthly, quarterly)</li>
                     </ul>
                   </div>
-                  <div className="rounded-xl border border-[#F0F0F0] p-4 mb-3">
+                  <div className="rounded-lg border border-[#F0F0F0] p-4 mb-3">
                     <p className="text-[13px] font-semibold text-[#111] mb-2">Semaine 4 : Lead scoring</p>
                     <ul className="space-y-1.5 text-[12px] text-[#666]">
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Construire la grille de Fit Scoring (criteres et points)</li>
@@ -1468,7 +1468,7 @@ export default function GuideRevOpsContenuPage() {
                     <span className="w-3 h-3 rounded-full bg-[#6C5CE7]" />
                     <h3 className="text-[15px] font-semibold text-[#111]">Phase 3 : CRM cleanup + Pipeline (Semaines 5-6)</h3>
                   </div>
-                  <div className="rounded-xl border border-[#F0F0F0] p-4 mb-3">
+                  <div className="rounded-lg border border-[#F0F0F0] p-4 mb-3">
                     <p className="text-[13px] font-semibold text-[#111] mb-2">Semaine 5 : Nettoyage CRM</p>
                     <ul className="space-y-1.5 text-[12px] text-[#666]">
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Deduplication des contacts et entreprises</li>
@@ -1478,7 +1478,7 @@ export default function GuideRevOpsContenuPage() {
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Archiver les contacts et deals morts (plus de 6 mois sans activite)</li>
                     </ul>
                   </div>
-                  <div className="rounded-xl border border-[#F0F0F0] p-4 mb-3">
+                  <div className="rounded-lg border border-[#F0F0F0] p-4 mb-3">
                     <p className="text-[13px] font-semibold text-[#111] mb-2">Semaine 6 : Configuration pipeline</p>
                     <ul className="space-y-1.5 text-[12px] text-[#666]">
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Configurer les stages du pipeline avec les criteres definis en phase 2</li>
@@ -1500,7 +1500,7 @@ export default function GuideRevOpsContenuPage() {
                     <span className="w-3 h-3 rounded-full bg-[#22C55E]" />
                     <h3 className="text-[15px] font-semibold text-[#111]">Phase 4 : Automation + Workflows (Semaines 7-8)</h3>
                   </div>
-                  <div className="rounded-xl border border-[#F0F0F0] p-4 mb-3">
+                  <div className="rounded-lg border border-[#F0F0F0] p-4 mb-3">
                     <p className="text-[13px] font-semibold text-[#111] mb-2">Semaine 7 : Workflows marketing</p>
                     <ul className="space-y-1.5 text-[12px] text-[#666]">
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Sequence de bienvenue (5 emails, 14 jours)</li>
@@ -1509,7 +1509,7 @@ export default function GuideRevOpsContenuPage() {
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Workflow de recyclage des leads disqualifies (re-nurturing a 60 jours)</li>
                     </ul>
                   </div>
-                  <div className="rounded-xl border border-[#F0F0F0] p-4 mb-3">
+                  <div className="rounded-lg border border-[#F0F0F0] p-4 mb-3">
                     <p className="text-[13px] font-semibold text-[#111] mb-2">Semaine 8 : Workflows sales et CS</p>
                     <ul className="space-y-1.5 text-[12px] text-[#666]">
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Sequences de follow-up post-demo (3 touches, 7 jours)</li>
@@ -1531,7 +1531,7 @@ export default function GuideRevOpsContenuPage() {
                     <span className="w-3 h-3 rounded-full bg-[#EAB308]" />
                     <h3 className="text-[15px] font-semibold text-[#111]">Phase 5 : Dashboards + Reporting (Semaines 9-10)</h3>
                   </div>
-                  <div className="rounded-xl border border-[#F0F0F0] p-4 mb-3">
+                  <div className="rounded-lg border border-[#F0F0F0] p-4 mb-3">
                     <p className="text-[13px] font-semibold text-[#111] mb-2">Semaine 9 : Dashboards operationnels</p>
                     <ul className="space-y-1.5 text-[12px] text-[#666]">
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Dashboard marketing : MQL, CPL, conversion par canal, attribution</li>
@@ -1540,7 +1540,7 @@ export default function GuideRevOpsContenuPage() {
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Dashboard funnel unifie : de visitor a advocate, un seul rapport</li>
                     </ul>
                   </div>
-                  <div className="rounded-xl border border-[#F0F0F0] p-4 mb-3">
+                  <div className="rounded-lg border border-[#F0F0F0] p-4 mb-3">
                     <p className="text-[13px] font-semibold text-[#111] mb-2">Semaine 10 : Reporting et forecasting</p>
                     <ul className="space-y-1.5 text-[12px] text-[#666]">
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Configurer le rapport hebdomadaire automatique (envoye par email chaque lundi)</li>
@@ -1561,7 +1561,7 @@ export default function GuideRevOpsContenuPage() {
                     <span className="w-3 h-3 rounded-full bg-[#F97316]" />
                     <h3 className="text-[15px] font-semibold text-[#111]">Phase 6 : Training + Adoption + Iteration (Semaines 11-12)</h3>
                   </div>
-                  <div className="rounded-xl border border-[#F0F0F0] p-4 mb-3">
+                  <div className="rounded-lg border border-[#F0F0F0] p-4 mb-3">
                     <p className="text-[13px] font-semibold text-[#111] mb-2">Semaine 11 : Formation des equipes</p>
                     <ul className="space-y-1.5 text-[12px] text-[#666]">
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Session de formation CRM pour les commerciaux (2h : nouveau pipeline, champs obligatoires, bonnes pratiques)</li>
@@ -1570,7 +1570,7 @@ export default function GuideRevOpsContenuPage() {
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Creer la documentation interne (playbook RevOps de l\u2019entreprise)</li>
                     </ul>
                   </div>
-                  <div className="rounded-xl border border-[#F0F0F0] p-4 mb-3">
+                  <div className="rounded-lg border border-[#F0F0F0] p-4 mb-3">
                     <p className="text-[13px] font-semibold text-[#111] mb-2">Semaine 12 : Mesure et iteration</p>
                     <ul className="space-y-1.5 text-[12px] text-[#666]">
                       <li className="flex items-start gap-2"><span className="w-4 h-4 rounded border border-[#DDD] flex items-center justify-center text-[9px] text-[#999] shrink-0 mt-0.5">--</span>Mesurer le score de maturite post-implementation (comparer avec le score initial)</li>
@@ -1590,7 +1590,7 @@ export default function GuideRevOpsContenuPage() {
               <Connector />
 
               <h3 className="text-[17px] font-semibold text-[#111] mb-3">A quoi ressemble le succes a J+90</h3>
-              <div className="rounded-xl bg-[#111] p-5">
+              <div className="rounded-lg bg-[#111] p-5">
                 <p className="text-[13px] text-white font-semibold mb-3">&quot;What good looks like&quot; -- Les 10 criteres de succes a jour 90</p>
                 <div className="space-y-2">
                   {[
@@ -1617,7 +1617,7 @@ export default function GuideRevOpsContenuPage() {
             <Connector />
 
             {/* ==================== CTA FINAL ==================== */}
-            <div className="rounded-2xl bg-gradient-to-br from-[#FF7A59] to-[#FF5A36] p-6 md:p-10 text-center mb-8">
+            <div className="rounded-lg bg-gradient-to-br from-[#FF7A59] to-[#FF5A36] p-6 md:p-10 text-center mb-8">
               <h2 className="text-[22px] md:text-[28px] font-semibold text-white leading-tight mb-3">
                 Pret a deployer le RevOps dans votre organisation ?
               </h2>
@@ -1625,11 +1625,11 @@ export default function GuideRevOpsContenuPage() {
                 Nos experts RevOps vous accompagnent de l\u2019audit initial au deploiement complet en 90 jours. Meme playbook, adapte a votre contexte.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <a href="https://meetings.hubspot.com/ceres-revops" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-[#FF7A59] text-[14px] font-semibold hover:bg-white/90 transition-colors">
+                <a href="https://meetings.hubspot.com/ceres-revops" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-[#FF7A59] text-[14px] font-semibold hover:bg-white/90 transition-colors">
                   Reserver un appel strategique
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                 </a>
-                <Link href="/guide-revops-ultime" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 text-white text-[14px] font-medium hover:bg-white/20 transition-colors border border-white/20">
+                <Link href="/guide-revops-ultime" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white/10 text-white text-[14px] font-medium hover:bg-white/20 transition-colors border border-white/20">
                   Telecharger le PDF gratuit
                 </Link>
               </div>
@@ -1640,7 +1640,7 @@ export default function GuideRevOpsContenuPage() {
               <h3 className="text-[17px] font-semibold text-[#111] mb-4">Guides et articles complementaires</h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedGuides.map((g, i) => (
-                  <Link key={i} href={g.slug} className="group rounded-2xl border border-[#E8E8E8] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] hover:border-[#DDD] transition-all">
+                  <Link key={i} href={g.slug} className="group rounded-lg border border-[#EAEAEA] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] hover:border-[#DDD] transition-all">
                     <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-medium mb-3" style={{ background: `${g.color}15`, color: g.color }}>{g.category}</span>
                     <p className="text-[13px] font-semibold text-[#111] group-hover:text-[#FF7A59] transition-colors leading-tight">{g.title}</p>
                   </Link>

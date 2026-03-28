@@ -153,7 +153,7 @@ export default function IAProcessusCommercialArticle() {
               {/* Section 1 : L'IA n'est plus un gadget */}
               {/* ============================================ */}
               <section id="ia-plus-gadget" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">L&apos;IA n&apos;est plus un gadget commercial</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>En 2024, l&apos;IA generative etait un sujet de curiosite. Les equipes commerciales testaient ChatGPT pour rediger des emails, jouaient avec des prompts, et la majorite des tentatives restaient anecdotiques. Deux ans plus tard, le paysage a radicalement change.</p>
@@ -164,7 +164,7 @@ export default function IAProcessusCommercialArticle() {
                   </div>
 
                   {/* Adoption curve mockup */}
-                  <div className="mt-6 rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-5">
+                  <div className="mt-6 rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-5">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-4">Adoption de l&apos;IA dans les equipes commerciales B2B</p>
                     <div className="flex items-end gap-3 h-[120px]">
                       {[
@@ -190,7 +190,7 @@ export default function IAProcessusCommercialArticle() {
                       { stat: "-22%", label: "sur la duree du cycle de vente", color: "#4B5EFC" },
                       { stat: "-40%", label: "de temps sur les taches admin", color: "#22C55E" },
                     ].map((s) => (
-                      <div key={s.label} className="rounded-xl border border-[#F2F2F2] p-4 text-center">
+                      <div key={s.label} className="rounded-lg border border-[#F2F2F2] p-4 text-center">
                         <p className="text-[22px] font-bold mb-1" style={{ color: s.color }}>{s.stat}</p>
                         <p className="text-[10px] text-[#999] leading-[1.4]">{s.label}</p>
                       </div>
@@ -204,7 +204,7 @@ export default function IAProcessusCommercialArticle() {
               {/* Section 2a : Enrichissement automatique */}
               {/* ============================================ */}
               <section id="enrichissement" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[10px] font-bold">1</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Enrichissement automatique des leads</h2>
@@ -217,11 +217,11 @@ export default function IAProcessusCommercialArticle() {
                   </div>
 
                   {/* CSS Mockup: AI enrichment workflow */}
-                  <div className="mt-6 rounded-xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+                  <div className="mt-6 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-4">Workflow d&apos;enrichissement IA</p>
                     <div className="flex flex-col sm:flex-row items-center gap-3">
                       {/* Step 1 */}
-                      <div className="flex-1 w-full rounded-lg border border-[#E8E8E8] bg-white p-3 text-center">
+                      <div className="flex-1 w-full rounded-lg border border-[#EAEAEA] bg-white p-3 text-center">
                         <div className="w-8 h-8 rounded-full bg-[#FF7A59] mx-auto mb-2 flex items-center justify-center">
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
                         </div>
@@ -231,7 +231,7 @@ export default function IAProcessusCommercialArticle() {
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CCC" strokeWidth="2" className="shrink-0 hidden sm:block"><path d="M5 12h14m-7-7 7 7-7 7" /></svg>
                       <div className="sm:hidden w-px h-4 bg-[#E8E8E8]" />
                       {/* Step 2 */}
-                      <div className="flex-1 w-full rounded-lg border border-[#E8E8E8] bg-white p-3 text-center">
+                      <div className="flex-1 w-full rounded-lg border border-[#EAEAEA] bg-white p-3 text-center">
                         <div className="w-8 h-8 rounded-full bg-[#6D00CC] mx-auto mb-2 flex items-center justify-center">
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>
                         </div>
@@ -241,7 +241,7 @@ export default function IAProcessusCommercialArticle() {
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CCC" strokeWidth="2" className="shrink-0 hidden sm:block"><path d="M5 12h14m-7-7 7 7-7 7" /></svg>
                       <div className="sm:hidden w-px h-4 bg-[#E8E8E8]" />
                       {/* Step 3 */}
-                      <div className="flex-1 w-full rounded-lg border border-[#E8E8E8] bg-white p-3 text-center">
+                      <div className="flex-1 w-full rounded-lg border border-[#EAEAEA] bg-white p-3 text-center">
                         <div className="w-8 h-8 rounded-full bg-[#22C55E] mx-auto mb-2 flex items-center justify-center">
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><path d="M22 4 12 14.01l-3-3" /></svg>
                         </div>
@@ -251,7 +251,7 @@ export default function IAProcessusCommercialArticle() {
                     </div>
 
                     {/* Enrichment result mockup */}
-                    <div className="mt-4 rounded-lg border border-[#E8E8E8] bg-white p-4">
+                    <div className="mt-4 rounded-lg border border-[#EAEAEA] bg-white p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-5 h-5 rounded bg-[#6D00CC] flex items-center justify-center">
                           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><path d="M12 2a10 10 0 1 0 10 10" /><path d="M12 2v10l7-4" /></svg>
@@ -290,7 +290,7 @@ export default function IAProcessusCommercialArticle() {
               {/* Section 2b : Scoring predictif */}
               {/* ============================================ */}
               <section id="scoring" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[10px] font-bold">2</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Scoring predictif des deals</h2>
@@ -305,7 +305,7 @@ export default function IAProcessusCommercialArticle() {
                   {/* CSS Mockup: AI scoring vs rule-based comparison */}
                   <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {/* Rule-based */}
-                    <div className="rounded-xl border border-[#E8E8E8] bg-[#FAFAFA] p-4">
+                    <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-4 h-4 rounded bg-[#E8E8E8]" />
                         <span className="text-[10px] font-semibold text-[#999]">Scoring par regles</span>
@@ -332,7 +332,7 @@ export default function IAProcessusCommercialArticle() {
                       </div>
                     </div>
                     {/* AI-based */}
-                    <div className="rounded-xl border border-[#6D00CC] bg-[#FAFBFF] p-4">
+                    <div className="rounded-lg border border-[#6D00CC] bg-[#FAFBFF] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-4 h-4 rounded bg-[#6D00CC]" />
                         <span className="text-[10px] font-semibold text-[#6D00CC]">Scoring IA predictif</span>
@@ -367,7 +367,7 @@ export default function IAProcessusCommercialArticle() {
               {/* Section 2c : Redaction d'emails */}
               {/* ============================================ */}
               <section id="emails" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[10px] font-bold">3</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Redaction d&apos;emails personnalises</h2>
@@ -382,12 +382,12 @@ export default function IAProcessusCommercialArticle() {
                   {/* CSS Mockup: Before/After email */}
                   <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {/* Before */}
-                    <div className="rounded-xl border border-[#E8E8E8] bg-[#FAFAFA] p-4">
+                    <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-[#EF4444]" />
                         <span className="text-[10px] font-semibold text-[#EF4444]">AVANT : Email generique</span>
                       </div>
-                      <div className="rounded-lg bg-white border border-[#E8E8E8] p-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3">
                         <p className="text-[9px] text-[#999] mb-1">De : commercial@acme.com</p>
                         <p className="text-[9px] text-[#999] mb-2">Objet : Solution CRM pour votre entreprise</p>
                         <div className="text-[9px] text-[#666] leading-[1.6] space-y-2">
@@ -402,7 +402,7 @@ export default function IAProcessusCommercialArticle() {
                       </div>
                     </div>
                     {/* After */}
-                    <div className="rounded-xl border border-[#6D00CC] bg-[#FAFBFF] p-4">
+                    <div className="rounded-lg border border-[#6D00CC] bg-[#FAFBFF] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-[#22C55E]" />
                         <span className="text-[10px] font-semibold text-[#22C55E]">APRES : Email personnalise par IA</span>
@@ -423,7 +423,7 @@ export default function IAProcessusCommercialArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl bg-[#F0EBFF] border border-[#E0D4FF] p-4">
+                  <div className="mt-4 rounded-lg bg-[#F0EBFF] border border-[#E0D4FF] p-4">
                     <p className="text-[11px] font-semibold text-[#6D00CC] mb-2">Le prompt qui fait la difference</p>
                     <p className="text-[10px] text-[#555] leading-[1.6]">Le secret n&apos;est pas dans l&apos;outil mais dans le prompt. Integrez systematiquement : (1) une reference concrete a un contenu ou une actualite du prospect, (2) un cas client similaire avec un resultat chiffre, (3) un CTA non-engageant. L&apos;email doit faire moins de 100 mots.</p>
                   </div>
@@ -435,7 +435,7 @@ export default function IAProcessusCommercialArticle() {
               {/* Section 2d : Resume automatique des calls */}
               {/* ============================================ */}
               <section id="resume-calls" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[10px] font-bold">4</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Resume automatique des appels commerciaux</h2>
@@ -448,9 +448,9 @@ export default function IAProcessusCommercialArticle() {
                   </div>
 
                   {/* CSS Mockup: Call summary flowing to CRM */}
-                  <div className="mt-6 rounded-xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+                  <div className="mt-6 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-4">Resume IA d&apos;un appel commercial</p>
-                    <div className="rounded-lg bg-white border border-[#E8E8E8] p-4">
+                    <div className="rounded-lg bg-white border border-[#EAEAEA] p-4">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <div className="w-5 h-5 rounded bg-[#6D00CC] flex items-center justify-center">
@@ -509,7 +509,7 @@ export default function IAProcessusCommercialArticle() {
               {/* Section 2e : Analyse win/loss */}
               {/* ============================================ */}
               <section id="win-loss" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[10px] font-bold">5</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Analyse win/loss par IA</h2>
@@ -522,14 +522,14 @@ export default function IAProcessusCommercialArticle() {
                   </div>
 
                   {/* CSS Mockup: Win/Loss insights dashboard */}
-                  <div className="mt-6 rounded-xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+                  <div className="mt-6 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-4">Dashboard Win/Loss IA - Insights Q1 2026</p>
                     <div className="grid grid-cols-2 gap-3 mb-4">
-                      <div className="rounded-lg bg-white border border-[#E8E8E8] p-3 text-center">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 text-center">
                         <p className="text-[9px] text-[#999]">Deals analyses</p>
                         <p className="text-[18px] font-bold text-[#111]">127</p>
                       </div>
-                      <div className="rounded-lg bg-white border border-[#E8E8E8] p-3 text-center">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 text-center">
                         <p className="text-[9px] text-[#999]">Win rate global</p>
                         <p className="text-[18px] font-bold text-[#6D00CC]">34%</p>
                       </div>
@@ -543,7 +543,7 @@ export default function IAProcessusCommercialArticle() {
                         { pattern: "Pas de relance dans les 48h post-demo", impact: "Win rate -35%", severity: "high", color: "#EF4444" },
                         { pattern: "Mention du concurrent X en call", impact: "Win rate 22% (vs 41% moyenne)", severity: "medium", color: "#FF7A59" },
                       ].map((p) => (
-                        <div key={p.pattern} className="flex items-center gap-3 rounded-lg bg-white border border-[#E8E8E8] p-3">
+                        <div key={p.pattern} className="flex items-center gap-3 rounded-lg bg-white border border-[#EAEAEA] p-3">
                           <div className="w-2 h-2 rounded-full shrink-0" style={{ background: p.color }} />
                           <div className="flex-1 min-w-0">
                             <p className="text-[9px] font-medium text-[#111]">{p.pattern}</p>
@@ -564,7 +564,7 @@ export default function IAProcessusCommercialArticle() {
               {/* Section 2f : Prevision de revenus */}
               {/* ============================================ */}
               <section id="prevision" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[10px] font-bold">6</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Prevision de revenus par IA</h2>
@@ -578,7 +578,7 @@ export default function IAProcessusCommercialArticle() {
 
                   {/* CSS Mockup: AI forecast vs spreadsheet */}
                   <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-[#E8E8E8] bg-[#FAFAFA] p-4">
+                    <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-4">
                       <p className="text-[10px] font-semibold text-[#999] mb-3">Forecast Excel classique</p>
                       <div className="space-y-2 mb-3">
                         {[
@@ -599,7 +599,7 @@ export default function IAProcessusCommercialArticle() {
                         <p className="text-[8px] text-[#EF4444]">Marge d&apos;erreur : +/- 35%</p>
                       </div>
                     </div>
-                    <div className="rounded-xl border border-[#6D00CC] bg-[#FAFBFF] p-4">
+                    <div className="rounded-lg border border-[#6D00CC] bg-[#FAFBFF] p-4">
                       <p className="text-[10px] font-semibold text-[#6D00CC] mb-3">Forecast IA predictif</p>
                       <div className="space-y-2 mb-3">
                         {[
@@ -631,7 +631,7 @@ export default function IAProcessusCommercialArticle() {
               {/* Section 2g : Qualification automatique */}
               {/* ============================================ */}
               <section id="qualification" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[10px] font-bold">7</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Qualification automatique et routing intelligent</h2>
@@ -645,9 +645,9 @@ export default function IAProcessusCommercialArticle() {
                   </div>
 
                   {/* CSS Mockup: Chatbot qualification interface */}
-                  <div className="mt-6 rounded-xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+                  <div className="mt-6 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-4">Interface de qualification IA</p>
-                    <div className="max-w-[320px] mx-auto rounded-xl bg-white border border-[#E8E8E8] overflow-hidden shadow-sm">
+                    <div className="max-w-[320px] mx-auto rounded-lg bg-white border border-[#EAEAEA] overflow-hidden shadow-sm">
                       {/* Chat header */}
                       <div className="bg-[#6D00CC] px-4 py-3 flex items-center gap-2">
                         <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
@@ -696,7 +696,7 @@ export default function IAProcessusCommercialArticle() {
                         </div>
                       </div>
                       {/* Qualification badge */}
-                      <div className="border-t border-[#E8E8E8] px-3 py-2 bg-[#F0EBFF]">
+                      <div className="border-t border-[#EAEAEA] px-3 py-2 bg-[#F0EBFF]">
                         <div className="flex items-center justify-between">
                           <span className="text-[8px] text-[#6D00CC] font-semibold">Lead qualifie BANT</span>
                           <div className="flex gap-1">
@@ -716,7 +716,7 @@ export default function IAProcessusCommercialArticle() {
               {/* Section 2h : Coaching commercial */}
               {/* ============================================ */}
               <section id="coaching" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[10px] font-bold">8</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Coaching commercial en temps reel</h2>
@@ -729,7 +729,7 @@ export default function IAProcessusCommercialArticle() {
                   </div>
 
                   {/* CSS Mockup: AI coaching scorecard */}
-                  <div className="mt-6 rounded-xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+                  <div className="mt-6 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-4">Scorecard de coaching IA - Appel #247</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
                       {[
@@ -738,14 +738,14 @@ export default function IAProcessusCommercialArticle() {
                         { label: "Objections", score: 64, color: "#FF7A59" },
                         { label: "Closing", score: 73, color: "#4B5EFC" },
                       ].map((s) => (
-                        <div key={s.label} className="rounded-lg bg-white border border-[#E8E8E8] p-3 text-center">
+                        <div key={s.label} className="rounded-lg bg-white border border-[#EAEAEA] p-3 text-center">
                           <p className="text-[18px] font-bold" style={{ color: s.color }}>{s.score}</p>
                           <p className="text-[8px] text-[#999]">{s.label}</p>
                         </div>
                       ))}
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div className="rounded-lg bg-white border border-[#E8E8E8] p-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3">
                         <p className="text-[9px] font-semibold text-[#22C55E] mb-2">Points forts</p>
                         <ul className="text-[9px] text-[#555] space-y-1 leading-[1.5]">
                           <li>+ Excellent ratio d&apos;ecoute (35/65)</li>
@@ -753,7 +753,7 @@ export default function IAProcessusCommercialArticle() {
                           <li>+ Discovery structuree (pain, impact, timeline)</li>
                         </ul>
                       </div>
-                      <div className="rounded-lg bg-white border border-[#E8E8E8] p-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3">
                         <p className="text-[9px] font-semibold text-[#EF4444] mb-2">Axes d&apos;amelioration</p>
                         <ul className="text-[9px] text-[#555] space-y-1 leading-[1.5]">
                           <li>- Objection &ldquo;prix&rdquo; non traitee (esquivee)</li>
@@ -771,7 +771,7 @@ export default function IAProcessusCommercialArticle() {
               {/* Section 3 : La stack IA en 2026 */}
               {/* ============================================ */}
               <section id="stack-ia" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">La stack IA commerciale en 2026</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Le paysage des outils IA pour la vente evolue a une vitesse folle. En 2024, la question etait &ldquo;faut-il utiliser l&apos;IA ?&rdquo;. En 2026, la question est &ldquo;quels outils combiner pour construire une stack coherente ?&rdquo;. Voici les categories d&apos;outils et nos recommandations pour chaque cas d&apos;usage.</p>
@@ -812,7 +812,7 @@ export default function IAProcessusCommercialArticle() {
                         ]
                       },
                     ].map((cat) => (
-                      <div key={cat.category} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={cat.category} className="rounded-lg border border-[#F2F2F2] p-4">
                         <p className="text-[11px] font-semibold text-[#111] mb-3">{cat.category}</p>
                         <div className="space-y-2">
                           {cat.tools.map((t) => (
@@ -841,7 +841,7 @@ export default function IAProcessusCommercialArticle() {
               {/* Section 4 : Implementer sans tout casser */}
               {/* ============================================ */}
               <section id="implementation" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Implementer l&apos;IA sans tout casser : l&apos;approche en 3 phases</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>L&apos;erreur la plus frequente est de vouloir deployer l&apos;IA partout en meme temps. Trop de changements simultanement garantissent la resistance de l&apos;equipe et l&apos;echec du projet. L&apos;approche qui fonctionne est progressive : on commence par les quick wins, on prouve la valeur, et on etend progressivement.</p>
@@ -883,7 +883,7 @@ export default function IAProcessusCommercialArticle() {
                         result: "Resultat attendu : processus commercial augmente par l'IA de bout en bout. Chaque etape du cycle de vente est assistee par l'IA sans etre dependante.",
                       },
                     ].map((p) => (
-                      <div key={p.phase} className="rounded-xl border-l-4 bg-[#FAFAFA] p-5" style={{ borderColor: p.color }}>
+                      <div key={p.phase} className="rounded-lg border-l-4 bg-[#FAFAFA] p-5" style={{ borderColor: p.color }}>
                         <p className="text-[12px] font-semibold text-[#111] mb-3">{p.phase}</p>
                         <ul className="space-y-1.5 mb-3">
                           {p.items.map((item) => (
@@ -907,7 +907,7 @@ export default function IAProcessusCommercialArticle() {
               {/* Section 5 : Les pieges a eviter */}
               {/* ============================================ */}
               <section id="pieges" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les 5 pieges a eviter avec l&apos;IA commerciale</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>L&apos;IA commerciale est un accelerateur puissant, mais mal utilisee, elle peut faire plus de degats que de bien. Voici les pieges dans lesquels tombent la majorite des equipes, et comment les eviter.</p>
@@ -946,7 +946,7 @@ export default function IAProcessusCommercialArticle() {
                         color: "#22C55E"
                       },
                     ].map((e, i) => (
-                      <div key={i} className="rounded-xl border-l-2 bg-[#FAFAFA] p-4" style={{ borderColor: e.color }}>
+                      <div key={i} className="rounded-lg border-l-2 bg-[#FAFAFA] p-4" style={{ borderColor: e.color }}>
                         <p className="text-[12px] font-semibold text-[#111] mb-2">{i + 1}. {e.piege}</p>
                         <p className="text-[11px] text-[#777] leading-[1.6] mb-2">{e.desc}</p>
                         <div className="rounded-lg bg-white border border-[#F2F2F2] p-2">
@@ -964,14 +964,14 @@ export default function IAProcessusCommercialArticle() {
               {/* Section 6 : ROI de l'IA commerciale */}
               {/* ============================================ */}
               <section id="roi" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">ROI de l&apos;IA commerciale : les chiffres reels</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Au-dela des promesses marketing, quel est le retour sur investissement reel de l&apos;IA dans un processus de vente B2B ? Voici les chiffres que l&apos;on observe chez nos clients apres 6 mois de deploiement, avec une equipe de 10 commerciaux.</p>
                   </div>
 
                   {/* Time savings breakdown */}
-                  <div className="rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-5 mb-4">
+                  <div className="rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-5 mb-4">
                     <p className="text-[11px] font-semibold text-[#111] mb-3">Temps gagne par commercial et par semaine</p>
                     <div className="space-y-2">
                       {[
@@ -981,7 +981,7 @@ export default function IAProcessusCommercialArticle() {
                         { task: "Mise a jour CRM", before: "4h", after: "1h", saved: "3h", pct: 75 },
                         { task: "Preparation de reunions", before: "2h", after: "0.5h", saved: "1.5h", pct: 75 },
                       ].map((t) => (
-                        <div key={t.task} className="rounded-lg bg-white border border-[#E8E8E8] p-3">
+                        <div key={t.task} className="rounded-lg bg-white border border-[#EAEAEA] p-3">
                           <div className="flex items-center justify-between mb-1.5">
                             <span className="text-[10px] font-medium text-[#111]">{t.task}</span>
                             <span className="text-[10px] font-bold text-[#6D00CC]">-{t.saved}</span>
@@ -1010,7 +1010,7 @@ export default function IAProcessusCommercialArticle() {
                       { metric: "Taux de reponse emails", before: "3.2%", after: "11.8%", change: "+269%", color: "#22C55E" },
                       { metric: "Pipeline genere", before: "180K", after: "295K", change: "+64%", color: "#FF7A59" },
                     ].map((m) => (
-                      <div key={m.metric} className="rounded-xl border border-[#F2F2F2] p-3 text-center">
+                      <div key={m.metric} className="rounded-lg border border-[#F2F2F2] p-3 text-center">
                         <p className="text-[9px] text-[#999] mb-1">{m.metric}</p>
                         <p className="text-[8px] text-[#CCC] line-through">{m.before}</p>
                         <p className="text-[16px] font-bold" style={{ color: m.color }}>{m.after}</p>
@@ -1020,10 +1020,10 @@ export default function IAProcessusCommercialArticle() {
                   </div>
 
                   {/* ROI calculation */}
-                  <div className="rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-4">
+                  <div className="rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-4">
                     <p className="text-[11px] font-semibold text-[#111] mb-3">Calcul du ROI pour une equipe de 10 commerciaux</p>
                     <div className="grid grid-cols-2 gap-3">
-                      <div className="rounded-lg bg-white border border-[#E8E8E8] p-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3">
                         <p className="text-[9px] text-[#999] mb-2">Investissement annuel</p>
                         <div className="space-y-1 text-[9px]">
                           <div className="flex justify-between"><span className="text-[#555]">Claap (10 users)</span><span className="text-[#111]">1 800 EUR</span></div>
@@ -1057,9 +1057,9 @@ export default function IAProcessusCommercialArticle() {
               {/* Section 7 : Notre approche Ceres (dark) */}
               {/* ============================================ */}
               <section id="approche-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#0A0A0A] p-5 md:p-8 border border-[#222]">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8 border border-[#222]">
                   <div className="flex items-center gap-3 mb-5">
-                    <div className="w-8 h-8 rounded-xl bg-[#6D00CC] flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-lg bg-[#6D00CC] flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>
                     </div>
                     <h2 className="text-[17px] font-semibold text-white">Notre approche chez Ceres : Claude + HubSpot + Make</h2>
@@ -1072,7 +1072,7 @@ export default function IAProcessusCommercialArticle() {
                   </div>
 
                   {/* CSS Mockup: Claude analyzing a deal */}
-                  <div className="rounded-xl bg-[#151515] border border-[#333] p-4 mb-4">
+                  <div className="rounded-lg bg-[#151515] border border-[#333] p-4 mb-4">
                     <div className="flex items-center gap-2 mb-3">
                       <div className="w-5 h-5 rounded bg-[#6D00CC] flex items-center justify-center">
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
@@ -1124,7 +1124,7 @@ export default function IAProcessusCommercialArticle() {
                   </div>
 
                   {/* Workflow diagram */}
-                  <div className="rounded-xl bg-[#151515] border border-[#333] p-4">
+                  <div className="rounded-lg bg-[#151515] border border-[#333] p-4">
                     <p className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-4">Notre workflow IA type pour un client B2B</p>
                     <div className="flex flex-col gap-2">
                       {[
@@ -1170,7 +1170,7 @@ export default function IAProcessusCommercialArticle() {
               </section>
 
               {/* CTA */}
-              <div className="mb-12 rounded-2xl bg-gradient-to-br from-[#6D00CC] to-[#4B0E8A] p-6 md:p-8 text-center">
+              <div className="mb-12 rounded-lg bg-gradient-to-br from-[#6D00CC] to-[#4B0E8A] p-6 md:p-8 text-center">
                 <h3 className="text-[17px] font-semibold text-white mb-3">Pret a integrer l&apos;IA dans votre processus commercial ?</h3>
                 <p className="text-[13px] text-white/70 leading-[1.7] mb-5 max-w-[500px] mx-auto">Chez Ceres, on deploie la stack Claude + HubSpot + Make pour les equipes commerciales B2B. Un audit gratuit de 30 minutes pour identifier les quick wins IA dans votre processus de vente.</p>
                 <Link href="https://calendly.com/ceres-revops/30min" className="inline-flex items-center gap-2 px-6 py-2.5 bg-white text-[#6D00CC] rounded-lg text-[13px] font-medium hover:bg-[#F5F5F5] transition-colors">
@@ -1184,7 +1184,7 @@ export default function IAProcessusCommercialArticle() {
                 <h3 className="text-[14px] font-semibold text-[#111] mb-4">Articles complementaires</h3>
                 <div className="grid gap-3">
                   {relatedArticles.map((a) => (
-                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
+                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
                       <div className="w-1 h-10 rounded-full" style={{ background: a.color }} />
                       <div className="flex-1 min-w-0">
                         <p className="text-[9px] font-medium mb-1" style={{ color: a.color }}>{a.category}</p>

@@ -35,7 +35,7 @@ export default function ScorecardBlock({ title, value, target, score, breakdown 
   var dashOffset = circumference * (1 - score / 100);
 
   return (
-    <div className="border border-[#E5E5E5] rounded-xl p-5 bg-white">
+    <div className="border border-[#EAEAEA] rounded-lg p-5 bg-white">
       <div className="flex items-start gap-5">
         {/* Score gauge */}
         <div className="relative shrink-0">
@@ -52,17 +52,17 @@ export default function ScorecardBlock({ title, value, target, score, breakdown 
             />
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-xl font-bold text-[#0A0A0A] tabular-nums">{score}</span>
-            <span className="text-[9px] text-[#A3A3A3]">/100</span>
+            <span className="text-xl font-bold text-[#111] tabular-nums">{score}</span>
+            <span className="text-[9px] text-[#BBB]">/100</span>
           </div>
         </div>
 
         {/* Details */}
         <div className="flex-1 min-w-0">
-          <h3 className="text-sm font-semibold text-[#0A0A0A]">{title}</h3>
+          <h3 className="text-sm font-semibold text-[#111]">{title}</h3>
           <div className="flex items-baseline gap-2 mt-1">
-            <span className="text-2xl font-bold text-[#0A0A0A]">{value}</span>
-            {target && <span className="text-xs text-[#A3A3A3]">target: {target}</span>}
+            <span className="text-2xl font-bold text-[#111]">{value}</span>
+            {target && <span className="text-xs text-[#BBB]">target: {target}</span>}
           </div>
           <span className="inline-block mt-1.5 text-[11px] font-semibold px-2 py-0.5 rounded-full" style={{ color: color, backgroundColor: color + "15" }}>
             {label}
@@ -77,8 +77,8 @@ export default function ScorecardBlock({ title, value, target, score, breakdown 
                 return (
                   <div key={i}>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[11px] text-[#525252]">{item.label}</span>
-                      <span className="text-[11px] font-medium text-[#0A0A0A] tabular-nums">{item.score}/{item.maxScore}</span>
+                      <span className="text-[11px] text-[#555]">{item.label}</span>
+                      <span className="text-[11px] font-medium text-[#111] tabular-nums">{item.score}/{item.maxScore}</span>
                     </div>
                     <div className="h-1.5 bg-[#F0F0F0] rounded-full overflow-hidden">
                       <div className="h-full rounded-full transition-all duration-500" style={{ width: pct + "%", backgroundColor: itemColor }} />

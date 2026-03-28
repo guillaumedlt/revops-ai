@@ -146,7 +146,7 @@ export default function HubSpotVsPipedriveArticle() {
             <article>
               {/* Section 1 : Deux CRM, deux philosophies */}
               <section id="philosophies" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=32" alt="HubSpot" className="w-5 h-5" />
                     <img src="https://www.google.com/s2/favicons?domain=pipedrive.com&sz=32" alt="Pipedrive" className="w-5 h-5" />
@@ -160,7 +160,7 @@ export default function HubSpotVsPipedriveArticle() {
                   </div>
 
                   <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=32" alt="HubSpot" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">HubSpot</span>
@@ -172,7 +172,7 @@ export default function HubSpotVsPipedriveArticle() {
                         ))}
                       </ul>
                     </div>
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <img src="https://www.google.com/s2/favicons?domain=pipedrive.com&sz=32" alt="Pipedrive" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Pipedrive</span>
@@ -191,7 +191,7 @@ export default function HubSpotVsPipedriveArticle() {
 
               {/* Section 2 : Comparaison des prix */}
               <section id="prix" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Comparaison des prix : le vrai cout de chaque CRM</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Le pricing est souvent le premier critere de choix, et c&apos;est aussi la ou les surprises sont les plus frequentes. Les deux outils affichent des prix attractifs en entree de gamme, mais le cout reel depend du nombre d&apos;utilisateurs, des modules actifs et des add-ons.</p>
@@ -211,7 +211,7 @@ export default function HubSpotVsPipedriveArticle() {
                         { plan: "Pro", price: "100 eur", users: "Par utilisateur", features: "Tout Starter + sequences, workflows, reporting custom, playbooks, forecasting" },
                         { plan: "Enterprise", price: "150 eur", users: "Par utilisateur", features: "Tout Pro + objets custom, predictive lead scoring, hierarchie d&apos;equipes, sandboxes" },
                       ].map((t) => (
-                        <div key={t.plan} className="rounded-xl border border-[#F2F2F2] p-3">
+                        <div key={t.plan} className="rounded-lg border border-[#F2F2F2] p-3">
                           <p className="text-[10px] text-[#FF7A59] font-semibold uppercase mb-1">{t.plan}</p>
                           <p className="text-[18px] font-bold text-[#111] mb-0.5">{t.price}</p>
                           <p className="text-[9px] text-[#999] mb-2">{t.users}/mois</p>
@@ -235,7 +235,7 @@ export default function HubSpotVsPipedriveArticle() {
                         { plan: "Power", price: "64 eur", users: "Par utilisateur", features: "Tout Pro + support telephonique, controle permissions, CRM projet, scalabilite" },
                         { plan: "Enterprise", price: "99 eur", users: "Par utilisateur", features: "Tout Power + securite avancee, reporting illimite, support premium, implementation" },
                       ].map((t) => (
-                        <div key={t.plan} className="rounded-xl border border-[#F2F2F2] p-3">
+                        <div key={t.plan} className="rounded-lg border border-[#F2F2F2] p-3">
                           <p className="text-[10px] text-[#22C55E] font-semibold uppercase mb-1">{t.plan}</p>
                           <p className="text-[18px] font-bold text-[#111] mb-0.5">{t.price}</p>
                           <p className="text-[9px] text-[#999] mb-2">{t.users}/mois</p>
@@ -246,19 +246,19 @@ export default function HubSpotVsPipedriveArticle() {
                   </div>
 
                   {/* Couts caches */}
-                  <div className="rounded-2xl bg-[#111] p-5 md:p-6">
+                  <div className="rounded-lg bg-[#111] p-5 md:p-6">
                     <h3 className="text-[14px] font-semibold text-white mb-3">Les couts caches a anticiper</h3>
                     <div className="space-y-3 text-[12px] text-white/60 leading-[1.7]">
                       <p>Le prix affiche ne raconte qu&apos;une partie de l&apos;histoire. Voici les couts supplementaires que l&apos;on constate systematiquement chez nos clients :</p>
                     </div>
                     <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div className="rounded-xl border border-white/10 p-3">
+                      <div className="rounded-lg border border-white/10 p-3">
                         <p className="text-[11px] font-semibold text-[#FF7A59] mb-2">HubSpot : couts supplementaires</p>
                         {["Onboarding obligatoire Pro : 500 eur", "Onboarding obligatoire Enterprise : 3 000 eur", "Contacts marketing (au-dela de 1 000) : 50 eur/1 000", "API calls limites sur les plans bas", "Add-ons : Reporting (200 eur/mois), Ads (revenu > 10K)"].map((i) => (
                           <p key={i} className="text-[10px] text-white/50 mb-1.5 flex items-start gap-2"><span className="text-[#FF7A59] mt-0.5 shrink-0">+</span>{i}</p>
                         ))}
                       </div>
-                      <div className="rounded-xl border border-white/10 p-3">
+                      <div className="rounded-lg border border-white/10 p-3">
                         <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Pipedrive : couts supplementaires</p>
                         {["LeadBooster add-on : 32,50 eur/mois", "Web Visitors add-on : 41 eur/mois", "Campaigns (emailing) : 13,33 eur/mois", "Smart Docs : 32,50 eur/mois", "Projects : 6,70 eur/mois"].map((i) => (
                           <p key={i} className="text-[10px] text-white/50 mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
@@ -268,7 +268,7 @@ export default function HubSpotVsPipedriveArticle() {
                   </div>
 
                   {/* Cout total simule */}
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Simulation : cout total pour une equipe de 10 commerciaux</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="space-y-1.5">
@@ -308,7 +308,7 @@ export default function HubSpotVsPipedriveArticle() {
 
               {/* Section 3 : Fonctionnalites CRM */}
               <section id="fonctionnalites-crm" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Fonctionnalites CRM : pipeline, contacts, deals, reporting</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Sur le coeur de metier CRM, les deux outils sont matures et couvrent l&apos;essentiel. Mais les differences apparaissent dans les details et dans la profondeur fonctionnelle.</p>
@@ -327,7 +327,7 @@ export default function HubSpotVsPipedriveArticle() {
                       { label: "Objets custom", hubspot: "Oui (Enterprise uniquement)", pipedrive: "Non" },
                       { label: "Deal rotting alerts", hubspot: "Non natif", pipedrive: "Oui, natif" },
                     ].map((r) => (
-                      <div key={r.label} className="rounded-xl border border-[#F2F2F2] p-3">
+                      <div key={r.label} className="rounded-lg border border-[#F2F2F2] p-3">
                         <p className="text-[11px] font-semibold text-[#111] mb-2">{r.label}</p>
                         <div className="space-y-1">
                           <div className="flex items-start gap-2">
@@ -348,7 +348,7 @@ export default function HubSpotVsPipedriveArticle() {
 
               {/* Section 4 : Marketing et inbound */}
               <section id="marketing" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Marketing et inbound : l&apos;avantage decisif de HubSpot</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>C&apos;est probablement le point ou l&apos;ecart est le plus large entre les deux CRM. HubSpot a ete concu des le depart pour l&apos;inbound marketing, et cela se voit. Pipedrive est un CRM de vente qui a ajoute des briques marketing en option, sans jamais pretendre rivaliser sur ce terrain.</p>
@@ -358,7 +358,7 @@ export default function HubSpotVsPipedriveArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#FFF5F0] p-3">
+                    <div className="rounded-lg bg-[#FFF5F0] p-3">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=32" alt="HubSpot" className="w-4 h-4" />
                         <p className="text-[11px] font-semibold text-[#FF7A59]">HubSpot Marketing</p>
@@ -367,7 +367,7 @@ export default function HubSpotVsPipedriveArticle() {
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#FF7A59] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#F5F5F5] p-3">
+                    <div className="rounded-lg bg-[#F5F5F5] p-3">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=pipedrive.com&sz=32" alt="Pipedrive" className="w-4 h-4" />
                         <p className="text-[11px] font-semibold text-[#999]">Pipedrive Campaigns</p>
@@ -383,7 +383,7 @@ export default function HubSpotVsPipedriveArticle() {
 
               {/* Section 5 : Automatisation et workflows */}
               <section id="automatisation" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Automatisation et workflows</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;automatisation est devenue un critere de choix majeur en 2026. Les equipes de vente veulent eliminer les taches repetitives : envoyer un email de suivi apres une reunion, mettre a jour un champ quand un deal change d&apos;etape, assigner un lead au bon commercial, creer une tache de relance automatiquement. Les deux CRM proposent de l&apos;automatisation, mais avec des niveaux de sophistication tres differents.</p>
@@ -392,7 +392,7 @@ export default function HubSpotVsPipedriveArticle() {
                     <p>Concretement, chez nos clients, on automatise environ 15 a 20 workflows dans HubSpot pour une equipe de vente structuree. Dans Pipedrive, on en met rarement plus de 8 a 10 en place, non pas par choix, mais parce que l&apos;outil ne permet pas certains scenarios avances (rotation de leads ponderee, workflows cross-objets, branch logic complexe).</p>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#F2F2F2] p-4">
+                  <div className="mt-4 rounded-lg border border-[#F2F2F2] p-4">
                     <p className="text-[11px] font-semibold text-[#111] mb-3">Exemples d&apos;automatisations possibles</p>
                     <div className="space-y-2">
                       {[
@@ -428,7 +428,7 @@ export default function HubSpotVsPipedriveArticle() {
 
               {/* Section 6 : Reporting et analytics */}
               <section id="reporting" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Reporting et analytics</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le reporting est un autre domaine ou les deux CRM se distinguent nettement. La question n&apos;est pas seulement &ldquo;quels rapports puis-je generer ?&rdquo; mais aussi &ldquo;quelle profondeur d&apos;analyse puis-je atteindre sans exporter mes donnees dans un outil tiers ?&rdquo;</p>
@@ -438,7 +438,7 @@ export default function HubSpotVsPipedriveArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-[#F2F2F2] p-3">
+                    <div className="rounded-lg border border-[#F2F2F2] p-3">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=32" alt="HubSpot" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Reporting HubSpot</span>
@@ -458,7 +458,7 @@ export default function HubSpotVsPipedriveArticle() {
                         ))}
                       </div>
                     </div>
-                    <div className="rounded-xl border border-[#F2F2F2] p-3">
+                    <div className="rounded-lg border border-[#F2F2F2] p-3">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=pipedrive.com&sz=32" alt="Pipedrive" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Reporting Pipedrive</span>
@@ -485,7 +485,7 @@ export default function HubSpotVsPipedriveArticle() {
 
               {/* Section 7 : Integrations et ecosysteme */}
               <section id="integrations" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Integrations et ecosysteme</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Un CRM ne fonctionne jamais seul. Il doit se connecter a votre stack existante : outils de prospection, emailing, facturation, support, productivite. La richesse de l&apos;ecosysteme d&apos;integrations est un critere determinant, surtout quand l&apos;equipe grandit et que les besoins se complexifient.</p>
@@ -495,7 +495,7 @@ export default function HubSpotVsPipedriveArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-[#F2F2F2] p-3">
+                    <div className="rounded-lg border border-[#F2F2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#111] mb-2">Integrations HubSpot populaires</p>
                       <div className="flex flex-wrap gap-1.5">
                         {[
@@ -516,7 +516,7 @@ export default function HubSpotVsPipedriveArticle() {
                       </div>
                       <p className="text-[10px] text-[#999] mt-2">1 500+ integrations au total</p>
                     </div>
-                    <div className="rounded-xl border border-[#F2F2F2] p-3">
+                    <div className="rounded-lg border border-[#F2F2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#111] mb-2">Integrations Pipedrive populaires</p>
                       <div className="flex flex-wrap gap-1.5">
                         {[
@@ -544,7 +544,7 @@ export default function HubSpotVsPipedriveArticle() {
 
               {/* Section 8 : UX et prise en main */}
               <section id="ux" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">UX et prise en main</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;experience utilisateur est un critere souvent sous-estime. Un CRM que les commerciaux n&apos;utilisent pas est un CRM inutile, quel que soit le nombre de fonctionnalites. L&apos;adoption depend directement de la facilite de prise en main et de l&apos;ergonomie au quotidien.</p>
@@ -562,7 +562,7 @@ export default function HubSpotVsPipedriveArticle() {
                       { critere: "Documentation et aide", hubspot: "HubSpot Academy (best-in-class)", pipedrive: "Knowledge base correct", winner: "hubspot" },
                       { critere: "Taux d&apos;adoption equipes", hubspot: "70-80% (variable)", pipedrive: "85-95% (eleve)", winner: "pipedrive" },
                     ].map((r) => (
-                      <div key={r.critere} className={`rounded-xl border p-3 ${r.winner === "pipedrive" ? "border-[#22C55E]/30 bg-[#F0FDF4]/50" : "border-[#FF7A59]/30 bg-[#FFF5F0]/50"}`}>
+                      <div key={r.critere} className={`rounded-lg border p-3 ${r.winner === "pipedrive" ? "border-[#22C55E]/30 bg-[#F0FDF4]/50" : "border-[#FF7A59]/30 bg-[#FFF5F0]/50"}`}>
                         <p className="text-[11px] font-semibold text-[#111] mb-2" dangerouslySetInnerHTML={{ __html: r.critere }} />
                         <div className="space-y-1">
                           <div className="flex items-start gap-2">
@@ -583,7 +583,7 @@ export default function HubSpotVsPipedriveArticle() {
 
               {/* Section 9 : Scalabilite */}
               <section id="scalabilite" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Scalabilite : de la startup a l&apos;enterprise</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Choisir un CRM, c&apos;est aussi anticiper les besoins de demain. Un outil adapte a une equipe de 3 commerciaux ne sera peut-etre plus suffisant quand l&apos;equipe en comptera 30. Changer de CRM est un projet douloureux (migration des donnees, reapprentissage, perte de configurations). Mieux vaut choisir un outil qui grandira avec vous.</p>
@@ -597,7 +597,7 @@ export default function HubSpotVsPipedriveArticle() {
                       { phase: "Scale-up (5-30 pers.)", hubspot: "Sales Hub Pro a 100 eur/pers. Workflows, sequences, reporting avance. Le ROI apparait quand les processus se complexifient.", pipedrive: "Professional a 49 eur/pers. Couvre 80% des besoins, mais les limites apparaissent sur l&apos;automatisation et le reporting.", color: "#4B5EFC", winner: "HubSpot" },
                       { phase: "Enterprise (30+ pers.)", hubspot: "Enterprise a 150 eur/pers. Objets custom, predictive scoring, hierarchies, sandboxes. Plateforme mature pour les grandes equipes.", pipedrive: "Enterprise a 99 eur/pers. Suffisant pour des equipes de vente pures, mais insuffisant pour des besoins RevOps complexes.", color: "#FF7A59", winner: "HubSpot" },
                     ].map((r) => (
-                      <div key={r.phase} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={r.phase} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-2 h-2 rounded-full" style={{ background: r.color }} />
                           <p className="text-[12px] font-semibold text-[#111]">{r.phase}</p>
@@ -628,7 +628,7 @@ export default function HubSpotVsPipedriveArticle() {
 
               {/* Section 10 : Tableau comparatif global */}
               <section id="tableau-comparatif" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <h2 className="text-[17px] font-semibold text-white mb-5">Tableau comparatif global : 16 criteres</h2>
                   <div className="space-y-1">
                     {/* Header */}
@@ -674,14 +674,14 @@ export default function HubSpotVsPipedriveArticle() {
 
               {/* Section 11 : Verdict */}
               <section id="verdict" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Notre verdict : quel CRM choisir selon votre profil</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Apres avoir deploye les deux CRM chez des dizaines de clients, notre position est claire : il n&apos;y a pas de &ldquo;meilleur CRM&rdquo; dans l&apos;absolu. Le bon choix depend de votre contexte, de votre strategie d&apos;acquisition et de vos ambitions de croissance. Voici notre recommandation par profil.</p>
                   </div>
 
                   <div className="mt-5 space-y-3">
-                    <div className="rounded-xl border border-[#22C55E]/30 bg-[#F0FDF4] p-4">
+                    <div className="rounded-lg border border-[#22C55E]/30 bg-[#F0FDF4] p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=pipedrive.com&sz=32" alt="Pipedrive" className="w-4 h-4" />
                         <p className="text-[12px] font-semibold text-[#22C55E]">Choisissez Pipedrive si...</p>
@@ -700,7 +700,7 @@ export default function HubSpotVsPipedriveArticle() {
                       </ul>
                     </div>
 
-                    <div className="rounded-xl border border-[#FF7A59]/30 bg-[#FFF5F0] p-4">
+                    <div className="rounded-lg border border-[#FF7A59]/30 bg-[#FFF5F0] p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=32" alt="HubSpot" className="w-4 h-4" />
                         <p className="text-[12px] font-semibold text-[#FF7A59]">Choisissez HubSpot si...</p>
@@ -735,7 +735,7 @@ export default function HubSpotVsPipedriveArticle() {
               <p className="text-[13px] font-semibold text-[#111] mb-4">Articles similaires</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedArticles.map((a) => (
-                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
+                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold text-white mb-3" style={{ background: a.color }}>
                       {a.category[0]}
                     </div>
@@ -748,14 +748,14 @@ export default function HubSpotVsPipedriveArticle() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide pour choisir et configurer votre CRM ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[500px] mx-auto">On deploie HubSpot et Pipedrive pour des equipes de vente B2B. Configuration, migration, automatisation, formation. Votre CRM operationnel en moins de 3 semaines.</p>
                 <div className="flex items-center justify-center gap-3">
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                     <span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Reserver un appel
                   </a>
-                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                     Nos services
                   </Link>
                 </div>

@@ -148,7 +148,7 @@ export default function BlogPostPage() {
             {/* ============ SECTION 1 : Votre meilleur commercial ============ */}
             <article>
               <section id="site-commercial" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">1. Pourquoi votre site web est votre meilleur commercial</h2>
                   <p className="text-[13px] text-[#555] leading-[1.75] mb-3">
                     En B2B, 70% du parcours d&apos;achat se fait avant le premier contact avec un commercial. Vos prospects lisent vos pages, comparent vos offres, consultent vos etudes de cas et se forgent une opinion avant meme de decrocher le telephone. Votre site web n&apos;est pas une brochure en ligne : c&apos;est un commercial qui travaille 24 heures sur 24, 7 jours sur 7.
@@ -167,7 +167,7 @@ export default function BlogPostPage() {
 
               {/* KPI impact card */}
               <section className="mb-8">
-                <div className="rounded-xl bg-[#F7F7FF] border border-[#E8E8F8] p-5">
+                <div className="rounded-lg bg-[#F7F7FF] border border-[#E8E8F8] p-5">
                   <p className="text-[11px] font-semibold text-[#4B5EFC] uppercase tracking-wider mb-3">Chiffres cles</p>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div>
@@ -194,7 +194,7 @@ export default function BlogPostPage() {
 
               {/* ============ SECTION 2 : Qu'est-ce que HubSpot CMS Hub ============ */}
               <section id="cms-hub-overview" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">2. Qu&apos;est-ce que HubSpot CMS Hub</h2>
                   <p className="text-[13px] text-[#555] leading-[1.75] mb-3">
                     HubSpot CMS Hub est la plateforme de gestion de contenu web de HubSpot, lancee en 2020 comme un produit a part entiere (auparavant integree au Marketing Hub). Son positionnement est clair : offrir un CMS pensee pour les equipes marketing et commerciales, pas pour les developpeurs.
@@ -210,7 +210,7 @@ export default function BlogPostPage() {
                   <div className="overflow-x-auto">
                     <table className="w-full text-[12px] border-collapse">
                       <thead>
-                        <tr className="border-b border-[#E8E8E8]">
+                        <tr className="border-b border-[#EAEAEA]">
                           <th className="text-left py-3 pr-4 text-[#999] font-semibold uppercase tracking-wider text-[10px]">Edition</th>
                           <th className="text-left py-3 pr-4 text-[#999] font-semibold uppercase tracking-wider text-[10px]">Prix / mois</th>
                           <th className="text-left py-3 pr-4 text-[#999] font-semibold uppercase tracking-wider text-[10px]">Fonctionnalites cles</th>
@@ -257,7 +257,7 @@ export default function BlogPostPage() {
 
               {/* ============ SECTION 3 : Comparatif CMS ============ */}
               <section id="comparatif" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">3. HubSpot CMS vs WordPress vs Webflow : comparatif detaille</h2>
                   <p className="text-[13px] text-[#555] leading-[1.75] mb-5">
                     Le choix d&apos;un CMS est structurant. Il impacte votre capacite a generer des leads, a personnaliser l&apos;experience visiteur et a maintenir votre site dans le temps. Voici un comparatif objectif entre les trois plateformes les plus utilisees en B2B.
@@ -266,7 +266,7 @@ export default function BlogPostPage() {
                   <div className="overflow-x-auto">
                     <table className="w-full text-[12px] border-collapse">
                       <thead>
-                        <tr className="border-b border-[#E8E8E8]">
+                        <tr className="border-b border-[#EAEAEA]">
                           <th className="text-left py-3 pr-4 text-[#999] font-semibold uppercase tracking-wider text-[10px]">Critere</th>
                           <th className="text-left py-3 pr-4 text-[#999] font-semibold uppercase tracking-wider text-[10px]">HubSpot CMS</th>
                           <th className="text-left py-3 pr-4 text-[#999] font-semibold uppercase tracking-wider text-[10px]">WordPress</th>
@@ -357,7 +357,7 @@ export default function BlogPostPage() {
 
               {/* ============ SECTION 4 : Fonctionnalites cles ============ */}
               <section id="fonctionnalites" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">4. Les fonctionnalites cles du CMS Hub</h2>
                   <p className="text-[13px] text-[#555] leading-[1.75] mb-5">
                     Le CMS Hub n&apos;est pas qu&apos;un editeur de pages. C&apos;est une plateforme complete qui couvre la creation, l&apos;optimisation, la securite et la personnalisation de votre site. Voici les fonctionnalites a connaitre.
@@ -365,35 +365,35 @@ export default function BlogPostPage() {
 
                   {/* Feature cards grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-                    <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                    <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">Drag-and-drop editor</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">L&apos;editeur visuel permet de creer et modifier des pages sans ecrire une seule ligne de code. Vous deposez des modules (texte, image, formulaire, CTA, video) dans une grille flexible. Chaque modification est visible en temps reel.</p>
                     </div>
-                    <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                    <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">Themes et templates</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">HubSpot propose une marketplace de themes pre-construits. Les developpeurs peuvent creer des themes sur mesure avec HubL (le langage de templating HubSpot), HTML, CSS et JavaScript. Les themes definissent la charte graphique globale du site.</p>
                     </div>
-                    <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                    <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">Modules personnalisables</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">Les modules sont des blocs reutilisables : temoignages clients, grilles de pricing, FAQ accordeons, sliders. Les developpeurs creent des modules custom que les marketeurs utilisent ensuite sans toucher au code.</p>
                     </div>
-                    <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                    <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">Smart content (contenu intelligent)</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">Affichez un contenu different selon le profil du visiteur : pays, appareil, lifecycle stage, liste CRM, source d&apos;acquisition. Un prospect qui revient verra un message different d&apos;un nouveau visiteur. Disponible a partir de l&apos;edition Pro.</p>
                     </div>
-                    <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                    <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">Outils SEO integres</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">L&apos;outil SEO analyse chaque page et donne des recommandations en temps reel : titre, meta description, structure Hn, mots-cles, liens internes. L&apos;outil Topic Clusters aide a organiser votre strategie de contenu autour de pilier pages et cluster pages.</p>
                     </div>
-                    <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                    <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">CDN global et SSL</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">Chaque site HubSpot est heberge sur un CDN global avec SSL automatique. Pas de configuration serveur, pas de certificats a renouveler. Le CDN garantit des temps de chargement rapides partout dans le monde.</p>
                     </div>
-                    <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                    <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">Environnement de staging</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">Testez vos modifications sur un environnement de pre-production avant de les publier. Le staging est disponible a partir de l&apos;edition Pro. Vous pouvez y tester de nouveaux designs, des reorganisations de navigation ou des mises a jour de contenu.</p>
                     </div>
-                    <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                    <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">Formulaires et CTAs natifs</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">Creez des formulaires directement dans le CMS. Chaque soumission cree ou met a jour un contact dans le CRM. Les CTAs (call-to-action) sont des boutons trackables dont vous pouvez mesurer le taux de clic et le taux de conversion.</p>
                     </div>
@@ -403,7 +403,7 @@ export default function BlogPostPage() {
 
               {/* ============ SECTION 5 : 7 etapes ============ */}
               <section id="7-etapes" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">5. Creer un site performant en 7 etapes</h2>
                   <p className="text-[13px] text-[#555] leading-[1.75] mb-5">
                     Construire un site sur HubSpot CMS ne s&apos;improvise pas. Voici la methodologie que nous utilisons chez Ceres pour livrer des sites B2B qui generent des leads des le premier mois.
@@ -411,7 +411,7 @@ export default function BlogPostPage() {
 
                   {/* Step cards */}
                   <div className="space-y-4">
-                    <div className="rounded-xl border border-[#E8E8E8] p-4 border-l-4 border-l-[#4B5EFC]">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4 border-l-4 border-l-[#4B5EFC]">
                       <div className="flex items-center gap-3 mb-2">
                         <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-[#4B5EFC]/10 text-[#4B5EFC] text-[13px] font-bold">1</span>
                         <p className="text-[13px] font-semibold text-[#111]">Definir l&apos;arborescence et les parcours utilisateur</p>
@@ -419,7 +419,7 @@ export default function BlogPostPage() {
                       <p className="text-[12px] text-[#555] leading-[1.65] pl-10">Avant de toucher au CMS, cartographiez vos personas, leurs problematiques et le chemin qu&apos;ils doivent parcourir sur votre site pour passer de visiteur a lead. Definissez les pages piliers (accueil, produit, cas clients, pricing, blog) et les liens entre elles. Chaque page doit avoir un objectif clair et un CTA unique.</p>
                     </div>
 
-                    <div className="rounded-xl border border-[#E8E8E8] p-4 border-l-4 border-l-[#4B5EFC]">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4 border-l-4 border-l-[#4B5EFC]">
                       <div className="flex items-center gap-3 mb-2">
                         <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-[#4B5EFC]/10 text-[#4B5EFC] text-[13px] font-bold">2</span>
                         <p className="text-[13px] font-semibold text-[#111]">Choisir et personnaliser un theme</p>
@@ -427,7 +427,7 @@ export default function BlogPostPage() {
                       <p className="text-[12px] text-[#555] leading-[1.65] pl-10">Selectionnez un theme sur la marketplace HubSpot ou faites developper un theme sur mesure. Definissez les couleurs, typographies, espacements et styles de composants dans les parametres globaux du theme. Un bon theme permet aux marketeurs de creer de nouvelles pages sans solliciter un developpeur a chaque fois.</p>
                     </div>
 
-                    <div className="rounded-xl border border-[#E8E8E8] p-4 border-l-4 border-l-[#4B5EFC]">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4 border-l-4 border-l-[#4B5EFC]">
                       <div className="flex items-center gap-3 mb-2">
                         <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-[#4B5EFC]/10 text-[#4B5EFC] text-[13px] font-bold">3</span>
                         <p className="text-[13px] font-semibold text-[#111]">Rediger le contenu avec une approche SEO</p>
@@ -435,7 +435,7 @@ export default function BlogPostPage() {
                       <p className="text-[12px] text-[#555] leading-[1.65] pl-10">Chaque page doit etre ecrite pour un mot-cle cible. Utilisez l&apos;outil Topic Clusters pour organiser vos contenus en clusters semantiques. Redigez des titres H1 uniques, des meta descriptions de 150 caracteres, et structurez le contenu avec des H2 et H3 logiques. Le contenu doit repondre a une question precise que se pose votre persona.</p>
                     </div>
 
-                    <div className="rounded-xl border border-[#E8E8E8] p-4 border-l-4 border-l-[#4B5EFC]">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4 border-l-4 border-l-[#4B5EFC]">
                       <div className="flex items-center gap-3 mb-2">
                         <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-[#4B5EFC]/10 text-[#4B5EFC] text-[13px] font-bold">4</span>
                         <p className="text-[13px] font-semibold text-[#111]">Integrer les formulaires et CTAs</p>
@@ -443,7 +443,7 @@ export default function BlogPostPage() {
                       <p className="text-[12px] text-[#555] leading-[1.65] pl-10">Placez des formulaires HubSpot sur les pages cles : demande de demo, telechargement de contenu, inscription newsletter. Configurez des CTAs trackables sur chaque page. Chaque formulaire doit etre connecte a un workflow d&apos;automatisation (welcome series, notification equipe commerciale, lead scoring). Evitez de demander trop d&apos;informations au premier contact : nom, email et entreprise suffisent.</p>
                     </div>
 
-                    <div className="rounded-xl border border-[#E8E8E8] p-4 border-l-4 border-l-[#4B5EFC]">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4 border-l-4 border-l-[#4B5EFC]">
                       <div className="flex items-center gap-3 mb-2">
                         <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-[#4B5EFC]/10 text-[#4B5EFC] text-[13px] font-bold">5</span>
                         <p className="text-[13px] font-semibold text-[#111]">Optimiser la performance technique</p>
@@ -451,7 +451,7 @@ export default function BlogPostPage() {
                       <p className="text-[12px] text-[#555] leading-[1.65] pl-10">Compressez les images (format WebP, max 200 Ko par image). Minimisez le JavaScript custom. Verifiez les Core Web Vitals (LCP sous 2.5s, FID sous 100ms, CLS sous 0.1). Le CDN HubSpot gere la mise en cache, mais vous devez optimiser les ressources que vous uploadez. Utilisez le lazy loading pour les images sous le fold.</p>
                     </div>
 
-                    <div className="rounded-xl border border-[#E8E8E8] p-4 border-l-4 border-l-[#4B5EFC]">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4 border-l-4 border-l-[#4B5EFC]">
                       <div className="flex items-center gap-3 mb-2">
                         <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-[#4B5EFC]/10 text-[#4B5EFC] text-[13px] font-bold">6</span>
                         <p className="text-[13px] font-semibold text-[#111]">Configurer les analytics et le tracking</p>
@@ -459,7 +459,7 @@ export default function BlogPostPage() {
                       <p className="text-[12px] text-[#555] leading-[1.65] pl-10">Connectez Google Analytics 4 en parallele du tracking HubSpot natif. Configurez des evenements GA4 pour chaque soumission de formulaire et chaque clic CTA. Mettez en place des tableaux de bord HubSpot pour suivre le trafic par source, les conversions par page et le taux de rebond. Verifiez que le tracking code HubSpot est present sur toutes les pages.</p>
                     </div>
 
-                    <div className="rounded-xl border border-[#E8E8E8] p-4 border-l-4 border-l-[#4B5EFC]">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4 border-l-4 border-l-[#4B5EFC]">
                       <div className="flex items-center gap-3 mb-2">
                         <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-[#4B5EFC]/10 text-[#4B5EFC] text-[13px] font-bold">7</span>
                         <p className="text-[13px] font-semibold text-[#111]">Iterer et optimiser en continu</p>
@@ -474,7 +474,7 @@ export default function BlogPostPage() {
 
               {/* ============ SECTION 6 : Smart content ============ */}
               <section id="smart-content" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">6. Le smart content : personnaliser l&apos;experience visiteur</h2>
                   <p className="text-[13px] text-[#555] leading-[1.75] mb-3">
                     Le smart content est la fonctionnalite qui distingue fondamentalement le CMS Hub des autres CMS. Elle permet d&apos;afficher un contenu different sur une meme page en fonction du profil du visiteur. Ce n&apos;est pas de l&apos;A/B testing (ou l&apos;on compare deux versions au hasard) : c&apos;est de la personnalisation deterministe basee sur les donnees CRM.
@@ -484,27 +484,27 @@ export default function BlogPostPage() {
                   </p>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
-                    <div className="rounded-lg border border-[#E8E8E8] p-3">
+                    <div className="rounded-lg border border-[#EAEAEA] p-3">
                       <p className="text-[12px] font-semibold text-[#111] mb-1">Par pays / langue</p>
                       <p className="text-[11px] text-[#555] leading-[1.6]">Affichez le contenu dans la langue du visiteur. Montrez des references clients locales. Adaptez les prix a la devise du pays.</p>
                     </div>
-                    <div className="rounded-lg border border-[#E8E8E8] p-3">
+                    <div className="rounded-lg border border-[#EAEAEA] p-3">
                       <p className="text-[12px] font-semibold text-[#111] mb-1">Par appareil</p>
                       <p className="text-[11px] text-[#555] leading-[1.6]">Affichez un CTA &quot;Appeler&quot; sur mobile et un formulaire complet sur desktop. Adaptez la longueur du contenu au format d&apos;ecran.</p>
                     </div>
-                    <div className="rounded-lg border border-[#E8E8E8] p-3">
+                    <div className="rounded-lg border border-[#EAEAEA] p-3">
                       <p className="text-[12px] font-semibold text-[#111] mb-1">Par lifecycle stage</p>
                       <p className="text-[11px] text-[#555] leading-[1.6]">Un visiteur inconnu voit un formulaire de contact. Un lead identifie voit une offre de demo. Un client existant voit un lien vers le support.</p>
                     </div>
-                    <div className="rounded-lg border border-[#E8E8E8] p-3">
+                    <div className="rounded-lg border border-[#EAEAEA] p-3">
                       <p className="text-[12px] font-semibold text-[#111] mb-1">Par liste CRM</p>
                       <p className="text-[11px] text-[#555] leading-[1.6]">Ciblez les contacts d&apos;une liste specifique (ex. : prospects chauds, clients Premium) pour leur montrer un contenu dedie.</p>
                     </div>
-                    <div className="rounded-lg border border-[#E8E8E8] p-3">
+                    <div className="rounded-lg border border-[#EAEAEA] p-3">
                       <p className="text-[12px] font-semibold text-[#111] mb-1">Par source d&apos;acquisition</p>
                       <p className="text-[11px] text-[#555] leading-[1.6]">Un visiteur venant de Google Ads voit un message aligne avec l&apos;annonce. Un visiteur venant de LinkedIn voit un contenu adapte a un persona B2B.</p>
                     </div>
-                    <div className="rounded-lg border border-[#E8E8E8] p-3">
+                    <div className="rounded-lg border border-[#EAEAEA] p-3">
                       <p className="text-[12px] font-semibold text-[#111] mb-1">Par nombre de visites</p>
                       <p className="text-[11px] text-[#555] leading-[1.6]">Premiere visite : presentation de l&apos;entreprise. Deuxieme visite : etude de cas. Troisieme visite : offre directe avec urgence.</p>
                     </div>
@@ -521,14 +521,14 @@ export default function BlogPostPage() {
 
               {/* ============ SECTION 7 : SEO et performance ============ */}
               <section id="seo-performance" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">7. SEO et performance technique</h2>
                   <p className="text-[13px] text-[#555] leading-[1.75] mb-5">
                     Un site qui ne se positionne pas dans les resultats de recherche est un site invisible. Le CMS Hub integre des outils SEO directement dans l&apos;editeur de pages, mais la performance technique depend aussi de vos pratiques de developpement et de creation de contenu.
                   </p>
 
                   {/* Core Web Vitals card */}
-                  <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
+                  <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-3">Core Web Vitals - Objectifs</p>
                     <div className="grid grid-cols-3 gap-4">
                       <div>
@@ -579,7 +579,7 @@ export default function BlogPostPage() {
 
               {/* ============ SECTION 8 : Integration CMS + CRM ============ */}
               <section id="cms-crm" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">8. Integrer le CMS avec le CRM HubSpot</h2>
                   <p className="text-[13px] text-[#555] leading-[1.75] mb-3">
                     C&apos;est le veritable avantage competitif du CMS Hub : l&apos;integration native avec le CRM HubSpot. Chaque interaction sur votre site alimente directement la fiche contact, sans configuration supplementaire, sans middleware, sans API custom.
@@ -589,37 +589,37 @@ export default function BlogPostPage() {
                   </p>
 
                   <div className="space-y-4 mb-5">
-                    <div className="rounded-xl border border-[#E8E8E8] p-4">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">Formulaires connectes au CRM</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">Chaque formulaire HubSpot place sur votre site cree automatiquement un contact dans le CRM (ou met a jour un contact existant si l&apos;email est deja connu). Les champs du formulaire sont mappes aux proprietes du CRM. Vous pouvez ajouter des champs progressifs (progressive profiling) qui s&apos;affichent uniquement aux visiteurs deja connus, pour enrichir progressivement leur fiche sans leur demander deux fois la meme information.</p>
                     </div>
-                    <div className="rounded-xl border border-[#E8E8E8] p-4">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">CTAs trackables et mesurables</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">Les CTAs HubSpot ne sont pas de simples boutons. Ce sont des objets CRM mesurables : nombre de vues, nombre de clics, taux de clic, taux de conversion. Vous pouvez A/B tester deux versions d&apos;un meme CTA et voir laquelle genere le plus de conversions. Les donnees de clic sont enregistrees dans la timeline du contact.</p>
                     </div>
-                    <div className="rounded-xl border border-[#E8E8E8] p-4">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">Chatbot et live chat</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">Le chatbot HubSpot (disponible dans le CRM gratuit) peut etre ajoute a votre site CMS en un clic. Il qualifie les visiteurs avec des questions automatiques, cree des tickets ou des contacts, et transfere la conversation a un commercial si le visiteur est qualifie. Chaque conversation est enregistree dans le CRM.</p>
                     </div>
-                    <div className="rounded-xl border border-[#E8E8E8] p-4">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">Lead scoring depuis le site</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">Les visites de pages sont trackees et utilisees dans le lead scoring. Un prospect qui visite la page pricing trois fois en une semaine recoit un score plus eleve qu&apos;un prospect qui a seulement lu un article de blog. Vous pouvez configurer des regles de scoring basees sur les pages visitees, la frequence de visite et les actions effectuees sur le site.</p>
                     </div>
                   </div>
 
                   {/* Visual flow */}
-                  <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                  <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-3">Flux de donnees CMS vers CRM</p>
                     <div className="flex flex-wrap items-center gap-2 text-[11px]">
                       <span className="px-3 py-1.5 rounded-md bg-[#4B5EFC] text-white font-medium">Visiteur sur le site</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Tracking pages visitees</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Tracking pages visitees</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Soumission formulaire</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Soumission formulaire</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Creation/MAJ contact CRM</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Creation/MAJ contact CRM</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Lead scoring automatique</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Lead scoring automatique</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
                       <span className="px-3 py-1.5 rounded-md bg-[#22C55E] text-white font-medium">Notification commercial</span>
                     </div>
@@ -629,30 +629,30 @@ export default function BlogPostPage() {
 
               {/* ============ SECTION 9 : Limites ============ */}
               <section id="limites" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">9. Les limites du HubSpot CMS</h2>
                   <p className="text-[13px] text-[#555] leading-[1.75] mb-5">
                     Le CMS Hub n&apos;est pas la solution ideale pour tout le monde. Il est important de connaitre ses limites avant de s&apos;engager, notamment parce que la migration depuis un autre CMS peut etre couteuse en temps et en argent.
                   </p>
 
                   <div className="space-y-4">
-                    <div className="rounded-xl border border-[#E8E8E8] p-4">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">Personnalisation design limitee par rapport a WordPress ou Webflow</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">Le CMS Hub utilise un systeme de themes et de modules qui encadre les possibilites de personnalisation. Pour un design tres specifique ou une animation complexe, vous aurez besoin d&apos;un developpeur HubSpot qui maitrise HubL, le langage de templating proprietaire. La courbe d&apos;apprentissage de HubL est plus raide que celle de Liquid (Shopify) ou du PHP WordPress.</p>
                     </div>
-                    <div className="rounded-xl border border-[#E8E8E8] p-4">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">Cout eleve pour les fonctionnalites avancees</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">Le smart content, le staging et l&apos;A/B testing ne sont disponibles qu&apos;a partir de l&apos;edition Pro a 400 EUR/mois. Pour une PME qui debute, c&apos;est un investissement significatif. A titre de comparaison, un site WordPress heberge revient a 10-50 EUR/mois avec des fonctionnalites similaires (via des plugins).</p>
                     </div>
-                    <div className="rounded-xl border border-[#E8E8E8] p-4">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">Dependance a l&apos;ecosysteme HubSpot</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">Une fois votre site sur le CMS Hub, migrer vers un autre CMS est un projet en soi. Les templates HubL ne sont pas portables vers WordPress ou Webflow. Vos contenus (pages, blog posts) peuvent etre exportes, mais la mise en forme et les modules custom devront etre recrees. C&apos;est un lock-in a prendre en compte.</p>
                     </div>
-                    <div className="rounded-xl border border-[#E8E8E8] p-4">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">Migration depuis un CMS existant</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">Migrer un site WordPress de 50 pages vers le CMS Hub prend en general 4 a 8 semaines. Il faut recoder les templates en HubL, migrer le contenu, configurer les redirections 301 pour ne pas perdre le SEO, et tester chaque page. Le cout d&apos;une migration par une agence varie de 5 000 a 20 000 EUR selon la complexite du site.</p>
                     </div>
-                    <div className="rounded-xl border border-[#E8E8E8] p-4">
+                    <div className="rounded-lg border border-[#EAEAEA] p-4">
                       <p className="text-[13px] font-semibold text-[#111] mb-2">Marketplace de modules plus petite</p>
                       <p className="text-[12px] text-[#555] leading-[1.65]">L&apos;ecosysteme de modules et templates HubSpot est beaucoup plus petit que celui de WordPress (60 000+ plugins). Pour des besoins specifiques (e-commerce avance, forum, LMS), vous ne trouverez pas forcement de solution native. Il faudra developper sur mesure ou utiliser des integrations tierces.</p>
                     </div>
@@ -664,7 +664,7 @@ export default function BlogPostPage() {
 
               {/* ============ SECTION 10 : Notre avis - Dark section ============ */}
               <section id="avis" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <h2 className="text-[17px] font-semibold text-white mb-4">10. Notre avis et recommandation</h2>
                   <p className="text-[13px] text-white/60 leading-[1.75] mb-4">
                     Apres avoir deploye et optimise des dizaines de sites sur le CMS Hub chez Ceres, notre position est claire : HubSpot CMS n&apos;est pas le meilleur CMS du marche en termes de flexibilite design ou de cout. Mais c&apos;est le meilleur choix pour les entreprises B2B qui veulent transformer leur site en un outil de generation de leads connecte a leur CRM.
@@ -702,7 +702,7 @@ export default function BlogPostPage() {
 
               {/* Related articles */}
               <section className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((a) => (
@@ -720,7 +720,7 @@ export default function BlogPostPage() {
 
               {/* CTA */}
               <section>
-                <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+                <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                   <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide pour votre site HubSpot CMS ?</h2>
                   <p className="text-[13px] text-[#999] mb-6 max-w-[420px] mx-auto">On cree et optimise votre site HubSpot CMS de A a Z. Strategie, design, contenu, integration CRM et suivi des performances inclus.</p>
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

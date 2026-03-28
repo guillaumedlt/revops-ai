@@ -189,7 +189,7 @@ function DownloadModal({ guide, onClose }: { guide: Guide; onClose: () => void }
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-[440px] rounded-2xl bg-white p-6 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.3)]">
+      <div className="relative w-full max-w-[440px] rounded-lg bg-white p-6 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.3)]">
         <button onClick={onClose} className="absolute top-4 right-4 text-[#CCC] hover:text-[#999] transition-colors">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M4 4l8 8M12 4l-8 8" /></svg>
         </button>
@@ -197,7 +197,7 @@ function DownloadModal({ guide, onClose }: { guide: Guide; onClose: () => void }
         {!submitted ? (
           <>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white" style={{ background: guide.color }}>
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white" style={{ background: guide.color }}>
                 {guideIcons[guide.slug]}
               </div>
               <div>
@@ -215,7 +215,7 @@ function DownloadModal({ guide, onClose }: { guide: Guide; onClose: () => void }
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full px-3 py-2 rounded-lg border border-[#E8E8E8] text-[13px] text-[#111] placeholder:text-[#CCC] focus:outline-none focus:border-[#DDD]"
+                className="w-full px-3 py-2 rounded-lg border border-[#EAEAEA] text-[13px] text-[#111] placeholder:text-[#CCC] focus:outline-none focus:border-[#DDD]"
               />
               <input
                 type="email"
@@ -223,14 +223,14 @@ function DownloadModal({ guide, onClose }: { guide: Guide; onClose: () => void }
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-3 py-2 rounded-lg border border-[#E8E8E8] text-[13px] text-[#111] placeholder:text-[#CCC] focus:outline-none focus:border-[#DDD]"
+                className="w-full px-3 py-2 rounded-lg border border-[#EAEAEA] text-[13px] text-[#111] placeholder:text-[#CCC] focus:outline-none focus:border-[#DDD]"
               />
               <input
                 type="text"
                 placeholder="Entreprise"
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
-                className="w-full px-3 py-2 rounded-lg border border-[#E8E8E8] text-[13px] text-[#111] placeholder:text-[#CCC] focus:outline-none focus:border-[#DDD]"
+                className="w-full px-3 py-2 rounded-lg border border-[#EAEAEA] text-[13px] text-[#111] placeholder:text-[#CCC] focus:outline-none focus:border-[#DDD]"
               />
               <button type="submit" className="w-full py-2.5 rounded-lg text-white text-[13px] font-medium transition-colors" style={{ background: guide.color }}>
                 Telecharger le guide
@@ -245,7 +245,7 @@ function DownloadModal({ guide, onClose }: { guide: Guide; onClose: () => void }
             </div>
             <p className="text-[16px] font-semibold text-[#111] mb-2">Guide envoye</p>
             <p className="text-[13px] text-[#777] leading-[1.6] mb-4">Verifiez votre boite email ({email}). Le guide arrive dans les 2 minutes.</p>
-            <button onClick={onClose} className="px-4 py-2 rounded-lg border border-[#E8E8E8] text-[12px] text-[#666] hover:border-[#DDD] transition-colors">
+            <button onClick={onClose} className="px-4 py-2 rounded-lg border border-[#EAEAEA] text-[12px] text-[#666] hover:border-[#DDD] transition-colors">
               Fermer
             </button>
           </div>
@@ -317,11 +317,11 @@ export default function GuidesPage() {
               return (
                 <Wrapper
                   key={g.slug}
-                  className="text-left rounded-2xl border-2 p-5 transition-all hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.12)] group block"
+                  className="text-left rounded-lg border-2 p-5 transition-all hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.12)] group block"
                   style={{ borderColor: `${g.color}30` }}
                 >
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white" style={{ background: g.color }}>
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white" style={{ background: g.color }}>
                       {guideIcons[g.slug]}
                     </div>
                     <div className="flex items-center gap-2">
@@ -365,13 +365,13 @@ export default function GuidesPage() {
         {/* All guides */}
         <section className="space-y-6 mb-16">
           {filtered.map((g) => (
-            <div key={g.slug} className="rounded-2xl border border-[#E8E8E8] bg-white shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] overflow-hidden">
+            <div key={g.slug} className="rounded-lg border border-[#EAEAEA] bg-white shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] overflow-hidden">
               <div className="p-5 md:p-8">
                 <div className="flex flex-col lg:flex-row gap-6">
                   {/* Left: Info */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white shrink-0" style={{ background: g.color }}>
+                      <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white shrink-0" style={{ background: g.color }}>
                         {guideIcons[g.slug]}
                       </div>
                       <div>
@@ -403,7 +403,7 @@ export default function GuidesPage() {
 
                   {/* Right: Includes + CTA */}
                   <div className="lg:w-[280px] shrink-0">
-                    <div className="rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4 mb-4">
+                    <div className="rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4 mb-4">
                       <p className="text-[11px] font-semibold text-[#111] mb-3">Ce qui est inclus</p>
                       {g.includes.map((inc) => (
                         <p key={inc} className="text-[11px] text-[#777] mb-1.5 flex items-start gap-2">
@@ -413,7 +413,7 @@ export default function GuidesPage() {
                       ))}
                     </div>
 
-                    <div className="rounded-xl bg-[#F5F5F5] border border-[#EBEBEB] p-4 mb-4">
+                    <div className="rounded-lg bg-[#F5F5F5] border border-[#EAEAEA] p-4 mb-4">
                       <p className="text-[11px] font-semibold text-[#111] mb-2">Pour qui</p>
                       {g.forWho.map((fw) => (
                         <p key={fw} className="text-[10px] text-[#888] mb-1.5 flex items-start gap-2">
@@ -451,7 +451,7 @@ export default function GuidesPage() {
 
         {/* Why our guides */}
         <section className="mb-12">
-          <div className="rounded-2xl bg-[#111] p-6 md:p-10">
+          <div className="rounded-lg bg-[#111] p-6 md:p-10">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Pourquoi nos guides</span>
             <h2 className="text-[20px] sm:text-[24px] font-semibold text-white tracking-[-0.02em] mb-4">
               Pas des ebooks generiques. Des outils de travail.
@@ -462,7 +462,7 @@ export default function GuidesPage() {
                 { title: "Actionnables", desc: "Pas de theorie vague. Des templates, des checklists, des formules et des exemples concrets que vous pouvez appliquer demain." },
                 { title: "Mis a jour", desc: "Nos guides sont mis a jour a chaque changement majeur dans les outils ou les pratiques. Vous recevez les mises a jour gratuitement." },
               ].map((p) => (
-                <div key={p.title} className="rounded-xl bg-white/5 p-4">
+                <div key={p.title} className="rounded-lg bg-white/5 p-4">
                   <p className="text-[13px] font-semibold text-white mb-2">{p.title}</p>
                   <p className="text-[11px] text-white/50 leading-[1.65]">{p.desc}</p>
                 </div>
@@ -486,14 +486,14 @@ export default function GuidesPage() {
 
         {/* CTA */}
         <section>
-          <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+          <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
             <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;un accompagnement personnalise ?</h2>
             <p className="text-[13px] text-[#999] mb-6 max-w-[450px] mx-auto">Nos guides sont un excellent point de depart. Si vous voulez aller plus vite, notre equipe peut deployer ces frameworks directement dans votre entreprise.</p>
             <div className="flex items-center justify-center gap-3">
               <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                 <span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Reserver un appel
               </a>
-              <Link href="/audit-revops" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+              <Link href="/audit-revops" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                 Demander un audit
               </Link>
             </div>

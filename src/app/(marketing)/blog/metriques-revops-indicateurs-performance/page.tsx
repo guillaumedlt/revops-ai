@@ -145,7 +145,7 @@ export default function MetriquesRevopsArticle() {
               </div>
 
               {/* Quick overview */}
-              <div className="mt-8 rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+              <div className="mt-8 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                 <span className="text-[13px] font-semibold text-[#111] mb-4 block">Ce que vous allez decouvrir</span>
                 <div className="grid grid-cols-2 sm:grid-cols-6 gap-3">
                   {[
@@ -156,7 +156,7 @@ export default function MetriquesRevopsArticle() {
                     { label: "Retention", value: "4", color: "#F59E0B" },
                     { label: "Efficacite ops", value: "4", color: "#EF4444" },
                   ].map((s) => (
-                    <div key={s.label} className="text-center p-3 rounded-xl bg-white border border-[#F0F0F0]">
+                    <div key={s.label} className="text-center p-3 rounded-lg bg-white border border-[#F0F0F0]">
                       <div className="text-[22px] font-bold" style={{ color: s.color }}>{s.value}</div>
                       <div className="text-[10px] text-[#999] mt-1">{s.label}</div>
                     </div>
@@ -168,7 +168,7 @@ export default function MetriquesRevopsArticle() {
             <article>
               {/* ===================== SECTION 1 : Pourquoi les metriques RevOps sont differentes ===================== */}
               <section id="pourquoi-differentes" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi les metriques RevOps sont differentes des KPI sales classiques</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La plupart des entreprises B2B suivent des KPI commerciaux : pipeline, win rate, nombre d&apos;appels, quota attainment. C&apos;est necessaire mais insuffisant. Ces indicateurs ne couvrent qu&apos;un tiers de l&apos;equation. Ils mesurent la performance de l&apos;equipe de vente. Pas celle du revenue engine dans son ensemble.</p>
@@ -194,7 +194,7 @@ export default function MetriquesRevopsArticle() {
                         color: "#22C55E",
                       },
                     ].map((item) => (
-                      <div key={item.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={item.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: item.color }} />
                           <h3 className="text-[13px] font-semibold text-[#111]" dangerouslySetInnerHTML={{ __html: item.title }} />
@@ -213,7 +213,7 @@ export default function MetriquesRevopsArticle() {
 
               {/* ===================== SECTION 2 : Metriques d&apos;acquisition (6) ===================== */}
               <section id="metriques-acquisition" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#FF7A59]" />
                     <span className="text-[11px] font-semibold text-[#FF7A59] uppercase tracking-wider">Categorie 1 / 6</span>
@@ -223,7 +223,7 @@ export default function MetriquesRevopsArticle() {
 
                   <div className="space-y-5">
                     {/* Metrique 1 — CAC */}
-                    <div className="rounded-xl border border-[#FFE8E0] bg-[#FFF8F6] p-5">
+                    <div className="rounded-lg border border-[#FFE8E0] bg-[#FFF8F6] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#FF7A59] w-5 h-5 rounded-md flex items-center justify-center">1</span>
@@ -232,7 +232,7 @@ export default function MetriquesRevopsArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#FF7A59]/10 text-[#FF7A59]">Critique</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Cout total pour acquerir un nouveau client, incluant les depenses marketing et commerciales. Le CAC est la metrique fondatrice de toute analyse d&apos;acquisition. Il ne suffit pas de generer du revenu, il faut le generer de maniere rentable. Un CAC qui augmente trimestre apres trimestre sans que le LTV suive est le signe d&apos;un modele qui s&apos;essouffle.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">CAC = (Depenses marketing + Depenses sales) / Nombre de nouveaux clients</p>
                       </div>
@@ -246,7 +246,7 @@ export default function MetriquesRevopsArticle() {
                     </div>
 
                     {/* Metrique 2 — CPL */}
-                    <div className="rounded-xl border border-[#FFE8E0] bg-[#FFF8F6] p-5">
+                    <div className="rounded-lg border border-[#FFE8E0] bg-[#FFF8F6] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#FF7A59] w-5 h-5 rounded-md flex items-center justify-center">2</span>
@@ -255,7 +255,7 @@ export default function MetriquesRevopsArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#FF7A59]/10 text-[#FF7A59]">Essentiel</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Cout moyen pour generer un lead, tout canal confondu ou par canal specifique. Le CPL est la decomposition du CAC au niveau du funnel superieur. Il permet de comparer l&apos;efficacite economique de vos differents canaux d&apos;acquisition : inbound, outbound, paid, events, referral.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">CPL = Depenses marketing du canal / Nombre de leads generes par ce canal</p>
                       </div>
@@ -269,7 +269,7 @@ export default function MetriquesRevopsArticle() {
                     </div>
 
                     {/* Metrique 3 — Taux de conversion par canal */}
-                    <div className="rounded-xl border border-[#FFE8E0] bg-[#FFF8F6] p-5">
+                    <div className="rounded-lg border border-[#FFE8E0] bg-[#FFF8F6] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#FF7A59] w-5 h-5 rounded-md flex items-center justify-center">3</span>
@@ -278,7 +278,7 @@ export default function MetriquesRevopsArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#FF7A59]/10 text-[#FF7A59]">Essentiel</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Pourcentage de visiteurs ou de prospects qui se convertissent en leads qualifies, segmente par canal d&apos;acquisition. Cette metrique revele la qualite reelle de chaque source de trafic. Deux canaux peuvent generer le meme volume de leads mais avec des taux de conversion radicalement differents vers le MQL et le SQL.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">Conversion canal = Leads qualifies du canal / Total leads du canal x 100</p>
                       </div>
@@ -292,7 +292,7 @@ export default function MetriquesRevopsArticle() {
                     </div>
 
                     {/* Metrique 4 — Volume MQL */}
-                    <div className="rounded-xl border border-[#FFE8E0] bg-[#FFF8F6] p-5">
+                    <div className="rounded-lg border border-[#FFE8E0] bg-[#FFF8F6] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#FF7A59] w-5 h-5 rounded-md flex items-center justify-center">4</span>
@@ -301,7 +301,7 @@ export default function MetriquesRevopsArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#FF7A59]/10 text-[#FF7A59]">Essentiel</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Nombre de Marketing Qualified Leads generes sur une periode donnee. Le volume de MQL est le pouls de votre machine d&apos;acquisition. C&apos;est le carburant brut qui alimente le pipeline. Un volume de MQL en baisse se traduit mecaniquement par un pipeline en contraction 30 a 60 jours plus tard.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">Volume MQL = Nombre de leads atteignant le statut MQL sur la periode</p>
                       </div>
@@ -315,7 +315,7 @@ export default function MetriquesRevopsArticle() {
                     </div>
 
                     {/* Metrique 5 — Lead Velocity Rate */}
-                    <div className="rounded-xl border border-[#FFE8E0] bg-[#FFF8F6] p-5">
+                    <div className="rounded-lg border border-[#FFE8E0] bg-[#FFF8F6] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#FF7A59] w-5 h-5 rounded-md flex items-center justify-center">5</span>
@@ -324,7 +324,7 @@ export default function MetriquesRevopsArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#EF4444]/10 text-[#EF4444]">Critique</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Taux de croissance mensuel du nombre de leads qualifies. Le LVR est considere par beaucoup de VCs et de dirigeants SaaS comme le meilleur predicteur de croissance future. Contrairement au MRR qui est un indicateur retarde, le LVR est un indicateur avance. Si votre LVR est positif et constant, votre revenu futur est quasiment assure.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">LVR = (MQL ce mois - MQL mois precedent) / MQL mois precedent x 100</p>
                       </div>
@@ -338,7 +338,7 @@ export default function MetriquesRevopsArticle() {
                     </div>
 
                     {/* Metrique 6 — Time to MQL */}
-                    <div className="rounded-xl border border-[#FFE8E0] bg-[#FFF8F6] p-5">
+                    <div className="rounded-lg border border-[#FFE8E0] bg-[#FFF8F6] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#FF7A59] w-5 h-5 rounded-md flex items-center justify-center">6</span>
@@ -347,7 +347,7 @@ export default function MetriquesRevopsArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#FF7A59]/10 text-[#FF7A59]">Important</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Duree moyenne entre la premiere interaction d&apos;un lead et son passage au statut MQL. Le time to MQL mesure l&apos;efficacite de votre nurturing. Un time to MQL court indique que vos contenus, vos sequences et votre lead scoring fonctionnent bien. Un time to MQL long peut signaler un decalage entre votre contenu et les attentes de votre audience.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">Time to MQL = Moyenne(Date MQL - Date de creation du contact)</p>
                       </div>
@@ -366,7 +366,7 @@ export default function MetriquesRevopsArticle() {
 
               {/* ===================== SECTION 3 : Metriques de pipeline (6) ===================== */}
               <section id="metriques-pipeline" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#4B5EFC]" />
                     <span className="text-[11px] font-semibold text-[#4B5EFC] uppercase tracking-wider">Categorie 2 / 6</span>
@@ -425,7 +425,7 @@ export default function MetriquesRevopsArticle() {
                         reveals: "Un ecart important entre pipeline brut et pipeline pondere indique que la majorite de vos deals sont dans les stages precoces. Si votre pipeline brut est a 5x mais votre weighted pipeline a 1x, vous avez beaucoup d&apos;opportunites peu matures et un risque eleve de sous-performance.",
                       },
                     ].map((kpi) => (
-                      <div key={kpi.num} className="rounded-xl border border-[#E0E4FF] bg-[#F6F7FF] p-5">
+                      <div key={kpi.num} className="rounded-lg border border-[#E0E4FF] bg-[#F6F7FF] p-5">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
                             <span className="text-[11px] font-bold text-white bg-[#4B5EFC] w-5 h-5 rounded-md flex items-center justify-center">{kpi.num}</span>
@@ -433,7 +433,7 @@ export default function MetriquesRevopsArticle() {
                           </div>
                         </div>
                         <p className="text-[12px] text-[#555] leading-[1.7] mb-3" dangerouslySetInnerHTML={{ __html: kpi.definition }} />
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                           <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                           <p className="text-[13px] font-mono text-[#111] mt-1">{kpi.formula}</p>
                         </div>
@@ -453,7 +453,7 @@ export default function MetriquesRevopsArticle() {
 
               {/* ===================== SECTION 4 : Metriques de closing (5) ===================== */}
               <section id="metriques-closing" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#6C5CE7]" />
                     <span className="text-[11px] font-semibold text-[#6C5CE7] uppercase tracking-wider">Categorie 3 / 6</span>
@@ -504,7 +504,7 @@ export default function MetriquesRevopsArticle() {
                         reveals: "Suivez ce taux par concurrent nomme. Si votre win rate contre le Concurrent A est de 65% mais de 28% contre le Concurrent B, vous savez exactement ou concentrer votre effort de differentiation et vos battle cards.",
                       },
                     ].map((kpi) => (
-                      <div key={kpi.num} className="rounded-xl border border-[#E8E0FF] bg-[#F8F6FF] p-5">
+                      <div key={kpi.num} className="rounded-lg border border-[#E8E0FF] bg-[#F8F6FF] p-5">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
                             <span className="text-[11px] font-bold text-white bg-[#6C5CE7] w-5 h-5 rounded-md flex items-center justify-center">{kpi.num}</span>
@@ -512,7 +512,7 @@ export default function MetriquesRevopsArticle() {
                           </div>
                         </div>
                         <p className="text-[12px] text-[#555] leading-[1.7] mb-3" dangerouslySetInnerHTML={{ __html: kpi.definition }} />
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                           <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                           <p className="text-[13px] font-mono text-[#111] mt-1">{kpi.formula}</p>
                         </div>
@@ -532,7 +532,7 @@ export default function MetriquesRevopsArticle() {
 
               {/* ===================== SECTION 5 : Metriques de revenue (5) ===================== */}
               <section id="metriques-revenue" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#22C55E]" />
                     <span className="text-[11px] font-semibold text-[#22C55E] uppercase tracking-wider">Categorie 4 / 6</span>
@@ -583,7 +583,7 @@ export default function MetriquesRevopsArticle() {
                         reveals: "Un revenue per employee en baisse sur plusieurs trimestres signale que vous recrutez plus vite que votre revenu ne croit. C&apos;est un signal d&apos;alerte sur la scalabilite de votre organisation. Les entreprises les plus efficaces maintiennent ce ratio en hausse constante.",
                       },
                     ].map((kpi) => (
-                      <div key={kpi.num} className="rounded-xl border border-[#E0F5E5] bg-[#F5FBF6] p-5">
+                      <div key={kpi.num} className="rounded-lg border border-[#E0F5E5] bg-[#F5FBF6] p-5">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
                             <span className="text-[11px] font-bold text-white bg-[#22C55E] w-5 h-5 rounded-md flex items-center justify-center">{kpi.num}</span>
@@ -591,7 +591,7 @@ export default function MetriquesRevopsArticle() {
                           </div>
                         </div>
                         <p className="text-[12px] text-[#555] leading-[1.7] mb-3" dangerouslySetInnerHTML={{ __html: kpi.definition }} />
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                           <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                           <p className="text-[13px] font-mono text-[#111] mt-1">{kpi.formula}</p>
                         </div>
@@ -611,7 +611,7 @@ export default function MetriquesRevopsArticle() {
 
               {/* ===================== SECTION 6 : Metriques de retention (4) ===================== */}
               <section id="metriques-retention" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#F59E0B]" />
                     <span className="text-[11px] font-semibold text-[#F59E0B] uppercase tracking-wider">Categorie 5 / 6</span>
@@ -654,7 +654,7 @@ export default function MetriquesRevopsArticle() {
                         reveals: "Un TTV qui s&apos;allonge signale un onboarding trop complexe, un produit trop difficile a configurer ou un manque d&apos;accompagnement post-vente. Reduire le TTV de 50% peut avoir un impact plus fort sur le churn que n&apos;importe quelle fonctionnalite produit.",
                       },
                     ].map((kpi) => (
-                      <div key={kpi.num} className="rounded-xl border border-[#FFF0D0] bg-[#FFFBF0] p-5">
+                      <div key={kpi.num} className="rounded-lg border border-[#FFF0D0] bg-[#FFFBF0] p-5">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
                             <span className="text-[11px] font-bold text-white bg-[#F59E0B] w-5 h-5 rounded-md flex items-center justify-center">{kpi.num}</span>
@@ -662,7 +662,7 @@ export default function MetriquesRevopsArticle() {
                           </div>
                         </div>
                         <p className="text-[12px] text-[#555] leading-[1.7] mb-3" dangerouslySetInnerHTML={{ __html: kpi.definition }} />
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                           <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                           <p className="text-[13px] font-mono text-[#111] mt-1">{kpi.formula}</p>
                         </div>
@@ -682,7 +682,7 @@ export default function MetriquesRevopsArticle() {
 
               {/* ===================== SECTION 7 : Metriques d&apos;efficacite operationnelle (4) ===================== */}
               <section id="metriques-efficacite" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#EF4444]" />
                     <span className="text-[11px] font-semibold text-[#EF4444] uppercase tracking-wider">Categorie 6 / 6</span>
@@ -725,7 +725,7 @@ export default function MetriquesRevopsArticle() {
                         reveals: "Un taux d&apos;adherence faible n&apos;est pas toujours un probleme de discipline. C&apos;est souvent le signe que le processus est trop complexe, mal documente ou qu&apos;il ne genere pas de valeur percue par les utilisateurs. Avant de renforcer la discipline, questionnez la pertinence du processus lui-meme.",
                       },
                     ].map((kpi) => (
-                      <div key={kpi.num} className="rounded-xl border border-[#FFE0E0] bg-[#FFF6F6] p-5">
+                      <div key={kpi.num} className="rounded-lg border border-[#FFE0E0] bg-[#FFF6F6] p-5">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
                             <span className="text-[11px] font-bold text-white bg-[#EF4444] w-5 h-5 rounded-md flex items-center justify-center">{kpi.num}</span>
@@ -733,7 +733,7 @@ export default function MetriquesRevopsArticle() {
                           </div>
                         </div>
                         <p className="text-[12px] text-[#555] leading-[1.7] mb-3" dangerouslySetInnerHTML={{ __html: kpi.definition }} />
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                           <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                           <p className="text-[13px] font-mono text-[#111] mt-1">{kpi.formula}</p>
                         </div>
@@ -753,13 +753,13 @@ export default function MetriquesRevopsArticle() {
 
               {/* ===================== SECTION 8 : Dashboard RevOps ideal (dark section) ===================== */}
               <section id="dashboard-revops" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Dashboard ideal</span>
                   <h2 className="text-[17px] font-semibold text-white mb-2">Le RevOps dashboard ideal</h2>
                   <p className="text-[12px] text-white/50 leading-[1.75] mb-6">Voici une representation du dashboard RevOps que nous deployons chez nos clients. Contrairement a un dashboard commercial classique, il couvre l&apos;integralite du revenue engine : de l&apos;acquisition a la retention, en passant par le revenue waterfall et le health score operationnel.</p>
 
                   {/* Dashboard mockup - Row 1: Revenue Health Score */}
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-4 mb-4">
+                  <div className="rounded-lg border border-white/10 bg-white/5 p-4 mb-4">
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-[11px] font-semibold text-white/40 uppercase tracking-wider">Revenue Health Score -- Mars 2026</span>
                       <div className="flex items-center gap-2">
@@ -792,7 +792,7 @@ export default function MetriquesRevopsArticle() {
                   {/* Dashboard mockup - Row 2: Revenue Waterfall + Funnel */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                     {/* Revenue Waterfall */}
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <div className="rounded-lg border border-white/10 bg-white/5 p-4">
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-[11px] font-semibold text-white/60">Revenue Waterfall (MRR)</span>
                         <span className="text-[9px] px-2 py-0.5 rounded bg-[#22C55E]/20 text-[#22C55E]">Net +8.3K</span>
@@ -823,7 +823,7 @@ export default function MetriquesRevopsArticle() {
                     </div>
 
                     {/* Full Funnel Conversion */}
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <div className="rounded-lg border border-white/10 bg-white/5 p-4">
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-[11px] font-semibold text-white/60">Full-funnel conversion</span>
                         <span className="text-[9px] px-2 py-0.5 rounded bg-white/10 text-white/30">Ce trimestre</span>
@@ -852,7 +852,7 @@ export default function MetriquesRevopsArticle() {
                   {/* Dashboard mockup - Row 3: Acquisition efficiency + Retention health */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                     {/* Acquisition efficiency */}
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <div className="rounded-lg border border-white/10 bg-white/5 p-4">
                       <span className="text-[11px] font-semibold text-white/60 mb-3 block">Efficacite acquisition</span>
                       <div className="space-y-3">
                         {[
@@ -875,7 +875,7 @@ export default function MetriquesRevopsArticle() {
                     </div>
 
                     {/* Retention health */}
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <div className="rounded-lg border border-white/10 bg-white/5 p-4">
                       <span className="text-[11px] font-semibold text-white/60 mb-3 block">Sante retention</span>
                       <div className="space-y-2.5">
                         {[
@@ -900,7 +900,7 @@ export default function MetriquesRevopsArticle() {
                   {/* Dashboard mockup - Row 4: Ops Health + Revenue per channel */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Ops health gauges */}
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <div className="rounded-lg border border-white/10 bg-white/5 p-4">
                       <span className="text-[11px] font-semibold text-white/60 mb-3 block">Sante operationnelle</span>
                       <div className="grid grid-cols-2 gap-3">
                         {[
@@ -918,7 +918,7 @@ export default function MetriquesRevopsArticle() {
                     </div>
 
                     {/* Revenue by channel */}
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <div className="rounded-lg border border-white/10 bg-white/5 p-4">
                       <span className="text-[11px] font-semibold text-white/60 mb-3 block">Revenue par canal (ce trimestre)</span>
                       <div className="flex items-end gap-1.5 h-[80px]">
                         {[
@@ -948,7 +948,7 @@ export default function MetriquesRevopsArticle() {
 
               {/* ===================== SECTION 9 : Prioriser par stade de croissance ===================== */}
               <section id="prioriser-par-stade" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Comment prioriser vos metriques par stade de croissance</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Tracker 30 metriques des le premier jour n&apos;a aucun sens. Cela genere de la confusion, dilue l&apos;attention et surcharge vos dashboards. La bonne approche consiste a selectionner un ensemble de metriques adapte a votre stade de croissance et a l&apos;elargir progressivement a mesure que votre organisation murit.</p>
@@ -957,7 +957,7 @@ export default function MetriquesRevopsArticle() {
 
                   <div className="mt-5 space-y-4">
                     {/* Early Stage */}
-                    <div className="rounded-xl border border-[#F2F2F2] p-5">
+                    <div className="rounded-lg border border-[#F2F2F2] p-5">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-sm bg-[#FF7A59]" />
                         <h3 className="text-[13px] font-semibold text-[#111]">Early Stage (0-1M ARR) -- 8 metriques</h3>
@@ -971,7 +971,7 @@ export default function MetriquesRevopsArticle() {
                     </div>
 
                     {/* Growth */}
-                    <div className="rounded-xl border border-[#F2F2F2] p-5">
+                    <div className="rounded-lg border border-[#F2F2F2] p-5">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-sm bg-[#4B5EFC]" />
                         <h3 className="text-[13px] font-semibold text-[#111]">Growth (1-5M ARR) -- 18 metriques</h3>
@@ -985,7 +985,7 @@ export default function MetriquesRevopsArticle() {
                     </div>
 
                     {/* Scale-up */}
-                    <div className="rounded-xl border border-[#F2F2F2] p-5">
+                    <div className="rounded-lg border border-[#F2F2F2] p-5">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-sm bg-[#22C55E]" />
                         <h3 className="text-[13px] font-semibold text-[#111]">Scale-up (5M+ ARR) -- 30 metriques</h3>
@@ -1008,7 +1008,7 @@ export default function MetriquesRevopsArticle() {
 
               {/* ===================== SECTION 10 : Framework Ceres (dark section) ===================== */}
               <section id="framework-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Notre approche</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">Notre framework metriques RevOps chez Ceres</h2>
                   <div className="space-y-3 text-[12px] text-white/50 leading-[1.75]">
@@ -1024,7 +1024,7 @@ export default function MetriquesRevopsArticle() {
                       { label: "Adoption dashboard", value: "92%", color: "#22C55E" },
                       { label: "Amelioration NRR (moy.)", value: "+8pts", color: "#6C5CE7" },
                     ].map((s) => (
-                      <div key={s.label} className="text-center p-3 rounded-xl bg-white/5 border border-white/10">
+                      <div key={s.label} className="text-center p-3 rounded-lg bg-white/5 border border-white/10">
                         <div className="text-[20px] font-bold" style={{ color: s.color }}>{s.value}</div>
                         <div className="text-[10px] text-white/35 mt-1">{s.label}</div>
                       </div>
@@ -1055,7 +1055,7 @@ export default function MetriquesRevopsArticle() {
 
               {/* Related articles */}
               <section className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((a) => (
@@ -1073,7 +1073,7 @@ export default function MetriquesRevopsArticle() {
 
               {/* CTA */}
               <section>
-                <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+                <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                   <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide pour deployer vos metriques RevOps ?</h2>
                   <p className="text-[13px] text-[#999] mb-6 max-w-[460px] mx-auto">On deploie votre systeme de metriques RevOps complet en 2 a 3 semaines : audit revenue engine, dashboards, alertes automatiques, cadence de review et formation equipes.</p>
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

@@ -148,7 +148,7 @@ export default function StackTechnologiqueRevOpsArticle() {
             <article>
               {/* Section 1 : Pourquoi votre stack RevOps est strategique */}
               <section id="stack-strategique" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi votre stack RevOps est strategique</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;entreprise B2B moyenne utilise 130 applications SaaS en 2026, selon Productiv. Pour les equipes revenue (marketing, sales, customer success), ce chiffre se situe entre 15 et 40 outils. Chaque outil a ete ajoute pour resoudre un probleme specifique, souvent dans l&apos;urgence, rarement dans une logique d&apos;ensemble. Le resultat est un empilement technologique fragile, couteux et mal integre.</p>
@@ -166,7 +166,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                       { stat: "40%", label: "des integrations sont mal maintenues", color: "#EF4444" },
                       { stat: "15-40", label: "outils pour les equipes revenue", color: "#FF7A59" },
                     ].map((s) => (
-                      <div key={s.label} className="rounded-xl border border-[#F2F2F2] p-4 text-center">
+                      <div key={s.label} className="rounded-lg border border-[#F2F2F2] p-4 text-center">
                         <p className="text-[20px] font-bold mb-1" style={{ color: s.color }}>{s.stat}</p>
                         <p className="text-[10px] text-[#999] leading-[1.4]">{s.label}</p>
                       </div>
@@ -178,7 +178,7 @@ export default function StackTechnologiqueRevOpsArticle() {
 
               {/* Section 2 : Les 7 couches du stack RevOps */}
               <section id="sept-couches" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les 7 couches du stack RevOps</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-6">
                     <p>Un stack RevOps mature se decompose en sept couches fonctionnelles. Chaque couche a un role precis, des outils dedies, et des interactions definies avec les autres couches. Penser en couches permet d&apos;evaluer la maturite de chaque fonction independamment et d&apos;identifier les maillons faibles de votre architecture.</p>
@@ -186,7 +186,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                   </div>
 
                   {/* CSS Architecture Diagram */}
-                  <div className="rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-5 mb-4">
+                  <div className="rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-5 mb-4">
                     <p className="text-[11px] font-semibold text-[#111] mb-5 text-center uppercase tracking-wider">Architecture du stack RevOps -- Vue en couches</p>
                     <div className="space-y-2 max-w-[520px] mx-auto">
                       {[
@@ -236,7 +236,7 @@ export default function StackTechnologiqueRevOpsArticle() {
 
               {/* Section 3 : Couche 1 - CRM */}
               <section id="couche-crm" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Couche 1 : CRM -- La fondation de votre stack</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Le CRM est la couche fondamentale. C&apos;est la source de verite sur vos contacts, entreprises, deals et interactions. Tout le reste du stack en depend. Un mauvais choix de CRM contamine l&apos;ensemble de votre architecture. Un CRM bien configure est le socle sur lequel vous construisez tout le reste.</p>
@@ -274,7 +274,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                         color: "#22C55E",
                       },
                     ].map((tool) => (
-                      <div key={tool.name} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={tool.name} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-3 mb-3">
                           <img src={`https://www.google.com/s2/favicons?domain=${tool.domain}&sz=32`} alt={tool.name} width={20} height={20} className="rounded" />
                           <span className="text-[13px] font-semibold text-[#111]">{tool.name}</span>
@@ -290,7 +290,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                     ))}
                   </div>
 
-                  <div className="rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[11px] font-semibold text-[#111] mb-2">Notre recommandation</p>
                     <p className="text-[12px] text-[#666] leading-[1.7]">Pour 80% des entreprises B2B francaises de moins de 200 personnes, HubSpot est le meilleur choix. L&apos;ecosysteme natif est suffisamment riche pour eviter d&apos;empiler des outils tiers, le plan gratuit permet de demarrer sans risque, et la montee en gamme est progressive. N&apos;allez sur Salesforce que si vous avez un admin CRM a temps plein et des processus metier qui justifient la complexite.</p>
                   </div>
@@ -300,7 +300,7 @@ export default function StackTechnologiqueRevOpsArticle() {
 
               {/* Section 4 : Couche 2 - Automation */}
               <section id="couche-automation" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Couche 2 : Automation -- Automatiser sans sur-ingenierer</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>La couche d&apos;automation est celle qui genere le plus de ROI immediat. Chaque processus manuel supprime est du temps libere pour des taches a plus forte valeur ajoutee. Mais c&apos;est aussi la couche la plus dangereuse : une mauvaise automation peut corrompre vos donnees, spammer vos clients, ou creer des boucles infinies qui font exploser vos couts.</p>
@@ -308,7 +308,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                   </div>
 
                   {/* Comparison table */}
-                  <div className="rounded-xl border border-[#F2F2F2] overflow-hidden mb-5">
+                  <div className="rounded-lg border border-[#F2F2F2] overflow-hidden mb-5">
                     <div className="overflow-x-auto">
                       <table className="w-full text-[11px]">
                         <thead>
@@ -375,7 +375,7 @@ export default function StackTechnologiqueRevOpsArticle() {
 
               {/* Section 5 : Couche 3 - Enrichissement */}
               <section id="couche-enrichissement" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Couche 3 : Enrichissement -- La qualite des donnees a la source</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Un contact dans votre CRM avec juste un email et un prenom ne vaut pas grand-chose. L&apos;enrichissement consiste a completer automatiquement les fiches contacts et entreprises avec des donnees firmographiques (taille, secteur, CA, technologie utilisee), des donnees de contact (numero de telephone, profil LinkedIn, poste exact), et des signaux d&apos;intent (levee de fonds, recrutement, publication).</p>
@@ -383,7 +383,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                   </div>
 
                   {/* Tool ecosystem map */}
-                  <div className="rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-5 mb-5">
+                  <div className="rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-5 mb-5">
                     <p className="text-[11px] font-semibold text-[#111] mb-4 text-center uppercase tracking-wider">Ecosysteme enrichissement B2B -- Positionnement</p>
                     <div className="grid grid-cols-2 gap-3">
                       {[
@@ -412,7 +412,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                           prix: "Inclus dans HubSpot Breeze (plans Pro+)"
                         },
                       ].map((tool) => (
-                        <div key={tool.name} className="rounded-xl border border-[#E8E8E8] bg-white p-4">
+                        <div key={tool.name} className="rounded-lg border border-[#EAEAEA] bg-white p-4">
                           <div className="flex items-center gap-2 mb-2">
                             <img src={`https://www.google.com/s2/favicons?domain=${tool.domain}&sz=32`} alt={tool.name} width={18} height={18} className="rounded" />
                             <span className="text-[12px] font-semibold text-[#111]">{tool.name}</span>
@@ -435,7 +435,7 @@ export default function StackTechnologiqueRevOpsArticle() {
 
               {/* Section 6 : Couche 4 - Analytics et BI */}
               <section id="couche-analytics" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Couche 4 : Analytics et BI -- Mesurer ce qui compte</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Les donnees sans analyse ne sont que du stockage. La couche analytics transforme les donnees brutes de votre CRM et de vos outils en insights actionnables. C&apos;est la couche qui permet aux dirigeants de prendre des decisions basees sur des faits, pas sur des intuitions.</p>
@@ -466,7 +466,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                         color: "#FF7A59",
                       },
                     ].map((tool) => (
-                      <div key={tool.name} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={tool.name} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-3 mb-3">
                           <img src={`https://www.google.com/s2/favicons?domain=${tool.domain}&sz=32`} alt={tool.name} width={18} height={18} className="rounded" />
                           <span className="text-[12px] font-semibold text-[#111]">{tool.name}</span>
@@ -486,7 +486,7 @@ export default function StackTechnologiqueRevOpsArticle() {
 
               {/* Section 7 : Couche 5 - Communication */}
               <section id="couche-communication" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Couche 5 : Communication -- Aligner les equipes en temps reel</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Le RevOps est par definition transversal. Il aligne marketing, sales et customer success autour d&apos;objectifs communs. Cet alignement ne peut pas reposer uniquement sur des reunions hebdomadaires et des emails. Il faut des outils de communication qui rendent l&apos;information visible, accessible et actionnable en temps reel.</p>
@@ -516,7 +516,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                         desc: "Videos rapides pour expliquer un process, faire un debriefing, presenter une analyse. Remplace les reunions inutiles. Integrable dans Slack et Notion. Particulierement utile pour les equipes distribuees ou en mode hybride.",
                       },
                     ].map((tool) => (
-                      <div key={tool.name} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={tool.name} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <img src={`https://www.google.com/s2/favicons?domain=${tool.domain}&sz=32`} alt={tool.name} width={16} height={16} className="rounded" />
                           <span className="text-[12px] font-semibold text-[#111]">{tool.name}</span>
@@ -536,7 +536,7 @@ export default function StackTechnologiqueRevOpsArticle() {
 
               {/* Section 8 : Couche 6 - IA */}
               <section id="couche-ia" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Couche 6 : Intelligence Artificielle -- L&apos;acceleration des operations</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>L&apos;IA generative a radicalement transforme les operations revenue en 18 mois. Ce qui etait un gadget en 2024 est devenu un avantage competitif mesurable en 2026. Les equipes qui deploient l&apos;IA de maniere structuree sur leurs processus commerciaux gagnent en moyenne 2 a 3 heures par jour et par commercial, selon McKinsey.</p>
@@ -567,7 +567,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                         force: "Construit sur mesure avec Make ou n8n + API Claude/GPT. Connecte directement a votre CRM et vos donnees. L&apos;investissement le plus strategique a moyen terme.",
                       },
                     ].map((tool) => (
-                      <div key={tool.name} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={tool.name} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-3 mb-3">
                           <img src={`https://www.google.com/s2/favicons?domain=${tool.domain}&sz=32`} alt={tool.name} width={18} height={18} className="rounded" />
                           <span className="text-[12px] font-semibold text-[#111]">{tool.name}</span>
@@ -595,7 +595,7 @@ export default function StackTechnologiqueRevOpsArticle() {
 
               {/* Section 9 : Couche 7 - Integration */}
               <section id="couche-integration" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Couche 7 : Integration et iPaaS -- Le ciment du stack</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>La couche d&apos;integration est ce qui transforme une collection d&apos;outils isoles en un systeme coherent. Sans elle, chaque outil fonctionne en silo, les donnees sont dupliquees et desynchronisees, et les equipes passent leur temps a copier-coller des informations d&apos;un outil a l&apos;autre.</p>
@@ -633,7 +633,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                         desc: "Le leader du Gartner Magic Quadrant iPaaS. Capacites IT avancees (API management, governance, orchestration). Justifie uniquement pour les organisations avec 50+ integrations a gerer.",
                       },
                     ].map((tool) => (
-                      <div key={tool.name} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={tool.name} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <img src={`https://www.google.com/s2/favicons?domain=${tool.domain}&sz=32`} alt={tool.name} width={16} height={16} className="rounded" />
                           <span className="text-[12px] font-semibold text-[#111]">{tool.name}</span>
@@ -654,7 +654,7 @@ export default function StackTechnologiqueRevOpsArticle() {
 
               {/* Section 10 : Le stack par taille d'entreprise */}
               <section id="stack-par-taille" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Le stack RevOps par taille d&apos;entreprise</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-6">
                     <p>Le stack ideal depend de votre taille, de votre maturite technique et de votre budget. Voici trois configurations types, testees et validees sur le terrain. Chaque configuration couvre les sept couches avec un equilibre adapte entre fonctionnalites et cout.</p>
@@ -712,7 +712,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                         note: "A cette echelle, vous avez besoin de gouvernance : droits d&apos;acces, audit trail, environnements de test. Prevoyez un budget admin/ops equivalent a 20% du cout des licences.",
                       },
                     ].map((config) => (
-                      <div key={config.title} className="rounded-xl border-2 p-5 flex flex-col" style={{ borderColor: `${config.color}30` }}>
+                      <div key={config.title} className="rounded-lg border-2 p-5 flex flex-col" style={{ borderColor: `${config.color}30` }}>
                         <div className="text-center mb-4">
                           <p className="text-[13px] font-semibold text-[#111]">{config.title}</p>
                           <p className="text-[10px] text-[#999] mb-2">{config.subtitle}</p>
@@ -738,7 +738,7 @@ export default function StackTechnologiqueRevOpsArticle() {
 
               {/* Section 11 : Les erreurs de stack courantes */}
               <section id="erreurs-stack" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les erreurs de stack courantes</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>En accompagnant des dizaines d&apos;entreprises sur leur stack RevOps, nous voyons les memes erreurs revenir systematiquement. Voici les plus destructrices, et comment les eviter.</p>
@@ -772,7 +772,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                         desc: "Acheter un outil ne suffit pas a generer de la valeur. Les equipes doivent etre formees, les processus adaptes, les habitudes changees. Un CRM a 10 000 EUR par an utilise a 30% de ses capacites est un gaspillage. Prevoyez un budget formation equivalent a 30% du cout de la premiere annee de licences. C&apos;est l&apos;investissement le plus rentable de votre stack.",
                       },
                     ].map((err) => (
-                      <div key={err.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={err.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-start gap-3">
                           <div className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ background: err.color }} />
                           <div>
@@ -789,7 +789,7 @@ export default function StackTechnologiqueRevOpsArticle() {
 
               {/* Section 12 : Notre stack chez Ceres (dark section) */}
               <section id="stack-ceres" className="mb-8">
-                <div className="rounded-2xl bg-gradient-to-br from-[#111] to-[#1A1A1A] p-5 md:p-8 border border-[#333]">
+                <div className="rounded-lg bg-gradient-to-br from-[#111] to-[#1A1A1A] p-5 md:p-8 border border-[#333]">
                   <h2 className="text-[17px] font-semibold text-white mb-2">Notre stack chez Ceres</h2>
                   <p className="text-[12px] text-[#999] leading-[1.7] mb-6">Transparence totale. Voici exactement les outils que nous utilisons en interne et que nous deployon chez nos clients. Pas de partenariats caches, pas de commissions sur les recommandations. Uniquement les outils que nous trouvons les plus efficaces en 2026.</p>
 
@@ -852,7 +852,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                         detail: "Apollo pour la base de donnees prospects et l&apos;enrichissement. Lemlist pour les sequences multicanal (email + LinkedIn). Les deux connectes a HubSpot via Make.",
                       },
                     ].map((item) => (
-                      <div key={item.couche} className="rounded-xl border border-[#333] bg-[#1A1A1A] p-4">
+                      <div key={item.couche} className="rounded-lg border border-[#333] bg-[#1A1A1A] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <img src={`https://www.google.com/s2/favicons?domain=${item.domain}&sz=32`} alt={item.outil} width={16} height={16} className="rounded opacity-80" />
                           <span className="text-[9px] font-semibold uppercase tracking-wider" style={{ color: item.color }}>{item.couche}</span>
@@ -871,7 +871,7 @@ export default function StackTechnologiqueRevOpsArticle() {
               </section>
 
               {/* CTA */}
-              <div className="mb-12 rounded-2xl bg-gradient-to-br from-[#111] to-[#1A1A1A] p-6 md:p-8 text-center border border-[#333]">
+              <div className="mb-12 rounded-lg bg-gradient-to-br from-[#111] to-[#1A1A1A] p-6 md:p-8 text-center border border-[#333]">
                 <h3 className="text-[17px] font-semibold text-white mb-3">Besoin d&apos;auditer ou de repenser votre stack RevOps ?</h3>
                 <p className="text-[13px] text-[#999] leading-[1.7] mb-5 max-w-[500px] mx-auto">Chez Ceres, on audite votre stack existant, on identifie les redondances et les maillons manquants, et on construit une architecture integree adaptee a votre taille et votre budget. Un diagnostic complet en 5 jours avec un plan d&apos;action priorise.</p>
                 <Link href="https://calendly.com/ceres-revops/30min" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#6C5CE7] text-white rounded-lg text-[13px] font-medium hover:bg-[#5A4BD6] transition-colors">
@@ -885,7 +885,7 @@ export default function StackTechnologiqueRevOpsArticle() {
                 <h3 className="text-[14px] font-semibold text-[#111] mb-4">Articles complementaires</h3>
                 <div className="grid gap-3">
                   {relatedArticles.map((a) => (
-                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
+                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
                       <div className="w-1 h-10 rounded-full" style={{ background: a.color }} />
                       <div className="flex-1 min-w-0">
                         <p className="text-[9px] font-medium mb-1" style={{ color: a.color }}>{a.category}</p>

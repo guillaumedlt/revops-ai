@@ -43,7 +43,7 @@ export default function Hero() {
             On structure vos process, connecte vos outils et déploie l&apos;IA pour que vos équipes avancent ensemble.
           </p>
           <div className="flex items-center justify-center gap-3">
-            <a href="#contact" className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md border border-[#E5E5E5] bg-white text-[13px] text-[#111] font-medium hover:border-[#CCC] hover:shadow-sm transition-all">
+            <a href="#contact" className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md border border-[#EAEAEA] bg-white text-[13px] text-[#111] font-medium hover:border-[#CCC] hover:shadow-sm transition-all">
               <span className="w-2 h-2 rounded-sm bg-[#D4A27F]" />
               Réserver un appel
             </a>

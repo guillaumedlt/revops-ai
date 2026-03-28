@@ -4,7 +4,7 @@ export default function CTA() {
   return (
     <section id="contact" className="relative z-20 pb-16">
       <div className="max-w-[1000px] mx-auto px-6">
-        <div className="rounded-2xl bg-[#111] p-8 md:p-14 text-center">
+        <div className="rounded-lg bg-[#111] p-8 md:p-14 text-center">
           <div className="max-w-[480px] mx-auto">
             <div className="mb-5 flex justify-center">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60">

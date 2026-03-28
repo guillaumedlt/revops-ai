@@ -73,9 +73,9 @@ function WidgetContent({ widget }: { widget: Widget }) {
     case "scorecard":
       return <ScorecardBlock title="" value={c.value || ""} target={c.target} score={c.score || 0} breakdown={c.breakdown} />;
     case "report":
-      return c.blocks ? <BlockRenderer blocks={c.blocks} /> : <p className="text-xs text-[#A3A3A3]">Empty report</p>;
+      return c.blocks ? <BlockRenderer blocks={c.blocks} /> : <p className="text-xs text-[#BBB]">Empty report</p>;
     default:
-      return <p className="text-xs text-[#A3A3A3]">Unknown widget type</p>;
+      return <p className="text-xs text-[#BBB]">Unknown widget type</p>;
   }
 }
 
@@ -263,7 +263,7 @@ export default function DashboardViewPage() {
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <div className="h-5 w-5 border-2 border-[#E5E5E5] border-t-[#0A0A0A] rounded-full animate-spin" />
+        <div className="h-5 w-5 border-2 border-[#EAEAEA] border-t-[#0A0A0A] rounded-full animate-spin" />
       </div>
     );
   }
@@ -278,7 +278,7 @@ export default function DashboardViewPage() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => router.push("/dashboards")}
-              className="h-8 w-8 rounded-lg flex items-center justify-center text-[#A3A3A3] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors"
+              className="h-8 w-8 rounded-lg flex items-center justify-center text-[#BBB] hover:bg-[#F5F5F5] hover:text-[#111] transition-colors"
             >
               <ArrowLeft size={18} />
             </button>
@@ -290,7 +290,7 @@ export default function DashboardViewPage() {
                   value={editName}
                   onChange={(e) => setEditName(e.target.value)}
                   autoFocus
-                  className="text-lg font-semibold text-[#0A0A0A] bg-transparent border-b border-[#0A0A0A] focus:outline-none"
+                  className="text-lg font-semibold text-[#111] bg-transparent border-b border-[#0A0A0A] focus:outline-none"
                 />
                 <button
                   onClick={handleSaveName}
@@ -303,26 +303,26 @@ export default function DashboardViewPage() {
                     setEditing(false);
                     setEditName(dashboard.name);
                   }}
-                  className="text-[#A3A3A3] hover:bg-[#F5F5F5] h-7 w-7 rounded flex items-center justify-center"
+                  className="text-[#BBB] hover:bg-[#F5F5F5] h-7 w-7 rounded flex items-center justify-center"
                 >
                   <X size={16} />
                 </button>
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <h1 className="text-lg font-semibold text-[#0A0A0A]">
+                <h1 className="text-lg font-semibold text-[#111]">
                   {dashboard.name}
                 </h1>
                 <button
                   onClick={() => setEditing(true)}
-                  className="text-[#A3A3A3] hover:text-[#0A0A0A]"
+                  className="text-[#BBB] hover:text-[#111]"
                 >
                   <Pencil size={14} />
                 </button>
               </div>
             )}
           </div>
-          <span className="text-xs text-[#A3A3A3]">
+          <span className="text-xs text-[#BBB]">
             {widgets.length} widget{widgets.length !== 1 ? "s" : ""}
           </span>
         </div>
@@ -332,15 +332,15 @@ export default function DashboardViewPage() {
       <div className="px-6 py-4 max-w-7xl mx-auto">
         {widgets.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-sm text-[#525252] font-medium">
+            <p className="text-sm text-[#555] font-medium">
               No widgets yet
             </p>
-            <p className="text-sm text-[#A3A3A3] mt-1">
+            <p className="text-sm text-[#BBB] mt-1">
               Go to Chat and use the pin icon on any report to add it here.
             </p>
             <button
               onClick={() => router.push("/chat")}
-              className="mt-4 bg-[#0A0A0A] text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-[#262626] transition-colors"
+              className="mt-4 bg-[#111] text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-[#262626] transition-colors"
             >
               Go to Chat
             </button>
@@ -360,7 +360,7 @@ export default function DashboardViewPage() {
             {/* Drop preview ghost */}
             {dragState && previewPos && (
               <div
-                className="rounded-xl border-2 border-dashed border-blue-400 bg-blue-50/50 pointer-events-none z-10"
+                className="rounded-lg border-2 border-dashed border-blue-400 bg-blue-50/50 pointer-events-none z-10"
                 style={{
                   gridColumn:
                     previewPos.x + 1 + " / span " + previewPos.w,
@@ -377,7 +377,7 @@ export default function DashboardViewPage() {
                 <div
                   key={widget.id}
                   className={
-                    "relative border border-[#E5E5E5] rounded-xl bg-white overflow-hidden group " +
+                    "relative border border-[#EAEAEA] rounded-lg bg-white overflow-hidden group " +
                     (isDragging
                       ? "opacity-40 shadow-lg ring-2 ring-blue-300"
                       : "hover:shadow-sm transition-shadow duration-200")
@@ -402,7 +402,7 @@ export default function DashboardViewPage() {
                         size={14}
                         className="text-[#D4D4D4] flex-shrink-0"
                       />
-                      <h3 className="text-xs font-medium text-[#0A0A0A] truncate">
+                      <h3 className="text-xs font-medium text-[#111] truncate">
                         {widget.title}
                       </h3>
                     </div>
@@ -411,7 +411,7 @@ export default function DashboardViewPage() {
                         e.stopPropagation();
                         handleDeleteWidget(widget.id);
                       }}
-                      className="hidden group-hover:flex h-6 w-6 items-center justify-center rounded text-[#A3A3A3] hover:text-[#EF4444] hover:bg-[#FEF2F2]"
+                      className="hidden group-hover:flex h-6 w-6 items-center justify-center rounded text-[#BBB] hover:text-[#EF4444] hover:bg-[#FEF2F2]"
                     >
                       <Trash2 size={12} />
                     </button>

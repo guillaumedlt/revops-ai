@@ -136,7 +136,7 @@ export default function HubleadArticle() {
               </div>
 
               {/* Quick verdict card */}
-              <div className="mt-8 rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+              <div className="mt-8 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-[13px] font-semibold text-[#111]">Verdict rapide</span>
                   <div className="flex items-center gap-2">
@@ -167,7 +167,7 @@ export default function HubleadArticle() {
             <article>
               {/* Le probleme */}
               <section id="probleme" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Le probleme : LinkedIn et HubSpot ne se parlent pas</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La situation est la meme dans presque toutes les equipes commerciales B2B. Vos SDR et Account Executives passent 2 a 3 heures par jour sur LinkedIn. Ils identifient des prospects, envoient des messages, recoivent des reponses, prennent des notes mentales sur les echanges. Et rien de tout cela ne remonte dans le CRM.</p>
@@ -182,7 +182,7 @@ export default function HubleadArticle() {
                       { label: "Contacts non traces", value: "~60%", icon: "perte" },
                       { label: "Visibilite manager", value: "0%", icon: "aveugle" },
                     ].map((m) => (
-                      <div key={m.label} className="text-center p-3 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2]">
+                      <div key={m.label} className="text-center p-3 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2]">
                         <div className="text-[18px] font-bold text-[#111]">{m.value}</div>
                         <div className="text-[10px] text-[#999] mt-1">{m.label}</div>
                       </div>
@@ -194,7 +194,7 @@ export default function HubleadArticle() {
 
               {/* Presentation */}
               <section id="presentation" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Qu&apos;est-ce que Hublead</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Hublead est une extension Chrome qui se superpose a l&apos;interface LinkedIn pour ajouter des fonctionnalites de synchronisation avec HubSpot. Concretement, quand vous visitez un profil LinkedIn, Hublead affiche un panneau lateral qui vous permet d&apos;importer le contact dans HubSpot, de voir s&apos;il existe deja dans votre CRM, et de synchroniser les donnees entre les deux plateformes.</p>
@@ -221,7 +221,7 @@ export default function HubleadArticle() {
 
               {/* Installation */}
               <section id="installation" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Installation et prise en main</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;installation de Hublead est rapide et ne demande aucune competence technique. Le processus complet prend moins de 5 minutes.</p>
@@ -239,7 +239,7 @@ export default function HubleadArticle() {
                           <div className="w-7 h-7 rounded-lg bg-[#4B5EFC] flex items-center justify-center text-white text-[11px] font-bold mx-auto">{s.step}</div>
                           {i < 3 && <div className="w-px h-6 bg-[#E8E8E8] mx-auto mt-1" />}
                         </div>
-                        <div className="flex-1 rounded-xl border border-[#F2F2F2] p-3">
+                        <div className="flex-1 rounded-lg border border-[#F2F2F2] p-3">
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-[12px] font-semibold text-[#111]">{s.title}</span>
                             <span className="text-[10px] font-medium text-[#4B5EFC]">{s.delay}</span>
@@ -260,7 +260,7 @@ export default function HubleadArticle() {
 
               {/* Features */}
               <section id="features" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les fonctionnalites cles</h2>
                   <div className="space-y-5">
                     {[
@@ -308,7 +308,7 @@ export default function HubleadArticle() {
 
               {/* Workflow */}
               <section id="workflow" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Hublead en action : notre workflow quotidien</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Chez Ceres, on a standardise un workflow LinkedIn + HubSpot pour les equipes commerciales de nos clients. Voici comment Hublead s&apos;integre dans le processus quotidien d&apos;un SDR.</p>
@@ -327,7 +327,7 @@ export default function HubleadArticle() {
                           <div className="text-[11px] font-bold text-[#4B5EFC]">{w.time}</div>
                           {i < 4 && <div className="w-px h-6 bg-[#E8E8E8] mx-auto mt-1" />}
                         </div>
-                        <div className="flex-1 rounded-xl border border-[#F2F2F2] p-3">
+                        <div className="flex-1 rounded-lg border border-[#F2F2F2] p-3">
                           <span className="text-[12px] font-semibold text-[#111] mb-1 block">{w.action}</span>
                           <p className="text-[11px] text-[#888] leading-[1.6]">{w.desc}</p>
                         </div>
@@ -335,7 +335,7 @@ export default function HubleadArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Resultats mesures sur 2 mois</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -357,7 +357,7 @@ export default function HubleadArticle() {
 
               {/* Limites */}
               <section id="limites" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les limites qu&apos;on a rencontrees</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Apres 2 mois d&apos;utilisation sur 3 comptes clients, voici les points de friction identifies :</p>
@@ -402,7 +402,7 @@ export default function HubleadArticle() {
 
               {/* Pricing */}
               <section id="pricing" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Prix et plans</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Hublead propose un modele de tarification par utilisateur et par mois. Le plan gratuit existe mais reste tres limite. Voici les plans au moment de notre test (mars 2026) :</p>
@@ -414,7 +414,7 @@ export default function HubleadArticle() {
                       { name: "Pro", price: "39", features: ["Par utilisateur", "Imports illimites", "Sync conversations", "Enrichissement email", "Notes et taches", "Detection doublons"], highlight: true },
                       { name: "Team", price: "59", features: ["Par utilisateur", "Tout Pro +", "Dashboard equipe", "Parametres admin", "Support prioritaire", "API access"], highlight: false },
                     ].map((p) => (
-                      <div key={p.name} className={`rounded-xl border p-4 ${p.highlight ? "border-[#4B5EFC] bg-[#4B5EFC]/[0.02]" : "border-[#F2F2F2]"}`}>
+                      <div key={p.name} className={`rounded-lg border p-4 ${p.highlight ? "border-[#4B5EFC] bg-[#4B5EFC]/[0.02]" : "border-[#F2F2F2]"}`}>
                         <div className="text-[13px] font-semibold text-[#111] mb-1">{p.name}</div>
                         <div className="flex items-baseline gap-1 mb-3">
                           <span className="text-[24px] font-bold text-[#4B5EFC]">{p.price}&#8364;</span>
@@ -442,7 +442,7 @@ export default function HubleadArticle() {
 
               {/* Comparison */}
               <section id="vs" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Hublead vs Surfe vs Kaspr vs PhantomBuster</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Ces 4 outils adressent le meme probleme (connecter LinkedIn a un CRM) mais avec des approches differentes. Voici notre comparatif base sur une utilisation reelle de chacun.</p>
@@ -450,7 +450,7 @@ export default function HubleadArticle() {
 
                   <div className="overflow-x-auto">
                     <div className="min-w-[500px]">
-                      <div className="grid grid-cols-5 gap-2 pb-3 border-b border-[#E8E8E8]">
+                      <div className="grid grid-cols-5 gap-2 pb-3 border-b border-[#EAEAEA]">
                         <span className="text-[10px] font-semibold text-[#999]">Critere</span>
                         <div className="flex items-center justify-center gap-1.5">
                           <img src="https://www.google.com/s2/favicons?domain=hublead.io&sz=32" alt="Hublead" className="w-3.5 h-3.5" />
@@ -504,7 +504,7 @@ export default function HubleadArticle() {
 
               {/* Verdict */}
               <section id="verdict" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Verdict</span>
                   <h2 className="text-[20px] font-semibold text-white mb-4">Notre avis final apres 2 mois</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -551,10 +551,10 @@ export default function HubleadArticle() {
 
               {/* Pour qui */}
               <section id="pour-qui" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pour qui Hublead est fait</h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-4">
+                    <div className="rounded-lg bg-[#F0FDF4] p-4">
                       <p className="text-[12px] font-semibold text-[#22C55E] mb-3">Ideal pour</p>
                       {[
                         "Equipes commerciales B2B sur HubSpot",
@@ -567,7 +567,7 @@ export default function HubleadArticle() {
                         <p key={i} className="text-[11px] text-[#555] mb-2 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-4">
+                    <div className="rounded-lg bg-[#FEF2F2] p-4">
                       <p className="text-[12px] font-semibold text-[#EF4444] mb-3">Pas adapte si</p>
                       {[
                         "Vous utilisez Salesforce ou Pipedrive",
@@ -582,7 +582,7 @@ export default function HubleadArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Notre recommandation</p>
                     <p className="text-[12px] text-[#777] leading-[1.65]">Si vous etes sur HubSpot et que vos commerciaux passent du temps sur LinkedIn, Hublead merite d&apos;etre teste. Le plan Pro a 39 euros par mois par utilisateur permet de valider rapidement la valeur ajoutee. Pour les equipes qui font de la prospection a grand volume, combinez Hublead (pour la synchronisation CRM) avec PhantomBuster ou Captain Data (pour le scraping en masse). Et si l&apos;enrichissement email est critique, ajoutez Kaspr ou DropContact dans votre stack.</p>
                   </div>
@@ -595,7 +595,7 @@ export default function HubleadArticle() {
               <p className="text-[13px] font-semibold text-[#111] mb-4">Articles similaires</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedArticles.map((a) => (
-                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
+                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold text-white mb-3" style={{ background: a.color }}>
                       {a.category[0]}
                     </div>
@@ -608,14 +608,14 @@ export default function HubleadArticle() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin de connecter LinkedIn a votre CRM HubSpot ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[450px] mx-auto">On configure et optimise votre stack de prospection LinkedIn + HubSpot. Hublead, Surfe, PhantomBuster, workflows et automatisations. Setup complet en moins de 2 semaines.</p>
                 <div className="flex items-center justify-center gap-3">
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                     <span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Reserver un appel
                   </a>
-                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                     Nos services
                   </Link>
                 </div>

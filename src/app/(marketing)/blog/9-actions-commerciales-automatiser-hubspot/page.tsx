@@ -205,7 +205,7 @@ export default function BlogPostPage() {
 
             {/* Intro section */}
             <section className="mb-10">
-              <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi automatiser vos actions commerciales ?</h2>
                 <p className="text-[13px] text-[#555] leading-[1.75] mb-3">
                   Selon une etude de HubSpot, les commerciaux ne passent que 33% de leur temps a vendre. Le reste est consomme par des taches administratives : saisie de donnees, mise a jour du CRM, creation de rapports, envoi d&apos;emails de routine.
@@ -223,15 +223,15 @@ export default function BlogPostPage() {
             {/* Bubble summary cards */}
             <section className="mb-10">
               <div className="grid grid-cols-3 gap-3">
-                <div className="rounded-2xl bg-[#F7F7FF] border border-[#E8E8F4] p-4 text-center">
+                <div className="rounded-lg bg-[#F7F7FF] border border-[#E8E8F4] p-4 text-center">
                   <p className="text-[24px] font-bold text-[#4B5EFC]">9</p>
                   <p className="text-[11px] text-[#666] mt-1">actions a automatiser</p>
                 </div>
-                <div className="rounded-2xl bg-[#F0FDF4] border border-[#DCFCE7] p-4 text-center">
+                <div className="rounded-lg bg-[#F0FDF4] border border-[#DCFCE7] p-4 text-center">
                   <p className="text-[24px] font-bold text-[#22C55E]">12h+</p>
                   <p className="text-[11px] text-[#666] mt-1">gagnees / semaine</p>
                 </div>
-                <div className="rounded-2xl bg-[#FFF7ED] border border-[#FFEDD5] p-4 text-center">
+                <div className="rounded-lg bg-[#FFF7ED] border border-[#FFEDD5] p-4 text-center">
                   <p className="text-[24px] font-bold text-[#F97316]">0</p>
                   <p className="text-[11px] text-[#666] mt-1">code requis</p>
                 </div>
@@ -243,11 +243,11 @@ export default function BlogPostPage() {
             <article>
               {actions.map((action, i) => (
                 <section key={action.num} id={`action-${action.num}`} className="mb-8">
-                  <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                  <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                     {/* Header with number and time saved */}
                     <div className="flex items-start justify-between mb-5">
                       <div className="flex items-center gap-3">
-                        <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#4B5EFC] text-white text-[14px] font-bold">{action.num}</span>
+                        <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#4B5EFC] text-white text-[14px] font-bold">{action.num}</span>
                         <h2 className="text-[17px] font-semibold text-[#111] leading-tight max-w-[400px]">{action.title}</h2>
                       </div>
                       <span className="shrink-0 ml-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F0FDF4] border border-[#DCFCE7]">
@@ -269,7 +269,7 @@ export default function BlogPostPage() {
                     </div>
 
                     {/* Le setup */}
-                    <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                    <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                       <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#EEF2FF] text-[11px] font-medium text-[#4B5EFC] mb-3">Setup pas a pas</span>
                       <div className="space-y-2">
                         {action.setup.split("\n").map((line, li) => {
@@ -294,20 +294,20 @@ export default function BlogPostPage() {
             {/* Total time saved -- dark section */}
             <section id="total" className="mb-8">
               <Connector />
-              <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+              <div className="rounded-lg bg-[#111] p-5 md:p-8">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Bilan</span>
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-white mb-6">Temps total recupere chaque semaine</h2>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
                   {actions.map((a) => (
-                    <div key={a.num} className="rounded-xl bg-white/5 border border-white/10 p-3">
+                    <div key={a.num} className="rounded-lg bg-white/5 border border-white/10 p-3">
                       <p className="text-[11px] text-white/40 mb-1">{a.num}. {a.title.split(" ").slice(0, 3).join(" ")}</p>
                       <p className="text-[16px] font-bold text-[#22C55E]">{a.timeSaved}</p>
                     </div>
                   ))}
                 </div>
 
-                <div className="rounded-xl bg-[#22C55E]/10 border border-[#22C55E]/20 p-5 text-center">
+                <div className="rounded-lg bg-[#22C55E]/10 border border-[#22C55E]/20 p-5 text-center">
                   <p className="text-[11px] text-[#22C55E]/60 uppercase tracking-wider mb-2">Total estime</p>
                   <p className="text-[36px] font-bold text-[#22C55E]">12h 05min</p>
                   <p className="text-[13px] text-white/40 mt-2">par semaine, soit plus de <strong className="text-white/70">625 heures par an</strong> pour votre equipe commerciale</p>
@@ -326,7 +326,7 @@ export default function BlogPostPage() {
 
             {/* Priority section */}
             <section className="mb-8">
-              <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <h2 className="text-[17px] font-semibold text-[#111] mb-4">Par ou commencer ?</h2>
                 <p className="text-[13px] text-[#555] leading-[1.75] mb-4">
                   Vous n&apos;avez pas besoin d&apos;implementer les 9 automatisations en une seule fois. Voici notre recommandation pour commencer :
@@ -366,7 +366,7 @@ export default function BlogPostPage() {
 
             {/* Dark pro tip */}
             <section className="mb-8">
-              <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+              <div className="rounded-lg bg-[#111] p-5 md:p-8">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Aller plus loin</span>
                 <h2 className="text-[17px] font-semibold text-white mb-3">Avec Ceres, on automatise et on mesure</h2>
                 <p className="text-[13px] text-white/40 leading-[1.75] mb-4">
@@ -390,7 +390,7 @@ export default function BlogPostPage() {
 
             {/* Related articles */}
             <section className="mb-8">
-              <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                 <div className="space-y-2">
                   {relatedArticles.map((a) => (
@@ -408,7 +408,7 @@ export default function BlogPostPage() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Pret a automatiser vos actions commerciales ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[420px] mx-auto">On configure vos 9 automatisations HubSpot en moins de 2 semaines. Resultat garanti sur le temps gagne.</p>
                 <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

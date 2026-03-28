@@ -89,40 +89,40 @@ export default function TemplatesPopover({ onSelect }: TemplatesPopoverProps) {
   return (
     <div ref={containerRef} className="relative">
       <button onClick={function() { setOpen(!open); }} type="button"
-        className="flex h-8 w-8 items-center justify-center rounded-lg text-[#737373] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors"
+        className="flex h-8 w-8 items-center justify-center rounded-lg text-[#999] hover:bg-[#F5F5F5] hover:text-[#111] transition-colors"
         title="Templates">
         <Lightbulb size={16} />
       </button>
       {open && (
-        <div className="absolute bottom-full left-0 mb-2 w-[380px] max-w-[calc(100vw-2rem)] rounded-xl border border-[#E5E5E5] bg-white shadow-lg z-50 overflow-hidden">
+        <div className="absolute bottom-full left-0 mb-2 w-[380px] max-w-[calc(100vw-2rem)] rounded-lg border border-[#EAEAEA] bg-white shadow-lg z-50 overflow-hidden">
           {/* Header + Search */}
           <div className="p-3 border-b border-[#F0F0F0]">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-semibold text-[#0A0A0A]">Templates</h3>
-              <button onClick={function() { setOpen(false); }} className="text-[#A3A3A3] hover:text-[#0A0A0A]"><X size={14} /></button>
+              <h3 className="text-sm font-semibold text-[#111]">Templates</h3>
+              <button onClick={function() { setOpen(false); }} className="text-[#BBB] hover:text-[#111]"><X size={14} /></button>
             </div>
             <div className="relative">
-              <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#A3A3A3]" />
+              <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#BBB]" />
               <input ref={searchRef} type="text" value={search} onChange={function(e) { setSearch(e.target.value); }}
                 placeholder="Search templates..."
-                className="w-full h-8 pl-9 pr-3 text-xs rounded-lg border border-[#E5E5E5] focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]" />
+                className="w-full h-8 pl-9 pr-3 text-xs rounded-lg border border-[#EAEAEA] focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]" />
             </div>
           </div>
 
           {/* Templates list */}
           <div className="max-h-[280px] overflow-y-auto p-2">
             {filtered.length === 0 ? (
-              <p className="text-xs text-[#A3A3A3] text-center py-4">No templates found</p>
+              <p className="text-xs text-[#BBB] text-center py-4">No templates found</p>
             ) : filtered.map(function(cat) {
               return (
                 <div key={cat.category} className="mb-2">
-                  <p className="text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3] px-2 py-1.5">{cat.category}</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-[#BBB] px-2 py-1.5">{cat.category}</p>
                   {cat.items.map(function(item) {
                     var needsInput = item.prompt.endsWith(" ");
                     return (
                       <button key={item.label} onClick={function() { onSelect(item.prompt); if (!needsInput) setOpen(false); }}
                         className="w-full text-left px-2 py-2 rounded-lg text-xs hover:bg-[#F5F5F5] transition-colors group flex items-center justify-between">
-                        <span className="text-[#0A0A0A] group-hover:text-[#0A0A0A]">{item.label}</span>
+                        <span className="text-[#111] group-hover:text-[#111]">{item.label}</span>
                         {needsInput && <span className="text-[10px] text-[#D4D4D4]">type to complete</span>}
                       </button>
                     );

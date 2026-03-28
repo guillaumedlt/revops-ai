@@ -86,7 +86,7 @@ export default function AgenceHubSpotPage() {
             <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=64" alt="HubSpot" width={22} height={22} className="rounded-sm" />
             <span className="text-[13px] text-[#999]">Partenaire certifié HubSpot · +100 instances déployées</span>
           </div>
-          <a href="#contact" className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md border border-[#E5E5E5] bg-white text-[13px] text-[#111] font-medium hover:border-[#CCC] hover:shadow-sm transition-all">
+          <a href="#contact" className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md border border-[#EAEAEA] bg-white text-[13px] text-[#111] font-medium hover:border-[#CCC] hover:shadow-sm transition-all">
             <span className="w-2 h-2 rounded-sm bg-[#FF7A59]" />Discuter de mon projet
           </a>
         </section>
@@ -101,7 +101,7 @@ export default function AgenceHubSpotPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {whyHubSpot.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-[#E8E8E8] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div key={item.title} className="rounded-lg border border-[#EAEAEA] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <div className="flex items-center gap-2.5 mb-3">
                   <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: item.color }} />
                   <h3 className="text-[14px] font-semibold text-[#111]">{item.title}</h3>
@@ -114,29 +114,29 @@ export default function AgenceHubSpotPage() {
         <Connector />
 
         <section><div className="text-center mb-10"><div className="mb-4"><Badge>Les 4 Hubs</Badge></div><h2 className="text-[24px] sm:text-[30px] font-semibold text-[#111] tracking-[-0.02em]">Tout dans une seule plateforme</h2></div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{hubs.map((h) => (<div key={h.title} className="rounded-2xl border border-[#E8E8E8] bg-white p-6 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]"><div className="flex items-center gap-2.5 mb-3"><div className="w-3 h-3 rounded-sm" style={{ backgroundColor: h.color }} /><h3 className="text-[15px] font-semibold text-[#111]">{h.title}</h3></div><p className="text-[12px] text-[#777] leading-[1.65] mb-4">{h.desc}</p><ul className="space-y-1.5">{h.features.map((f) => (<li key={f} className="flex items-center gap-2 text-[11px] text-[#666]"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" className="shrink-0 text-[#22C55E]"><path d="M13.3 4.3L6 11.6L2.7 8.3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>{f}</li>))}</ul></div>))}</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{hubs.map((h) => (<div key={h.title} className="rounded-lg border border-[#EAEAEA] bg-white p-6 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]"><div className="flex items-center gap-2.5 mb-3"><div className="w-3 h-3 rounded-sm" style={{ backgroundColor: h.color }} /><h3 className="text-[15px] font-semibold text-[#111]">{h.title}</h3></div><p className="text-[12px] text-[#777] leading-[1.65] mb-4">{h.desc}</p><ul className="space-y-1.5">{h.features.map((f) => (<li key={f} className="flex items-center gap-2 text-[11px] text-[#666]"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" className="shrink-0 text-[#22C55E]"><path d="M13.3 4.3L6 11.6L2.7 8.3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>{f}</li>))}</ul></div>))}</div>
         </section>
         <Connector />
 
-        <section><div className="rounded-2xl bg-[#111] p-6 md:p-10">
+        <section><div className="rounded-lg bg-[#111] p-6 md:p-10">
           <div className="mb-8"><span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Nos interventions</span><h2 className="text-[24px] sm:text-[30px] font-semibold text-white tracking-[-0.02em] mb-2">5 façons d&apos;intervenir</h2><p className="text-[13px] text-white/40">De l&apos;implémentation from scratch à l&apos;admin quotidienne.</p></div>
-          <div className="space-y-3">{interventions.map((item) => (<div key={item.title} className="rounded-xl bg-white/5 border border-white/10 p-5"><div className="flex items-center gap-2.5 mb-2"><div className="w-3 h-3 rounded-sm" style={{ backgroundColor: item.color }} /><h3 className="text-[14px] font-semibold text-white">{item.title}</h3><span className="text-[10px] font-medium px-2 py-0.5 rounded" style={{ backgroundColor: item.color + "20", color: item.color }}>{item.duration}</span></div><p className="text-[12px] text-white/40 leading-[1.6] mb-3">{item.desc}</p><ul className="space-y-1.5">{item.items.map((i) => (<li key={i} className="flex items-center gap-2 text-[11px] text-white/30"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" className="shrink-0 text-white/20"><path d="M13.3 4.3L6 11.6L2.7 8.3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>{i}</li>))}</ul></div>))}</div>
+          <div className="space-y-3">{interventions.map((item) => (<div key={item.title} className="rounded-lg bg-white/5 border border-white/10 p-5"><div className="flex items-center gap-2.5 mb-2"><div className="w-3 h-3 rounded-sm" style={{ backgroundColor: item.color }} /><h3 className="text-[14px] font-semibold text-white">{item.title}</h3><span className="text-[10px] font-medium px-2 py-0.5 rounded" style={{ backgroundColor: item.color + "20", color: item.color }}>{item.duration}</span></div><p className="text-[12px] text-white/40 leading-[1.6] mb-3">{item.desc}</p><ul className="space-y-1.5">{item.items.map((i) => (<li key={i} className="flex items-center gap-2 text-[11px] text-white/30"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" className="shrink-0 text-white/20"><path d="M13.3 4.3L6 11.6L2.7 8.3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>{i}</li>))}</ul></div>))}</div>
         </div></section>
         <Connector />
 
-        <section><div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+        <section><div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
           <div className="text-center mb-8"><div className="mb-4"><Badge>Résultats</Badge></div><h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em]">Avant / Après</h2></div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">{results.map((r) => (<div key={r.before} className="flex items-center gap-3 rounded-xl border border-[#F2F2F2] p-4"><div className="flex-1"><p className="text-[11px] text-[#999] line-through mb-1">{r.before}</p><p className="text-[12px] font-semibold text-[#111]">{r.after}</p></div><span className="text-[13px] font-bold text-[#22C55E] shrink-0">{r.metric}</span></div>))}</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">{results.map((r) => (<div key={r.before} className="flex items-center gap-3 rounded-lg border border-[#F2F2F2] p-4"><div className="flex-1"><p className="text-[11px] text-[#999] line-through mb-1">{r.before}</p><p className="text-[12px] font-semibold text-[#111]">{r.after}</p></div><span className="text-[13px] font-bold text-[#22C55E] shrink-0">{r.metric}</span></div>))}</div>
         </div></section>
         <Connector />
 
-        <section><div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+        <section><div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
           <div className="mb-8"><div className="mb-4"><Badge>FAQ</Badge></div><h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em]">Questions fréquentes</h2></div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">{faqItems.map((f, i) => (<div key={i} className="border-b border-[#F2F2F2] py-4"><h3 className="text-[13px] font-semibold text-[#111] mb-1.5">{f.q}</h3><p className="text-[12px] text-[#777] leading-[1.6]">{f.a}</p></div>))}</div>
         </div></section>
         <Connector />
 
-        <section id="contact"><div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-8 md:p-12 text-center">
+        <section id="contact"><div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-8 md:p-12 text-center">
           <h2 className="text-[24px] sm:text-[30px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Un projet HubSpot ?</h2>
           <p className="text-[14px] text-[#999] mb-6 max-w-[420px] mx-auto">Config, migration, optimisation ou admin. On cadre ça en 30 min.</p>
           <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors"><span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Réserver un appel</a>

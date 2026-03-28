@@ -97,7 +97,7 @@ export default function AgentsIAPage() {
               <img key={d} src={`https://www.google.com/s2/favicons?domain=${d}&sz=64`} alt="" width={20} height={20} className="rounded-sm" loading="lazy" />
             ))}
           </div>
-          <a href="#contact" className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md border border-[#E5E5E5] bg-white text-[13px] text-[#111] font-medium hover:border-[#CCC] hover:shadow-sm transition-all">
+          <a href="#contact" className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md border border-[#EAEAEA] bg-white text-[13px] text-[#111] font-medium hover:border-[#CCC] hover:shadow-sm transition-all">
             <span className="w-2 h-2 rounded-sm bg-[#6D00CC]" />Déployer des agents IA
           </a>
         </section>
@@ -105,7 +105,7 @@ export default function AgentsIAPage() {
 
         {/* Problems */}
         <section>
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="mb-8">
               <div className="mb-4"><Badge>Le problème</Badge></div>
               <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em]">Vos équipes font le travail que l&apos;IA devrait faire</h2>
@@ -131,7 +131,7 @@ export default function AgentsIAPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {claudeAdvantages.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-[#E8E8E8] bg-white p-6 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div key={item.title} className="rounded-lg border border-[#EAEAEA] bg-white p-6 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <div className="flex items-center gap-2.5 mb-3">
                   <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: item.color }} />
                   <h3 className="text-[15px] font-semibold text-[#111]">{item.title}</h3>
@@ -145,7 +145,7 @@ export default function AgentsIAPage() {
 
         {/* Architecture — clean schematic */}
         <section>
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="text-center mb-8">
               <div className="mb-4"><Badge>Architecture</Badge></div>
               <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em]">Comment ça fonctionne</h2>
@@ -158,7 +158,7 @@ export default function AgentsIAPage() {
                 { label: "Résultat", sub: "Dans vos outils", color: "#22C55E" },
               ].map((step, i) => (
                 <div key={step.label} className="flex items-center gap-2">
-                  <div className="rounded-xl border border-[#F2F2F2] p-4 flex-1 text-center">
+                  <div className="rounded-lg border border-[#F2F2F2] p-4 flex-1 text-center">
                     <div className="w-3 h-3 rounded-sm mx-auto mb-2" style={{ backgroundColor: step.color }} />
                     <h3 className="text-[12px] font-semibold text-[#111] mb-0.5">{step.label}</h3>
                     <p className="text-[10px] text-[#999]">{step.sub}</p>
@@ -180,7 +180,7 @@ export default function AgentsIAPage() {
           </div>
           <div className="space-y-3">
             {agents.map((a) => (
-              <article key={a.title} className="rounded-2xl border border-[#E8E8E8] bg-white p-6 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <article key={a.title} className="rounded-lg border border-[#EAEAEA] bg-white p-6 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <div className="flex flex-col md:flex-row md:items-start gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-2.5 mb-2">
@@ -205,7 +205,7 @@ export default function AgentsIAPage() {
 
         {/* Tech stack */}
         <section>
-          <div className="rounded-2xl bg-[#111] p-6 md:p-10">
+          <div className="rounded-lg bg-[#111] p-6 md:p-10">
             <div className="mb-8">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Stack technique</span>
               <h2 className="text-[24px] sm:text-[30px] font-semibold text-white tracking-[-0.02em] mb-2">Les briques qu&apos;on utilise</h2>
@@ -213,7 +213,7 @@ export default function AgentsIAPage() {
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {stack.map((s) => (
-                <div key={s.label} className="rounded-xl bg-white/5 border border-white/10 p-4 flex items-start gap-3">
+                <div key={s.label} className="rounded-lg bg-white/5 border border-white/10 p-4 flex items-start gap-3">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={`https://www.google.com/s2/favicons?domain=${s.domain}&sz=64`} alt={s.label} width={18} height={18} className="rounded-sm mt-0.5 shrink-0" loading="lazy" />
                   <div>
@@ -229,14 +229,14 @@ export default function AgentsIAPage() {
 
         {/* Timeline */}
         <section>
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="mb-8">
               <div className="mb-4"><Badge>Timeline</Badge></div>
               <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em]">Premier agent en prod en 3 semaines</h2>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {timeline.map((s, i) => (
-                <div key={s.num} className="relative rounded-xl border border-[#F2F2F2] p-4">
+                <div key={s.num} className="relative rounded-lg border border-[#F2F2F2] p-4">
                   <span className="text-[18px] font-bold text-[#6D00CC]">{s.num}</span>
                   <h3 className="text-[13px] font-semibold text-[#111] mt-2 mb-1">{s.title}</h3>
                   <p className="text-[11px] text-[#777] leading-[1.5]">{s.desc}</p>
@@ -250,7 +250,7 @@ export default function AgentsIAPage() {
 
         {/* FAQ */}
         <section>
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="mb-8">
               <div className="mb-4"><Badge>FAQ</Badge></div>
               <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em]">Questions fréquentes</h2>
@@ -269,7 +269,7 @@ export default function AgentsIAPage() {
 
         {/* CTA */}
         <section id="contact">
-          <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-8 md:p-12 text-center">
+          <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-8 md:p-12 text-center">
             <h2 className="text-[24px] sm:text-[30px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Prêt à déployer l&apos;IA dans votre stack ?</h2>
             <p className="text-[14px] text-[#999] mb-6 max-w-[420px] mx-auto">On identifie vos 3 premiers use cases IA en 30 minutes. Gratuit, sans engagement.</p>
             <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

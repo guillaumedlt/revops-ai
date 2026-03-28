@@ -145,7 +145,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
             <article>
               {/* Section 1 -- L'evolution des operations commerciales */}
               <section id="evolution-operations" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">L&apos;evolution des operations commerciales : du Sales Ops au RevOps</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;histoire des operations commerciales est celle d&apos;une specialisation progressive, suivie d&apos;une reunification necessaire. Pour comprendre le RevOps, il faut d&apos;abord comprendre comment on en est arrive la. Les trois dernieres decennies ont vu emerger, l&apos;une apres l&apos;autre, des fonctions operationnelles dediees a chaque departement generateur de revenu.</p>
@@ -156,7 +156,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                   </div>
 
                   {/* CSS Timeline */}
-                  <div className="mt-8 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-8 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-[#FF7A59]" />
                       <span className="text-[12px] font-semibold text-white">Evolution des Operations -- Timeline</span>
@@ -195,7 +195,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
 
               {/* Section 2 -- Sales Ops */}
               <section id="sales-ops" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#FF7A59] flex items-center justify-center text-white text-[12px] font-bold">SO</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Sales Ops : definition et perimetre</h2>
@@ -217,7 +217,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                       { domaine: "Analyse de performance", kpis: ["Taux de conversion par etape", "Cycle de vente moyen", "Win rate par commercial", "Pipeline coverage ratio"], outils: "CRM dashboards, Looker, Tableau", color: "#FF7A59" },
                       { domaine: "Enablement operationnel", kpis: ["Stack technologique de vente", "Playbooks de qualification", "Onboarding des nouveaux reps", "Sequences et templates"], outils: "Outreach, Salesloft, Notion", color: "#FF7A59" },
                     ].map((item) => (
-                      <div key={item.domaine} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={item.domaine} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <p className="text-[12px] font-semibold text-[#111] mb-2">{item.domaine}</p>
                         <div className="space-y-1.5 mb-3">
                           {item.kpis.map((k) => (
@@ -239,7 +239,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
 
               {/* Section 3 -- Marketing Ops */}
               <section id="marketing-ops" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#4B5EFC] flex items-center justify-center text-white text-[12px] font-bold">MO</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Marketing Ops : definition et perimetre</h2>
@@ -261,7 +261,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                       { domaine: "Attribution et analytics", kpis: ["Modeles d&apos;attribution multi-touch", "Tracking des conversions", "ROI par canal et par campagne", "Dashboards de performance"], outils: "GA4, HubSpot Reports, Looker", color: "#4B5EFC" },
                       { domaine: "Gestion des donnees", kpis: ["Conformite RGPD", "Hygiene et deduplication", "Enrichissement des contacts", "Segmentation avancee"], outils: "Clearbit, ZoomInfo, Clay", color: "#4B5EFC" },
                     ].map((item) => (
-                      <div key={item.domaine} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={item.domaine} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <p className="text-[12px] font-semibold text-[#111] mb-2">{item.domaine}</p>
                         <div className="space-y-1.5 mb-3">
                           {item.kpis.map((k) => (
@@ -283,7 +283,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
 
               {/* Section 4 -- Customer Success Ops */}
               <section id="cs-ops" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#6C5CE7] flex items-center justify-center text-white text-[12px] font-bold">CS</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Customer Success Ops : definition et perimetre</h2>
@@ -304,7 +304,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                       { value: "CSAT", label: "Customer Satisfaction : satisfaction globale mesuree regulierement", color: "#22C55E" },
                       { value: "Churn", label: "Taux d&apos;attrition : pourcentage de clients ou revenu perdu", color: "#FF7A59" },
                     ].map((stat) => (
-                      <div key={stat.label} className="text-center p-4 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2]">
+                      <div key={stat.label} className="text-center p-4 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2]">
                         <div className="text-[18px] font-bold" style={{ color: stat.color }}>{stat.value}</div>
                         <div className="text-[10px] text-[#999] mt-1 leading-[1.4]">{stat.label}</div>
                       </div>
@@ -316,7 +316,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
 
               {/* Section 5 -- RevOps : la vision unifiee */}
               <section id="revops-vision-unifiee" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">RevOps : la vision unifiee du cycle de revenu</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le Revenue Operations n&apos;est pas simplement la somme du Sales Ops, du Marketing Ops et du CS Ops. C&apos;est une refonte fondamentale de la maniere dont une entreprise pense et pilote ses operations generatrices de revenu. Le RevOps part d&apos;un constat : le client ne voit pas vos silos internes. Pour lui, il y a une seule experience, de la premiere interaction marketing jusqu&apos;au renouvellement de son abonnement. Vos operations doivent refleter cette realite.</p>
@@ -328,7 +328,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                   </div>
 
                   {/* CSS Venn Diagram - 3 circles converging */}
-                  <div className="mt-8 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-8 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-[#22C55E]" />
                       <span className="text-[12px] font-semibold text-white">RevOps -- Convergence des 3 fonctions Ops</span>
@@ -388,14 +388,14 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
 
               {/* Section 6 -- Tableau comparatif */}
               <section id="tableau-comparatif" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Tableau comparatif : Sales Ops vs Marketing Ops vs RevOps</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-6">
                     <p>Pour clarifier les differences, voici une comparaison detaillee sur douze criteres cles. Ce tableau permet de comprendre en un coup d&apos;oeil ce qui releve de chaque fonction et ou le RevOps apporte une rupture par rapport aux Ops en silo.</p>
                   </div>
 
                   {/* Comparison table */}
-                  <div className="rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="overflow-x-auto">
                       <table className="w-full text-[11px]">
                         <thead>
@@ -438,14 +438,14 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
 
               {/* Section 7 -- Les 3 modeles organisationnels */}
               <section id="modeles-organisationnels" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les 3 modeles organisationnels : silos, hub-and-spoke, unifie</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Il n&apos;existe pas un seul moyen d&apos;organiser les operations de revenu. Selon la taille de l&apos;entreprise, la maturite des equipes et les ressources disponibles, trois modeles sont possibles. Chacun a ses avantages, ses inconvenients et ses conditions de reussite. Les voici en detail.</p>
                   </div>
 
                   {/* CSS Org Chart - Model 1: Silos */}
-                  <div className="mt-6 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-6 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#FF7A59]" />
@@ -456,7 +456,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                     <div className="bg-white p-5 md:p-6">
                       {/* CEO box */}
                       <div className="flex justify-center mb-2">
-                        <div className="px-4 py-2 rounded-lg bg-[#FAFAFA] border border-[#E8E8E8] text-center">
+                        <div className="px-4 py-2 rounded-lg bg-[#FAFAFA] border border-[#EAEAEA] text-center">
                           <p className="text-[11px] font-semibold text-[#111]">CEO / Direction</p>
                         </div>
                       </div>
@@ -531,7 +531,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                   </div>
 
                   {/* CSS Org Chart - Model 2: Hub and Spoke */}
-                  <div className="mt-4 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-4 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#4B5EFC]" />
@@ -541,7 +541,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                     </div>
                     <div className="bg-white p-5 md:p-6">
                       <div className="flex justify-center mb-2">
-                        <div className="px-4 py-2 rounded-lg bg-[#FAFAFA] border border-[#E8E8E8] text-center">
+                        <div className="px-4 py-2 rounded-lg bg-[#FAFAFA] border border-[#EAEAEA] text-center">
                           <p className="text-[11px] font-semibold text-[#111]">CEO / Direction</p>
                         </div>
                       </div>
@@ -602,7 +602,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                   </div>
 
                   {/* CSS Org Chart - Model 3: Unified RevOps */}
-                  <div className="mt-4 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-4 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#22C55E]" />
@@ -612,14 +612,14 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                     </div>
                     <div className="bg-white p-5 md:p-6">
                       <div className="flex justify-center mb-2">
-                        <div className="px-4 py-2 rounded-lg bg-[#FAFAFA] border border-[#E8E8E8] text-center">
+                        <div className="px-4 py-2 rounded-lg bg-[#FAFAFA] border border-[#EAEAEA] text-center">
                           <p className="text-[11px] font-semibold text-[#111]">CEO / CRO</p>
                         </div>
                       </div>
                       <div className="flex justify-center mb-2"><div className="w-[1px] h-4 bg-[#E0E0E0]" /></div>
                       {/* Unified RevOps team */}
                       <div className="flex justify-center mb-2">
-                        <div className="px-6 py-3 rounded-xl bg-[#22C55E]/10 border-2 border-[#22C55E]/40 text-center">
+                        <div className="px-6 py-3 rounded-lg bg-[#22C55E]/10 border-2 border-[#22C55E]/40 text-center">
                           <p className="text-[12px] font-bold text-[#22C55E]">VP Revenue Operations</p>
                           <p className="text-[8px] text-[#22C55E]/60 mt-0.5">Equipe centralisee -- tous les Ops</p>
                         </div>
@@ -642,7 +642,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                       <div className="flex justify-center my-2"><div className="w-[1px] h-3 bg-[#E0E0E0]" /></div>
                       {/* Departments served */}
                       <div className="flex justify-center">
-                        <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#FAFAFA] border border-[#E8E8E8]">
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#FAFAFA] border border-[#EAEAEA]">
                           <span className="text-[9px] font-medium text-[#999]">Sert :</span>
                           <span className="px-2 py-0.5 rounded text-[8px] font-medium" style={{ backgroundColor: "#4B5EFC15", color: "#4B5EFC" }}>Marketing</span>
                           <span className="px-2 py-0.5 rounded text-[8px] font-medium" style={{ backgroundColor: "#FF7A5915", color: "#FF7A59" }}>Sales</span>
@@ -682,7 +682,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
 
               {/* Section 8 -- Quand passer au RevOps */}
               <section id="quand-passer-revops" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Quand passer au RevOps ? Les signaux et les seuils</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Toutes les entreprises n&apos;ont pas besoin d&apos;un modele RevOps unifie des le premier jour. Une startup de 10 personnes avec un commercial et un marketeur n&apos;a pas les memes besoins qu&apos;une scale-up de 200 personnes avec des equipes sales, marketing et CS structurees. La question n&apos;est pas &ldquo;faut-il faire du RevOps ?&rdquo; mais &ldquo;quand est-ce que le cout de ne pas le faire depasse le cout de le mettre en place ?&rdquo;.</p>
@@ -702,7 +702,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                       { signal: "Blame game installe", desc: "Marketing accuse les sales, les sales accusent le marketing. Les reunions sont tendues.", seuil: "Desaccords recurrents", severity: "Critique", color: "#FF7A59" },
                       { signal: "Churn inexplique", desc: "Perte de clients sans comprendre les causes. Pas de visibilite sur les promesses faites en avant-vente.", seuil: "Churn > 10% annuel sans diagnostic", severity: "Eleve", color: "#6C5CE7" },
                     ].map((item) => (
-                      <div key={item.signal} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={item.signal} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <div className="flex items-center justify-between mb-2">
                           <p className="text-[12px] font-semibold text-[#111]">{item.signal}</p>
                           <span className="text-[9px] font-medium px-2 py-0.5 rounded-full" style={{ backgroundColor: `${item.color}15`, color: item.color }}>{item.severity}</span>
@@ -720,7 +720,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
 
               {/* Section 9 -- Impact mesurable (dark section) */}
               <section id="impact-mesurable" className="mb-8">
-                <div className="rounded-2xl bg-[#111] text-white p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] text-white p-5 md:p-8">
                   <h2 className="text-[17px] font-semibold text-white mb-4">L&apos;impact mesurable du RevOps : les chiffres qui comptent</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
                     <p>Le RevOps n&apos;est pas une mode organisationnelle. C&apos;est un levier de performance dont l&apos;impact est mesurable et documente. Les entreprises qui ont fait la transition d&apos;un modele en silos vers un modele RevOps unifie rapportent des resultats significatifs sur plusieurs indicateurs cles.</p>
@@ -738,7 +738,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                       { value: "-40%", label: "d&apos;erreurs dans les donnees CRM apres unification", color: "#22C55E" },
                       { value: "+20pts", label: "de NPS grace a une experience client coherente", color: "#6C5CE7" },
                     ].map((stat) => (
-                      <div key={stat.label} className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
+                      <div key={stat.label} className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
                         <div className="text-[20px] font-bold" style={{ color: stat.color }}>{stat.value}</div>
                         <div className="text-[10px] text-white/40 mt-1 leading-[1.4]">{stat.label}</div>
                       </div>
@@ -746,7 +746,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                   </div>
 
                   {/* ROI breakdown */}
-                  <div className="mt-6 rounded-xl bg-white/5 border border-white/10 p-5">
+                  <div className="mt-6 rounded-lg bg-white/5 border border-white/10 p-5">
                     <p className="text-[12px] font-semibold text-white mb-4">ROI du RevOps -- les leviers d&apos;impact</p>
                     <div className="space-y-3">
                       {[
@@ -775,7 +775,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
 
               {/* Section 10 -- Notre recommandation */}
               <section id="recommandation" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Notre recommandation : comment choisir le bon modele</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La question n&apos;est pas de choisir entre Sales Ops, Marketing Ops et RevOps comme si c&apos;etaient des options mutuellement exclusives. La bonne approche depend de votre stade de maturite, de la taille de votre equipe et de la complexite de votre cycle de revenu. Voici notre grille de decision.</p>
@@ -811,7 +811,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                         color: "#22C55E",
                       },
                     ].map((item) => (
-                      <div key={item.stade} className="p-4 rounded-xl border-2 bg-white" style={{ borderColor: `${item.color}30` }}>
+                      <div key={item.stade} className="p-4 rounded-lg border-2 bg-white" style={{ borderColor: `${item.color}30` }}>
                         <div className="flex items-center gap-2 mb-1">
                           <span className="text-[13px] font-bold" style={{ color: item.color }}>{item.stade}</span>
                         </div>
@@ -830,7 +830,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
                   </div>
 
                   {/* Ceres method */}
-                  <div className="mt-6 rounded-xl bg-[#FF7A59]/5 border border-[#FF7A59]/15 p-5">
+                  <div className="mt-6 rounded-lg bg-[#FF7A59]/5 border border-[#FF7A59]/15 p-5">
                     <p className="text-[12px] font-semibold text-[#FF7A59] mb-3">Notre methode d&apos;accompagnement RevOps</p>
                     <div className="space-y-2">
                       {[
@@ -851,7 +851,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
 
               {/* Related articles */}
               <section className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((a) => (
@@ -869,7 +869,7 @@ export default function RevOpsVsSalesOpsMarketingOpsPage() {
 
               {/* CTA */}
               <section>
-                <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+                <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                   <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Pret a structurer vos operations de revenu ?</h2>
                   <p className="text-[13px] text-[#999] mb-6 max-w-[420px] mx-auto">On vous aide a choisir le bon modele organisationnel et a deployer une approche RevOps adaptee a votre stade de maturite. Audit, recommandation, deploiement.</p>
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

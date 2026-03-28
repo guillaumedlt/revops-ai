@@ -45,7 +45,7 @@ const MODELS: ModelOption[] = [
 function ProviderIcon({ provider, size = 16 }: { provider: string; size?: number }) {
   if (provider === "kairo") {
     return (
-      <div className="flex items-center justify-center rounded bg-[#0A0A0A] text-white" style={{ width: size, height: size }}>
+      <div className="flex items-center justify-center rounded bg-[#111] text-white" style={{ width: size, height: size }}>
         <span style={{ fontSize: size * 0.6, fontWeight: 700, lineHeight: 1 }}>K</span>
       </div>
     );
@@ -77,10 +77,10 @@ function ProviderIcon({ provider, size = 16 }: { provider: string; size?: number
 function Step({ n, text, sub, link }: { n: string; text: string; sub?: string; link?: string }) {
   return (
     <div className="flex items-start gap-2 flex-1 min-w-0">
-      <span className="h-5 w-5 rounded-full bg-[#0A0A0A] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">{n}</span>
+      <span className="h-5 w-5 rounded-full bg-[#111] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">{n}</span>
       <div className="min-w-0">
         <p className="text-[11px] text-[#333] leading-snug">{text}</p>
-        {sub && <p className="text-[10px] text-[#A3A3A3] leading-snug mt-0.5">{sub}</p>}
+        {sub && <p className="text-[10px] text-[#BBB] leading-snug mt-0.5">{sub}</p>}
         {link && (
           <a href={link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-0.5 text-[10px] text-[#6366F1] hover:underline mt-0.5">
             Open <ExternalLink size={9} />
@@ -133,17 +133,17 @@ function BillingTab() {
   return (
     <div className="space-y-6">
       {/* Current plan + credits */}
-      <div className="bg-white rounded-xl border border-[#E5E5E5] p-6">
+      <div className="bg-white rounded-lg border border-[#EAEAEA] p-6">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-sm font-semibold text-[#0A0A0A]">Plan actuel</h2>
+            <h2 className="text-sm font-semibold text-[#111]">Plan actuel</h2>
             <div className="flex items-center gap-2 mt-1">
-              <span className="text-lg font-bold text-[#0A0A0A]">{planLabels[credits?.plan || "free"] || "Free"}</span>
+              <span className="text-lg font-bold text-[#111]">{planLabels[credits?.plan || "free"] || "Free"}</span>
               <span className="text-[10px] bg-[#22C55E]/10 text-[#22C55E] font-medium px-2 py-0.5 rounded-full">Actif</span>
             </div>
           </div>
           {credits?.plan !== "free" && (
-            <button onClick={handleManageBilling} className="text-xs text-[#737373] hover:text-[#0A0A0A] border border-[#E5E5E5] rounded-lg px-3 py-1.5 transition-colors">
+            <button onClick={handleManageBilling} className="text-xs text-[#999] hover:text-[#111] border border-[#EAEAEA] rounded-lg px-3 py-1.5 transition-colors">
               Gerer l&apos;abonnement
             </button>
           )}
@@ -151,8 +151,8 @@ function BillingTab() {
         {credits && (
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs text-[#737373]">Credits utilises ce mois</span>
-              <span className="text-xs font-semibold text-[#0A0A0A] tabular-nums">{credits.used} / {credits.total}</span>
+              <span className="text-xs text-[#999]">Credits utilises ce mois</span>
+              <span className="text-xs font-semibold text-[#111] tabular-nums">{credits.used} / {credits.total}</span>
             </div>
             <div className="h-2.5 bg-[#F0F0F0] rounded-full overflow-hidden">
               <div
@@ -163,14 +163,14 @@ function BillingTab() {
                 }}
               />
             </div>
-            <p className="text-[11px] text-[#A3A3A3] mt-1.5">{credits.remaining} credits restants</p>
+            <p className="text-[11px] text-[#BBB] mt-1.5">{credits.remaining} credits restants</p>
           </div>
         )}
       </div>
 
       {/* Upgrade plan */}
       {credits?.plan === "free" && (
-        <div className="bg-[#0A0A0A] rounded-xl p-6 text-white">
+        <div className="bg-[#111] rounded-lg p-6 text-white">
           <h3 className="text-sm font-semibold mb-1">Passe au Pro</h3>
           <p className="text-xs text-white/60 mb-4">500 credits/mois, alertes proactives, tous les connecteurs, export PDF.</p>
           <div className="flex items-center gap-3">
@@ -180,7 +180,7 @@ function BillingTab() {
                 var json = await res.json();
                 if (json.data?.checkoutUrl) window.location.href = json.data.checkoutUrl;
               }}
-              className="bg-white text-[#0A0A0A] rounded-lg px-4 py-2 text-xs font-semibold hover:bg-white/90 transition-colors"
+              className="bg-white text-[#111] rounded-lg px-4 py-2 text-xs font-semibold hover:bg-white/90 transition-colors"
             >
               49 EUR/mois — Upgrade
             </button>
@@ -200,9 +200,9 @@ function BillingTab() {
       )}
 
       {/* Buy credit packs */}
-      <div className="bg-white rounded-xl border border-[#E5E5E5] p-6">
-        <h2 className="text-sm font-semibold text-[#0A0A0A] mb-1">Acheter des credits</h2>
-        <p className="text-xs text-[#737373] mb-4">Credits bonus ajoutes instantanement. Valides jusqu&apos;a la fin du mois.</p>
+      <div className="bg-white rounded-lg border border-[#EAEAEA] p-6">
+        <h2 className="text-sm font-semibold text-[#111] mb-1">Acheter des credits</h2>
+        <p className="text-xs text-[#999] mb-4">Credits bonus ajoutes instantanement. Valides jusqu&apos;a la fin du mois.</p>
         <div className="grid grid-cols-3 gap-3">
           {packs.map(function(pack) {
             return (
@@ -210,15 +210,15 @@ function BillingTab() {
                 key={pack.id}
                 onClick={function() { handleBuyPack(pack.id); }}
                 disabled={buying === pack.id}
-                className={"relative rounded-xl border p-4 text-center transition-all hover:shadow-sm disabled:opacity-50 " + (pack.popular ? "border-[#0A0A0A] ring-1 ring-[#0A0A0A]" : "border-[#E5E5E5] hover:border-[#D4D4D4]")}
+                className={"relative rounded-lg border p-4 text-center transition-all hover:shadow-sm disabled:opacity-50 " + (pack.popular ? "border-[#0A0A0A] ring-1 ring-[#0A0A0A]" : "border-[#EAEAEA] hover:border-[#D4D4D4]")}
               >
                 {pack.popular && (
-                  <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-[#0A0A0A] text-white text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">Best value</span>
+                  <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-[#111] text-white text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">Best value</span>
                 )}
-                <p className="text-lg font-bold text-[#0A0A0A]">{pack.credits}</p>
-                <p className="text-[10px] text-[#A3A3A3] mb-2">credits</p>
-                <p className="text-sm font-semibold text-[#0A0A0A]">{pack.price} EUR</p>
-                <p className="text-[10px] text-[#A3A3A3]">{(pack.price / pack.credits * 100).toFixed(1)} c/credit</p>
+                <p className="text-lg font-bold text-[#111]">{pack.credits}</p>
+                <p className="text-[10px] text-[#BBB] mb-2">credits</p>
+                <p className="text-sm font-semibold text-[#111]">{pack.price} EUR</p>
+                <p className="text-[10px] text-[#BBB]">{(pack.price / pack.credits * 100).toFixed(1)} c/credit</p>
               </button>
             );
           })}
@@ -400,14 +400,14 @@ function SettingsContent() {
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-xl font-semibold text-[#0A0A0A]">Settings</h1>
-        <a href="/chat" className="text-sm text-[#737373] hover:text-[#0A0A0A] transition-colors">
+        <h1 className="text-xl font-semibold text-[#111]">Settings</h1>
+        <a href="/chat" className="text-sm text-[#999] hover:text-[#111] transition-colors">
           Back to chat
         </a>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 border-b border-[#E5E5E5] mb-6">
+      <div className="flex gap-1 border-b border-[#EAEAEA] mb-6">
         {TABS.map((tab) => (
           <button
             key={tab.id}
@@ -415,8 +415,8 @@ function SettingsContent() {
             className={
               "px-4 py-2.5 text-sm transition-colors -mb-px " +
               (activeTab === tab.id
-                ? "text-[#0A0A0A] font-medium border-b-2 border-[#0A0A0A]"
-                : "text-[#737373] hover:text-[#0A0A0A]")
+                ? "text-[#111] font-medium border-b-2 border-[#0A0A0A]"
+                : "text-[#999] hover:text-[#111]")
             }
           >
             {tab.label}
@@ -427,23 +427,23 @@ function SettingsContent() {
       {/* General tab */}
       {activeTab === "general" && (
         <div className="space-y-6">
-          <div className="bg-white rounded-xl border border-[#E5E5E5] p-6 space-y-4">
-            <h2 className="text-sm font-medium text-[#0A0A0A]">Account</h2>
+          <div className="bg-white rounded-lg border border-[#EAEAEA] p-6 space-y-4">
+            <h2 className="text-sm font-medium text-[#111]">Account</h2>
             <div className="space-y-3">
               <div>
-                <label className="text-xs text-[#737373]">Email</label>
-                <p className="text-sm text-[#0A0A0A] mt-0.5">{userEmail}</p>
+                <label className="text-xs text-[#999]">Email</label>
+                <p className="text-sm text-[#111] mt-0.5">{userEmail}</p>
               </div>
               <div>
-                <label className="text-xs text-[#737373]">Name</label>
-                <p className="text-sm text-[#0A0A0A] mt-0.5">{userName || "Not set"}</p>
+                <label className="text-xs text-[#999]">Name</label>
+                <p className="text-sm text-[#111] mt-0.5">{userName || "Not set"}</p>
               </div>
             </div>
           </div>
 
           <button
             onClick={handleLogout}
-            className="px-4 py-2 text-sm rounded-lg border border-[#E5E5E5] text-[#737373] hover:text-red-600 hover:border-red-200 transition-colors"
+            className="px-4 py-2 text-sm rounded-lg border border-[#EAEAEA] text-[#999] hover:text-red-600 hover:border-red-200 transition-colors"
           >
             Log out
           </button>
@@ -453,9 +453,9 @@ function SettingsContent() {
       {/* LLM tab */}
       {activeTab === "llm" && (
         <div className="space-y-6">
-          <div className="bg-white rounded-xl border border-[#E5E5E5] p-6 space-y-4">
-            <h2 className="text-sm font-medium text-[#0A0A0A]">Default model</h2>
-            <p className="text-xs text-[#737373]">Choose which model Kairo uses by default</p>
+          <div className="bg-white rounded-lg border border-[#EAEAEA] p-6 space-y-4">
+            <h2 className="text-sm font-medium text-[#111]">Default model</h2>
+            <p className="text-xs text-[#999]">Choose which model Kairo uses by default</p>
             <div className="space-y-1">
               {MODELS.map((model) => {
                 const isSelected = llmConfig?.defaultModel === model.id;
@@ -472,11 +472,11 @@ function SettingsContent() {
                       <ProviderIcon provider={model.provider} size={18} />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className={"text-sm " + (isSelected ? "font-medium text-[#0A0A0A]" : "text-[#525252]")}>{model.label}</p>
-                      <p className="text-[11px] text-[#A3A3A3]">{model.description}</p>
+                      <p className={"text-sm " + (isSelected ? "font-medium text-[#111]" : "text-[#555]")}>{model.label}</p>
+                      <p className="text-[11px] text-[#BBB]">{model.description}</p>
                     </div>
                     {isSelected && (
-                      <Check size={16} className="text-[#0A0A0A] shrink-0" />
+                      <Check size={16} className="text-[#111] shrink-0" />
                     )}
                   </button>
                 );
@@ -484,9 +484,9 @@ function SettingsContent() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl border border-[#E5E5E5] p-6 space-y-4">
-            <h2 className="text-sm font-medium text-[#0A0A0A]">API Keys</h2>
-            <p className="text-xs text-[#737373]">
+          <div className="bg-white rounded-lg border border-[#EAEAEA] p-6 space-y-4">
+            <h2 className="text-sm font-medium text-[#111]">API Keys</h2>
+            <p className="text-xs text-[#999]">
               Optional — if not configured, Kairo platform keys will be used
             </p>
             {[
@@ -505,8 +505,8 @@ function SettingsContent() {
                       <ProviderIcon provider={provider.provider} size={20} />
                     </div>
                     <div>
-                      <p className="text-sm text-[#0A0A0A] font-medium">{provider.name}</p>
-                      <p className="text-xs text-[#737373] mt-0.5">
+                      <p className="text-sm text-[#111] font-medium">{provider.name}</p>
+                      <p className="text-xs text-[#999] mt-0.5">
                         {config?.configured ? (
                           <span className="text-green-600">{"Connected — ****" + config.last4}</span>
                         ) : (
@@ -522,17 +522,17 @@ function SettingsContent() {
                         value={keyInput}
                         onChange={(e) => setKeyInput(e.target.value)}
                         placeholder="sk-..."
-                        className="h-8 px-3 border border-[#E5E5E5] rounded-lg text-xs w-48 focus:outline-none focus:ring-1 focus:ring-[#0A0A0A]"
+                        className="h-8 px-3 border border-[#EAEAEA] rounded-lg text-xs w-48 focus:outline-none focus:ring-1 focus:ring-[#0A0A0A]"
                       />
                       <button
                         onClick={() => saveKey(provider.id)}
-                        className="h-8 px-3 rounded-lg bg-[#0A0A0A] text-white text-xs"
+                        className="h-8 px-3 rounded-lg bg-[#111] text-white text-xs"
                       >
                         Save
                       </button>
                       <button
                         onClick={() => { setEditingKey(null); setKeyInput(""); }}
-                        className="text-xs text-[#737373]"
+                        className="text-xs text-[#999]"
                       >
                         Cancel
                       </button>
@@ -540,7 +540,7 @@ function SettingsContent() {
                   ) : (
                     <button
                       onClick={() => setEditingKey(provider.id)}
-                      className="text-xs text-[#737373] hover:text-[#0A0A0A] transition-colors"
+                      className="text-xs text-[#999] hover:text-[#111] transition-colors"
                     >
                       Edit
                     </button>
@@ -555,7 +555,7 @@ function SettingsContent() {
       {/* Connectors tab */}
       {activeTab === "connectors" && (
         <div className="space-y-3">
-          <p className="text-xs text-[#737373] mb-4">
+          <p className="text-xs text-[#999] mb-4">
             Connect your tools to let Kairo query your data in real-time.
           </p>
           {CONNECTOR_REGISTRY.map(function(c) {
@@ -569,26 +569,26 @@ function SettingsContent() {
               : c.description;
 
             return (
-              <div key={c.id} className="bg-white rounded-xl border border-[#E5E5E5] overflow-hidden">
+              <div key={c.id} className="bg-white rounded-lg border border-[#EAEAEA] overflow-hidden">
                 {/* Main row */}
                 <div className="p-4 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <img src={c.logo} alt="" className="h-6 w-6 rounded" />
                     <div>
                       <div className="flex items-center gap-2">
-                        <p className="text-sm font-medium text-[#0A0A0A]">{c.name}</p>
+                        <p className="text-sm font-medium text-[#111]">{c.name}</p>
                         {c.toolCount > 0 && (
-                          <span className="text-[10px] bg-[#F5F5F5] text-[#737373] px-1.5 py-0.5 rounded-full">{c.toolCount} tools</span>
+                          <span className="text-[10px] bg-[#F5F5F5] text-[#999] px-1.5 py-0.5 rounded-full">{c.toolCount} tools</span>
                         )}
                       </div>
-                      <p className={"text-xs mt-0.5 " + (hasError ? "text-[#EF4444]" : isConnected ? "text-[#22C55E]" : "text-[#A3A3A3]")}>{statusText}</p>
+                      <p className={"text-xs mt-0.5 " + (hasError ? "text-[#EF4444]" : isConnected ? "text-[#22C55E]" : "text-[#BBB]")}>{statusText}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
                     {/* Help button */}
                     <button
                       onClick={function() { setShowGuide(showGuide === c.id ? null : c.id); }}
-                      className={"h-7 w-7 flex items-center justify-center rounded-lg transition-colors " + (showGuide === c.id ? "bg-[#F0F0F0] text-[#0A0A0A]" : "text-[#C0C0C0] hover:text-[#737373] hover:bg-[#F5F5F5]")}
+                      className={"h-7 w-7 flex items-center justify-center rounded-lg transition-colors " + (showGuide === c.id ? "bg-[#F0F0F0] text-[#111]" : "text-[#C0C0C0] hover:text-[#999] hover:bg-[#F5F5F5]")}
                       title="How to connect"
                     >
                       <HelpCircle size={15} />
@@ -599,33 +599,33 @@ function SettingsContent() {
                       <button
                         onClick={handleConnectHubspot}
                         disabled={hubspotLoading}
-                        className={"text-xs font-medium rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50 " + (hasError ? "text-white bg-[#EF4444] hover:bg-[#DC2626]" : hubspotConnected ? "text-[#737373] border border-[#E5E5E5] hover:bg-[#F5F5F5]" : "text-white bg-[#0A0A0A] hover:bg-[#333]")}
+                        className={"text-xs font-medium rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50 " + (hasError ? "text-white bg-[#EF4444] hover:bg-[#DC2626]" : hubspotConnected ? "text-[#999] border border-[#EAEAEA] hover:bg-[#F5F5F5]" : "text-white bg-[#111] hover:bg-[#333]")}
                       >
                         {hubspotLoading ? "Redirecting..." : hasError ? "Reconnecter" : hubspotConnected ? "Reconnect" : "Connect"}
                       </button>
                     ) : c.id === "notion" ? (
                       notionConnected ? (
-                        <button onClick={handleDisconnectNotion} className="text-[11px] text-[#737373] hover:text-red-500 border border-[#E5E5E5] rounded-lg px-2.5 py-1.5 transition-colors">Disconnect</button>
+                        <button onClick={handleDisconnectNotion} className="text-[11px] text-[#999] hover:text-red-500 border border-[#EAEAEA] rounded-lg px-2.5 py-1.5 transition-colors">Disconnect</button>
                       ) : showNotionInput ? (
                         <div className="flex items-center gap-1.5">
-                          <input type="password" value={notionKeyInput} onChange={function(e) { setNotionKeyInput(e.target.value); }} placeholder="ntn_..." className="h-7 px-2 border border-[#E5E5E5] rounded-lg text-xs w-36 focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]" />
-                          <button onClick={handleConnectNotion} disabled={notionConnecting || !notionKeyInput.trim()} className="text-[11px] text-white bg-[#0A0A0A] rounded-lg px-2.5 py-1 hover:bg-[#333] disabled:opacity-50">{notionConnecting ? "..." : "Save"}</button>
-                          <button onClick={function() { setShowNotionInput(false); setNotionKeyInput(""); }} className="text-[11px] text-[#A3A3A3]">Cancel</button>
+                          <input type="password" value={notionKeyInput} onChange={function(e) { setNotionKeyInput(e.target.value); }} placeholder="ntn_..." className="h-7 px-2 border border-[#EAEAEA] rounded-lg text-xs w-36 focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]" />
+                          <button onClick={handleConnectNotion} disabled={notionConnecting || !notionKeyInput.trim()} className="text-[11px] text-white bg-[#111] rounded-lg px-2.5 py-1 hover:bg-[#333] disabled:opacity-50">{notionConnecting ? "..." : "Save"}</button>
+                          <button onClick={function() { setShowNotionInput(false); setNotionKeyInput(""); }} className="text-[11px] text-[#BBB]">Cancel</button>
                         </div>
                       ) : (
-                        <button onClick={function() { setShowNotionInput(true); setShowGuide("notion"); }} className="text-xs font-medium text-white bg-[#0A0A0A] rounded-lg px-3 py-1.5 hover:bg-[#333] transition-colors">Connect</button>
+                        <button onClick={function() { setShowNotionInput(true); setShowGuide("notion"); }} className="text-xs font-medium text-white bg-[#111] rounded-lg px-3 py-1.5 hover:bg-[#333] transition-colors">Connect</button>
                       )
                     ) : c.id === "lemlist" ? (
                       lemlistConnected ? (
-                        <button onClick={handleDisconnectLemlist} className="text-[11px] text-[#737373] hover:text-red-500 border border-[#E5E5E5] rounded-lg px-2.5 py-1.5 transition-colors">Disconnect</button>
+                        <button onClick={handleDisconnectLemlist} className="text-[11px] text-[#999] hover:text-red-500 border border-[#EAEAEA] rounded-lg px-2.5 py-1.5 transition-colors">Disconnect</button>
                       ) : showLemlistInput ? (
                         <div className="flex items-center gap-1.5">
-                          <input type="password" value={lemlistKeyInput} onChange={function(e) { setLemlistKeyInput(e.target.value); }} placeholder="API key..." className="h-7 px-2 border border-[#E5E5E5] rounded-lg text-xs w-32 focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]" />
-                          <button onClick={handleConnectLemlist} disabled={lemlistConnecting || !lemlistKeyInput.trim()} className="text-[11px] text-white bg-[#0A0A0A] rounded-lg px-2.5 py-1 hover:bg-[#333] disabled:opacity-50">{lemlistConnecting ? "..." : "Save"}</button>
-                          <button onClick={function() { setShowLemlistInput(false); setLemlistKeyInput(""); }} className="text-[11px] text-[#A3A3A3]">Cancel</button>
+                          <input type="password" value={lemlistKeyInput} onChange={function(e) { setLemlistKeyInput(e.target.value); }} placeholder="API key..." className="h-7 px-2 border border-[#EAEAEA] rounded-lg text-xs w-32 focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]" />
+                          <button onClick={handleConnectLemlist} disabled={lemlistConnecting || !lemlistKeyInput.trim()} className="text-[11px] text-white bg-[#111] rounded-lg px-2.5 py-1 hover:bg-[#333] disabled:opacity-50">{lemlistConnecting ? "..." : "Save"}</button>
+                          <button onClick={function() { setShowLemlistInput(false); setLemlistKeyInput(""); }} className="text-[11px] text-[#BBB]">Cancel</button>
                         </div>
                       ) : (
-                        <button onClick={function() { setShowLemlistInput(true); setShowGuide("lemlist"); }} className="text-xs font-medium text-white bg-[#0A0A0A] rounded-lg px-3 py-1.5 hover:bg-[#333] transition-colors">Connect</button>
+                        <button onClick={function() { setShowLemlistInput(true); setShowGuide("lemlist"); }} className="text-xs font-medium text-white bg-[#111] rounded-lg px-3 py-1.5 hover:bg-[#333] transition-colors">Connect</button>
                       )
                     ) : null}
                   </div>
@@ -636,34 +636,34 @@ function SettingsContent() {
                   <div className="border-t border-[#F0F0F0] bg-[#FAFAFA] px-4 py-3">
                     {c.id === "hubspot" && (
                       <div className="space-y-2">
-                        <p className="text-[11px] font-semibold text-[#525252]">Setup in 1 click</p>
+                        <p className="text-[11px] font-semibold text-[#555]">Setup in 1 click</p>
                         <div className="flex gap-4">
                           <Step n="1" text='Click "Connect" above' />
                           <Step n="2" text="Log in to HubSpot" />
                           <Step n="3" text="Authorize Kairo" />
                         </div>
-                        <p className="text-[10px] text-[#A3A3A3] mt-1">Kairo connects via OAuth SSO — no API key needed. Your data stays in HubSpot, Kairo queries it in real-time.</p>
+                        <p className="text-[10px] text-[#BBB] mt-1">Kairo connects via OAuth SSO — no API key needed. Your data stays in HubSpot, Kairo queries it in real-time.</p>
                       </div>
                     )}
                     {c.id === "notion" && (
                       <div className="space-y-2">
-                        <p className="text-[11px] font-semibold text-[#525252]">Setup in 3 steps</p>
+                        <p className="text-[11px] font-semibold text-[#555]">Setup in 3 steps</p>
                         <div className="flex gap-4">
                           <Step n="1" text="Create an integration on Notion" link="https://www.notion.so/profile/integrations" />
                           <Step n="2" text="Share pages with your integration" sub='Page > "..." > Connections' />
                           <Step n="3" text="Paste the API key above" sub="Starts with ntn_" />
                         </div>
-                        <p className="text-[10px] text-[#A3A3A3] mt-1">Create an Internal integration, give it Read access, then share the pages you want Kairo to access.</p>
+                        <p className="text-[10px] text-[#BBB] mt-1">Create an Internal integration, give it Read access, then share the pages you want Kairo to access.</p>
                       </div>
                     )}
                     {c.id === "lemlist" && (
                       <div className="space-y-2">
-                        <p className="text-[11px] font-semibold text-[#525252]">Setup in 2 steps</p>
+                        <p className="text-[11px] font-semibold text-[#555]">Setup in 2 steps</p>
                         <div className="flex gap-4">
                           <Step n="1" text="Copy your API key from Lemlist" link="https://app.lemlist.com/settings/integrations" />
                           <Step n="2" text="Paste it above and click Save" />
                         </div>
-                        <p className="text-[10px] text-[#A3A3A3] mt-1">Find it in Lemlist Settings &gt; Integrations &gt; API. Kairo will read your campaigns, leads, and team stats.</p>
+                        <p className="text-[10px] text-[#BBB] mt-1">Find it in Lemlist Settings &gt; Integrations &gt; API. Kairo will read your campaigns, leads, and team stats.</p>
                       </div>
                     )}
                   </div>

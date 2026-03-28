@@ -46,7 +46,7 @@ export default function Features() {
   return (
     <section id="services" className="relative z-20">
       <div className="max-w-[1000px] mx-auto px-6">
-        <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
+        <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
 
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
@@ -102,7 +102,7 @@ export default function Features() {
                     );
                   }}
                   className={
-                    "rounded-xl border p-4 text-left cursor-pointer transition-all " +
+                    "rounded-lg border p-4 text-left cursor-pointer transition-all " +
                     (isSel ? "border-[#111] bg-[#FAFAFA] ring-1 ring-[#111]" : "border-[#F2F2F2] hover:border-[#E0E0E0]") +
                     (isDis ? " !opacity-30 !cursor-not-allowed" : "")
                   }

@@ -165,7 +165,7 @@ export default function MeilleurCRMB2BFranceArticle() {
             <article>
               {/* Section 1 : Ce qu'un CRM B2B doit faire */}
               <section id="b2b-vs-b2c" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Ce qu&apos;un CRM B2B doit faire (et pourquoi le B2C n&apos;est pas le meme sujet)</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Tous les CRM ne se valent pas. Et surtout, un CRM concu pour le B2C ne convient pas au B2B. La difference est structurelle : en B2C, vous gerez des individus isoles, des transactions rapides, du volume. En B2B, vous gerez des comptes entreprises, des cycles de vente de plusieurs mois, des comites d&apos;achat avec 5, 10, parfois 15 interlocuteurs impliques dans la decision.</p>
@@ -184,7 +184,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                       { title: "Automatisation des processus", desc: "Workflows automatises : relances, changements d etape, notifications, creation de taches. Reduction du travail administratif des commerciaux.", color: "#4B5EFC" },
                       { title: "Reporting avance", desc: "Rapports personnalises sur la performance individuelle et collective : taux de conversion par etape, velocite, win rate, taille moyenne des deals.", color: "#6C5CE7" },
                     ].map((c) => (
-                      <div key={c.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={c.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-full" style={{ background: c.color }} />
                           <span className="text-[12px] font-semibold text-[#111]">{c.title}</span>
@@ -205,7 +205,7 @@ export default function MeilleurCRMB2BFranceArticle() {
 
               {/* Section 2 : Les criteres de selection */}
               <section id="criteres" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les criteres de selection pour un CRM B2B</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Pour etablir ce classement, on a retenu 12 criteres concrets que l&apos;on evalue en situation reelle chez nos clients. Ces criteres ne sont pas theoriques : ce sont les points de friction que l&apos;on rencontre au quotidien quand on deploie et optimise des CRM pour des equipes B2B de 3 a 50 commerciaux.</p>
@@ -225,7 +225,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                       { title: "RGPD et securite", desc: "Hebergement des donnees en Europe, conformite RGPD native, gestion du consentement, audit trail.", color: "#FF7A59" },
                       { title: "IA et innovation", desc: "Fonctionnalites d intelligence artificielle : scoring predictif, suggestions, resume de conversations, forecasting IA.", color: "#22C55E" },
                     ].map((c) => (
-                      <div key={c.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={c.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-full" style={{ background: c.color }} />
                           <span className="text-[12px] font-semibold text-[#111]">{c.title}</span>
@@ -240,7 +240,7 @@ export default function MeilleurCRMB2BFranceArticle() {
 
               {/* Section 3 : #1 HubSpot CRM */}
               <section id="hubspot" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=32" alt="HubSpot" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">#1 HubSpot CRM</h2>
@@ -257,7 +257,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     <p>Le point faible de HubSpot reste la personnalisation avancee. Les objets custom existent mais restent moins flexibles que ceux de Salesforce. Pour les entreprises avec des processus de vente tres specifiques (industrie, construction, neobanques), certaines adaptations peuvent etre limitantes. Et le prix monte vite quand on ajoute plusieurs Hubs en version Enterprise.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing HubSpot Sales Hub (jan 2026)</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -277,13 +277,13 @@ export default function MeilleurCRMB2BFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["CRM gratuit pour utilisateurs illimites", "Interface intuitive, adoption rapide", "Forecasting B2B avance (Pro+)", "Ecosysteme complet (Marketing, Service, Ops)", "1 600+ integrations dans la marketplace", "Enrichissement Clearbit natif", "ABM et target accounts integres"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Objets custom moins flexibles que Salesforce", "Prix eleve en version Enterprise multi-Hubs", "Personnalisation avancee limitee (Free/Starter)", "Reporting basique sur les plans gratuit et Starter", "Pas de gestion de territoires native"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -291,7 +291,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#C5CAF5] bg-[#EEF0FF] p-3">
+                  <div className="mt-4 rounded-lg border border-[#C5CAF5] bg-[#EEF0FF] p-3">
                     <p className="text-[11px] font-semibold text-[#4B5EFC] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les PME et ETI B2B de 3 a 50 commerciaux qui veulent un CRM puissant, facile a adopter et integre avec le marketing. Notre recommandation par defaut pour toute entreprise B2B qui demarre ou qui veut migrer depuis un outil vieillissant.</p>
                   </div>
@@ -301,7 +301,7 @@ export default function MeilleurCRMB2BFranceArticle() {
 
               {/* Section 4 : #2 Salesforce Sales Cloud */}
               <section id="salesforce" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <img src="https://www.google.com/s2/favicons?domain=salesforce.com&sz=32" alt="Salesforce" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">#2 Salesforce Sales Cloud</h2>
@@ -317,7 +317,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     <p>L&apos;ecosysteme Salesforce est le plus riche du marche : AppExchange compte plus de 7 000 applications, et pratiquement tous les outils B2B s&apos;integrent nativement avec Salesforce. C&apos;est un avantage indeniable pour les entreprises qui ont une stack complexe.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing Salesforce Sales Cloud (jan 2026)</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -337,13 +337,13 @@ export default function MeilleurCRMB2BFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Personnalisation quasi illimitee", "Gestion de comptes la plus avancee", "Forecasting multi-niveaux", "Ecosysteme de 7 000+ apps", "IA Einstein pour scoring et recommandations", "Reference pour les equipes 50+ commerciaux"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Complexite de mise en place et maintenance", "Necessite un admin Salesforce dedie", "Interface moins intuitive que HubSpot", "Couts caches (implementation, consulting, add-ons)", "Pas de plan gratuit fonctionnel", "Engagement annuel obligatoire"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -351,7 +351,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#E0D4FC] bg-[#F8F5FF] p-3">
+                  <div className="mt-4 rounded-lg border border-[#E0D4FC] bg-[#F8F5FF] p-3">
                     <p className="text-[11px] font-semibold text-[#6C5CE7] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les entreprises de plus de 50 commerciaux avec des processus de vente complexes, des hierarchies d&apos;acheteurs multi-niveaux et un budget CRM superieur a 50 000 euros par an. Indispensable dans les secteurs ou Salesforce est le standard (SaaS enterprise, conseil, services financiers).</p>
                   </div>
@@ -361,7 +361,7 @@ export default function MeilleurCRMB2BFranceArticle() {
 
               {/* Section 5 : #3 Pipedrive */}
               <section id="pipedrive" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <img src="https://www.google.com/s2/favicons?domain=pipedrive.com&sz=32" alt="Pipedrive" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">#3 Pipedrive</h2>
@@ -376,7 +376,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     <p>Pipedrive est un excellent choix pour les equipes de 2 a 15 commerciaux qui vendent un produit ou service relativement simple (cycles de vente de 1 a 3 mois, un ou deux interlocuteurs par deal) et qui veulent un outil que les commerciaux utiliseront reellement. Pour du B2B complexe avec de l&apos;ABM et du multi-interlocuteurs, HubSpot ou Salesforce seront plus adaptes.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing Pipedrive (jan 2026)</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -396,13 +396,13 @@ export default function MeilleurCRMB2BFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Meilleure UX pipeline du marche", "Adoption immediate par les commerciaux", "Prix accessible et transparent", "App mobile excellente", "Pipeline visuel drag-and-drop"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Gestion de comptes basique", "Pas de marketing automation integre", "Forecasting limite vs HubSpot/Salesforce", "Pas d ABM natif", "Reporting moins avance"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -410,7 +410,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#D4EDDA] bg-[#F0FDF4] p-3">
+                  <div className="mt-4 rounded-lg border border-[#D4EDDA] bg-[#F0FDF4] p-3">
                     <p className="text-[11px] font-semibold text-[#22C55E] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les equipes commerciales B2B de 2 a 15 personnes avec des cycles de vente courts a moyens (1-3 mois) et qui privilegient la simplicite d&apos;utilisation. Excellent pour les entreprises de services, les agences et les ESN.</p>
                   </div>
@@ -420,7 +420,7 @@ export default function MeilleurCRMB2BFranceArticle() {
 
               {/* Section 6 : #4 Microsoft Dynamics 365 */}
               <section id="dynamics" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <img src="https://www.google.com/s2/favicons?domain=microsoft.com&sz=32" alt="Microsoft Dynamics 365" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">#4 Microsoft Dynamics 365 Sales</h2>
@@ -436,7 +436,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     <p>En France, Dynamics est surtout present dans les grandes entreprises et les ETI du secteur industriel qui ont deja standardise leur IT sur Microsoft. Pour les startups et les PME tech, HubSpot ou Pipedrive sont generalement de meilleurs choix.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing Dynamics 365 Sales (jan 2026)</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -456,13 +456,13 @@ export default function MeilleurCRMB2BFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Integration Outlook/Teams/Excel native", "Fonctionnalites B2B enterprise completes", "Power BI pour le reporting avance", "Hebergement EU natif (Azure)", "IA Copilot for Sales"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Interface lourde et peu intuitive", "Administration complexe (Power Platform)", "Adoption difficile par les commerciaux", "Tarification opaque avec de nombreux add-ons", "Ecosysteme d integrations moins riche"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -470,7 +470,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#E5E5E5] bg-[#F9F9F9] p-3">
+                  <div className="mt-4 rounded-lg border border-[#EAEAEA] bg-[#F9F9F9] p-3">
                     <p className="text-[11px] font-semibold text-[#111] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les ETI et grandes entreprises dont l&apos;infrastructure IT est deja 100% Microsoft (Outlook, Teams, SharePoint, Azure AD). Pertinent dans l&apos;industrie, la distribution et les services financiers ou Microsoft est le standard.</p>
                   </div>
@@ -480,7 +480,7 @@ export default function MeilleurCRMB2BFranceArticle() {
 
               {/* Section 7 : #5 Sellsy */}
               <section id="sellsy" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <img src="https://www.google.com/s2/favicons?domain=sellsy.com&sz=32" alt="Sellsy" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">#5 Sellsy</h2>
@@ -495,7 +495,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     <p>Sellsy est un excellent choix pour les PME francaises de 5 a 30 personnes qui veulent un outil tout-en-un CRM + facturation + comptabilite, avec un support francophone et des donnees en France. Pour les equipes commerciales B2B qui ont besoin de fonctionnalites avancees (ABM, scoring, forecasting sophistique), HubSpot ou Pipedrive seront plus adaptes.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing Sellsy (jan 2026)</p>
                     <div className="grid grid-cols-3 gap-3">
                       {[
@@ -514,13 +514,13 @@ export default function MeilleurCRMB2BFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["CRM + facturation + comptabilite integres", "100% francais, donnees hebergees en France", "Support francophone reactif", "Devis-a-facture automatique", "Conforme aux obligations legales francaises"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Fonctionnalites CRM B2B basiques vs leaders", "Pas de forecasting avance", "Integrations limitees avec l ecosysteme B2B", "Automatisation de workflows limitee", "Pas d ABM ni de scoring predictif"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -528,7 +528,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#FFDDD2] bg-[#FFF5F0] p-3">
+                  <div className="mt-4 rounded-lg border border-[#FFDDD2] bg-[#FFF5F0] p-3">
                     <p className="text-[11px] font-semibold text-[#FF7A59] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les PME francaises de 5 a 30 personnes qui veulent un outil unique CRM + facturation + comptabilite. Particulierement adapte aux societes de services, agences et ESN qui ont besoin de generer des devis et des factures directement depuis le pipeline commercial.</p>
                   </div>
@@ -538,7 +538,7 @@ export default function MeilleurCRMB2BFranceArticle() {
 
               {/* Section 8 : #6 Axonaut */}
               <section id="axonaut" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <img src="https://www.google.com/s2/favicons?domain=axonaut.com&sz=32" alt="Axonaut" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">#6 Axonaut</h2>
@@ -553,7 +553,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     <p>Les limites pour le B2B sont significatives. Le pipeline est basique (pas de multi-pipeline natif, pas de forecasting). La gestion de comptes est rudimentaire. Les integrations sont tres limitees (pas de connexion native avec les outils de prospection B2B, pas d&apos;API ouverte pour les automatisations custom). Le reporting est minimal. Et l&apos;outil n&apos;est tout simplement pas concu pour des equipes commerciales de plus de 10 personnes.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing Axonaut (jan 2026)</p>
                     <div className="grid grid-cols-3 gap-3">
                       {[
@@ -572,13 +572,13 @@ export default function MeilleurCRMB2BFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Tout-en-un CRM + compta + facturation + RH", "Prix unique transparent", "Prise en main en 1 heure", "100% francais, support francophone", "Ideal pour TPE et independants"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Pipeline CRM tres basique", "Pas de forecasting ni de scoring", "Integrations tres limitees", "Pas concu pour plus de 10 users", "Reporting minimal"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -586,7 +586,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#FFDDD2] bg-[#FFF5F0] p-3">
+                  <div className="mt-4 rounded-lg border border-[#FFDDD2] bg-[#FFF5F0] p-3">
                     <p className="text-[11px] font-semibold text-[#FF7A59] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les TPE et independants francais (1 a 10 personnes) qui cherchent un outil unique pour gerer la relation client, la facturation et la comptabilite. Artisans, consultants, petites agences. Pas adapte pour des equipes commerciales B2B structurees.</p>
                   </div>
@@ -596,7 +596,7 @@ export default function MeilleurCRMB2BFranceArticle() {
 
               {/* Section 9 : #7 Zoho CRM */}
               <section id="zoho" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <img src="https://www.google.com/s2/favicons?domain=zoho.com&sz=32" alt="Zoho CRM" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">#7 Zoho CRM</h2>
@@ -612,7 +612,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     <p>Zoho est un choix pertinent pour les PME B2B soucieuses du budget qui veulent un CRM fonctionnellement riche sans payer le prix de HubSpot Pro ou Salesforce. Mais il faut accepter une experience utilisateur en retrait et un ecosysteme de partenaires moins developpe en France.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing Zoho CRM (jan 2026)</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -632,13 +632,13 @@ export default function MeilleurCRMB2BFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Meilleur rapport qualite-prix du marche", "Fonctionnalites avancees a prix bas", "Ecosysteme de 45+ apps Zoho", "IA Zia pour scoring et predictions", "Zoho One a 45 eur/mois (toutes apps)"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Interface datee et UX perfectible", "Documentation confuse en francais", "Peu de partenaires en France", "Integrations non-Zoho moins fluides", "Support inegal selon les plans"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -646,7 +646,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#D4EDDA] bg-[#F0FDF4] p-3">
+                  <div className="mt-4 rounded-lg border border-[#D4EDDA] bg-[#F0FDF4] p-3">
                     <p className="text-[11px] font-semibold text-[#22C55E] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les PME B2B de 5 a 30 personnes avec un budget CRM serre qui veulent des fonctionnalites avancees (scoring, IA, automatisation) sans payer le prix de HubSpot Pro ou Salesforce. Pertinent si vous etes pret a investir du temps dans la configuration.</p>
                   </div>
@@ -656,13 +656,13 @@ export default function MeilleurCRMB2BFranceArticle() {
 
               {/* Section 10 : Tableau comparatif */}
               <section id="comparatif" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Tableau comparatif des 7 CRM B2B</h2>
                   <p className="text-[13px] text-[#555] leading-[1.75] mb-5">Vue d&apos;ensemble complete des 7 CRM compares sur 12 criteres B2B. Les scores refletent notre experience terrain avec ces outils.</p>
 
                   <div className="overflow-x-auto">
                     <div className="min-w-[900px]">
-                      <div className="grid grid-cols-8 gap-2 pb-3 border-b border-[#E8E8E8]">
+                      <div className="grid grid-cols-8 gap-2 pb-3 border-b border-[#EAEAEA]">
                         <span className="text-[10px] font-semibold text-[#999]">Critere</span>
                         {[
                           { name: "HubSpot", icon: "hubspot.com" },
@@ -710,7 +710,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FFF7ED] border border-[#FFEDD5] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FFF7ED] border border-[#FFEDD5] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Comment lire ce tableau</p>
                     <p className="text-[11px] text-[#777] leading-[1.65]">Les scores refletent notre experience avec ces outils en contexte B2B reel. Un outil note &ldquo;Basique&rdquo; sur un critere n&apos;est pas necessairement mauvais : il couvre les besoins de base mais ne permet pas les cas d&apos;usage avances. Les prix indiques sont les prix d&apos;entree par utilisateur et par mois, hors promotions et engagements annuels.</p>
                   </div>
@@ -720,7 +720,7 @@ export default function MeilleurCRMB2BFranceArticle() {
 
               {/* Section 11 : Quel CRM B2B selon votre taille et budget */}
               <section id="recommandations" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Recommandations</span>
                   <h2 className="text-[20px] font-semibold text-white mb-4">Quel CRM B2B choisir selon votre taille et votre budget</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75] mb-6">
@@ -766,7 +766,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                         desc: "Zoho offre le meilleur ratio fonctionnalites/prix du marche. Scoring, IA, automatisation et reporting avance a un prix deux a trois fois inferieur a HubSpot Pro. Le compromis se fait sur l UX et l ecosysteme de partenaires en France.",
                       },
                     ].map((r) => (
-                      <div key={r.profil} className="rounded-xl bg-white/5 border border-white/10 p-4">
+                      <div key={r.profil} className="rounded-lg bg-white/5 border border-white/10 p-4">
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-[12px] font-semibold text-white">{r.profil}</span>
                           <span className="text-[10px] text-[#4B5EFC] font-medium">{r.budget}</span>
@@ -782,7 +782,7 @@ export default function MeilleurCRMB2BFranceArticle() {
 
               {/* Section 12 : Notre choix chez Ceres */}
               <section id="choix-ceres" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Notre choix chez Ceres : HubSpot, sans hesitation</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Chez Ceres, on deploie et optimise des CRM pour des entreprises B2B depuis trois ans. On a travaille avec HubSpot, Salesforce, Pipedrive et Zoho chez nos clients. Notre recommandation par defaut est HubSpot, et voici pourquoi.</p>
@@ -814,7 +814,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                         icon: "hubspot.com",
                       },
                     ].map((s) => (
-                      <div key={s.etape} className="flex gap-3 rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={s.etape} className="flex gap-3 rounded-lg border border-[#F2F2F2] p-4">
                         <img src={`https://www.google.com/s2/favicons?domain=${s.icon}&sz=32`} alt={s.etape} className="w-5 h-5 mt-0.5" />
                         <div className="flex-1">
                           <p className="text-[11px] font-semibold text-[#4B5EFC] mb-0.5">{s.etape}</p>
@@ -824,7 +824,7 @@ export default function MeilleurCRMB2BFranceArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Cout type d&apos;un deployment HubSpot B2B</p>
                     <p className="text-[11px] text-[#777] leading-[1.65]">Pour une equipe de 10 commerciaux : Sales Hub Professional (90 eur/user/mois x 10 = 900 eur/mois) + Marketing Hub Starter (15 eur/mois) + Operations Hub Starter (15 eur/mois). Total : environ 930 eur par mois, soit 93 eur par utilisateur. C&apos;est 40% moins cher que Salesforce Enterprise a fonctionnalites equivalentes, avec une adoption deux fois plus rapide.</p>
                   </div>
@@ -842,7 +842,7 @@ export default function MeilleurCRMB2BFranceArticle() {
               <p className="text-[13px] font-semibold text-[#111] mb-4">Articles similaires</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedArticles.map((a) => (
-                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
+                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold text-white mb-3" style={{ background: a.color }}>
                       {a.category[0]}
                     </div>
@@ -855,14 +855,14 @@ export default function MeilleurCRMB2BFranceArticle() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide pour choisir et deployer votre CRM B2B ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[500px] mx-auto">On deploie HubSpot pour les equipes commerciales B2B. Configuration, migration de donnees, formation, integrations, reporting. Votre CRM operationnel en moins de 2 semaines.</p>
                 <div className="flex items-center justify-center gap-3">
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                     <span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Reserver un appel
                   </a>
-                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                     Notre agence HubSpot
                   </Link>
                 </div>

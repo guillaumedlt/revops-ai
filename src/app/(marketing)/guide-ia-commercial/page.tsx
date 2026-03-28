@@ -136,10 +136,10 @@ export default function GuideIALandingPage() {
 
         {/* Book mockup + what you'll learn */}
         <section className="mb-16">
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
             <div className="flex flex-col md:flex-row gap-8 items-center">
               {/* Book cover */}
-              <div className="w-[200px] h-[260px] rounded-xl shadow-[8px_8px_30px_-10px_rgba(0,0,0,0.2)] shrink-0 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #6D00CC 0%, #8B5CF6 50%, #4C1D95 100%)" }}>
+              <div className="w-[200px] h-[260px] rounded-lg shadow-[8px_8px_30px_-10px_rgba(0,0,0,0.2)] shrink-0 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #6D00CC 0%, #8B5CF6 50%, #4C1D95 100%)" }}>
                 <div className="absolute inset-0 flex flex-col justify-between p-5">
                   <div>
                     <div className="w-8 h-0.5 bg-white/40 mb-3" />
@@ -218,9 +218,9 @@ export default function GuideIALandingPage() {
           </div>
           <div className="space-y-3">
             {chapters.map((ch) => (
-              <div key={ch.num} className="rounded-2xl border border-[#E8E8E8] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] hover:border-[#DDD] transition-colors">
+              <div key={ch.num} className="rounded-lg border border-[#EAEAEA] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] hover:border-[#DDD] transition-colors">
                 <div className="flex gap-4 items-start">
-                  <div className="w-10 h-10 rounded-xl bg-[#6D00CC]/10 flex items-center justify-center text-[#6D00CC] text-[13px] font-bold shrink-0">
+                  <div className="w-10 h-10 rounded-lg bg-[#6D00CC]/10 flex items-center justify-center text-[#6D00CC] text-[13px] font-bold shrink-0">
                     {ch.num}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -238,7 +238,7 @@ export default function GuideIALandingPage() {
 
         {/* Templates inclus */}
         <section className="mb-16">
-          <div className="rounded-2xl bg-[#111] p-6 md:p-10">
+          <div className="rounded-lg bg-[#111] p-6 md:p-10">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Inclus dans le guide</span>
             <h2 className="text-[20px] sm:text-[28px] font-semibold text-white tracking-[-0.02em] mb-6">Tout ce qui est inclus</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -251,7 +251,7 @@ export default function GuideIALandingPage() {
                 { title: "Checklist de deploiement 3 phases", desc: "Quick wins, automatisation, agents autonomes. 12 semaines, etape par etape.", color: "#6C5CE7" },
                 { title: "Bibliotheque de prompts par role", desc: "SDR, AE, CSM, RevOps Manager. Les prompts adaptes a chaque fonction.", color: "#6D00CC" },
               ].map((t) => (
-                <div key={t.title} className="rounded-xl bg-white/5 p-4 flex gap-3 items-start">
+                <div key={t.title} className="rounded-lg bg-white/5 p-4 flex gap-3 items-start">
                   <div className="w-2 h-2 rounded-sm mt-1.5 shrink-0" style={{ background: t.color }} />
                   <div>
                     <p className="text-[12px] font-semibold text-white mb-0.5">{t.title}</p>
@@ -269,13 +269,13 @@ export default function GuideIALandingPage() {
             <Badge>Apercu</Badge>
             <h2 className="text-[20px] sm:text-[28px] font-semibold text-[#111] tracking-[-0.02em] mt-4">Un exemple de prompt du guide</h2>
           </div>
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="flex items-center gap-2 mb-4">
               <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude" className="w-4 h-4" />
               <span className="text-[11px] font-semibold text-[#111]">Prompt #7 : Icebreaker personnalise</span>
               <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#6D00CC]/10 text-[#6D00CC] font-medium">SDR</span>
             </div>
-            <div className="rounded-xl bg-[#1a1a2e] p-4 mb-4">
+            <div className="rounded-lg bg-[#1a1a2e] p-4 mb-4">
               <pre className="text-[11px] text-[#E0E0E0] leading-[1.7] whitespace-pre-wrap font-mono">
 {`Tu es un expert en prospection B2B. A partir du profil
 LinkedIn suivant, genere un icebreaker de 1-2 phrases
@@ -303,7 +303,7 @@ Actualite recente : {recent_news}`}
 
         {/* Testimonial */}
         <section className="mb-16">
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <p className="text-[14px] text-[#555] leading-[1.75] mb-4">&ldquo;On a deploye les workflows Make + Claude du guide en 2 semaines. Les resumes de calls automatiques nous font gagner 45 minutes par jour par commercial. Le scoring IA a augmente notre taux de conversion SQL de 22%.&rdquo;</p>
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-[#6D00CC]/10 flex items-center justify-center text-[#6D00CC] text-[10px] font-bold">LR</div>
@@ -322,7 +322,7 @@ Actualite recente : {recent_news}`}
             <h2 className="text-[20px] sm:text-[28px] font-semibold text-[#111] tracking-[-0.02em] mt-4">Ce guide est fait pour vous si</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
               <p className="text-[12px] font-semibold text-[#22C55E] mb-3">Ideal pour</p>
               {[
                 "Vous dirigez une equipe commerciale B2B (SDR, AE, CSM)",
@@ -335,7 +335,7 @@ Actualite recente : {recent_news}`}
                 <p key={i} className="text-[12px] text-[#555] mb-2 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
               ))}
             </div>
-            <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
               <p className="text-[12px] font-semibold text-[#999] mb-3">Moins pertinent si</p>
               {[
                 "Vous n\u2019avez pas encore de CRM en place",
@@ -351,7 +351,7 @@ Actualite recente : {recent_news}`}
 
         {/* Download form */}
         <section id="telecharger" className="mb-16 scroll-mt-24">
-          <div className="rounded-2xl border-2 border-[#6D00CC]/20 bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(109,0,204,0.15)]">
+          <div className="rounded-lg border-2 border-[#6D00CC]/20 bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(109,0,204,0.15)]">
             <div className="flex flex-col lg:flex-row gap-8">
               <div className="flex-1">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#6D00CC]/10 text-[12px] font-medium text-[#6D00CC] mb-4">Gratuit</span>
@@ -379,7 +379,7 @@ Actualite recente : {recent_news}`}
               </div>
 
               <div className="lg:w-[380px] shrink-0">
-                <div className="rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-5">
+                <div className="rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-5">
                   <p className="text-[12px] font-semibold text-[#111] mb-4">Acceder au guide</p>
                   <div ref={formRef} id="hs-guide-ia-form" className="min-h-[200px]">
                     <div className="flex items-center justify-center h-[200px] text-[#CCC]">
@@ -409,7 +409,7 @@ Actualite recente : {recent_news}`}
               { q: "Le guide est-il adapte a Salesforce ?", a: "Les prompts et la methodologie sont CRM-agnostiques. Les workflows Make sont illustres avec HubSpot mais fonctionnent aussi avec Salesforce et Pipedrive." },
               { q: "Peut-on etre accompagne par Ceres pour deployer l\u2019IA ?", a: "Oui, notre offre Agents IA inclut le deploiement des cas d\u2019usage du guide avec un consultant dedie. Le guide est un excellent point de depart pour cadrer vos besoins." },
             ].map((faq) => (
-              <div key={faq.q} className="rounded-2xl border border-[#E8E8E8] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div key={faq.q} className="rounded-lg border border-[#EAEAEA] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <h3 className="text-[13px] font-semibold text-[#111] mb-2">{faq.q}</h3>
                 <p className="text-[12px] text-[#777] leading-[1.65]">{faq.a}</p>
               </div>
@@ -419,7 +419,7 @@ Actualite recente : {recent_news}`}
 
         {/* Final CTA */}
         <section>
-          <div className="rounded-2xl bg-[#111] p-6 md:p-10 text-center">
+          <div className="rounded-lg bg-[#111] p-6 md:p-10 text-center">
             <h2 className="text-[20px] sm:text-[28px] font-semibold text-white tracking-[-0.02em] mb-3">Pret a deployer l&apos;IA dans votre equipe ?</h2>
             <p className="text-[14px] text-white/50 mb-6 max-w-[420px] mx-auto leading-[1.7]">Telechargez le guide ou reservez un appel pour un accompagnement sur mesure.</p>
             <div className="flex items-center justify-center gap-3">

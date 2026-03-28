@@ -137,7 +137,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
               </div>
 
               {/* Tools involved */}
-              <div className="mt-8 rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+              <div className="mt-8 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                 <span className="text-[13px] font-semibold text-[#111] mb-4 block">Outils concernes</span>
                 <div className="flex flex-wrap gap-3">
                   {[
@@ -160,7 +160,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
             <article>
               {/* Section 1 : Pourquoi connecter WhatsApp a HubSpot */}
               <section id="pourquoi" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi connecter WhatsApp a HubSpot</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>WhatsApp compte plus de 2 milliards d&apos;utilisateurs actifs dans le monde. En France, c&apos;est la deuxieme application de messagerie la plus utilisee. Et de plus en plus d&apos;equipes commerciales s&apos;en servent pour echanger avec leurs prospects et clients : relances, suivi de commandes, support rapide, envoi de documents.</p>
@@ -179,7 +179,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
 
               {/* Section 2 : Les 3 methodes d'integration */}
               <section id="methodes" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les 3 methodes d&apos;integration</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Il n&apos;y a pas une seule facon de connecter WhatsApp a HubSpot. Selon votre plan HubSpot, votre volume de messages, et vos competences techniques, vous choisirez une approche differente. Voici un comparatif rapide avant d&apos;entrer dans le detail de chaque methode.</p>
@@ -215,7 +215,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                         cons: "Necessite un developpeur, integration custom a maintenir, plus long a mettre en place",
                       },
                     ].map((m) => (
-                      <div key={m.method} className="flex gap-3 rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={m.method} className="flex gap-3 rounded-lg border border-[#F2F2F2] p-4">
                         <img src={`https://www.google.com/s2/favicons?domain=${m.icon}&sz=32`} alt={m.method} className="w-5 h-5 mt-0.5" />
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
@@ -238,7 +238,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#EFF6FF] border border-[#DBEAFE] p-4">
+                  <div className="mt-5 rounded-lg bg-[#EFF6FF] border border-[#DBEAFE] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">En resume</p>
                     <p className="text-[11px] text-[#777] leading-[1.65]">Si vous avez un plan HubSpot Pro ou Enterprise, commencez par l&apos;integration native. C&apos;est la plus simple a deployer et elle couvre 80% des cas d&apos;usage. Si vous etes sur un plan Starter ou Free, passez par Make. Si vous avez un developpeur et des besoins specifiques (messages transactionnels, chatbot, volumes importants), explorez Twilio.</p>
                   </div>
@@ -248,7 +248,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
 
               {/* Section 3 : Prerequis WhatsApp Business API */}
               <section id="prerequis" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Prerequis : WhatsApp Business API</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Avant de connecter quoi que ce soit, il faut comprendre la difference entre les trois versions de WhatsApp. C&apos;est la source de confusion numero un chez nos clients.</p>
@@ -272,7 +272,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                         usable: true,
                       },
                     ].map((v) => (
-                      <div key={v.name} className={`rounded-xl border p-4 ${v.usable ? "border-[#22C55E] bg-[#F0FDF4]" : "border-[#F2F2F2]"}`}>
+                      <div key={v.name} className={`rounded-lg border p-4 ${v.usable ? "border-[#22C55E] bg-[#F0FDF4]" : "border-[#F2F2F2]"}`}>
                         <div className="flex items-center gap-2 mb-2">
                           <span className="text-[13px] font-semibold text-[#111]">{v.name}</span>
                           {v.usable ? (
@@ -306,7 +306,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FFF7ED] border border-[#FFEDD5] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FFF7ED] border border-[#FFEDD5] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Point d&apos;attention</p>
                     <p className="text-[11px] text-[#777] leading-[1.65]">La verification Meta Business est la partie la plus longue du processus. Ne la laissez pas pour la fin. Lancez-la des le debut de votre projet d&apos;integration. Si votre compte Meta a deja ete restreint ou desactive par le passe, le processus peut prendre plus de temps, voire echouer. Dans ce cas, creez un nouveau Business Manager propre.</p>
                   </div>
@@ -316,7 +316,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
 
               {/* Section 4 : Methode 1 - Integration native HubSpot */}
               <section id="methode-native" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Methode 1 : Integration native HubSpot</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Depuis fin 2024, HubSpot propose une integration native avec WhatsApp Business. C&apos;est la methode la plus simple si vous avez un plan Sales Hub Pro, Service Hub Pro, ou Marketing Hub Pro (ou superieur). L&apos;integration est incluse dans le prix, sans cout supplementaire.</p>
@@ -363,7 +363,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#F0FDF4] border border-[#DCFCE7] p-4">
+                  <div className="mt-5 rounded-lg bg-[#F0FDF4] border border-[#DCFCE7] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Ce que ca donne concretement</p>
                     <p className="text-[11px] text-[#777] leading-[1.65]">Une fois configure, vos commerciaux peuvent repondre aux messages WhatsApp directement depuis HubSpot, sans changer d&apos;outil. Les conversations sont enregistrees sur la fiche contact, les rapports de temps de reponse fonctionnent, et vous pouvez creer des workflows bases sur les interactions WhatsApp (ex: un deal passe en &ldquo;Negociation&rdquo; quand le prospect repond sur WhatsApp).</p>
                   </div>
@@ -373,7 +373,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
 
               {/* Section 5 : Methode 2 - Via Make/Zapier */}
               <section id="methode-make" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Methode 2 : Via Make ou Zapier</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Si vous n&apos;avez pas un plan HubSpot Pro, ou si vous voulez plus de flexibilite dans la configuration, Make (ex-Integromat) et Zapier permettent de connecter WhatsApp Business API a HubSpot via des scenarios d&apos;automatisation.</p>
@@ -381,7 +381,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                     <p>Voici le workflow type qu&apos;on met en place :</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Architecture du workflow Make</p>
                     <div className="space-y-2">
                       {[
@@ -405,7 +405,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                     <p>Pour le sens inverse (HubSpot vers WhatsApp), on cree un second scenario :</p>
                   </div>
 
-                  <div className="mt-3 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-3 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Workflow sortant : HubSpot vers WhatsApp</p>
                     <div className="space-y-2">
                       {[
@@ -428,7 +428,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                     <p>Le setup prend environ 3 a 4 heures pour un scenario bien configure et teste. Chez Ceres, on standardise ce workflow pour tous nos clients et on l&apos;adapte en fonction du pipeline et des proprietes custom de chaque compte HubSpot.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FFF7ED] border border-[#FFEDD5] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FFF7ED] border border-[#FFEDD5] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Piege courant</p>
                     <p className="text-[11px] text-[#777] leading-[1.65]">Les numeros de telephone doivent etre au format E.164 (+33612345678) dans HubSpot pour que le matching fonctionne. Si vos contacts ont des formats heterogenes (06 12 34 56 78, 0033612345678, etc.), ajoutez une etape de normalisation dans votre scenario Make avant la recherche HubSpot. Sinon, vous aurez des doublons et des messages non associes.</p>
                   </div>
@@ -438,7 +438,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
 
               {/* Section 6 : Methode 3 - Via Twilio */}
               <section id="methode-twilio" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Methode 3 : Via Twilio (pour les equipes techniques)</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Twilio est un fournisseur d&apos;API de communication (SMS, voix, WhatsApp, email). Leur API WhatsApp est l&apos;une des plus matures du marche. Si vous avez un developpeur dans votre equipe et des besoins avances, c&apos;est la methode qui offre le plus de controle.</p>
@@ -495,23 +495,23 @@ export default function IntegrationHubSpotWhatsAppArticle() {
 
               {/* Section 7 : Automatiser les messages WhatsApp */}
               <section id="automatiser" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Automatiser les messages WhatsApp</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Une fois l&apos;integration en place, l&apos;objectif est d&apos;automatiser les messages recurrents pour gagner du temps et ameliorer l&apos;experience client. Mais attention : WhatsApp a des regles strictes sur les messages automatises.</p>
                   </div>
 
-                  <div className="mt-5 rounded-2xl bg-[#111] p-5">
+                  <div className="mt-5 rounded-lg bg-[#111] p-5">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Regle fondamentale</span>
                     <h3 className="text-[15px] font-semibold text-white mb-3">La fenetre de 24 heures</h3>
                     <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
                       <p>WhatsApp distingue deux types de messages :</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
-                        <div className="rounded-xl bg-white/5 p-4">
+                        <div className="rounded-lg bg-white/5 p-4">
                           <p className="text-[12px] font-semibold text-white mb-2">Messages de session</p>
                           <p className="text-[11px] text-white/50 leading-[1.65]">Vous pouvez envoyer des messages libres (non templateises) dans les 24 heures suivant le dernier message du client. Format libre, pas besoin d&apos;approbation.</p>
                         </div>
-                        <div className="rounded-xl bg-white/5 p-4">
+                        <div className="rounded-lg bg-white/5 p-4">
                           <p className="text-[12px] font-semibold text-white mb-2">Messages templates</p>
                           <p className="text-[11px] text-white/50 leading-[1.65]">En dehors de la fenetre de 24h, vous devez utiliser des templates pre-approuves par Meta. Ils sont categorises : marketing, utilitaire, authentification. Chaque categorie a un tarif different.</p>
                         </div>
@@ -556,7 +556,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                         category: "Marketing",
                       },
                     ].map((u) => (
-                      <div key={u.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={u.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="text-[12px] font-semibold text-[#111]">{u.title}</span>
                           <span className="text-[9px] px-1.5 py-0.5 rounded font-medium bg-[#4B5EFC]/10 text-[#4B5EFC]">{u.category}</span>
@@ -569,7 +569,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FFF7ED] border border-[#FFEDD5] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FFF7ED] border border-[#FFEDD5] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Bonnes pratiques pour les templates</p>
                     <div className="space-y-1.5">
                       {[
@@ -592,7 +592,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
 
               {/* Section 8 : Tracker les conversations dans le CRM */}
               <section id="tracker" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Tracker les conversations dans le CRM</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;integration WhatsApp-HubSpot ne se limite pas a envoyer et recevoir des messages. L&apos;objectif est de transformer ces conversations en donnees exploitables pour vos rapports et vos decisions commerciales.</p>
@@ -628,7 +628,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                         ],
                       },
                     ].map((block) => (
-                      <div key={block.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={block.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <p className="text-[13px] font-semibold text-[#111] mb-3">{block.title}</p>
                         <div className="space-y-2">
                           {block.items.map((item) => (
@@ -652,7 +652,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
 
               {/* Section 9 : Les limites a connaitre */}
               <section id="limites" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les limites a connaitre</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;integration WhatsApp-HubSpot n&apos;est pas parfaite. Voici les limites et les frustrations qu&apos;on rencontre regulierement en deploiement :</p>
@@ -702,7 +702,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
 
               {/* Section 10 : Notre recommandation */}
               <section id="recommandation" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Recommandation</span>
                   <h2 className="text-[20px] font-semibold text-white mb-4">Notre recommandation selon votre situation</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -710,21 +710,21 @@ export default function IntegrationHubSpotWhatsAppArticle() {
                   </div>
 
                   <div className="mt-5 space-y-3">
-                    <div className="rounded-xl bg-white/5 p-4">
+                    <div className="rounded-lg bg-white/5 p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=32" alt="HubSpot" className="w-4 h-4" />
                         <p className="text-[12px] font-semibold text-white">Vous avez HubSpot Pro ou Enterprise</p>
                       </div>
                       <p className="text-[11px] text-white/50 leading-[1.65]">Utilisez l&apos;integration native. C&apos;est la plus simple, la plus fiable, et elle est incluse dans votre abonnement. Vous aurez les conversations dans la boite de reception, le tracking sur la timeline, et la possibilite de declencher des workflows. C&apos;est suffisant pour 80% des cas d&apos;usage.</p>
                     </div>
-                    <div className="rounded-xl bg-white/5 p-4">
+                    <div className="rounded-lg bg-white/5 p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=make.com&sz=32" alt="Make" className="w-4 h-4" />
                         <p className="text-[12px] font-semibold text-white">Vous avez HubSpot Free ou Starter</p>
                       </div>
                       <p className="text-[11px] text-white/50 leading-[1.65]">Passez par Make ou Zapier. Le setup est un peu plus long mais le resultat est equivalent. Vous gardez le tracking, l&apos;automatisation, et les rapports. C&apos;est aussi la bonne option si vous voulez des workflows plus complexes que ce que propose l&apos;integration native (envoi multi-canal, enrichissement, routing avance).</p>
                     </div>
-                    <div className="rounded-xl bg-white/5 p-4">
+                    <div className="rounded-lg bg-white/5 p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=twilio.com&sz=32" alt="Twilio" className="w-4 h-4" />
                         <p className="text-[12px] font-semibold text-white">Vous avez un developpeur et des besoins specifiques</p>
@@ -746,7 +746,7 @@ export default function IntegrationHubSpotWhatsAppArticle() {
               <p className="text-[13px] font-semibold text-[#111] mb-4">Articles similaires</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedArticles.map((a) => (
-                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
+                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold text-white mb-3" style={{ background: a.color }}>
                       {a.category[0]}
                     </div>
@@ -759,14 +759,14 @@ export default function IntegrationHubSpotWhatsAppArticle() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide pour connecter WhatsApp a HubSpot ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[450px] mx-auto">On configure l&apos;integration WhatsApp-HubSpot de A a Z : compte Meta Business, templates, workflows, tracking. Operationnel en moins d&apos;une semaine.</p>
                 <div className="flex items-center justify-center gap-3">
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                     <span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Reserver un appel
                   </a>
-                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                     Nos services
                   </Link>
                 </div>

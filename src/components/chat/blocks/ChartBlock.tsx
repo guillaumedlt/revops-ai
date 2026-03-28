@@ -90,8 +90,8 @@ export default function ChartBlock({ chartType, title, data, xKey, yKey, yKeys, 
   var renderLegend = isMultiSeries || chartType === "combo";
 
   return (
-    <div className="border border-[#E5E5E5] rounded-xl p-4 bg-white">
-      {title && <div className="text-sm font-semibold text-[#0A0A0A] mb-3">{title}</div>}
+    <div className="border border-[#EAEAEA] rounded-lg p-4 bg-white">
+      {title && <div className="text-sm font-semibold text-[#111] mb-3">{title}</div>}
       <ResponsiveContainer width="100%" height={height}>
         {chartType === "bar" ? (
           <BarChart data={data} barGap={2}>

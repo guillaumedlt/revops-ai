@@ -64,14 +64,14 @@ export default function Pricing() {
       <div className="max-w-[1000px] mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-[13px] text-[#A3A3A3] uppercase tracking-wider mb-4">
+          <p className="text-[13px] text-[#BBB] uppercase tracking-wider mb-4">
             Tarifs
           </p>
-          <h2 className="text-[32px] sm:text-[40px] font-bold text-[#0A0A0A] leading-tight tracking-tight mb-4">
+          <h2 className="text-[32px] sm:text-[40px] font-bold text-[#111] leading-tight tracking-tight mb-4">
             Simple, transparent,{" "}
-            <span className="text-[#A3A3A3]">sans engagement.</span>
+            <span className="text-[#BBB]">sans engagement.</span>
           </h2>
-          <p className="text-[17px] text-[#737373]">
+          <p className="text-[17px] text-[#999]">
             Commencez gratuitement. Passez au plan supérieur quand vous en avez besoin.
           </p>
         </div>
@@ -82,17 +82,17 @@ export default function Pricing() {
             <div
               key={plan.name}
               className={
-                "rounded-2xl p-7 flex flex-col transition-all " +
+                "rounded-lg p-7 flex flex-col transition-all " +
                 (plan.highlight
-                  ? "bg-[#0A0A0A] text-white ring-1 ring-[#0A0A0A] scale-[1.02]"
-                  : "bg-white border border-[#E5E5E5] hover:border-[#D4D4D4]")
+                  ? "bg-[#111] text-white ring-1 ring-[#0A0A0A] scale-[1.02]"
+                  : "bg-white border border-[#EAEAEA] hover:border-[#D4D4D4]")
               }
             >
               <div>
                 <h3
                   className={
                     "text-[18px] font-semibold " +
-                    (plan.highlight ? "text-white" : "text-[#0A0A0A]")
+                    (plan.highlight ? "text-white" : "text-[#111]")
                   }
                 >
                   {plan.name}
@@ -100,7 +100,7 @@ export default function Pricing() {
                 <p
                   className={
                     "text-[13px] mt-1 " +
-                    (plan.highlight ? "text-white/50" : "text-[#A3A3A3]")
+                    (plan.highlight ? "text-white/50" : "text-[#BBB]")
                   }
                 >
                   {plan.desc}
@@ -111,7 +111,7 @@ export default function Pricing() {
                 <span
                   className={
                     "text-[40px] font-bold tracking-tight " +
-                    (plan.highlight ? "text-white" : "text-[#0A0A0A]")
+                    (plan.highlight ? "text-white" : "text-[#111]")
                   }
                 >
                   {plan.price}&euro;
@@ -120,7 +120,7 @@ export default function Pricing() {
                   <span
                     className={
                       "text-[14px] ml-1 " +
-                      (plan.highlight ? "text-white/50" : "text-[#A3A3A3]")
+                      (plan.highlight ? "text-white/50" : "text-[#BBB]")
                     }
                   >
                     {plan.period}
@@ -131,7 +131,7 @@ export default function Pricing() {
               <p
                 className={
                   "text-[13px] font-medium mb-6 " +
-                  (plan.highlight ? "text-white/60" : "text-[#737373]")
+                  (plan.highlight ? "text-white/60" : "text-[#999]")
                 }
               >
                 {plan.credits}
@@ -140,10 +140,10 @@ export default function Pricing() {
               <Link
                 href={plan.href}
                 className={
-                  "w-full h-11 flex items-center justify-center rounded-xl text-[14px] font-medium transition-all " +
+                  "w-full h-11 flex items-center justify-center rounded-lg text-[14px] font-medium transition-all " +
                   (plan.highlight
-                    ? "bg-white text-[#0A0A0A] hover:bg-white/90"
-                    : "bg-[#0A0A0A] text-white hover:bg-[#1a1a1a]")
+                    ? "bg-white text-[#111] hover:bg-white/90"
+                    : "bg-[#111] text-white hover:bg-[#1a1a1a]")
                 }
               >
                 {plan.cta}
@@ -155,7 +155,7 @@ export default function Pricing() {
                     key={f}
                     className={
                       "flex items-start gap-2.5 text-[13px] " +
-                      (plan.highlight ? "text-white/70" : "text-[#737373]")
+                      (plan.highlight ? "text-white/70" : "text-[#999]")
                     }
                   >
                     <svg

@@ -118,7 +118,7 @@ export default function BlogPage() {
               placeholder="Rechercher un article..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full h-12 pl-11 pr-4 rounded-2xl border border-[#E8E8E8] bg-white text-[14px] text-[#111] placeholder-[#CCC] focus:outline-none focus:border-[#DDD] shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] transition-colors"
+              className="w-full h-12 pl-11 pr-4 rounded-lg border border-[#EAEAEA] bg-white text-[14px] text-[#111] placeholder-[#CCC] focus:outline-none focus:border-[#DDD] shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] transition-colors"
             />
           </div>
         </section>
@@ -128,8 +128,8 @@ export default function BlogPage() {
           <div className="flex flex-wrap gap-2 justify-center">
             {categories.map((c) => (
               <button key={c.key} type="button" onClick={() => setCat(c.key)}
-                className={"inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border text-[12px] font-medium cursor-pointer transition-all " +
-                  (cat === c.key ? "border-[#111] bg-[#111] text-white" : "border-[#E8E8E8] bg-white text-[#999] hover:border-[#DDD] hover:text-[#666] shadow-[0_2px_8px_-4px_rgba(0,0,0,0.04)]")}>
+                className={"inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border text-[12px] font-medium cursor-pointer transition-all " +
+                  (cat === c.key ? "border-[#111] bg-[#111] text-white" : "border-[#EAEAEA] bg-white text-[#999] hover:border-[#DDD] hover:text-[#666] shadow-[0_2px_8px_-4px_rgba(0,0,0,0.04)]")}>
                 {c.key !== "all" && <span className="w-2 h-2 rounded-sm" style={{ backgroundColor: cat === c.key ? "white" : c.color, opacity: cat === c.key ? 0.7 : 0.5 }} />}
                 {c.label}
               </button>
@@ -147,12 +147,12 @@ export default function BlogPage() {
                 const isLarge = i === 0;
                 return (
                   <Link key={a.slug} href={`/blog/${a.slug}`}
-                    className={"rounded-2xl border border-[#E8E8E8] bg-white overflow-hidden hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.1)] transition-all group " +
+                    className={"rounded-lg border border-[#EAEAEA] bg-white overflow-hidden hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.1)] transition-all group " +
                       (isLarge ? "md:col-span-7 md:row-span-2" : "md:col-span-5")}>
                     {/* Visual header */}
                     <div className="p-6 pb-0" style={{ background: `linear-gradient(135deg, ${color}08 0%, ${color}03 100%)` }}>
                       <div className="flex items-center justify-between mb-4">
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: color + "12" }}>
+                        <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: color + "12" }}>
                           <span className="text-[13px] font-bold" style={{ color }}>{letter}</span>
                         </div>
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-md" style={{ backgroundColor: color + "12", color }}>{a.readTime}</span>
@@ -187,7 +187,7 @@ export default function BlogPage() {
               const letter = categoryLetters[a.category];
               return (
                 <Link key={a.slug} href={`/blog/${a.slug}`}
-                  className="rounded-2xl border border-[#E8E8E8] bg-white overflow-hidden hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.1)] transition-all group">
+                  className="rounded-lg border border-[#EAEAEA] bg-white overflow-hidden hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.1)] transition-all group">
                   {/* Mini visual */}
                   <div className="px-5 pt-5 pb-0" style={{ background: `linear-gradient(135deg, ${color}06 0%, transparent 100%)` }}>
                     <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: color + "10" }}>
@@ -224,7 +224,7 @@ export default function BlogPage() {
 
         {/* Newsletter */}
         <section className="mt-16">
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-8 md:p-12 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-8 md:p-12 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="flex-1">
                 <div className="mb-3"><Badge>Newsletter</Badge></div>
@@ -233,7 +233,7 @@ export default function BlogPage() {
               </div>
               <div className="w-full md:w-auto shrink-0">
                 <div className="flex gap-2">
-                  <input type="email" placeholder="votre@email.com" className="w-full md:w-[220px] h-10 px-4 rounded-lg border border-[#E5E5E5] bg-[#FAFAFA] text-[13px] text-[#111] placeholder-[#CCC] focus:outline-none focus:border-[#DDD]" />
+                  <input type="email" placeholder="votre@email.com" className="w-full md:w-[220px] h-10 px-4 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] text-[13px] text-[#111] placeholder-[#CCC] focus:outline-none focus:border-[#DDD]" />
                   <button type="button" className="px-4 h-10 rounded-lg bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors cursor-pointer shrink-0">
                     S&apos;abonner
                   </button>

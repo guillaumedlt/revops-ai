@@ -173,7 +173,7 @@ export default function ActionsPage() {
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <div className="h-5 w-5 border-2 border-[#E5E5E5] border-t-[#0A0A0A] rounded-full animate-spin" />
+        <div className="h-5 w-5 border-2 border-[#EAEAEA] border-t-[#0A0A0A] rounded-full animate-spin" />
       </div>
     );
   }
@@ -181,11 +181,11 @@ export default function ActionsPage() {
   return (
     <div className="flex-1 flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="shrink-0 px-6 pt-6 pb-4 border-b border-[#EBEBEB] bg-white">
+      <div className="shrink-0 px-6 pt-6 pb-4 border-b border-[#EAEAEA] bg-white">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-semibold text-[#0A0A0A]">Actions</h1>
-            <p className="text-[13px] text-[#737373] mt-0.5">
+            <h1 className="text-xl font-semibold text-[#111]">Actions</h1>
+            <p className="text-[13px] text-[#999] mt-0.5">
               {todo.length + inProgress.length} active{todo.length + inProgress.length > 1 ? "s" : ""} · {done.length} terminee{done.length > 1 ? "s" : ""}
             </p>
           </div>
@@ -218,15 +218,15 @@ export default function ActionsPage() {
                 <div className="flex items-center justify-between mb-3 shrink-0">
                   <div className="flex items-center gap-2">
                     <Icon size={14} style={{ color: col.color }} />
-                    <span className="text-[13px] font-semibold text-[#0A0A0A]">{col.label}</span>
-                    <span className="text-[11px] text-[#A3A3A3] bg-[#F5F5F5] rounded-full h-5 min-w-[20px] flex items-center justify-center px-1.5 font-medium">
+                    <span className="text-[13px] font-semibold text-[#111]">{col.label}</span>
+                    <span className="text-[11px] text-[#BBB] bg-[#F5F5F5] rounded-full h-5 min-w-[20px] flex items-center justify-center px-1.5 font-medium">
                       {items.length}
                     </span>
                   </div>
                   {col.id !== "done" && (
                     <button
                       onClick={function() { setAddingIn(addingIn === col.id ? null : col.id); }}
-                      className="h-6 w-6 rounded-md text-[#C0C0C0] hover:text-[#0A0A0A] hover:bg-[#F5F5F5] flex items-center justify-center transition-colors"
+                      className="h-6 w-6 rounded-md text-[#C0C0C0] hover:text-[#111] hover:bg-[#F5F5F5] flex items-center justify-center transition-colors"
                     >
                       <Plus size={14} />
                     </button>
@@ -234,10 +234,10 @@ export default function ActionsPage() {
                 </div>
 
                 {/* Drop zone */}
-                <div className={"flex-1 rounded-xl border-2 border-dashed p-2 space-y-2 overflow-y-auto transition-colors " + (isOver ? "border-[#6366F1] bg-[#EEF2FF]" : "border-transparent bg-[#FAFAFA]")}>
+                <div className={"flex-1 rounded-lg border-2 border-dashed p-2 space-y-2 overflow-y-auto transition-colors " + (isOver ? "border-[#6366F1] bg-[#EEF2FF]" : "border-transparent bg-[#FAFAFA]")}>
                   {/* Quick add inline */}
                   {addingIn === col.id && (
-                    <div className="bg-white rounded-lg border border-[#E5E5E5] p-2.5 shadow-sm">
+                    <div className="bg-white rounded-lg border border-[#EAEAEA] p-2.5 shadow-sm">
                       <input
                         ref={addInputRef}
                         type="text"
@@ -248,17 +248,17 @@ export default function ActionsPage() {
                           if (e.key === "Escape") { setAddingIn(null); setNewTitle(""); }
                         }}
                         placeholder="Titre de l'action..."
-                        className="w-full text-[13px] bg-transparent focus:outline-none text-[#0A0A0A] placeholder:text-[#C0C0C0]"
+                        className="w-full text-[13px] bg-transparent focus:outline-none text-[#111] placeholder:text-[#C0C0C0]"
                       />
                       <div className="flex items-center justify-between mt-2">
                         <button
                           onClick={function() { handleAdd(col.id); }}
                           disabled={!newTitle.trim()}
-                          className="text-[11px] font-medium text-white bg-[#0A0A0A] rounded-md px-2.5 py-1 hover:bg-[#333] disabled:opacity-40"
+                          className="text-[11px] font-medium text-white bg-[#111] rounded-md px-2.5 py-1 hover:bg-[#333] disabled:opacity-40"
                         >
                           Ajouter
                         </button>
-                        <button onClick={function() { setAddingIn(null); setNewTitle(""); }} className="text-[11px] text-[#A3A3A3]">Annuler</button>
+                        <button onClick={function() { setAddingIn(null); setNewTitle(""); }} className="text-[11px] text-[#BBB]">Annuler</button>
                       </div>
                     </div>
                   )}
@@ -276,12 +276,12 @@ export default function ActionsPage() {
                         draggable
                         onDragStart={function(e) { onDragStart(e, action.id); }}
                         onDragEnd={onDragEnd}
-                        className={"group bg-white rounded-lg border border-[#EBEBEB] p-3 cursor-grab active:cursor-grabbing hover:border-[#D4D4D4] hover:shadow-sm transition-all select-none " + (isDragging ? "opacity-50 ring-2 ring-[#6366F1]" : "") + (col.id === "done" ? " opacity-70" : "")}
+                        className={"group bg-white rounded-lg border border-[#EAEAEA] p-3 cursor-grab active:cursor-grabbing hover:border-[#D4D4D4] hover:shadow-sm transition-all select-none " + (isDragging ? "opacity-50 ring-2 ring-[#6366F1]" : "") + (col.id === "done" ? " opacity-70" : "")}
                       >
                         {/* Top row: grip + title + delete */}
                         <div className="flex items-start gap-2">
                           <GripVertical size={12} className="text-[#D4D4D4] mt-0.5 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
-                          <p className={"flex-1 text-[13px] font-medium leading-snug " + (col.id === "done" ? "line-through text-[#A3A3A3]" : "text-[#0A0A0A]")}>
+                          <p className={"flex-1 text-[13px] font-medium leading-snug " + (col.id === "done" ? "line-through text-[#BBB]" : "text-[#111]")}>
                             {action.title}
                           </p>
                           <button
@@ -297,7 +297,7 @@ export default function ActionsPage() {
                           {/* Priority dot */}
                           <div className="flex items-center gap-1">
                             <div className="h-2 w-2 rounded-full" style={{ backgroundColor: dotColor }} />
-                            <span className="text-[9px] text-[#A3A3A3]">{PRIORITY_LABEL[action.priority]}</span>
+                            <span className="text-[9px] text-[#BBB]">{PRIORITY_LABEL[action.priority]}</span>
                           </div>
 
                           {/* Source */}
@@ -307,12 +307,12 @@ export default function ActionsPage() {
 
                           {/* Domain */}
                           {action.domain && (
-                            <span className="text-[9px] text-[#A3A3A3] bg-[#F5F5F5] px-1.5 py-0.5 rounded">{action.domain}</span>
+                            <span className="text-[9px] text-[#BBB] bg-[#F5F5F5] px-1.5 py-0.5 rounded">{action.domain}</span>
                           )}
 
                           {/* Due date */}
                           {due && (
-                            <span className={"text-[9px] font-medium flex items-center gap-0.5 " + (due.overdue ? "text-[#EF4444]" : "text-[#737373]")}>
+                            <span className={"text-[9px] font-medium flex items-center gap-0.5 " + (due.overdue ? "text-[#EF4444]" : "text-[#999]")}>
                               <Calendar size={8} /> {due.text}
                             </span>
                           )}

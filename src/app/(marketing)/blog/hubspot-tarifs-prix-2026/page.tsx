@@ -45,7 +45,7 @@ const relatedArticles = [
 /* ─── Pricing card helper ─── */
 function PricingCard({ tier, price, period, features, color, popular }: { tier: string; price: string; period?: string; features: string[]; color: string; popular?: boolean }) {
   return (
-    <div className={`relative rounded-xl border ${popular ? "border-[#FF7A59] shadow-[0_0_0_1px_#FF7A59]" : "border-[#E8E8E8]"} bg-white overflow-hidden`}>
+    <div className={`relative rounded-lg border ${popular ? "border-[#FF7A59] shadow-[0_0_0_1px_#FF7A59]" : "border-[#EAEAEA]"} bg-white overflow-hidden`}>
       {popular && <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#FF7A59]" />}
       <div className="p-4 text-center" style={{ background: `linear-gradient(135deg, ${color}08, ${color}15)` }}>
         <p className="text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color }}>{tier}</p>
@@ -67,7 +67,7 @@ function PricingCard({ tier, price, period, features, color, popular }: { tier: 
 /* ─── Simulation card helper ─── */
 function SimulationCard({ profile, description, hubs, monthly, annual, color }: { profile: string; description: string; hubs: { name: string; tier: string; price: string }[]; monthly: string; annual: string; color: string }) {
   return (
-    <div className="rounded-xl border border-[#E8E8E8] bg-white overflow-hidden shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+    <div className="rounded-lg border border-[#EAEAEA] bg-white overflow-hidden shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
       <div className="p-4 border-b border-[#F2F2F2]" style={{ background: `linear-gradient(135deg, ${color}08, ${color}12)` }}>
         <p className="text-[13px] font-bold text-[#111] mb-1">{profile}</p>
         <p className="text-[11px] text-[#777]">{description}</p>
@@ -204,7 +204,7 @@ export default function HubSpotTarifsPrix2026Article() {
               {/* Section 1 : Introduction */}
               {/* ═══════════════════════════════════════════════ */}
               <section id="introduction" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF7A59" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
@@ -218,7 +218,7 @@ export default function HubSpotTarifsPrix2026Article() {
                   </div>
 
                   {/* Quick overview table */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] overflow-hidden">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] overflow-hidden">
                     <div className="p-3 bg-[#111] text-white">
                       <p className="text-[11px] font-semibold">Vue d&apos;ensemble des prix HubSpot 2026 (facturation mensuelle)</p>
                     </div>
@@ -264,7 +264,7 @@ export default function HubSpotTarifsPrix2026Article() {
               {/* Section 2 : Le modele tarifaire */}
               {/* ═══════════════════════════════════════════════ */}
               <section id="modele-tarifaire" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#4B5EFC]/10 flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4B5EFC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 20h20" /><path d="M5 20V10" /><path d="M10 20V4" /><path d="M15 20v-8" /><path d="M20 20V14" /></svg>
@@ -281,7 +281,7 @@ export default function HubSpotTarifsPrix2026Article() {
                         { title: "3. Les contacts marketing", desc: "Pour le Marketing Hub uniquement, vous payez en fonction du nombre de contacts marketing (ceux a qui vous envoyez des emails). Le prix de base inclut 1 000 contacts en Starter et 2 000 en Pro. Au-dela, chaque tranche supplementaire est facturee.", color: "#6C5CE7" },
                         { title: "4. Les sieges (seats)", desc: "Pour Sales Hub et Service Hub en Pro et Enterprise, chaque utilisateur payant necessite un siege. Le prix affiche est par siege. C&apos;est le facteur multiplicateur le plus sous-estime.", color: "#22C55E" },
                       ].map((item, i) => (
-                        <div key={i} className="rounded-xl border-l-2 bg-[#FAFAFA] p-4" style={{ borderColor: item.color }}>
+                        <div key={i} className="rounded-lg border-l-2 bg-[#FAFAFA] p-4" style={{ borderColor: item.color }}>
                           <p className="text-[12px] font-semibold text-[#111] mb-1">{item.title}</p>
                           <p className="text-[11px] text-[#777] leading-[1.6]">{item.desc}</p>
                         </div>
@@ -297,7 +297,7 @@ export default function HubSpotTarifsPrix2026Article() {
               {/* Section 3 : Marketing Hub */}
               {/* ═══════════════════════════════════════════════ */}
               <section id="marketing-hub" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF7A59" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
@@ -380,7 +380,7 @@ export default function HubSpotTarifsPrix2026Article() {
                   </div>
 
                   {/* Contact pricing breakdown */}
-                  <div className="rounded-xl bg-[#FFF7F5] border border-[#FFE0D6] p-4 mb-6">
+                  <div className="rounded-lg bg-[#FFF7F5] border border-[#FFE0D6] p-4 mb-6">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Tarification des contacts marketing supplementaires</p>
                     <div className="space-y-1.5 text-[11px] text-[#555]">
                       <p><strong className="text-[#111]">Starter :</strong> +20 EUR/mois par tranche de 1 000 contacts supplementaires</p>
@@ -391,7 +391,7 @@ export default function HubSpotTarifsPrix2026Article() {
                   </div>
 
                   {/* Notre avis */}
-                  <div className="rounded-xl bg-[#111] p-4">
+                  <div className="rounded-lg bg-[#111] p-4">
                     <p className="text-[12px] font-semibold text-white mb-2">Notre avis sur le Marketing Hub</p>
                     <p className="text-[11px] text-white/60 leading-[1.7]">Le Marketing Hub est excellent a partir du tier Pro. C&apos;est la que l&apos;on debloque les workflows, l&apos;A/B testing et l&apos;attribution multi-touch qui justifient vraiment l&apos;investissement. Le Starter est trop limite pour du marketing serieux : pas de workflows, pas de scoring. Le saut de prix entre Starter (20 EUR) et Pro (890 EUR) est le plus violent de toute la gamme HubSpot. Il n&apos;y a pas d&apos;entre-deux. Attention egalement au cout des contacts qui peut doubler la facture du Pro si votre base depasse les 10 000 contacts marketing. Nettoyez vos listes regulierement, c&apos;est de l&apos;argent reel.</p>
                   </div>
@@ -402,7 +402,7 @@ export default function HubSpotTarifsPrix2026Article() {
               {/* Section 4 : Sales Hub */}
               {/* ═══════════════════════════════════════════════ */}
               <section id="sales-hub" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#4B5EFC]/10 flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4B5EFC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
@@ -486,7 +486,7 @@ export default function HubSpotTarifsPrix2026Article() {
                   </div>
 
                   {/* Seat pricing warning */}
-                  <div className="rounded-xl bg-[#FFF7F5] border border-[#FFE0D6] p-4 mb-6">
+                  <div className="rounded-lg bg-[#FFF7F5] border border-[#FFE0D6] p-4 mb-6">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Le vrai cout par equipe (Sales Hub Pro)</p>
                     <div className="overflow-x-auto">
                       <table className="w-full text-[11px]">
@@ -516,7 +516,7 @@ export default function HubSpotTarifsPrix2026Article() {
                     </div>
                   </div>
 
-                  <div className="rounded-xl bg-[#111] p-4">
+                  <div className="rounded-lg bg-[#111] p-4">
                     <p className="text-[12px] font-semibold text-white mb-2">Notre avis sur le Sales Hub</p>
                     <p className="text-[11px] text-white/60 leading-[1.7]">Le Sales Hub est le meilleur rapport qualite/prix de HubSpot. Le Free est deja tres fonctionnel pour une petite equipe. Le Starter a 20 EUR/mois est une affaire pour les TPE. Le Pro a 100 EUR/siege est competitif face a Salesforce (qui demarre a 80 EUR/siege en Sales Cloud mais avec beaucoup moins de fonctionnalites incluses). Le point d&apos;attention : le minimum de 10 sieges en Enterprise, soit 1 500 EUR/mois minimum, ce qui reserve ce palier aux equipes de 10+ commerciaux. Conseil : ne mettez en siege Pro que les commerciaux qui utilisent activement les sequences et les workflows. Les managers peuvent souvent rester en visualisation gratuite.</p>
                   </div>
@@ -529,7 +529,7 @@ export default function HubSpotTarifsPrix2026Article() {
               {/* Section 5 : Service Hub */}
               {/* ═══════════════════════════════════════════════ */}
               <section id="service-hub" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#22C55E]/10 flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
@@ -605,7 +605,7 @@ export default function HubSpotTarifsPrix2026Article() {
                     />
                   </div>
 
-                  <div className="rounded-xl bg-[#111] p-4">
+                  <div className="rounded-lg bg-[#111] p-4">
                     <p className="text-[12px] font-semibold text-white mb-2">Notre avis sur le Service Hub</p>
                     <p className="text-[11px] text-white/60 leading-[1.7]">Le Service Hub a longtemps ete le parent pauvre de HubSpot. Depuis la refonte de 2024, il est devenu serieux. Le Help Desk unifie en Pro est un vrai concurrent a Zendesk et Intercom, avec l&apos;avantage de partager la meme base de donnees que le CRM et le Marketing Hub. Le portail client est un atout majeur pour les entreprises B2B. Cela dit, si le support client est votre besoin principal et que vous n&apos;utilisez pas d&apos;autres hubs HubSpot, des outils specialises comme Zendesk ou Freshdesk offrent souvent un meilleur rapport fonctionnalites/prix pour un usage isole.</p>
                   </div>
@@ -616,7 +616,7 @@ export default function HubSpotTarifsPrix2026Article() {
               {/* Section 6 : CMS Hub */}
               {/* ═══════════════════════════════════════════════ */}
               <section id="cms-hub" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#6C5CE7]/10 flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6C5CE7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><path d="M3 9h18" /><path d="M9 21V9" /></svg>
@@ -687,7 +687,7 @@ export default function HubSpotTarifsPrix2026Article() {
                     />
                   </div>
 
-                  <div className="rounded-xl bg-[#111] p-4">
+                  <div className="rounded-lg bg-[#111] p-4">
                     <p className="text-[12px] font-semibold text-white mb-2">Notre avis sur le CMS Hub</p>
                     <p className="text-[11px] text-white/60 leading-[1.7]">Le CMS Hub a un vrai avantage : l&apos;integration native avec le CRM HubSpot. Chaque visiteur de votre site est automatiquement lie a sa fiche contact. Le smart content permet de personnaliser les pages selon le profil du visiteur. C&apos;est puissant. Mais le prix du Pro (490 EUR/mois) est eleve compare a WordPress + un bon hebergeur (50-100 EUR/mois). Le CMS Hub se justifie quand vous utilisez deja HubSpot pour le marketing et les ventes, et que vous voulez centraliser l&apos;ensemble. Pour un site vitrine sans besoin de personnalisation, WordPress reste plus economique et plus flexible.</p>
                   </div>
@@ -698,7 +698,7 @@ export default function HubSpotTarifsPrix2026Article() {
               {/* Section 7 : Operations Hub */}
               {/* ═══════════════════════════════════════════════ */}
               <section id="operations-hub" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#22C55E]/10 flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" /></svg>
@@ -763,7 +763,7 @@ export default function HubSpotTarifsPrix2026Article() {
                     />
                   </div>
 
-                  <div className="rounded-xl bg-[#111] p-4">
+                  <div className="rounded-lg bg-[#111] p-4">
                     <p className="text-[12px] font-semibold text-white mb-2">Notre avis sur l&apos;Operations Hub</p>
                     <p className="text-[11px] text-white/60 leading-[1.7]">L&apos;Operations Hub est un hub de niche mais redoutablement utile. Le Free est deja precieux pour la synchronisation bidirectionnelle avec vos autres outils. Le Pro est indispensable si vous avez besoin d&apos;executer du code custom dans vos workflows (appels API, transformations de donnees complexes). Le partage Snowflake en Enterprise est un game-changer pour les entreprises data-driven. Cependant, 790 EUR/mois pour le Pro est eleve si vous n&apos;utilisez que les actions programmables. Evaluez d&apos;abord si des outils tiers comme Make ou Zapier ne couvrent pas votre besoin a moindre cout.</p>
                   </div>
@@ -774,7 +774,7 @@ export default function HubSpotTarifsPrix2026Article() {
               {/* Section 8 : Commerce Hub */}
               {/* ═══════════════════════════════════════════════ */}
               <section id="commerce-hub" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF7A59" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" /></svg>
@@ -810,7 +810,7 @@ export default function HubSpotTarifsPrix2026Article() {
                     />
                   </div>
 
-                  <div className="rounded-xl bg-[#FFF7F5] border border-[#FFE0D6] p-4 mb-6">
+                  <div className="rounded-lg bg-[#FFF7F5] border border-[#FFE0D6] p-4 mb-6">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Frais de transaction</p>
                     <div className="space-y-1.5 text-[11px] text-[#555]">
                       <p><strong className="text-[#111]">HubSpot Payments (US uniquement) :</strong> 2,9 % + 0,30 USD par transaction carte. 0,5 % par transaction ACH (plafond 10 USD).</p>
@@ -819,7 +819,7 @@ export default function HubSpotTarifsPrix2026Article() {
                     </div>
                   </div>
 
-                  <div className="rounded-xl bg-[#111] p-4">
+                  <div className="rounded-lg bg-[#111] p-4">
                     <p className="text-[12px] font-semibold text-white mb-2">Notre avis sur le Commerce Hub</p>
                     <p className="text-[11px] text-white/60 leading-[1.7]">Le Commerce Hub est encore jeune. Pour les entreprises B2B qui font de la facturation recurrente (SaaS, abonnements), il est interessant d&apos;avoir les factures directement liees aux deals dans le CRM. Mais les fonctionnalites restent limitees comparees a des outils specialises comme Chargebee ou Stripe Billing. Notre recommandation : utilisez-le si vous avez des besoins de facturation simples et que vous etes deja sur HubSpot. Si la facturation et la gestion des abonnements sont au coeur de votre activite, un outil dedie sera plus adapte.</p>
                   </div>
@@ -832,7 +832,7 @@ export default function HubSpotTarifsPrix2026Article() {
               {/* Section 9 : Bundles CRM Suite */}
               {/* ═══════════════════════════════════════════════ */}
               <section id="crm-suite" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#4B5EFC]/10 flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4B5EFC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg>
@@ -865,7 +865,7 @@ export default function HubSpotTarifsPrix2026Article() {
                         color: "#111",
                       },
                     ].map((bundle, i) => (
-                      <div key={i} className="rounded-xl border p-4" style={{ borderColor: bundle.color === "#111" ? "#333" : bundle.color + "40", background: bundle.color === "#111" ? "#111" : bundle.color + "05" }}>
+                      <div key={i} className="rounded-lg border p-4" style={{ borderColor: bundle.color === "#111" ? "#333" : bundle.color + "40", background: bundle.color === "#111" ? "#111" : bundle.color + "05" }}>
                         <div className="flex items-center justify-between mb-2">
                           <p className="text-[13px] font-bold" style={{ color: bundle.color === "#111" ? "#FFF" : bundle.color }}>{bundle.tier}</p>
                           <p className="text-[16px] font-bold" style={{ color: bundle.color === "#111" ? "#FFF" : "#111" }}>{bundle.price}</p>
@@ -876,7 +876,7 @@ export default function HubSpotTarifsPrix2026Article() {
                     ))}
                   </div>
 
-                  <div className="rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Quand prendre un bundle vs des hubs separement ?</p>
                     <div className="space-y-2 text-[11px] text-[#555] leading-[1.6]">
                       <p><strong className="text-[#111]">Prenez le bundle si :</strong> vous avez besoin de 3 hubs ou plus au meme palier. L&apos;economie est significative, surtout en Starter ou le bundle a 20 EUR/mois inclut les 6 hubs.</p>
@@ -891,7 +891,7 @@ export default function HubSpotTarifsPrix2026Article() {
               {/* Section 10 : Couts caches */}
               {/* ═══════════════════════════════════════════════ */}
               <section id="couts-caches" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#EF4444]/10 flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
@@ -939,7 +939,7 @@ export default function HubSpotTarifsPrix2026Article() {
                         icon: "M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.66 0 3-4.03 3-9s-1.34-9-3-9m0 18c-1.66 0-3-4.03-3-9s1.34-9 3-9",
                       },
                     ].map((item, i) => (
-                      <div key={i} className="rounded-xl border-l-2 bg-[#FAFAFA] p-4" style={{ borderColor: item.color }}>
+                      <div key={i} className="rounded-lg border-l-2 bg-[#FAFAFA] p-4" style={{ borderColor: item.color }}>
                         <p className="text-[12px] font-semibold text-[#111] mb-2">{item.title}</p>
                         <p className="text-[11px] text-[#777] leading-[1.65]">{item.desc}</p>
                       </div>
@@ -952,7 +952,7 @@ export default function HubSpotTarifsPrix2026Article() {
               {/* Section 11 : Simulation de budget */}
               {/* ═══════════════════════════════════════════════ */}
               <section id="simulation" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#6C5CE7]/10 flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6C5CE7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2" /><line x1="1" y1="10" x2="23" y2="10" /></svg>
@@ -1007,7 +1007,7 @@ export default function HubSpotTarifsPrix2026Article() {
                     />
                   </div>
 
-                  <div className="mt-4 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-4 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[10px] text-[#999] leading-[1.6]">* Les frais d&apos;onboarding sont payes une seule fois. Nous les avons lisses sur 12 mois pour donner un cout mensualise equivalent. Les prix sont en facturation mensuelle. La facturation annuelle offre 10 a 25 % de remise selon les hubs. Simulation indicative basee sur les tarifs publics de mars 2026.</p>
                   </div>
                 </div>
@@ -1017,7 +1017,7 @@ export default function HubSpotTarifsPrix2026Article() {
               {/* Section 12 : Astuces pour economiser */}
               {/* ═══════════════════════════════════════════════ */}
               <section id="economiser" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#22C55E]/10 flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>
@@ -1068,7 +1068,7 @@ export default function HubSpotTarifsPrix2026Article() {
                         desc: "Projetez votre budget HubSpot sur 3 ans en incluant la croissance des contacts, des utilisateurs et des besoins fonctionnels. Une planification en amont evite les mauvaises surprises au renouvellement.",
                       },
                     ].map((item, i) => (
-                      <div key={i} className="flex items-start gap-3 rounded-xl bg-[#FAFAFA] p-4">
+                      <div key={i} className="flex items-start gap-3 rounded-lg bg-[#FAFAFA] p-4">
                         <div className="w-6 h-6 rounded-full bg-[#22C55E]/10 flex items-center justify-center shrink-0 mt-0.5">
                           <span className="text-[10px] font-bold text-[#22C55E]">{i + 1}</span>
                         </div>
@@ -1086,7 +1086,7 @@ export default function HubSpotTarifsPrix2026Article() {
               {/* Section 13 : Notre avis global */}
               {/* ═══════════════════════════════════════════════ */}
               <section id="notre-avis" className="mb-8">
-                <div className="rounded-2xl border border-[#4B5EFC] bg-gradient-to-br from-[#F8F9FF] to-[#EEF0FF] p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(75,94,252,0.15)]">
+                <div className="rounded-lg border border-[#4B5EFC] bg-gradient-to-br from-[#F8F9FF] to-[#EEF0FF] p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(75,94,252,0.15)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Notre avis global sur les tarifs HubSpot en 2026</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Apres avoir deploye HubSpot chez des dizaines d&apos;entreprises de toutes tailles, voici notre position sur la tarification de la plateforme en 2026.</p>
@@ -1099,7 +1099,7 @@ export default function HubSpotTarifsPrix2026Article() {
 
                     <p><strong className="text-[#111]">L&apos;Enterprise n&apos;est rentable qu&apos;a partir d&apos;une certaine taille.</strong> Les fonctionnalites Enterprise (objets personnalises, SSO, sandbox, partitionnement) sont puissantes mais leur cout ne se justifie que pour des equipes de 20+ utilisateurs et des processus complexes. En dessous, le Pro suffit largement.</p>
 
-                    <div className="mt-4 p-4 rounded-xl bg-white border border-[#E0E4FF]">
+                    <div className="mt-4 p-4 rounded-lg bg-white border border-[#E0E4FF]">
                       <p className="text-[12px] font-semibold text-[#111] mb-2">Notre recommandation par taille d&apos;entreprise</p>
                       <div className="space-y-2">
                         {[
@@ -1123,7 +1123,7 @@ export default function HubSpotTarifsPrix2026Article() {
               </section>
 
               {/* CTA */}
-              <div className="mb-12 rounded-2xl bg-[#111] p-6 md:p-8 text-center">
+              <div className="mb-12 rounded-lg bg-[#111] p-6 md:p-8 text-center">
                 <h3 className="text-[17px] font-semibold text-white mb-3">Besoin d&apos;aide pour choisir le bon plan HubSpot ?</h3>
                 <p className="text-[13px] text-[#999] leading-[1.7] mb-5 max-w-[500px] mx-auto">En tant que partenaire HubSpot, on accompagne les entreprises dans le choix du bon palier, la negociation tarifaire et l&apos;implementation. Un audit gratuit de 30 minutes pour identifier la configuration optimale selon votre situation et votre budget.</p>
                 <Link href="https://calendly.com/ceres-revops/30min" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#4B5EFC] text-white rounded-lg text-[13px] font-medium hover:bg-[#3A4DE0] transition-colors">
@@ -1137,7 +1137,7 @@ export default function HubSpotTarifsPrix2026Article() {
                 <h3 className="text-[14px] font-semibold text-[#111] mb-4">Articles complementaires</h3>
                 <div className="grid gap-3">
                   {relatedArticles.map((a) => (
-                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
+                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
                       <div className="w-1 h-10 rounded-full" style={{ background: a.color }} />
                       <div className="flex-1 min-w-0">
                         <p className="text-[9px] font-medium mb-1" style={{ color: a.color }}>{a.category}</p>

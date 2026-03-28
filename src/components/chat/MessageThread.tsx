@@ -132,15 +132,15 @@ function BuildingBlocksIndicator({ count }: { count: number }) {
     <motion.div
       initial={{ opacity: 0, y: 4 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex items-center gap-3 mt-3 px-3.5 py-2.5 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]"
+      className="flex items-center gap-3 mt-3 px-3.5 py-2.5 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]"
     >
       <div className="relative h-5 w-5 shrink-0">
         <div className="absolute inset-0 rounded-md bg-[#6366F1]/10" />
         <BarChart3 size={13} className="absolute top-1 left-1 text-[#6366F1] animate-pulse" />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-[12px] font-medium text-[#525252]">Construction des visuels...</p>
-        <p className="text-[10px] text-[#A3A3A3]">{count} bloc{count > 1 ? "s" : ""} en cours</p>
+        <p className="text-[12px] font-medium text-[#555]">Construction des visuels...</p>
+        <p className="text-[10px] text-[#BBB]">{count} bloc{count > 1 ? "s" : ""} en cours</p>
       </div>
       <div className="flex gap-0.5">
         <div className="h-1 w-1 rounded-full bg-[#6366F1] animate-bounce" style={{ animationDelay: "0ms" }} />
@@ -203,7 +203,7 @@ function ThinkingIndicator({ activeTools }: { activeTools: string[] }) {
                 className="flex items-center gap-2.5 py-0.5"
               >
                 <PulsingDot />
-                <span className="text-sm text-[#737373]">
+                <span className="text-sm text-[#999]">
                   {TOOL_LABELS[tool] || tool}
                 </span>
               </motion.div>
@@ -237,7 +237,7 @@ function ThinkingIndicator({ activeTools }: { activeTools: string[] }) {
               )}
               <span
                 className={
-                  "text-sm " + (isLatest ? "text-[#737373]" : "text-[#C0C0C0]")
+                  "text-sm " + (isLatest ? "text-[#999]" : "text-[#C0C0C0]")
                 }
               >
                 {step.label}
@@ -291,24 +291,24 @@ function SaveMessageToDashboard({ blocks, title }: { blocks: any[]; title: strin
   return (
     <div ref={ref} className="relative">
       <button onClick={function() { setOpen(!open); }}
-        className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] text-[#737373] hover:text-[#0A0A0A] hover:bg-[#F5F5F5] transition-colors">
+        className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] text-[#999] hover:text-[#111] hover:bg-[#F5F5F5] transition-colors">
         <LayoutDashboard size={12} /> Save to Dashboard
       </button>
       {open && (
-        <div className="absolute bottom-full right-0 mb-1 w-[220px] rounded-xl border border-[#E5E5E5] bg-white shadow-lg p-2 z-50">
-          <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#A3A3A3]">Save to Dashboard</p>
+        <div className="absolute bottom-full right-0 mb-1 w-[220px] rounded-lg border border-[#EAEAEA] bg-white shadow-lg p-2 z-50">
+          <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#BBB]">Save to Dashboard</p>
           {dashboards.length === 0 ? (
-            <p className="px-2 py-2 text-xs text-[#737373]">No dashboards yet</p>
+            <p className="px-2 py-2 text-xs text-[#999]">No dashboards yet</p>
           ) : dashboards.map(function(d) {
             return (
               <button key={d.id} onClick={function() { addWidget(d.id); }} disabled={adding === d.id || added.has(d.id)}
-                className="flex w-full items-center justify-between px-2 py-2 rounded-lg text-sm text-[#525252] hover:bg-[#FAFAFA] disabled:opacity-50">
+                className="flex w-full items-center justify-between px-2 py-2 rounded-lg text-sm text-[#555] hover:bg-[#FAFAFA] disabled:opacity-50">
                 <span className="truncate">{d.name}</span>
-                {added.has(d.id) ? <Check size={14} className="text-[#22C55E]" /> : adding === d.id ? <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" /> : <Plus size={14} className="text-[#A3A3A3]" />}
+                {added.has(d.id) ? <Check size={14} className="text-[#22C55E]" /> : adding === d.id ? <div className="h-3 w-3 border-2 border-[#EAEAEA] border-t-[#737373] rounded-full animate-spin" /> : <Plus size={14} className="text-[#BBB]" />}
               </button>
             );
           })}
-          <a href="/dashboards" className="flex items-center gap-1 px-2 py-2 text-xs text-[#737373] hover:text-[#0A0A0A]"><Plus size={12} /> New dashboard</a>
+          <a href="/dashboards" className="flex items-center gap-1 px-2 py-2 text-xs text-[#999] hover:text-[#111]"><Plus size={12} /> New dashboard</a>
         </div>
       )}
     </div>
@@ -326,7 +326,7 @@ function ErrorCard({
     <motion.div
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-xl border border-red-100 bg-red-50/60 px-4 py-3 text-sm"
+      className="rounded-lg border border-red-100 bg-red-50/60 px-4 py-3 text-sm"
     >
       <p className="text-red-700 mb-2">
         {message || "Something went wrong. Please try again."}
@@ -353,7 +353,7 @@ function AssistantMessage({ msg, onSendSuggestion }: { msg: Message; onSendSugge
     <div className="flex gap-3">
       <KairoAvatar />
       <div className="flex-1 min-w-0">
-        <div className="relative w-full bg-white border border-[#E8E8E8] rounded-xl px-5 py-4 text-[13px] text-[#111] group/msg">
+        <div className="relative w-full bg-white border border-[#EAEAEA] rounded-lg px-5 py-4 text-[13px] text-[#111] group/msg">
           {msg.content_blocks && msg.content_blocks.length > 0 ? (
             <>
               <BlockRenderer blocks={msg.content_blocks} />
@@ -368,7 +368,7 @@ function AssistantMessage({ msg, onSendSuggestion }: { msg: Message; onSendSugge
           )}
           <button
             onClick={function() { navigator.clipboard.writeText(msg.content); }}
-            className="absolute top-2 right-2 opacity-0 group-hover/msg:opacity-100 h-7 w-7 flex items-center justify-center rounded-lg text-[#A3A3A3] hover:text-[#0A0A0A] hover:bg-[#F5F5F5] transition-all"
+            className="absolute top-2 right-2 opacity-0 group-hover/msg:opacity-100 h-7 w-7 flex items-center justify-center rounded-lg text-[#BBB] hover:text-[#111] hover:bg-[#F5F5F5] transition-all"
             title="Copy"
           >
             <Copy size={13} />
@@ -382,7 +382,7 @@ function AssistantMessage({ msg, onSendSuggestion }: { msg: Message; onSendSugge
             {showAddActions && (
               <button
                 onClick={function() { onSendSuggestion("Oui, ajoute ces actions a mon board avec les bonnes priorites et deadlines."); }}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold text-white bg-[#0A0A0A] hover:bg-[#333] transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold text-white bg-[#111] hover:bg-[#333] transition-colors"
               >
                 <CheckSquare size={11} />
                 Ajouter au board
@@ -394,9 +394,9 @@ function AssistantMessage({ msg, onSendSuggestion }: { msg: Message; onSendSugge
                 <button
                   key={i}
                   onClick={function() { onSendSuggestion(s); }}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-medium text-[#525252] bg-[#F5F5F5] hover:bg-[#EBEBEB] hover:text-[#0A0A0A] border border-[#EBEBEB] transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-medium text-[#555] bg-[#F5F5F5] hover:bg-[#EBEBEB] hover:text-[#111] border border-[#EAEAEA] transition-colors"
                 >
-                  <Zap size={10} className="text-[#A3A3A3]" />
+                  <Zap size={10} className="text-[#BBB]" />
                   <span className="truncate max-w-[200px]">{s}</span>
                 </button>
               );
@@ -415,7 +415,7 @@ function StreamingMessage({ streamingText, streamingBlocks, activeTools }: { str
     <div className="flex gap-3">
       <KairoAvatar />
       <div className="flex-1 min-w-0">
-        <div className="w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A]">
+        <div className="w-full bg-white border border-[#EAEAEA] rounded-lg px-4 py-3.5 text-[13px] text-[#111]">
           {activeTools.length > 0 && (
             <div className="mb-3">
               <ThinkingIndicator activeTools={activeTools} />
@@ -456,11 +456,11 @@ export default function MessageThread({
 
   return (
     <div className="flex-1 overflow-y-auto">
-      <div className="max-w-3xl mx-auto px-5 py-6 space-y-5">
+      <div className="max-w-3xl mx-auto px-5 py-5 space-y-4">
         {messages.map((msg) => (
           <div key={msg.id} className={msg.role === "user" ? "flex justify-end" : ""}>
             {msg.role === "user" ? (
-              <div className="max-w-[70%] bg-[#111] text-white rounded-xl px-4 py-2.5 text-[13px] leading-relaxed">
+              <div className="max-w-[70%] bg-[#111] text-white rounded-lg px-4 py-2.5 text-[13px] leading-relaxed">
                 {msg.content}
               </div>
             ) : (
@@ -480,7 +480,7 @@ export default function MessageThread({
           <div className="flex gap-3">
             <KairoAvatar />
             <div className="flex-1 min-w-0">
-              <div className="w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A]">
+              <div className="w-full bg-white border border-[#EAEAEA] rounded-lg px-4 py-3.5 text-[13px] text-[#111]">
                 <ThinkingIndicator activeTools={activeTools} />
               </div>
             </div>

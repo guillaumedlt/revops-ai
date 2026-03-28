@@ -146,7 +146,7 @@ export default function ForecastingCommercialArticle() {
               </div>
 
               {/* Quick overview */}
-              <div className="mt-8 rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+              <div className="mt-8 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                 <span className="text-[13px] font-semibold text-[#111] mb-4 block">Ce que vous allez decouvrir</span>
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
                   {[
@@ -156,7 +156,7 @@ export default function ForecastingCommercialArticle() {
                     { label: "Formules de calcul", value: "6", color: "#6C5CE7" },
                     { label: "Templates", value: "2", color: "#FF7A59" },
                   ].map((s) => (
-                    <div key={s.label} className="text-center p-3 rounded-xl bg-white border border-[#F0F0F0]">
+                    <div key={s.label} className="text-center p-3 rounded-lg bg-white border border-[#F0F0F0]">
                       <div className="text-[22px] font-bold" style={{ color: s.color }}>{s.value}</div>
                       <div className="text-[10px] text-[#999] mt-1">{s.label}</div>
                     </div>
@@ -168,7 +168,7 @@ export default function ForecastingCommercialArticle() {
             <article>
               {/* ===================== SECTION 1 : Pourquoi le forecasting est critique ===================== */}
               <section id="pourquoi-forecasting" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi le forecasting commercial est critique</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le forecasting commercial, c&apos;est l&apos;art de predire le revenu que votre equipe va generer sur une periode donnee. En theorie, c&apos;est simple. En pratique, 68% des entreprises B2B declarent que leurs previsions commerciales sont imprecises a plus de 10% (Gartner, 2025). Et les consequences d&apos;un mauvais forecast sont en cascade.</p>
@@ -194,7 +194,7 @@ export default function ForecastingCommercialArticle() {
                         color: "#6C5CE7",
                       },
                     ].map((item) => (
-                      <div key={item.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={item.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: item.color }} />
                           <h3 className="text-[13px] font-semibold text-[#111]" dangerouslySetInnerHTML={{ __html: item.title }} />
@@ -205,7 +205,7 @@ export default function ForecastingCommercialArticle() {
                   </div>
 
                   {/* CSS Mockup : Forecast vs Actual vs Target */}
-                  <div className="mt-6 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] p-4">
+                  <div className="mt-6 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-4">
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-[11px] font-semibold text-[#999] uppercase tracking-wider">Forecast vs Realise vs Target - Q1 2026</span>
                       <span className="text-[10px] text-[#CCC]">Visualisation</span>
@@ -250,7 +250,7 @@ export default function ForecastingCommercialArticle() {
 
               {/* ===================== SECTION 2 : Les 5 methodes de forecasting ===================== */}
               <section id="cinq-methodes" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#22C55E]" />
                     <span className="text-[11px] font-semibold text-[#22C55E] uppercase tracking-wider">Methodes</span>
@@ -260,7 +260,7 @@ export default function ForecastingCommercialArticle() {
 
                   <div className="space-y-4">
                     {/* Method 1 — Bottom-up */}
-                    <div className="rounded-xl border border-[#E8F5E9] bg-[#F6FBF6] p-5">
+                    <div className="rounded-lg border border-[#E8F5E9] bg-[#F6FBF6] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#22C55E] w-5 h-5 rounded-md flex items-center justify-center">1</span>
@@ -269,16 +269,16 @@ export default function ForecastingCommercialArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#22C55E]/10 text-[#22C55E]">Debutant</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Chaque commercial estime son propre closing pour la periode. Le manager additionne les estimations individuelles. C&apos;est la methode la plus courante dans les PME car elle ne necessite aucun outil specifique. Son defaut majeur : elle repose entierement sur le jugement subjectif des reps.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">Forecast = SUM(estimation de chaque rep)</p>
                       </div>
                       <div className="grid grid-cols-2 gap-2 text-[11px]">
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-2.5">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                           <span className="text-[10px] font-semibold text-[#22C55E]">Forces</span>
                           <p className="text-[#666] mt-1">Simple, rapide, implique les reps, capture le contexte terrain</p>
                         </div>
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-2.5">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                           <span className="text-[10px] font-semibold text-[#EF4444]">Limites</span>
                           <p className="text-[#666] mt-1">Biais individuels (optimisme, sandbagging), pas reproductible</p>
                         </div>
@@ -286,7 +286,7 @@ export default function ForecastingCommercialArticle() {
                     </div>
 
                     {/* Method 2 — Top-down */}
-                    <div className="rounded-xl border border-[#EDE9FE] bg-[#F8F6FF] p-5">
+                    <div className="rounded-lg border border-[#EDE9FE] bg-[#F8F6FF] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#6C5CE7] w-5 h-5 rounded-md flex items-center justify-center">2</span>
@@ -295,16 +295,16 @@ export default function ForecastingCommercialArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#6C5CE7]/10 text-[#6C5CE7]">Debutant</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">On part du marche total adressable (TAM) ou de l&apos;objectif de l&apos;entreprise, et on decline en targets par equipe puis par rep. C&apos;est une methode de planification plus que de prevision. Elle repond a la question &ldquo;combien devrait-on faire ?&rdquo; plutot que &ldquo;combien va-t-on faire ?&rdquo;.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">Forecast = Objectif annuel / 4 trimestres x coefficient saisonnier</p>
                       </div>
                       <div className="grid grid-cols-2 gap-2 text-[11px]">
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-2.5">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                           <span className="text-[10px] font-semibold text-[#22C55E]">Forces</span>
                           <p className="text-[#666] mt-1">Alignement strategique, cadre clair pour les equipes</p>
                         </div>
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-2.5">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                           <span className="text-[10px] font-semibold text-[#EF4444]">Limites</span>
                           <p className="text-[#666] mt-1">Deconnecte de la realite terrain, ne detecte pas les signaux faibles</p>
                         </div>
@@ -312,7 +312,7 @@ export default function ForecastingCommercialArticle() {
                     </div>
 
                     {/* Method 3 — Pipeline weighted */}
-                    <div className="rounded-xl border border-[#DBEAFE] bg-[#F0F7FF] p-5">
+                    <div className="rounded-lg border border-[#DBEAFE] bg-[#F0F7FF] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#4B5EFC] w-5 h-5 rounded-md flex items-center justify-center">3</span>
@@ -321,16 +321,16 @@ export default function ForecastingCommercialArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#4B5EFC]/10 text-[#4B5EFC]">Intermediaire</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Chaque deal est pondere par sa probabilite de closing, basee sur son stade dans le pipeline. Un deal en Discovery a 10% de chances, un deal en Negotiation a 70%. Le forecast est la somme des montants ponderes. C&apos;est la methode la plus repandue et celle que la plupart des CRM integrent nativement.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">Forecast = SUM(montant deal x probabilite du stage)</p>
                       </div>
                       <div className="grid grid-cols-2 gap-2 text-[11px]">
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-2.5">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                           <span className="text-[10px] font-semibold text-[#22C55E]">Forces</span>
                           <p className="text-[#666] mt-1">Objectif, base sur le pipeline reel, automatisable dans le CRM</p>
                         </div>
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-2.5">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                           <span className="text-[10px] font-semibold text-[#EF4444]">Limites</span>
                           <p className="text-[#666] mt-1">Les probabilites par stage sont des moyennes, chaque deal est unique</p>
                         </div>
@@ -338,7 +338,7 @@ export default function ForecastingCommercialArticle() {
                     </div>
 
                     {/* Method 4 — Historical run rate */}
-                    <div className="rounded-xl border border-[#FFF3E0] bg-[#FFFBF5] p-5">
+                    <div className="rounded-lg border border-[#FFF3E0] bg-[#FFFBF5] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#FF7A59] w-5 h-5 rounded-md flex items-center justify-center">4</span>
@@ -347,16 +347,16 @@ export default function ForecastingCommercialArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#FF7A59]/10 text-[#FF7A59]">Intermediaire</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">On utilise les performances passees pour projeter le futur. Si votre equipe a signe en moyenne 280K EUR par mois sur les 6 derniers mois avec un taux de croissance de 5% MoM, on projette 294K EUR le mois suivant. Cette methode fonctionne bien quand le marche est stable et que l&apos;equipe ne change pas.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">Forecast M+1 = Moyenne des 6 derniers mois x (1 + taux croissance MoM)</p>
                       </div>
                       <div className="grid grid-cols-2 gap-2 text-[11px]">
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-2.5">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                           <span className="text-[10px] font-semibold text-[#22C55E]">Forces</span>
                           <p className="text-[#666] mt-1">Base sur des faits, pas des opinions, facile a calculer</p>
                         </div>
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-2.5">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                           <span className="text-[10px] font-semibold text-[#EF4444]">Limites</span>
                           <p className="text-[#666] mt-1">Ne prend pas en compte les changements (nouveau produit, nouveau marche, churn equipe)</p>
                         </div>
@@ -364,7 +364,7 @@ export default function ForecastingCommercialArticle() {
                     </div>
 
                     {/* Method 5 — AI predictive */}
-                    <div className="rounded-xl border border-[#F3E8FF] bg-[#FAF5FF] p-5">
+                    <div className="rounded-lg border border-[#F3E8FF] bg-[#FAF5FF] p-5">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-bold text-white bg-[#A855F7] w-5 h-5 rounded-md flex items-center justify-center">5</span>
@@ -373,16 +373,16 @@ export default function ForecastingCommercialArticle() {
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#A855F7]/10 text-[#A855F7]">Avance</span>
                       </div>
                       <p className="text-[12px] text-[#555] leading-[1.7] mb-3">Des algorithmes de machine learning analysent l&apos;ensemble des signaux (emails, appels, mouvements de stage, engagement du prospect, historique de deals similaires) pour attribuer une probabilite de closing a chaque deal. C&apos;est la methode la plus precise mais elle necessite un volume de donnees significatif pour fonctionner.</p>
-                      <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-3">
+                      <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-3">
                         <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Fonctionnement</span>
                         <p className="text-[13px] font-mono text-[#111] mt-1">Probabilite = f(activites, engagement, historique, timing, signaux)</p>
                       </div>
                       <div className="grid grid-cols-2 gap-2 text-[11px]">
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-2.5">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                           <span className="text-[10px] font-semibold text-[#22C55E]">Forces</span>
                           <p className="text-[#666] mt-1">Precision superieure (85-95%), detection des patterns invisibles, pas de biais humains</p>
                         </div>
-                        <div className="rounded-lg bg-white border border-[#E5E5E5] p-2.5">
+                        <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                           <span className="text-[10px] font-semibold text-[#EF4444]">Limites</span>
                           <p className="text-[#666] mt-1">Necessite 500+ deals historiques, &ldquo;black box&rdquo;, cout eleve</p>
                         </div>
@@ -390,7 +390,7 @@ export default function ForecastingCommercialArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] text-[#666] leading-[1.7]">
                       <strong className="text-[#111]">Notre recommandation :</strong> commencez par le pipeline weighted (methode 3). Ajoutez le historical run rate (methode 4) comme point de comparaison. Et quand vous aurez suffisamment de donnees historiques (12+ mois, 200+ deals closes), explorez l&apos;IA predictive (methode 5). Le bottom-up ne devrait etre qu&apos;un complement qualitatif, jamais votre methode principale.
                     </p>
@@ -401,7 +401,7 @@ export default function ForecastingCommercialArticle() {
 
               {/* ===================== SECTION 3 : Pipeline weighted en detail ===================== */}
               <section id="pipeline-weighted" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#4B5EFC]" />
                     <span className="text-[11px] font-semibold text-[#4B5EFC] uppercase tracking-wider">Deep dive</span>
@@ -414,7 +414,7 @@ export default function ForecastingCommercialArticle() {
                   </div>
 
                   {/* CSS Mockup : Pipeline weighted calculation */}
-                  <div className="mt-5 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] p-4">
+                  <div className="mt-5 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-4">
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-[11px] font-semibold text-[#999] uppercase tracking-wider">Calcul du forecast pondere - Exemple</span>
                       <span className="text-[10px] text-[#CCC]">Pipeline weighted</span>
@@ -427,7 +427,7 @@ export default function ForecastingCommercialArticle() {
                         { deal: "Delta Corp", stage: "Negotiation", amount: "55 000", prob: "70%", weighted: "38 500", probColor: "#22C55E", barW: "70%" },
                         { deal: "Epsilon IO", stage: "Verbal commit", amount: "25 000", prob: "90%", weighted: "22 500", probColor: "#4B5EFC", barW: "90%" },
                       ].map((d, i) => (
-                        <div key={i} className="rounded-lg bg-white border border-[#E5E5E5] p-3">
+                        <div key={i} className="rounded-lg bg-white border border-[#EAEAEA] p-3">
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-2">
                               <span className="text-[12px] font-semibold text-[#111]">{d.deal}</span>
@@ -457,7 +457,7 @@ export default function ForecastingCommercialArticle() {
                     <p>Pour chaque stage, divisez le nombre de deals qui ont fini Closed Won par le nombre total de deals qui sont passes par ce stage. Si sur les 12 derniers mois, 120 deals sont passes par &ldquo;Demo&rdquo; et 34 ont fini Closed Won, votre probabilite reelle pour &ldquo;Demo&rdquo; est 28%, pas 40%.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] text-[#666] leading-[1.7]">
                       <strong className="text-[#111]">Attention :</strong> recalibrez vos probabilites tous les trimestres. Les taux de conversion evoluent avec les changements de marche, de produit et d&apos;equipe. Des probabilites datees de 12 mois faussent completement le forecast.
                     </p>
@@ -468,7 +468,7 @@ export default function ForecastingCommercialArticle() {
 
               {/* ===================== SECTION 4 : Forecasting dans HubSpot ===================== */}
               <section id="forecasting-hubspot" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#FF7A59]" />
                     <span className="text-[11px] font-semibold text-[#FF7A59] uppercase tracking-wider">HubSpot</span>
@@ -483,7 +483,7 @@ export default function ForecastingCommercialArticle() {
                   </div>
 
                   {/* CSS Mockup : HubSpot forecast view */}
-                  <div className="mt-5 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] p-4">
+                  <div className="mt-5 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-4">
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-[11px] font-semibold text-[#999] uppercase tracking-wider">HubSpot Forecast - Mars 2026</span>
                       <span className="text-[10px] px-2 py-0.5 rounded bg-[#FF7A59]/10 text-[#FF7A59]">Sales Hub Pro</span>
@@ -501,7 +501,7 @@ export default function ForecastingCommercialArticle() {
                         { rep: "Thomas R.", pipeline: "120K", bestCase: "78K", commit: "52K", closed: "45K", closedPct: "56%" },
                         { rep: "Sarah L.", pipeline: "65K", bestCase: "45K", commit: "30K", closed: "22K", closedPct: "27%" },
                       ].map((r) => (
-                        <div key={r.rep} className="grid grid-cols-5 gap-1 rounded-lg bg-white border border-[#E5E5E5] p-2.5 items-center">
+                        <div key={r.rep} className="grid grid-cols-5 gap-1 rounded-lg bg-white border border-[#EAEAEA] p-2.5 items-center">
                           <span className="text-[11px] font-medium text-[#111]">{r.rep}</span>
                           <div>
                             <span className="text-[11px] font-mono text-[#555]">{r.pipeline}</span>
@@ -548,7 +548,7 @@ export default function ForecastingCommercialArticle() {
 
               {/* ===================== SECTION 5 : Mesurer la precision ===================== */}
               <section id="mesurer-precision" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#22C55E]" />
                     <span className="text-[11px] font-semibold text-[#22C55E] uppercase tracking-wider">Precision</span>
@@ -556,13 +556,13 @@ export default function ForecastingCommercialArticle() {
                   <h2 className="text-[17px] font-semibold text-[#111] mb-2">Forecast vs reality : mesurer la precision</h2>
                   <p className="text-[13px] text-[#555] leading-[1.75] mb-5">Un forecast n&apos;a de valeur que s&apos;il est fiable. La metrique cle est le Forecast Accuracy, qui mesure l&apos;ecart entre la prevision et le realise. L&apos;objectif pour une equipe mature est d&apos;etre entre 90% et 100% de precision.</p>
 
-                  <div className="rounded-lg bg-white border border-[#E5E5E5] p-3 mb-5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 mb-5">
                     <span className="text-[10px] font-semibold text-[#999] uppercase tracking-wider">Formule</span>
                     <p className="text-[13px] font-mono text-[#111] mt-1">Forecast Accuracy = 1 - |Forecast - Realise| / Realise x 100</p>
                   </div>
 
                   {/* CSS Mockup : Accuracy gauge */}
-                  <div className="rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] p-5">
+                  <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-[11px] font-semibold text-[#999] uppercase tracking-wider">Forecast Accuracy - Q1 2026</span>
                       <span className="text-[10px] text-[#CCC]">Jauge de precision</span>
@@ -586,7 +586,7 @@ export default function ForecastingCommercialArticle() {
                         { month: "Fevrier", forecast: "320K", actual: "275K", accuracy: "84%", color: "#F59E0B" },
                         { month: "Mars", forecast: "350K", actual: "340K", accuracy: "97%", color: "#22C55E" },
                       ].map((m) => (
-                        <div key={m.month} className="rounded-lg bg-white border border-[#E5E5E5] p-2.5 text-center">
+                        <div key={m.month} className="rounded-lg bg-white border border-[#EAEAEA] p-2.5 text-center">
                           <span className="text-[10px] text-[#999]">{m.month}</span>
                           <div className="text-[18px] font-bold mt-0.5" style={{ color: m.color }}>{m.accuracy}</div>
                           <div className="text-[9px] text-[#CCC] mt-0.5">F: {m.forecast} | R: {m.actual}</div>
@@ -611,7 +611,7 @@ export default function ForecastingCommercialArticle() {
 
               {/* ===================== SECTION 6 : Les biais du forecasting ===================== */}
               <section id="biais-forecasting" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#EF4444]" />
                     <span className="text-[11px] font-semibold text-[#EF4444] uppercase tracking-wider">Biais cognitifs</span>
@@ -658,7 +658,7 @@ export default function ForecastingCommercialArticle() {
                         antidote: "Exigez un mapping du comite d&apos;achat pour tout deal superieur a un certain montant. Validez que le champion a acces au decision maker et a presente l&apos;offre.",
                       },
                     ].map((bias) => (
-                      <div key={bias.title} className="rounded-xl border p-4" style={{ backgroundColor: bias.bgColor, borderColor: bias.borderColor }}>
+                      <div key={bias.title} className="rounded-lg border p-4" style={{ backgroundColor: bias.bgColor, borderColor: bias.borderColor }}>
                         <div className="flex items-center gap-2 mb-2.5">
                           <span className="text-[11px] font-bold text-white w-5 h-5 rounded-md flex items-center justify-center" style={{ backgroundColor: bias.color }}>{bias.icon}</span>
                           <h3 className="text-[13px] font-semibold text-[#111]">{bias.title}</h3>
@@ -672,7 +672,7 @@ export default function ForecastingCommercialArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] text-[#666] leading-[1.7]">
                       <strong className="text-[#111]">Le meilleur remede contre les biais :</strong> croisez toujours le jugement humain (bottom-up) avec une methode data-driven (pipeline weighted ou IA). Quand l&apos;ecart entre les deux est superieur a 20%, c&apos;est un signal d&apos;alerte qui merite une investigation.
                     </p>
@@ -683,7 +683,7 @@ export default function ForecastingCommercialArticle() {
 
               {/* ===================== SECTION 7 : Forecast + IA ===================== */}
               <section id="forecast-ia" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#A855F7]" />
                     <span className="text-[11px] font-semibold text-[#A855F7] uppercase tracking-wider">Intelligence artificielle</span>
@@ -710,7 +710,7 @@ export default function ForecastingCommercialArticle() {
                         color: "#22C55E",
                       },
                     ].map((block) => (
-                      <div key={block.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={block.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <h3 className="text-[13px] font-semibold text-[#111] mb-2" dangerouslySetInnerHTML={{ __html: block.title }} />
                         <div className="space-y-1.5">
                           {block.items.map((item) => (
@@ -729,7 +729,7 @@ export default function ForecastingCommercialArticle() {
 
               {/* ===================== SECTION 8 : Meeting de forecast hebdomadaire ===================== */}
               <section id="meeting-forecast" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#4B5EFC]" />
                     <span className="text-[11px] font-semibold text-[#4B5EFC] uppercase tracking-wider">Processus</span>
@@ -742,7 +742,7 @@ export default function ForecastingCommercialArticle() {
                   </div>
 
                   {/* Meeting agenda template */}
-                  <div className="mt-5 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] p-4">
+                  <div className="mt-5 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-4">
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-[11px] font-semibold text-[#999] uppercase tracking-wider">Template - Agenda du meeting forecast</span>
                       <span className="text-[10px] text-[#CCC]">30 min / rep</span>
@@ -755,7 +755,7 @@ export default function ForecastingCommercialArticle() {
                         { time: "22-27 min", topic: "Deals a risque et deals stalles", detail: "Quels deals n&apos;ont pas bouge depuis 2+ semaines ? Faut-il les deprioriser, les relancer ou les passer en Closed Lost ?", color: "#EF4444" },
                         { time: "27-30 min", topic: "Actions et engagements", detail: "3 actions maximum pour la semaine. Qui fait quoi, pour quand. On note dans le CRM.", color: "#6C5CE7" },
                       ].map((item) => (
-                        <div key={item.time} className="flex gap-3 rounded-lg bg-white border border-[#E5E5E5] p-3">
+                        <div key={item.time} className="flex gap-3 rounded-lg bg-white border border-[#EAEAEA] p-3">
                           <div className="shrink-0 w-[60px]">
                             <span className="text-[10px] font-mono font-semibold" style={{ color: item.color }}>{item.time}</span>
                           </div>
@@ -789,7 +789,7 @@ export default function ForecastingCommercialArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] text-[#666] leading-[1.7]">
                       <strong className="text-[#111]">Regle d&apos;or :</strong> le forecast meeting n&apos;est pas un pipeline review. On ne passe pas en revue tous les deals. On se concentre sur les deals Commit et Best Case, les changements depuis la derniere semaine, et les deals a risque. Le pipeline review est un exercice separe, moins frequent (bimensuel ou mensuel).
                     </p>
@@ -800,7 +800,7 @@ export default function ForecastingCommercialArticle() {
 
               {/* ===================== SECTION 9 : Les outils de forecasting ===================== */}
               <section id="outils-forecasting" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-2 h-2 rounded-sm bg-[#FF7A59]" />
                     <span className="text-[11px] font-semibold text-[#FF7A59] uppercase tracking-wider">Outils</span>
@@ -843,7 +843,7 @@ export default function ForecastingCommercialArticle() {
                         scores: { precision: "85-92%", automatisation: "Tres haute", integration: "Salesforce, HubSpot", cout: "A partir de 20 000 EUR/an" },
                       },
                     ].map((tool) => (
-                      <div key={tool.name} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={tool.name} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center justify-between mb-2.5">
                           <div className="flex items-center gap-2">
                             <h3 className="text-[13px] font-semibold text-[#111]">{tool.name}</h3>
@@ -864,7 +864,7 @@ export default function ForecastingCommercialArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] text-[#666] leading-[1.7]">
                       <strong className="text-[#111]">Notre recommandation :</strong> si vous etes sur HubSpot, utilisez d&apos;abord l&apos;outil natif. Il couvre 80% des besoins. N&apos;ajoutez Clari ou Gong que si votre equipe depasse 15 reps, que vos cycles de vente sont longs (3+ mois) et que le forecast accuracy avec HubSpot seul reste sous 80% malgre un processus rigoureux.
                     </p>
@@ -875,7 +875,7 @@ export default function ForecastingCommercialArticle() {
 
               {/* ===================== SECTION 10 : Notre approche chez Ceres (dark section) ===================== */}
               <section id="approche-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Notre approche</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">Comment on met en place le forecasting chez Ceres</h2>
                   <div className="space-y-3 text-[12px] text-white/50 leading-[1.75]">
@@ -891,7 +891,7 @@ export default function ForecastingCommercialArticle() {
                       { label: "Gain de precision", value: "+27pts", color: "#22C55E" },
                       { label: "Delai de mise en place", value: "3 sem.", color: "#6C5CE7" },
                     ].map((s) => (
-                      <div key={s.label} className="text-center p-3 rounded-xl bg-white/5 border border-white/10">
+                      <div key={s.label} className="text-center p-3 rounded-lg bg-white/5 border border-white/10">
                         <div className="text-[20px] font-bold" style={{ color: s.color }}>{s.value}</div>
                         <div className="text-[10px] text-white/35 mt-1">{s.label}</div>
                       </div>
@@ -920,7 +920,7 @@ export default function ForecastingCommercialArticle() {
 
               {/* Related articles */}
               <section className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((a) => (
@@ -938,7 +938,7 @@ export default function ForecastingCommercialArticle() {
 
               {/* CTA */}
               <section>
-                <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+                <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                   <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide pour fiabiliser votre forecast commercial ?</h2>
                   <p className="text-[13px] text-[#999] mb-6 max-w-[460px] mx-auto">On deploie votre systeme de forecasting complet en 3 semaines : audit pipeline, calibration des probabilites, configuration HubSpot, meeting process et formation equipe.</p>
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

@@ -151,7 +151,7 @@ export default function OnboardingHubSpot30JoursArticle() {
             <article>
               {/* ============ SECTION 1 : POURQUOI 30 JOURS ============ */}
               <section id="pourquoi-30-jours" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi les 30 premiers jours sont critiques</h2>
 
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
@@ -174,7 +174,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                       { value: "30j", label: "fenetre critique pour l&apos;adoption", color: "#FF7A59" },
                       { value: "80%", label: "taux d&apos;adoption cible a J+30", color: "#4B5EFC" },
                     ].map((s) => (
-                      <div key={s.value} className="rounded-xl border border-[#F2F2F2] p-3 text-center">
+                      <div key={s.value} className="rounded-lg border border-[#F2F2F2] p-3 text-center">
                         <p className="text-[20px] font-bold" style={{ color: s.color }}>{s.value}</p>
                         <p className="text-[10px] text-[#999] leading-[1.4] mt-1" dangerouslySetInnerHTML={{ __html: s.label }} />
                       </div>
@@ -196,7 +196,7 @@ export default function OnboardingHubSpot30JoursArticle() {
 
               {/* ============ SECTION 2 : CHECKLIST PRE-ONBOARDING ============ */}
               <section id="checklist-pre-onboarding" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Avant de commencer : la checklist pre-onboarding</h2>
 
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
@@ -209,8 +209,8 @@ export default function OnboardingHubSpot30JoursArticle() {
                   </div>
 
                   {/* Checklist mockup */}
-                  <div className="rounded-xl border border-[#E8E8E8] bg-[#FAFAFA] overflow-hidden mb-5">
-                    <div className="bg-[#F5F5F5] border-b border-[#E8E8E8] px-4 py-2.5 flex items-center gap-2">
+                  <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] overflow-hidden mb-5">
+                    <div className="bg-[#F5F5F5] border-b border-[#EAEAEA] px-4 py-2.5 flex items-center gap-2">
                       <div className="flex gap-1.5">
                         <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
                         <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
@@ -239,7 +239,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                         </div>
                       ))}
                     </div>
-                    <div className="bg-[#F5F5F5] border-t border-[#E8E8E8] px-4 py-2 flex items-center justify-between">
+                    <div className="bg-[#F5F5F5] border-t border-[#EAEAEA] px-4 py-2 flex items-center justify-between">
                       <span className="text-[10px] text-[#999]">3/10 termines</span>
                       <div className="w-32 h-1.5 rounded-full bg-[#E5E7EB]">
                         <div className="w-[30%] h-full rounded-full bg-[#22C55E]" />
@@ -265,9 +265,9 @@ export default function OnboardingHubSpot30JoursArticle() {
 
               {/* ============ SECTION 3 : SEMAINE 1 ============ */}
               <section id="semaine-1" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#4B5EFC]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#4B5EFC]">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#4B5EFC]/10 text-[#4B5EFC] text-[14px] font-bold">S1</span>
+                    <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#4B5EFC]/10 text-[#4B5EFC] text-[14px] font-bold">S1</span>
                     <div>
                       <h2 className="text-[17px] font-semibold text-[#111]">Semaine 1 : Les fondations</h2>
                       <p className="text-[11px] text-[#999]">Jours 1 a 7 -- Configuration du compte et du pipeline</p>
@@ -292,7 +292,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                       { day: "Jour 4-5", tasks: "Configurer le pipeline de vente : etapes, probabilites, proprietes requises par etape. Creer les pipelines secondaires si necessaire (upsell, partenaires). Definir les regles d&apos;attribution des leads.", color: "#22C55E" },
                       { day: "Jour 6-7", tasks: "Connecter les boites mail individuelles (Gmail/Outlook). Configurer le calendrier de prise de rendez-vous. Premiere session de formation : navigation, creation de contacts et deals, loguer une activite.", color: "#4B5EFC" },
                     ].map((d) => (
-                      <div key={d.day} className="flex gap-3 rounded-xl border border-[#F2F2F2] p-3">
+                      <div key={d.day} className="flex gap-3 rounded-lg border border-[#F2F2F2] p-3">
                         <div className="w-16 shrink-0">
                           <span className="text-[11px] font-bold" style={{ color: d.color }}>{d.day}</span>
                         </div>
@@ -302,8 +302,8 @@ export default function OnboardingHubSpot30JoursArticle() {
                   </div>
 
                   {/* CSS Mockup: Pipeline setup */}
-                  <div className="rounded-xl border border-[#E8E8E8] bg-[#FAFAFA] overflow-hidden mb-5">
-                    <div className="bg-[#F5F5F5] border-b border-[#E8E8E8] px-4 py-2.5 flex items-center gap-2">
+                  <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] overflow-hidden mb-5">
+                    <div className="bg-[#F5F5F5] border-b border-[#EAEAEA] px-4 py-2.5 flex items-center gap-2">
                       <div className="flex gap-1.5">
                         <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
                         <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
@@ -349,7 +349,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                             <span className="text-[9px] text-[#999] w-28 shrink-0">Proprietes requises :</span>
                             <div className="flex gap-1 flex-wrap">
                               {["Budget", "Autorite", "Besoin", "Timing"].map((p) => (
-                                <span key={p} className="text-[9px] px-2 py-0.5 rounded bg-[#F5F5F5] text-[#666] border border-[#E8E8E8]">{p}</span>
+                                <span key={p} className="text-[9px] px-2 py-0.5 rounded bg-[#F5F5F5] text-[#666] border border-[#EAEAEA]">{p}</span>
                               ))}
                             </div>
                           </div>
@@ -379,7 +379,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                   </div>
 
                   {/* Deliverables */}
-                  <div className="mt-5 rounded-xl bg-[#F7F7FF] border border-[#E8E8F8] p-4">
+                  <div className="mt-5 rounded-lg bg-[#F7F7FF] border border-[#E8E8F8] p-4">
                     <p className="text-[11px] font-semibold text-[#4B5EFC] uppercase tracking-wider mb-2">Livrables fin de semaine 1</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -402,9 +402,9 @@ export default function OnboardingHubSpot30JoursArticle() {
 
               {/* ============ SECTION 4 : SEMAINE 2 ============ */}
               <section id="semaine-2" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#22C55E]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#22C55E]">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#22C55E]/10 text-[#22C55E] text-[14px] font-bold">S2</span>
+                    <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#22C55E]/10 text-[#22C55E] text-[14px] font-bold">S2</span>
                     <div>
                       <h2 className="text-[17px] font-semibold text-[#111]">Semaine 2 : Les donnees</h2>
                       <p className="text-[11px] text-[#999]">Jours 8 a 14 -- Import, nettoyage et structuration</p>
@@ -429,7 +429,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                       { day: "Jour 11-12", tasks: "Importer les deals en cours. Les placer dans les bonnes etapes du pipeline. Associer les contacts et entreprises concernes. Verifier les montants, dates de fermeture prevues et proprietaires.", color: "#FF7A59" },
                       { day: "Jour 13-14", tasks: "Configurer les integrations : synchronisation email bidirectionnelle, calendrier, telephone (si VoIP). Tester chaque integration. Deuxieme session de formation : creer un deal, loguer des activites, utiliser les filtres et vues.", color: "#22C55E" },
                     ].map((d) => (
-                      <div key={d.day} className="flex gap-3 rounded-xl border border-[#F2F2F2] p-3">
+                      <div key={d.day} className="flex gap-3 rounded-lg border border-[#F2F2F2] p-3">
                         <div className="w-16 shrink-0">
                           <span className="text-[11px] font-bold" style={{ color: d.color }}>{d.day}</span>
                         </div>
@@ -439,8 +439,8 @@ export default function OnboardingHubSpot30JoursArticle() {
                   </div>
 
                   {/* CSS Mockup: Data import */}
-                  <div className="rounded-xl border border-[#E8E8E8] bg-[#FAFAFA] overflow-hidden mb-5">
-                    <div className="bg-[#F5F5F5] border-b border-[#E8E8E8] px-4 py-2.5 flex items-center gap-2">
+                  <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] overflow-hidden mb-5">
+                    <div className="bg-[#F5F5F5] border-b border-[#EAEAEA] px-4 py-2.5 flex items-center gap-2">
                       <div className="flex gap-1.5">
                         <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
                         <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
@@ -457,7 +457,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                           { type: "Deals", count: "89", status: "En cours...", pct: 65, color: "#FF7A59" },
                           { type: "Notes & activites", count: "---", status: "En attente", pct: 0, color: "#D1D5DB" },
                         ].map((imp) => (
-                          <div key={imp.type} className="rounded-lg border border-[#E8E8E8] bg-white p-3">
+                          <div key={imp.type} className="rounded-lg border border-[#EAEAEA] bg-white p-3">
                             <div className="flex items-center justify-between mb-1.5">
                               <div className="flex items-center gap-2">
                                 <div className="w-2 h-2 rounded-full" style={{ background: imp.color }} />
@@ -519,9 +519,9 @@ export default function OnboardingHubSpot30JoursArticle() {
 
               {/* ============ SECTION 5 : SEMAINE 3 ============ */}
               <section id="semaine-3" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#FF7A59]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#FF7A59]">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#FF7A59]/10 text-[#FF7A59] text-[14px] font-bold">S3</span>
+                    <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#FF7A59]/10 text-[#FF7A59] text-[14px] font-bold">S3</span>
                     <div>
                       <h2 className="text-[17px] font-semibold text-[#111]">Semaine 3 : L&apos;automatisation</h2>
                       <p className="text-[11px] text-[#999]">Jours 15 a 21 -- Workflows, sequences, templates</p>
@@ -546,7 +546,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                       { day: "Jour 19-20", tasks: "Mettre en place les workflows essentiels : notification quand un deal change d&apos;etape, creation automatique de tache de suivi, mise a jour du lifecycle stage, rotation des leads entre commerciaux.", color: "#22C55E" },
                       { day: "Jour 21", tasks: "Configurer les notifications internes : alertes Slack ou email quand un prospect visite la page pricing, quand un deal depasse X euros, quand un deal est inactif depuis 14 jours. Troisieme session de formation.", color: "#FF7A59" },
                     ].map((d) => (
-                      <div key={d.day} className="flex gap-3 rounded-xl border border-[#F2F2F2] p-3">
+                      <div key={d.day} className="flex gap-3 rounded-lg border border-[#F2F2F2] p-3">
                         <div className="w-16 shrink-0">
                           <span className="text-[11px] font-bold" style={{ color: d.color }}>{d.day}</span>
                         </div>
@@ -568,22 +568,22 @@ export default function OnboardingHubSpot30JoursArticle() {
                   </div>
 
                   {/* Workflow diagram */}
-                  <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
+                  <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-3">Exemple : workflow de notification deal inactif</p>
                     <div className="flex flex-wrap items-center gap-2 text-[11px]">
                       <span className="px-3 py-1.5 rounded-md bg-[#FF7A59] text-white font-medium">Declencheur : deal inactif 14 jours</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Creer tache : relancer le prospect</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Creer tache : relancer le prospect</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Email au commercial : rappel de suivi</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Email au commercial : rappel de suivi</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Si inactif +7j : notifier le manager</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Si inactif +7j : notifier le manager</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
                       <span className="px-3 py-1.5 rounded-md bg-[#EF4444] text-white font-medium">Si inactif +30j : passer en Perdu</span>
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl bg-[#FFF5F0] border border-[#FFE0D0] p-4">
+                  <div className="mt-4 rounded-lg bg-[#FFF5F0] border border-[#FFE0D0] p-4">
                     <p className="text-[11px] font-semibold text-[#FF7A59] uppercase tracking-wider mb-2">Livrables fin de semaine 3</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -606,9 +606,9 @@ export default function OnboardingHubSpot30JoursArticle() {
 
               {/* ============ SECTION 6 : SEMAINE 4 ============ */}
               <section id="semaine-4" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#6C5CE7]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#6C5CE7]">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#6C5CE7]/10 text-[#6C5CE7] text-[14px] font-bold">S4</span>
+                    <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#6C5CE7]/10 text-[#6C5CE7] text-[14px] font-bold">S4</span>
                     <div>
                       <h2 className="text-[17px] font-semibold text-[#111]">Semaine 4 : Le reporting</h2>
                       <p className="text-[11px] text-[#999]">Jours 22 a 30 -- Dashboards, rapports, objectifs</p>
@@ -633,7 +633,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                       { day: "Jour 28-29", tasks: "Configurer les rapports marketing (si applicable) : sources de leads, taux de conversion par formulaire, performance des pages. Creer le dashboard de suivi marketing.", color: "#22C55E" },
                       { day: "Jour 30", tasks: "Session finale de formation et revue de l&apos;onboarding. Verifier tous les KPIs de succes. Documenter les conventions d&apos;utilisation. Planifier le premier audit qualite a J+60.", color: "#6C5CE7" },
                     ].map((d) => (
-                      <div key={d.day} className="flex gap-3 rounded-xl border border-[#F2F2F2] p-3">
+                      <div key={d.day} className="flex gap-3 rounded-lg border border-[#F2F2F2] p-3">
                         <div className="w-16 shrink-0">
                           <span className="text-[11px] font-bold" style={{ color: d.color }}>{d.day}</span>
                         </div>
@@ -643,8 +643,8 @@ export default function OnboardingHubSpot30JoursArticle() {
                   </div>
 
                   {/* CSS Mockup: Dashboard */}
-                  <div className="rounded-xl border border-[#E8E8E8] bg-[#FAFAFA] overflow-hidden mb-5">
-                    <div className="bg-[#F5F5F5] border-b border-[#E8E8E8] px-4 py-2.5 flex items-center gap-2">
+                  <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] overflow-hidden mb-5">
+                    <div className="bg-[#F5F5F5] border-b border-[#EAEAEA] px-4 py-2.5 flex items-center gap-2">
                       <div className="flex gap-1.5">
                         <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
                         <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
@@ -661,7 +661,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                           { label: "Taux de conversion", value: "23%", change: "-2%", up: false },
                           { label: "Cycle moyen", value: "28j", change: "-3j", up: true },
                         ].map((kpi) => (
-                          <div key={kpi.label} className="rounded-lg border border-[#E8E8E8] bg-white p-3">
+                          <div key={kpi.label} className="rounded-lg border border-[#EAEAEA] bg-white p-3">
                             <p className="text-[9px] text-[#999] mb-1">{kpi.label}</p>
                             <p className="text-[14px] font-bold text-[#111]">{kpi.value}</p>
                             <p className={`text-[9px] font-medium ${kpi.up ? "text-[#22C55E]" : "text-[#EF4444]"}`}>{kpi.change} vs mois precedent</p>
@@ -670,7 +670,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                       </div>
 
                       {/* Pipeline chart mockup */}
-                      <div className="rounded-lg border border-[#E8E8E8] bg-white p-3 mb-3">
+                      <div className="rounded-lg border border-[#EAEAEA] bg-white p-3 mb-3">
                         <p className="text-[10px] font-semibold text-[#333] mb-3">Pipeline par etape</p>
                         <div className="space-y-2">
                           {[
@@ -692,7 +692,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                       </div>
 
                       {/* Activity chart mockup */}
-                      <div className="rounded-lg border border-[#E8E8E8] bg-white p-3">
+                      <div className="rounded-lg border border-[#EAEAEA] bg-white p-3">
                         <p className="text-[10px] font-semibold text-[#333] mb-3">Activites cette semaine</p>
                         <div className="flex items-end gap-1 h-16">
                           {[
@@ -724,7 +724,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                     </p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#F5F3FF] border border-[#E8E0FF] p-4">
+                  <div className="mt-5 rounded-lg bg-[#F5F3FF] border border-[#E8E0FF] p-4">
                     <p className="text-[11px] font-semibold text-[#6C5CE7] uppercase tracking-wider mb-2">Livrables fin de semaine 4</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -747,7 +747,7 @@ export default function OnboardingHubSpot30JoursArticle() {
 
               {/* ============ SECTION 7 : 10 ERREURS ============ */}
               <section id="erreurs" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les 10 erreurs d&apos;onboarding les plus courantes</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Apres avoir accompagne des dizaines d&apos;entreprises dans leur onboarding HubSpot, on a identifie les erreurs qui reviennent systematiquement. Les voici, classees par frequence et par impact sur l&apos;adoption.</p>
@@ -806,7 +806,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                         color: "#22C55E"
                       },
                     ].map((e, i) => (
-                      <div key={i} className="rounded-xl border-l-2 bg-[#FAFAFA] p-4" style={{ borderColor: e.color }}>
+                      <div key={i} className="rounded-lg border-l-2 bg-[#FAFAFA] p-4" style={{ borderColor: e.color }}>
                         <p className="text-[12px] font-semibold text-[#111] mb-2">{i + 1}. {e.erreur}</p>
                         <p className="text-[11px] text-[#777] leading-[1.6]" dangerouslySetInnerHTML={{ __html: e.desc }} />
                       </div>
@@ -819,7 +819,7 @@ export default function OnboardingHubSpot30JoursArticle() {
 
               {/* ============ SECTION 8 : SEUL VS AGENCE ============ */}
               <section id="seul-vs-agence" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Onboarding seul vs avec une agence</h2>
 
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
@@ -832,15 +832,15 @@ export default function OnboardingHubSpot30JoursArticle() {
                   </div>
 
                   {/* Comparison table */}
-                  <div className="rounded-xl border border-[#E8E8E8] overflow-hidden mb-5">
+                  <div className="rounded-lg border border-[#EAEAEA] overflow-hidden mb-5">
                     <div className="grid grid-cols-3">
-                      <div className="p-3 bg-[#F9F9F9] border-b border-r border-[#E8E8E8]">
+                      <div className="p-3 bg-[#F9F9F9] border-b border-r border-[#EAEAEA]">
                         <span className="text-[10px] font-semibold text-[#999] uppercase">Critere</span>
                       </div>
-                      <div className="p-3 bg-[#F9F9F9] border-b border-r border-[#E8E8E8] text-center">
+                      <div className="p-3 bg-[#F9F9F9] border-b border-r border-[#EAEAEA] text-center">
                         <span className="text-[10px] font-semibold text-[#999] uppercase">Onboarding seul</span>
                       </div>
-                      <div className="p-3 bg-[#FFF5F0] border-b border-[#E8E8E8] text-center">
+                      <div className="p-3 bg-[#FFF5F0] border-b border-[#EAEAEA] text-center">
                         <span className="text-[10px] font-semibold text-[#FF7A59] uppercase">Avec une agence</span>
                       </div>
                     </div>
@@ -883,16 +883,16 @@ export default function OnboardingHubSpot30JoursArticle() {
 
               {/* ============ SECTION 9 : CHECKLIST 30 JOURS ============ */}
               <section id="checklist-30-jours" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">La checklist visuelle des 30 jours</h2>
                   <p className="text-[13px] text-[#555] leading-[1.75] mb-5">
                     Voici la vue d&apos;ensemble de votre plan d&apos;onboarding. Chaque jalon represente un livrable concret et verifiable. Utilisez cette timeline pour suivre votre progression et vous assurer que rien n&apos;est oublie.
                   </p>
 
                   {/* Visual timeline */}
-                  <div className="rounded-xl border border-[#E8E8E8] bg-[#FAFAFA] overflow-hidden">
+                  <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] overflow-hidden">
                     {/* Timeline header */}
-                    <div className="bg-[#F5F5F5] border-b border-[#E8E8E8] px-4 py-3">
+                    <div className="bg-[#F5F5F5] border-b border-[#EAEAEA] px-4 py-3">
                       <div className="flex items-center justify-between">
                         <span className="text-[11px] font-semibold text-[#333]">Timeline onboarding HubSpot -- 30 jours</span>
                         <div className="flex items-center gap-3">
@@ -1013,7 +1013,7 @@ export default function OnboardingHubSpot30JoursArticle() {
 
               {/* ============ SECTION 10 : POURQUOI CERES (dark section) ============ */}
               <section id="ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <h2 className="text-[17px] font-semibold text-white mb-4">Pourquoi faire appel a Ceres pour votre onboarding HubSpot</h2>
 
                   <div className="space-y-3 text-[13px] text-[#999] leading-[1.75] mb-6">
@@ -1035,7 +1035,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                       { step: "05", title: "Formation & adoption", desc: "3 sessions de formation adaptees par role (commercial, manager, admin). Documentation des conventions. Support pendant 30 jours.", color: "#4B5EFC" },
                       { step: "06", title: "Suivi & optimisation", desc: "Audit qualite a J+60. Ajustements des configurations. Recommandations d&apos;amelioration. Support continu disponible.", color: "#22C55E" },
                     ].map((s) => (
-                      <div key={s.step} className="rounded-xl border border-[#333] bg-[#1A1A1A] p-4">
+                      <div key={s.step} className="rounded-lg border border-[#333] bg-[#1A1A1A] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="text-[12px] font-bold" style={{ color: s.color }}>{s.step}</span>
                           <span className="text-[12px] font-semibold text-white">{s.title}</span>
@@ -1046,7 +1046,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                   </div>
 
                   {/* Results */}
-                  <div className="rounded-xl border border-[#333] bg-[#1A1A1A] p-4 mb-6">
+                  <div className="rounded-lg border border-[#333] bg-[#1A1A1A] p-4 mb-6">
                     <p className="text-[11px] font-semibold text-[#FF7A59] uppercase tracking-wider mb-3">Resultats moyens observes chez nos clients</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                       {[
@@ -1080,7 +1080,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                 <h3 className="text-[14px] font-semibold text-[#111] mb-4">Articles complementaires</h3>
                 <div className="grid gap-3">
                   {relatedArticles.map((a) => (
-                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
+                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
                       <div className="w-1 h-10 rounded-full" style={{ background: a.color }} />
                       <div className="flex-1 min-w-0">
                         <p className="text-[9px] font-medium mb-1" style={{ color: a.color }}>{a.category}</p>

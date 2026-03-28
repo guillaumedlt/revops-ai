@@ -146,7 +146,7 @@ export default function StructurerEquipeRevOpsPage() {
             <article>
               {/* Section 1 -- Il n'y a pas de modele unique */}
               <section id="pas-de-modele-unique" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Il n&apos;y a pas de modele unique</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La question &ldquo;comment structurer mon equipe RevOps ?&rdquo; est la plus frequente que l&apos;on recoit chez Ceres. Et la reponse commence toujours par la meme chose : ca depend. Ca depend de votre taille, de votre maturite commerciale, de votre stack technique, de votre secteur et de votre vitesse de croissance. Une startup de 20 personnes en pre-Series A n&apos;a pas les memes besoins qu&apos;une ETI de 300 collaborateurs avec trois lignes de produit.</p>
@@ -162,7 +162,7 @@ export default function StructurerEquipeRevOpsPage() {
                       { factor: "Maturite commerciale", desc: "Une entreprise avec un funnel etabli et des metriques suivies a des besoins differents d&apos;une entreprise en exploration.", color: "#4B5EFC" },
                       { factor: "Stack technique", desc: "Le nombre d&apos;outils, leur niveau d&apos;integration et la dette technique existante impactent directement les besoins en RevOps.", color: "#22C55E" },
                     ].map((item) => (
-                      <div key={item.factor} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={item.factor} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <p className="text-[12px] font-semibold mb-2" style={{ color: item.color }}>{item.factor}</p>
                         <p className="text-[10px] text-[#777] leading-[1.6]">{item.desc}</p>
                       </div>
@@ -174,7 +174,7 @@ export default function StructurerEquipeRevOpsPage() {
 
               {/* Section 2 -- Phase 0 : Pas de RevOps (0-15 personnes) */}
               <section id="phase-0" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#999] flex items-center justify-center text-white text-[12px] font-bold">P0</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Phase 0 : Pas de RevOps (0-15 personnes)</h2>
@@ -187,7 +187,7 @@ export default function StructurerEquipeRevOpsPage() {
                   </div>
 
                   {/* CSS Org Chart -- Phase 0: Flat structure */}
-                  <div className="mt-8 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-8 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#999]" />
@@ -198,7 +198,7 @@ export default function StructurerEquipeRevOpsPage() {
                     <div className="bg-white p-6">
                       <div className="flex flex-col items-center">
                         {/* CEO/Fondateur */}
-                        <div className="px-5 py-3 rounded-xl bg-[#111] text-white text-center">
+                        <div className="px-5 py-3 rounded-lg bg-[#111] text-white text-center">
                           <p className="text-[12px] font-bold">CEO / Fondateur</p>
                           <p className="text-[9px] text-white/50 mt-0.5">Fait le RevOps en plus du reste</p>
                         </div>
@@ -232,7 +232,7 @@ export default function StructurerEquipeRevOpsPage() {
                   </div>
 
                   {/* Pain points */}
-                  <div className="mt-5 rounded-xl bg-[#FF7A59]/5 border border-[#FF7A59]/15 p-5">
+                  <div className="mt-5 rounded-lg bg-[#FF7A59]/5 border border-[#FF7A59]/15 p-5">
                     <p className="text-[12px] font-semibold text-[#FF7A59] mb-3">Quand ca casse : les signaux d&apos;alerte</p>
                     <div className="space-y-2">
                       {[
@@ -255,7 +255,7 @@ export default function StructurerEquipeRevOpsPage() {
 
               {/* Section 3 -- Phase 1 : Le premier RevOps (15-30) */}
               <section id="phase-1" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#FF7A59] flex items-center justify-center text-white text-[12px] font-bold">P1</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Phase 1 : Le premier RevOps (15-30 personnes)</h2>
@@ -268,7 +268,7 @@ export default function StructurerEquipeRevOpsPage() {
                   </div>
 
                   {/* CSS Org Chart -- Phase 1: Solo RevOps */}
-                  <div className="mt-8 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-8 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#FF7A59]" />
@@ -279,7 +279,7 @@ export default function StructurerEquipeRevOpsPage() {
                     <div className="bg-white p-6">
                       <div className="flex flex-col items-center">
                         {/* CEO */}
-                        <div className="px-5 py-3 rounded-xl bg-[#111] text-white text-center">
+                        <div className="px-5 py-3 rounded-lg bg-[#111] text-white text-center">
                           <p className="text-[12px] font-bold">CEO</p>
                         </div>
                         <div className="w-[2px] h-5 bg-[#E0E0E0]" />
@@ -312,7 +312,7 @@ export default function StructurerEquipeRevOpsPage() {
                   </div>
 
                   {/* Missions du premier RevOps */}
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-3">Missions du premier RevOps</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {[
@@ -323,7 +323,7 @@ export default function StructurerEquipeRevOpsPage() {
                         { mission: "Data quality : deduplication, enrichissement", priority: "Moyenne", color: "#22C55E" },
                         { mission: "Onboarding : playbooks pour nouveaux reps", priority: "Moyenne", color: "#22C55E" },
                       ].map((m) => (
-                        <div key={m.mission} className="flex items-start gap-3 p-3 rounded-lg bg-white border border-[#E8E8E8]">
+                        <div key={m.mission} className="flex items-start gap-3 p-3 rounded-lg bg-white border border-[#EAEAEA]">
                           <span className="text-[8px] font-bold px-1.5 py-0.5 rounded shrink-0 mt-0.5" style={{ color: m.color, backgroundColor: `${m.color}15` }}>{m.priority}</span>
                           <span className="text-[11px] text-[#555] leading-[1.5]">{m.mission}</span>
                         </div>
@@ -336,7 +336,7 @@ export default function StructurerEquipeRevOpsPage() {
 
               {/* Section 4 -- Phase 2 : L'equipe naissante (30-80) */}
               <section id="phase-2" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#4B5EFC] flex items-center justify-center text-white text-[12px] font-bold">P2</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Phase 2 : L&apos;equipe naissante (30-80 personnes)</h2>
@@ -350,7 +350,7 @@ export default function StructurerEquipeRevOpsPage() {
                   </div>
 
                   {/* CSS Org Chart -- Phase 2: Small team */}
-                  <div className="mt-8 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-8 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#4B5EFC]" />
@@ -361,7 +361,7 @@ export default function StructurerEquipeRevOpsPage() {
                     <div className="bg-white p-6">
                       <div className="flex flex-col items-center">
                         {/* CEO/COO */}
-                        <div className="px-5 py-3 rounded-xl bg-[#111] text-white text-center">
+                        <div className="px-5 py-3 rounded-lg bg-[#111] text-white text-center">
                           <p className="text-[12px] font-bold">CEO / COO</p>
                         </div>
                         <div className="w-[2px] h-5 bg-[#E0E0E0]" />
@@ -410,7 +410,7 @@ export default function StructurerEquipeRevOpsPage() {
 
               {/* Section 5 -- Phase 3 : L'equipe structuree (80-200) */}
               <section id="phase-3" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#6C5CE7] flex items-center justify-center text-white text-[12px] font-bold">P3</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Phase 3 : L&apos;equipe structuree (80-200 personnes)</h2>
@@ -424,7 +424,7 @@ export default function StructurerEquipeRevOpsPage() {
                   </div>
 
                   {/* CSS Org Chart -- Phase 3: Medium team */}
-                  <div className="mt-8 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-8 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#6C5CE7]" />
@@ -435,7 +435,7 @@ export default function StructurerEquipeRevOpsPage() {
                     <div className="bg-white p-6">
                       <div className="flex flex-col items-center">
                         {/* CRO / COO */}
-                        <div className="px-5 py-3 rounded-xl bg-[#111] text-white text-center">
+                        <div className="px-5 py-3 rounded-lg bg-[#111] text-white text-center">
                           <p className="text-[12px] font-bold">CRO / COO</p>
                         </div>
                         <div className="w-[2px] h-5 bg-[#E0E0E0]" />
@@ -456,12 +456,12 @@ export default function StructurerEquipeRevOpsPage() {
                           ].map((p) => (
                             <div key={p.pod} className="flex flex-col items-center">
                               <div className="w-[2px] h-3 bg-[#E0E0E0]" />
-                              <div className="px-4 py-3 rounded-xl border-2 text-center min-w-[140px]" style={{ borderColor: `${p.color}30`, backgroundColor: `${p.color}05` }}>
+                              <div className="px-4 py-3 rounded-lg border-2 text-center min-w-[140px]" style={{ borderColor: `${p.color}30`, backgroundColor: `${p.color}05` }}>
                                 <p className="text-[11px] font-bold" style={{ color: p.color }}>{p.pod}</p>
                                 <p className="text-[8px] text-[#BBB] mt-0.5 mb-2">{p.focus}</p>
                                 <div className="space-y-1">
                                   {p.members.map((m) => (
-                                    <div key={m} className="px-2 py-1 rounded bg-white border border-[#E8E8E8] text-[8px] text-[#666]">{m}</div>
+                                    <div key={m} className="px-2 py-1 rounded bg-white border border-[#EAEAEA] text-[8px] text-[#666]">{m}</div>
                                   ))}
                                 </div>
                               </div>
@@ -480,7 +480,7 @@ export default function StructurerEquipeRevOpsPage() {
                       { change: "Du reporting ad hoc au BI", desc: "Les dashboards sont automatises, les previsions modelisees, les analyses proactives.", icon: "D" },
                       { change: "Des outils isoles a la stack integree", desc: "Un Systems Architect gere l&apos;architecture globale et les flux de donnees.", icon: "T" },
                     ].map((item) => (
-                      <div key={item.change} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={item.change} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-5 h-5 rounded bg-[#6C5CE7]/10 flex items-center justify-center text-[9px] font-bold text-[#6C5CE7]">{item.icon}</div>
                           <p className="text-[11px] font-semibold text-[#333]">{item.change}</p>
@@ -495,7 +495,7 @@ export default function StructurerEquipeRevOpsPage() {
 
               {/* Section 6 -- Phase 4 : Le departement RevOps (200+) */}
               <section id="phase-4" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#22C55E] flex items-center justify-center text-white text-[12px] font-bold">P4</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Phase 4 : Le departement RevOps (200+ personnes)</h2>
@@ -509,7 +509,7 @@ export default function StructurerEquipeRevOpsPage() {
                   </div>
 
                   {/* CSS Org Chart -- Phase 4: Full department */}
-                  <div className="mt-8 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-8 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#22C55E]" />
@@ -520,7 +520,7 @@ export default function StructurerEquipeRevOpsPage() {
                     <div className="bg-white p-6 overflow-x-auto">
                       <div className="flex flex-col items-center min-w-[500px]">
                         {/* CRO */}
-                        <div className="px-5 py-2.5 rounded-xl bg-[#111] text-white text-center">
+                        <div className="px-5 py-2.5 rounded-lg bg-[#111] text-white text-center">
                           <p className="text-[11px] font-bold">CRO</p>
                         </div>
                         <div className="w-[2px] h-4 bg-[#E0E0E0]" />
@@ -547,11 +547,11 @@ export default function StructurerEquipeRevOpsPage() {
                           ].map((d) => (
                             <div key={d.dir} className="flex flex-col items-center">
                               <div className="w-[2px] h-3 bg-[#E0E0E0]" />
-                              <div className="px-3 py-2.5 rounded-xl border-2 text-center min-w-[120px]" style={{ borderColor: `${d.color}30`, backgroundColor: `${d.color}05` }}>
+                              <div className="px-3 py-2.5 rounded-lg border-2 text-center min-w-[120px]" style={{ borderColor: `${d.color}30`, backgroundColor: `${d.color}05` }}>
                                 <p className="text-[10px] font-bold" style={{ color: d.color }}>{d.dir}</p>
                                 <div className="mt-2 space-y-1">
                                   {d.members.map((m) => (
-                                    <div key={m} className="px-2 py-0.5 rounded bg-white border border-[#E8E8E8] text-[7px] text-[#666]">{m}</div>
+                                    <div key={m} className="px-2 py-0.5 rounded bg-white border border-[#EAEAEA] text-[7px] text-[#666]">{m}</div>
                                   ))}
                                 </div>
                               </div>
@@ -570,7 +570,7 @@ export default function StructurerEquipeRevOpsPage() {
                       { value: "10-15", label: "Membres de l&apos;equipe", color: "#22C55E" },
                       { value: "C-1", label: "Niveau hierarchique du VP", color: "#6C5CE7" },
                     ].map((stat) => (
-                      <div key={stat.label} className="text-center p-3 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={stat.label} className="text-center p-3 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <div className="text-[18px] font-bold" style={{ color: stat.color }}>{stat.value}</div>
                         <div className="text-[9px] text-[#999] mt-1 leading-[1.4]">{stat.label}</div>
                       </div>
@@ -582,7 +582,7 @@ export default function StructurerEquipeRevOpsPage() {
 
               {/* Section 7 -- A qui le RevOps doit-il reporter */}
               <section id="reporting" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">A qui le RevOps doit-il reporter ?</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La question du rattachement hierarchique est l&apos;une des plus debattues dans le monde du RevOps. La reponse n&apos;est pas unique et depend de la maturite de l&apos;entreprise, de la culture interne et de la structure existante. Mais il y a des principes clairs et des erreurs a eviter.</p>
@@ -626,7 +626,7 @@ export default function StructurerEquipeRevOpsPage() {
                         color: "#6C5CE7",
                       },
                     ].map((opt) => (
-                      <div key={opt.to} className="p-5 rounded-xl border-2" style={{ borderColor: `${opt.color}20`, backgroundColor: `${opt.color}03` }}>
+                      <div key={opt.to} className="p-5 rounded-lg border-2" style={{ borderColor: `${opt.color}20`, backgroundColor: `${opt.color}03` }}>
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-3">
                             <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-[10px] font-bold" style={{ backgroundColor: opt.color }}>{opt.to.split(" ")[0]}</div>
@@ -672,7 +672,7 @@ export default function StructurerEquipeRevOpsPage() {
 
               {/* Section 8 -- L'ordre de recrutement ideal */}
               <section id="ordre-recrutement" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">L&apos;ordre de recrutement ideal</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;ordre dans lequel vous recrutez votre equipe RevOps est aussi important que les profils que vous choisissez. Recruter dans le mauvais ordre cree des desequilibres : trop de strategie sans execution, trop de technique sans vision business, trop d&apos;analyse sans personne pour implementer les recommandations. Voici la sequence qui fonctionne pour la majorite des entreprises B2B en croissance.</p>
@@ -683,7 +683,7 @@ export default function StructurerEquipeRevOpsPage() {
                   </div>
 
                   {/* Hiring Timeline CSS Mockup */}
-                  <div className="mt-8 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-8 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#FF7A59]" />
@@ -753,7 +753,7 @@ export default function StructurerEquipeRevOpsPage() {
                                 <div className="w-[8px] h-[8px] rounded-full" style={{ backgroundColor: hire.color }} />
                               </div>
 
-                              <div className="p-4 rounded-xl border border-[#E8E8E8] bg-[#FAFAFA]">
+                              <div className="p-4 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA]">
                                 <div className="flex items-center gap-3 mb-2">
                                   <span className="text-[11px] font-bold px-2 py-0.5 rounded" style={{ color: hire.color, backgroundColor: `${hire.color}12` }}>{hire.order}</span>
                                   <span className="text-[12px] font-semibold text-[#111]">{hire.role}</span>
@@ -778,7 +778,7 @@ export default function StructurerEquipeRevOpsPage() {
 
               {/* Section 9 -- Les profils types */}
               <section id="profils-types" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les profils types du RevOps</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le RevOps regroupe des profils tres differents, du generaliste business-oriented au specialiste technique pur. Comprendre ces profils est essentiel pour recruter les bonnes personnes au bon moment et eviter les erreurs de casting qui coutent cher en temps perdu et en frustration des deux cotes.</p>
@@ -829,7 +829,7 @@ export default function StructurerEquipeRevOpsPage() {
                         evolution: "VP RevOps, CRO, COO, consultant independant",
                       },
                     ].map((role) => (
-                      <div key={role.title} className="p-5 rounded-xl border-2" style={{ borderColor: `${role.color}25`, backgroundColor: `${role.color}03` }}>
+                      <div key={role.title} className="p-5 rounded-lg border-2" style={{ borderColor: `${role.color}25`, backgroundColor: `${role.color}03` }}>
                         <div className="flex items-center justify-between mb-3">
                           <div>
                             <p className="text-[14px] font-bold" style={{ color: role.color }}>{role.title}</p>
@@ -861,7 +861,7 @@ export default function StructurerEquipeRevOpsPage() {
 
               {/* Section 10 -- Le modele hybride (dark section) */}
               <section id="modele-hybride" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">L&apos;alternative</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">Le modele hybride : equipe interne + agence RevOps</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -873,10 +873,10 @@ export default function StructurerEquipeRevOpsPage() {
                   </div>
 
                   {/* Hybrid model visual */}
-                  <div className="mt-8 rounded-xl bg-white/5 border border-white/10 p-5">
+                  <div className="mt-8 rounded-lg bg-white/5 border border-white/10 p-5">
                     <p className="text-[12px] font-semibold text-white/80 mb-5">Modele hybride -- Repartition des responsabilites</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-6 h-6 rounded-lg bg-[#4B5EFC] flex items-center justify-center text-white text-[9px] font-bold">INT</div>
                           <p className="text-[12px] font-semibold text-[#4B5EFC]">Equipe interne</p>
@@ -897,7 +897,7 @@ export default function StructurerEquipeRevOpsPage() {
                           ))}
                         </div>
                       </div>
-                      <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-6 h-6 rounded-lg bg-[#FF7A59] flex items-center justify-center text-white text-[9px] font-bold">AG</div>
                           <p className="text-[12px] font-semibold text-[#FF7A59]">Agence Ceres</p>
@@ -929,7 +929,7 @@ export default function StructurerEquipeRevOpsPage() {
                       { value: "+50", label: "clients dont Ceres tire les bonnes pratiques", color: "#22C55E" },
                       { value: "1 sem.", label: "pour demarrer vs. 3 mois de recrutement", color: "#6C5CE7" },
                     ].map((stat) => (
-                      <div key={stat.label} className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
+                      <div key={stat.label} className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
                         <div className="text-[20px] font-bold" style={{ color: stat.color }}>{stat.value}</div>
                         <div className="text-[10px] text-white/40 mt-1 leading-[1.4]">{stat.label}</div>
                       </div>
@@ -956,7 +956,7 @@ export default function StructurerEquipeRevOpsPage() {
 
               {/* Related articles */}
               <section className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((a) => (
@@ -974,7 +974,7 @@ export default function StructurerEquipeRevOpsPage() {
 
               {/* CTA */}
               <section>
-                <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+                <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                   <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide pour structurer votre equipe RevOps ?</h2>
                   <p className="text-[13px] text-[#999] mb-6 max-w-[420px] mx-auto">On vous aide a definir la bonne structure, recruter les bons profils et mettre en place les processus adaptes a votre phase de croissance. Premier echange sans engagement.</p>
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

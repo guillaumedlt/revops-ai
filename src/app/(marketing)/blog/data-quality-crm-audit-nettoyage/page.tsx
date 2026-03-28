@@ -147,7 +147,7 @@ export default function DataQualityCrmArticle() {
             <article>
               {/* Section 1 : Le vrai cout des donnees sales */}
               <section id="cout-donnees-sales" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Le vrai cout des donnees sales dans votre CRM</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Les donnees de mauvaise qualite coutent en moyenne 12,9 millions de dollars par an aux entreprises, selon Gartner. Ce chiffre concerne les grandes organisations, mais ramene a l&apos;echelle d&apos;une PME B2B francaise, le probleme reste structurel. On estime que les donnees &ldquo;sales&rdquo; representent entre 15% et 25% du chiffre d&apos;affaires perdu, via des opportunites manquees, des campagnes mal ciblees et des decisions basees sur des metriques fausses.</p>
@@ -171,7 +171,7 @@ export default function DataQualityCrmArticle() {
                       { stat: "44%", label: "des acheteurs ignorent les emails avec des erreurs", color: "#6C5CE7" },
                       { stat: "30%", label: "des donnees B2B deviennent obsoletes chaque annee", color: "#22C55E" },
                     ].map((s) => (
-                      <div key={s.label} className="rounded-xl border border-[#F2F2F2] p-4 text-center">
+                      <div key={s.label} className="rounded-lg border border-[#F2F2F2] p-4 text-center">
                         <p className="text-[20px] font-bold mb-1" style={{ color: s.color }}>{s.stat}</p>
                         <p className="text-[10px] text-[#999] leading-[1.4]">{s.label}</p>
                       </div>
@@ -183,7 +183,7 @@ export default function DataQualityCrmArticle() {
 
               {/* Section 2 : Les 5 dimensions de la qualite des donnees */}
               <section id="dimensions-qualite" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les 5 dimensions de la qualite des donnees</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-6">
                     <p>Avant de nettoyer quoi que ce soit, il faut comprendre ce que signifie &ldquo;qualite des donnees&rdquo;. Ce n&apos;est pas un concept vague. La qualite des donnees se decompose en cinq dimensions mesurables. Chaque dimension peut etre evaluee independamment, et chacune a un impact specifique sur vos operations commerciales et marketing.</p>
@@ -191,7 +191,7 @@ export default function DataQualityCrmArticle() {
                   </div>
 
                   {/* CSS Radar Chart Mockup */}
-                  <div className="mb-6 rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-5">
+                  <div className="mb-6 rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-5">
                     <p className="text-[12px] font-semibold text-[#111] mb-4 text-center">Score qualite des donnees -- Exemple d&apos;audit</p>
                     <div className="relative w-[280px] h-[280px] mx-auto">
                       {/* Pentagon background */}
@@ -253,7 +253,7 @@ export default function DataQualityCrmArticle() {
                       { title: "Fraicheur (Timeliness)", score: "50%", desc: "A quand remonte la derniere mise a jour de vos fiches ? Si un contact n'a pas ete modifie depuis 18 mois et que la derniere interaction date de deux ans, cette donnee est probablement perimee. En B2B, la duree de vie moyenne d'une donnee est de 12 a 18 mois avant qu'un changement de poste, de numero ou d'entreprise ne la rende obsolete.", color: "#FF7A59", impact: "Base qui se degrade silencieusement, contacts injoignables, opportunites fantomes" },
                       { title: "Unicite (Uniqueness)", score: "40%", desc: "Combien de doublons existent dans votre base ? En moyenne, les CRM que nous auditons contiennent entre 10% et 25% de doublons. Meme contact, meme entreprise, crees par differents commerciaux ou importes depuis differentes sources. Les doublons faussent les reportings, creent de la confusion et generent des experiences client deplorables.", color: "#EF4444", impact: "Meme prospect contacte 3 fois, pipeline gonfle artificiellement, reportings non fiables" },
                     ].map((d) => (
-                      <div key={d.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={d.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
                             <div className="w-2 h-2 rounded-full" style={{ background: d.color }} />
@@ -275,7 +275,7 @@ export default function DataQualityCrmArticle() {
 
               {/* Section 3 : Etape 1 - Auditer votre base */}
               <section id="etape-audit" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#22C55E]/10 flex items-center justify-center text-[14px] font-bold text-[#22C55E]">1</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Etape 1 : Auditer votre base</h2>
@@ -286,7 +286,7 @@ export default function DataQualityCrmArticle() {
                   </div>
 
                   {/* CSS Data Quality Score Gauge */}
-                  <div className="my-6 rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-5">
+                  <div className="my-6 rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-5">
                     <p className="text-[12px] font-semibold text-[#111] mb-4 text-center">Data Quality Score -- Tableau de bord d&apos;audit</p>
                     <div className="flex items-center justify-center gap-8 mb-6">
                       {/* Main gauge */}
@@ -360,7 +360,7 @@ export default function DataQualityCrmArticle() {
 
               {/* Section 4 : Etape 2 - Dedupliquer */}
               <section id="etape-dedup" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#22C55E]/10 flex items-center justify-center text-[14px] font-bold text-[#22C55E]">2</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Etape 2 : Dedupliquer vos contacts et entreprises</h2>
@@ -383,7 +383,7 @@ export default function DataQualityCrmArticle() {
                   </div>
 
                   {/* Dedup rules card */}
-                  <div className="mt-5 rounded-xl bg-[#F0FDF4] border border-[#D4EDDA] p-4">
+                  <div className="mt-5 rounded-lg bg-[#F0FDF4] border border-[#D4EDDA] p-4">
                     <p className="text-[12px] font-semibold text-[#22C55E] mb-3">Regles de fusion recommandees</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {[
@@ -407,7 +407,7 @@ export default function DataQualityCrmArticle() {
 
               {/* Section 5 : Etape 3 - Standardiser */}
               <section id="etape-standardiser" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#22C55E]/10 flex items-center justify-center text-[14px] font-bold text-[#22C55E]">3</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Etape 3 : Standardiser les formats et conventions</h2>
@@ -419,7 +419,7 @@ export default function DataQualityCrmArticle() {
                   </div>
 
                   {/* Standardization examples table */}
-                  <div className="my-5 rounded-xl border border-[#F2F2F2] overflow-hidden">
+                  <div className="my-5 rounded-lg border border-[#F2F2F2] overflow-hidden">
                     <div className="bg-[#FAFAFA] px-4 py-2.5 border-b border-[#F2F2F2]">
                       <p className="text-[11px] font-semibold text-[#111]">Avant / Apres standardisation</p>
                     </div>
@@ -461,7 +461,7 @@ export default function DataQualityCrmArticle() {
 
               {/* Section 6 : Etape 4 - Enrichir */}
               <section id="etape-enrichir" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#22C55E]/10 flex items-center justify-center text-[14px] font-bold text-[#22C55E]">4</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Etape 4 : Enrichir les donnees manquantes</h2>
@@ -479,7 +479,7 @@ export default function DataQualityCrmArticle() {
                       { name: "Clay", price: "A partir de 149$/mois", pros: ["50+ sources de donnees", "Workflows d'enrichissement sequentiels", "IA pour qualifier et scorer", "Waterfall enrichment (cascading)"], cons: ["Courbe d'apprentissage elevee", "Prix premium", "Moins bon sur la France"], color: "#6C5CE7" },
                       { name: "Clearbit (Breeze)", price: "Inclus dans HubSpot Breeze", pros: ["Integration native HubSpot", "Enrichissement automatique a la creation", "Donnees entreprise tres fiables", "Scoring intent integre"], cons: ["Necessite HubSpot payant", "Donnees B2C limitees", "Couverture France moyenne"], color: "#4B5EFC" },
                     ].map((t) => (
-                      <div key={t.name} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={t.name} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-full" style={{ background: t.color }} />
                           <p className="text-[12px] font-semibold text-[#111]">{t.name}</p>
@@ -500,11 +500,11 @@ export default function DataQualityCrmArticle() {
                   </div>
 
                   {/* Before / After Contact Record Mockup */}
-                  <div className="my-6 rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-5">
+                  <div className="my-6 rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-5">
                     <p className="text-[12px] font-semibold text-[#111] mb-4 text-center">Fiche contact : avant / apres enrichissement</p>
                     <div className="grid grid-cols-2 gap-4">
                       {/* Before */}
-                      <div className="rounded-xl border border-[#EF4444]/30 bg-white p-4">
+                      <div className="rounded-lg border border-[#EF4444]/30 bg-white p-4">
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-5 h-5 rounded-full bg-[#EF4444]/10 flex items-center justify-center">
                             <span className="text-[10px] text-[#EF4444] font-bold">!</span>
@@ -534,7 +534,7 @@ export default function DataQualityCrmArticle() {
                         </div>
                       </div>
                       {/* After */}
-                      <div className="rounded-xl border border-[#22C55E]/30 bg-white p-4">
+                      <div className="rounded-lg border border-[#22C55E]/30 bg-white p-4">
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-5 h-5 rounded-full bg-[#22C55E]/10 flex items-center justify-center">
                             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
@@ -581,7 +581,7 @@ export default function DataQualityCrmArticle() {
 
               {/* Section 7 : Etape 5 - Automatiser la maintenance */}
               <section id="etape-automatiser" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#22C55E]/10 flex items-center justify-center text-[14px] font-bold text-[#22C55E]">5</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Etape 5 : Automatiser la maintenance continue</h2>
@@ -618,7 +618,7 @@ export default function DataQualityCrmArticle() {
                         examples: ["Mensuel : revue des doublons detectes", "Trimestriel : archivage contacts inactifs > 18 mois", "Trimestriel : re-enrichissement des fiches < 60% completes", "Semestriel : audit complet des 5 dimensions"]
                       },
                     ].map((p) => (
-                      <div key={p.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={p.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-full" style={{ background: p.color }} />
                           <p className="text-[12px] font-semibold text-[#111]">{p.title}</p>
@@ -649,7 +649,7 @@ export default function DataQualityCrmArticle() {
 
               {/* Section 8 : La checklist data quality */}
               <section id="checklist" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-2">La checklist data quality : 50 points de controle</h2>
                   <p className="text-[13px] text-[#555] leading-[1.75] mb-5">Voici la checklist complete que nous utilisons chez Ceres lors de nos audits data quality. Cliquez sur chaque section pour derouler les points de controle.</p>
 
@@ -741,7 +741,7 @@ export default function DataQualityCrmArticle() {
                         ],
                       },
                     ].map((section) => (
-                      <div key={section.id} className="rounded-xl border border-[#F2F2F2] overflow-hidden">
+                      <div key={section.id} className="rounded-lg border border-[#F2F2F2] overflow-hidden">
                         <button
                           onClick={() => setOpenChecklist(openChecklist === section.id ? null : section.id)}
                           className="w-full flex items-center justify-between px-4 py-3 hover:bg-[#FAFAFA] transition-colors"
@@ -787,7 +787,7 @@ export default function DataQualityCrmArticle() {
 
               {/* Section 9 : Les outils pour maintenir la qualite */}
               <section id="outils" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les outils pour maintenir la qualite des donnees</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Le nettoyage manuel est necessaire lors de l&apos;audit initial. Mais pour la maintenance continue, vous avez besoin d&apos;outils qui automatisent la detection, la correction et la prevention des problemes de qualite. Voici les trois categories d&apos;outils essentiels et nos recommandations pour chaque.</p>
@@ -795,7 +795,7 @@ export default function DataQualityCrmArticle() {
 
                   <div className="space-y-4">
                     {/* HubSpot Operations Hub */}
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-3 mb-3">
                         <div className="w-2 h-2 rounded-full bg-[#FF7A59]" />
                         <p className="text-[12px] font-semibold text-[#111]">HubSpot Operations Hub</p>
@@ -810,7 +810,7 @@ export default function DataQualityCrmArticle() {
                     </div>
 
                     {/* Insycle */}
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-3 mb-3">
                         <div className="w-2 h-2 rounded-full bg-[#4B5EFC]" />
                         <p className="text-[12px] font-semibold text-[#111]">Insycle</p>
@@ -825,7 +825,7 @@ export default function DataQualityCrmArticle() {
                     </div>
 
                     {/* Dedupely */}
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-3 mb-3">
                         <div className="w-2 h-2 rounded-full bg-[#22C55E]" />
                         <p className="text-[12px] font-semibold text-[#111]">Dedupely</p>
@@ -851,7 +851,7 @@ export default function DataQualityCrmArticle() {
 
               {/* Section 10 : Notre audit chez Ceres — Dark section */}
               <section id="audit-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <div className="flex items-center gap-3 mb-5">
                     <div className="w-8 h-8 rounded-lg bg-[#22C55E]/20 flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
@@ -872,7 +872,7 @@ export default function DataQualityCrmArticle() {
                       { title: "Audit des workflows existants", desc: "Verification que les automatisations existantes ne creent pas de problemes de qualite. Identification des flux d'entree non controles (formulaires, imports, integrations).", color: "#22C55E" },
                       { title: "Plan d'action priorise", desc: "Livrable final : un document avec le diagnostic chiffre, les actions correctives classees par impact et effort, et le plan de maintenance recommande.", color: "#EF4444" },
                     ].map((item) => (
-                      <div key={item.title} className="rounded-xl border border-[#333] bg-[#1A1A1A] p-4">
+                      <div key={item.title} className="rounded-lg border border-[#333] bg-[#1A1A1A] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-full" style={{ background: item.color }} />
                           <p className="text-[12px] font-semibold text-white">{item.title}</p>
@@ -883,7 +883,7 @@ export default function DataQualityCrmArticle() {
                   </div>
 
                   {/* Results */}
-                  <div className="rounded-xl border border-[#333] bg-[#1A1A1A] p-4 mb-6">
+                  <div className="rounded-lg border border-[#333] bg-[#1A1A1A] p-4 mb-6">
                     <p className="text-[12px] font-semibold text-white mb-3">Resultats moyens constates apres notre audit + nettoyage</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -908,7 +908,7 @@ export default function DataQualityCrmArticle() {
               </section>
 
               {/* CTA */}
-              <div className="mb-12 rounded-2xl bg-gradient-to-br from-[#111] to-[#1A1A1A] p-6 md:p-8 text-center border border-[#333]">
+              <div className="mb-12 rounded-lg bg-gradient-to-br from-[#111] to-[#1A1A1A] p-6 md:p-8 text-center border border-[#333]">
                 <h3 className="text-[17px] font-semibold text-white mb-3">Votre CRM a besoin d&apos;un audit data quality ?</h3>
                 <p className="text-[13px] text-[#999] leading-[1.7] mb-5 max-w-[500px] mx-auto">Chez Ceres, on audite, nettoie et automatise la maintenance de votre base CRM. Un diagnostic chiffre en 5 jours, un plan d&apos;action priorise et des resultats mesurables. Commencez par un appel de 30 minutes pour evaluer l&apos;etat de sante de vos donnees.</p>
                 <Link href="https://calendly.com/ceres-revops/30min" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#22C55E] text-white rounded-lg text-[13px] font-medium hover:bg-[#1EAD50] transition-colors">
@@ -922,7 +922,7 @@ export default function DataQualityCrmArticle() {
                 <h3 className="text-[14px] font-semibold text-[#111] mb-4">Articles complementaires</h3>
                 <div className="grid gap-3">
                   {relatedArticles.map((a) => (
-                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
+                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
                       <div className="w-1 h-10 rounded-full" style={{ background: a.color }} />
                       <div className="flex-1 min-w-0">
                         <p className="text-[9px] font-medium mb-1" style={{ color: a.color }}>{a.category}</p>

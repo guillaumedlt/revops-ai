@@ -220,7 +220,7 @@ export default function GlossairePage() {
               placeholder="Rechercher un terme..."
               value={search}
               onChange={(e) => { setSearch(e.target.value); setActiveLetter(null); }}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E8E8E8] bg-white text-[13px] text-[#111] placeholder:text-[#CCC] focus:outline-none focus:border-[#DDD] shadow-[0_2px_8px_-4px_rgba(0,0,0,0.06)]"
+              className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-[#EAEAEA] bg-white text-[13px] text-[#111] placeholder:text-[#CCC] focus:outline-none focus:border-[#DDD] shadow-[0_2px_8px_-4px_rgba(0,0,0,0.06)]"
             />
             {search && (
               <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-[#CCC] hover:text-[#999]">
@@ -293,13 +293,13 @@ export default function GlossairePage() {
             {grouped.map(([letter, letterTerms]) => (
               <section key={letter} id={`letter-${letter}`}>
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="w-10 h-10 rounded-xl bg-[#111] text-white flex items-center justify-center text-[16px] font-bold">{letter}</span>
+                  <span className="w-10 h-10 rounded-lg bg-[#111] text-white flex items-center justify-center text-[16px] font-bold">{letter}</span>
                   <div className="flex-1 h-px bg-[#F2F2F2]" />
                   <span className="text-[11px] text-[#CCC]">{letterTerms.length} terme{letterTerms.length > 1 ? "s" : ""}</span>
                 </div>
                 <div className="space-y-3">
                   {letterTerms.map((t) => (
-                    <div key={t.slug} id={t.slug} className="rounded-2xl border border-[#E8E8E8] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] hover:border-[#DDD] transition-colors">
+                    <div key={t.slug} id={t.slug} className="rounded-lg border border-[#EAEAEA] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] hover:border-[#DDD] transition-colors">
                       <div className="flex items-start justify-between gap-4 mb-2">
                         <h2 className="text-[15px] font-semibold text-[#111]">{t.term}</h2>
                         <span
@@ -347,7 +347,7 @@ export default function GlossairePage() {
 
         {/* Stats */}
         <section className="mt-16 mb-8">
-          <div className="rounded-2xl bg-[#111] p-6 md:p-10">
+          <div className="rounded-lg bg-[#111] p-6 md:p-10">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
               {[
                 { value: terms.length.toString(), label: "Termes definis" },
@@ -369,14 +369,14 @@ export default function GlossairePage() {
 
         {/* CTA */}
         <section>
-          <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+          <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
             <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Un terme vous manque ?</h2>
             <p className="text-[13px] text-[#999] mb-6 max-w-[400px] mx-auto">Dites-nous quel terme ajouter ou posez-nous directement votre question RevOps.</p>
             <div className="flex items-center justify-center gap-3">
               <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                 <span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Reserver un appel
               </a>
-              <Link href="/blog" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+              <Link href="/blog" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                 Lire le blog
               </Link>
             </div>

@@ -154,7 +154,7 @@ export default function AuditRevOpsPage() {
             ))}
           </div>
           <div className="flex items-center justify-center gap-3">
-            <a href="#contact" className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md border border-[#E5E5E5] bg-white text-[13px] text-[#111] font-medium hover:border-[#CCC] hover:shadow-sm transition-all">
+            <a href="#contact" className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md border border-[#EAEAEA] bg-white text-[13px] text-[#111] font-medium hover:border-[#CCC] hover:shadow-sm transition-all">
               <span className="w-2 h-2 rounded-sm bg-[#FF7A59]" />
               Demander un audit
             </a>
@@ -167,7 +167,7 @@ export default function AuditRevOpsPage() {
 
         {/* Score illustration */}
         <section className="">
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="text-center mb-8">
               <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-2">Votre score de maturité RevOps</h2>
               <p className="text-[13px] text-[#999]">On mesure 6 piliers et on vous donne un score global benchmarké.</p>
@@ -207,7 +207,7 @@ export default function AuditRevOpsPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {auditPillars.map((p) => (
-              <div key={p.title} className="rounded-2xl border border-[#E8E8E8] bg-white p-6 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div key={p.title} className="rounded-lg border border-[#EAEAEA] bg-white p-6 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2.5">
                     <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: p.color }} />
@@ -231,14 +231,14 @@ export default function AuditRevOpsPage() {
 
         {/* Before / After */}
         <section className="">
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="text-center mb-8">
               <div className="mb-4"><Badge>Résultats types</Badge></div>
               <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em]">Avant / Après audit</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {beforeAfter.map((ba) => (
-                <div key={ba.before} className="flex items-center gap-3 rounded-xl border border-[#F2F2F2] p-4">
+                <div key={ba.before} className="flex items-center gap-3 rounded-lg border border-[#F2F2F2] p-4">
                   <div className="flex-1">
                     <p className="text-[11px] text-[#999] line-through mb-1">{ba.before}</p>
                     <p className="text-[12px] font-semibold text-[#111]">{ba.after}</p>
@@ -253,7 +253,7 @@ export default function AuditRevOpsPage() {
 
         {/* Timeline */}
         <section className="">
-          <div className="rounded-2xl bg-[#111] p-6 md:p-10">
+          <div className="rounded-lg bg-[#111] p-6 md:p-10">
             <div className="mb-8">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Timeline</span>
               <h2 className="text-[24px] sm:text-[30px] font-semibold text-white tracking-[-0.02em] mb-2">2 semaines, 4 étapes</h2>
@@ -261,7 +261,7 @@ export default function AuditRevOpsPage() {
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {timeline.map((s, i) => (
-                <div key={s.num} className="relative rounded-xl bg-white/5 border border-white/10 p-4">
+                <div key={s.num} className="relative rounded-lg bg-white/5 border border-white/10 p-4">
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-[20px] font-semibold text-white/10">{s.num}</span>
                     <span className="text-[10px] font-medium px-2 py-0.5 rounded" style={{ backgroundColor: s.color + "20", color: s.color }}>{s.duration}</span>
@@ -285,7 +285,7 @@ export default function AuditRevOpsPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {deliverables.map((d) => (
-              <div key={d.title} className="rounded-2xl border border-[#E8E8E8] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div key={d.title} className="rounded-lg border border-[#EAEAEA] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <div className="flex items-center gap-2.5 mb-2">
                   <div className="w-3 h-3 rounded-sm shrink-0" style={{ backgroundColor: d.color }} />
                   <h3 className="text-[14px] font-semibold text-[#111]">{d.title}</h3>
@@ -299,7 +299,7 @@ export default function AuditRevOpsPage() {
 
         {/* Who is this for */}
         <section className="">
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="mb-6">
               <div className="mb-4"><Badge>Pour qui ?</Badge></div>
               <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em]">L&apos;audit est fait pour vous si...</h2>
@@ -325,7 +325,7 @@ export default function AuditRevOpsPage() {
 
         {/* FAQ */}
         <section className="">
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="mb-6">
               <div className="mb-4"><Badge>FAQ</Badge></div>
               <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em]">Questions sur l&apos;audit</h2>
@@ -344,7 +344,7 @@ export default function AuditRevOpsPage() {
 
         {/* CTA */}
         <section id="contact">
-          <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-8 md:p-12 text-center">
+          <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-8 md:p-12 text-center">
             <h2 className="text-[24px] sm:text-[30px] font-semibold text-[#111] tracking-[-0.02em] mb-3">
               Prêt pour votre audit RevOps ?
             </h2>

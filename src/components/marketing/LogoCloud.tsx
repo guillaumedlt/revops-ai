@@ -52,7 +52,7 @@ export default function LogoCloud() {
         <div className="absolute top-1/2 -left-28 -translate-y-1/2 w-[180px] h-[180px] rounded-full bg-[#D4A27F] opacity-[0.08] blur-[60px] pointer-events-none" style={{ animation: "blobFloat 8s 6s ease-in-out infinite" }} />
 
         {/* Card */}
-        <div className="relative rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
+        <div className="relative rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
           <p className="relative text-center text-[14px] text-[#999] mb-10">
             Déjà <span className="font-semibold text-[#111]">+250 entreprises</span> accompagnées
           </p>

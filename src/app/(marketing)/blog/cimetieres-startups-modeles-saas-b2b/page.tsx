@@ -143,7 +143,7 @@ export default function CimetieresStartupsArticle() {
               </div>
 
               {/* Stats overview card */}
-              <div className="mt-8 rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+              <div className="mt-8 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                 <div className="flex items-center gap-2 mb-4">
                   <span className="text-[13px] font-semibold text-[#111]">Ce que disent les chiffres</span>
                 </div>
@@ -169,7 +169,7 @@ export default function CimetieresStartupsArticle() {
             <article>
               {/* Section 1 : Les chiffres qui font peur */}
               <section id="chiffres" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les chiffres qui font peur</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Avant de plonger dans les patterns d&apos;echec, posons les chiffres. 90% des startups echouent dans les 5 premieres annees. Ce chiffre, repete a l&apos;infini dans l&apos;ecosysteme, est devenu un lieu commun. Mais quand on creuse les donnees du SaaS B2B specifiquement, la realite est encore plus brutale.</p>
@@ -182,7 +182,7 @@ export default function CimetieresStartupsArticle() {
                       { stat: "18 mois", label: "duree de vie moyenne d&apos;une startup SaaS sans PMF", color: "#FF7A59" },
                       { stat: "3-5 ans", label: "pour atteindre la rentabilite en SaaS B2B", color: "#6C5CE7" },
                     ].map((s) => (
-                      <div key={s.label} className="rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4 text-center">
+                      <div key={s.label} className="rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4 text-center">
                         <div className="text-[20px] font-bold mb-1" style={{ color: s.color }}>{s.stat}</div>
                         <div className="text-[10px] text-[#999] leading-[1.5]" dangerouslySetInnerHTML={{ __html: s.label }} />
                       </div>
@@ -197,7 +197,7 @@ export default function CimetieresStartupsArticle() {
 
               {/* Pattern 1 : Le pricing qui tue */}
               <section id="pricing" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-md bg-[#FEF2F2] flex items-center justify-center text-[11px] font-bold text-[#EF4444]">1</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Le pricing qui tue</h2>
@@ -208,7 +208,7 @@ export default function CimetieresStartupsArticle() {
                     <p><strong className="text-[#111]">La course au prix bas.</strong> Face a la concurrence, beaucoup de startups reagissent en baissant leurs prix. C&apos;est une spirale mortelle. En SaaS B2B, le prix bas envoie un signal de faible valeur. Un outil a 9 euros par mois ne sera jamais pris au serieux par un directeur commercial qui gere un budget de 500K euros. Pire, un prix bas vous empeche de financer une equipe commerciale, du support, du marketing. Vous etes condamne au self-service pur, ce qui fonctionne rarement en B2B complexe.</p>
                     <p><strong className="text-[#111]">Le feature creep tarifaire.</strong> A chaque renouvellement difficile, vous ajoutez une fonctionnalite au plan de base. Peu a peu, votre offre premium se vide de sa valeur, votre plan gratuit ou starter fait tout, et personne n&apos;a de raison de passer au plan superieur. C&apos;est la cannibalisation interne.</p>
                   </div>
-                  <div className="mt-5 rounded-xl bg-[#FEF2F2] border border-[#FECACA] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FEF2F2] border border-[#FECACA] p-4">
                     <p className="text-[12px] font-semibold text-[#EF4444] mb-2">Erreur classique</p>
                     <p className="text-[12px] text-[#777] leading-[1.65]">Fixer son prix en fonction de ses couts plutot qu&apos;en fonction de la valeur delivree au client. Un outil qui fait gagner 50 heures par mois a une equipe de 5 commerciaux peut justifier 500 euros par mois, meme si vos couts d&apos;infrastructure sont de 12 euros.</p>
                   </div>
@@ -218,7 +218,7 @@ export default function CimetieresStartupsArticle() {
 
               {/* Pattern 2 : Le go-to-market premature */}
               <section id="go-to-market" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-md bg-[#FFF7ED] flex items-center justify-center text-[11px] font-bold text-[#FF7A59]">2</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Le go-to-market premature</h2>
@@ -230,7 +230,7 @@ export default function CimetieresStartupsArticle() {
                     <p><strong className="text-[#111]">Le bon timing.</strong> Le go-to-market devrait commencer quand vous avez au minimum 20-30 clients qui paient, renouvellent et recommandent votre produit. Pas avant. Chaque euro depense en acquisition avant ce seuil est un euro brule.</p>
                   </div>
                   <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-4">
+                    <div className="rounded-lg bg-[#F0FDF4] p-4">
                       <p className="text-[12px] font-semibold text-[#22C55E] mb-3">Signes que vous etes pret</p>
                       {[
                         "20+ clients qui paient et renouvellent",
@@ -245,7 +245,7 @@ export default function CimetieresStartupsArticle() {
                         </p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-4">
+                    <div className="rounded-lg bg-[#FEF2F2] p-4">
                       <p className="text-[12px] font-semibold text-[#EF4444] mb-3">Signes que c&apos;est trop tot</p>
                       {[
                         "Moins de 10 clients payants",
@@ -267,7 +267,7 @@ export default function CimetieresStartupsArticle() {
 
               {/* Pattern 3 : Le produit sans marche */}
               <section id="produit-sans-marche" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-md bg-[#EEF2FF] flex items-center justify-center text-[11px] font-bold text-[#4B5EFC]">3</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Le produit sans marche</h2>
@@ -278,7 +278,7 @@ export default function CimetieresStartupsArticle() {
                     <p><strong className="text-[#111]">Le syndrome de la solution qui cherche un probleme.</strong> Vous avez une technologie interessante, vous cherchez des cas d&apos;usage. Vous pivotez tous les 3 mois. Vous multipliez les verticales. Chaque prospect a un besoin different et vous dites oui a tout. Au bout de 18 mois, votre produit fait 15 choses et aucune correctement.</p>
                     <p><strong className="text-[#111]">Le test qui ne trompe pas.</strong> Posez la question a vos prospects : &quot;Si cet outil disparaissait demain, quel serait l&apos;impact sur votre activite ?&quot; Si la reponse est &quot;on s&apos;adapterait&quot; ou &quot;on trouverait une alternative facilement&quot;, vous n&apos;avez pas de product-market fit. Vous avez un nice-to-have, pas un must-have.</p>
                   </div>
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Le framework du PMF en SaaS B2B</p>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
                       {[
@@ -299,7 +299,7 @@ export default function CimetieresStartupsArticle() {
 
               {/* Pattern 4 : L'over-engineering */}
               <section id="over-engineering" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-md bg-[#F3E8FF] flex items-center justify-center text-[11px] font-bold text-[#6C5CE7]">4</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">L&apos;over-engineering</h2>
@@ -315,7 +315,7 @@ export default function CimetieresStartupsArticle() {
                       { label: "Temps moyen passe en engineering vs discovery", value: "80% / 20%", sublabel: "Startups qui echouent", color: "#EF4444" },
                       { label: "Temps moyen passe en engineering vs discovery", value: "40% / 60%", sublabel: "Startups qui reussissent", color: "#22C55E" },
                     ].map((s) => (
-                      <div key={s.sublabel} className="rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4 text-center">
+                      <div key={s.sublabel} className="rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4 text-center">
                         <div className="text-[18px] font-bold mb-1" style={{ color: s.color }}>{s.value}</div>
                         <div className="text-[10px] text-[#999] mb-1">{s.label}</div>
                         <div className="text-[9px] font-medium" style={{ color: s.color }}>{s.sublabel}</div>
@@ -328,7 +328,7 @@ export default function CimetieresStartupsArticle() {
 
               {/* Pattern 5 : Les silos marketing-sales */}
               <section id="silos" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-md bg-[#FEF3C7] flex items-center justify-center text-[11px] font-bold text-[#D97706]">5</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Les silos marketing-sales</h2>
@@ -339,7 +339,7 @@ export default function CimetieresStartupsArticle() {
                     <p><strong className="text-[#111]">Le probleme de la definition du lead.</strong> Qu&apos;est-ce qu&apos;un lead qualifie ? Pour le marketing, c&apos;est quelqu&apos;un qui a telecharge un ebook et laisse son email. Pour les sales, c&apos;est quelqu&apos;un qui a un budget, un besoin identifie et une decision a prendre dans les 3 mois. Ces deux definitions n&apos;ont rien a voir. Et sans alignement sur cette definition, chaque equipe travaille dans le vide.</p>
                     <p><strong className="text-[#111]">L&apos;absence de SLA.</strong> Combien de temps les sales ont-ils pour traiter un lead entrant ? Quel est le nombre minimum de tentatives de contact ? Quel est le taux de conversion attendu par source ? Sans SLA entre marketing et sales, il n&apos;y a pas de responsabilite, pas de mesure, pas d&apos;amelioration possible.</p>
                   </div>
-                  <div className="mt-5 rounded-xl bg-[#FFF7ED] border border-[#FFEDD5] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FFF7ED] border border-[#FFEDD5] p-4">
                     <p className="text-[12px] font-semibold text-[#D97706] mb-2">Le cout du desalignement</p>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
                       {[
@@ -360,7 +360,7 @@ export default function CimetieresStartupsArticle() {
 
               {/* Pattern 6 : Le burn-rate incontrole */}
               <section id="burn-rate" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-md bg-[#FEF2F2] flex items-center justify-center text-[11px] font-bold text-[#EF4444]">6</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Le burn-rate incontrole</h2>
@@ -376,7 +376,7 @@ export default function CimetieresStartupsArticle() {
                       { title: "Unit economics sains", items: ["LTV / CAC > 3x", "Payback period < 12 mois", "Gross margin > 70%", "Net revenue retention > 100%"], color: "#22C55E", bg: "#F0FDF4" },
                       { title: "Unit economics toxiques", items: ["LTV / CAC < 1.5x", "Payback period > 18 mois", "Gross margin < 50%", "Churn mensuel > 5%"], color: "#EF4444", bg: "#FEF2F2" },
                     ].map((block) => (
-                      <div key={block.title} className="rounded-xl p-4" style={{ background: block.bg }}>
+                      <div key={block.title} className="rounded-lg p-4" style={{ background: block.bg }}>
                         <p className="text-[12px] font-semibold mb-3" style={{ color: block.color }}>{block.title}</p>
                         {block.items.map((item) => (
                           <p key={item} className="text-[11px] text-[#555] mb-2 flex items-start gap-2">
@@ -392,7 +392,7 @@ export default function CimetieresStartupsArticle() {
 
               {/* Pattern 7 : L'absence de RevOps */}
               <section id="absence-revops" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-md bg-white/10 flex items-center justify-center text-[11px] font-bold text-[#FF7A59]">7</span>
                     <h2 className="text-[17px] font-semibold text-white">L&apos;absence de RevOps</h2>
@@ -409,7 +409,7 @@ export default function CimetieresStartupsArticle() {
                       { label: "Donnees", desc: "Source de verite unique (CRM), metriques partagees, reporting automatise, data quality", color: "#6C5CE7" },
                       { label: "Technologie", desc: "Stack integree, automatisations, workflows, outils connectes entre eux", color: "#4B5EFC" },
                     ].map((pillar) => (
-                      <div key={pillar.label} className="rounded-xl bg-white/5 border border-white/10 p-4">
+                      <div key={pillar.label} className="rounded-lg bg-white/5 border border-white/10 p-4">
                         <div className="text-[12px] font-bold mb-2" style={{ color: pillar.color }}>{pillar.label}</div>
                         <p className="text-[10px] text-white/40 leading-[1.6]">{pillar.desc}</p>
                       </div>
@@ -421,7 +421,7 @@ export default function CimetieresStartupsArticle() {
 
               {/* Les signaux d'alerte */}
               <section id="signaux" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les signaux d&apos;alerte a surveiller</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Les startups ne meurent pas du jour au lendemain. Elles s&apos;affaiblissent progressivement pendant des mois avant de s&apos;effondrer. Voici les metriques qui doivent declencher une alerte rouge dans votre tableau de bord.</p>
@@ -435,7 +435,7 @@ export default function CimetieresStartupsArticle() {
                       { metric: "Taux de conversion lead-client < 2%", desc: "Vous generez beaucoup de leads mais tres peu deviennent clients. Soit vos leads ne sont pas qualifies, soit votre processus de vente est defaillant, soit votre produit ne convainc pas en demo.", level: "Alerte", color: "#D97706" },
                       { metric: "Runway < 6 mois", desc: "Vous avez moins de 6 mois de tresorerie devant vous. Il est temps de couper les depenses non essentielles et de concentrer toutes vos ressources sur ce qui genere du revenu immediatement.", level: "Urgence", color: "#EF4444" },
                     ].map((alert) => (
-                      <div key={alert.metric} className="flex gap-3 items-start rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                      <div key={alert.metric} className="flex gap-3 items-start rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                         <div className="w-16 shrink-0">
                           <span className="inline-block px-2 py-0.5 rounded text-[9px] font-bold text-white" style={{ background: alert.color }}>{alert.level}</span>
                         </div>
@@ -452,7 +452,7 @@ export default function CimetieresStartupsArticle() {
 
               {/* Comment eviter le cimetiere */}
               <section id="eviter-cimetiere" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Comment eviter le cimetiere</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La bonne nouvelle, c&apos;est que tous ces patterns d&apos;echec sont evitables. Pas avec de la chance ou de l&apos;intuition, mais avec de la methode. Et c&apos;est exactement ce que le RevOps apporte : une methodologie operationnelle pour piloter la croissance du revenu.</p>
@@ -500,7 +500,7 @@ export default function CimetieresStartupsArticle() {
                       </div>
                     ))}
                   </div>
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Le RevOps comme prevention</p>
                     <p className="text-[12px] text-[#777] leading-[1.65]">Le RevOps n&apos;est pas un luxe reserve aux entreprises de 100 personnes. C&apos;est une discipline qui se met en place des les premiers clients. Un CRM bien configure, des processus documentes, des metriques suivies chaque semaine. C&apos;est la difference entre piloter une startup avec un tableau de bord et piloter a l&apos;aveugle en esperant que ca marche.</p>
                   </div>
@@ -510,7 +510,7 @@ export default function CimetieresStartupsArticle() {
 
               {/* Conclusion */}
               <section id="conclusion" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Conclusion</span>
                   <h2 className="text-[20px] font-semibold text-white mb-4">Le cimetiere n&apos;est pas une fatalite</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -528,7 +528,7 @@ export default function CimetieresStartupsArticle() {
               <p className="text-[13px] font-semibold text-[#111] mb-4">Articles similaires</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedArticles.map((a) => (
-                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
+                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold text-white mb-3" style={{ background: a.color }}>
                       {a.category[0]}
                     </div>
@@ -541,14 +541,14 @@ export default function CimetieresStartupsArticle() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Votre startup merite mieux que le cimetiere</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[450px] mx-auto">On aide les startups SaaS B2B a structurer leurs processus RevOps, aligner leurs equipes et piloter leur croissance avec les bonnes metriques. Avant qu&apos;il ne soit trop tard.</p>
                 <div className="flex items-center justify-center gap-3">
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                     <span className="w-2 h-2 rounded-sm bg-[#FF7A59]" />Diagnostic RevOps gratuit
                   </a>
-                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                     Nos services
                   </Link>
                 </div>

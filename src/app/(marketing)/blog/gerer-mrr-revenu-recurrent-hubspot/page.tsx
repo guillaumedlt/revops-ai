@@ -143,7 +143,7 @@ export default function MRRHubSpotArticle() {
               </div>
 
               {/* Quick KPI overview */}
-              <div className="mt-8 rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+              <div className="mt-8 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                 <span className="text-[13px] font-semibold text-[#111] mb-4 block">Ce que vous allez mettre en place</span>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {[
@@ -152,7 +152,7 @@ export default function MRRHubSpotArticle() {
                     { label: "Workflows", value: "3", color: "#FF7A59" },
                     { label: "Temps de setup", value: "2h", color: "#22C55E" },
                   ].map((s) => (
-                    <div key={s.label} className="text-center p-3 rounded-xl bg-white border border-[#F2F2F2]">
+                    <div key={s.label} className="text-center p-3 rounded-lg bg-white border border-[#F2F2F2]">
                       <div className="text-[22px] font-bold" style={{ color: s.color }}>{s.value}</div>
                       <div className="text-[10px] text-[#999] mt-1">{s.label}</div>
                     </div>
@@ -164,7 +164,7 @@ export default function MRRHubSpotArticle() {
             <article>
               {/* Section 1 — Pourquoi suivre le MRR */}
               <section id="pourquoi-mrr" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi suivre le MRR dans votre CRM</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La plupart des equipes SaaS suivent leur MRR dans un spreadsheet. Un Google Sheet partage entre le CEO, le VP Sales et le head of finance, mis a jour manuellement une fois par semaine. Ca fonctionne quand vous avez 20 clients. A 200, c&apos;est un cauchemar operationnel.</p>
@@ -184,7 +184,7 @@ export default function MRRHubSpotArticle() {
 
               {/* Section 2 — Metriques cles */}
               <section id="metriques-cles" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les metriques cles du revenu recurrent</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Avant de configurer quoi que ce soit dans HubSpot, il faut s&apos;aligner sur les definitions. Le revenu recurrent se decompose en plusieurs metriques qui racontent chacune une partie de l&apos;histoire. Voici les cinq metriques fondamentales que chaque equipe SaaS doit suivre.</p>
@@ -223,7 +223,7 @@ export default function MRRHubSpotArticle() {
                         color: "#6C5CE7",
                       },
                     ].map((m) => (
-                      <div key={m.metric} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={m.metric} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-sm shrink-0" style={{ backgroundColor: m.color }} />
                           <h3 className="text-[14px] font-semibold text-[#111]">{m.metric}</h3>
@@ -245,7 +245,7 @@ export default function MRRHubSpotArticle() {
 
               {/* Section 3 — Proprietes de deal */}
               <section id="proprietes-deal" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Configurer les proprietes de deal pour le MRR</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>HubSpot utilise la propriete &ldquo;Amount&rdquo; (Montant) par defaut sur les deals. Le probleme : ce montant represente generalement la valeur totale du contrat, pas le revenu mensuel recurrent. Un deal a 24 000 euros sur 2 ans represente un MRR de 1 000 euros, mais HubSpot affiche 24 000 euros dans vos rapports.</p>
@@ -292,7 +292,7 @@ export default function MRRHubSpotArticle() {
 
               {/* Section 4 — Proprietes calculees */}
               <section id="proprietes-calculees" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Creer des proprietes calculees (formules HubSpot)</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>HubSpot Operations Hub (edition Pro ou Enterprise) permet de creer des proprietes calculees avec des formules. C&apos;est indispensable pour automatiser le calcul du MRR a partir du montant total et de la duree du contrat.</p>
@@ -317,7 +317,7 @@ export default function MRRHubSpotArticle() {
                         formula: "mrr_amount - previous_mrr",
                       },
                     ].map((f) => (
-                      <div key={f.title} className="rounded-xl border border-[#F2F2F2] overflow-hidden">
+                      <div key={f.title} className="rounded-lg border border-[#F2F2F2] overflow-hidden">
                         <div className="p-4">
                           <h3 className="text-[14px] font-semibold text-[#111] mb-1">{f.title}</h3>
                           <p className="text-[12px] text-[#666] leading-[1.7]">{f.desc}</p>
@@ -329,7 +329,7 @@ export default function MRRHubSpotArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FFFBEB] border border-[#FEF3C7] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FFFBEB] border border-[#FEF3C7] p-4">
                     <p className="text-[12px] text-[#92400E] leading-[1.65]">
                       <strong>Prerequis :</strong> Les proprietes calculees avec formules necessitent HubSpot Operations Hub Pro (800 euros/mois) ou Enterprise. Si vous etes sur le plan Starter ou Free, vous devrez utiliser des workflows pour calculer ces valeurs (voir section suivante).
                     </p>
@@ -340,7 +340,7 @@ export default function MRRHubSpotArticle() {
 
               {/* Section 5 — Pipeline SaaS */}
               <section id="pipeline-saas" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Le pipeline adapte au SaaS</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le pipeline par defaut de HubSpot est concu pour des cycles de vente classiques. Pour une entreprise SaaS, il faut un pipeline qui reflete la realite de votre modele : acquisition, renouvellement et expansion sont trois processus distincts.</p>
@@ -348,7 +348,7 @@ export default function MRRHubSpotArticle() {
                   </div>
 
                   <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-sm bg-[#22C55E]" />
                         <span className="text-[13px] font-semibold text-[#111]">Pipeline New Business</span>
@@ -374,7 +374,7 @@ export default function MRRHubSpotArticle() {
                       </div>
                     </div>
 
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-sm bg-[#4B5EFC]" />
                         <span className="text-[13px] font-semibold text-[#111]">Pipeline Renewal / Expansion</span>
@@ -410,7 +410,7 @@ export default function MRRHubSpotArticle() {
 
               {/* Section 6 — Dashboards (dark section) */}
               <section id="dashboards" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Dashboards</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">Les 5 dashboards MRR essentiels</h2>
                   <p className="text-[12px] text-white/50 leading-[1.75] mb-6">Une fois vos proprietes configurees, vous pouvez creer des dashboards dedies au suivi du MRR. Voici les 5 que nous installons systematiquement chez nos clients SaaS.</p>
@@ -448,7 +448,7 @@ export default function MRRHubSpotArticle() {
                         widgets: ["Graphique: MRR projete sur 3 mois", "KPI: Pipeline weighted MRR", "Tableau: Renouvellements a venir (90 jours)", "KPI: MRR at risk (renouvellements incertains)", "Graphique: Forecast vs Realise (historique)"],
                       },
                     ].map((d) => (
-                      <div key={d.num} className="rounded-xl border border-white/10 bg-white/5 p-5">
+                      <div key={d.num} className="rounded-lg border border-white/10 bg-white/5 p-5">
                         <div className="flex items-center gap-3 mb-3">
                           <span className="text-[20px] font-bold text-white/15">{d.num}</span>
                           <h3 className="text-[14px] font-semibold text-white">{d.title}</h3>
@@ -463,7 +463,7 @@ export default function MRRHubSpotArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl border border-white/10 bg-white/5 p-4">
+                  <div className="mt-5 rounded-lg border border-white/10 bg-white/5 p-4">
                     <p className="text-[12px] text-white/45 leading-[1.65]">
                       <strong className="text-white/60">Astuce :</strong> dans HubSpot, creez un seul rapport personnalise pour chaque dashboard et dupliquez-le avec des filtres differents. Ca vous evite de reconfigurer les memes parametres a chaque fois. Utilisez les filtres de date relatifs (&ldquo;ce mois&rdquo;, &ldquo;trimestre en cours&rdquo;) pour que les rapports se mettent a jour automatiquement.
                     </p>
@@ -474,14 +474,14 @@ export default function MRRHubSpotArticle() {
 
               {/* Section 7 — Forecasting */}
               <section id="forecasting" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Forecasting et previsions de revenus</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le forecasting MRR repose sur trois composantes : le pipeline de new business, les renouvellements a venir, et l&apos;expansion attendue. HubSpot propose un outil de forecasting natif, mais il a des limites pour le modele SaaS. Voici comment l&apos;exploiter au maximum.</p>
                     <p>Le principe est simple : chaque deal dans votre pipeline a un montant MRR et une probabilite de closing (definie par l&apos;etape du pipeline). Le MRR weighted est le produit des deux. La somme des MRR weighted de tous les deals ouverts donne votre forecast.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-5">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-5">
                     <h3 className="text-[13px] font-semibold text-[#111] mb-3">Formule de forecasting</h3>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between text-[12px]">
@@ -500,7 +500,7 @@ export default function MRRHubSpotArticle() {
                         <span className="text-[#555]">- Churn prevu (renouvellements a risque)</span>
                         <span className="font-mono text-[#EF4444] font-semibold">- 2 100 EUR</span>
                       </div>
-                      <div className="border-t border-[#E5E5E5] pt-3 flex items-center justify-between text-[13px]">
+                      <div className="border-t border-[#EAEAEA] pt-3 flex items-center justify-between text-[13px]">
                         <span className="font-semibold text-[#111]">MRR projete (M+1)</span>
                         <span className="font-mono text-[#22C55E] font-bold text-[15px]">51 600 EUR</span>
                       </div>
@@ -522,7 +522,7 @@ export default function MRRHubSpotArticle() {
 
               {/* Section 8 — Automatiser les alertes */}
               <section id="automatiser-alertes" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Automatiser les alertes (churn risk, expansion signals)</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le suivi du MRR ne sert a rien si personne n&apos;agit sur les signaux. HubSpot Workflows permet d&apos;automatiser les alertes et les actions basees sur les proprietes MRR que vous avez creees. Voici les trois workflows indispensables.</p>
@@ -561,7 +561,7 @@ export default function MRRHubSpotArticle() {
                         color: "#FF7A59",
                       },
                     ].map((w) => (
-                      <div key={w.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={w.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: w.color }} />
                           <h3 className="text-[14px] font-semibold text-[#111]">{w.title}</h3>
@@ -592,7 +592,7 @@ export default function MRRHubSpotArticle() {
 
               {/* Section 9 — Limites de HubSpot */}
               <section id="limites-hubspot" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les limites de HubSpot pour le MRR (et les alternatives)</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Soyons honnetes : HubSpot n&apos;a pas ete concu comme un outil de revenue analytics pour le SaaS. Le setup que nous venons de decrire fonctionne bien pour 80% des cas, mais il a des limites qu&apos;il faut connaitre.</p>
@@ -631,7 +631,7 @@ export default function MRRHubSpotArticle() {
                         severityColor: "#F59E0B",
                       },
                     ].map((l) => (
-                      <div key={l.limite} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={l.limite} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center justify-between mb-2">
                           <h3 className="text-[13px] font-semibold text-[#111]">{l.limite}</h3>
                           <span className="text-[10px] font-medium px-2 py-0.5 rounded-full" style={{ color: l.severityColor, backgroundColor: `${l.severityColor}15` }}>Impact {l.severity}</span>
@@ -655,7 +655,7 @@ export default function MRRHubSpotArticle() {
 
               {/* Section 10 — Setup Ceres (dark section) */}
               <section id="setup-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Notre approche</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">Notre setup chez Ceres</h2>
                   <div className="space-y-3 text-[12px] text-white/50 leading-[1.75]">
@@ -671,7 +671,7 @@ export default function MRRHubSpotArticle() {
                       { label: "Precision du forecast", value: "87%", color: "#22C55E" },
                       { label: "Reduction du churn", value: "-34%", color: "#6C5CE7" },
                     ].map((s) => (
-                      <div key={s.label} className="text-center p-3 rounded-xl bg-white/5 border border-white/10">
+                      <div key={s.label} className="text-center p-3 rounded-lg bg-white/5 border border-white/10">
                         <div className="text-[20px] font-bold" style={{ color: s.color }}>{s.value}</div>
                         <div className="text-[10px] text-white/35 mt-1">{s.label}</div>
                       </div>
@@ -698,7 +698,7 @@ export default function MRRHubSpotArticle() {
 
               {/* Related articles */}
               <section className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((a) => (
@@ -716,7 +716,7 @@ export default function MRRHubSpotArticle() {
 
               {/* CTA */}
               <section>
-                <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+                <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                   <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide pour configurer votre MRR dans HubSpot ?</h2>
                   <p className="text-[13px] text-[#999] mb-6 max-w-[420px] mx-auto">On deploie votre setup MRR complet en 1 semaine : proprietes, dashboards, workflows et formation equipe.</p>
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

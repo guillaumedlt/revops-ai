@@ -37,7 +37,7 @@ export default function Team() {
   return (
     <section className="relative z-20">
       <div className="max-w-[1000px] mx-auto px-6">
-        <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
+        <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
           <div className="mb-8">
             <div className="mb-4"><Badge>L&apos;équipe</Badge></div>
             <h2 className="text-[22px] sm:text-[28px] font-semibold text-[#111] leading-[1.2] tracking-[-0.02em] mb-2">
@@ -51,7 +51,7 @@ export default function Team() {
               const initials = t.name.split(" ").map(n => n[0]).join("");
               return (
                 <div key={t.name} className="text-center">
-                  <div className="w-20 h-20 rounded-2xl mx-auto mb-3 overflow-hidden flex items-center justify-center" style={{ backgroundColor: t.color + "12" }}>
+                  <div className="w-20 h-20 rounded-lg mx-auto mb-3 overflow-hidden flex items-center justify-center" style={{ backgroundColor: t.color + "12" }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={t.image}

@@ -145,7 +145,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
             <article>
               {/* Section 1 -- Le cout du desalignement */}
               <section id="cout-desalignement" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Le cout reel du desalignement marketing-sales</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le desalignement entre marketing et sales n&apos;est pas un simple irritant organisationnel. C&apos;est un probleme de revenue. Selon une etude de Forrester, les entreprises dont les equipes marketing et commerciales ne sont pas alignees perdent en moyenne 10% de leur chiffre d&apos;affaires annuel. Sur une entreprise qui fait 5 millions d&apos;euros de revenu, cela represente 500 000 euros de manque a gagner chaque annee.</p>
@@ -163,7 +163,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                       { value: "60%", label: "des commerciaux estiment que le marketing ne comprend pas leurs besoins", color: "#6C5CE7" },
                       { value: "3x", label: "plus de croissance pour les entreprises alignees (SiriusDecisions)", color: "#22C55E" },
                     ].map((stat) => (
-                      <div key={stat.label} className="text-center p-4 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2]">
+                      <div key={stat.label} className="text-center p-4 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2]">
                         <div className="text-[22px] font-bold" style={{ color: stat.color }}>{stat.value}</div>
                         <div className="text-[10px] text-[#999] mt-1 leading-[1.4]">{stat.label}</div>
                       </div>
@@ -175,7 +175,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
 
               {/* Section 2 -- Les symptomes */}
               <section id="symptomes" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les symptomes du desalignement : les reconnaissez-vous ?</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Avant de resoudre le probleme, il faut le diagnostiquer. Le desalignement marketing-sales se manifeste par des symptomes concrets que la plupart des entreprises B2B connaissent, mais qu&apos;elles normalisent a tort. Voici les signaux d&apos;alerte les plus frequents.</p>
@@ -196,7 +196,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                       { symptome: "Outils fragmentes", desc: "Marketing automation et CRM non synchronises. Donnees en silo. Pas de vue unifiee du parcours prospect.", severity: "Modere", color: "#4B5EFC" },
                       { symptome: "Blame game installe", desc: "Reunions tendues entre equipes. Chacun rejette la faute sur l&apos;autre. Culture de competition plutot que de collaboration.", severity: "Critique", color: "#FF7A59" },
                     ].map((item) => (
-                      <div key={item.symptome} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={item.symptome} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <div className="flex items-center justify-between mb-2">
                           <p className="text-[12px] font-semibold text-[#111]">{item.symptome}</p>
                           <span className="text-[9px] font-medium px-2 py-0.5 rounded-full" style={{ backgroundColor: `${item.color}15`, color: item.color }}>{item.severity}</span>
@@ -207,7 +207,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   </div>
 
                   {/* Alignment Scorecard CSS Mockup */}
-                  <div className="mt-8 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-8 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#FF7A59]" />
@@ -260,7 +260,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
 
               {/* Section 3 -- Semaine 1 : Definir les termes */}
               <section id="semaine-1" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#FF7A59] flex items-center justify-center text-white text-[12px] font-bold">S1</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Semaine 1 : Definir les termes ensemble</h2>
@@ -298,7 +298,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                         color: "#22C55E",
                       },
                     ].map((item) => (
-                      <div key={item.stage} className="p-4 rounded-xl border-2 bg-white" style={{ borderColor: `${item.color}30` }}>
+                      <div key={item.stage} className="p-4 rounded-lg border-2 bg-white" style={{ borderColor: `${item.color}30` }}>
                         <div className="flex items-center gap-2 mb-2">
                           <span className="text-[14px] font-bold" style={{ color: item.color }}>{item.stage}</span>
                           <span className="text-[9px] text-[#BBB] font-medium">{item.full}</span>
@@ -317,7 +317,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   </div>
 
                   {/* SLA Template preview */}
-                  <div className="mt-6 rounded-xl bg-[#FF7A59]/5 border border-[#FF7A59]/15 p-5">
+                  <div className="mt-6 rounded-lg bg-[#FF7A59]/5 border border-[#FF7A59]/15 p-5">
                     <p className="text-[12px] font-semibold text-[#FF7A59] mb-3">Template SLA Semaine 1 -- Engagements reciproques</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
@@ -346,7 +346,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   </div>
 
                   {/* Week 1 milestones */}
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                     <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-3">Milestones Semaine 1</p>
                     <div className="space-y-2">
                       {[
@@ -368,7 +368,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
 
               {/* Section 4 -- Semaine 2 : Aligner le funnel */}
               <section id="semaine-2" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#4B5EFC] flex items-center justify-center text-white text-[12px] font-bold">S2</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Semaine 2 : Aligner le funnel et le scoring</h2>
@@ -383,7 +383,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   </div>
 
                   {/* CSS Funnel handoff visualization */}
-                  <div className="mt-8 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-8 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-[#4B5EFC]" />
                       <span className="text-[12px] font-semibold text-white">Funnel Handoff -- Lifecycle Stages</span>
@@ -391,7 +391,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                     <div className="bg-white p-5">
                       <div className="flex flex-col items-center gap-0">
                         {/* Stage 1 - Visitor */}
-                        <div className="w-full max-w-[480px] rounded-t-xl bg-[#F8F8F8] border border-[#E8E8E8] p-3 text-center relative">
+                        <div className="w-full max-w-[480px] rounded-t-xl bg-[#F8F8F8] border border-[#EAEAEA] p-3 text-center relative">
                           <p className="text-[12px] font-semibold text-[#999]">Visiteur</p>
                           <p className="text-[10px] text-[#BBB] mt-0.5">Trafic anonyme -- pas encore identifie</p>
                           <div className="absolute right-3 top-3 text-[9px] text-[#DDD] font-medium">MARKETING</div>
@@ -444,7 +444,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   </div>
 
                   {/* Lead scoring model */}
-                  <div className="mt-6 rounded-xl bg-[#4B5EFC]/5 border border-[#4B5EFC]/15 p-5">
+                  <div className="mt-6 rounded-lg bg-[#4B5EFC]/5 border border-[#4B5EFC]/15 p-5">
                     <p className="text-[12px] font-semibold text-[#4B5EFC] mb-4">Modele de Lead Scoring recommande</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
@@ -488,7 +488,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   </div>
 
                   {/* Week 2 milestones */}
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                     <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-3">Milestones Semaine 2</p>
                     <div className="space-y-2">
                       {[
@@ -511,7 +511,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
 
               {/* Section 5 -- Semaine 3 : Outiller */}
               <section id="semaine-3" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#22C55E] flex items-center justify-center text-white text-[12px] font-bold">S3</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Semaine 3 : Mettre en place les outils</h2>
@@ -525,7 +525,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   </div>
 
                   {/* CSS Dashboard mockup */}
-                  <div className="mt-8 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-8 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#22C55E]" />
@@ -628,7 +628,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
 
                   {/* Meeting cadence */}
                   <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                    <div className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                       <p className="text-[12px] font-semibold text-[#22C55E] mb-2">Weekly Sync -- 30 min</p>
                       <p className="text-[10px] text-[#999] mb-2">Chaque lundi, 10h00</p>
                       <ul className="space-y-1.5">
@@ -640,7 +640,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                         ))}
                       </ul>
                     </div>
-                    <div className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                    <div className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                       <p className="text-[12px] font-semibold text-[#4B5EFC] mb-2">Monthly Review -- 60 min</p>
                       <p className="text-[10px] text-[#999] mb-2">Premier vendredi du mois, 14h00</p>
                       <ul className="space-y-1.5">
@@ -655,7 +655,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   </div>
 
                   {/* Week 3 milestones */}
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                     <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-3">Milestones Semaine 3</p>
                     <div className="space-y-2">
                       {[
@@ -678,7 +678,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
 
               {/* Section 6 -- Semaine 4 : Mesurer et iterer */}
               <section id="semaine-4" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-[#6C5CE7] flex items-center justify-center text-white text-[12px] font-bold">S4</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">Semaine 4 : Mesurer et iterer</h2>
@@ -699,7 +699,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                       { kpi: "Cycle MQL-to-SQL", target: "< 5 jours", desc: "Temps entre handoff et qualification", color: "#6C5CE7" },
                       { kpi: "MQL-to-Opp rate", target: "> 25%", desc: "MQLs convertis en opportunites", color: "#22C55E" },
                     ].map((item) => (
-                      <div key={item.kpi} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] text-center">
+                      <div key={item.kpi} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] text-center">
                         <p className="text-[11px] font-semibold text-[#333] mb-1">{item.kpi}</p>
                         <p className="text-[16px] font-bold" style={{ color: item.color }}>{item.target}</p>
                         <p className="text-[9px] text-[#999] mt-1">{item.desc}</p>
@@ -708,7 +708,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   </div>
 
                   {/* Weekly review template */}
-                  <div className="mt-6 rounded-xl bg-[#6C5CE7]/5 border border-[#6C5CE7]/15 p-5">
+                  <div className="mt-6 rounded-lg bg-[#6C5CE7]/5 border border-[#6C5CE7]/15 p-5">
                     <p className="text-[12px] font-semibold text-[#6C5CE7] mb-3">Template Weekly Review</p>
                     <div className="space-y-3">
                       {[
@@ -733,7 +733,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   </div>
 
                   {/* Week 4 milestones */}
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                     <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-3">Milestones Semaine 4</p>
                     <div className="space-y-2">
                       {[
@@ -756,7 +756,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
 
               {/* Section 7 -- Le SLA marketing-sales */}
               <section id="sla-marketing-sales" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Le SLA marketing-sales : le contrat qui change tout</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le SLA (Service Level Agreement) marketing-sales est un document formel qui definit les engagements reciproques des deux equipes. Ce n&apos;est pas un document juridique, c&apos;est un accord operationnel. Mais il a la meme force contraignante qu&apos;un contrat : les deux parties s&apos;engagent sur des objectifs mesurables, et la performance est revue regulierement.</p>
@@ -767,7 +767,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   </div>
 
                   {/* SLA Dashboard CSS Mockup */}
-                  <div className="mt-8 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-8 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#FF7A59]" />
@@ -781,7 +781,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                       {/* SLA Status */}
                       <div className="grid grid-cols-2 gap-4 mb-5">
                         {/* Marketing SLA */}
-                        <div className="p-4 rounded-xl border border-[#F0F0F0]">
+                        <div className="p-4 rounded-lg border border-[#F0F0F0]">
                           <div className="flex items-center justify-between mb-3">
                             <span className="text-[11px] font-semibold text-[#FF7A59]">Engagements Marketing</span>
                             <span className="text-[9px] px-2 py-0.5 rounded bg-[#22C55E]/10 text-[#22C55E] font-medium">3/4 atteints</span>
@@ -806,7 +806,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                         </div>
 
                         {/* Sales SLA */}
-                        <div className="p-4 rounded-xl border border-[#F0F0F0]">
+                        <div className="p-4 rounded-lg border border-[#F0F0F0]">
                           <div className="flex items-center justify-between mb-3">
                             <span className="text-[11px] font-semibold text-[#4B5EFC]">Engagements Sales</span>
                             <span className="text-[9px] px-2 py-0.5 rounded bg-[#22C55E]/10 text-[#22C55E] font-medium">4/4 atteints</span>
@@ -854,7 +854,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   </div>
 
                   {/* SLA contents */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#333] mb-3">Ce que contient un SLA complet</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {[
@@ -882,7 +882,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
 
               {/* Section 8 -- Les outils de l'alignement */}
               <section id="outils-alignement" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les outils de l&apos;alignement marketing-sales</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;alignement est d&apos;abord un sujet de processus et de culture, pas d&apos;outils. Mais les bons outils, bien configures, rendent l&apos;alignement beaucoup plus facile a maintenir. Ils automatisent la circulation de l&apos;information, eliminent les taches manuelles sujettes a l&apos;erreur, et creent de la transparence par defaut.</p>
@@ -900,7 +900,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                       { outil: "Notion", role: "Documentation partagee", desc: "SLA, glossaire, playbooks, templates de review. Documentation vivante accessible en un clic par les deux equipes.", color: "#6C5CE7" },
                       { outil: "Claap", role: "Feedback video asynchrone", desc: "Retours de demo, walkthrough campagnes, recaps hebdo. Comble le fossement de communication entre equipes distribuees.", color: "#22C55E" },
                     ].map((item) => (
-                      <div key={item.outil} className="p-4 rounded-xl border-2 bg-white" style={{ borderColor: `${item.color}30` }}>
+                      <div key={item.outil} className="p-4 rounded-lg border-2 bg-white" style={{ borderColor: `${item.color}30` }}>
                         <div className="flex items-center gap-2 mb-2">
                           <span className="text-[13px] font-bold" style={{ color: item.color }}>{item.outil}</span>
                           <span className="text-[9px] text-[#BBB] font-medium">{item.role}</span>
@@ -915,7 +915,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
 
               {/* Section 9 -- Maintenir l'alignement */}
               <section id="maintenir-alignement" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Maintenir l&apos;alignement dans la duree</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Les 30 premiers jours mettent en place les fondations. Mais l&apos;alignement n&apos;est pas un projet ponctuel avec une date de fin. C&apos;est une discipline continue qui requiert de l&apos;attention, de la rigueur et des rituels. Les entreprises qui reussissent l&apos;alignement sur le long terme sont celles qui le traitent comme un processus permanent, pas comme un chantier a terminer.</p>
@@ -926,7 +926,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   </div>
 
                   {/* Shared OKRs example */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#333] mb-4">Exemple d&apos;OKRs partages -- Q2 2026</p>
                     <div className="space-y-4">
                       {[
@@ -949,7 +949,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                           color: "#4B5EFC",
                         },
                       ].map((okr) => (
-                        <div key={okr.objective} className="p-4 rounded-xl bg-white border border-[#E8E8E8]">
+                        <div key={okr.objective} className="p-4 rounded-lg bg-white border border-[#EAEAEA]">
                           <p className="text-[12px] font-semibold mb-2" style={{ color: okr.color }}>{okr.objective}</p>
                           <div className="space-y-1.5">
                             {okr.keyResults.map((kr) => (
@@ -971,7 +971,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                       { phase: "Ajustements (45 min)", items: ["Recalibrage du scoring", "Revision des criteres MQL/SQL", "Mise a jour du SLA", "Nouveaux objectifs trimestriels"], color: "#4B5EFC" },
                       { phase: "Planification (30 min)", items: ["OKRs communs Q+1", "Campagnes prevues", "Ressources et budget", "Prochaines etapes"], color: "#22C55E" },
                     ].map((p) => (
-                      <div key={p.phase} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={p.phase} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <p className="text-[12px] font-semibold mb-3" style={{ color: p.color }}>{p.phase}</p>
                         <ul className="space-y-1.5">
                           {p.items.map((item) => (
@@ -990,7 +990,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
 
               {/* Section 10 -- Notre methode chez Ceres (dark section) */}
               <section id="methode-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Notre methode</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">Notre methode d&apos;alignement chez Ceres</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -1001,7 +1001,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                   </div>
 
                   {/* 30-day timeline visual */}
-                  <div className="mt-8 rounded-xl bg-white/5 border border-white/10 p-5">
+                  <div className="mt-8 rounded-lg bg-white/5 border border-white/10 p-5">
                     <p className="text-[12px] font-semibold text-white/80 mb-5">Timeline 30 jours -- Vue d&apos;ensemble</p>
                     <div className="relative">
                       {/* Timeline line */}
@@ -1069,7 +1069,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                       { value: "+25%", label: "de pipeline marketing", color: "#22C55E" },
                       { value: "30j", label: "pour installer les fondations", color: "#6C5CE7" },
                     ].map((stat) => (
-                      <div key={stat.label} className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
+                      <div key={stat.label} className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
                         <div className="text-[20px] font-bold" style={{ color: stat.color }}>{stat.value}</div>
                         <div className="text-[10px] text-white/40 mt-1 leading-[1.4]">{stat.label}</div>
                       </div>
@@ -1097,7 +1097,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
 
               {/* Related articles */}
               <section className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((a) => (
@@ -1115,7 +1115,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
 
               {/* CTA */}
               <section>
-                <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+                <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                   <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Pret a aligner marketing et sales ?</h2>
                   <p className="text-[13px] text-[#999] mb-6 max-w-[420px] mx-auto">On deploie notre methode d&apos;alignement en 30 jours. Diagnostic, definitions, SLA, scoring, dashboards, feedback loops. Premiers resultats mesurables des la semaine 3.</p>
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

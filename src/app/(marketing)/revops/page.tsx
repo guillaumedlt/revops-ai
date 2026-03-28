@@ -119,7 +119,7 @@ export default function RevOpsPage() {
 
         {/* Quick definition — snippet-friendly */}
         <section>
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="mb-4">
               <div className="mb-4"><Badge>Définition</Badge></div>
             </div>
@@ -150,7 +150,7 @@ export default function RevOpsPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {pillars.map((p) => (
-              <div key={p.title} className="rounded-2xl border border-[#E8E8E8] bg-white p-6 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div key={p.title} className="rounded-lg border border-[#EAEAEA] bg-white p-6 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <div className="flex items-center gap-2.5 mb-3">
                   <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: p.color }} />
                   <h3 className="text-[15px] font-semibold text-[#111]">{p.title}</h3>
@@ -164,7 +164,7 @@ export default function RevOpsPage() {
 
         {/* Without vs With */}
         <section>
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="text-center mb-8">
               <div className="mb-4"><Badge>Avant / Après</Badge></div>
               <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em]">Sans RevOps vs Avec RevOps</h2>
@@ -199,7 +199,7 @@ export default function RevOpsPage() {
 
         {/* RevOps vs Sales Ops */}
         <section>
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="mb-8">
               <div className="mb-4"><Badge>Comparatif</Badge></div>
               <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em]">RevOps vs Sales Ops</h2>
@@ -225,7 +225,7 @@ export default function RevOpsPage() {
 
         {/* Impact numbers */}
         <section>
-          <div className="rounded-2xl bg-[#111] p-6 md:p-10">
+          <div className="rounded-lg bg-[#111] p-6 md:p-10">
             <div className="mb-8">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Impact mesuré</span>
               <h2 className="text-[24px] sm:text-[30px] font-semibold text-white tracking-[-0.02em] mb-2">Le RevOps en chiffres</h2>
@@ -233,7 +233,7 @@ export default function RevOpsPage() {
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {metrics.map((m) => (
-                <div key={m.label} className="text-center rounded-xl bg-white/5 border border-white/10 p-5">
+                <div key={m.label} className="text-center rounded-lg bg-white/5 border border-white/10 p-5">
                   <div className="text-[28px] font-bold text-white tracking-[-0.02em] mb-1">{m.value}</div>
                   <p className="text-[11px] text-white/50 mb-2">{m.label}</p>
                   <p className="text-[9px] text-white/25">{m.source}</p>
@@ -246,7 +246,7 @@ export default function RevOpsPage() {
 
         {/* Maturity levels */}
         <section>
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="mb-8">
               <div className="mb-4"><Badge>Maturité</Badge></div>
               <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em]">Où en êtes-vous ?</h2>
@@ -254,7 +254,7 @@ export default function RevOpsPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
               {maturityLevels.map((l) => (
-                <div key={l.level} className="rounded-xl border border-[#F2F2F2] p-4">
+                <div key={l.level} className="rounded-lg border border-[#F2F2F2] p-4">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-[18px] font-bold" style={{ color: l.color }}>{l.level}</span>
                     <h3 className="text-[13px] font-semibold text-[#111]">{l.title}</h3>
@@ -276,7 +276,7 @@ export default function RevOpsPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {steps.map((s) => (
-              <div key={s.num} className="rounded-2xl border border-[#E8E8E8] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div key={s.num} className="rounded-lg border border-[#EAEAEA] bg-white p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <span className="text-[20px] font-bold text-[#F0F0F0]">{s.num}</span>
                 <h3 className="text-[14px] font-semibold text-[#111] mt-2 mb-1.5">{s.title}</h3>
                 <p className="text-[12px] text-[#777] leading-[1.6]">{s.desc}</p>
@@ -288,7 +288,7 @@ export default function RevOpsPage() {
 
         {/* Role of AI */}
         <section>
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="mb-8">
               <div className="mb-4"><Badge>RevOps + IA</Badge></div>
               <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em]">L&apos;IA, le levier qui change tout</h2>
@@ -329,7 +329,7 @@ export default function RevOpsPage() {
 
         {/* FAQ */}
         <section>
-          <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+          <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
             <div className="mb-8">
               <div className="mb-4"><Badge>FAQ</Badge></div>
               <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em]">Questions fréquentes sur le RevOps</h2>
@@ -348,7 +348,7 @@ export default function RevOpsPage() {
 
         {/* CTA */}
         <section id="contact">
-          <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-8 md:p-12 text-center">
+          <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-8 md:p-12 text-center">
             <h2 className="text-[24px] sm:text-[30px] font-semibold text-[#111] tracking-[-0.02em] mb-3">
               Prêt à structurer votre RevOps ?
             </h2>

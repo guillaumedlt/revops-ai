@@ -139,7 +139,7 @@ export default function SkagArticle() {
               </div>
 
               {/* Quick summary card */}
-              <div className="mt-8 rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+              <div className="mt-8 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                 <span className="text-[13px] font-semibold text-[#111] mb-4 block">En resume</span>
                 <div className="space-y-2">
                   {[
@@ -162,7 +162,7 @@ export default function SkagArticle() {
             <article>
               {/* Section 1 : Definition */}
               <section id="definition" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">C&apos;est quoi un SKAG ?</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>SKAG signifie Single Keyword Ad Group, soit &ldquo;groupe d&apos;annonces a mot-cle unique&rdquo; en francais. Le principe est simple : au lieu de regrouper plusieurs mots-cles dans un meme ad group, on cree un ad group distinct pour chaque mot-cle individuel.</p>
@@ -171,7 +171,7 @@ export default function SkagArticle() {
                   </div>
 
                   {/* Structure example */}
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Exemple de structure SKAG</p>
                     <div className="space-y-2">
                       {[
@@ -200,7 +200,7 @@ export default function SkagArticle() {
 
               {/* Section 2 : Popularite */}
               <section id="popularite" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi les SKAG ont ete populaires</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Pour comprendre l&apos;engouement autour des SKAG, il faut se remettre dans le contexte de Google Ads avant 2020. A cette epoque, le Quality Score etait le graal absolu. Un bon Quality Score (7/10 ou plus) permettait de payer moins cher par clic et d&apos;obtenir de meilleures positions d&apos;annonce. Et le Quality Score dependait directement de trois facteurs : le taux de clic attendu, la pertinence de l&apos;annonce et l&apos;experience de la page de destination.</p>
@@ -214,7 +214,7 @@ export default function SkagArticle() {
                       { label: "CTR moyen constate", value: "+15-25%", color: "#4B5EFC" },
                       { label: "CPC moyen observe", value: "-10-20%", color: "#FF7A59" },
                     ].map((m) => (
-                      <div key={m.label} className="text-center p-3 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2]">
+                      <div key={m.label} className="text-center p-3 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2]">
                         <div className="text-[18px] font-bold" style={{ color: m.color }}>{m.value}</div>
                         <div className="text-[10px] text-[#999] mt-1">{m.label}</div>
                       </div>
@@ -231,7 +231,7 @@ export default function SkagArticle() {
 
               {/* Section 3 : Avantages */}
               <section id="avantages" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les avantages des SKAG</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Meme en 2026, les SKAG conservent des avantages structurels qu&apos;il ne faut pas ignorer. Ils ne sont pas devenus &ldquo;mauvais&rdquo; du jour au lendemain. Voici ce qui reste valide.</p>
@@ -276,7 +276,7 @@ export default function SkagArticle() {
 
               {/* Section 4 : Inconvenients */}
               <section id="inconvenients" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les inconvenients des SKAG</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>C&apos;est ici que le debat devient interessant. Les inconvenients des SKAG ne sont pas simplement des &ldquo;desagrements&rdquo; mineurs. Certains sont devenus des problemes structurels qui impactent directement la performance.</p>
@@ -321,7 +321,7 @@ export default function SkagArticle() {
 
               {/* Section 5 : Comparaison SKAG vs STAG vs Thematic */}
               <section id="comparaison" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">SKAG vs STAG vs Thematic Ad Groups</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Avant de trancher, il est important de comprendre les trois grandes approches de structuration d&apos;un compte Google Ads et ce qui les differencie concretement.</p>
@@ -329,7 +329,7 @@ export default function SkagArticle() {
 
                   <div className="overflow-x-auto mt-5">
                     <div className="min-w-[500px]">
-                      <div className="grid grid-cols-4 gap-2 pb-3 border-b border-[#E8E8E8]">
+                      <div className="grid grid-cols-4 gap-2 pb-3 border-b border-[#EAEAEA]">
                         <span className="text-[10px] font-semibold text-[#999]">Critere</span>
                         <span className="text-[10px] font-semibold text-[#22C55E] text-center">SKAG</span>
                         <span className="text-[10px] font-semibold text-[#4B5EFC] text-center">STAG</span>
@@ -367,7 +367,7 @@ export default function SkagArticle() {
 
               {/* Section 6 : Performance Max et Smart Bidding */}
               <section id="pmax-smart" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Contexte 2026</span>
                   <h2 className="text-[20px] font-semibold text-white mb-4">L&apos;impact de Performance Max et du Smart Bidding</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -377,7 +377,7 @@ export default function SkagArticle() {
                     <p>Performance Max va encore plus loin en automatisant non seulement les encheres mais aussi le ciblage, les placements et les creations. Dans ce contexte, la granularite extreme des SKAG devient contre-productive. Google veut des signaux consolides, pas des micro-segments isoles.</p>
                   </div>
                   <div className="mt-6 grid grid-cols-2 gap-4">
-                    <div className="rounded-xl bg-white/5 p-4">
+                    <div className="rounded-lg bg-white/5 p-4">
                       <p className="text-[12px] font-semibold text-[#22C55E] mb-3">Ce que le Smart Bidding fait bien</p>
                       {[
                         "Ajuste les encheres en temps reel",
@@ -390,7 +390,7 @@ export default function SkagArticle() {
                         </div>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-white/5 p-4">
+                    <div className="rounded-lg bg-white/5 p-4">
                       <p className="text-[12px] font-semibold text-[#FF7A59] mb-3">Pourquoi les SKAG le freinent</p>
                       {[
                         "Fragmentent les donnees de conversion",
@@ -410,7 +410,7 @@ export default function SkagArticle() {
 
               {/* Section 7 : Quand utiliser les SKAG en 2026 */}
               <section id="quand-utiliser" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Quand utiliser les SKAG en 2026</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Dire que les SKAG sont &ldquo;morts&rdquo; serait excessif. Il existe encore des scenarios ou cette approche apporte une vraie valeur ajoutee. Mais ces scenarios sont devenus nettement plus restreints qu&apos;il y a cinq ans.</p>
@@ -449,7 +449,7 @@ export default function SkagArticle() {
                         applicable: false,
                       },
                     ].map((s) => (
-                      <div key={s.scenario} className="flex gap-3 items-start p-3 rounded-xl border border-[#F2F2F2]">
+                      <div key={s.scenario} className="flex gap-3 items-start p-3 rounded-lg border border-[#F2F2F2]">
                         <div className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 mt-0.5 ${s.applicable ? "bg-[#F0FDF4]" : "bg-[#FEF2F2]"}`}>
                           {s.applicable ? (
                             <svg width="10" height="10" viewBox="0 0 16 16" fill="none" className="text-[#22C55E]"><path d="M13.3 4.3L6 11.6L2.7 8.3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -470,7 +470,7 @@ export default function SkagArticle() {
 
               {/* Section 8 : Alternatives modernes */}
               <section id="alternatives" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les alternatives modernes aux SKAG</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Si les SKAG ne sont plus la reponse par defaut, quelles structures adopter en 2026 ? Voici les trois approches que nous recommandons chez Ceres, en fonction du contexte.</p>
@@ -533,7 +533,7 @@ export default function SkagArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Conseil pratique</p>
                     <p className="text-[12px] text-[#777] leading-[1.65]">
                       Si vous gerez actuellement un compte en SKAG et que vous souhaitez migrer vers une structure STAG, ne le faites pas d&apos;un coup. Procedez campagne par campagne. Consolidez les ad groups qui partagent la meme intention, gardez vos meilleurs SKAG intacts, et mesurez l&apos;impact sur 4 a 6 semaines avant de continuer. La transition progressive minimise les risques de perte de performance.
@@ -545,7 +545,7 @@ export default function SkagArticle() {
 
               {/* Section 9 : Verdict */}
               <section id="verdict" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Verdict</span>
                   <h2 className="text-[20px] font-semibold text-white mb-4">Notre verdict sur les SKAG en 2026</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -593,7 +593,7 @@ export default function SkagArticle() {
               <p className="text-[13px] font-semibold text-[#111] mb-4">Articles similaires</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedArticles.map((a) => (
-                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
+                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold text-white mb-3" style={{ background: a.color }}>
                       {a.category[0]}
                     </div>
@@ -606,14 +606,14 @@ export default function SkagArticle() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;optimiser votre compte Google Ads ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[450px] mx-auto">On audite et restructure vos campagnes Google Ads pour maximiser votre ROI. Structure de compte, Smart Bidding, tracking, reporting. Resultats mesurables en 30 jours.</p>
                 <div className="flex items-center justify-center gap-3">
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                     <span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Reserver un appel
                   </a>
-                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                     Nos services
                   </Link>
                 </div>

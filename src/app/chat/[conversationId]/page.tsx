@@ -210,11 +210,11 @@ export default function ConversationPage() {
   return (
     <div className="flex-1 flex flex-col h-full">
       {/* Mobile header */}
-      <div className="md:hidden flex items-center gap-3 px-4 py-3 border-b border-[#E5E5E5] bg-white shrink-0">
-        <a href="/chat" className="h-8 w-8 flex items-center justify-center rounded-lg hover:bg-[#F5F5F5]">
-          <ChevronLeft size={18} className="text-[#525252]" />
+      <div className="md:hidden flex items-center gap-3 px-4 h-[49px] border-b border-[#EAEAEA] bg-white shrink-0">
+        <a href="/chat" className="h-7 w-7 flex items-center justify-center rounded hover:bg-[#F5F5F5]">
+          <ChevronLeft size={16} className="text-[#999]" />
         </a>
-        <span className="text-sm font-medium text-[#0A0A0A] truncate">Kairo</span>
+        <span className="text-[13px] font-medium text-[#111] truncate">Kairo</span>
       </div>
       <MessageThread
         messages={messages}

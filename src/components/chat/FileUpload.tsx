@@ -27,17 +27,17 @@ export default function FileUpload({ onFileSelect, selectedFile, onClear }: File
         onChange={(e) => { if (e.target.files?.[0]) onFileSelect(e.target.files[0]); }} />
 
       <button onClick={() => inputRef.current?.click()} type="button"
-        className="flex h-8 w-8 items-center justify-center rounded-lg text-[#737373] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors">
+        className="flex h-8 w-8 items-center justify-center rounded-lg text-[#999] hover:bg-[#F5F5F5] hover:text-[#111] transition-colors">
         <Plus size={18} />
       </button>
 
       {selectedFile && (
         <div className="absolute -top-12 left-0 right-0 px-4">
-          <div className="inline-flex items-center gap-2 rounded-lg border border-[#E5E5E5] bg-white px-3 py-1.5 text-xs text-[#525252]">
+          <div className="inline-flex items-center gap-2 rounded-lg border border-[#EAEAEA] bg-white px-3 py-1.5 text-xs text-[#555]">
             {isImage ? <ImageIcon size={14} /> : <FileText size={14} />}
             <span className="max-w-[200px] truncate">{selectedFile.name}</span>
-            <span className="text-[#A3A3A3]">{formatSize(selectedFile.size)}</span>
-            <button onClick={onClear} className="text-[#A3A3A3] hover:text-[#0A0A0A]"><X size={14} /></button>
+            <span className="text-[#BBB]">{formatSize(selectedFile.size)}</span>
+            <button onClick={onClear} className="text-[#BBB] hover:text-[#111]"><X size={14} /></button>
           </div>
         </div>
       )}

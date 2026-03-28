@@ -335,7 +335,7 @@ export default function AuditRevOpsChecklistPage() {
             <article>
               {/* Section 1 : Pourquoi faire un audit RevOps */}
               <section id="pourquoi-audit" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi faire un audit RevOps</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Un audit RevOps n&apos;est pas un luxe reserve aux grandes entreprises. C&apos;est un diagnostic necessaire des que votre croissance commence a ralentir sans raison apparente, ou des que vos equipes passent plus de temps a se battre avec les outils qu&apos;a vendre.</p>
@@ -352,7 +352,7 @@ export default function AuditRevOpsChecklistPage() {
                       { symptom: "Automatisations absentes ou cassees", detail: "Les taches repetitives sont faites a la main. Les workflows existants ne fonctionnent plus correctement. L&apos;equipe ne sait pas quels workflows sont actifs." },
                       { symptom: "Decisions prises au doigt mouille", detail: "Les decisions strategiques (recruter un commercial, investir dans un canal) sont prises sans donnees fiables. Le gut feeling remplace l&apos;analyse." },
                     ].map((s) => (
-                      <div key={s.symptom} className="rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-4">
+                      <div key={s.symptom} className="rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-4">
                         <p className="text-[12px] font-semibold text-[#111] mb-2">{s.symptom}</p>
                         <p className="text-[11px] text-[#777] leading-[1.6]">{s.detail}</p>
                       </div>
@@ -371,7 +371,7 @@ export default function AuditRevOpsChecklistPage() {
                       { stat: "-20%", label: "Cycle de vente", color: "#4B5EFC" },
                       { stat: "+30%", label: "Productivite commerciale", color: "#FF7A59" },
                     ].map((r) => (
-                      <div key={r.label} className="rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-4 text-center">
+                      <div key={r.label} className="rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-4 text-center">
                         <p className="text-[18px] font-bold mb-1" style={{ color: r.color }}>{r.stat}</p>
                         <p className="text-[10px] text-[#999]">{r.label}</p>
                       </div>
@@ -384,7 +384,7 @@ export default function AuditRevOpsChecklistPage() {
 
               {/* Section 2 : Methodologie de scoring */}
               <section id="methodologie-scoring" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Notre methodologie de scoring</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Notre audit utilise un scoring sur 100 points repartis en 8 categories. Chaque point de controle est evalue sur une echelle de 0 (inexistant), 0.5 (partiel) ou 1 (en place et fonctionnel). Le score total est pondere pour reflechir l&apos;importance relative de chaque categorie dans la performance revenue globale.</p>
@@ -452,14 +452,14 @@ export default function AuditRevOpsChecklistPage() {
               {/* Checklist categories - collapsible sections */}
               {checklistCategories.map((cat, catIndex) => (
                 <section key={cat.id} id={cat.id} className="mb-8">
-                  <div className="rounded-2xl border border-[#E8E8E8] bg-white shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] overflow-hidden">
+                  <div className="rounded-lg border border-[#EAEAEA] bg-white shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] overflow-hidden">
                     {/* Category header - clickable */}
                     <button
                       onClick={() => toggleCategory(cat.id)}
                       className="w-full p-5 md:p-8 flex items-center justify-between text-left hover:bg-[#FAFAFA] transition-colors"
                     >
                       <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white text-[14px] font-bold shrink-0" style={{ background: cat.color }}>
+                        <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white text-[14px] font-bold shrink-0" style={{ background: cat.color }}>
                           {catIndex + 1}
                         </div>
                         <div>
@@ -496,7 +496,7 @@ export default function AuditRevOpsChecklistPage() {
                       <div className="px-5 md:px-8 pb-5 md:pb-8 border-t border-[#F2F2F2]">
                         <div className="space-y-3 mt-5">
                           {cat.items.map((item, idx) => (
-                            <div key={item.id} className="group rounded-xl border border-[#F2F2F2] hover:border-[#E0E0E0] p-4 transition-colors">
+                            <div key={item.id} className="group rounded-lg border border-[#F2F2F2] hover:border-[#E0E0E0] p-4 transition-colors">
                               <div className="flex items-start gap-3">
                                 <div className="w-6 h-6 rounded-lg border-2 border-[#E0E0E0] flex items-center justify-center shrink-0 mt-0.5 group-hover:border-current transition-colors" style={{ color: cat.color }}>
                                   <span className="text-[9px] font-bold text-[#CCC] group-hover:hidden">{idx + 1}</span>
@@ -524,7 +524,7 @@ export default function AuditRevOpsChecklistPage() {
 
               {/* Section : Interpreter votre score */}
               <section id="interpreter-score" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Interpreter votre score</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-6">
                     <p>Votre score total sur 100 vous positionne sur l&apos;un des quatre niveaux de maturite RevOps. Chaque niveau correspond a un stade de developpement de vos operations revenue, avec des priorites et des actions differentes.</p>
@@ -551,7 +551,7 @@ export default function AuditRevOpsChecklistPage() {
                   {/* Maturity cards */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {maturityLevels.map((level) => (
-                      <div key={level.label} className="rounded-xl border p-5" style={{ borderColor: level.borderColor, background: level.bgColor }}>
+                      <div key={level.label} className="rounded-lg border p-5" style={{ borderColor: level.borderColor, background: level.bgColor }}>
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-[11px] font-bold" style={{ background: level.color }}>
                             {level.range.split("-")[0]}
@@ -576,7 +576,7 @@ export default function AuditRevOpsChecklistPage() {
 
               {/* Section : Quick wins par score */}
               <section id="quick-wins" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les quick wins par niveau de score</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-6">
                     <p>Selon votre score, les priorites ne sont pas les memes. Voici les actions a mettre en place en premier pour chaque niveau de maturite. L&apos;objectif n&apos;est pas de tout faire en meme temps, mais de commencer par les fondations qui auront le plus d&apos;impact.</p>
@@ -585,7 +585,7 @@ export default function AuditRevOpsChecklistPage() {
                   {/* Quick wins by level */}
                   <div className="space-y-4">
                     {/* Debutant */}
-                    <div className="rounded-xl border border-[#FECACA] bg-[#FEF2F2] p-5">
+                    <div className="rounded-lg border border-[#FECACA] bg-[#FEF2F2] p-5">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-[#EF4444]" />
                         <p className="text-[13px] font-semibold text-[#EF4444]">Score 0-25 : poser les fondations</p>
@@ -600,7 +600,7 @@ export default function AuditRevOpsChecklistPage() {
                     </div>
 
                     {/* En construction */}
-                    <div className="rounded-xl border border-[#FEF08A] bg-[#FEFCE8] p-5">
+                    <div className="rounded-lg border border-[#FEF08A] bg-[#FEFCE8] p-5">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-[#EAB308]" />
                         <p className="text-[13px] font-semibold text-[#EAB308]">Score 25-50 : structurer les processus</p>
@@ -615,7 +615,7 @@ export default function AuditRevOpsChecklistPage() {
                     </div>
 
                     {/* Structure */}
-                    <div className="rounded-xl border border-[#C7D2FE] bg-[#EEF2FF] p-5">
+                    <div className="rounded-lg border border-[#C7D2FE] bg-[#EEF2FF] p-5">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-[#4B5EFC]" />
                         <p className="text-[13px] font-semibold text-[#4B5EFC]">Score 50-75 : optimiser et automatiser</p>
@@ -630,7 +630,7 @@ export default function AuditRevOpsChecklistPage() {
                     </div>
 
                     {/* Optimise */}
-                    <div className="rounded-xl border border-[#BBF7D0] bg-[#F0FDF4] p-5">
+                    <div className="rounded-lg border border-[#BBF7D0] bg-[#F0FDF4] p-5">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-[#22C55E]" />
                         <p className="text-[13px] font-semibold text-[#22C55E]">Score 75-100 : innover et scaler</p>
@@ -651,7 +651,7 @@ export default function AuditRevOpsChecklistPage() {
 
               {/* Section : Notre audit chez Ceres - Dark section */}
               <section id="audit-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <div className="flex items-center gap-3 mb-5">
                     <div className="w-8 h-8 rounded-lg bg-[#FF7A59]/20 flex items-center justify-center">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF7A59" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
@@ -672,7 +672,7 @@ export default function AuditRevOpsChecklistPage() {
                       { title: "Atelier de restitution", desc: "Presentation des resultats en atelier avec les equipes marketing, sales et direction. Discussion des priorites, validation du plan d&apos;action et definition du calendrier.", color: "#EAB308" },
                       { title: "Suivi a 90 jours", desc: "Un point de suivi 90 jours apres la restitution pour mesurer les progres, ajuster les priorites et verifier que les quick wins ont ete implementes correctement.", color: "#EC4899" },
                     ].map((item) => (
-                      <div key={item.title} className="rounded-xl border border-[#333] bg-[#1A1A1A] p-4">
+                      <div key={item.title} className="rounded-lg border border-[#333] bg-[#1A1A1A] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-full" style={{ background: item.color }} />
                           <p className="text-[12px] font-semibold text-white">{item.title}</p>
@@ -683,7 +683,7 @@ export default function AuditRevOpsChecklistPage() {
                   </div>
 
                   {/* Timeline */}
-                  <div className="rounded-xl border border-[#333] bg-[#1A1A1A] p-4 mb-6">
+                  <div className="rounded-lg border border-[#333] bg-[#1A1A1A] p-4 mb-6">
                     <p className="text-[12px] font-semibold text-white mb-4">Timeline type de notre audit</p>
                     <div className="flex flex-col sm:flex-row gap-3">
                       {[
@@ -702,7 +702,7 @@ export default function AuditRevOpsChecklistPage() {
                   </div>
 
                   {/* Results */}
-                  <div className="rounded-xl border border-[#333] bg-[#1A1A1A] p-4 mb-6">
+                  <div className="rounded-lg border border-[#333] bg-[#1A1A1A] p-4 mb-6">
                     <p className="text-[12px] font-semibold text-white mb-3">Resultats moyens constates chez nos clients post-audit</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -727,7 +727,7 @@ export default function AuditRevOpsChecklistPage() {
               </section>
 
               {/* CTA */}
-              <div className="mb-12 rounded-2xl bg-gradient-to-br from-[#111] to-[#1A1A1A] p-6 md:p-8 text-center border border-[#333]">
+              <div className="mb-12 rounded-lg bg-gradient-to-br from-[#111] to-[#1A1A1A] p-6 md:p-8 text-center border border-[#333]">
                 <h3 className="text-[17px] font-semibold text-white mb-3">Pret a auditer vos operations revenue ?</h3>
                 <p className="text-[13px] text-[#999] leading-[1.7] mb-5 max-w-[500px] mx-auto">Chez Ceres, on audite vos operations revenue avec la meme rigueur et la meme grille que celle de cet article. Un diagnostic chiffre en 4 semaines, un plan d&apos;action priorise et un suivi a 90 jours. Commencez par un appel de 30 minutes pour evaluer votre niveau de maturite RevOps.</p>
                 <Link href="https://calendly.com/ceres-revops/30min" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#FF7A59] text-white rounded-lg text-[13px] font-medium hover:bg-[#E8694D] transition-colors">
@@ -741,7 +741,7 @@ export default function AuditRevOpsChecklistPage() {
                 <h3 className="text-[14px] font-semibold text-[#111] mb-4">Articles complementaires</h3>
                 <div className="grid gap-3">
                   {relatedArticles.map((a) => (
-                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
+                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
                       <div className="w-1 h-10 rounded-full" style={{ background: a.color }} />
                       <div className="flex-1 min-w-0">
                         <p className="text-[9px] font-medium mb-1" style={{ color: a.color }}>{a.category}</p>

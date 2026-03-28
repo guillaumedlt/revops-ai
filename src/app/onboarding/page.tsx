@@ -68,7 +68,7 @@ export default function OnboardingPage() {
       {/* Progress bar */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-[#F0F0F0]">
         <div
-          className="h-full bg-[#0A0A0A] transition-all duration-500 rounded-r-full"
+          className="h-full bg-[#111] transition-all duration-500 rounded-r-full"
           style={{ width: ((step + 1) / 3 * 100) + "%" }}
         />
       </div>
@@ -79,14 +79,14 @@ export default function OnboardingPage() {
           return (
             <div key={i} className="flex items-center gap-2">
               <div className={"h-7 w-7 rounded-full flex items-center justify-center text-[11px] font-bold transition-all " + (
-                i < step ? "bg-[#0A0A0A] text-white" :
-                i === step ? "bg-[#0A0A0A] text-white ring-4 ring-[#0A0A0A]/10" :
-                "bg-[#F0F0F0] text-[#A3A3A3]"
+                i < step ? "bg-[#111] text-white" :
+                i === step ? "bg-[#111] text-white ring-4 ring-[#0A0A0A]/10" :
+                "bg-[#F0F0F0] text-[#BBB]"
               )}>
                 {i < step ? <Check size={13} /> : i + 1}
               </div>
-              <span className={"text-[12px] hidden sm:block " + (i <= step ? "text-[#0A0A0A] font-medium" : "text-[#C0C0C0]")}>{label}</span>
-              {i < 2 && <div className={"h-px w-8 " + (i < step ? "bg-[#0A0A0A]" : "bg-[#EBEBEB]")} />}
+              <span className={"text-[12px] hidden sm:block " + (i <= step ? "text-[#111] font-medium" : "text-[#C0C0C0]")}>{label}</span>
+              {i < 2 && <div className={"h-px w-8 " + (i < step ? "bg-[#111]" : "bg-[#EBEBEB]")} />}
             </div>
           );
         })}
@@ -95,26 +95,26 @@ export default function OnboardingPage() {
       {/* Step 0: Welcome */}
       {step === 0 && (
         <div className="w-full max-w-md text-center">
-          <div className="h-14 w-14 rounded-2xl bg-[#0A0A0A] flex items-center justify-center mx-auto mb-6">
+          <div className="h-14 w-14 rounded-lg bg-[#111] flex items-center justify-center mx-auto mb-6">
             <span className="text-white text-xl font-bold">K</span>
           </div>
-          <h1 className="text-2xl font-bold text-[#0A0A0A] mb-2 tracking-tight">Bienvenue sur Kairo</h1>
-          <p className="text-sm text-[#737373] mb-8">Ton assistant IA RevOps. On configure tout en 2 minutes.</p>
+          <h1 className="text-2xl font-bold text-[#111] mb-2 tracking-tight">Bienvenue sur Kairo</h1>
+          <p className="text-sm text-[#999] mb-8">Ton assistant IA RevOps. On configure tout en 2 minutes.</p>
           <div className="mb-4">
-            <label className="block text-[12px] font-medium text-[#525252] mb-1.5 text-left">Ton prenom</label>
+            <label className="block text-[12px] font-medium text-[#555] mb-1.5 text-left">Ton prenom</label>
             <input
               type="text" value={name}
               onChange={function(e) { setName(e.target.value); }}
               onKeyDown={function(e) { if (e.key === "Enter") handleSaveName(); }}
               placeholder="Guillaume"
-              className="w-full h-12 px-4 text-sm rounded-xl border border-[#E5E5E5] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] focus:border-transparent transition-shadow"
+              className="w-full h-12 px-4 text-sm rounded-lg border border-[#EAEAEA] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] focus:border-transparent transition-shadow"
               autoFocus
             />
           </div>
           <button
             onClick={handleSaveName}
             disabled={!name.trim() || saving}
-            className="w-full h-11 rounded-xl bg-[#0A0A0A] text-white text-sm font-medium hover:bg-[#262626] disabled:opacity-40 transition-colors flex items-center justify-center gap-2"
+            className="w-full h-11 rounded-lg bg-[#111] text-white text-sm font-medium hover:bg-[#262626] disabled:opacity-40 transition-colors flex items-center justify-center gap-2"
           >
             {saving ? <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <>Continuer <ArrowRight size={15} /></>}
           </button>
@@ -124,11 +124,11 @@ export default function OnboardingPage() {
       {/* Step 1: Connect HubSpot */}
       {step === 1 && (
         <div className="w-full max-w-md text-center">
-          <h1 className="text-2xl font-bold text-[#0A0A0A] mb-2 tracking-tight">Connecte ton CRM</h1>
-          <p className="text-sm text-[#737373] mb-8">Kairo analyse tes donnees HubSpot pour te donner des insights.</p>
+          <h1 className="text-2xl font-bold text-[#111] mb-2 tracking-tight">Connecte ton CRM</h1>
+          <p className="text-sm text-[#999] mb-8">Kairo analyse tes donnees HubSpot pour te donner des insights.</p>
 
           {hsConnected ? (
-            <div className="mb-8 py-6 rounded-xl bg-[#F0FDF4] border border-[#BBF7D0]">
+            <div className="mb-8 py-6 rounded-lg bg-[#F0FDF4] border border-[#BBF7D0]">
               <div className="h-12 w-12 rounded-full bg-[#22C55E]/20 flex items-center justify-center mx-auto mb-3">
                 <Check size={24} className="text-[#22C55E]" />
               </div>
@@ -137,7 +137,7 @@ export default function OnboardingPage() {
           ) : (
             <button
               onClick={handleConnectHubspot}
-              className="w-full h-12 rounded-xl bg-[#FF7A59] text-white text-sm font-medium hover:bg-[#E5684A] transition-colors flex items-center justify-center gap-2 mb-4"
+              className="w-full h-12 rounded-lg bg-[#FF7A59] text-white text-sm font-medium hover:bg-[#E5684A] transition-colors flex items-center justify-center gap-2 mb-4"
             >
               <ExternalLink size={16} /> Connecter HubSpot
             </button>
@@ -145,7 +145,7 @@ export default function OnboardingPage() {
 
           <button
             onClick={function() { setStep(2); }}
-            className={"w-full h-11 rounded-xl text-sm font-medium transition-colors flex items-center justify-center gap-2 " + (hsConnected ? "bg-[#0A0A0A] text-white hover:bg-[#262626]" : "border border-[#E5E5E5] text-[#737373] hover:bg-[#FAFAFA]")}
+            className={"w-full h-11 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2 " + (hsConnected ? "bg-[#111] text-white hover:bg-[#262626]" : "border border-[#EAEAEA] text-[#999] hover:bg-[#FAFAFA]")}
           >
             {hsConnected ? <>Continuer <ArrowRight size={15} /></> : "Passer pour l'instant"}
           </button>
@@ -155,18 +155,18 @@ export default function OnboardingPage() {
       {/* Step 2: First question */}
       {step === 2 && (
         <div className="w-full max-w-md text-center">
-          <div className="h-12 w-12 rounded-xl bg-[#F0FDF4] flex items-center justify-center mx-auto mb-6">
+          <div className="h-12 w-12 rounded-lg bg-[#F0FDF4] flex items-center justify-center mx-auto mb-6">
             <Sparkles size={24} className="text-[#22C55E]" />
           </div>
-          <h1 className="text-2xl font-bold text-[#0A0A0A] mb-2 tracking-tight">{"C'est pret !"}</h1>
-          <p className="text-sm text-[#737373] mb-8">Pose ta premiere question a Kairo.</p>
+          <h1 className="text-2xl font-bold text-[#111] mb-2 tracking-tight">{"C'est pret !"}</h1>
+          <p className="text-sm text-[#999] mb-8">Pose ta premiere question a Kairo.</p>
           <div className="space-y-2.5 mb-6">
             {suggestions.map(function(s) {
               return (
                 <button
                   key={s.text}
                   onClick={function() { handleFinish(s.text); }}
-                  className="w-full h-12 rounded-xl border border-[#E5E5E5] text-sm text-[#525252] hover:bg-[#FAFAFA] hover:border-[#D4D4D4] hover:text-[#0A0A0A] transition-all flex items-center gap-3 px-4"
+                  className="w-full h-12 rounded-lg border border-[#EAEAEA] text-sm text-[#555] hover:bg-[#FAFAFA] hover:border-[#D4D4D4] hover:text-[#111] transition-all flex items-center gap-3 px-4"
                 >
                   <span className="text-base">{s.icon}</span>
                   <span>{s.text}</span>
@@ -176,7 +176,7 @@ export default function OnboardingPage() {
           </div>
           <button
             onClick={function() { handleFinish(); }}
-            className="w-full h-11 rounded-xl bg-[#0A0A0A] text-white text-sm font-medium hover:bg-[#262626] transition-colors flex items-center justify-center gap-2"
+            className="w-full h-11 rounded-lg bg-[#111] text-white text-sm font-medium hover:bg-[#262626] transition-colors flex items-center justify-center gap-2"
           >
             Aller sur Kairo <ArrowRight size={15} />
           </button>

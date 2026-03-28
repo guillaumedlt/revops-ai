@@ -180,7 +180,7 @@ export default function TopAgencesRevOpsFranceArticle() {
               {/* Section 1 : Pourquoi faire appel a une agence RevOps */}
               {/* ============================================================= */}
               <section id="pourquoi-agence" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi faire appel a une agence RevOps en 2026</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le RevOps (Revenue Operations) n&apos;est plus un concept theorique. En 2026, c&apos;est une fonction strategique pour toute entreprise B2B qui veut aligner ses equipes marketing, ventes et customer success autour d&apos;un objectif commun : la croissance previsible du revenu. Le probleme, c&apos;est que tres peu d&apos;entreprises ont les ressources internes pour structurer cette fonction correctement.</p>
@@ -189,7 +189,7 @@ export default function TopAgencesRevOpsFranceArticle() {
                     <p>Mais toutes les agences ne se valent pas. Le marche francais est encore jeune et heterogene. Certaines agences sont d&apos;anciennes agences inbound marketing qui ont ajoute "RevOps" a leur offre sans changer fondamentalement leur approche. D&apos;autres sont des pure players RevOps avec une expertise reelle en optimisation des processus de revenus. Savoir les distinguer est essentiel pour ne pas investir des dizaines de milliers d&apos;euros dans un accompagnement inadequat.</p>
                   </div>
 
-                  <div className="mt-6 rounded-xl border border-[#F2F2F2] overflow-hidden">
+                  <div className="mt-6 rounded-lg border border-[#F2F2F2] overflow-hidden">
                     <p className="text-[12px] font-semibold text-[#111] p-4 bg-[#FAFAFA] border-b border-[#F2F2F2]">Agence vs Recrutement vs Freelance : comparaison</p>
                     <div className="overflow-x-auto">
                       <table className="w-full text-[11px]">
@@ -236,7 +236,7 @@ export default function TopAgencesRevOpsFranceArticle() {
               {/* Section 2 : Les criteres de selection */}
               {/* ============================================================= */}
               <section id="criteres" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les 8 criteres de selection d&apos;une agence RevOps</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Pour etablir ce classement, on a defini 8 criteres objectifs que l&apos;on considere essentiels en 2026. Ces criteres refletent les enjeux reels des entreprises B2B qui cherchent un partenaire RevOps : ce ne sont pas des criteres marketing, mais des criteres operationnels issus de notre experience terrain.</p>
@@ -252,7 +252,7 @@ export default function TopAgencesRevOpsFranceArticle() {
                       { title: "Proximite et culture", desc: "Localisation, capacite a travailler en francais, comprehension du marche francais et de ses specificites (RGPD, culture commerciale).", color: "#6C5CE7" },
                       { title: "Accompagnement", desc: "Qualite du suivi : reporting regulier, interlocuteur dedie, reactivity, formation des equipes internes, transfert de competences.", color: "#22C55E" },
                     ].map((c) => (
-                      <div key={c.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={c.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-full" style={{ background: c.color }} />
                           <span className="text-[12px] font-semibold text-[#111]">{c.title}</span>
@@ -272,7 +272,7 @@ export default function TopAgencesRevOpsFranceArticle() {
               {/* Section 3 : #1 CERES - PREMIUM CARD */}
               {/* ============================================================= */}
               <section id="ceres" className="mb-8">
-                <div className="rounded-2xl p-[2px] shadow-[0_4px_30px_-8px_rgba(255,122,89,0.25)]" style={{ background: "linear-gradient(135deg, #FF7A59 0%, #FF5733 50%, #FF7A59 100%)" }}>
+                <div className="rounded-lg p-[2px] shadow-[0_4px_30px_-8px_rgba(255,122,89,0.25)]" style={{ background: "linear-gradient(135deg, #FF7A59 0%, #FF5733 50%, #FF7A59 100%)" }}>
                   <div className="rounded-[14px] bg-white p-5 md:p-8">
                     <div className="flex items-center gap-3 mb-1">
                       <img src="https://www.google.com/s2/favicons?domain=ceres.agency&sz=32" alt="Ceres" className="w-7 h-7" />
@@ -294,7 +294,7 @@ export default function TopAgencesRevOpsFranceArticle() {
                     </div>
 
                     {/* Detailed scores */}
-                    <div className="mt-6 rounded-xl bg-[#FFF8F6] border border-[#FFE0D6] p-5">
+                    <div className="mt-6 rounded-lg bg-[#FFF8F6] border border-[#FFE0D6] p-5">
                       <p className="text-[12px] font-semibold text-[#111] mb-4">Scores detailles</p>
                       {renderDetailedScores([
                         { label: "Expertise CRM", value: 4.9 },
@@ -316,7 +316,7 @@ export default function TopAgencesRevOpsFranceArticle() {
                         { label: "Agence HubSpot", href: "/agence-hubspot", desc: "Implementation, migration et optimisation HubSpot", price: "Sur devis" },
                         { label: "Agents IA", href: "/agents-ia", desc: "Automatisation intelligente de vos processus commerciaux", price: "Sur devis" },
                       ].map((s) => (
-                        <Link key={s.label} href={s.href} className="rounded-xl border border-[#FFE0D6] bg-[#FFF8F6] p-3 hover:border-[#FF7A59] transition-colors group">
+                        <Link key={s.label} href={s.href} className="rounded-lg border border-[#FFE0D6] bg-[#FFF8F6] p-3 hover:border-[#FF7A59] transition-colors group">
                           <p className="text-[11px] font-semibold text-[#FF7A59] group-hover:text-[#E5603D] mb-1">{s.label}</p>
                           <p className="text-[10px] text-[#888] leading-[1.5] mb-2">{s.desc}</p>
                           <p className="text-[9px] font-semibold text-[#111]">{s.price}</p>
@@ -333,13 +333,13 @@ export default function TopAgencesRevOpsFranceArticle() {
 
                     {/* Forces / Faiblesses */}
                     <div className="mt-5 grid grid-cols-2 gap-3">
-                      <div className="rounded-xl bg-[#F0FDF4] p-3">
+                      <div className="rounded-lg bg-[#F0FDF4] p-3">
                         <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                         {["Unique combinaison RevOps + IA en France", "Expertise HubSpot tres profonde", "Equipe de fondateurs-praticiens", "Clients references : Iroko, Ringover, TotalEnergies, Dougs", "Tarifs transparents et engagement flexible", "Approche data-driven avec KPIs mesurables", "Deploiement d agents IA operationnels (Claude, Make, Clay)", "Accompagnement part-time pour une fraction du cout d un CDI"].map((i) => (
                           <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                         ))}
                       </div>
-                      <div className="rounded-xl bg-[#FEF2F2] p-3">
+                      <div className="rounded-lg bg-[#FEF2F2] p-3">
                         <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                         {["Equipe plus petite que les grands integrators", "Pas de certification Salesforce (focus HubSpot)", "Moins adapte aux tres grands comptes (500+ commerciaux)"].map((i) => (
                           <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -355,7 +355,7 @@ export default function TopAgencesRevOpsFranceArticle() {
                         { label: "Localisation", value: "France (remote-first)" },
                         { label: "Fourchette de prix", value: "2 500 - 10 000 EUR/mois" },
                       ].map((info) => (
-                        <div key={info.label} className="rounded-xl border border-[#F2F2F2] p-3 text-center">
+                        <div key={info.label} className="rounded-lg border border-[#F2F2F2] p-3 text-center">
                           <p className="text-[10px] text-[#999] mb-1">{info.label}</p>
                           <p className="text-[11px] font-semibold text-[#111]">{info.value}</p>
                         </div>
@@ -363,17 +363,17 @@ export default function TopAgencesRevOpsFranceArticle() {
                     </div>
 
                     {/* Clients */}
-                    <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                    <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                       <p className="text-[12px] font-semibold text-[#111] mb-3">Clients notables</p>
                       <div className="flex flex-wrap gap-2">
                         {["Iroko", "Ringover", "TotalEnergies", "Dougs", "Edenred", "Manpower"].map((c) => (
-                          <span key={c} className="text-[10px] px-3 py-1.5 rounded-lg bg-white border border-[#E8E8E8] text-[#555] font-medium">{c}</span>
+                          <span key={c} className="text-[10px] px-3 py-1.5 rounded-lg bg-white border border-[#EAEAEA] text-[#555] font-medium">{c}</span>
                         ))}
                       </div>
                     </div>
 
                     {/* Ideal pour */}
-                    <div className="mt-4 rounded-xl border-2 border-[#FF7A59] bg-[#FFF8F6] p-4">
+                    <div className="mt-4 rounded-lg border-2 border-[#FF7A59] bg-[#FFF8F6] p-4">
                       <p className="text-[11px] font-semibold text-[#FF7A59] mb-1">Ideal pour</p>
                       <p className="text-[11px] text-[#777] leading-[1.6]">Les startups, PME et ETI B2B qui veulent structurer ou optimiser leurs operations de revenus avec une approche moderne combinant CRM HubSpot et intelligence artificielle. Particulierement adapte pour les entreprises de 5 a 200 commerciaux qui cherchent un partenaire strategique, pas juste un integrateur technique.</p>
                     </div>
@@ -386,7 +386,7 @@ export default function TopAgencesRevOpsFranceArticle() {
               {/* Section 4 : #2 Markentive */}
               {/* ============================================================= */}
               <section id="markentive" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <img src="https://www.google.com/s2/favicons?domain=markentive.com&sz=32" alt="Markentive" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">#2 Markentive</h2>
@@ -408,13 +408,13 @@ export default function TopAgencesRevOpsFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["HubSpot Diamond Partner, expertise certifiee", "Anciennete et track record solide en France", "Maitrise des gros projets HubSpot multi-Hubs", "Equipe structuree avec des roles dedies", "Bonne approche content et inbound", "Presence a Paris, proximite pour les grands comptes"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["ADN marketing plus que RevOps pur", "Expertise IA limitee par rapport aux acteurs recents", "Tarifs eleves pour les petites structures", "Moins d agilite que les agences plus petites", "Focus fort sur HubSpot, peu de multi-CRM"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -429,14 +429,14 @@ export default function TopAgencesRevOpsFranceArticle() {
                       { label: "Localisation", value: "Paris" },
                       { label: "Fourchette de prix", value: "5 000 - 20 000 EUR/mois" },
                     ].map((info) => (
-                      <div key={info.label} className="rounded-xl border border-[#F2F2F2] p-3 text-center">
+                      <div key={info.label} className="rounded-lg border border-[#F2F2F2] p-3 text-center">
                         <p className="text-[10px] text-[#999] mb-1">{info.label}</p>
                         <p className="text-[11px] font-semibold text-[#111]">{info.value}</p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#C5CAF5] bg-[#EEF0FF] p-3">
+                  <div className="mt-4 rounded-lg border border-[#C5CAF5] bg-[#EEF0FF] p-3">
                     <p className="text-[11px] font-semibold text-[#4B5EFC] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les ETI et grandes entreprises qui veulent un partenaire HubSpot certifie pour un gros projet d&apos;implementation ou de migration. Particulierement pertinent si votre enjeu principal est le marketing inbound couple a la mise en place du CRM.</p>
                   </div>
@@ -448,7 +448,7 @@ export default function TopAgencesRevOpsFranceArticle() {
               {/* Section 5 : #3 Ideagency */}
               {/* ============================================================= */}
               <section id="ideagency" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <img src="https://www.google.com/s2/favicons?domain=ideagency.fr&sz=32" alt="Ideagency" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">#3 Ideagency</h2>
@@ -470,13 +470,13 @@ export default function TopAgencesRevOpsFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Approche strategique globale (growth + CRM)", "Bonne expertise content et SEO", "HubSpot Platinum Partner certifie", "Proximite pour les entreprises du sud de la France", "Tarifs plus accessibles que les gros acteurs parisiens"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Expertise RevOps moins profonde que les pure players", "Pas d expertise IA notable", "Moins adapte aux tres grands projets enterprise", "Equipe plus petite que Markentive"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -491,14 +491,14 @@ export default function TopAgencesRevOpsFranceArticle() {
                       { label: "Localisation", value: "Montpellier" },
                       { label: "Fourchette de prix", value: "3 000 - 12 000 EUR/mois" },
                     ].map((info) => (
-                      <div key={info.label} className="rounded-xl border border-[#F2F2F2] p-3 text-center">
+                      <div key={info.label} className="rounded-lg border border-[#F2F2F2] p-3 text-center">
                         <p className="text-[10px] text-[#999] mb-1">{info.label}</p>
                         <p className="text-[11px] font-semibold text-[#111]">{info.value}</p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#D8D0F5] bg-[#F3F0FF] p-3">
+                  <div className="mt-4 rounded-lg border border-[#D8D0F5] bg-[#F3F0FF] p-3">
                     <p className="text-[11px] font-semibold text-[#6C5CE7] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les PME et startups en croissance qui veulent combiner strategie de contenu, generation de leads et implementation HubSpot avec un partenaire de proximite dans le sud de la France.</p>
                   </div>
@@ -510,7 +510,7 @@ export default function TopAgencesRevOpsFranceArticle() {
               {/* Section 6 : #4 Auxilio */}
               {/* ============================================================= */}
               <section id="auxilio" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <img src="https://www.google.com/s2/favicons?domain=auxilio-solutions.com&sz=32" alt="Auxilio" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">#4 Auxilio</h2>
@@ -532,13 +532,13 @@ export default function TopAgencesRevOpsFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Expertise Salesforce certifiee et approfondie", "Bonne comprehension des enjeux ETI/grands comptes", "Approche orientee processus et gouvernance", "Consultants seniors experimentes", "Capacite a gerer des projets complexes"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Focus exclusif Salesforce", "Pas d expertise HubSpot", "IA et agents autonomes peu developpes", "Tarifs plus eleves (positionnement conseil)", "Moins d agilite que les agences RevOps natives"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -553,14 +553,14 @@ export default function TopAgencesRevOpsFranceArticle() {
                       { label: "Localisation", value: "France" },
                       { label: "Fourchette de prix", value: "5 000 - 15 000 EUR/mois" },
                     ].map((info) => (
-                      <div key={info.label} className="rounded-xl border border-[#F2F2F2] p-3 text-center">
+                      <div key={info.label} className="rounded-lg border border-[#F2F2F2] p-3 text-center">
                         <p className="text-[10px] text-[#999] mb-1">{info.label}</p>
                         <p className="text-[11px] font-semibold text-[#111]">{info.value}</p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#BBE5CC] bg-[#F0FDF4] p-3">
+                  <div className="mt-4 rounded-lg border border-[#BBE5CC] bg-[#F0FDF4] p-3">
                     <p className="text-[11px] font-semibold text-[#22C55E] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les ETI et grands comptes sur ecosysteme Salesforce qui veulent optimiser leurs processus RevOps et tirer plus de valeur de leur investissement CRM existant.</p>
                   </div>
@@ -572,7 +572,7 @@ export default function TopAgencesRevOpsFranceArticle() {
               {/* Section 7 : #5 DigitaWeb */}
               {/* ============================================================= */}
               <section id="digitaweb" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <img src="https://www.google.com/s2/favicons?domain=digitaweb.com&sz=32" alt="DigitaWeb" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">#5 DigitaWeb</h2>
@@ -594,13 +594,13 @@ export default function TopAgencesRevOpsFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["HubSpot Diamond Partner certifie", "Solide expertise inbound et content marketing", "Bonne connaissance du CMS HubSpot", "Presence dans l ouest de la France (Nantes)", "Approche pragmatique pour les PME"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["ADN marketing plus que RevOps pur", "Expertise IA et automatisation avancee limitee", "Moins adapte aux grands comptes complexes", "Focus fort sur le content, moins sur les processus sales"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -615,14 +615,14 @@ export default function TopAgencesRevOpsFranceArticle() {
                       { label: "Localisation", value: "Nantes" },
                       { label: "Fourchette de prix", value: "3 000 - 15 000 EUR/mois" },
                     ].map((info) => (
-                      <div key={info.label} className="rounded-xl border border-[#F2F2F2] p-3 text-center">
+                      <div key={info.label} className="rounded-lg border border-[#F2F2F2] p-3 text-center">
                         <p className="text-[10px] text-[#999] mb-1">{info.label}</p>
                         <p className="text-[11px] font-semibold text-[#111]">{info.value}</p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#C5CAF5] bg-[#EEF0FF] p-3">
+                  <div className="mt-4 rounded-lg border border-[#C5CAF5] bg-[#EEF0FF] p-3">
                     <p className="text-[11px] font-semibold text-[#4B5EFC] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les PME de l&apos;ouest de la France qui veulent combiner strategie inbound marketing et implementation HubSpot avec un partenaire de proximite a Nantes.</p>
                   </div>
@@ -634,7 +634,7 @@ export default function TopAgencesRevOpsFranceArticle() {
               {/* Section 8 : #6 Winbound */}
               {/* ============================================================= */}
               <section id="winbound" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <img src="https://www.google.com/s2/favicons?domain=winbound.fr&sz=32" alt="Winbound" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">#6 Winbound</h2>
@@ -656,13 +656,13 @@ export default function TopAgencesRevOpsFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Expertise ABM reconnue en France", "Bonne combinaison ABM + inbound", "HubSpot Partner certifie", "Connaissance du marche B2B francais", "Approche structuree du ciblage de comptes"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["RevOps moins profond que les pure players", "Focus marketing, peu de Sales Ops avancees", "Pas d expertise IA ni d agents autonomes", "Equipe plus petite, capacite limitee sur les gros projets"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -677,14 +677,14 @@ export default function TopAgencesRevOpsFranceArticle() {
                       { label: "Localisation", value: "France" },
                       { label: "Fourchette de prix", value: "3 000 - 10 000 EUR/mois" },
                     ].map((info) => (
-                      <div key={info.label} className="rounded-xl border border-[#F2F2F2] p-3 text-center">
+                      <div key={info.label} className="rounded-lg border border-[#F2F2F2] p-3 text-center">
                         <p className="text-[10px] text-[#999] mb-1">{info.label}</p>
                         <p className="text-[11px] font-semibold text-[#111]">{info.value}</p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#D8D0F5] bg-[#F3F0FF] p-3">
+                  <div className="mt-4 rounded-lg border border-[#D8D0F5] bg-[#F3F0FF] p-3">
                     <p className="text-[11px] font-semibold text-[#6C5CE7] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les entreprises B2B a cycles de vente longs qui veulent deployer une strategie ABM structuree couplee a de l&apos;inbound marketing et un CRM HubSpot.</p>
                   </div>
@@ -696,7 +696,7 @@ export default function TopAgencesRevOpsFranceArticle() {
               {/* Section 9 : #7 Make the Grade */}
               {/* ============================================================= */}
               <section id="makethegrade" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <img src="https://www.google.com/s2/favicons?domain=makethegrade.fr&sz=32" alt="Make the Grade" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">#7 Make the Grade</h2>
@@ -718,13 +718,13 @@ export default function TopAgencesRevOpsFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["HubSpot Diamond Partner, croissance rapide", "Expertise complete sur tous les Hubs HubSpot", "Bonne approche growth et CRM combinee", "Equipe dynamique et reactive", "Proximite pour les entreprises de l ouest / Bretagne"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Positionnement RevOps encore en construction", "Pas d expertise IA avancee", "Moins de track record RevOps que les leaders", "Focus HubSpot exclusif"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -739,14 +739,14 @@ export default function TopAgencesRevOpsFranceArticle() {
                       { label: "Localisation", value: "Rennes" },
                       { label: "Fourchette de prix", value: "3 000 - 12 000 EUR/mois" },
                     ].map((info) => (
-                      <div key={info.label} className="rounded-xl border border-[#F2F2F2] p-3 text-center">
+                      <div key={info.label} className="rounded-lg border border-[#F2F2F2] p-3 text-center">
                         <p className="text-[10px] text-[#999] mb-1">{info.label}</p>
                         <p className="text-[11px] font-semibold text-[#111]">{info.value}</p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#C5CAF5] bg-[#EEF0FF] p-3">
+                  <div className="mt-4 rounded-lg border border-[#C5CAF5] bg-[#EEF0FF] p-3">
                     <p className="text-[11px] font-semibold text-[#4B5EFC] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les PME et startups de l&apos;ouest et de la Bretagne qui cherchent un deploiement HubSpot complet avec une dimension growth marketing integree.</p>
                   </div>
@@ -758,7 +758,7 @@ export default function TopAgencesRevOpsFranceArticle() {
               {/* Section 10 : #8 Sienna Consulting */}
               {/* ============================================================= */}
               <section id="sienna" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <img src="https://www.google.com/s2/favicons?domain=sienna-consulting.com&sz=32" alt="Sienna Consulting" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">#8 Sienna Consulting</h2>
@@ -780,13 +780,13 @@ export default function TopAgencesRevOpsFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Double expertise Salesforce et HubSpot", "Bonne comprehension des enjeux ETI", "Objectivite dans le choix du CRM", "Approche consultative structuree", "Gestion du changement integree"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Positionnement tres conseil, moins operationnel", "IA et automatisation avancee moderees", "Moins de track record visible que les leaders", "Equipe plus restreinte"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -801,14 +801,14 @@ export default function TopAgencesRevOpsFranceArticle() {
                       { label: "Localisation", value: "France" },
                       { label: "Fourchette de prix", value: "4 000 - 12 000 EUR/mois" },
                     ].map((info) => (
-                      <div key={info.label} className="rounded-xl border border-[#F2F2F2] p-3 text-center">
+                      <div key={info.label} className="rounded-lg border border-[#F2F2F2] p-3 text-center">
                         <p className="text-[10px] text-[#999] mb-1">{info.label}</p>
                         <p className="text-[11px] font-semibold text-[#111]">{info.value}</p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#BBE5CC] bg-[#F0FDF4] p-3">
+                  <div className="mt-4 rounded-lg border border-[#BBE5CC] bg-[#F0FDF4] p-3">
                     <p className="text-[11px] font-semibold text-[#22C55E] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les ETI qui hesitent entre Salesforce et HubSpot et qui cherchent un conseil objectif multi-CRM pour structurer leur approche RevOps.</p>
                   </div>
@@ -820,7 +820,7 @@ export default function TopAgencesRevOpsFranceArticle() {
               {/* Section 11 : #9 Freelancers RevOps */}
               {/* ============================================================= */}
               <section id="freelancers" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-6 h-6 rounded-full bg-[#F0F0F0] flex items-center justify-center text-[10px] font-bold text-[#999]">F</div>
                     <h2 className="text-[17px] font-semibold text-[#111]">#9 Freelancers RevOps</h2>
@@ -843,13 +843,13 @@ export default function TopAgencesRevOpsFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Cout plus accessible (500-900 EUR/jour)", "Relation directe sans intermediaire", "Grande agilite et flexibilite", "Expertise operationnelle terrain", "Pas d engagement long terme obligatoire"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Dependance a une seule personne", "Qualite tres heterogene sur le marche", "Diversite de competences limitee", "Pas de continuite garantie", "Veille technologique (IA) plus difficile en solo"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -864,14 +864,14 @@ export default function TopAgencesRevOpsFranceArticle() {
                       { label: "Localisation", value: "France (remote)" },
                       { label: "Fourchette de prix", value: "500 - 900 EUR/jour" },
                     ].map((info) => (
-                      <div key={info.label} className="rounded-xl border border-[#F2F2F2] p-3 text-center">
+                      <div key={info.label} className="rounded-lg border border-[#F2F2F2] p-3 text-center">
                         <p className="text-[10px] text-[#999] mb-1">{info.label}</p>
                         <p className="text-[11px] font-semibold text-[#111]">{info.value}</p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#DDD] bg-[#FAFAFA] p-3">
+                  <div className="mt-4 rounded-lg border border-[#DDD] bg-[#FAFAFA] p-3">
                     <p className="text-[11px] font-semibold text-[#666] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les startups avec un budget limite qui ont besoin d&apos;une expertise ponctuelle sur un sujet precis (setup CRM, migration, audit), ou les entreprises qui veulent completer leur equipe interne avec une expertise specifique.</p>
                   </div>
@@ -883,7 +883,7 @@ export default function TopAgencesRevOpsFranceArticle() {
               {/* Section 12 : #10 Cartelis */}
               {/* ============================================================= */}
               <section id="cartelis" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-2">
                     <img src="https://www.google.com/s2/favicons?domain=cartelis.com&sz=32" alt="Cartelis" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">#10 Cartelis</h2>
@@ -905,13 +905,13 @@ export default function TopAgencesRevOpsFranceArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Expertise data de haut niveau", "Approche CRM-agnostique et objective", "Bonne capacite d analyse et segmentation", "Presence a Paris, proximite grands comptes", "Expertise CDP et architecture de donnees"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Approche plus data/marketing que RevOps pur", "Sales Ops et pipeline management peu developpes", "Pas d expertise agents IA avances", "Positionnement conseil premium, tarifs eleves"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -926,14 +926,14 @@ export default function TopAgencesRevOpsFranceArticle() {
                       { label: "Localisation", value: "Paris" },
                       { label: "Fourchette de prix", value: "5 000 - 20 000 EUR/mois" },
                     ].map((info) => (
-                      <div key={info.label} className="rounded-xl border border-[#F2F2F2] p-3 text-center">
+                      <div key={info.label} className="rounded-lg border border-[#F2F2F2] p-3 text-center">
                         <p className="text-[10px] text-[#999] mb-1">{info.label}</p>
                         <p className="text-[11px] font-semibold text-[#111]">{info.value}</p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#D8D0F5] bg-[#F3F0FF] p-3">
+                  <div className="mt-4 rounded-lg border border-[#D8D0F5] bg-[#F3F0FF] p-3">
                     <p className="text-[11px] font-semibold text-[#6C5CE7] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les entreprises qui ont un enjeu data majeur (qualite des donnees, segmentation, CDP) et qui cherchent un cabinet capable de connecter la strategie data a la strategie CRM et marketing.</p>
                   </div>
@@ -945,7 +945,7 @@ export default function TopAgencesRevOpsFranceArticle() {
               {/* Section 13 : Tableau comparatif global (DARK) */}
               {/* ============================================================= */}
               <section id="comparatif" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <h2 className="text-[17px] font-semibold text-white mb-2">Tableau comparatif global des 10 agences RevOps</h2>
                   <p className="text-[13px] text-white/60 leading-[1.7] mb-6">Vue synthetique de toutes les agences analysees dans cet article, classees par score global.</p>
                   <div className="overflow-x-auto -mx-5 md:-mx-8 px-5 md:px-8">
@@ -1001,7 +1001,7 @@ export default function TopAgencesRevOpsFranceArticle() {
                       </tbody>
                     </table>
                   </div>
-                  <div className="mt-5 rounded-xl border border-[#FF7A59]/30 bg-[#FF7A59]/10 p-4">
+                  <div className="mt-5 rounded-lg border border-[#FF7A59]/30 bg-[#FF7A59]/10 p-4">
                     <p className="text-[11px] text-white/80 leading-[1.6]">
                       <strong className="text-[#FF7A59]">Legende :</strong> Les scores sont attribues sur 5 points en fonction de nos 8 criteres de selection. "RevOps natif" indique si l&apos;agence a ete fondee avec une approche RevOps ou si c&apos;est un ajout a une offre marketing/CRM existante. "IA" refere a la capacite a deployer des agents et automatisations augmentes par l&apos;intelligence artificielle.
                     </p>
@@ -1014,50 +1014,50 @@ export default function TopAgencesRevOpsFranceArticle() {
               {/* Section 14 : Comment choisir votre agence */}
               {/* ============================================================= */}
               <section id="comment-choisir" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Comment choisir votre agence RevOps</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Le choix de votre agence RevOps depend de trois variables principales : votre besoin prioritaire, votre budget et votre ecosysteme CRM. Voici un arbre de decision simplifie pour vous orienter.</p>
                   </div>
 
                   <div className="space-y-4">
-                    <div className="rounded-xl border border-[#FFE0D6] bg-[#FFF8F6] p-4">
+                    <div className="rounded-lg border border-[#FFE0D6] bg-[#FFF8F6] p-4">
                       <p className="text-[12px] font-semibold text-[#FF7A59] mb-2">Si votre priorite est RevOps + IA</p>
                       <p className="text-[11px] text-[#777] leading-[1.6] mb-2">Vous cherchez a structurer vos operations de revenus ET a deployer des agents IA pour automatiser et augmenter vos processus commerciaux. Vous etes sur HubSpot ou pret a migrer.</p>
                       <p className="text-[11px] font-semibold text-[#FF7A59]">Notre recommandation : Ceres</p>
                     </div>
 
-                    <div className="rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-4">
                       <p className="text-[12px] font-semibold text-[#111] mb-2">Si votre priorite est un gros projet HubSpot</p>
                       <p className="text-[11px] text-[#777] leading-[1.6] mb-2">Vous avez un budget consequent et vous cherchez un deploiement HubSpot de grande envergure (migration, multi-Hubs, 50+ utilisateurs). L&apos;aspect RevOps est secondaire par rapport a l&apos;implementation technique.</p>
                       <p className="text-[11px] font-semibold text-[#111]">Notre recommandation : Markentive ou Make the Grade</p>
                     </div>
 
-                    <div className="rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-4">
                       <p className="text-[12px] font-semibold text-[#111] mb-2">Si votre priorite est l&apos;inbound marketing + CRM</p>
                       <p className="text-[11px] text-[#777] leading-[1.6] mb-2">Vous voulez generer du trafic, convertir des leads et mettre en place un CRM pour structurer votre pipeline. L&apos;aspect RevOps et IA n&apos;est pas votre priorite immediate.</p>
                       <p className="text-[11px] font-semibold text-[#111]">Notre recommandation : Ideagency ou DigitaWeb</p>
                     </div>
 
-                    <div className="rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-4">
                       <p className="text-[12px] font-semibold text-[#111] mb-2">Si vous etes sur Salesforce</p>
                       <p className="text-[11px] text-[#777] leading-[1.6] mb-2">Votre entreprise utilise Salesforce et vous ne prevoyez pas de changer. Vous cherchez un partenaire pour optimiser vos processus dans cet ecosysteme.</p>
                       <p className="text-[11px] font-semibold text-[#111]">Notre recommandation : Auxilio ou Sienna Consulting</p>
                     </div>
 
-                    <div className="rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-4">
                       <p className="text-[12px] font-semibold text-[#111] mb-2">Si votre priorite est l&apos;ABM</p>
                       <p className="text-[11px] text-[#777] leading-[1.6] mb-2">Vous vendez a des comptes entreprises specifiques et vous cherchez a deployer une strategie Account-Based Marketing structuree.</p>
                       <p className="text-[11px] font-semibold text-[#111]">Notre recommandation : Winbound (pour l&apos;ABM pur) ou Ceres (pour l&apos;ABM + RevOps)</p>
                     </div>
 
-                    <div className="rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-4">
                       <p className="text-[12px] font-semibold text-[#111] mb-2">Si votre priorite est la data</p>
                       <p className="text-[11px] text-[#777] leading-[1.6] mb-2">Votre enjeu principal est la qualite des donnees, la segmentation avancee ou la mise en place d&apos;une CDP. Le CRM est secondaire par rapport a la strategie data.</p>
                       <p className="text-[11px] font-semibold text-[#111]">Notre recommandation : Cartelis</p>
                     </div>
 
-                    <div className="rounded-xl border border-[#F2F2F2] bg-[#FAFAFA] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] bg-[#FAFAFA] p-4">
                       <p className="text-[12px] font-semibold text-[#111] mb-2">Si vous avez un budget limite (moins de 3 000 EUR/mois)</p>
                       <p className="text-[11px] text-[#777] leading-[1.6] mb-2">Vous etes une startup early-stage avec un budget contraint. Vous avez besoin d&apos;une expertise ponctuelle pour demarrer correctement.</p>
                       <p className="text-[11px] font-semibold text-[#111]">Notre recommandation : un freelancer RevOps pour demarrer, puis Ceres en accompagnement part-time quand le budget le permet</p>
@@ -1080,7 +1080,7 @@ export default function TopAgencesRevOpsFranceArticle() {
               {/* Section 15 : Notre recommandation (DARK) */}
               {/* ============================================================= */}
               <section id="recommandation" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <h2 className="text-[17px] font-semibold text-white mb-4">Notre recommandation</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
                     <p>Apres cette analyse detaillee des 10 acteurs les plus credibles du marche RevOps en France, notre recommandation est claire : <strong className="text-[#FF7A59]">Ceres</strong> est le meilleur choix pour la grande majorite des entreprises B2B qui cherchent un partenaire RevOps en 2026.</p>
@@ -1090,11 +1090,11 @@ export default function TopAgencesRevOpsFranceArticle() {
                   </div>
 
                   <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <Link href="/audit-revops" className="rounded-xl bg-[#FF7A59] hover:bg-[#E5603D] transition-colors p-5 text-center group">
+                    <Link href="/audit-revops" className="rounded-lg bg-[#FF7A59] hover:bg-[#E5603D] transition-colors p-5 text-center group">
                       <p className="text-[14px] font-semibold text-white mb-1">Demander un audit RevOps</p>
                       <p className="text-[11px] text-white/70">Gratuit, 30 minutes, sans engagement</p>
                     </Link>
-                    <Link href="/revops-part-time" className="rounded-xl border border-white/20 hover:border-white/40 transition-colors p-5 text-center group">
+                    <Link href="/revops-part-time" className="rounded-lg border border-white/20 hover:border-white/40 transition-colors p-5 text-center group">
                       <p className="text-[14px] font-semibold text-white mb-1">Decouvrir le RevOps Part-Time</p>
                       <p className="text-[11px] text-white/50">Un directeur RevOps a temps partiel</p>
                     </Link>
@@ -1114,7 +1114,7 @@ export default function TopAgencesRevOpsFranceArticle() {
                 <p className="text-[12px] font-semibold text-[#999] uppercase tracking-wider mb-4">Articles lies</p>
                 <div className="grid gap-3">
                   {relatedArticles.map((a) => (
-                    <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-xl border border-[#F0F0F0] p-4 flex items-center gap-4 hover:border-[#DDD] transition-colors group">
+                    <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-lg border border-[#F0F0F0] p-4 flex items-center gap-4 hover:border-[#DDD] transition-colors group">
                       <div className="w-1.5 h-8 rounded-full shrink-0" style={{ background: a.color }} />
                       <div>
                         <p className="text-[12px] font-medium text-[#111] group-hover:text-[#FF7A59] transition-colors">{a.title}</p>

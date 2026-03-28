@@ -139,7 +139,7 @@ export default function EmeliaArticle() {
               </div>
 
               {/* Quick verdict card */}
-              <div className="mt-8 rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+              <div className="mt-8 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-[13px] font-semibold text-[#111]">Verdict rapide</span>
                   <div className="flex items-center gap-2">
@@ -170,7 +170,7 @@ export default function EmeliaArticle() {
             <article>
               {/* Intro */}
               <section id="intro" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi on a teste Emelia</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Chez Ceres, on gere le cold emailing pour une dizaine de clients. Historiquement, on utilisait Lemlist sur la majorite des comptes. Ca marchait. Mais depuis 2025, plusieurs choses ont change.</p>
@@ -191,7 +191,7 @@ export default function EmeliaArticle() {
 
               {/* Prise en main */}
               <section id="prise-en-main" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Prise en main et interface</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Premiere impression quand on se connecte : c&apos;est propre. L&apos;interface d&apos;Emelia est minimaliste, presque austere. Pas de tutoriels interminables, pas de pop-ups de bienvenue, pas de dashboard encombre. On arrive sur la page des campagnes et on peut commencer a travailler.</p>
@@ -205,7 +205,7 @@ export default function EmeliaArticle() {
                       { label: "Sections dans le menu", value: "5", icon: "menu" },
                       { label: "Courbe d'apprentissage", value: "Faible", icon: "courbe" },
                     ].map((m) => (
-                      <div key={m.label} className="text-center p-3 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2]">
+                      <div key={m.label} className="text-center p-3 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2]">
                         <div className="text-[18px] font-bold text-[#111]">{m.value}</div>
                         <div className="text-[10px] text-[#999] mt-1">{m.label}</div>
                       </div>
@@ -217,7 +217,7 @@ export default function EmeliaArticle() {
 
               {/* Features */}
               <section id="features" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les fonctionnalites cles</h2>
                   <div className="space-y-5">
                     {[
@@ -265,7 +265,7 @@ export default function EmeliaArticle() {
 
               {/* Deliverability */}
               <section id="deliverability" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Delivrabilite et warm-up</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>C&apos;est LE critere numero un pour un outil de cold email. Un outil peut avoir toutes les fonctionnalites du monde, si vos emails finissent en spam, c&apos;est de l&apos;argent jete par la fenetre.</p>
@@ -275,7 +275,7 @@ export default function EmeliaArticle() {
 
                   {/* Detailed metrics comparison */}
                   <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <img src="https://www.google.com/s2/favicons?domain=emelia.io&sz=32" alt="Emelia" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Emelia (nos resultats)</span>
@@ -299,7 +299,7 @@ export default function EmeliaArticle() {
                         ))}
                       </div>
                     </div>
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-3">
                         <img src="https://www.google.com/s2/favicons?domain=lemlist.com&sz=32" alt="Lemlist" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#999]">Lemlist (memes listes)</span>
@@ -341,7 +341,7 @@ export default function EmeliaArticle() {
 
               {/* Sequences detail */}
               <section id="sequences" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Creation de sequences : ce qui marche</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;editeur de sequences d&apos;Emelia est minimaliste mais efficace. Voici la structure qui a le mieux fonctionne sur nos 4 campagnes :</p>
@@ -359,7 +359,7 @@ export default function EmeliaArticle() {
                           <div className="text-[10px] font-semibold text-[#999]">{s.delay}</div>
                           {i < 3 && <div className="w-px h-6 bg-[#E8E8E8] mx-auto mt-1" />}
                         </div>
-                        <div className="flex-1 rounded-xl border border-[#F2F2F2] p-3">
+                        <div className="flex-1 rounded-lg border border-[#F2F2F2] p-3">
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-[12px] font-semibold text-[#111]">{s.step} : {s.subject}</span>
                             <span className="text-[10px] font-medium" style={{ color: s.rateColor }}>{s.rate}</span>
@@ -370,7 +370,7 @@ export default function EmeliaArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Nos conseils pour des sequences performantes</p>
                     <div className="space-y-1.5">
                       {[
@@ -394,18 +394,18 @@ export default function EmeliaArticle() {
 
               {/* Enrichissement */}
               <section id="enrichissement" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Enrichissement et scraping LinkedIn</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Emelia propose deux fonctionnalites d&apos;enrichissement integrees :</p>
 
                     <div className="mt-3 space-y-3">
-                      <div className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div className="rounded-lg border border-[#F2F2F2] p-4">
                         <h3 className="text-[13px] font-semibold text-[#111] mb-2">Email Finder</h3>
                         <p className="text-[12px] text-[#777] leading-[1.65]">A partir d&apos;un prenom, nom et domaine d&apos;entreprise, Emelia trouve l&apos;adresse email professionnelle. Le taux de decouverte est correct (environ 60-65% sur nos tests) mais inferieur a des outils specialises comme Hunter.io (75%) ou Apollo (70%). La verification d&apos;email est incluse, ce qui evite les bounces sur les adresses trouvees.</p>
                       </div>
 
-                      <div className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div className="rounded-lg border border-[#F2F2F2] p-4">
                         <h3 className="text-[13px] font-semibold text-[#111] mb-2">Scraping LinkedIn</h3>
                         <p className="text-[12px] text-[#777] leading-[1.65]">Emelia permet de scraper des recherches LinkedIn Sales Navigator directement depuis l&apos;interface. Vous collez l&apos;URL de votre recherche, Emelia extrait les profils et tente de trouver les emails. C&apos;est pratique pour ne pas avoir a passer par un outil tiers comme Phantombuster ou Captain Data.</p>
                         <p className="text-[12px] text-[#777] leading-[1.65] mt-2">Attention : le scraping LinkedIn reste une zone grise. LinkedIn n&apos;apprecie pas et peut restreindre votre compte. Emelia utilise des proxys pour limiter les risques, mais le risque zero n&apos;existe pas.</p>
@@ -420,7 +420,7 @@ export default function EmeliaArticle() {
 
               {/* Pricing */}
               <section id="pricing" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Prix et rapport qualite/prix</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>C&apos;est la ou Emelia se demarque le plus. Le pricing est transparent, sans surprises, et significativement moins cher que les alternatives. Voici les plans au moment de notre test (mars 2026) :</p>
@@ -432,7 +432,7 @@ export default function EmeliaArticle() {
                       { name: "Growth", price: "97", features: ["3 boites email", "5 000 contacts actifs", "Tout Starter +", "Rotation de boites", "Enrichissement email"], highlight: true },
                       { name: "Scale", price: "197", features: ["10 boites email", "25 000 contacts actifs", "Tout Growth +", "API access", "Support prioritaire"], highlight: false },
                     ].map((p) => (
-                      <div key={p.name} className={`rounded-xl border p-4 ${p.highlight ? "border-[#6C5CE7] bg-[#6C5CE7]/[0.02]" : "border-[#F2F2F2]"}`}>
+                      <div key={p.name} className={`rounded-lg border p-4 ${p.highlight ? "border-[#6C5CE7] bg-[#6C5CE7]/[0.02]" : "border-[#F2F2F2]"}`}>
                         <div className="text-[13px] font-semibold text-[#111] mb-1">{p.name}</div>
                         <div className="flex items-baseline gap-1 mb-3">
                           <span className="text-[24px] font-bold text-[#6C5CE7]">{p.price}&#8364;</span>
@@ -454,8 +454,8 @@ export default function EmeliaArticle() {
                     <p>Pour mettre ces prix en perspective :</p>
                   </div>
 
-                  <div className="mt-3 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
-                    <div className="grid grid-cols-4 gap-3 pb-3 border-b border-[#E8E8E8]">
+                  <div className="mt-3 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                    <div className="grid grid-cols-4 gap-3 pb-3 border-b border-[#EAEAEA]">
                       <span className="text-[10px] font-semibold text-[#999]">Configuration</span>
                       <span className="text-[10px] font-semibold text-[#6C5CE7] text-center">Emelia</span>
                       <span className="text-[10px] font-semibold text-[#999] text-center">Lemlist</span>
@@ -483,7 +483,7 @@ export default function EmeliaArticle() {
 
               {/* Integrations */}
               <section id="integrations" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Integrations CRM et outils</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>C&apos;est le point faible principal d&apos;Emelia. Les integrations natives existent mais restent basiques par rapport a la concurrence.</p>
@@ -520,7 +520,7 @@ export default function EmeliaArticle() {
                         desc: "Emelia supporte les webhooks sortants (nouveau contact, reponse, bounce). Ca permet de construire des automatisations avancees avec Make ou Zapier. C'est ce qu'on utilise chez Ceres pour pousser les donnees dans HubSpot.",
                       },
                     ].map((t) => (
-                      <div key={t.tool} className="flex gap-3 rounded-xl border border-[#F2F2F2] p-3">
+                      <div key={t.tool} className="flex gap-3 rounded-lg border border-[#F2F2F2] p-3">
                         <img src={`https://www.google.com/s2/favicons?domain=${t.icon}&sz=32`} alt={t.tool} className="w-5 h-5 mt-0.5" />
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
@@ -533,7 +533,7 @@ export default function EmeliaArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FFF7ED] border border-[#FFEDD5] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FFF7ED] border border-[#FFEDD5] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Ce qu&apos;on a fait chez Ceres</p>
                     <p className="text-[11px] text-[#777] leading-[1.65]">On a construit un workflow Make qui ecoute les webhooks Emelia et synchronise les donnees dans HubSpot : creation de contact, mise a jour du statut de prospection, ajout de notes avec le contenu de la reponse, et creation d&apos;un deal quand le prospect repond positivement. Le setup prend environ 2 heures mais une fois en place, c&apos;est fiable et robuste.</p>
                   </div>
@@ -543,7 +543,7 @@ export default function EmeliaArticle() {
 
               {/* Comparison */}
               <section id="vs" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Emelia vs Lemlist vs La Growth Machine vs Apollo</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>On a utilise les 4 outils en production. Voici notre comparatif honnete, critere par critere.</p>
@@ -551,7 +551,7 @@ export default function EmeliaArticle() {
 
                   <div className="overflow-x-auto">
                     <div className="min-w-[500px]">
-                      <div className="grid grid-cols-5 gap-2 pb-3 border-b border-[#E8E8E8]">
+                      <div className="grid grid-cols-5 gap-2 pb-3 border-b border-[#EAEAEA]">
                         <span className="text-[10px] font-semibold text-[#999]">Critere</span>
                         <span className="text-[10px] font-semibold text-[#6C5CE7] text-center">Emelia</span>
                         <span className="text-[10px] font-semibold text-[#999] text-center">Lemlist</span>
@@ -593,7 +593,7 @@ export default function EmeliaArticle() {
 
               {/* Limites */}
               <section id="limites" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les limites qu&apos;on a rencontrees</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Apres 3 mois d&apos;utilisation intensive, voici les points de friction qu&apos;on a identifies :</p>
@@ -638,7 +638,7 @@ export default function EmeliaArticle() {
 
               {/* Verdict */}
               <section id="verdict" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Verdict</span>
                   <h2 className="text-[20px] font-semibold text-white mb-4">Notre avis final apres 3 mois</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -685,10 +685,10 @@ export default function EmeliaArticle() {
 
               {/* Pour qui */}
               <section id="pour-qui" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pour qui Emelia est fait</h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-4">
+                    <div className="rounded-lg bg-[#F0FDF4] p-4">
                       <p className="text-[12px] font-semibold text-[#22C55E] mb-3">Ideal pour</p>
                       {[
                         "Startups et PME qui font du cold email pur",
@@ -701,7 +701,7 @@ export default function EmeliaArticle() {
                         <p key={i} className="text-[11px] text-[#555] mb-2 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-4">
+                    <div className="rounded-lg bg-[#FEF2F2] p-4">
                       <p className="text-[12px] font-semibold text-[#EF4444] mb-3">Pas adapte si</p>
                       {[
                         "Vous avez besoin de LinkedIn automation integre",
@@ -716,7 +716,7 @@ export default function EmeliaArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Notre recommandation</p>
                     <p className="text-[12px] text-[#777] leading-[1.65]">Si vous faites du cold email et que votre budget est un critere, testez Emelia. Le plan Starter a 37 euros par mois vous permet de valider l&apos;outil sur une vraie campagne. Si vous avez besoin de connecter Emelia a HubSpot ou Salesforce de facon poussee, prevoyez un workflow Make/n8n ou faites-vous accompagner par une equipe RevOps.</p>
                   </div>
@@ -729,7 +729,7 @@ export default function EmeliaArticle() {
               <p className="text-[13px] font-semibold text-[#111] mb-4">Articles similaires</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedArticles.map((a) => (
-                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
+                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold text-white mb-3" style={{ background: a.color }}>
                       {a.category[0]}
                     </div>
@@ -742,14 +742,14 @@ export default function EmeliaArticle() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide avec votre stack outbound ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[450px] mx-auto">On configure et connecte vos outils de prospection a votre CRM. Emelia, Lemlist, Clay, Apollo, HubSpot. Setup complet en moins de 2 semaines.</p>
                 <div className="flex items-center justify-center gap-3">
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                     <span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Reserver un appel
                   </a>
-                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                     Nos services
                   </Link>
                 </div>

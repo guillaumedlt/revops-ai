@@ -144,7 +144,7 @@ export default function BlogPostPage() {
 
             {/* Intro context card */}
             <section className="mb-8">
-              <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi automatiser avec HubSpot ?</h2>
                 <p className="text-[13px] text-[#555] leading-[1.75] mb-3">
                   Selon HubSpot, les entreprises qui utilisent le marketing automation generent 2x plus de leads qualifies que celles qui n&apos;en utilisent pas. Plus important encore : elles reduisent de 30% le temps passe par leurs equipes sur des taches repetitives (envoi d&apos;emails, qualification manuelle, attribution de leads).
@@ -163,7 +163,7 @@ export default function BlogPostPage() {
             <article>
               {/* ============ WORKFLOW 1 ============ */}
               <section id="workflow-1" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#4B5EFC]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#4B5EFC]">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#4B5EFC]/10 text-[#4B5EFC] text-[14px] font-bold">1</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Welcome series (sequence de bienvenue)</h2>
@@ -177,22 +177,22 @@ export default function BlogPostPage() {
                   </p>
 
                   {/* Workflow diagram */}
-                  <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
+                  <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-3">Flux du workflow</p>
                     <div className="flex flex-wrap items-center gap-2 text-[11px]">
                       <span className="px-3 py-1.5 rounded-md bg-[#4B5EFC] text-white font-medium">Declencheur : nouveau contact cree</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Delai : immediat</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Delai : immediat</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Email 1 : bienvenue + proposition de valeur</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Email 1 : bienvenue + proposition de valeur</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Delai : 2 jours</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Delai : 2 jours</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Email 2 : contenu phare (guide, etude de cas)</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Email 2 : contenu phare (guide, etude de cas)</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Delai : 3 jours</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Delai : 3 jours</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Email 3 : temoignage client + CTA demo</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Email 3 : temoignage client + CTA demo</span>
                     </div>
                   </div>
 
@@ -218,7 +218,7 @@ export default function BlogPostPage() {
                   </div>
 
                   {/* KPI impact */}
-                  <div className="rounded-xl bg-[#F7F7FF] border border-[#E8E8F8] p-4">
+                  <div className="rounded-lg bg-[#F7F7FF] border border-[#E8E8F8] p-4">
                     <p className="text-[11px] font-semibold text-[#4B5EFC] uppercase tracking-wider mb-2">Impact attendu</p>
                     <div className="grid grid-cols-3 gap-3">
                       <div>
@@ -248,7 +248,7 @@ export default function BlogPostPage() {
 
               {/* ============ WORKFLOW 2 ============ */}
               <section id="workflow-2" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#22C55E]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#22C55E]">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#22C55E]/10 text-[#22C55E] text-[14px] font-bold">2</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Lead scoring automatique</h2>
@@ -262,18 +262,18 @@ export default function BlogPostPage() {
                   </p>
 
                   {/* Workflow diagram */}
-                  <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
+                  <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-3">Flux du workflow</p>
                     <div className="flex flex-wrap items-center gap-2 text-[11px]">
                       <span className="px-3 py-1.5 rounded-md bg-[#22C55E] text-white font-medium">Declencheur : propriete modifiee ou activite enregistree</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Calcul du score demographique</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Calcul du score demographique</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Calcul du score comportemental</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Calcul du score comportemental</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Si score &gt; 50 : passer en MQL</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Si score &gt; 50 : passer en MQL</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Notification equipe commerciale</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Notification equipe commerciale</span>
                     </div>
                   </div>
 
@@ -298,7 +298,7 @@ export default function BlogPostPage() {
                     </div>
                   </div>
 
-                  <div className="rounded-xl bg-[#F0FFF4] border border-[#D1FAE5] p-4">
+                  <div className="rounded-lg bg-[#F0FFF4] border border-[#D1FAE5] p-4">
                     <p className="text-[11px] font-semibold text-[#22C55E] uppercase tracking-wider mb-2">Impact attendu</p>
                     <div className="grid grid-cols-3 gap-3">
                       <div>
@@ -327,7 +327,7 @@ export default function BlogPostPage() {
 
               {/* ============ WORKFLOW 3 ============ */}
               <section id="workflow-3" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#FF7A59]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#FF7A59]">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#FF7A59]/10 text-[#FF7A59] text-[14px] font-bold">3</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Nurturing MQL (sequence educative)</h2>
@@ -340,20 +340,20 @@ export default function BlogPostPage() {
                     L&apos;erreur classique : transmettre tous les MQL aux commerciaux sans distinction. Le commercial appelle, le prospect dit &quot;je ne suis pas pret&quot;, le lead est marque comme perdu. Avec un bon nurturing, ce meme contact aurait pu convertir 3 mois plus tard.
                   </p>
 
-                  <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
+                  <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-3">Flux du workflow</p>
                     <div className="flex flex-wrap items-center gap-2 text-[11px]">
                       <span className="px-3 py-1.5 rounded-md bg-[#FF7A59] text-white font-medium">Declencheur : lifecycle stage = MQL</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Condition : pas de deal ouvert</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Condition : pas de deal ouvert</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Email 1 : article de fond (J+0)</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Email 1 : article de fond (J+0)</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Email 2 : etude de cas (J+5)</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Email 2 : etude de cas (J+5)</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Email 3 : comparatif (J+12)</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Email 3 : comparatif (J+12)</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Email 4 : invitation demo (J+20)</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Email 4 : invitation demo (J+20)</span>
                     </div>
                   </div>
 
@@ -378,7 +378,7 @@ export default function BlogPostPage() {
                     </div>
                   </div>
 
-                  <div className="rounded-xl bg-[#FFF5F0] border border-[#FFE0D1] p-4">
+                  <div className="rounded-lg bg-[#FFF5F0] border border-[#FFE0D1] p-4">
                     <p className="text-[11px] font-semibold text-[#FF7A59] uppercase tracking-wider mb-2">Impact attendu</p>
                     <div className="grid grid-cols-3 gap-3">
                       <div>
@@ -407,7 +407,7 @@ export default function BlogPostPage() {
 
               {/* ============ WORKFLOW 4 ============ */}
               <section id="workflow-4" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#8B5CF6]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#8B5CF6]">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#8B5CF6]/10 text-[#8B5CF6] text-[14px] font-bold">4</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Attribution de leads aux commerciaux</h2>
@@ -420,18 +420,18 @@ export default function BlogPostPage() {
                     Le workflow d&apos;attribution automatique elimine cette latence. Que vous utilisiez un modele round-robin (repartition equitable), une attribution par territoire geographique ou par segment de marche, HubSpot peut le gerer sans intervention humaine.
                   </p>
 
-                  <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
+                  <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-3">Flux du workflow</p>
                     <div className="flex flex-wrap items-center gap-2 text-[11px]">
                       <span className="px-3 py-1.5 rounded-md bg-[#8B5CF6] text-white font-medium">Declencheur : lifecycle stage = SQL</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Branche : region du contact</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Branche : region du contact</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Attribution round-robin par equipe</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Attribution round-robin par equipe</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Creation de tache : premier appel</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Creation de tache : premier appel</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Notification Slack + email</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Notification Slack + email</span>
                     </div>
                   </div>
 
@@ -456,7 +456,7 @@ export default function BlogPostPage() {
                     </div>
                   </div>
 
-                  <div className="rounded-xl bg-[#F5F3FF] border border-[#E5DEFF] p-4">
+                  <div className="rounded-lg bg-[#F5F3FF] border border-[#E5DEFF] p-4">
                     <p className="text-[11px] font-semibold text-[#8B5CF6] uppercase tracking-wider mb-2">Impact attendu</p>
                     <div className="grid grid-cols-3 gap-3">
                       <div>
@@ -485,7 +485,7 @@ export default function BlogPostPage() {
 
               {/* ============ WORKFLOW 5 ============ */}
               <section id="workflow-5" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#F59E0B]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#F59E0B]">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#F59E0B]/10 text-[#F59E0B] text-[14px] font-bold">5</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Relance devis et proposition</h2>
@@ -498,22 +498,22 @@ export default function BlogPostPage() {
                     Ce workflow se declenche quand un deal entre dans une etape specifique du pipeline (typiquement &quot;Proposition envoyee&quot; ou &quot;Devis envoye&quot;) et orchestre une sequence de relances espacees dans le temps, avec une escalade si le prospect ne repond pas.
                   </p>
 
-                  <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
+                  <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-3">Flux du workflow</p>
                     <div className="flex flex-wrap items-center gap-2 text-[11px]">
                       <span className="px-3 py-1.5 rounded-md bg-[#F59E0B] text-white font-medium">Declencheur : deal stage = Proposition envoyee</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Delai : 3 jours</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Delai : 3 jours</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Email 1 : relance douce</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Email 1 : relance douce</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Delai : 5 jours</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Delai : 5 jours</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Tache : appel de suivi</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Tache : appel de suivi</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Delai : 7 jours</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Delai : 7 jours</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Email 2 : derniere relance + urgence</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Email 2 : derniere relance + urgence</span>
                     </div>
                   </div>
 
@@ -537,7 +537,7 @@ export default function BlogPostPage() {
                     </div>
                   </div>
 
-                  <div className="rounded-xl bg-[#FFFBEB] border border-[#FDE68A] p-4">
+                  <div className="rounded-lg bg-[#FFFBEB] border border-[#FDE68A] p-4">
                     <p className="text-[11px] font-semibold text-[#F59E0B] uppercase tracking-wider mb-2">Impact attendu</p>
                     <div className="grid grid-cols-3 gap-3">
                       <div>
@@ -566,7 +566,7 @@ export default function BlogPostPage() {
 
               {/* ============ WORKFLOW 6 ============ */}
               <section id="workflow-6" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#EF4444]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#EF4444]">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#EF4444]/10 text-[#EF4444] text-[14px] font-bold">6</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Re-engagement des contacts inactifs</h2>
@@ -579,18 +579,18 @@ export default function BlogPostPage() {
                     Plutot que de les supprimer (et perdre tout l&apos;investissement d&apos;acquisition), un workflow de re-engagement tente de les reactiver avec un contenu specifiquement concu pour capter a nouveau leur attention. Les contacts qui ne repondent pas a cette derniere tentative sont alors nettoyes de votre base active pour ameliorer votre delivrabilite.
                   </p>
 
-                  <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
+                  <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-3">Flux du workflow</p>
                     <div className="flex flex-wrap items-center gap-2 text-[11px]">
                       <span className="px-3 py-1.5 rounded-md bg-[#EF4444] text-white font-medium">Declencheur : aucune activite depuis 90 jours</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Email 1 : &quot;Vous nous manquez&quot;</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Email 1 : &quot;Vous nous manquez&quot;</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Delai : 7 jours</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Delai : 7 jours</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Si ouverture : retour au nurturing</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Si ouverture : retour au nurturing</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Sinon : email final + nettoyage</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Sinon : email final + nettoyage</span>
                     </div>
                   </div>
 
@@ -615,7 +615,7 @@ export default function BlogPostPage() {
                     </div>
                   </div>
 
-                  <div className="rounded-xl bg-[#FEF2F2] border border-[#FECACA] p-4">
+                  <div className="rounded-lg bg-[#FEF2F2] border border-[#FECACA] p-4">
                     <p className="text-[11px] font-semibold text-[#EF4444] uppercase tracking-wider mb-2">Impact attendu</p>
                     <div className="grid grid-cols-3 gap-3">
                       <div>
@@ -644,7 +644,7 @@ export default function BlogPostPage() {
 
               {/* ============ WORKFLOW 7 ============ */}
               <section id="workflow-7" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#06B6D4]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border-l-4 border-l-[#06B6D4]">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#06B6D4]/10 text-[#06B6D4] text-[14px] font-bold">7</span>
                     <h2 className="text-[17px] font-semibold text-[#111]">Onboarding client (post-signature)</h2>
@@ -657,20 +657,20 @@ export default function BlogPostPage() {
                     Le workflow d&apos;onboarding automatise les etapes recurrentes du processus : emails de bienvenue, envoi de documentation, creation des taches pour l&apos;equipe Customer Success, rappels de formation et collecte de feedback. Le CSM peut ainsi se concentrer sur la relation humaine plutot que sur la logistique.
                   </p>
 
-                  <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
+                  <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4 mb-5">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-3">Flux du workflow</p>
                     <div className="flex flex-wrap items-center gap-2 text-[11px]">
                       <span className="px-3 py-1.5 rounded-md bg-[#06B6D4] text-white font-medium">Declencheur : deal stage = Closed Won</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Lifecycle stage = Customer</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Lifecycle stage = Customer</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Email de bienvenue client</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Email de bienvenue client</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Tache CSM : kick-off (J+2)</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Tache CSM : kick-off (J+2)</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Email formation (J+7)</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Email formation (J+7)</span>
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" className="text-[#CCC] shrink-0"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" strokeWidth="1.2" /></svg>
-                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#E8E8E8] text-[#555]">Enquete satisfaction (J+30)</span>
+                      <span className="px-3 py-1.5 rounded-md bg-white border border-[#EAEAEA] text-[#555]">Enquete satisfaction (J+30)</span>
                     </div>
                   </div>
 
@@ -695,7 +695,7 @@ export default function BlogPostPage() {
                     </div>
                   </div>
 
-                  <div className="rounded-xl bg-[#ECFEFF] border border-[#CFFAFE] p-4">
+                  <div className="rounded-lg bg-[#ECFEFF] border border-[#CFFAFE] p-4">
                     <p className="text-[11px] font-semibold text-[#06B6D4] uppercase tracking-wider mb-2">Impact attendu</p>
                     <div className="grid grid-cols-3 gap-3">
                       <div>
@@ -725,7 +725,7 @@ export default function BlogPostPage() {
 
             {/* ============ SYNTHESE ============ */}
             <section id="synthese" className="mb-8">
-              <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+              <div className="rounded-lg bg-[#111] p-5 md:p-8">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Synthese</span>
                 <h2 className="text-[17px] font-semibold text-white mb-4">Les 7 workflows en un coup d&apos;oeil</h2>
                 <p className="text-[13px] text-white/50 leading-[1.75] mb-5">
@@ -760,7 +760,7 @@ export default function BlogPostPage() {
 
             {/* Aller plus loin */}
             <section className="mb-8">
-              <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <h2 className="text-[17px] font-semibold text-[#111] mb-4">Aller plus loin avec l&apos;IA</h2>
                 <p className="text-[13px] text-[#555] leading-[1.75] mb-3">
                   Les workflows HubSpot sont puissants, mais ils restent bases sur des regles statiques. La prochaine etape, c&apos;est d&apos;ajouter une couche d&apos;intelligence artificielle pour rendre ces workflows dynamiques.
@@ -776,7 +776,7 @@ export default function BlogPostPage() {
 
             {/* Related */}
             <section className="mb-8">
-              <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                 <div className="space-y-2">
                   {relatedArticles.map((a) => (
@@ -794,7 +794,7 @@ export default function BlogPostPage() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide pour vos workflows HubSpot ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[420px] mx-auto">On configure et optimise vos 7 workflows HubSpot en 2 semaines. Audit, implementation et suivi des KPIs inclus.</p>
                 <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

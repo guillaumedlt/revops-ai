@@ -256,7 +256,7 @@ export default function BlogPostPage() {
 
             {/* Intro section */}
             <section className="mb-10">
-              <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi des quick wins ?</h2>
                 <p className="text-[13px] text-[#555] leading-[1.75] mb-3">
                   Le RevOps ne se resume pas a des transformations massives de 12 mois. Les entreprises qui progressent le plus vite sont celles qui enchainent des petites victoires rapides, mesurent les resultats, et iterent. Un quick win, c&apos;est une action qui demande peu d&apos;effort mais qui produit un impact visible et mesurable sur vos operations.
@@ -274,15 +274,15 @@ export default function BlogPostPage() {
             {/* Bubble summary cards */}
             <section className="mb-10">
               <div className="grid grid-cols-3 gap-3">
-                <div className="rounded-2xl bg-[#FFF5F2] border border-[#FFE0D6] p-4 text-center">
+                <div className="rounded-lg bg-[#FFF5F2] border border-[#FFE0D6] p-4 text-center">
                   <p className="text-[24px] font-bold text-[#FF7A59]">10</p>
                   <p className="text-[11px] text-[#666] mt-1">quick wins</p>
                 </div>
-                <div className="rounded-2xl bg-[#F0FDF4] border border-[#DCFCE7] p-4 text-center">
+                <div className="rounded-lg bg-[#F0FDF4] border border-[#DCFCE7] p-4 text-center">
                   <p className="text-[24px] font-bold text-[#22C55E]">30j</p>
                   <p className="text-[11px] text-[#666] mt-1">pour tout deployer</p>
                 </div>
-                <div className="rounded-2xl bg-[#F7F7FF] border border-[#E8E8F4] p-4 text-center">
+                <div className="rounded-lg bg-[#F7F7FF] border border-[#E8E8F4] p-4 text-center">
                   <p className="text-[24px] font-bold text-[#4B5EFC]">~16h</p>
                   <p className="text-[11px] text-[#666] mt-1">de setup total</p>
                 </div>
@@ -292,7 +292,7 @@ export default function BlogPostPage() {
 
             {/* Effort/Impact Matrix -- CSS mockup */}
             <section id="matrice" className="mb-10">
-              <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <h2 className="text-[17px] font-semibold text-[#111] mb-2">Matrice effort / impact</h2>
                 <p className="text-[12px] text-[#999] mb-6">Priorisez les quick wins selon votre contexte. Commencez par le quadrant superieur gauche.</p>
 
@@ -304,7 +304,7 @@ export default function BlogPostPage() {
                   </div>
 
                   {/* Matrix grid */}
-                  <div className="grid grid-cols-2 gap-[2px] rounded-xl overflow-hidden border border-[#E8E8E8]">
+                  <div className="grid grid-cols-2 gap-[2px] rounded-lg overflow-hidden border border-[#EAEAEA]">
                     {/* Top-left: Low effort, High impact -- BEST */}
                     <div className="bg-[#F0FDF4] p-4 min-h-[140px]">
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#22C55E]/10 text-[9px] font-bold text-[#16A34A] uppercase tracking-wider mb-3">Priorite 1</span>
@@ -396,7 +396,7 @@ export default function BlogPostPage() {
 
             {/* Progress tracker */}
             <section className="mb-10">
-              <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <h2 className="text-[17px] font-semibold text-[#111] mb-2">Planning sur 30 jours</h2>
                 <p className="text-[12px] text-[#999] mb-5">Repartissez les quick wins sur 4 semaines pour un deploiement progressif.</p>
 
@@ -509,11 +509,11 @@ export default function BlogPostPage() {
             <article>
               {wins.map((win, i) => (
                 <section key={win.num} id={`win-${win.num}`} className="mb-8">
-                  <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                  <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                     {/* Header with number, time and impact */}
                     <div className="flex items-start justify-between mb-5">
                       <div className="flex items-center gap-3">
-                        <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#FF7A59] text-white text-[14px] font-bold">{win.num}</span>
+                        <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#FF7A59] text-white text-[14px] font-bold">{win.num}</span>
                         <h2 className="text-[17px] font-semibold text-[#111] leading-tight max-w-[400px]">{win.title}</h2>
                       </div>
                       <div className="shrink-0 ml-3 flex flex-col items-end gap-1.5">
@@ -541,7 +541,7 @@ export default function BlogPostPage() {
                     </div>
 
                     {/* Le setup */}
-                    <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+                    <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                       <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#FFF5F2] text-[11px] font-medium text-[#FF7A59] mb-3">Setup pas a pas</span>
                       <div className="space-y-2">
                         {win.setup.split("\n").map((line, li) => {
@@ -566,13 +566,13 @@ export default function BlogPostPage() {
             {/* Bilan -- dark section */}
             <section id="bilan" className="mb-8">
               <Connector />
-              <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+              <div className="rounded-lg bg-[#111] p-5 md:p-8">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Bilan</span>
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-white mb-6">Recapitulatif des 10 quick wins</h2>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
                   {wins.map((w) => (
-                    <div key={w.num} className="rounded-xl bg-white/5 border border-white/10 p-3">
+                    <div key={w.num} className="rounded-lg bg-white/5 border border-white/10 p-3">
                       <p className="text-[11px] text-white/40 mb-1">{w.num}. {w.title.split(" ").slice(0, 3).join(" ")}</p>
                       <div className="flex items-center justify-between">
                         <p className="text-[13px] font-bold text-[#FF7A59]">{w.setupTime}</p>
@@ -582,7 +582,7 @@ export default function BlogPostPage() {
                   ))}
                 </div>
 
-                <div className="rounded-xl bg-[#FF7A59]/10 border border-[#FF7A59]/20 p-5 text-center mb-6">
+                <div className="rounded-lg bg-[#FF7A59]/10 border border-[#FF7A59]/20 p-5 text-center mb-6">
                   <p className="text-[11px] text-[#FF7A59]/60 uppercase tracking-wider mb-2">Temps total de setup</p>
                   <p className="text-[36px] font-bold text-[#FF7A59]">~15h 45min</p>
                   <p className="text-[13px] text-white/40 mt-2">reparties sur <strong className="text-white/70">4 semaines</strong>, soit moins de 4 heures par semaine</p>
@@ -604,7 +604,7 @@ export default function BlogPostPage() {
 
             {/* Mesurer section */}
             <section className="mb-8">
-              <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <h2 className="text-[17px] font-semibold text-[#111] mb-4">Comment mesurer l&apos;impact ?</h2>
                 <p className="text-[13px] text-[#555] leading-[1.75] mb-4">
                   Chaque quick win doit etre mesure. Avant de commencer, notez vos metriques de reference. Apres 30 jours, comparez. Voici les KPIs a suivre :
@@ -651,7 +651,7 @@ export default function BlogPostPage() {
 
             {/* Dark CTA section for Ceres */}
             <section className="mb-8">
-              <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+              <div className="rounded-lg bg-[#111] p-5 md:p-8">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Aller plus loin avec Ceres</span>
                 <h2 className="text-[17px] font-semibold text-white mb-3">On implemente vos quick wins en une semaine</h2>
                 <p className="text-[13px] text-white/40 leading-[1.75] mb-4">
@@ -676,7 +676,7 @@ export default function BlogPostPage() {
 
             {/* Related articles */}
             <section className="mb-8">
-              <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                 <div className="space-y-2">
                   {relatedArticles.map((a) => (
@@ -694,7 +694,7 @@ export default function BlogPostPage() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Pret a lancer vos 10 quick wins ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[420px] mx-auto">On configure tout dans votre HubSpot en moins d&apos;une semaine. Resultats mesurables des J+7.</p>
                 <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

@@ -105,19 +105,19 @@ export default function AddToDashboard({ block, blockTitle, messageId, conversat
     <div ref={ref} className="relative inline-flex">
       <button
         onClick={function () { setOpen(!open); }}
-        className="flex h-7 w-7 items-center justify-center rounded-lg text-[#A3A3A3] hover:text-[#0A0A0A] hover:bg-[#F5F5F5] transition-colors"
+        className="flex h-7 w-7 items-center justify-center rounded-lg text-[#BBB] hover:text-[#111] hover:bg-[#F5F5F5] transition-colors"
         title="Add to Dashboard"
       >
         <LayoutDashboard size={14} />
       </button>
 
       {open && (
-        <div className="absolute bottom-full right-0 mb-1 w-[220px] rounded-xl border border-[#E5E5E5] bg-white shadow-lg p-2 z-50">
-          <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#A3A3A3]">
+        <div className="absolute bottom-full right-0 mb-1 w-[220px] rounded-lg border border-[#EAEAEA] bg-white shadow-lg p-2 z-50">
+          <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#BBB]">
             Add to Dashboard
           </p>
           {dashboards.length === 0 ? (
-            <p className="px-2 py-2 text-xs text-[#737373]">No dashboards yet</p>
+            <p className="px-2 py-2 text-xs text-[#999]">No dashboards yet</p>
           ) : (
             dashboards.map(function (d) {
               return (
@@ -125,21 +125,21 @@ export default function AddToDashboard({ block, blockTitle, messageId, conversat
                   key={d.id}
                   onClick={function () { addWidget(d.id); }}
                   disabled={adding === d.id || added.has(d.id)}
-                  className="flex w-full items-center justify-between px-2 py-2 rounded-lg text-sm text-[#525252] hover:bg-[#FAFAFA] disabled:opacity-50"
+                  className="flex w-full items-center justify-between px-2 py-2 rounded-lg text-sm text-[#555] hover:bg-[#FAFAFA] disabled:opacity-50"
                 >
                   <span className="truncate">{d.name}</span>
                   {added.has(d.id) ? (
                     <Check size={14} className="text-[#22C55E]" />
                   ) : adding === d.id ? (
-                    <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" />
+                    <div className="h-3 w-3 border-2 border-[#EAEAEA] border-t-[#737373] rounded-full animate-spin" />
                   ) : (
-                    <Plus size={14} className="text-[#A3A3A3]" />
+                    <Plus size={14} className="text-[#BBB]" />
                   )}
                 </button>
               );
             })
           )}
-          <a href="/dashboards" className="flex items-center gap-1 px-2 py-2 text-xs text-[#737373] hover:text-[#0A0A0A]">
+          <a href="/dashboards" className="flex items-center gap-1 px-2 py-2 text-xs text-[#999] hover:text-[#111]">
             <Plus size={12} /> Create new dashboard
           </a>
         </div>

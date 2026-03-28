@@ -148,7 +148,7 @@ export default function CrmPme2026Article() {
             <article>
               {/* Section 1 : Pourquoi un CRM est indispensable pour une PME en 2026 */}
               <section id="pourquoi-crm" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi un CRM est indispensable pour une PME en 2026</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>En 2026, gerer ses clients et prospects sur Excel ou Google Sheets n&apos;est plus une option viable. Les PME qui continuent a fonctionner sans CRM perdent en moyenne 27% de leurs opportunites commerciales par manque de suivi, selon une etude Forrester. Ce n&apos;est pas un chiffre theorique : on le constate chaque semaine chez les PME que l&apos;on accompagne.</p>
@@ -170,7 +170,7 @@ export default function CrmPme2026Article() {
                       { stat: "65%", label: "du temps commercial sur des taches non-vente", color: "#FF7A59" },
                       { stat: "800+", label: "solutions CRM sur le marche mondial", color: "#6C5CE7" },
                     ].map((s) => (
-                      <div key={s.label} className="rounded-xl border border-[#F2F2F2] p-4 text-center">
+                      <div key={s.label} className="rounded-lg border border-[#F2F2F2] p-4 text-center">
                         <p className="text-[22px] font-bold mb-1" style={{ color: s.color }}>{s.stat}</p>
                         <p className="text-[10px] text-[#999] leading-[1.4]">{s.label}</p>
                       </div>
@@ -182,7 +182,7 @@ export default function CrmPme2026Article() {
 
               {/* Section 2 : Les 7 criteres pour choisir un CRM PME */}
               <section id="criteres" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les 7 criteres pour choisir un CRM PME</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Avant de comparer les outils un par un, il faut savoir sur quels criteres les evaluer. On a identifie sept dimensions qui comptent vraiment pour une PME. Ce ne sont pas des criteres theoriques : ce sont les points qui reviennent systematiquement quand on aide nos clients a choisir et a deployer un CRM.</p>
@@ -197,7 +197,7 @@ export default function CrmPme2026Article() {
                       { title: "Scalabilite", desc: "Le CRM doit pouvoir accompagner la croissance de votre entreprise sans migration douloureuse. Passer de 3 a 30 utilisateurs, ajouter du marketing automation, integrer de la facturation : tout ca doit etre possible sans changer d'outil.", color: "#6C5CE7" },
                       { title: "Support et accompagnement", desc: "Qualite du support technique, disponibilite d'une documentation en francais, existence d'un reseau de partenaires locaux pour l'implementation et la formation. Un CRM mal deploye est pire que pas de CRM.", color: "#FF7A59" },
                     ].map((c) => (
-                      <div key={c.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={c.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-full" style={{ background: c.color }} />
                           <span className="text-[12px] font-semibold text-[#111]">{c.title}</span>
@@ -212,7 +212,7 @@ export default function CrmPme2026Article() {
 
               {/* Section 3 : HubSpot CRM */}
               <section id="hubspot" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=hubspot.com&sz=32" alt="HubSpot" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">HubSpot CRM</h2>
@@ -227,7 +227,7 @@ export default function CrmPme2026Article() {
                     <p>En 2026, HubSpot a considerablement renforce son offre IA. L&apos;assistant Breeze genere des emails, resume les conversations, suggere des prochaines etapes et identifie les deals a risque. Le scoring predictif est desormais disponible sur le plan Pro. Ce sont des fonctionnalites qui font une vraie difference au quotidien pour les equipes commerciales.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing HubSpot Sales Hub (janvier 2026)</p>
                     <div className="grid grid-cols-4 gap-3">
                       {[
@@ -247,13 +247,13 @@ export default function CrmPme2026Article() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Plan gratuit reellement utilisable", "Ecosysteme complet (vente, marketing, service)", "Interface intuitive, prise en main rapide", "1 600+ integrations dans le marketplace", "IA Breeze integree (redaction, scoring)", "Application mobile excellente", "Support en francais, large reseau de partenaires FR"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Limites</p>
                       {["Prix eleve sur les plans Pro et Enterprise", "Personnalisation limitee vs Salesforce", "Sequences reservees au plan Pro (100 EUR/mois)", "Reporting avance necessite le plan Pro minimum", "Cout des onboarding obligatoire (plans Pro/Enterprise)"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -261,7 +261,7 @@ export default function CrmPme2026Article() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#C5CAF5] bg-[#EEF0FF] p-3">
+                  <div className="mt-4 rounded-lg border border-[#C5CAF5] bg-[#EEF0FF] p-3">
                     <p className="text-[11px] font-semibold text-[#4B5EFC] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les PME de 2 a 100 salaries qui veulent un outil tout-en-un couvrant vente, marketing et service client. Particulierement adapte si vous prevoyez de grandir et avez besoin d&apos;un ecosysteme qui evolue avec vous. Le plan gratuit en fait le meilleur point de depart pour les equipes qui debutent avec un CRM.</p>
                   </div>
@@ -271,7 +271,7 @@ export default function CrmPme2026Article() {
 
               {/* Section 4 : Pipedrive */}
               <section id="pipedrive" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=pipedrive.com&sz=32" alt="Pipedrive" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">Pipedrive</h2>
@@ -286,7 +286,7 @@ export default function CrmPme2026Article() {
                     <p>Le support en francais est correct mais perfectible. L&apos;interface est entierement traduite, mais le support technique est principalement en anglais aux horaires US. Le reseau de partenaires en France est plus limite que celui de HubSpot ou Salesforce.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing Pipedrive (janvier 2026)</p>
                     <div className="grid grid-cols-4 gap-3">
                       {[
@@ -306,13 +306,13 @@ export default function CrmPme2026Article() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Pipeline visuel Kanban excellent", "Approche activity-based selling", "Prix competitif et transparent", "Prise en main tres rapide (1-2 jours)", "API ouverte et marketplace riche", "Application mobile bien pensee"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Limites</p>
                       {["Pas de module marketing natif", "Support en francais limite", "Reporting basique sur les petits plans", "Pas de plan gratuit", "Moins d'integrations natives que HubSpot", "Fonctionnalites IA en retard"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -320,7 +320,7 @@ export default function CrmPme2026Article() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#D4EDDA] bg-[#F0FDF4] p-3">
+                  <div className="mt-4 rounded-lg border border-[#D4EDDA] bg-[#F0FDF4] p-3">
                     <p className="text-[11px] font-semibold text-[#22C55E] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les equipes commerciales pures de 3 a 30 personnes avec un cycle de vente court a moyen. Ideal pour les PME qui veulent un CRM simple, centre sur le pipeline, sans avoir besoin de marketing automation integre. Excellent rapport qualite/prix pour les budgets serres.</p>
                   </div>
@@ -330,7 +330,7 @@ export default function CrmPme2026Article() {
 
               {/* Section 5 : Salesforce Essentials */}
               <section id="salesforce" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=salesforce.com&sz=32" alt="Salesforce" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">Salesforce Essentials</h2>
@@ -345,7 +345,7 @@ export default function CrmPme2026Article() {
                     <p>Notre constat apres avoir accompagne plusieurs dizaines de PME : dans 80% des cas, Salesforce est surdimensionne pour une PME de moins de 50 salaries. Les equipes sous-utilisent l&apos;outil, la complexite freine l&apos;adoption, et le cout total de possession (licence + implementation + maintenance + formation) est 2 a 3 fois superieur a celui de HubSpot ou Pipedrive pour un resultat comparable.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing Salesforce Sales Cloud (janvier 2026)</p>
                     <div className="grid grid-cols-4 gap-3">
                       {[
@@ -365,13 +365,13 @@ export default function CrmPme2026Article() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Personnalisation quasi illimitee", "Ecosysteme AppExchange (7 000+ apps)", "Scalabilite maximale (de 2 a 10 000 users)", "Leader du marche, standard de l'industrie", "IA Einstein puissante (plans hauts)"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Limites</p>
                       {["Interface complexe, prise en main longue", "Prix total eleve (licence + imple + maintenance)", "Surdimensionne pour la plupart des PME", "Necessite souvent un admin dedie", "Plan Starter limite a 10 utilisateurs", "Support en francais perfectible"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -379,7 +379,7 @@ export default function CrmPme2026Article() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#FFDDD2] bg-[#FFF5F0] p-3">
+                  <div className="mt-4 rounded-lg border border-[#FFDDD2] bg-[#FFF5F0] p-3">
                     <p className="text-[11px] font-semibold text-[#FF7A59] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les PME de plus de 50 salaries avec des processus de vente complexes, des besoins de personnalisation avances et un budget suffisant pour l&apos;implementation et la maintenance. Ou les PME qui anticipent une croissance forte et veulent un outil qui peut scaler jusqu&apos;a des centaines d&apos;utilisateurs sans migration.</p>
                   </div>
@@ -389,7 +389,7 @@ export default function CrmPme2026Article() {
 
               {/* Section 6 : Zoho CRM */}
               <section id="zoho" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=zoho.com&sz=32" alt="Zoho CRM" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">Zoho CRM</h2>
@@ -404,7 +404,7 @@ export default function CrmPme2026Article() {
                     <p>L&apos;IA Zia, disponible sur le plan Enterprise, est competente sans etre revolutionnaire. Elle propose de la prediction de conversion, de la detection d&apos;anomalies et de la suggestion de prochaines actions. C&apos;est un plus, mais en retard par rapport aux capacites de HubSpot Breeze ou de Salesforce Einstein.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing Zoho CRM (janvier 2026)</p>
                     <div className="grid grid-cols-4 gap-3">
                       {[
@@ -424,13 +424,13 @@ export default function CrmPme2026Article() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Prix tres competitif a fonctionnalites egales", "Suite Zoho complete (55+ apps integrees)", "Personnalisation poussee (Canvas, API)", "Plan gratuit pour 3 utilisateurs", "RGPD compliant, serveurs en EU", "Automatisations disponibles des le plan Standard"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Limites</p>
                       {["Interface datee, moins fluide que la concurrence", "Support en francais limite", "Reseau de partenaires FR restreint", "IA Zia en retard sur Breeze/Einstein", "Integrations tierces moins riches que HubSpot", "Courbe d'apprentissage moyenne"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -438,7 +438,7 @@ export default function CrmPme2026Article() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#E0D4FC] bg-[#F8F5FF] p-3">
+                  <div className="mt-4 rounded-lg border border-[#E0D4FC] bg-[#F8F5FF] p-3">
                     <p className="text-[11px] font-semibold text-[#6C5CE7] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les PME soucieuses du budget qui veulent un CRM complet sans exploser les couts. Particulierement pertinent si vous utilisez deja d&apos;autres produits Zoho (Mail, Books, Desk). Un choix rationnel pour les equipes de 5 a 50 personnes qui privilegient le rapport fonctionnalites/prix.</p>
                   </div>
@@ -448,7 +448,7 @@ export default function CrmPme2026Article() {
 
               {/* Section 7 : Monday CRM */}
               <section id="monday" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=monday.com&sz=32" alt="Monday CRM" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">Monday CRM</h2>
@@ -463,7 +463,7 @@ export default function CrmPme2026Article() {
                     <p>L&apos;ecosysteme d&apos;integrations est correct mais moins riche que HubSpot ou Salesforce. L&apos;integration Gmail/Outlook fonctionne, mais le tracking email est basique. Il n&apos;y a pas de marketplace d&apos;apps aussi fournie que chez les leaders.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing Monday CRM (janvier 2026)</p>
                     <div className="grid grid-cols-3 gap-3">
                       {[
@@ -482,13 +482,13 @@ export default function CrmPme2026Article() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Interface visuelle et coloree, tres ergonomique", "Flexibilite des vues (tableau, Kanban, timeline)", "Ideal si vous utilisez deja Monday pour les projets", "Automatisations no-code puissantes", "Dashboards personnalisables en drag-and-drop", "Prix d'entree competitif"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Limites</p>
                       {["Pas un CRM natif, fonctionnalites CRM limitees", "Pas de sequences email avancees", "Tracking email basique", "Minimum 3 utilisateurs payants", "Integrations CRM-specifiques moins riches", "Pas de plan gratuit pour le CRM"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -496,7 +496,7 @@ export default function CrmPme2026Article() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#FFDDD2] bg-[#FFF5F0] p-3">
+                  <div className="mt-4 rounded-lg border border-[#FFDDD2] bg-[#FFF5F0] p-3">
                     <p className="text-[11px] font-semibold text-[#FF7A59] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les PME qui utilisent deja Monday pour la gestion de projet et veulent integrer un CRM dans la meme plateforme. Adapte aux equipes qui privilegient la collaboration visuelle et qui ont un processus commercial simple, sans besoin de sequences email ou de scoring avance.</p>
                   </div>
@@ -506,7 +506,7 @@ export default function CrmPme2026Article() {
 
               {/* Section 8 : Folk CRM */}
               <section id="folk" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=folk.app&sz=32" alt="Folk" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">Folk CRM</h2>
@@ -521,7 +521,7 @@ export default function CrmPme2026Article() {
                     <p>En tant que produit francais, Folk offre une interface nativement en francais, un support reactif dans la langue, et une conformite RGPD native (serveurs en Europe). C&apos;est un avantage reel pour les PME francaises sensibles a ces sujets.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing Folk (janvier 2026)</p>
                     <div className="grid grid-cols-3 gap-3">
                       {[
@@ -540,13 +540,13 @@ export default function CrmPme2026Article() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Interface moderne, prise en main instantanee", "Extension Chrome (LinkedIn, Gmail, web)", "Mail merge integre", "Produit francais, support FR, RGPD natif", "Prix accessible", "Design type Notion/Airtable"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Limites</p>
                       {["Pas de pipeline de vente classique", "Reporting et analytics tres basiques", "Pas d'automatisations avancees", "Pas d'integration telephonique", "Peu d'integrations natives", "Limite pour les equipes de plus de 15 personnes"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -554,7 +554,7 @@ export default function CrmPme2026Article() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#C5CAF5] bg-[#EEF0FF] p-3">
+                  <div className="mt-4 rounded-lg border border-[#C5CAF5] bg-[#EEF0FF] p-3">
                     <p className="text-[11px] font-semibold text-[#4B5EFC] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les tres petites equipes (2 a 10 personnes), les freelances, les cabinets de conseil et les agences qui veulent un CRM leger pour gerer leurs relations et envoyer des campagnes email simples. Parfait pour les fondateurs qui cherchent un carnet d&apos;adresses intelligent sans la complexite d&apos;un CRM enterprise.</p>
                   </div>
@@ -564,7 +564,7 @@ export default function CrmPme2026Article() {
 
               {/* Section 9 : noCRM.io */}
               <section id="nocrm" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=nocrm.io&sz=32" alt="noCRM.io" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">noCRM.io</h2>
@@ -579,7 +579,7 @@ export default function CrmPme2026Article() {
                     <p>En tant qu&apos;outil francais, noCRM offre une interface nativement en francais, un support excellent en francais, et une communaute active. La documentation est complete et bien ecrite. L&apos;equipe est reactive et a l&apos;ecoute des retours utilisateurs.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing noCRM.io (janvier 2026)</p>
                     <div className="grid grid-cols-3 gap-3">
                       {[
@@ -598,13 +598,13 @@ export default function CrmPme2026Article() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Philosophie 'prochaine action' anti-procrastination", "Prospection par fichier unique et efficace", "Prise en main en 30 minutes", "Produit francais, support FR excellent", "Prix simple et transparent", "Ideal pour les equipes terrain"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Limites</p>
                       {["Pas un CRM complet (prospection seulement)", "Pas de gestion post-vente", "Reporting basique", "Peu d'integrations natives", "Pas de marketing automation", "Pas de plan gratuit"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -612,7 +612,7 @@ export default function CrmPme2026Article() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#D4EDDA] bg-[#F0FDF4] p-3">
+                  <div className="mt-4 rounded-lg border border-[#D4EDDA] bg-[#F0FDF4] p-3">
                     <p className="text-[11px] font-semibold text-[#22C55E] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les equipes commerciales pures (3 a 20 personnes) dont le quotidien est la prospection telephonique ou terrain. Parfait pour les forces de vente qui veulent un outil anti-gas-prise-de-tete, sans administration, centre sur l&apos;action. Excellent pour les PME du batiment, de l&apos;immobilier ou des services B2B avec du cycle court.</p>
                   </div>
@@ -622,7 +622,7 @@ export default function CrmPme2026Article() {
 
               {/* Section 10 : Tableau comparatif global */}
               <section id="comparatif" className="mb-8">
-                <div className="rounded-2xl border border-[#1A1A2E] bg-[#1A1A2E] p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.2)]">
+                <div className="rounded-lg border border-[#1A1A2E] bg-[#1A1A2E] p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.2)]">
                   <h2 className="text-[17px] font-semibold text-white mb-2">Tableau comparatif global</h2>
                   <p className="text-[12px] text-[#999] mb-5">Les 7 CRM compares sur 12 criteres. Evaluation basee sur notre experience terrain aupres de PME francaises.</p>
                   <div className="overflow-x-auto">
@@ -685,7 +685,7 @@ export default function CrmPme2026Article() {
                       { name: "Folk", score: "7/10", color: "#4B5EFC" },
                       { name: "noCRM", score: "7/10", color: "#22C55E" },
                     ].map((s) => (
-                      <div key={s.name} className="rounded-xl border border-[#333] p-3 text-center">
+                      <div key={s.name} className="rounded-lg border border-[#333] p-3 text-center">
                         <p className="text-[10px] text-[#999] mb-1">{s.name}</p>
                         <p className="text-[16px] font-bold" style={{ color: s.color }}>{s.score}</p>
                         <p className="text-[9px] text-[#666]">Score PME</p>
@@ -698,7 +698,7 @@ export default function CrmPme2026Article() {
 
               {/* Section 11 : Quel CRM choisir selon votre profil */}
               <section id="profil" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Quel CRM choisir selon votre profil</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Plutot que de chercher le &ldquo;meilleur CRM&rdquo; en absolu, la bonne question est : quel CRM correspond a votre situation ? Voici notre matrice de decision basee sur les trois variables qui comptent le plus : la taille de votre equipe, votre budget et votre besoin principal.</p>
@@ -715,7 +715,7 @@ export default function CrmPme2026Article() {
                       { profil: "PME budget-conscious", budget: "< 30 EUR/user/mois", besoin: "Maximum de fonctionnalites au moindre cout", reco: "Zoho CRM Professional", color: "#FF7A59" },
                       { profil: "PME en forte croissance (50+ pers.)", budget: "1 000+ EUR/mois", besoin: "Scalabilite, personnalisation, IA", reco: "HubSpot Enterprise ou Salesforce Pro", color: "#22C55E" },
                     ].map((p) => (
-                      <div key={p.profil} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={p.profil} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-start gap-3">
                           <div className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ background: p.color }} />
                           <div className="flex-1">
@@ -731,7 +731,7 @@ export default function CrmPme2026Article() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">La regle d&apos;or</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Choisissez toujours le CRM le plus simple qui repond a vos besoins actuels, pas a vos besoins dans trois ans. Il est plus facile de migrer vers un outil plus complet quand le besoin se fait sentir que de supporter au quotidien un outil surdimensionne que personne n&apos;utilise. L&apos;adoption par l&apos;equipe est le critere numero un.</p>
                   </div>
@@ -741,7 +741,7 @@ export default function CrmPme2026Article() {
 
               {/* Section 12 : Les erreurs a eviter */}
               <section id="erreurs" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les erreurs a eviter lors du choix et de l&apos;implementation</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Apres avoir accompagne des dizaines de PME dans le choix et le deploiement de leur CRM, on a identifie les erreurs qui reviennent systematiquement. Les voici, avec les solutions pour les eviter.</p>
@@ -785,7 +785,7 @@ export default function CrmPme2026Article() {
                         color: "#4B5EFC"
                       },
                     ].map((e, i) => (
-                      <div key={i} className="rounded-xl border-l-2 bg-[#FAFAFA] p-4" style={{ borderColor: e.color }}>
+                      <div key={i} className="rounded-lg border-l-2 bg-[#FAFAFA] p-4" style={{ borderColor: e.color }}>
                         <p className="text-[12px] font-semibold text-[#111] mb-2">{i + 1}. {e.erreur}</p>
                         <p className="text-[11px] text-[#777] leading-[1.6]">{e.desc}</p>
                       </div>
@@ -797,7 +797,7 @@ export default function CrmPme2026Article() {
 
               {/* Section 13 : Notre recommandation */}
               <section id="recommandation" className="mb-8">
-                <div className="rounded-2xl border border-[#4B5EFC] bg-gradient-to-br from-[#F8F9FF] to-[#EEF0FF] p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(75,94,252,0.15)]">
+                <div className="rounded-lg border border-[#4B5EFC] bg-gradient-to-br from-[#F8F9FF] to-[#EEF0FF] p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(75,94,252,0.15)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Notre recommandation : HubSpot pour la majorite des PME</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Apres avoir deploye des CRM chez des dizaines de PME francaises de 3 a 200 salaries, notre recommandation par defaut est <strong className="text-[#111]">HubSpot CRM</strong>. Pas parce que c&apos;est le plus complet (Salesforce l&apos;est davantage). Pas parce que c&apos;est le moins cher (Zoho l&apos;est). Mais parce que c&apos;est celui qui offre le meilleur equilibre entre puissance, facilite d&apos;utilisation et ecosysteme.</p>
@@ -815,7 +815,7 @@ export default function CrmPme2026Article() {
               </section>
 
               {/* CTA */}
-              <div className="mb-12 rounded-2xl bg-[#111] p-6 md:p-8 text-center">
+              <div className="mb-12 rounded-lg bg-[#111] p-6 md:p-8 text-center">
                 <h3 className="text-[17px] font-semibold text-white mb-3">Besoin d&apos;aide pour choisir et deployer votre CRM ?</h3>
                 <p className="text-[13px] text-[#999] leading-[1.7] mb-5 max-w-[500px] mx-auto">Chez Ceres, on accompagne les PME dans le choix, l&apos;implementation et l&apos;optimisation de leur CRM. On est partenaires HubSpot et on connait les alternatives. Un audit gratuit de 30 minutes pour identifier la meilleure solution pour votre situation.</p>
                 <Link href="https://calendly.com/ceres-revops/30min" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#4B5EFC] text-white rounded-lg text-[13px] font-medium hover:bg-[#3A4DE0] transition-colors">
@@ -829,7 +829,7 @@ export default function CrmPme2026Article() {
                 <h3 className="text-[14px] font-semibold text-[#111] mb-4">Articles complementaires</h3>
                 <div className="grid gap-3">
                   {relatedArticles.map((a) => (
-                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
+                    <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-4 rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors">
                       <div className="w-1 h-10 rounded-full" style={{ background: a.color }} />
                       <div className="flex-1 min-w-0">
                         <p className="text-[9px] font-medium mb-1" style={{ color: a.color }}>{a.category}</p>

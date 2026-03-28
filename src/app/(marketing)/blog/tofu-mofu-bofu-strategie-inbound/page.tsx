@@ -144,7 +144,7 @@ export default function TofuMofuBofuPage() {
             <article>
               {/* Section 1 — Definition du funnel */}
               <section id="definition" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">C&apos;est quoi le funnel TOFU / MOFU / BOFU</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le funnel TOFU / MOFU / BOFU est un modele qui decoupe le parcours d&apos;achat en trois grandes phases. Chaque acronyme correspond a une position dans l&apos;entonnoir de conversion : Top of Funnel (haut de l&apos;entonnoir), Middle of Funnel (milieu) et Bottom of Funnel (bas). L&apos;idee est simple : un prospect ne passe pas d&apos;inconnu a client en une seule etape. Il traverse un processus de decouverte, d&apos;evaluation puis de decision.</p>
@@ -178,7 +178,7 @@ export default function TofuMofuBofuPage() {
 
               {/* Section 2 — Pertinence en 2026 */}
               <section id="pertinence-2026" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi le funnel est encore pertinent en 2026</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>On entend regulierement que le funnel marketing est mort. Que le parcours d&apos;achat est devenu non-lineaire. Que les prospects ne suivent plus un chemin previsible. Tout cela est partiellement vrai, mais la conclusion est fausse. Le funnel n&apos;est pas mort, il a evolue.</p>
@@ -196,7 +196,7 @@ export default function TofuMofuBofuPage() {
                       { value: "47%", label: "des acheteurs consultent 3 a 5 contenus avant de contacter un vendeur", color: "#22C55E" },
                       { value: "72%", label: "des marketeurs B2B utilisent le content marketing pour nourrir le funnel", color: "#6C5CE7" },
                     ].map((stat) => (
-                      <div key={stat.label} className="text-center p-4 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2]">
+                      <div key={stat.label} className="text-center p-4 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2]">
                         <div className="text-[22px] font-bold" style={{ color: stat.color }}>{stat.value}</div>
                         <div className="text-[10px] text-[#999] mt-1 leading-[1.4]">{stat.label}</div>
                       </div>
@@ -208,7 +208,7 @@ export default function TofuMofuBofuPage() {
 
               {/* Section 3 — TOFU */}
               <section id="tofu" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-3 h-3 rounded-sm bg-[#FF7A59]" />
                     <h2 className="text-[17px] font-semibold text-[#111]">TOFU : attirer les visiteurs</h2>
@@ -229,7 +229,7 @@ export default function TofuMofuBofuPage() {
                       { format: "Podcasts / Videos", desc: "Episodes thematiques avec des experts ou interviews. Format immersif qui construit la credibilite sur la duree." },
                       { format: "Infographies", desc: "Visuels partageables qui synthetisent des donnees ou des processus. Fort potentiel de backlinks et de partages." },
                     ].map((item) => (
-                      <div key={item.format} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={item.format} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <p className="text-[12px] font-semibold text-[#FF7A59] mb-1">{item.format}</p>
                         <p className="text-[11px] text-[#777] leading-[1.6]">{item.desc}</p>
                       </div>
@@ -237,7 +237,7 @@ export default function TofuMofuBofuPage() {
                   </div>
 
                   {/* KPIs TOFU */}
-                  <div className="mt-5 rounded-xl bg-[#FF7A59]/5 border border-[#FF7A59]/15 p-4">
+                  <div className="mt-5 rounded-lg bg-[#FF7A59]/5 border border-[#FF7A59]/15 p-4">
                     <p className="text-[12px] font-semibold text-[#FF7A59] mb-3">KPIs TOFU a suivre</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -259,7 +259,7 @@ export default function TofuMofuBofuPage() {
 
               {/* Section 4 — MOFU */}
               <section id="mofu" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-3 h-3 rounded-sm bg-[#4B5EFC]" />
                     <h2 className="text-[17px] font-semibold text-[#111]">MOFU : convertir en leads qualifies</h2>
@@ -280,7 +280,7 @@ export default function TofuMofuBofuPage() {
                       { format: "Etudes de cas", desc: "Resultats clients concrets avec methode et chiffres. Demontre la capacite a delivrer. Format tres persuasif au MOFU." },
                       { format: "Sequences email", desc: "Workflows automatises de nurturing. 5 a 8 emails espaces sur 2 a 4 semaines. Contenu educatif progressif menant vers le BOFU." },
                     ].map((item) => (
-                      <div key={item.format} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={item.format} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <p className="text-[12px] font-semibold text-[#4B5EFC] mb-1">{item.format}</p>
                         <p className="text-[11px] text-[#777] leading-[1.6]">{item.desc}</p>
                       </div>
@@ -288,7 +288,7 @@ export default function TofuMofuBofuPage() {
                   </div>
 
                   {/* KPIs MOFU */}
-                  <div className="mt-5 rounded-xl bg-[#4B5EFC]/5 border border-[#4B5EFC]/15 p-4">
+                  <div className="mt-5 rounded-lg bg-[#4B5EFC]/5 border border-[#4B5EFC]/15 p-4">
                     <p className="text-[12px] font-semibold text-[#4B5EFC] mb-3">KPIs MOFU a suivre</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -310,7 +310,7 @@ export default function TofuMofuBofuPage() {
 
               {/* Section 5 — BOFU */}
               <section id="bofu" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-3 h-3 rounded-sm bg-[#22C55E]" />
                     <h2 className="text-[17px] font-semibold text-[#111]">BOFU : transformer en clients</h2>
@@ -332,7 +332,7 @@ export default function TofuMofuBofuPage() {
                       { format: "Propositions detaillees", desc: "Documents commerciaux avec scope, deliverables, timeline et pricing. Professionnalisme et clarte sont essentiels." },
                       { format: "Calculateurs de ROI", desc: "Outils interactifs qui quantifient la valeur de votre solution par rapport a la situation actuelle du prospect." },
                     ].map((item) => (
-                      <div key={item.format} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={item.format} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <p className="text-[12px] font-semibold text-[#22C55E] mb-1">{item.format}</p>
                         <p className="text-[11px] text-[#777] leading-[1.6]">{item.desc}</p>
                       </div>
@@ -340,7 +340,7 @@ export default function TofuMofuBofuPage() {
                   </div>
 
                   {/* KPIs BOFU */}
-                  <div className="mt-5 rounded-xl bg-[#22C55E]/5 border border-[#22C55E]/15 p-4">
+                  <div className="mt-5 rounded-lg bg-[#22C55E]/5 border border-[#22C55E]/15 p-4">
                     <p className="text-[12px] font-semibold text-[#22C55E] mb-3">KPIs BOFU a suivre</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
@@ -362,7 +362,7 @@ export default function TofuMofuBofuPage() {
 
               {/* Section 6 — Contenus par etape */}
               <section id="contenus-par-etape" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les contenus par etape du funnel</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le mapping de contenu est l&apos;exercice le plus important de votre strategie inbound. Chaque piece de contenu doit avoir un objectif clair, un CTA adapte a l&apos;etape du funnel, et un KPI de mesure. Un contenu TOFU avec un CTA BOFU (&ldquo;Demandez une demo&rdquo; sur un article de blog generique) est une erreur frequente qui tue les taux de conversion.</p>
@@ -373,7 +373,7 @@ export default function TofuMofuBofuPage() {
                   <div className="mt-6 overflow-x-auto">
                     <table className="w-full text-[12px]">
                       <thead>
-                        <tr className="border-b border-[#E8E8E8]">
+                        <tr className="border-b border-[#EAEAEA]">
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">Etape</th>
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">Format</th>
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">Objectif</th>
@@ -418,7 +418,7 @@ export default function TofuMofuBofuPage() {
 
               {/* Section 7 — Aligner avec le CRM */}
               <section id="crm-alignment" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Aligner le funnel avec votre CRM</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le funnel TOFU / MOFU / BOFU ne vit pas que dans la tete du marketeur. Il doit etre materialise dans votre CRM. Sans cela, impossible de mesurer la progression des prospects, d&apos;automatiser le nurturing, ou de definir des regles de handoff entre marketing et sales.</p>
@@ -435,7 +435,7 @@ export default function TofuMofuBofuPage() {
                       { stage: "Opportunity", funnel: "BOFU", desc: "Deal ouvert dans le pipeline. Proposition envoyee, negociation en cours.", color: "#22C55E" },
                       { stage: "Customer", funnel: "Post-BOFU", desc: "Deal signe. Le contact est maintenant un client. Debut de la phase de retention et d&apos;expansion.", color: "#22C55E" },
                     ].map((item) => (
-                      <div key={item.stage} className="flex items-start gap-3 p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={item.stage} className="flex items-start gap-3 p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <div className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: item.color }} />
                         <div>
                           <div className="flex items-center gap-2 mb-1">
@@ -459,7 +459,7 @@ export default function TofuMofuBofuPage() {
 
               {/* Section 8 — Erreurs classiques */}
               <section id="erreurs" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les erreurs classiques du funnel inbound</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Apres des dizaines de projets inbound accompagnes, voici les erreurs que nous voyons le plus souvent. Elles sont previsibles, evitables, et pourtant tres repandues.</p>
@@ -475,7 +475,7 @@ export default function TofuMofuBofuPage() {
                       { num: "06", title: "Pas de mesure par etape", desc: "Beaucoup d&apos;equipes mesurent le trafic et le chiffre d&apos;affaires, mais rien entre les deux. Sans suivi des taux de conversion a chaque etape (visiteur vers lead, lead vers MQL, MQL vers SQL, SQL vers client), impossible d&apos;identifier ou le funnel fuit." },
                       { num: "07", title: "Ignorer le contenu post-BOFU", desc: "Le funnel ne s&apos;arrete pas a la signature. La retention, l&apos;upsell et le referral sont des sources de revenus majeures. Les clients satisfaits deviennent vos meilleurs ambassadeurs. Integrez le post-achat dans votre strategie de contenu." },
                     ].map((err) => (
-                      <div key={err.num} className="flex items-start gap-3 p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={err.num} className="flex items-start gap-3 p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <span className="text-[18px] font-bold text-[#E8E8E8] shrink-0">{err.num}</span>
                         <div>
                           <p className="text-[12px] font-semibold text-[#111] mb-1">{err.title}</p>
@@ -490,7 +490,7 @@ export default function TofuMofuBofuPage() {
 
               {/* Section 9 — RevOps et funnel (dark section) */}
               <section id="revops" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">RevOps</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">TOFU / MOFU / BOFU et RevOps : l&apos;alignement complet</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -508,7 +508,7 @@ export default function TofuMofuBofuPage() {
                       { pillar: "Outils", items: ["CRM unifie (HubSpot)", "Marketing automation integre", "Reporting cross-equipes", "Attribution multi-touch"], color: "#4B5EFC" },
                       { pillar: "Donnees", items: ["Source de verite unique", "Scoring standardise", "Boucles de feedback", "Revenue attribution"], color: "#22C55E" },
                     ].map((p) => (
-                      <div key={p.pillar} className="p-4 rounded-xl bg-white/5 border border-white/10">
+                      <div key={p.pillar} className="p-4 rounded-lg bg-white/5 border border-white/10">
                         <p className="text-[12px] font-semibold mb-3" style={{ color: p.color }}>{p.pillar}</p>
                         <ul className="space-y-1.5">
                           {p.items.map((item) => (
@@ -527,7 +527,7 @@ export default function TofuMofuBofuPage() {
 
               {/* Section 10 — Approche Ceres (dark section) */}
               <section id="approche-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Notre methode</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">Notre approche du funnel inbound chez Ceres</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -558,7 +558,7 @@ export default function TofuMofuBofuPage() {
 
               {/* Related articles */}
               <section className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((a) => (
@@ -576,7 +576,7 @@ export default function TofuMofuBofuPage() {
 
               {/* CTA */}
               <section>
-                <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+                <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                   <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Pret a structurer votre funnel inbound ?</h2>
                   <p className="text-[13px] text-[#999] mb-6 max-w-[420px] mx-auto">On audite votre funnel, on identifie les fuites, et on met en place le contenu, les processus et les outils pour convertir plus de visiteurs en clients. Premiers resultats en 6 semaines.</p>
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

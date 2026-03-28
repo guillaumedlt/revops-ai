@@ -46,7 +46,7 @@ export default function RevOpsQuiz() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-[#E8E8E8] bg-white text-[13px] font-medium text-[#111] hover:border-[#CCC] hover:shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] transition-all cursor-pointer"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[#EAEAEA] bg-white text-[13px] font-medium text-[#111] hover:border-[#CCC] hover:shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] transition-all cursor-pointer"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[#6D00CC]">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
@@ -58,7 +58,7 @@ export default function RevOpsQuiz() {
   }
 
   return (
-    <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+    <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
       {/* Header with close */}
       <div className="flex items-start justify-between mb-6">
         <div>

@@ -138,7 +138,7 @@ export default function BlogPostPage() {
             <article>
               {steps.map((step, i) => (
                 <section key={step.num} id={`step-${step.num}`} className="mb-8">
-                  <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                  <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                     <div className="flex items-center gap-3 mb-4">
                       <span className="text-[22px] font-bold text-[#F0F0F0]">{step.num}</span>
                       <h2 className="text-[17px] font-semibold text-[#111]">{step.title}</h2>
@@ -151,7 +151,7 @@ export default function BlogPostPage() {
                       </p>
                     ))}
                     {step.code && (
-                      <div className="mt-4 rounded-xl bg-[#0D0D0D] p-5 overflow-x-auto border border-[#222]">
+                      <div className="mt-4 rounded-lg bg-[#0D0D0D] p-5 overflow-x-auto border border-[#222]">
                         <pre className="text-[12px] text-[#A0A0A0] leading-[1.7] font-mono whitespace-pre-wrap">{step.code}</pre>
                       </div>
                     )}
@@ -163,7 +163,7 @@ export default function BlogPostPage() {
 
             {/* Pro tip */}
             <section className="mb-8">
-              <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+              <div className="rounded-lg bg-[#111] p-5 md:p-8">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Aller plus loin</span>
                 <h2 className="text-[17px] font-semibold text-white mb-3">Avec Ceres, on va plus loin</h2>
                 <div className="space-y-2.5">
@@ -179,7 +179,7 @@ export default function BlogPostPage() {
 
             {/* Related */}
             <section className="mb-8">
-              <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+              <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                 <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles liés</h2>
                 <div className="space-y-2">
                   {relatedArticles.map((a) => (
@@ -197,7 +197,7 @@ export default function BlogPostPage() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide avec votre tracking ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[380px] mx-auto">On configure votre tracking, votre attribution et vos conversions en 1 semaine.</p>
                 <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

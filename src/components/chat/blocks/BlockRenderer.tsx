@@ -73,7 +73,7 @@ export default function BlockRenderer({ blocks }: { blocks: ContentBlock[] }) {
             break;
           case "alert":
             content = (
-              <div className={"rounded-xl px-4 py-3 text-sm flex items-start gap-2 " + (
+              <div className={"rounded-lg px-4 py-3 text-sm flex items-start gap-2 " + (
                 block.severity === "critical"
                   ? "bg-[#FEF2F2] text-[#EF4444] border border-[#FECACA]"
                   : block.severity === "warning"

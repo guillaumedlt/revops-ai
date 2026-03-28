@@ -142,7 +142,7 @@ export default function GuideIAContenuPage() {
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-lg border border-[#E8E8E8] flex items-center justify-center text-[#999] hover:text-[#111] hover:border-[#CCC] transition-colors"
+                  className="w-8 h-8 rounded-lg border border-[#EAEAEA] flex items-center justify-center text-[#999] hover:text-[#111] hover:border-[#CCC] transition-colors"
                   title="Partager sur X"
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
@@ -151,7 +151,7 @@ export default function GuideIAContenuPage() {
                   href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-lg border border-[#E8E8E8] flex items-center justify-center text-[#999] hover:text-[#0A66C2] hover:border-[#CCC] transition-colors"
+                  className="w-8 h-8 rounded-lg border border-[#EAEAEA] flex items-center justify-center text-[#999] hover:text-[#0A66C2] hover:border-[#CCC] transition-colors"
                   title="Partager sur LinkedIn"
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
@@ -212,9 +212,9 @@ export default function GuideIAContenuPage() {
           {/*  CHAPTER 1                                                  */}
           {/* ========================================================== */}
           <section id="ch1" className="scroll-mt-[100px] mb-10">
-            <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">01</div>
+                <div className="w-10 h-10 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">01</div>
                 <div>
                   <p className="text-[10px] text-[#CCC] uppercase tracking-wider">Chapitre 1 &mdash; p. 4-8</p>
                   <h2 className="text-[22px] sm:text-[28px] font-semibold text-[#111] tracking-[-0.02em]">L&apos;IA commerciale en 2026</h2>
@@ -238,7 +238,7 @@ export default function GuideIAContenuPage() {
               </p>
 
               {/* Timeline visualization */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4">Chronologie d&apos;adoption</p>
                 <div className="space-y-4">
                   {/* Wave 1 */}
@@ -318,7 +318,7 @@ export default function GuideIAContenuPage() {
               </p>
 
               {/* Stats bar chart CSS */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-4">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-4">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4">Impact mesur&eacute; de l&apos;IA sur les &eacute;quipes commerciales</p>
                 <div className="space-y-3">
                   {[
@@ -354,9 +354,9 @@ export default function GuideIAContenuPage() {
           {/*  CHAPTER 2                                                  */}
           {/* ========================================================== */}
           <section id="ch2" className="scroll-mt-[100px] mb-10">
-            <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">02</div>
+                <div className="w-10 h-10 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">02</div>
                 <div>
                   <p className="text-[10px] text-[#CCC] uppercase tracking-wider">Chapitre 2 &mdash; p. 9-18</p>
                   <h2 className="text-[22px] sm:text-[28px] font-semibold text-[#111] tracking-[-0.02em]">Les 10 cas d&apos;usage &agrave; plus fort ROI</h2>
@@ -368,7 +368,7 @@ export default function GuideIAContenuPage() {
               </p>
 
               {/* Use case 1 */}
-              <div className="rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
+              <div className="rounded-lg border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] text-white text-[10px] font-bold flex items-center justify-center">1</span>
@@ -380,19 +380,19 @@ export default function GuideIAContenuPage() {
                   Au lieu de chercher manuellement des informations sur chaque prospect (taille d&apos;entreprise, technologies utilis&eacute;es, actualit&eacute;s r&eacute;centes, pain points probables), vous laissez Clay + Claude analyser automatiquement le site web, le profil LinkedIn et les articles r&eacute;cents de chaque contact. L&apos;IA g&eacute;n&egrave;re un r&eacute;sum&eacute; du contexte business, un icebreaker personnalis&eacute; et une liste de pain points potentiels. R&eacute;sultat : chaque fiche contact est enrichie en profondeur en quelques secondes au lieu de 15-20 minutes de recherche manuelle.
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Outils</p>
                     <p className="text-[11px] font-semibold text-[#111]">Clay + Claude</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Setup</p>
                     <p className="text-[11px] font-semibold text-[#111]">2 heures</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Temps gagn&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#22C55E]">3h / jour</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Difficult&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#111]">Facile</p>
                   </div>
@@ -400,7 +400,7 @@ export default function GuideIAContenuPage() {
               </div>
 
               {/* Use case 2 */}
-              <div className="rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
+              <div className="rounded-lg border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] text-white text-[10px] font-bold flex items-center justify-center">2</span>
@@ -412,19 +412,19 @@ export default function GuideIAContenuPage() {
                   Le scoring traditionnel bas&eacute; uniquement sur des r&egrave;gles (taille d&apos;entreprise, secteur, engagement email) est limit&eacute;. Le scoring purement IA est une bo&icirc;te noire. La solution : un mod&egrave;le hybride. Vous d&eacute;finissez les crit&egrave;res de base (ICP fit, engagement, timing) et l&apos;IA affine le score en analysant les signaux faibles : ton des emails, questions pos&eacute;es en d&eacute;mo, comparaison avec les deals gagn&eacute;s pr&eacute;c&eacute;demment. Ce scoring pr&eacute;dictif augmente le taux de conversion de 25% en moyenne car les commerciaux se concentrent sur les bons deals.
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Outils</p>
                     <p className="text-[11px] font-semibold text-[#111]">CRM + Claude API</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Setup</p>
                     <p className="text-[11px] font-semibold text-[#111]">1-2 semaines</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Impact</p>
                     <p className="text-[11px] font-semibold text-[#22C55E]">+25% conversion</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Difficult&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#111]">Interm&eacute;diaire</p>
                   </div>
@@ -432,7 +432,7 @@ export default function GuideIAContenuPage() {
               </div>
 
               {/* Use case 3 */}
-              <div className="rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
+              <div className="rounded-lg border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] text-white text-[10px] font-bold flex items-center justify-center">3</span>
@@ -444,19 +444,19 @@ export default function GuideIAContenuPage() {
                   L&apos;email de prospection g&eacute;n&eacute;rique est mort. Les taux de r&eacute;ponse des s&eacute;quences templat&eacute;es s&apos;effondrent (&lt;1% en moyenne). La personnalisation par IA change la donne : Claude analyse le profil du prospect, son entreprise, ses enjeux probables et g&eacute;n&egrave;re un email unique avec un icebreaker pertinent, une proposition de valeur adapt&eacute;e et un CTA contextuel. Combin&eacute; avec Lemlist pour l&apos;envoi automatis&eacute;, les taux de r&eacute;ponse doublent en moyenne (de 3-4% &agrave; 8-12%).
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Outils</p>
                     <p className="text-[11px] font-semibold text-[#111]">Claude + Lemlist</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Setup</p>
                     <p className="text-[11px] font-semibold text-[#111]">3 heures</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Impact</p>
                     <p className="text-[11px] font-semibold text-[#22C55E]">2x r&eacute;ponses</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Difficult&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#111]">Facile</p>
                   </div>
@@ -464,7 +464,7 @@ export default function GuideIAContenuPage() {
               </div>
 
               {/* Use case 4 */}
-              <div className="rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
+              <div className="rounded-lg border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] text-white text-[10px] font-bold flex items-center justify-center">4</span>
@@ -476,19 +476,19 @@ export default function GuideIAContenuPage() {
                   Chaque call commercial contient des informations pr&eacute;cieuses : objections, signaux d&apos;achat, besoins non exprim&eacute;s, engagements pris. Mais la r&eacute;alit&eacute; est que 80% de ces informations sont perdues car les commerciaux ne prennent pas de notes assez d&eacute;taill&eacute;es. Avec Claap ou Modjo pour l&apos;enregistrement et la transcription, puis Claude pour l&apos;analyse structur&eacute;e, chaque call g&eacute;n&egrave;re automatiquement un r&eacute;sum&eacute; avec les points cl&eacute;s, les actions &agrave; suivre, les objections identifi&eacute;es et le sentiment global du prospect. Le gain moyen est de 45 minutes par jour par commercial.
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Outils</p>
                     <p className="text-[11px] font-semibold text-[#111]">Claap/Modjo + Claude</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Setup</p>
                     <p className="text-[11px] font-semibold text-[#111]">4 heures</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Temps gagn&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#22C55E]">45 min / jour</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Difficult&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#111]">Facile</p>
                   </div>
@@ -496,7 +496,7 @@ export default function GuideIAContenuPage() {
               </div>
 
               {/* Use case 5 */}
-              <div className="rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
+              <div className="rounded-lg border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] text-white text-[10px] font-bold flex items-center justify-center">5</span>
@@ -508,19 +508,19 @@ export default function GuideIAContenuPage() {
                   Pourquoi perdez-vous des deals ? La plupart des &eacute;quipes ne le savent pas vraiment. Le champ &laquo; raison de perte &raquo; du CRM est rarement rempli correctement. En demandant &agrave; Claude d&apos;analyser l&apos;historique complet de chaque deal (emails, notes de calls, dur&eacute;e des &eacute;tapes, interactions), l&apos;IA identifie des patterns actionables : &laquo; Les deals perdus au stade n&eacute;gociation impliquent 60% du temps un concurrent qui propose un prix 20% inf&eacute;rieur &raquo;, ou &laquo; Les deals o&ugrave; le d&eacute;cideur technique n&apos;est pas impliqu&eacute; avant l&apos;&eacute;tape de proposition ont 3x plus de chances d&apos;&ecirc;tre perdus &raquo;. Ces insights transforment votre processus de vente.
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Outils</p>
                     <p className="text-[11px] font-semibold text-[#111]">Claude + donn&eacute;es CRM</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Setup</p>
                     <p className="text-[11px] font-semibold text-[#111]">1 semaine</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Impact</p>
                     <p className="text-[11px] font-semibold text-[#22C55E]">Patterns actionnables</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Difficult&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#111]">Interm&eacute;diaire</p>
                   </div>
@@ -528,7 +528,7 @@ export default function GuideIAContenuPage() {
               </div>
 
               {/* Use case 6 */}
-              <div className="rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
+              <div className="rounded-lg border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] text-white text-[10px] font-bold flex items-center justify-center">6</span>
@@ -540,19 +540,19 @@ export default function GuideIAContenuPage() {
                   Le forecasting traditionnel repose sur l&apos;intuition des commerciaux et les stades du pipeline. C&apos;est structurellement biais&eacute; : les commerciaux sont optimistes, les stades ne refl&egrave;tent pas la r&eacute;alit&eacute;. L&apos;IA analyse les signaux objectifs de chaque deal (v&eacute;locit&eacute; entre &eacute;tapes, fr&eacute;quence des interactions, nombre de stakeholders impliqu&eacute;s, comparaison avec les deals pass&eacute;s similaires) pour attribuer une probabilit&eacute; de cl&ocirc;ture ajust&eacute;e. Chez nos clients, la pr&eacute;cision du forecast s&apos;am&eacute;liore de 15% en moyenne, ce qui permet de meilleures d&eacute;cisions d&apos;allocation des ressources et de recrutement.
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Outils</p>
                     <p className="text-[11px] font-semibold text-[#111]">Claude API + CRM</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Setup</p>
                     <p className="text-[11px] font-semibold text-[#111]">2 semaines</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Impact</p>
                     <p className="text-[11px] font-semibold text-[#22C55E]">+15% pr&eacute;cision</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Difficult&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#111]">Avanc&eacute;</p>
                   </div>
@@ -560,7 +560,7 @@ export default function GuideIAContenuPage() {
               </div>
 
               {/* Use case 7 */}
-              <div className="rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
+              <div className="rounded-lg border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] text-white text-[10px] font-bold flex items-center justify-center">7</span>
@@ -572,19 +572,19 @@ export default function GuideIAContenuPage() {
                   Un visiteur arrive sur votre site &agrave; 22h. Il a des questions. Sans chatbot IA, il repart et ne revient probablement jamais. Avec un agent de qualification IA, le visiteur est engag&eacute; imm&eacute;diatement. L&apos;agent pose les bonnes questions (taille d&apos;&eacute;quipe, budget, timeline, probl&eacute;matique), qualifie le lead selon vos crit&egrave;res BANT ou MEDDIC, et route automatiquement vers le bon commercial avec un r&eacute;sum&eacute; complet. Si le lead n&apos;est pas qualifi&eacute;, l&apos;agent propose du contenu pertinent et l&apos;ajoute &agrave; une s&eacute;quence de nurturing adapt&eacute;e.
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Outils</p>
                     <p className="text-[11px] font-semibold text-[#111]">Chatbot IA + CRM</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Setup</p>
                     <p className="text-[11px] font-semibold text-[#111]">1 semaine</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Impact</p>
                     <p className="text-[11px] font-semibold text-[#22C55E]">Qualification 24/7</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Difficult&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#111]">Interm&eacute;diaire</p>
                   </div>
@@ -592,7 +592,7 @@ export default function GuideIAContenuPage() {
               </div>
 
               {/* Use case 8 */}
-              <div className="rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
+              <div className="rounded-lg border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] text-white text-[10px] font-bold flex items-center justify-center">8</span>
@@ -604,19 +604,19 @@ export default function GuideIAContenuPage() {
                   Le coaching commercial est le levier de performance le plus sous-exploit&eacute;. Les managers n&apos;ont pas le temps d&apos;&eacute;couter chaque call. L&apos;IA le fait pour eux. En analysant les transcriptions de calls, Claude identifie les points d&apos;am&eacute;lioration sp&eacute;cifiques pour chaque commercial : ratio talk/listen, gestion des objections, utilisation de la d&eacute;couverte, techniques de closing. Chaque commercial re&ccedil;oit un feedback personnalis&eacute; apr&egrave;s chaque call avec des suggestions concr&egrave;tes. Les &eacute;quipes qui d&eacute;ploient le coaching IA observent une am&eacute;lioration moyenne de 18% de la performance individuelle en 3 mois.
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Outils</p>
                     <p className="text-[11px] font-semibold text-[#111]">Gong/Modjo + Claude</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Setup</p>
                     <p className="text-[11px] font-semibold text-[#111]">1-2 semaines</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Impact</p>
                     <p className="text-[11px] font-semibold text-[#22C55E]">+18% performance</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Difficult&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#111]">Interm&eacute;diaire</p>
                   </div>
@@ -624,7 +624,7 @@ export default function GuideIAContenuPage() {
               </div>
 
               {/* Use case 9 */}
-              <div className="rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
+              <div className="rounded-lg border border-[#F0F0F0] bg-[#FAFAFA] p-5 mb-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] text-white text-[10px] font-bold flex items-center justify-center">9</span>
@@ -636,19 +636,19 @@ export default function GuideIAContenuPage() {
                   Les commerciaux et les managers passent en moyenne 2 &agrave; 4 heures par semaine &agrave; compiler des rapports : pipeline review, forecast, activit&eacute; de l&apos;&eacute;quipe, progression des objectifs. Avec un workflow Make + Claude, un rapport complet est g&eacute;n&eacute;r&eacute; automatiquement chaque lundi matin. L&apos;IA extrait les donn&eacute;es du CRM, calcule les m&eacute;triques cl&eacute;s, compare avec la semaine pr&eacute;c&eacute;dente et les objectifs, identifie les points d&apos;attention et les wins, et g&eacute;n&egrave;re un rapport structur&eacute; envoy&eacute; par email ou Slack. Plus besoin de compiler manuellement des donn&eacute;es dans des spreadsheets.
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Outils</p>
                     <p className="text-[11px] font-semibold text-[#111]">Make + Claude + CRM</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Setup</p>
                     <p className="text-[11px] font-semibold text-[#111]">4 heures</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Temps gagn&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#22C55E]">2h / semaine</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Difficult&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#111]">Facile</p>
                   </div>
@@ -656,7 +656,7 @@ export default function GuideIAContenuPage() {
               </div>
 
               {/* Use case 10 */}
-              <div className="rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] p-5">
+              <div className="rounded-lg border border-[#F0F0F0] bg-[#FAFAFA] p-5">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <span className="w-6 h-6 rounded-lg bg-[#6D00CC] text-white text-[10px] font-bold flex items-center justify-center">10</span>
@@ -668,19 +668,19 @@ export default function GuideIAContenuPage() {
                   Le ramp-up d&apos;un nouveau commercial prend en moyenne 3 &agrave; 6 mois. Pendant ce temps, il ne produit qu&apos;une fraction de sa capacit&eacute;. Une base de connaissances IA change compl&egrave;tement la dynamique. Le nouveau commercial peut interroger l&apos;IA sur n&apos;importe quel sujet : &laquo; Comment r&eacute;pondre &agrave; l&apos;objection prix face au concurrent X ? &raquo;, &laquo; Quel est notre processus pour les deals enterprise ? &raquo;, &laquo; Montre-moi les 5 meilleurs calls de d&eacute;mo &raquo;. L&apos;IA puise dans la documentation interne, les transcriptions de calls, les emails gagn&eacute;s et le CRM pour fournir des r&eacute;ponses contextuelles et pr&eacute;cises. Le ramp-up est r&eacute;duit de 50% en moyenne.
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Outils</p>
                     <p className="text-[11px] font-semibold text-[#111]">Claude + Notion + CRM</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Setup</p>
                     <p className="text-[11px] font-semibold text-[#111]">1 semaine</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Impact</p>
                     <p className="text-[11px] font-semibold text-[#22C55E]">-50% ramp time</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2.5">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2.5">
                     <p className="text-[10px] text-[#999] mb-0.5">Difficult&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#111]">Interm&eacute;diaire</p>
                   </div>
@@ -696,9 +696,9 @@ export default function GuideIAContenuPage() {
           {/*  CHAPTER 3                                                  */}
           {/* ========================================================== */}
           <section id="ch3" className="scroll-mt-[100px] mb-10">
-            <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">03</div>
+                <div className="w-10 h-10 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">03</div>
                 <div>
                   <p className="text-[10px] text-[#CCC] uppercase tracking-wider">Chapitre 3 &mdash; p. 19-22</p>
                   <h2 className="text-[22px] sm:text-[28px] font-semibold text-[#111] tracking-[-0.02em]">Choisir votre LLM</h2>
@@ -731,11 +731,11 @@ export default function GuideIAContenuPage() {
               </p>
 
               {/* Comparison table */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6 overflow-x-auto">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6 overflow-x-auto">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4">Comparaison sur 12 crit&egrave;res</p>
                 <table className="w-full text-[11px] min-w-[600px]">
                   <thead>
-                    <tr className="border-b border-[#E8E8E8]">
+                    <tr className="border-b border-[#EAEAEA]">
                       <th className="text-left py-2 pr-4 text-[#999] font-semibold">Crit&egrave;re</th>
                       <th className="text-center py-2 px-3 text-[#6D00CC] font-semibold">Claude</th>
                       <th className="text-center py-2 px-3 text-[#111] font-semibold">ChatGPT</th>
@@ -770,7 +770,7 @@ export default function GuideIAContenuPage() {
 
               {/* Decision matrix */}
               <h3 className="text-[16px] font-semibold text-[#111] mb-3">Matrice de d&eacute;cision par cas d&apos;usage</h3>
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6">
                 <div className="space-y-2">
                   {[
                     { use: "Enrichissement de contacts", rec: "Claude", why: "Meilleure compr\u00e9hension contextuelle, moins d\u2019hallucinations" },
@@ -792,7 +792,7 @@ export default function GuideIAContenuPage() {
               </div>
 
               {/* Why Ceres chose Claude */}
-              <div className="rounded-xl bg-[#6D00CC]/5 border border-[#6D00CC]/15 p-5">
+              <div className="rounded-lg bg-[#6D00CC]/5 border border-[#6D00CC]/15 p-5">
                 <h4 className="text-[13px] font-semibold text-[#6D00CC] mb-2">Pourquoi Ceres a choisi Claude</h4>
                 <p className="text-[13px] text-[#555] leading-[1.75]">
                   Apr&egrave;s avoir test&eacute; les trois mod&egrave;les sur des centaines de cas d&apos;usage commerciaux, nous avons choisi Claude comme mod&egrave;le par d&eacute;faut pour trois raisons : le MCP (Model Context Protocol) qui permet une int&eacute;gration directe avec HubSpot, Notion et les outils business sans d&eacute;veloppement custom, la qualit&eacute; de raisonnement sur les donn&eacute;es commerciales complexes (scoring, analyse win/loss, forecasting), et Claude Code qui nous permet de construire et it&eacute;rer rapidement sur nos agents IA. Cela ne signifie pas que Claude est le meilleur dans tous les cas : nous utilisons ChatGPT pour l&apos;analyse de fichiers Excel complexes et Gemini pour le traitement de documents Google Workspace massifs.
@@ -807,9 +807,9 @@ export default function GuideIAContenuPage() {
           {/*  CHAPTER 4                                                  */}
           {/* ========================================================== */}
           <section id="ch4" className="scroll-mt-[100px] mb-10">
-            <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">04</div>
+                <div className="w-10 h-10 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">04</div>
                 <div>
                   <p className="text-[10px] text-[#CCC] uppercase tracking-wider">Chapitre 4 &mdash; p. 23-26</p>
                   <h2 className="text-[22px] sm:text-[28px] font-semibold text-[#111] tracking-[-0.02em]">Enrichissement IA en pratique</h2>
@@ -835,11 +835,11 @@ export default function GuideIAContenuPage() {
               </p>
 
               {/* Clay mockup table */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6 overflow-x-auto">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6 overflow-x-auto">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4">Aper&ccedil;u d&apos;un tableau Clay enrichi par IA</p>
                 <table className="w-full text-[11px] min-w-[700px]">
                   <thead>
-                    <tr className="border-b-2 border-[#E8E8E8]">
+                    <tr className="border-b-2 border-[#EAEAEA]">
                       <th className="text-left py-2 pr-3 text-[#999] font-semibold">Nom</th>
                       <th className="text-left py-2 pr-3 text-[#999] font-semibold">Entreprise</th>
                       <th className="text-left py-2 pr-3 text-[#999] font-semibold">Taille</th>
@@ -880,7 +880,7 @@ export default function GuideIAContenuPage() {
 
               {/* Prompt */}
               <h3 className="text-[16px] font-semibold text-[#111] mb-3">Prompt d&apos;enrichissement pour Clay + Claude</h3>
-              <div className="rounded-xl bg-[#1a1a2e] p-4 mb-6">
+              <div className="rounded-lg bg-[#1a1a2e] p-4 mb-6">
                 <pre className="text-[11px] text-[#E0E0E0] leading-[1.7] whitespace-pre-wrap font-mono">{`Tu es un expert en prospection B2B. A partir des informations
 suivantes sur un contact et son entreprise, genere :
 
@@ -919,7 +919,7 @@ Donnees du contact :
                 L&apos;IA n&apos;est pas infaillible. Mettez en place ces contr&ocirc;les : v&eacute;rifiez un &eacute;chantillon de 20 contacts avant de lancer un enrichissement massif, filtrez les r&eacute;sultats o&ugrave; Claude indique &laquo; donn&eacute;e non disponible &raquo; pour un enrichissement manuel compl&eacute;mentaire, et cr&eacute;ez un champ &laquo; qualit&eacute; enrichissement &raquo; dans votre CRM (A/B/C) pour tracker la pertinence au fil du temps.
               </p>
 
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-4">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-4">
                 <h4 className="text-[12px] font-semibold text-[#111] mb-2">Alternative : Lemlist AI Enrichment</h4>
                 <p className="text-[12px] text-[#777] leading-[1.65]">
                   Si vous utilisez d&eacute;j&agrave; Lemlist pour vos s&eacute;quences, leur enrichissement IA int&eacute;gr&eacute; est une alternative plus simple. Moins puissant que Clay (moins de sources, personnalisation limit&eacute;e des prompts), mais l&apos;avantage est l&apos;int&eacute;gration native : l&apos;enrichissement alimente directement les variables de vos s&eacute;quences email. Id&eacute;al pour les &eacute;quipes de moins de 5 SDR qui veulent rester dans un seul outil.
@@ -934,9 +934,9 @@ Donnees du contact :
           {/*  CHAPTER 5                                                  */}
           {/* ========================================================== */}
           <section id="ch5" className="scroll-mt-[100px] mb-10">
-            <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">05</div>
+                <div className="w-10 h-10 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">05</div>
                 <div>
                   <p className="text-[10px] text-[#CCC] uppercase tracking-wider">Chapitre 5 &mdash; p. 27-30</p>
                   <h2 className="text-[22px] sm:text-[28px] font-semibold text-[#111] tracking-[-0.02em]">Emails personnalis&eacute;s par IA</h2>
@@ -950,7 +950,7 @@ Donnees du contact :
 
               {/* Prompt examples */}
               <h4 className="text-[13px] font-semibold text-[#111] mb-3">Prompt 1 : Cold email premier contact</h4>
-              <div className="rounded-xl bg-[#1a1a2e] p-4 mb-4">
+              <div className="rounded-lg bg-[#1a1a2e] p-4 mb-4">
                 <pre className="text-[11px] text-[#E0E0E0] leading-[1.7] whitespace-pre-wrap font-mono">{`Tu es un SDR senior en B2B SaaS. Redige un cold email
 de premier contact.
 
@@ -976,7 +976,7 @@ OUTPUT : Objet (max 6 mots) + Corps de l'email`}</pre>
               </div>
 
               <h4 className="text-[13px] font-semibold text-[#111] mb-3">Prompt 2 : Follow-up apr&egrave;s non-r&eacute;ponse</h4>
-              <div className="rounded-xl bg-[#1a1a2e] p-4 mb-4">
+              <div className="rounded-lg bg-[#1a1a2e] p-4 mb-4">
                 <pre className="text-[11px] text-[#E0E0E0] leading-[1.7] whitespace-pre-wrap font-mono">{`Redige un email de relance (follow-up #2) pour un
 prospect qui n'a pas repondu au premier email.
 
@@ -998,7 +998,7 @@ OUTPUT : Objet court + Corps`}</pre>
               </div>
 
               <h4 className="text-[13px] font-semibold text-[#111] mb-3">Prompt 3 : Email post-event/webinar</h4>
-              <div className="rounded-xl bg-[#1a1a2e] p-4 mb-4">
+              <div className="rounded-lg bg-[#1a1a2e] p-4 mb-4">
                 <pre className="text-[11px] text-[#E0E0E0] leading-[1.7] whitespace-pre-wrap font-mono">{`Redige un email de suivi pour un participant a notre
 dernier webinar/event.
 
@@ -1017,7 +1017,7 @@ REGLES :
               </div>
 
               <h4 className="text-[13px] font-semibold text-[#111] mb-3">Prompt 4 : Email de reactivation (deal perdu)</h4>
-              <div className="rounded-xl bg-[#1a1a2e] p-4 mb-4">
+              <div className="rounded-lg bg-[#1a1a2e] p-4 mb-4">
                 <pre className="text-[11px] text-[#E0E0E0] leading-[1.7] whitespace-pre-wrap font-mono">{`Redige un email pour reactiver un prospect dont le deal
 a ete perdu il y a 3-6 mois.
 
@@ -1036,7 +1036,7 @@ REGLES :
               </div>
 
               <h4 className="text-[13px] font-semibold text-[#111] mb-3">Prompt 5 : Intro par referral</h4>
-              <div className="rounded-xl bg-[#1a1a2e] p-4 mb-6">
+              <div className="rounded-lg bg-[#1a1a2e] p-4 mb-6">
                 <pre className="text-[11px] text-[#E0E0E0] leading-[1.7] whitespace-pre-wrap font-mono">{`Redige un email d'introduction via un referral
 (recommandation d'un client existant).
 
@@ -1058,7 +1058,7 @@ REGLES :
               {/* Before/After comparison */}
               <h3 className="text-[16px] font-semibold text-[#111] mb-3">Avant / Apr&egrave;s : email g&eacute;n&eacute;rique vs email IA</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div className="rounded-xl border border-red-200 bg-red-50/50 p-4">
+                <div className="rounded-lg border border-red-200 bg-red-50/50 p-4">
                   <p className="text-[11px] font-semibold text-red-500 mb-2">AVANT : Email g&eacute;n&eacute;rique</p>
                   <div className="text-[12px] text-[#555] leading-[1.7] space-y-2">
                     <p><strong>Objet :</strong> Solution CRM pour votre entreprise</p>
@@ -1071,7 +1071,7 @@ REGLES :
                     <span>Taux de r&eacute;ponse : 1,8%</span>
                   </div>
                 </div>
-                <div className="rounded-xl border border-green-200 bg-green-50/50 p-4">
+                <div className="rounded-lg border border-green-200 bg-green-50/50 p-4">
                   <p className="text-[11px] font-semibold text-green-600 mb-2">APRES : Email personnalis&eacute; par IA</p>
                   <div className="text-[12px] text-[#555] leading-[1.7] space-y-2">
                     <p><strong>Objet :</strong> Scaling EU et process sales</p>
@@ -1091,7 +1091,7 @@ REGLES :
                 L&apos;IA ne remplace pas le testing, elle l&apos;acc&eacute;l&egrave;re. Voici notre m&eacute;thodologie : cr&eacute;ez 3 variantes de prompt avec des approches diff&eacute;rentes (direct vs storytelling vs question), testez chaque variante sur un &eacute;chantillon de 100 prospects minimum, mesurez le taux d&apos;ouverture, de r&eacute;ponse et de conversion en meeting, identifiez la variante gagnante en 2 semaines puis d&eacute;ployez &agrave; l&apos;&eacute;chelle. Recommencez chaque mois car les approches s&apos;usent avec le temps.
               </p>
 
-              <div className="rounded-xl bg-[#22C55E]/5 border border-[#22C55E]/15 p-5">
+              <div className="rounded-lg bg-[#22C55E]/5 border border-[#22C55E]/15 p-5">
                 <h4 className="text-[13px] font-semibold text-[#22C55E] mb-2">R&eacute;sultats des campagnes Ceres</h4>
                 <p className="text-[13px] text-[#555] leading-[1.75]">
                   Sur l&apos;ensemble de nos campagnes clients entre janvier et mars 2026, le passage d&apos;emails templat&eacute;s &agrave; des emails personnalis&eacute;s par IA a produit les r&eacute;sultats suivants : taux de r&eacute;ponse moyen pass&eacute; de 2,1% &agrave; 11,8% (x5,6), taux de booking meeting pass&eacute; de 0,8% &agrave; 4,2% (x5,2), co&ucirc;t par meeting r&eacute;duit de 340 euros &agrave; 65 euros (-81%). Le volume de personnalisation rendu possible par l&apos;IA est le facteur cl&eacute; : chaque email est unique, ce qui &eacute;tait impossible manuellement &agrave; l&apos;&eacute;chelle.
@@ -1106,9 +1106,9 @@ REGLES :
           {/*  CHAPTER 6                                                  */}
           {/* ========================================================== */}
           <section id="ch6" className="scroll-mt-[100px] mb-10">
-            <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">06</div>
+                <div className="w-10 h-10 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">06</div>
                 <div>
                   <p className="text-[10px] text-[#CCC] uppercase tracking-wider">Chapitre 6 &mdash; p. 31-33</p>
                   <h2 className="text-[22px] sm:text-[28px] font-semibold text-[#111] tracking-[-0.02em]">R&eacute;sum&eacute; de calls et intelligence commerciale</h2>
@@ -1126,16 +1126,16 @@ REGLES :
               </p>
 
               {/* Call summary mockup */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4">Exemple de r&eacute;sum&eacute; structur&eacute; g&eacute;n&eacute;r&eacute; par Claude</p>
                 <div className="space-y-4">
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-3">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-3">
                     <p className="text-[10px] font-semibold text-[#6D00CC] uppercase tracking-wider mb-1">R&eacute;sum&eacute; ex&eacute;cutif</p>
                     <p className="text-[12px] text-[#555] leading-[1.65]">
                       Call de d&eacute;couverte avec Marie D. (VP Sales, Qonto). L&apos;&eacute;quipe de 12 AE rencontre des probl&egrave;mes de visibilit&eacute; pipeline et de pr&eacute;dictibilit&eacute; du forecast. Utilise HubSpot Sales Hub Pro mais pas de RevOps en place. Budget valid&eacute; pour Q2 2026, d&eacute;cision attendue fin avril. Int&eacute;ress&eacute;e par le scoring IA et le reporting automatis&eacute;.
                     </p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-3">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-3">
                     <p className="text-[10px] font-semibold text-[#22C55E] uppercase tracking-wider mb-1">Actions &agrave; suivre</p>
                     <div className="space-y-1 text-[12px] text-[#555]">
                       <p className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" /> Envoyer case study fintech - Responsable : nous - Deadline : 28 mars</p>
@@ -1144,14 +1144,14 @@ REGLES :
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="rounded-lg bg-white border border-[#E8E8E8] p-3">
+                    <div className="rounded-lg bg-white border border-[#EAEAEA] p-3">
                       <p className="text-[10px] font-semibold text-[#FF7A59] uppercase tracking-wider mb-1">Objections</p>
                       <div className="space-y-1 text-[12px] text-[#555]">
                         <p>&laquo; On a d&eacute;j&agrave; essay&eacute; des outils de reporting, &ccedil;a n&apos;a pas march&eacute; &raquo; - R&eacute;pondu avec cas client</p>
                         <p>&laquo; Notre &eacute;quipe est r&eacute;sistante au changement &raquo; - Non r&eacute;pondu (aborder en d&eacute;mo)</p>
                       </div>
                     </div>
-                    <div className="rounded-lg bg-white border border-[#E8E8E8] p-3">
+                    <div className="rounded-lg bg-white border border-[#EAEAEA] p-3">
                       <p className="text-[10px] font-semibold text-[#4B5EFC] uppercase tracking-wider mb-1">Signaux d&apos;achat</p>
                       <div className="space-y-1 text-[12px] text-[#555]">
                         <p className="flex items-center gap-1"><span className="text-[#22C55E]">+</span> Budget confirm&eacute; Q2 2026</p>
@@ -1161,7 +1161,7 @@ REGLES :
                       </div>
                     </div>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-3">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-3">
                     <p className="text-[10px] font-semibold text-[#999] uppercase tracking-wider mb-1">Sentiment &amp; scoring</p>
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-1">
@@ -1184,7 +1184,7 @@ REGLES :
               </p>
 
               {/* Make workflow diagram mockup */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4">Workflow Make : Call &rarr; Analyse &rarr; CRM</p>
                 <div className="flex items-center justify-between gap-2 overflow-x-auto">
                   {[
@@ -1195,7 +1195,7 @@ REGLES :
                     { label: "Slack", sub: "Notification manager", color: "#22C55E" },
                   ].map((step, i) => (
                     <div key={step.label} className="flex items-center gap-2">
-                      <div className="w-[120px] rounded-lg border border-[#E8E8E8] bg-white p-2.5 text-center shrink-0">
+                      <div className="w-[120px] rounded-lg border border-[#EAEAEA] bg-white p-2.5 text-center shrink-0">
                         <div className="w-6 h-6 rounded-md mx-auto mb-1.5 flex items-center justify-center text-white text-[9px] font-bold" style={{ background: step.color }}>{i + 1}</div>
                         <p className="text-[10px] font-semibold text-[#111]">{step.label}</p>
                         <p className="text-[9px] text-[#999]">{step.sub}</p>
@@ -1214,9 +1214,9 @@ REGLES :
           {/*  CHAPTER 7                                                  */}
           {/* ========================================================== */}
           <section id="ch7" className="scroll-mt-[100px] mb-10">
-            <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">07</div>
+                <div className="w-10 h-10 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">07</div>
                 <div>
                   <p className="text-[10px] text-[#CCC] uppercase tracking-wider">Chapitre 7 &mdash; p. 34-37</p>
                   <h2 className="text-[22px] sm:text-[28px] font-semibold text-[#111] tracking-[-0.02em]">Agents IA avec Make + Claude</h2>
@@ -1229,7 +1229,7 @@ REGLES :
               </p>
 
               {/* Agent 1 */}
-              <div className="rounded-xl bg-[#111] p-5 mb-4">
+              <div className="rounded-lg bg-[#111] p-5 mb-4">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#6D00CC] text-white font-medium">Agent 1</span>
                   <h4 className="text-[14px] font-semibold text-white">Agent de qualification</h4>
@@ -1275,7 +1275,7 @@ REGLES :
               </div>
 
               {/* Agent 2 */}
-              <div className="rounded-xl bg-[#111] p-5 mb-4">
+              <div className="rounded-lg bg-[#111] p-5 mb-4">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#4B5EFC] text-white font-medium">Agent 2</span>
                   <h4 className="text-[14px] font-semibold text-white">Agent d&apos;enrichissement continu</h4>
@@ -1320,7 +1320,7 @@ REGLES :
               </div>
 
               {/* Agent 3 */}
-              <div className="rounded-xl bg-[#111] p-5">
+              <div className="rounded-lg bg-[#111] p-5">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#22C55E] text-white font-medium">Agent 3</span>
                   <h4 className="text-[14px] font-semibold text-white">Agent de r&eacute;sum&eacute; de calls</h4>
@@ -1372,9 +1372,9 @@ REGLES :
           {/*  CHAPTER 8                                                  */}
           {/* ========================================================== */}
           <section id="ch8" className="scroll-mt-[100px] mb-10">
-            <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">08</div>
+                <div className="w-10 h-10 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">08</div>
                 <div>
                   <p className="text-[10px] text-[#CCC] uppercase tracking-wider">Chapitre 8 &mdash; p. 38-40</p>
                   <h2 className="text-[22px] sm:text-[28px] font-semibold text-[#111] tracking-[-0.02em]">D&eacute;ploiement progressif en 3 phases</h2>
@@ -1386,7 +1386,7 @@ REGLES :
               </p>
 
               {/* CSS Timeline */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4">Roadmap de d&eacute;ploiement sur 12 semaines</p>
                 <div className="flex items-start gap-0 mb-6">
                   <div className="flex-1 h-3 rounded-l-full bg-[#22C55E]/30 relative">
@@ -1408,7 +1408,7 @@ REGLES :
               </div>
 
               {/* Phase 1 */}
-              <div className="rounded-xl border-2 border-[#22C55E]/20 bg-[#22C55E]/5 p-5 mb-4">
+              <div className="rounded-lg border-2 border-[#22C55E]/20 bg-[#22C55E]/5 p-5 mb-4">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="w-6 h-6 rounded-lg bg-[#22C55E] text-white text-[10px] font-bold flex items-center justify-center">1</span>
                   <h4 className="text-[14px] font-semibold text-[#111]">Phase 1 : Quick wins (Semaines 1-2)</h4>
@@ -1431,15 +1431,15 @@ REGLES :
                   ))}
                 </div>
                 <div className="grid grid-cols-3 gap-2 text-center">
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2">
                     <p className="text-[9px] text-[#999]">Effort</p>
                     <p className="text-[11px] font-semibold text-[#111]">10-15h total</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2">
                     <p className="text-[9px] text-[#999]">KPI cl&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#22C55E]">Temps gagn&eacute; / jour</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2">
                     <p className="text-[9px] text-[#999]">Objectif</p>
                     <p className="text-[11px] font-semibold text-[#111]">1h gagn&eacute;e / jour / rep</p>
                   </div>
@@ -1447,7 +1447,7 @@ REGLES :
               </div>
 
               {/* Phase 2 */}
-              <div className="rounded-xl border-2 border-[#4B5EFC]/20 bg-[#4B5EFC]/5 p-5 mb-4">
+              <div className="rounded-lg border-2 border-[#4B5EFC]/20 bg-[#4B5EFC]/5 p-5 mb-4">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="w-6 h-6 rounded-lg bg-[#4B5EFC] text-white text-[10px] font-bold flex items-center justify-center">2</span>
                   <h4 className="text-[14px] font-semibold text-[#111]">Phase 2 : Automatisation (Semaines 3-6)</h4>
@@ -1471,15 +1471,15 @@ REGLES :
                   ))}
                 </div>
                 <div className="grid grid-cols-3 gap-2 text-center">
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2">
                     <p className="text-[9px] text-[#999]">Effort</p>
                     <p className="text-[11px] font-semibold text-[#111]">20-30h total</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2">
                     <p className="text-[9px] text-[#999]">KPI cl&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#4B5EFC]">Taux r&eacute;ponse emails</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2">
                     <p className="text-[9px] text-[#999]">Objectif</p>
                     <p className="text-[11px] font-semibold text-[#111]">+25% conversion SQL</p>
                   </div>
@@ -1487,7 +1487,7 @@ REGLES :
               </div>
 
               {/* Phase 3 */}
-              <div className="rounded-xl border-2 border-[#6D00CC]/20 bg-[#6D00CC]/5 p-5 mb-6">
+              <div className="rounded-lg border-2 border-[#6D00CC]/20 bg-[#6D00CC]/5 p-5 mb-6">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="w-6 h-6 rounded-lg bg-[#6D00CC] text-white text-[10px] font-bold flex items-center justify-center">3</span>
                   <h4 className="text-[14px] font-semibold text-[#111]">Phase 3 : Agents autonomes (Semaines 7-12)</h4>
@@ -1511,15 +1511,15 @@ REGLES :
                   ))}
                 </div>
                 <div className="grid grid-cols-3 gap-2 text-center">
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2">
                     <p className="text-[9px] text-[#999]">Effort</p>
                     <p className="text-[11px] font-semibold text-[#111]">30-50h total</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2">
                     <p className="text-[9px] text-[#999]">KPI cl&eacute;</p>
                     <p className="text-[11px] font-semibold text-[#6D00CC]">Pipeline velocity</p>
                   </div>
-                  <div className="rounded-lg bg-white border border-[#E8E8E8] p-2">
+                  <div className="rounded-lg bg-white border border-[#EAEAEA] p-2">
                     <p className="text-[9px] text-[#999]">Objectif</p>
                     <p className="text-[11px] font-semibold text-[#111]">+40% productivit&eacute;</p>
                   </div>
@@ -1539,9 +1539,9 @@ REGLES :
           {/*  CHAPTER 9                                                  */}
           {/* ========================================================== */}
           <section id="ch9" className="scroll-mt-[100px] mb-10">
-            <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">09</div>
+                <div className="w-10 h-10 rounded-lg bg-[#6D00CC] flex items-center justify-center text-white text-[13px] font-bold shrink-0">09</div>
                 <div>
                   <p className="text-[10px] text-[#CCC] uppercase tracking-wider">Chapitre 9 &mdash; p. 41-42</p>
                   <h2 className="text-[22px] sm:text-[28px] font-semibold text-[#111] tracking-[-0.02em]">Mesurer le ROI de l&apos;IA</h2>
@@ -1554,7 +1554,7 @@ REGLES :
               </p>
 
               {/* Time saved breakdown */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4">Temps gagn&eacute; par cas d&apos;usage (par commercial, par jour/semaine)</p>
                 <div className="space-y-2.5">
                   {[
@@ -1579,7 +1579,7 @@ REGLES :
                     </div>
                   ))}
                 </div>
-                <div className="mt-4 pt-3 border-t border-[#E8E8E8] flex items-center justify-between">
+                <div className="mt-4 pt-3 border-t border-[#EAEAEA] flex items-center justify-between">
                   <span className="text-[12px] font-semibold text-[#111]">Total estim&eacute;</span>
                   <span className="text-[14px] font-bold text-[#6D00CC]">1 328h / an / commercial</span>
                 </div>
@@ -1591,12 +1591,12 @@ REGLES :
               </p>
 
               {/* ROI Calculator mockup */}
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4">Simulateur de ROI (exemple pour une &eacute;quipe de 8 commerciaux)</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div className="space-y-3">
                     <p className="text-[11px] font-semibold text-[#111]">Param&egrave;tres</p>
-                    <div className="rounded-lg bg-white border border-[#E8E8E8] p-3 space-y-2">
+                    <div className="rounded-lg bg-white border border-[#EAEAEA] p-3 space-y-2">
                       <div className="flex items-center justify-between text-[12px]">
                         <span className="text-[#555]">Taille &eacute;quipe</span>
                         <span className="font-semibold text-[#111]">8 commerciaux</span>
@@ -1638,14 +1638,14 @@ REGLES :
                         <span className="text-[#555]">Revenu additionnel</span>
                         <span className="font-semibold text-[#22C55E]">+192 000 EUR / trimestre</span>
                       </div>
-                      <div className="flex items-center justify-between text-[12px] pt-2 border-t border-[#E8E8E8]">
+                      <div className="flex items-center justify-between text-[12px] pt-2 border-t border-[#EAEAEA]">
                         <span className="font-semibold text-[#111]">ROI total estim&eacute;</span>
                         <span className="font-bold text-[#22C55E] text-[14px]">+1,35M EUR / an</span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="rounded-lg bg-white border border-[#E8E8E8] p-3">
+                <div className="rounded-lg bg-white border border-[#EAEAEA] p-3">
                   <div className="flex items-center justify-between text-[12px]">
                     <span className="text-[#555]">Co&ucirc;t total outils IA (Claude + Clay + Make + Claap)</span>
                     <span className="font-semibold text-[#111]">~ 1 800 EUR / mois = 21 600 EUR / an</span>
@@ -1662,11 +1662,11 @@ REGLES :
                 Pour suivre le ROI de l&apos;IA dans la dur&eacute;e, nous recommandons un suivi mensuel structur&eacute;. Voici les m&eacute;triques &agrave; tracker chaque mois : temps moyen de recherche par prospect (avant/apr&egrave;s), nombre de contacts enrichis automatiquement, taux de r&eacute;ponse des emails IA vs templates classiques, nombre de calls r&eacute;sum&eacute;s automatiquement, taux de conversion par stade (avant/apr&egrave;s scoring IA), pr&eacute;cision du forecast (pr&eacute;vu vs r&eacute;alis&eacute;), temps de ramp-up des nouveaux commerciaux, et NPS de l&apos;&eacute;quipe sur les outils IA.
               </p>
 
-              <div className="rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6 overflow-x-auto">
+              <div className="rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5 mb-6 overflow-x-auto">
                 <p className="text-[11px] font-semibold text-[#999] uppercase tracking-wider mb-4">Grille de suivi mensuel</p>
                 <table className="w-full text-[11px] min-w-[600px]">
                   <thead>
-                    <tr className="border-b border-[#E8E8E8]">
+                    <tr className="border-b border-[#EAEAEA]">
                       <th className="text-left py-2 pr-4 text-[#999] font-semibold">M&eacute;trique</th>
                       <th className="text-center py-2 px-3 text-[#999] font-semibold">Baseline</th>
                       <th className="text-center py-2 px-3 text-[#999] font-semibold">Mois 1</th>
@@ -1710,7 +1710,7 @@ REGLES :
           {/*  CTA Final                                                  */}
           {/* ========================================================== */}
           <section className="mb-10">
-            <div className="rounded-2xl bg-[#111] p-6 md:p-10 text-center">
+            <div className="rounded-lg bg-[#111] p-6 md:p-10 text-center">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Prochaine &eacute;tape</span>
               <h2 className="text-[22px] sm:text-[30px] font-semibold text-white tracking-[-0.02em] mb-3">
                 Pr&ecirc;t &agrave; d&eacute;ployer l&apos;IA dans votre &eacute;quipe ?
@@ -1748,7 +1748,7 @@ REGLES :
 
           {/* Related / back links */}
           <section className="mb-8">
-            <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
               <h3 className="text-[14px] font-semibold text-[#111] mb-4">Ressources compl&eacute;mentaires</h3>
               <div className="space-y-3">
                 <Link href="/guide-ia-commercial" className="flex items-center gap-3 text-[13px] text-[#555] hover:text-[#6D00CC] transition-colors group">

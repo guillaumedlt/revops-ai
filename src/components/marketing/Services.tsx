@@ -66,7 +66,7 @@ function CardStack({ colors }: { colors: string[] }) {
         return (
           <div
             key={`${c}-${i}`}
-            className="absolute w-[56px] h-[56px] rounded-2xl bg-white flex items-center justify-center transition-all duration-500 ease-out"
+            className="absolute w-[56px] h-[56px] rounded-lg bg-white flex items-center justify-center transition-all duration-500 ease-out"
             style={{
               transform: `translateX(${spreadX}px) translateY(${spreadY}px) rotate(${rotate}deg) scale(${scale})`,
               zIndex: z,
@@ -120,7 +120,7 @@ export default function Services() {
   return (
     <section id="solutions" className="relative z-20">
       <div className="max-w-[1000px] mx-auto px-6">
-        <div className="rounded-2xl border border-[#E8E8E8] bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
+        <div className="rounded-lg border border-[#EAEAEA] bg-white p-6 md:p-10 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]">
           <div className="mb-8">
             <div className="mb-4"><Badge>Nos offres</Badge></div>
             <h2 className="text-[22px] sm:text-[28px] font-semibold text-[#111] leading-[1.2] tracking-[-0.02em] mb-2">Choisissez votre formule</h2>
@@ -131,7 +131,7 @@ export default function Services() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-8">
             {offers.map((o) => (
               <button key={o.id} type="button" onClick={() => setActive(o.id)}
-                className={"relative p-3.5 rounded-xl border text-left transition-all cursor-pointer " + (active === o.id ? "border-[#111] bg-[#FAFAFA] ring-1 ring-[#111]" : "border-[#F2F2F2] hover:border-[#E0E0E0]")}>
+                className={"relative p-3.5 rounded-lg border text-left transition-all cursor-pointer " + (active === o.id ? "border-[#111] bg-[#FAFAFA] ring-1 ring-[#111]" : "border-[#F2F2F2] hover:border-[#E0E0E0]")}>
                 {o.badge && <span className="absolute -top-2 right-3 text-[9px] font-semibold bg-[#111] text-white px-2 py-0.5 rounded-full">{o.badge}</span>}
                 <div className="w-2.5 h-2.5 rounded-sm mb-2.5" style={{ backgroundColor: o.color }} />
                 <h3 className="text-[13px] font-semibold text-[#111] mb-0.5 leading-tight">{o.title}</h3>
@@ -143,7 +143,7 @@ export default function Services() {
           {/* Content — illustration left, details right */}
           <div className="flex flex-col md:flex-row gap-6">
             {/* Illustration */}
-            <div className="w-full md:w-[220px] h-[160px] shrink-0 bg-[#F5F5F5] rounded-xl flex items-center justify-center">
+            <div className="w-full md:w-[220px] h-[160px] shrink-0 bg-[#F5F5F5] rounded-lg flex items-center justify-center">
               <CardStack colors={getColors()} />
             </div>
 

@@ -145,7 +145,7 @@ export default function SlaMarketingSalesTemplatePage() {
             <article>
               {/* Section 1 -- Definition */}
               <section id="definition" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">C&apos;est quoi un SLA marketing-sales</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Un SLA (Service Level Agreement) marketing-sales est un accord operationnel formel entre les equipes marketing et commerciales. Il definit les engagements reciproques de chaque equipe, les metriques utilisees pour mesurer le respect de ces engagements, et les consequences en cas de non-respect. Ce n&apos;est pas un document juridique. C&apos;est un contrat de confiance interne, signe par les responsables des deux equipes, qui rend explicite ce que chacun doit a l&apos;autre.</p>
@@ -157,7 +157,7 @@ export default function SlaMarketingSalesTemplatePage() {
 
                   {/* Bubble cards: Before vs After SLA */}
                   <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="p-4 rounded-xl bg-[#FFF5F3] border border-[#FF7A59]/15">
+                    <div className="p-4 rounded-lg bg-[#FFF5F3] border border-[#FF7A59]/15">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-6 h-6 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center">
                           <svg width="12" height="12" viewBox="0 0 16 16" fill="none" className="text-[#FF7A59]"><path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" transform="rotate(45 8 8)" /></svg>
@@ -179,7 +179,7 @@ export default function SlaMarketingSalesTemplatePage() {
                         ))}
                       </div>
                     </div>
-                    <div className="p-4 rounded-xl bg-[#F0FDF4] border border-[#22C55E]/15">
+                    <div className="p-4 rounded-lg bg-[#F0FDF4] border border-[#22C55E]/15">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-6 h-6 rounded-lg bg-[#22C55E]/10 flex items-center justify-center">
                           <svg width="12" height="12" viewBox="0 0 16 16" fill="none" className="text-[#22C55E]"><path d="M13.3 4.3L6 11.6L2.7 8.3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -208,7 +208,7 @@ export default function SlaMarketingSalesTemplatePage() {
 
               {/* Section 2 -- Les prerequis */}
               <section id="prerequis" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les prerequis avant de creer un SLA</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Un SLA ne peut pas etre redige dans le vide. Avant de definir des engagements chiffres, trois fondations doivent etre en place. Sans elles, votre SLA sera un document theorique que personne ne respectera parce que personne ne comprendra les memes termes de la meme maniere.</p>
@@ -224,7 +224,7 @@ export default function SlaMarketingSalesTemplatePage() {
                       { num: "02", titre: "Data baseline", desc: "3 a 6 mois de donnees historiques : volumes, taux de conversion, delais de traitement, taux d&apos;acceptation.", color: "#4B5EFC" },
                       { num: "03", titre: "Alignement strategique", desc: "Objectif de revenue partage. Calcul inverse : revenue cible, deals necessaires, SQLs, MQLs.", color: "#22C55E" },
                     ].map((item) => (
-                      <div key={item.num} className="p-4 rounded-xl border-2 bg-white" style={{ borderColor: `${item.color}30` }}>
+                      <div key={item.num} className="p-4 rounded-lg border-2 bg-white" style={{ borderColor: `${item.color}30` }}>
                         <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-[12px] font-bold mb-3" style={{ backgroundColor: item.color }}>{item.num}</div>
                         <p className="text-[12px] font-semibold text-[#111] mb-1.5">{item.titre}</p>
                         <p className="text-[10px] text-[#777] leading-[1.6]">{item.desc}</p>
@@ -233,7 +233,7 @@ export default function SlaMarketingSalesTemplatePage() {
                   </div>
 
                   {/* Reverse funnel calculation */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#333] mb-4">Calcul inverse : de l&apos;objectif revenue aux MQLs</p>
                     <div className="flex flex-col items-center gap-0">
                       {[
@@ -263,7 +263,7 @@ export default function SlaMarketingSalesTemplatePage() {
 
               {/* Section 3 -- Engagements marketing */}
               <section id="engagements-marketing" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Le SLA marketing : les engagements</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La partie marketing du SLA definit ce que l&apos;equipe marketing s&apos;engage a livrer aux sales chaque mois. Ce n&apos;est pas une liste de voeux ou d&apos;intentions. Ce sont des engagements mesurables, avec des chiffres precis et des delais. Le marketing s&apos;engage sur trois axes : le volume, la qualite et le delai de transfert.</p>
@@ -304,7 +304,7 @@ export default function SlaMarketingSalesTemplatePage() {
                         color: "#FF7A59",
                       },
                     ].map((card) => (
-                      <div key={card.engagement} className="rounded-xl border-2 p-4" style={{ borderColor: `${card.color}25`, backgroundColor: `${card.color}03` }}>
+                      <div key={card.engagement} className="rounded-lg border-2 p-4" style={{ borderColor: `${card.color}25`, backgroundColor: `${card.color}03` }}>
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-[13px] font-semibold text-[#111]">{card.engagement}</span>
                           <span className="text-[11px] font-bold px-3 py-1 rounded-md" style={{ backgroundColor: `${card.color}10`, color: card.color }}>{card.metric}</span>
@@ -323,7 +323,7 @@ export default function SlaMarketingSalesTemplatePage() {
 
               {/* Section 4 -- Engagements sales */}
               <section id="engagements-sales" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Le SLA sales : les engagements</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Un SLA bidirectionnel impose des engagements aux deux parties. Les sales ont tendance a penser que le SLA est un outil du marketing pour les contraindre. C&apos;est l&apos;inverse. Le SLA protege les sales en garantissant la qualite des leads qu&apos;ils recoivent. En contrepartie, les sales s&apos;engagent a traiter ces leads avec la rigueur qu&apos;ils meritent. Les engagements sales portent sur quatre axes : la vitesse, la perseverance, le feedback et le reporting.</p>
@@ -365,7 +365,7 @@ export default function SlaMarketingSalesTemplatePage() {
                         color: "#4B5EFC",
                       },
                     ].map((card) => (
-                      <div key={card.engagement} className="rounded-xl border-2 p-4" style={{ borderColor: `${card.color}25`, backgroundColor: `${card.color}03` }}>
+                      <div key={card.engagement} className="rounded-lg border-2 p-4" style={{ borderColor: `${card.color}25`, backgroundColor: `${card.color}03` }}>
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-[13px] font-semibold text-[#111]">{card.engagement}</span>
                           <span className="text-[11px] font-bold px-3 py-1 rounded-md" style={{ backgroundColor: `${card.color}10`, color: card.color }}>{card.metric}</span>
@@ -384,14 +384,14 @@ export default function SlaMarketingSalesTemplatePage() {
 
               {/* Section 5 -- Template complet */}
               <section id="template-complet" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Le template complet du SLA marketing-sales</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Voici le template complet que nous utilisons chez Ceres pour formaliser le SLA entre marketing et sales. Ce document est concu pour etre adapte a votre contexte : les chiffres sont des exemples, les sections sont toutes necessaires. Copiez-le, remplissez-le avec vos donnees, et faites-le valider par les deux equipes.</p>
                   </div>
 
                   {/* CSS Document Mockup */}
-                  <div className="mt-6 rounded-xl border border-[#E0E0E0] overflow-hidden shadow-[0_8px_30px_-10px_rgba(0,0,0,0.1)]">
+                  <div className="mt-6 rounded-lg border border-[#E0E0E0] overflow-hidden shadow-[0_8px_30px_-10px_rgba(0,0,0,0.1)]">
                     {/* Document header bar */}
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
@@ -556,14 +556,14 @@ export default function SlaMarketingSalesTemplatePage() {
                         <div className="grid grid-cols-2 gap-8">
                           <div>
                             <p className="text-[10px] text-[#BBB] mb-4">Responsable Marketing</p>
-                            <div className="border-b border-[#E8E8E8] pb-1 mb-1">
+                            <div className="border-b border-[#EAEAEA] pb-1 mb-1">
                               <span className="text-[10px] text-[#DDD]">Signature : _______________</span>
                             </div>
                             <span className="text-[9px] text-[#DDD]">Date : ___/___/______</span>
                           </div>
                           <div>
                             <p className="text-[10px] text-[#BBB] mb-4">Responsable Sales</p>
-                            <div className="border-b border-[#E8E8E8] pb-1 mb-1">
+                            <div className="border-b border-[#EAEAEA] pb-1 mb-1">
                               <span className="text-[10px] text-[#DDD]">Signature : _______________</span>
                             </div>
                             <span className="text-[9px] text-[#DDD]">Date : ___/___/______</span>
@@ -578,7 +578,7 @@ export default function SlaMarketingSalesTemplatePage() {
 
               {/* Section 6 -- Tracker dans HubSpot */}
               <section id="tracker-hubspot" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Comment tracker le SLA dans HubSpot</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Un SLA sans tracking est un document qui finit dans un tiroir. Tout l&apos;interet du SLA est d&apos;etre mesure en temps reel, avec des dashboards visibles par les deux equipes et des alertes automatiques quand un engagement n&apos;est pas respecte. HubSpot offre tous les outils necessaires pour tracker un SLA marketing-sales sans aucun developpement custom.</p>
@@ -588,7 +588,7 @@ export default function SlaMarketingSalesTemplatePage() {
                   </div>
 
                   {/* CSS Dashboard Mockup */}
-                  <div className="mt-8 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-8 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#FF7A59]" />
@@ -607,7 +607,7 @@ export default function SlaMarketingSalesTemplatePage() {
                           { label: "Delai moyen contact", value: "3.2h", target: "< 4h", status: "ok" },
                           { label: "Feedback renseigne", value: "91%", target: "100%", status: "warning" },
                         ].map((kpi) => (
-                          <div key={kpi.label} className="p-3 rounded-xl border border-[#F0F0F0]">
+                          <div key={kpi.label} className="p-3 rounded-lg border border-[#F0F0F0]">
                             <div className="flex items-center justify-between mb-1">
                               <span className="text-[9px] text-[#BBB]">{kpi.label}</span>
                               <div className={`w-2 h-2 rounded-full ${kpi.status === "ok" ? "bg-[#22C55E]" : "bg-[#F59E0B]"}`} />
@@ -620,7 +620,7 @@ export default function SlaMarketingSalesTemplatePage() {
 
                       {/* Two columns: Marketing vs Sales */}
                       <div className="grid grid-cols-2 gap-4 mb-5">
-                        <div className="p-4 rounded-xl border border-[#F0F0F0]">
+                        <div className="p-4 rounded-lg border border-[#F0F0F0]">
                           <div className="flex items-center justify-between mb-3">
                             <span className="text-[11px] font-semibold text-[#FF7A59]">Marketing SLA</span>
                             <span className="text-[9px] px-2 py-0.5 rounded bg-[#22C55E]/10 text-[#22C55E] font-medium">4/4</span>
@@ -642,7 +642,7 @@ export default function SlaMarketingSalesTemplatePage() {
                             ))}
                           </div>
                         </div>
-                        <div className="p-4 rounded-xl border border-[#F0F0F0]">
+                        <div className="p-4 rounded-lg border border-[#F0F0F0]">
                           <div className="flex items-center justify-between mb-3">
                             <span className="text-[11px] font-semibold text-[#4B5EFC]">Sales SLA</span>
                             <span className="text-[9px] px-2 py-0.5 rounded bg-[#F59E0B]/10 text-[#F59E0B] font-medium">3/4</span>
@@ -690,7 +690,7 @@ export default function SlaMarketingSalesTemplatePage() {
                   </div>
 
                   {/* Workflows list */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#333] mb-4">Les 4 workflows HubSpot essentiels</p>
                     <div className="space-y-3">
                       {[
@@ -699,7 +699,7 @@ export default function SlaMarketingSalesTemplatePage() {
                         { nom: "MQL Feedback Reminder", trigger: "MQL sans statut apres 10 jours", actions: "Rappel au commercial, notification manager si 15 jours sans feedback", color: "#4B5EFC" },
                         { nom: "SLA Weekly Report", trigger: "Chaque lundi a 8h", actions: "Generer le rapport SLA de la semaine, envoyer par email aux 2 managers, poster dans Slack", color: "#22C55E" },
                       ].map((wf) => (
-                        <div key={wf.nom} className="flex items-start gap-3 p-3 rounded-lg bg-white border border-[#E8E8E8]">
+                        <div key={wf.nom} className="flex items-start gap-3 p-3 rounded-lg bg-white border border-[#EAEAEA]">
                           <div className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: wf.color }} />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1">
@@ -718,7 +718,7 @@ export default function SlaMarketingSalesTemplatePage() {
 
               {/* Section 7 -- Reunion hebdomadaire */}
               <section id="reunion-hebdomadaire" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">La reunion SLA hebdomadaire</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le SLA ne fonctionne que s&apos;il est suivi regulierement. La reunion hebdomadaire est le rituel qui maintient la pression positive et empeche les petits ecarts de devenir des problemes structurels. C&apos;est un meeting de 30 minutes, chaque semaine, toujours le meme jour et la meme heure, qui ne saute jamais. C&apos;est la que les deux equipes regardent les chiffres ensemble, identifient les ecarts, et decidement des actions correctives immediates.</p>
@@ -728,7 +728,7 @@ export default function SlaMarketingSalesTemplatePage() {
                   </div>
 
                   {/* Meeting agenda mockup */}
-                  <div className="mt-6 rounded-xl border border-[#E0E0E0] overflow-hidden">
+                  <div className="mt-6 rounded-lg border border-[#E0E0E0] overflow-hidden">
                     <div className="bg-[#111] px-5 py-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#4B5EFC]" />
@@ -805,7 +805,7 @@ export default function SlaMarketingSalesTemplatePage() {
 
               {/* Section 8 -- Quand le SLA n'est pas respecte */}
               <section id="non-respect" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Que faire quand le SLA n&apos;est pas respecte</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Un SLA sera transgresse. C&apos;est inevitable et c&apos;est normal. L&apos;important n&apos;est pas d&apos;atteindre une perfection permanente, mais d&apos;avoir un processus clair pour gerer les ecarts quand ils surviennent. Le pire scenario n&apos;est pas un SLA non respecte, c&apos;est un SLA non respecte dont personne ne parle. Le processus de gestion des ecarts est aussi important que le SLA lui-meme.</p>
@@ -823,7 +823,7 @@ export default function SlaMarketingSalesTemplatePage() {
                       { niveau: "Niveau 3", titre: "Escalade management", desc: "Si l&apos;engagement n&apos;est pas respecte 2 mois de suite, escalade au directeur marketing et au directeur commercial. Decision sur les ressources.", duree: "Sous 60 jours", color: "#FF7A59" },
                       { niveau: "Niveau 4", titre: "Revision du SLA", desc: "Si malgre les actions correctives et les ressources supplementaires, l&apos;objectif reste inatteignable, revision formelle du SLA.", duree: "Trimestriel", color: "#6C5CE7" },
                     ].map((level) => (
-                      <div key={level.niveau} className="flex items-start gap-4 p-4 rounded-xl border border-[#F0F0F0]">
+                      <div key={level.niveau} className="flex items-start gap-4 p-4 rounded-lg border border-[#F0F0F0]">
                         <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: `${level.color}15` }}>
                           <span className="text-[10px] font-bold" style={{ color: level.color }}>{level.niveau.split(" ")[1]}</span>
                         </div>
@@ -843,7 +843,7 @@ export default function SlaMarketingSalesTemplatePage() {
 
               {/* Section 9 -- Faire evoluer le SLA */}
               <section id="faire-evoluer" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Faire evoluer le SLA dans le temps</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Un SLA n&apos;est pas un document fige. Il evolue avec votre entreprise, votre marche et votre maturite. Le SLA v1, celui que vous signez au demarrage, sera tres different du SLA v4 que vous utiliserez un an plus tard. Et c&apos;est parfaitement normal. Un SLA qui ne change jamais est un SLA qui ne sert plus, parce que le contexte a change autour de lui.</p>
@@ -861,7 +861,7 @@ export default function SlaMarketingSalesTemplatePage() {
                       { version: "v3.0", trimestre: "Q3", focus: "Performance", items: ["Pipeline marketing (EUR)", "Taux MQL vers Opportunity", "Cycle moyen marketing leads", "Alertes proactives"], color: "#22C55E" },
                       { version: "v4.0", trimestre: "Q4", focus: "Excellence", items: ["Predictive scoring integre", "Revenue attribution marketing", "NPS sales sur leads", "SLA auto-ajuste par l&apos;IA"], color: "#6C5CE7" },
                     ].map((v) => (
-                      <div key={v.version} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={v.version} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <div className="flex items-center gap-2 mb-3">
                           <span className="text-[11px] font-bold" style={{ color: v.color }}>{v.version}</span>
                           <span className="text-[9px] text-[#CCC]">{v.trimestre}</span>
@@ -884,7 +884,7 @@ export default function SlaMarketingSalesTemplatePage() {
 
               {/* Section 10 -- Notre template chez Ceres (dark section) */}
               <section id="template-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Notre methode</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">Notre template SLA chez Ceres</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -895,7 +895,7 @@ export default function SlaMarketingSalesTemplatePage() {
                   </div>
 
                   {/* Timeline */}
-                  <div className="mt-8 rounded-xl bg-white/5 border border-white/10 p-5">
+                  <div className="mt-8 rounded-lg bg-white/5 border border-white/10 p-5">
                     <p className="text-[12px] font-semibold text-white/80 mb-5">Timeline de deploiement SLA</p>
                     <div className="relative">
                       <div className="absolute left-[15px] top-2 bottom-2 w-[2px] bg-white/10" />
@@ -959,7 +959,7 @@ export default function SlaMarketingSalesTemplatePage() {
                       { value: "-2j", label: "sur le cycle MQL vers SQL", color: "#22C55E" },
                       { value: "88%", label: "de respect SLA au mois 3", color: "#6C5CE7" },
                     ].map((stat) => (
-                      <div key={stat.label} className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
+                      <div key={stat.label} className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
                         <div className="text-[20px] font-bold" style={{ color: stat.color }}>{stat.value}</div>
                         <div className="text-[10px] text-white/40 mt-1 leading-[1.4]">{stat.label}</div>
                       </div>
@@ -987,7 +987,7 @@ export default function SlaMarketingSalesTemplatePage() {
 
               {/* Related articles */}
               <section className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((a) => (
@@ -1005,7 +1005,7 @@ export default function SlaMarketingSalesTemplatePage() {
 
               {/* CTA */}
               <section>
-                <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+                <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                   <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Pret a mettre en place votre SLA ?</h2>
                   <p className="text-[13px] text-[#999] mb-6 max-w-[420px] mx-auto">On deploie votre SLA marketing-sales en 4 semaines. Diagnostic, co-construction, implementation HubSpot, coaching. Premiers resultats mesurables des le mois 1.</p>
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

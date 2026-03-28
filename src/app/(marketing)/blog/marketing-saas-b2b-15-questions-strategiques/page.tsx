@@ -51,9 +51,9 @@ const relatedArticles = [
 
 function QuestionCard({ number, title, children }: { number: number; title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+    <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
       <div className="flex items-start gap-4 mb-4">
-        <div className="w-10 h-10 rounded-xl bg-[#FF7A59]/10 flex items-center justify-center shrink-0">
+        <div className="w-10 h-10 rounded-lg bg-[#FF7A59]/10 flex items-center justify-center shrink-0">
           <span className="text-[15px] font-bold text-[#FF7A59]">{number}</span>
         </div>
         <h3 className="text-[17px] font-semibold text-[#111] leading-[1.3] pt-2">{title}</h3>
@@ -167,7 +167,7 @@ export default function MarketingSaaSB2BArticle() {
               </div>
 
               {/* Overview card */}
-              <div className="mt-8 rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+              <div className="mt-8 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                 <p className="text-[13px] font-semibold text-[#111] mb-4">Les 4 piliers couverts dans cet article</p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {[
@@ -176,7 +176,7 @@ export default function MarketingSaaSB2BArticle() {
                     { label: "Metriques & Ops", count: "4 questions", color: "#6C5CE7" },
                     { label: "Equipe & Scaling", count: "2 questions", color: "#22C55E" },
                   ].map((p) => (
-                    <div key={p.label} className="text-center rounded-xl bg-white border border-[#F2F2F2] p-3">
+                    <div key={p.label} className="text-center rounded-lg bg-white border border-[#F2F2F2] p-3">
                       <div className="text-[16px] font-bold" style={{ color: p.color }}>{p.count}</div>
                       <div className="text-[10px] text-[#999] mt-1">{p.label}</div>
                     </div>
@@ -191,7 +191,7 @@ export default function MarketingSaaSB2BArticle() {
             <article>
               {/* Intro */}
               <section id="intro" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi ces 15 questions avant toute strategie</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>On accompagne des SaaS B2B depuis 2021 chez Ceres. Des startups early-stage, des scaleups en Serie A, des PME tech qui cherchent a structurer leur croissance. Et on constate le meme schema a chaque fois.</p>
@@ -206,7 +206,7 @@ export default function MarketingSaaSB2BArticle() {
 
               {/* === BLOC 1 : Positionnement & ICP === */}
               <section id="positionnement-icp" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Bloc 1 sur 4</span>
                   <h2 className="text-[20px] font-semibold text-white mb-3">Positionnement &amp; ICP</h2>
                   <p className="text-[13px] text-white/60 leading-[1.75]">Les quatre premieres questions portent sur les fondations absolues. Si vous ne savez pas quel probleme vous resolvez, pour qui, et pourquoi on devrait vous choisir, aucune tactique marketing ne compensera ce manque de clarte. C&apos;est la base sur laquelle tout le reste repose.</p>
@@ -271,7 +271,7 @@ export default function MarketingSaaSB2BArticle() {
 
               {/* === BLOC 2 : Canaux & Acquisition === */}
               <section id="canaux-acquisition" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Bloc 2 sur 4</span>
                   <h2 className="text-[20px] font-semibold text-white mb-3">Canaux &amp; Acquisition</h2>
                   <p className="text-[13px] text-white/60 leading-[1.75]">Une fois le positionnement clair, la question suivante est : comment atteindre votre ICP ? Le choix des canaux d&apos;acquisition est la decision la plus impactante sur votre budget et votre velocity. Cinq questions pour la cadrer correctement.</p>
@@ -348,7 +348,7 @@ export default function MarketingSaaSB2BArticle() {
 
               {/* === BLOC 3 : Metriques & Operations === */}
               <section id="metriques-operations" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Bloc 3 sur 4</span>
                   <h2 className="text-[20px] font-semibold text-white mb-3">Metriques &amp; Operations</h2>
                   <p className="text-[13px] text-white/60 leading-[1.75]">Le marketing sans mesure n&apos;est pas du marketing, c&apos;est de l&apos;espoir. Quatre questions pour structurer vos operations, choisir vos outils, et mesurer ce qui compte vraiment.</p>
@@ -413,7 +413,7 @@ export default function MarketingSaaSB2BArticle() {
 
               {/* === BLOC 4 : Equipe & Scaling === */}
               <section id="equipe-scaling" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Bloc 4 sur 4</span>
                   <h2 className="text-[20px] font-semibold text-white mb-3">Equipe &amp; Scaling</h2>
                   <p className="text-[13px] text-white/60 leading-[1.75]">Les deux dernieres questions portent sur l&apos;execution. Quand recruter, quel profil, et quand structurer vos operations pour scaler. La strategie la plus brillante echoue sans les bonnes personnes et les bons process.</p>
@@ -454,7 +454,7 @@ export default function MarketingSaaSB2BArticle() {
 
               {/* Conclusion */}
               <section id="conclusion" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Conclusion</span>
                   <h2 className="text-[20px] font-semibold text-white mb-4">15 questions, un seul objectif</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -463,7 +463,7 @@ export default function MarketingSaaSB2BArticle() {
                     <p>On voit trop de SaaS sauter ces etapes pour passer directement aux tactiques. Lancer des ads LinkedIn sans ICP clair. Publier du contenu sans strategie SEO. Recruter un marketeur sans savoir quel canal prioriser. Le resultat est toujours le meme : du budget brule, du temps perdu, et une frustration croissante.</p>
                     <p>Prenez le temps de repondre a ces 15 questions. Ecrivez les reponses. Partagez-les avec votre equipe. Revisitez-les chaque trimestre. Ce sont vos fondations. Tout ce que vous construirez par-dessus sera plus solide.</p>
                   </div>
-                  <div className="mt-6 rounded-xl bg-white/5 p-4">
+                  <div className="mt-6 rounded-lg bg-white/5 p-4">
                     <p className="text-[12px] font-semibold text-white mb-2">Checklist rapide</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {[
@@ -499,7 +499,7 @@ export default function MarketingSaaSB2BArticle() {
               <p className="text-[13px] font-semibold text-[#111] mb-4">Articles similaires</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedArticles.map((a) => (
-                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
+                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold text-white mb-3" style={{ background: a.color }}>
                       {a.category[0]}
                     </div>
@@ -512,14 +512,14 @@ export default function MarketingSaaSB2BArticle() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin de structurer votre strategie marketing SaaS ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[450px] mx-auto">On accompagne les SaaS B2B de la definition de l&apos;ICP a la mise en place du RevOps. CRM, funnel, attribution, dashboards. Les fondations pour scaler.</p>
                 <div className="flex items-center justify-center gap-3">
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                     <span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Reserver un appel
                   </a>
-                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                     Nos services
                   </Link>
                 </div>

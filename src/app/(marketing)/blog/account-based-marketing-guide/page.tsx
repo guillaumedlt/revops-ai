@@ -147,7 +147,7 @@ export default function ABMGuidePage() {
             <article>
               {/* Section 1 — Definition */}
               <section id="definition" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Qu&apos;est-ce que l&apos;Account-Based Marketing</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;Account-Based Marketing (ABM) est une strategie B2B qui consiste a concentrer les efforts marketing et commerciaux sur une liste restreinte de comptes cibles identifies comme strategiques. Plutot que de ratisser large avec de l&apos;inbound classique et d&apos;attendre que les bons prospects viennent a vous, l&apos;ABM inverse la logique : vous identifiez d&apos;abord les entreprises que vous voulez comme clients, puis vous creez des campagnes sur mesure pour les engager.</p>
@@ -160,7 +160,7 @@ export default function ABMGuidePage() {
                   <div className="mt-6 overflow-x-auto">
                     <table className="w-full text-[12px]">
                       <thead>
-                        <tr className="border-b border-[#E8E8E8]">
+                        <tr className="border-b border-[#EAEAEA]">
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">Critere</th>
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">Inbound Marketing</th>
                           <th className="text-left py-3 text-[#999] font-medium">Account-Based Marketing</th>
@@ -191,7 +191,7 @@ export default function ABMGuidePage() {
 
               {/* Section 2 — Pourquoi ABM explose */}
               <section id="pourquoi-abm" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi l&apos;ABM explose en B2B</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;ABM n&apos;est plus une niche reservee aux grands comptes. En 2026, c&apos;est devenu la strategie dominante pour les entreprises B2B qui vendent des solutions a plus de 10 000 euros par an. Plusieurs facteurs expliquent cette acceleration.</p>
@@ -208,7 +208,7 @@ export default function ABMGuidePage() {
                       { value: "91%", label: "des entreprises ABM augmentent leur panier moyen", color: "#FF7A59" },
                       { value: "36%", label: "de taux de retention client superieur chez les praticiens ABM", color: "#22C55E" },
                     ].map((stat) => (
-                      <div key={stat.label} className="text-center p-4 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2]">
+                      <div key={stat.label} className="text-center p-4 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2]">
                         <div className="text-[22px] font-bold" style={{ color: stat.color }}>{stat.value}</div>
                         <div className="text-[10px] text-[#999] mt-1 leading-[1.4]">{stat.label}</div>
                       </div>
@@ -220,7 +220,7 @@ export default function ABMGuidePage() {
 
               {/* Section 3 — Les 3 niveaux */}
               <section id="trois-niveaux" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les 3 niveaux d&apos;ABM</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;ABM n&apos;est pas monolithique. Il existe trois approches, chacune avec un niveau de personnalisation et un investissement different. La plupart des entreprises combinent les trois.</p>
@@ -253,7 +253,7 @@ export default function ABMGuidePage() {
                         desc: "On utilise la technologie pour personnaliser a l&apos;echelle. Ads ciblees par liste de comptes sur LinkedIn, emails automatises avec variables dynamiques, landing pages adaptees par segment. L&apos;investissement par compte est moindre, mais la couverture est large. C&apos;est souvent le meilleur point d&apos;entree pour les equipes qui debutent en ABM.",
                       },
                     ].map((level) => (
-                      <div key={level.tier} className="p-5 rounded-xl border border-[#F0F0F0] bg-[#FAFAFA]">
+                      <div key={level.tier} className="p-5 rounded-lg border border-[#F0F0F0] bg-[#FAFAFA]">
                         <div className="flex items-center gap-3 mb-3">
                           <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: level.color }} />
                           <span className="text-[14px] font-semibold text-[#111]">{level.tier}</span>
@@ -273,7 +273,7 @@ export default function ABMGuidePage() {
 
               {/* Section 4 — ICP */}
               <section id="icp" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Etape 1 : Definir votre ICP (Ideal Customer Profile)</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Tout programme ABM commence par une question : quels sont les comptes qui ont la plus forte probabilite de devenir des clients a forte valeur ? Pour y repondre, vous devez construire votre ICP, le profil de votre client ideal au niveau de l&apos;entreprise (pas du contact).</p>
@@ -282,7 +282,7 @@ export default function ABMGuidePage() {
                   </div>
 
                   {/* ICP framework */}
-                  <div className="mt-6 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0] p-5">
+                  <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
                     <p className="text-[12px] font-semibold text-[#111] mb-4">Framework ICP en 6 dimensions</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {[
@@ -293,7 +293,7 @@ export default function ABMGuidePage() {
                         { dim: "Economiques", items: "Panier moyen potentiel, LTV estimee, capacite budgetaire" },
                         { dim: "Fit produit", items: "Cas d&apos;usage, problemes resolus, fonctionnalites requises" },
                       ].map((d) => (
-                        <div key={d.dim} className="p-3 rounded-lg bg-white border border-[#E8E8E8]">
+                        <div key={d.dim} className="p-3 rounded-lg bg-white border border-[#EAEAEA]">
                           <p className="text-[11px] font-semibold text-[#6C5CE7] mb-1">{d.dim}</p>
                           <p className="text-[11px] text-[#777] leading-[1.5]">{d.items}</p>
                         </div>
@@ -310,7 +310,7 @@ export default function ABMGuidePage() {
 
               {/* Section 5 — Identifier comptes */}
               <section id="comptes-cibles" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Etape 2 : Identifier et prioriser les comptes cibles</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Avec votre ICP en main, il faut maintenant construire votre liste de comptes cibles. Ce n&apos;est pas une simple extraction de base de donnees. C&apos;est un processus qui combine donnees statiques (firmographiques), donnees dynamiques (signaux d&apos;intention) et intelligence humaine (insights sales).</p>
@@ -320,7 +320,7 @@ export default function ABMGuidePage() {
 
                   {/* Scoring grid */}
                   <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                    <div className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                       <p className="text-[12px] font-semibold text-[#4B5EFC] mb-2">Fit Score (statique)</p>
                       <ul className="space-y-1.5 text-[11px] text-[#666]">
                         <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-[#4B5EFC] mt-1.5 shrink-0" />Correspondance avec l&apos;ICP</li>
@@ -330,7 +330,7 @@ export default function ABMGuidePage() {
                         <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-[#4B5EFC] mt-1.5 shrink-0" />Historique relationnel</li>
                       </ul>
                     </div>
-                    <div className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                    <div className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                       <p className="text-[12px] font-semibold text-[#FF7A59] mb-2">Intent Score (dynamique)</p>
                       <ul className="space-y-1.5 text-[11px] text-[#666]">
                         <li className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-[#FF7A59] mt-1.5 shrink-0" />Visites sur votre site web</li>
@@ -352,7 +352,7 @@ export default function ABMGuidePage() {
 
               {/* Section 6 — Intelligence commerciale */}
               <section id="intelligence" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Etape 3 : Recherche et intelligence commerciale</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Une fois vos comptes cibles identifies, vous devez les connaitre en profondeur. C&apos;est la phase de recherche, souvent negligee mais absolument critique. La qualite de votre personnalisation depend directement de la qualite de votre intelligence sur chaque compte.</p>
@@ -367,7 +367,7 @@ export default function ABMGuidePage() {
                       { title: "Actualites recentes", desc: "Levees de fonds, nominations, acquisitions, lancement de nouveaux produits, recrutements. Google Alerts, LinkedIn et la presse sectorielle sont vos amis." },
                       { title: "Relations existantes", desc: "Avez-vous des connexions en commun sur LinkedIn. Y a-t-il eu des interactions passees avec votre entreprise. Un ancien client, un participant a un webinaire, un visiteur du site." },
                     ].map((item) => (
-                      <div key={item.title} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={item.title} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <p className="text-[12px] font-semibold text-[#333] mb-1">{item.title}</p>
                         <p className="text-[11px] text-[#777] leading-[1.6]">{item.desc}</p>
                       </div>
@@ -384,7 +384,7 @@ export default function ABMGuidePage() {
 
               {/* Section 7 — Personnalisation */}
               <section id="personnalisation" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Etape 4 : Personnaliser les messages par compte</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La personnalisation est le coeur de l&apos;ABM. Et on ne parle pas d&apos;inserer le prenom du contact dans un email. On parle de creer des messages qui demontrent une comprehension reelle des enjeux specifiques de chaque compte.</p>
@@ -395,7 +395,7 @@ export default function ABMGuidePage() {
                   <div className="mt-5 overflow-x-auto">
                     <table className="w-full text-[12px]">
                       <thead>
-                        <tr className="border-b border-[#E8E8E8]">
+                        <tr className="border-b border-[#EAEAEA]">
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">Element</th>
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">Tier 1</th>
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">Tier 2</th>
@@ -436,7 +436,7 @@ export default function ABMGuidePage() {
 
               {/* Section 8 — Orchestration */}
               <section id="orchestration" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Etape 5 : Orchestrer les touchpoints multi-canal</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;ABM ne se limite pas a envoyer des emails. C&apos;est une orchestration multi-canal qui vise a creer une omnipresence maitrisee autour de vos comptes cibles. L&apos;objectif : que chaque decideur du compte voie votre marque et votre proposition de valeur sur plusieurs canaux, dans un timing coordonne.</p>
@@ -478,7 +478,7 @@ export default function ABMGuidePage() {
 
               {/* Section 9 — Mesurer ROI */}
               <section id="mesurer-roi" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Etape 6 : Mesurer le ROI de l&apos;ABM</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La mesure de l&apos;ABM ne fonctionne pas comme la mesure de l&apos;inbound classique. Oubliez le nombre de leads generes. En ABM, les metriques cles operent au niveau du compte, pas de l&apos;individu. Et le cycle de mesure est plus long : un programme ABM met generalement 3 a 6 mois avant de produire des resultats mesurables sur le pipeline.</p>
@@ -494,7 +494,7 @@ export default function ABMGuidePage() {
                       { metric: "Win Rate", desc: "Taux de closing sur les comptes ABM vs le reste. C&apos;est la metrique ultime. Si votre win rate ABM n&apos;est pas significativement superieur, quelque chose ne va pas.", category: "Conversion" },
                       { metric: "ACV (Annual Contract Value)", desc: "Valeur contractuelle annuelle moyenne des deals ABM. L&apos;ABM doit generer des deals plus gros. Si le panier moyen est le meme que l&apos;inbound, vous ne ciblez pas les bons comptes.", category: "Revenue" },
                     ].map((m) => (
-                      <div key={m.metric} className="p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={m.metric} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="text-[9px] font-semibold text-[#6C5CE7] uppercase tracking-wider bg-[#6C5CE7]/10 px-2 py-0.5 rounded">{m.category}</span>
                         </div>
@@ -514,7 +514,7 @@ export default function ABMGuidePage() {
 
               {/* Section 10 — Stack ABM */}
               <section id="stack-abm" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les outils de la stack ABM</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;outillage ABM a considerablement evolue. Il n&apos;est plus necessaire d&apos;investir dans une plateforme ABM dediee a 50 000 euros par an. Voici la stack que nous recommandons en fonction de votre maturite et de votre budget.</p>
@@ -524,7 +524,7 @@ export default function ABMGuidePage() {
                   <div className="mt-5 overflow-x-auto">
                     <table className="w-full text-[12px]">
                       <thead>
-                        <tr className="border-b border-[#E8E8E8]">
+                        <tr className="border-b border-[#EAEAEA]">
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">Categorie</th>
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">Outil</th>
                           <th className="text-left py-3 pr-4 text-[#999] font-medium">Role dans l&apos;ABM</th>
@@ -562,7 +562,7 @@ export default function ABMGuidePage() {
 
               {/* Section 11 — ABM + RevOps */}
               <section id="abm-revops" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Alignement</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">ABM + RevOps : l&apos;alignement marketing-sales</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -598,7 +598,7 @@ export default function ABMGuidePage() {
 
               {/* Section 12 — Erreurs classiques */}
               <section id="erreurs" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les erreurs classiques en ABM</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Apres avoir accompagne plusieurs dizaines d&apos;entreprises dans la mise en place de programmes ABM, voici les erreurs que nous voyons le plus souvent.</p>
@@ -614,7 +614,7 @@ export default function ABMGuidePage() {
                       { num: "06", title: "Sous-investir dans le contenu", desc: "L&apos;ABM a besoin de contenu de qualite et personnalise. Si vous n&apos;avez pas la capacite de produire des etudes de cas, des one-pagers sectoriels ou des demos personnalisees, votre programme manquera de carburant." },
                       { num: "07", title: "Ignorer le multi-threading", desc: "Cibler un seul contact par compte est risque. Si cette personne change de poste, votre deal meurt. Visez 3 a 5 contacts par compte, avec des roles et niveaux hierarchiques differents. C&apos;est la resilience de votre programme." },
                     ].map((err) => (
-                      <div key={err.num} className="flex items-start gap-3 p-4 rounded-xl bg-[#FAFAFA] border border-[#F0F0F0]">
+                      <div key={err.num} className="flex items-start gap-3 p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <span className="text-[18px] font-bold text-[#E8E8E8] shrink-0">{err.num}</span>
                         <div>
                           <p className="text-[12px] font-semibold text-[#111] mb-1">{err.title}</p>
@@ -629,7 +629,7 @@ export default function ABMGuidePage() {
 
               {/* Section 13 — Approche Ceres */}
               <section id="approche-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Notre methode</span>
                   <h2 className="text-[17px] font-semibold text-white mb-4">Notre approche ABM chez Ceres</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -660,7 +660,7 @@ export default function ABMGuidePage() {
 
               {/* Related articles */}
               <section className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-7 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[14px] font-semibold text-[#111] mb-4">Articles lies</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((a) => (
@@ -678,7 +678,7 @@ export default function ABMGuidePage() {
 
               {/* CTA */}
               <section>
-                <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+                <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                   <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Pret a lancer votre programme ABM ?</h2>
                   <p className="text-[13px] text-[#999] mb-6 max-w-[420px] mx-auto">On structure votre CRM, on definit vos comptes cibles et on met en place les outils pour executer votre ABM. Premiers resultats en 8 semaines.</p>
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">

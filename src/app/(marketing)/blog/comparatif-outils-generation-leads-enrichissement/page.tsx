@@ -146,7 +146,7 @@ export default function ComparatifOutilsLeadsArticle() {
             <article>
               {/* Section 1 : Pourquoi l'enrichissement est indispensable */}
               <section id="pourquoi" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi l&apos;enrichissement est devenu indispensable</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>En 2026, prospecter sans enrichissement revient a tirer a l&apos;aveugle. Les bases de donnees statiques achetees il y a deux ans sont obsoletes. Les contacts ont change de poste, les entreprises ont leve, pivote ou ferme. Selon une etude Gartner, 30% des donnees B2B deviennent obsoletes chaque annee. Sans enrichissement continu, votre CRM se degrade mecaniquement.</p>
@@ -166,7 +166,7 @@ export default function ComparatifOutilsLeadsArticle() {
 
               {/* Section 2 : Les criteres de comparaison */}
               <section id="criteres" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les criteres de comparaison</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Pour comparer ces 12 outils de facon objective, on a retenu 8 criteres concrets que l&apos;on mesure en production chez nos clients :</p>
@@ -182,7 +182,7 @@ export default function ComparatifOutilsLeadsArticle() {
                       { title: "API et automatisation", desc: "Qualite de l'API, limites de rate, disponibilite de webhooks, connecteurs Make/Zapier natifs.", color: "#FF7A59" },
                       { title: "Profondeur des donnees", desc: "Au-dela de l'email : telephone, technologies, signaux d'achat, donnees firmographiques, intent data.", color: "#22C55E" },
                     ].map((c) => (
-                      <div key={c.title} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={c.title} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-2 h-2 rounded-full" style={{ background: c.color }} />
                           <span className="text-[12px] font-semibold text-[#111]">{c.title}</span>
@@ -197,7 +197,7 @@ export default function ComparatifOutilsLeadsArticle() {
 
               {/* Section 3 : Clay */}
               <section id="clay" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=clay.com&sz=32" alt="Clay" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">Clay</h2>
@@ -210,7 +210,7 @@ export default function ComparatifOutilsLeadsArticle() {
                     <p>Le point faible : la complexite. Clay a une courbe d&apos;apprentissage raide. L&apos;interface est puissante mais dense. Il faut compter 2 a 3 semaines pour maitriser les fonctionnalites avancees. Et le prix monte vite quand on fait du volume.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing Clay (mars 2026)</p>
                     <div className="grid grid-cols-4 gap-3">
                       {[
@@ -230,13 +230,13 @@ export default function ComparatifOutilsLeadsArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Waterfall enrichment (75+ sources)", "AI agents pour scoring et personnalisation", "Taux de couverture 85-95%", "Integrations CRM excellentes", "Workflows visuels sans code"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Courbe d'apprentissage raide", "Prix eleve en volume (800+ $/mois)", "Complexe pour des besoins simples", "Pas de base de donnees propre", "Credits consommes rapidement"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -244,7 +244,7 @@ export default function ComparatifOutilsLeadsArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#E0D4FC] bg-[#F8F5FF] p-3">
+                  <div className="mt-4 rounded-lg border border-[#E0D4FC] bg-[#F8F5FF] p-3">
                     <p className="text-[11px] font-semibold text-[#6C5CE7] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les equipes growth et RevOps qui font de l&apos;outbound en volume et veulent maximiser la couverture d&apos;enrichissement. Necessaire si vous combinez plusieurs sources de donnees et avez besoin de workflows d&apos;enrichissement personnalises.</p>
                   </div>
@@ -254,7 +254,7 @@ export default function ComparatifOutilsLeadsArticle() {
 
               {/* Section 4 : Apollo.io */}
               <section id="apollo" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=apollo.io&sz=32" alt="Apollo.io" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">Apollo.io</h2>
@@ -267,7 +267,7 @@ export default function ComparatifOutilsLeadsArticle() {
                     <p>L&apos;integration HubSpot est l&apos;une des meilleures du marche : sync bidirectionnelle, mapping de champs custom, deduplication intelligente, enrichissement automatique des contacts existants. Chez Ceres, c&apos;est l&apos;outil qu&apos;on recommande par defaut aux equipes qui debutent en outbound.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing Apollo (mars 2026)</p>
                     <div className="grid grid-cols-4 gap-3">
                       {[
@@ -287,13 +287,13 @@ export default function ComparatifOutilsLeadsArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Base de 275M+ contacts", "Plan gratuit tres genereux", "Integration HubSpot excellente", "Filtres de recherche tres precis", "Sequencage email integre"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Donnees moins fiables en France", "Conformite RGPD discutable", "Delivrabilite email moyenne", "Interface parfois lente", "Numeros FR peu fiables"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -301,7 +301,7 @@ export default function ComparatifOutilsLeadsArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#D4EDDA] bg-[#F0FDF4] p-3">
+                  <div className="mt-4 rounded-lg border border-[#D4EDDA] bg-[#F0FDF4] p-3">
                     <p className="text-[11px] font-semibold text-[#22C55E] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les equipes commerciales de 2 a 20 personnes qui veulent un outil tout-en-un (base de donnees + enrichissement + sequences) a un prix accessible. Particulierement pertinent pour les cibles US/UK.</p>
                   </div>
@@ -311,7 +311,7 @@ export default function ComparatifOutilsLeadsArticle() {
 
               {/* Section 5 : Dropcontact */}
               <section id="dropcontact" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=dropcontact.com&sz=32" alt="Dropcontact" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">Dropcontact</h2>
@@ -324,7 +324,7 @@ export default function ComparatifOutilsLeadsArticle() {
                     <p>En termes de resultats, on observe des taux de validite de 85-92% sur les emails trouves. La couverture est un peu plus faible que les outils bases sur des bases de donnees (on estime que Dropcontact trouve un email pour 60-70% des requetes), mais les emails trouves sont generalement plus fiables. L&apos;integration HubSpot native est bien faite : enrichissement automatique des contacts a la creation, nettoyage et deduplication.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing Dropcontact (mars 2026)</p>
                     <div className="grid grid-cols-3 gap-3">
                       {[
@@ -343,13 +343,13 @@ export default function ComparatifOutilsLeadsArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["100% conforme RGPD", "Serveurs en France", "Taux de validite eleve (85-92%)", "Integration HubSpot native", "Nettoyage et deduplication CRM"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Couverture plus faible (60-70%)", "Pas de base de donnees de prospection", "Pas de numeros de telephone fiables", "Necessite prenom + nom + entreprise", "Pas de filtres de recherche avances"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -357,7 +357,7 @@ export default function ComparatifOutilsLeadsArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#C5CAF5] bg-[#EEF0FF] p-3">
+                  <div className="mt-4 rounded-lg border border-[#C5CAF5] bg-[#EEF0FF] p-3">
                     <p className="text-[11px] font-semibold text-[#4B5EFC] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les entreprises europeennes qui ont des contraintes RGPD fortes. Excellent comme brique d&apos;enrichissement dans un workflow plus large (par exemple dans Clay, ou en complement d&apos;Apollo). Indispensable si votre DPO ou votre equipe juridique exige une conformite sans compromis.</p>
                   </div>
@@ -367,7 +367,7 @@ export default function ComparatifOutilsLeadsArticle() {
 
               {/* Section 6 : Kaspr */}
               <section id="kaspr" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=kaspr.io&sz=32" alt="Kaspr" className="w-6 h-6" />
                     <h2 className="text-[17px] font-semibold text-[#111]">Kaspr</h2>
@@ -380,7 +380,7 @@ export default function ComparatifOutilsLeadsArticle() {
                     <p>L&apos;integration avec les CRM est basique mais fonctionnelle. Kaspr propose une sync HubSpot et Salesforce qui permet de pousser les contacts enrichis directement dans le CRM. Les plans incluent un systeme de credits par type de donnees (email, telephone) ce qui permet de maitriser le budget.</p>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Pricing Kaspr (mars 2026)</p>
                     <div className="grid grid-cols-4 gap-3">
                       {[
@@ -400,13 +400,13 @@ export default function ComparatifOutilsLeadsArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-3">
+                    <div className="rounded-lg bg-[#F0FDF4] p-3">
                       <p className="text-[11px] font-semibold text-[#22C55E] mb-2">Forces</p>
                       {["Extension LinkedIn tres simple", "Bonne couverture FR (70-80% emails)", "Numeros de telephone directs", "Plan gratuit pour tester", "Integration CRM basique incluse"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-3">
+                    <div className="rounded-lg bg-[#FEF2F2] p-3">
                       <p className="text-[11px] font-semibold text-[#EF4444] mb-2">Faiblesses</p>
                       {["Depend de LinkedIn (risque de ban)", "Credits limites sur les plans bas", "Pas de waterfall enrichment", "Pas d'enrichissement en masse natif", "API limitee sur les petits plans"].map((i) => (
                         <p key={i} className="text-[10px] text-[#555] mb-1.5 flex items-start gap-2"><span className="text-[#EF4444] mt-0.5 shrink-0">-</span>{i}</p>
@@ -414,7 +414,7 @@ export default function ComparatifOutilsLeadsArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-[#FFDDD2] bg-[#FFF5F0] p-3">
+                  <div className="mt-4 rounded-lg border border-[#FFDDD2] bg-[#FFF5F0] p-3">
                     <p className="text-[11px] font-semibold text-[#FF7A59] mb-1">Ideal pour</p>
                     <p className="text-[11px] text-[#777] leading-[1.6]">Les commerciaux individuels ou les petites equipes qui prospectent principalement via LinkedIn. Parfait pour du cold calling : Kaspr est l&apos;un des rares outils a fournir des numeros de telephone directs fiables en France.</p>
                   </div>
@@ -424,7 +424,7 @@ export default function ComparatifOutilsLeadsArticle() {
 
               {/* Section 7 : Captain Data / Phantombuster */}
               <section id="scraping" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=captaindata.co&sz=32" alt="Captain Data" className="w-5 h-5" />
                     <img src="https://www.google.com/s2/favicons?domain=phantombuster.com&sz=32" alt="Phantombuster" className="w-5 h-5" />
@@ -439,7 +439,7 @@ export default function ComparatifOutilsLeadsArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-[#F2F2F2] p-3">
+                    <div className="rounded-lg border border-[#F2F2F2] p-3">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=phantombuster.com&sz=32" alt="Phantombuster" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Phantombuster</span>
@@ -451,7 +451,7 @@ export default function ComparatifOutilsLeadsArticle() {
                         ))}
                       </div>
                     </div>
-                    <div className="rounded-xl border border-[#F2F2F2] p-3">
+                    <div className="rounded-lg border border-[#F2F2F2] p-3">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=captaindata.co&sz=32" alt="Captain Data" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Captain Data</span>
@@ -470,7 +470,7 @@ export default function ComparatifOutilsLeadsArticle() {
 
               {/* Section 8 : Hunter.io / Snov.io */}
               <section id="email-finders" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-3 mb-4">
                     <img src="https://www.google.com/s2/favicons?domain=hunter.io&sz=32" alt="Hunter.io" className="w-5 h-5" />
                     <img src="https://www.google.com/s2/favicons?domain=snov.io&sz=32" alt="Snov.io" className="w-5 h-5" />
@@ -485,7 +485,7 @@ export default function ComparatifOutilsLeadsArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-[#F2F2F2] p-3">
+                    <div className="rounded-lg border border-[#F2F2F2] p-3">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=hunter.io&sz=32" alt="Hunter.io" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Hunter.io</span>
@@ -505,7 +505,7 @@ export default function ComparatifOutilsLeadsArticle() {
                         ))}
                       </div>
                     </div>
-                    <div className="rounded-xl border border-[#F2F2F2] p-3">
+                    <div className="rounded-lg border border-[#F2F2F2] p-3">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=snov.io&sz=32" alt="Snov.io" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Snov.io</span>
@@ -532,7 +532,7 @@ export default function ComparatifOutilsLeadsArticle() {
 
               {/* Section 9 : Enterprise (Cognism, ZoomInfo, Lusha, Clearbit) */}
               <section id="enterprise" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Cognism, ZoomInfo, Lusha &amp; Clearbit : les solutions enterprise</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Ces quatre outils ciblent les equipes commerciales de 20 personnes et plus, avec des budgets d&apos;enrichissement consequents (10 000 a 100 000+ euros par an). Ils offrent des bases de donnees massives, des donnees d&apos;intention d&apos;achat, et des integrations profondes avec les CRM enterprise.</p>
@@ -573,7 +573,7 @@ export default function ComparatifOutilsLeadsArticle() {
                         color: "#22C55E",
                       },
                     ].map((t) => (
-                      <div key={t.tool} className="flex gap-3 rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={t.tool} className="flex gap-3 rounded-lg border border-[#F2F2F2] p-4">
                         <img src={`https://www.google.com/s2/favicons?domain=${t.icon}&sz=32`} alt={t.tool} className="w-5 h-5 mt-0.5" />
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
@@ -591,7 +591,7 @@ export default function ComparatifOutilsLeadsArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FFF7ED] border border-[#FFEDD5] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FFF7ED] border border-[#FFEDD5] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Notre avis sur les outils enterprise</p>
                     <p className="text-[11px] text-[#777] leading-[1.65]">Pour la majorite de nos clients (PME et scale-ups europeennes), ces outils sont surdimensionnes et trop chers. On les recommande uniquement aux equipes de plus de 20 commerciaux avec un budget outbound superieur a 100 000 euros par an. Pour les autres, la combinaison Clay + Apollo + Dropcontact offre une couverture equivalente a une fraction du prix.</p>
                   </div>
@@ -601,13 +601,13 @@ export default function ComparatifOutilsLeadsArticle() {
 
               {/* Section 10 : Tableau comparatif global */}
               <section id="comparatif" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Tableau comparatif global</h2>
                   <p className="text-[13px] text-[#555] leading-[1.75] mb-5">Vue d&apos;ensemble des 12 outils compares, avec les criteres qui comptent en production.</p>
 
                   <div className="overflow-x-auto">
                     <div className="min-w-[700px]">
-                      <div className="grid grid-cols-7 gap-2 pb-3 border-b border-[#E8E8E8]">
+                      <div className="grid grid-cols-7 gap-2 pb-3 border-b border-[#EAEAEA]">
                         <span className="text-[10px] font-semibold text-[#999]">Outil</span>
                         <span className="text-[10px] font-semibold text-[#6C5CE7] text-center">Prix entree</span>
                         <span className="text-[10px] font-semibold text-[#6C5CE7] text-center">Couverture FR</span>
@@ -651,7 +651,7 @@ export default function ComparatifOutilsLeadsArticle() {
 
               {/* Section 11 : Quelle stack recommander */}
               <section id="recommandations" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Recommandations</span>
                   <h2 className="text-[20px] font-semibold text-white mb-4">Quelle stack recommander selon votre cas</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75] mb-6">
@@ -691,7 +691,7 @@ export default function ComparatifOutilsLeadsArticle() {
                         desc: "Stack 100% franco-europeenne, conforme RGPD. Dropcontact pour les emails, Kaspr pour LinkedIn et les telephones, Captain Data pour le scraping. Pas besoin d'outils US si vous ne prospectez qu'en France.",
                       },
                     ].map((r) => (
-                      <div key={r.profil} className="rounded-xl bg-white/5 border border-white/10 p-4">
+                      <div key={r.profil} className="rounded-lg bg-white/5 border border-white/10 p-4">
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-[12px] font-semibold text-white">{r.profil}</span>
                           <span className="text-[10px] text-[#6C5CE7] font-medium">{r.budget}</span>
@@ -707,7 +707,7 @@ export default function ComparatifOutilsLeadsArticle() {
 
               {/* Section 12 : Notre stack chez Ceres */}
               <section id="stack-ceres" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Notre stack chez Ceres</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Chez Ceres, on gere la prospection outbound et l&apos;enrichissement de donnees pour une dizaine de clients B2B. Notre stack a evolue avec le temps et les besoins. Voici ce qu&apos;on utilise aujourd&apos;hui en production.</p>
@@ -746,7 +746,7 @@ export default function ComparatifOutilsLeadsArticle() {
                         desc: "Selon le client, on utilise Emelia (pour du cold email pur avec un budget serre) ou les sequences HubSpot (pour les equipes qui veulent tout centraliser dans le CRM). Les contacts non-repondeurs sont recycles dans des campagnes nurturing.",
                       },
                     ].map((s) => (
-                      <div key={s.etape} className="flex gap-3 rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={s.etape} className="flex gap-3 rounded-lg border border-[#F2F2F2] p-4">
                         <img src={`https://www.google.com/s2/favicons?domain=${s.icon}&sz=32`} alt={s.outil} className="w-5 h-5 mt-0.5" />
                         <div className="flex-1">
                           <p className="text-[11px] font-semibold text-[#6C5CE7] mb-0.5">{s.etape}</p>
@@ -757,7 +757,7 @@ export default function ComparatifOutilsLeadsArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Cout total de la stack</p>
                     <p className="text-[11px] text-[#777] leading-[1.65]">Pour un client type qui enrichit 5 000 contacts par mois : Clay Explorer (349 $) + Captain Data (399 eur) + Dropcontact Premium (49 eur) + Apollo Basic (49 $). Total : environ 850 eur par mois. C&apos;est un investissement significatif, mais le cout par lead enrichi et verifie revient a environ 0,17 eur, ce qui reste tres competitif compare aux solutions enterprise (Cognism ou ZoomInfo sont 3 a 5 fois plus chers a volume equivalent).</p>
                   </div>
@@ -776,7 +776,7 @@ export default function ComparatifOutilsLeadsArticle() {
               <p className="text-[13px] font-semibold text-[#111] mb-4">Articles similaires</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedArticles.map((a) => (
-                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
+                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold text-white mb-3" style={{ background: a.color }}>
                       {a.category[0]}
                     </div>
@@ -789,14 +789,14 @@ export default function ComparatifOutilsLeadsArticle() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide pour construire votre stack d&apos;enrichissement ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[500px] mx-auto">On configure Clay, Apollo, Dropcontact et vos outils de prospection. Enrichissement waterfall, integration HubSpot, workflows automatises. Setup complet en moins de 2 semaines.</p>
                 <div className="flex items-center justify-center gap-3">
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                     <span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Reserver un appel
                   </a>
-                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                     Nos services
                   </Link>
                 </div>

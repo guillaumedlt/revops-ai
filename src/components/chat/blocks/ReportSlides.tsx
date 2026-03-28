@@ -25,8 +25,8 @@ function SlideContent({ blocks }: { blocks: ContentBlock[] }) {
             return (
               <div key={i} className="text-[13px] text-[#333] leading-relaxed">
                 {block.text.split("\n").map(function(line, li) {
-                  if (line.startsWith("- ")) return <div key={li} className="flex gap-2 py-0.5"><span className="text-[#A3A3A3]">•</span><span>{line.slice(2)}</span></div>;
-                  if (line.startsWith("**") && line.endsWith("**")) return <p key={li} className="font-semibold text-[#0A0A0A] mt-2">{line.slice(2, -2)}</p>;
+                  if (line.startsWith("- ")) return <div key={li} className="flex gap-2 py-0.5"><span className="text-[#BBB]">•</span><span>{line.slice(2)}</span></div>;
+                  if (line.startsWith("**") && line.endsWith("**")) return <p key={li} className="font-semibold text-[#111] mt-2">{line.slice(2, -2)}</p>;
                   if (line.trim() === "") return <div key={li} className="h-2" />;
                   return <p key={li}>{line}</p>;
                 })}
@@ -39,9 +39,9 @@ function SlideContent({ blocks }: { blocks: ContentBlock[] }) {
               <div key={i} className="grid gap-3" style={{ gridTemplateColumns: "repeat(" + Math.min(block.items.length, 4) + ", 1fr)" }}>
                 {block.items.map(function(item, j) {
                   return (
-                    <div key={j} className="border border-[#E5E5E5] rounded-xl p-4 text-center bg-[#FAFAFA]">
-                      <p className="text-2xl font-bold text-[#0A0A0A]">{item.value}</p>
-                      <p className="text-[11px] text-[#737373] mt-1">{item.label}</p>
+                    <div key={j} className="border border-[#EAEAEA] rounded-lg p-4 text-center bg-[#FAFAFA]">
+                      <p className="text-2xl font-bold text-[#111]">{item.value}</p>
+                      <p className="text-[11px] text-[#999] mt-1">{item.label}</p>
                       {item.change !== undefined && (
                         <p className={"text-[11px] mt-0.5 font-medium " + (item.change >= 0 ? "text-[#22C55E]" : "text-[#EF4444]")}>
                           {(item.change >= 0 ? "+" : "") + item.change + "%"}
@@ -121,24 +121,24 @@ function AddReportToDashboard({ title, sections }: { title: string; sections: Co
 
   return (
     <div className="relative">
-      <button onClick={handleOpen} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#0A0A0A] text-white hover:bg-[#333] shadow-sm transition-colors">
+      <button onClick={handleOpen} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#111] text-white hover:bg-[#333] shadow-sm transition-colors">
         <LayoutDashboard size={12} /> Add to Dashboard
       </button>
       {open && (
-        <div className="absolute bottom-full right-0 mb-1 w-[220px] rounded-xl border border-[#E5E5E5] bg-white shadow-lg p-2 z-50">
-          <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#A3A3A3]">Add to Dashboard</p>
+        <div className="absolute bottom-full right-0 mb-1 w-[220px] rounded-lg border border-[#EAEAEA] bg-white shadow-lg p-2 z-50">
+          <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#BBB]">Add to Dashboard</p>
           {dashboards.length === 0 ? (
-            <p className="px-2 py-2 text-xs text-[#737373]">No dashboards yet</p>
+            <p className="px-2 py-2 text-xs text-[#999]">No dashboards yet</p>
           ) : dashboards.map(function(d) {
             return (
               <button key={d.id} onClick={function() { addWidget(d.id); }} disabled={adding === d.id || added.has(d.id)}
-                className="flex w-full items-center justify-between px-2 py-2 rounded-lg text-sm text-[#525252] hover:bg-[#FAFAFA] disabled:opacity-50">
+                className="flex w-full items-center justify-between px-2 py-2 rounded-lg text-sm text-[#555] hover:bg-[#FAFAFA] disabled:opacity-50">
                 <span className="truncate">{d.name}</span>
-                {added.has(d.id) ? <Check size={14} className="text-[#22C55E]" /> : adding === d.id ? <div className="h-3 w-3 border-2 border-[#E5E5E5] border-t-[#737373] rounded-full animate-spin" /> : <Plus size={14} className="text-[#A3A3A3]" />}
+                {added.has(d.id) ? <Check size={14} className="text-[#22C55E]" /> : adding === d.id ? <div className="h-3 w-3 border-2 border-[#EAEAEA] border-t-[#737373] rounded-full animate-spin" /> : <Plus size={14} className="text-[#BBB]" />}
               </button>
             );
           })}
-          <a href="/dashboards" className="flex items-center gap-1 px-2 py-2 text-xs text-[#737373] hover:text-[#0A0A0A]"><Plus size={12} /> Create new dashboard</a>
+          <a href="/dashboards" className="flex items-center gap-1 px-2 py-2 text-xs text-[#999] hover:text-[#111]"><Plus size={12} /> Create new dashboard</a>
         </div>
       )}
     </div>
@@ -166,17 +166,17 @@ export default function ReportSlides({ title, sections }: ReportSlidesProps) {
         <AddReportToDashboard title={title} sections={sections} />
       </div>
 
-      <div className="rounded-xl overflow-hidden border border-[#E5E5E5] shadow-sm mt-6">
+      <div className="rounded-lg overflow-hidden border border-[#EAEAEA] shadow-sm mt-6">
         <div className="bg-white aspect-[16/9] flex flex-col overflow-hidden">
           {isFirstSlide ? (
             <div className="flex-1 flex flex-col items-center justify-center text-center px-8">
-              <h1 className="text-2xl font-bold text-[#0A0A0A]">{title}</h1>
-              <p className="text-sm text-[#737373] mt-2">Generated by Kairo AI</p>
+              <h1 className="text-2xl font-bold text-[#111]">{title}</h1>
+              <p className="text-sm text-[#999] mt-2">Generated by Kairo AI</p>
             </div>
           ) : (
             <>
               <div className="px-8 pt-6 shrink-0">
-                {parsed.title && <h2 className="text-lg font-bold text-[#0A0A0A] border-b border-[#F0F0F0] pb-2">{parsed.title}</h2>}
+                {parsed.title && <h2 className="text-lg font-bold text-[#111] border-b border-[#F0F0F0] pb-2">{parsed.title}</h2>}
               </div>
               <div className="flex-1 px-8 py-4 overflow-y-auto min-h-0">
                 <SlideContent blocks={parsed.content} />
@@ -185,18 +185,18 @@ export default function ReportSlides({ title, sections }: ReportSlidesProps) {
           )}
         </div>
 
-        <div className="bg-[#FAFAFA] border-t border-[#E5E5E5] px-4 py-2 flex items-center justify-between">
-          <span className="text-[10px] text-[#A3A3A3] font-medium truncate max-w-[40%]">{title}</span>
+        <div className="bg-[#FAFAFA] border-t border-[#EAEAEA] px-4 py-2 flex items-center justify-between">
+          <span className="text-[10px] text-[#BBB] font-medium truncate max-w-[40%]">{title}</span>
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1">
               {sections.map(function(_, i) {
-                return <button key={i} onClick={function() { setCurrent(i); }} className={"h-1.5 rounded-full transition-all " + (i === current ? "w-4 bg-[#0A0A0A]" : "w-1.5 bg-[#D4D4D4] hover:bg-[#A3A3A3]")} />;
+                return <button key={i} onClick={function() { setCurrent(i); }} className={"h-1.5 rounded-full transition-all " + (i === current ? "w-4 bg-[#111]" : "w-1.5 bg-[#D4D4D4] hover:bg-[#A3A3A3]")} />;
               })}
             </div>
             <div className="flex items-center gap-0.5">
-              <button onClick={prev} disabled={current === 0} className="h-6 w-6 flex items-center justify-center rounded text-[#525252] hover:bg-[#E5E5E5] disabled:opacity-30 transition-colors"><ChevronLeft size={14} /></button>
-              <span className="text-[10px] text-[#A3A3A3] min-w-[28px] text-center">{(current + 1) + "/" + total}</span>
-              <button onClick={next} disabled={current === total - 1} className="h-6 w-6 flex items-center justify-center rounded text-[#525252] hover:bg-[#E5E5E5] disabled:opacity-30 transition-colors"><ChevronRight size={14} /></button>
+              <button onClick={prev} disabled={current === 0} className="h-6 w-6 flex items-center justify-center rounded text-[#555] hover:bg-[#E5E5E5] disabled:opacity-30 transition-colors"><ChevronLeft size={14} /></button>
+              <span className="text-[10px] text-[#BBB] min-w-[28px] text-center">{(current + 1) + "/" + total}</span>
+              <button onClick={next} disabled={current === total - 1} className="h-6 w-6 flex items-center justify-center rounded text-[#555] hover:bg-[#E5E5E5] disabled:opacity-30 transition-colors"><ChevronRight size={14} /></button>
             </div>
           </div>
         </div>

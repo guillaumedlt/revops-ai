@@ -143,7 +143,7 @@ export default function LemlistArticle() {
               </div>
 
               {/* Quick verdict card */}
-              <div className="mt-8 rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+              <div className="mt-8 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <img src="https://www.google.com/s2/favicons?domain=lemlist.com&sz=32" alt="Lemlist" className="w-6 h-6" />
@@ -179,7 +179,7 @@ export default function LemlistArticle() {
             <article>
               {/* Section 1 : Intro */}
               <section id="intro" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi on a teste Lemlist (et pourquoi on a fini par switcher)</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Chez Ceres, Lemlist est l&apos;un des outils centraux de notre stack outbound depuis plus de deux ans. On l&apos;a deploye sur une dizaine de comptes clients, lance plus de 30 campagnes, contacte des dizaines de milliers de prospects. On connait l&apos;outil dans ses moindres recoins. Et on est partenaire officiel Lemlist depuis 2025.</p>
@@ -194,7 +194,7 @@ export default function LemlistArticle() {
 
               {/* Section 2 : L'entreprise en chiffres */}
               <section id="entreprise" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">L&apos;entreprise Lemlist en chiffres</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Lemlist a ete fondee en 2018 a Paris par Guillaume Moubeche. L&apos;entreprise a connu une croissance rapide, portee par un positionnement clair sur la personnalisation email et une strategie de contenu tres agressive sur LinkedIn (ironie quand on connait la suite).</p>
@@ -207,7 +207,7 @@ export default function LemlistArticle() {
                       { label: "Employes", value: "173", sub: "equipe globale" },
                       { label: "Annee de creation", value: "2018", sub: "Paris, France" },
                     ].map((m) => (
-                      <div key={m.label} className="text-center p-3 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2]">
+                      <div key={m.label} className="text-center p-3 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2]">
                         <div className="text-[18px] font-bold text-[#111]">{m.value}</div>
                         <div className="text-[10px] text-[#999] mt-1">{m.label}</div>
                         <div className="text-[9px] text-[#CCC] mt-0.5">{m.sub}</div>
@@ -220,7 +220,7 @@ export default function LemlistArticle() {
                   </div>
 
                   <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-[12px] font-semibold text-[#111]">G2</span>
                         <div className="flex items-center gap-1">
@@ -233,7 +233,7 @@ export default function LemlistArticle() {
                         <div className="h-full rounded-full bg-[#FF7A59]" style={{ width: "88%" }} />
                       </div>
                     </div>
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-[12px] font-semibold text-[#111]">Capterra</span>
                         <div className="flex items-center gap-1">
@@ -257,7 +257,7 @@ export default function LemlistArticle() {
 
               {/* Section 3 : Prise en main */}
               <section id="prise-en-main" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Prise en main et interface</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;interface de Lemlist a beaucoup evolue depuis notre premier acces en 2024. Le design est propre, moderne, avec une palette de couleurs vives (beaucoup de violet et d&apos;orange). La navigation laterale est bien organisee avec les sections principales : Campagnes, Leads, Enrichissement, Templates, Rapports et Parametres.</p>
@@ -271,7 +271,7 @@ export default function LemlistArticle() {
                       { label: "Courbe d'apprentissage", value: "Moyenne-haute", icon: "courbe" },
                       { label: "Ressources educatives", value: "Excellentes", icon: "doc" },
                     ].map((m) => (
-                      <div key={m.label} className="text-center p-3 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2]">
+                      <div key={m.label} className="text-center p-3 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2]">
                         <div className="text-[14px] font-bold text-[#111]">{m.value}</div>
                         <div className="text-[10px] text-[#999] mt-1">{m.label}</div>
                       </div>
@@ -283,7 +283,7 @@ export default function LemlistArticle() {
 
               {/* Section 4 : Features cles */}
               <section id="features" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les fonctionnalites cles</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75] mb-5">
                     <p>Lemlist est un outil dense. Voici les 8 fonctionnalites principales, avec notre evaluation terrain pour chacune.</p>
@@ -344,7 +344,7 @@ export default function LemlistArticle() {
                     <h3 className="text-[14px] font-semibold text-[#111] mb-3">Disponibilite par plan</h3>
                     <div className="overflow-x-auto">
                       <div className="min-w-[500px]">
-                        <div className="grid grid-cols-5 gap-2 pb-3 border-b border-[#E8E8E8]">
+                        <div className="grid grid-cols-5 gap-2 pb-3 border-b border-[#EAEAEA]">
                           <span className="text-[10px] font-semibold text-[#999]">Fonctionnalite</span>
                           <span className="text-[10px] font-semibold text-[#999] text-center">Email Starter</span>
                           <span className="text-[10px] font-semibold text-[#999] text-center">Email Pro</span>
@@ -390,7 +390,7 @@ export default function LemlistArticle() {
 
               {/* Section 5 : Personnalisation */}
               <section id="personnalisation" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">La personnalisation : le vrai point fort de Lemlist</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Si on ne devait retenir qu&apos;une seule raison de choisir Lemlist, c&apos;est la personnalisation. C&apos;est la fonctionnalite historique de l&apos;outil, celle qui l&apos;a fait connaitre, et elle reste la meilleure du marche en 2026.</p>
@@ -398,28 +398,28 @@ export default function LemlistArticle() {
                   </div>
 
                   <div className="mt-5 space-y-4">
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <div className="w-6 h-6 rounded-md bg-[#6C5CE7]/10 flex items-center justify-center text-[10px] font-bold text-[#6C5CE7]">1</div>
                         <h3 className="text-[13px] font-semibold text-[#111]">Variables et liquid syntax</h3>
                       </div>
                       <p className="text-[12px] text-[#777] leading-[1.65]">Les variables classiques (prenom, nom, entreprise, poste) sont le minimum. La liquid syntax ajoute des conditions : &ldquo;Si le prospect est CEO, ecrire X, sinon ecrire Y&rdquo;. On peut creer des fallbacks intelligents : si une variable est vide, un texte alternatif prend le relais. Ca evite les emails avec des &ldquo;Bonjour &#123;&#123;firstName&#125;&#125;&rdquo; non remplaces.</p>
                     </div>
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <div className="w-6 h-6 rounded-md bg-[#4B5EFC]/10 flex items-center justify-center text-[10px] font-bold text-[#4B5EFC]">2</div>
                         <h3 className="text-[13px] font-semibold text-[#111]">Images dynamiques</h3>
                       </div>
                       <p className="text-[12px] text-[#777] leading-[1.65]">Vous uploadez un template d&apos;image (capture d&apos;ecran de votre produit, mockup, infographie) et Lemlist y incruste dynamiquement le nom du prospect, le logo de son entreprise, ou n&apos;importe quelle variable. Le resultat est une image qui semble creee manuellement pour chaque prospect. Sur nos campagnes SaaS, les emails avec images dynamiques ont systematiquement surperforme les emails texte : +35% de taux de reponse en moyenne.</p>
                     </div>
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <div className="w-6 h-6 rounded-md bg-[#FF7A59]/10 flex items-center justify-center text-[10px] font-bold text-[#FF7A59]">3</div>
                         <h3 className="text-[13px] font-semibold text-[#111]">Videos personnalisees</h3>
                       </div>
                       <p className="text-[12px] text-[#777] leading-[1.65]">Vous enregistrez une video (webcam, screen recording) et Lemlist personnalise le thumbnail avec les informations du prospect. Le prospect recoit un email avec ce qui ressemble a une video enregistree specialement pour lui. Le taux de clic est tres eleve. En revanche, la production de la video template demande plus de travail que les images, et le format est moins adapte a certains secteurs (services financiers, juridique).</p>
                     </div>
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <div className="w-6 h-6 rounded-md bg-[#22C55E]/10 flex items-center justify-center text-[10px] font-bold text-[#22C55E]">4</div>
                         <h3 className="text-[13px] font-semibold text-[#111]">Landing pages personnalisees</h3>
@@ -428,7 +428,7 @@ export default function LemlistArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Notre retour d&apos;experience</p>
                     <p className="text-[12px] text-[#777] leading-[1.65]">La personnalisation de Lemlist est reellement best-in-class. Sur les 30+ campagnes qu&apos;on a gerees, les campagnes avec personnalisation visuelle (images + liquid syntax) ont en moyenne genere 2 fois plus de reponses que les emails texte standard. Le probleme, c&apos;est que cette personnalisation avancee est aussi la raison pour laquelle Lemlist est plus cher. Si vous n&apos;utilisez pas ces fonctionnalites, vous payez pour quelque chose que vous ne consommez pas.</p>
                   </div>
@@ -438,7 +438,7 @@ export default function LemlistArticle() {
 
               {/* Section 6 : LinkedIn automation */}
               <section id="linkedin" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">L&apos;automatisation LinkedIn : ce qui marche, ce qui ne marche pas</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>C&apos;est la section la plus nuancee de cet article. L&apos;automatisation LinkedIn est un argument de vente majeur de Lemlist (plan Multichannel Expert a $99/mois), mais la realite terrain est plus complexe.</p>
@@ -453,7 +453,7 @@ export default function LemlistArticle() {
                       { action: "InMail", status: "Fonctionne", statusColor: "#22C55E", note: "Necessite un abonnement LinkedIn Premium/Sales Navigator en plus de Lemlist. Cout supplementaire non negligeable." },
                       { action: "Messages vocaux", status: "Experimental", statusColor: "#EF4444", note: "Feature recente, basee sur l'IA. Le resultat est encore artificiel et la plupart des prospects le detectent." },
                     ].map((l) => (
-                      <div key={l.action} className="flex gap-3 items-start rounded-xl border border-[#F2F2F2] p-3">
+                      <div key={l.action} className="flex gap-3 items-start rounded-lg border border-[#F2F2F2] p-3">
                         <div className="shrink-0">
                           <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md" style={{ color: l.statusColor, background: l.statusColor + "15" }}>{l.status}</span>
                         </div>
@@ -465,7 +465,7 @@ export default function LemlistArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FEF2F2] border border-[#FECACA] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FEF2F2] border border-[#FECACA] p-4">
                     <p className="text-[12px] font-semibold text-[#EF4444] mb-2">Le risque de ban LinkedIn</p>
                     <div className="space-y-2 text-[12px] text-[#777] leading-[1.65]">
                       <p>L&apos;automatisation LinkedIn viole les conditions d&apos;utilisation de LinkedIn. Point final. Lemlist utilise une extension Chrome qui simule des actions humaines sur votre navigateur, mais LinkedIn detecte de mieux en mieux ces outils.</p>
@@ -474,7 +474,7 @@ export default function LemlistArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Notre recommandation</p>
                     <p className="text-[12px] text-[#777] leading-[1.65]">Utilisez l&apos;automatisation LinkedIn de Lemlist avec moderation. Limitez-vous aux visites de profil et aux demandes de connexion (max 20-25 par jour). Evitez les messages automatises en masse. Et surtout, n&apos;utilisez jamais votre compte LinkedIn principal pour l&apos;automatisation. Si vous avez besoin d&apos;un outil LinkedIn dedie et plus fiable, regardez du cote de La Growth Machine qui gere mieux les limites et les proxys.</p>
                   </div>
@@ -484,7 +484,7 @@ export default function LemlistArticle() {
 
               {/* Section 7 : Multicanal en pratique */}
               <section id="multicanal" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Le multicanal en pratique</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Lemlist se positionne comme une plateforme de prospection multicanal : email, LinkedIn, WhatsApp et appels telephoniques dans une seule sequence. C&apos;est un vrai atout sur le papier. Voici comment ca fonctionne en realite.</p>
@@ -506,7 +506,7 @@ export default function LemlistArticle() {
                             <div className="text-[10px] font-semibold text-[#999]">{s.delay}</div>
                             {i < 5 && <div className="w-px h-6 bg-[#E8E8E8] mx-auto mt-1" />}
                           </div>
-                          <div className="flex-1 rounded-xl border border-[#F2F2F2] p-3">
+                          <div className="flex-1 rounded-lg border border-[#F2F2F2] p-3">
                             <div className="flex items-center gap-2 mb-1">
                               <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded text-white" style={{ background: s.channelColor }}>{s.channel}</span>
                               <span className="text-[12px] font-semibold text-[#111]">{s.action}</span>
@@ -528,14 +528,14 @@ export default function LemlistArticle() {
 
               {/* Section 8 : Lemwarm et delivrabilite */}
               <section id="delivrabilite" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Lemwarm et delivrabilite</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La delivrabilite est le nerf de la guerre en cold email. Si vos emails finissent en spam, tout le reste ne sert a rien. Voici comment Lemlist gere ce sujet.</p>
                   </div>
 
                   {/* Deliverability score dashboard mockup */}
-                  <div className="mt-5 rounded-xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+                  <div className="mt-5 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                     <p className="text-[12px] font-semibold text-[#111] mb-4">Dashboard de delivrabilite Lemwarm (ce que vous voyez)</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
                       {[
@@ -598,7 +598,7 @@ export default function LemlistArticle() {
 
               {/* Section 9 : Base de donnees B2B */}
               <section id="base-donnees" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">La base de donnees B2B : 450 millions de contacts, mais quelle qualite ?</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Lemlist a integre une base de donnees B2B directement dans la plateforme : 450 millions de contacts et 63 millions d&apos;entreprises. L&apos;enrichissement utilise un systeme &ldquo;waterfall&rdquo; qui interroge sequentiellement 7 a 8 fournisseurs de donnees (dont Dropcontact, Hunter, et d&apos;autres) pour maximiser le taux de decouverte.</p>
@@ -608,7 +608,7 @@ export default function LemlistArticle() {
                   <div className="mt-5 space-y-3">
                     <p className="text-[12px] font-semibold text-[#111]">Nos tests sur la base de donnees (mars 2026)</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div className="rounded-lg border border-[#F2F2F2] p-4">
                         <p className="text-[12px] font-semibold text-[#22C55E] mb-3">Ce qui fonctionne bien</p>
                         <div className="space-y-2">
                           {[
@@ -626,7 +626,7 @@ export default function LemlistArticle() {
                           ))}
                         </div>
                       </div>
-                      <div className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div className="rounded-lg border border-[#F2F2F2] p-4">
                         <p className="text-[12px] font-semibold text-[#EF4444] mb-3">Ce qui pose probleme</p>
                         <div className="space-y-2">
                           {[
@@ -657,7 +657,7 @@ export default function LemlistArticle() {
 
               {/* Section 10 : L'IA dans Lemlist */}
               <section id="ia" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">L&apos;IA dans Lemlist : un vrai avantage concurrentiel</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Lemlist a pris un virage IA ambitieux depuis fin 2025, et contrairement a beaucoup d&apos;outils qui collent un badge &ldquo;IA&rdquo; sur des fonctionnalites cosmetiques, ici l&apos;IA apporte une vraie valeur operationnelle. C&apos;est l&apos;un des domaines ou Lemlist a le plus progresse recemment.</p>
@@ -708,7 +708,7 @@ export default function LemlistArticle() {
                         verdict: "Tres utile pour les equipes qui ont du mal a definir leur ICP dans des filtres. On part d'un exemple concret et l'IA extrapole."
                       },
                     ].map((ai) => (
-                      <div key={ai.name} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={ai.name} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center justify-between mb-2">
                           <h3 className="text-[13px] font-semibold text-[#111]">{ai.name}</h3>
                           <span className="text-[12px] font-bold" style={{ color: ai.scoreColor }}>{ai.score}</span>
@@ -720,7 +720,7 @@ export default function LemlistArticle() {
                   </div>
 
                   {/* AI enrichment mockup */}
-                  <div className="mt-5 rounded-xl border border-[#E8E8E8] overflow-hidden">
+                  <div className="mt-5 rounded-lg border border-[#EAEAEA] overflow-hidden">
                     <div className="bg-[#6C5CE7] px-4 py-2 flex items-center gap-2">
                       <div className="flex gap-1"><div className="w-2 h-2 rounded-full bg-white/30" /><div className="w-2 h-2 rounded-full bg-white/30" /><div className="w-2 h-2 rounded-full bg-white/30" /></div>
                       <span className="text-[10px] text-white/70 font-medium">Lemlist AI Enrichment</span>
@@ -766,7 +766,7 @@ export default function LemlistArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#F0F0FF] border border-[#E0E0FF] p-4">
+                  <div className="mt-5 rounded-lg bg-[#F0F0FF] border border-[#E0E0FF] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Notre avis global sur l&apos;IA Lemlist</p>
                     <p className="text-[12px] text-[#555] leading-[1.65]">L&apos;IA dans Lemlist est passee de gadget a vrai avantage concurrentiel en quelques mois. L&apos;enrichissement de colonnes par IA est la fonctionnalite phare : elle permet de generer des donnees contextuelles pour chaque prospect sans quitter l&apos;outil, comme un Clay integre. Les AI Variables et le Campaign Generator sont des accelerateurs reels au quotidien. C&apos;est aujourd&apos;hui l&apos;un des arguments les plus solides pour choisir Lemlist.</p>
                   </div>
@@ -776,7 +776,7 @@ export default function LemlistArticle() {
 
               {/* Section 11 : Integrations CRM */}
               <section id="integrations" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les integrations CRM</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Les integrations CRM sont disponibles a partir du plan Email Pro ($69/mois). Lemlist propose des integrations natives avec les principaux CRM du marche :</p>
@@ -817,7 +817,7 @@ export default function LemlistArticle() {
                         limits: "Necessite le plan Expert (pas disponible sur Starter et Pro). Cout supplementaire de l'outil d'automatisation.",
                       },
                     ].map((int) => (
-                      <div key={int.tool} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={int.tool} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-3 mb-2">
                           <img src={`https://www.google.com/s2/favicons?domain=${int.icon}&sz=32`} alt={int.tool} className="w-4 h-4" />
                           <span className="text-[13px] font-semibold text-[#111]">{int.tool}</span>
@@ -838,7 +838,7 @@ export default function LemlistArticle() {
 
               {/* Section 12 : Pricing */}
               <section id="pricing" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Prix : le vrai cout de Lemlist en 2026</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le prix est le principal reproche qu&apos;on fait a Lemlist. Pas parce que l&apos;outil ne les vaut pas (il est puissant), mais parce que le modele per-seat fait exploser la facture des qu&apos;on scale.</p>
@@ -884,7 +884,7 @@ export default function LemlistArticle() {
                         highlight: false,
                       },
                     ].map((p) => (
-                      <div key={p.name} className={`rounded-xl border p-4 ${p.highlight ? "border-[#6C5CE7] bg-[#6C5CE7]/[0.02] ring-1 ring-[#6C5CE7]/20" : "border-[#F2F2F2]"}`}>
+                      <div key={p.name} className={`rounded-lg border p-4 ${p.highlight ? "border-[#6C5CE7] bg-[#6C5CE7]/[0.02] ring-1 ring-[#6C5CE7]/20" : "border-[#F2F2F2]"}`}>
                         <div className="text-[10px] font-bold uppercase tracking-wider mb-2" style={{ color: p.color }}>{p.name}</div>
                         <div className="flex items-baseline gap-1 mb-1">
                           <span className="text-[11px] text-[#999]">$</span>
@@ -916,12 +916,12 @@ export default function LemlistArticle() {
                   </div>
 
                   {/* Credit system calculator */}
-                  <div className="mt-6 rounded-xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+                  <div className="mt-6 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                     <h3 className="text-[14px] font-semibold text-[#111] mb-2">Le systeme de credits : ce qu&apos;il faut comprendre</h3>
                     <p className="text-[12px] text-[#777] leading-[1.65] mb-4">Chaque plan inclut un quota de credits mensuels pour l&apos;enrichissement. 1 email = 5 credits, 1 numero de telephone = 20 credits. Les credits non utilises ne roulent pas au mois suivant. Les credits supplementaires coutent $0.01 chacun.</p>
                     <div className="overflow-x-auto">
                       <div className="min-w-[400px]">
-                        <div className="grid grid-cols-4 gap-2 pb-3 border-b border-[#E8E8E8]">
+                        <div className="grid grid-cols-4 gap-2 pb-3 border-b border-[#EAEAEA]">
                           <span className="text-[10px] font-semibold text-[#999]">Volume d&apos;enrichissement</span>
                           <span className="text-[10px] font-semibold text-[#999] text-center">Credits necessaires</span>
                           <span className="text-[10px] font-semibold text-[#999] text-center">Cout additionnel*</span>
@@ -947,7 +947,7 @@ export default function LemlistArticle() {
                   </div>
 
                   {/* Simulation 5 SDR */}
-                  <div className="mt-6 rounded-xl border border-[#EF4444]/20 bg-[#FEF2F2] p-5">
+                  <div className="mt-6 rounded-lg border border-[#EF4444]/20 bg-[#FEF2F2] p-5">
                     <h3 className="text-[14px] font-semibold text-[#111] mb-2">Simulation : le vrai cout pour une equipe de 5 SDR</h3>
                     <p className="text-[12px] text-[#777] leading-[1.65] mb-4">Voici ce que ca coute concretement pour une equipe de 5 commerciaux sur le plan Multichannel Expert :</p>
                     <div className="space-y-2">
@@ -982,7 +982,7 @@ export default function LemlistArticle() {
 
               {/* Section 13 : Comparatif */}
               <section id="comparatif" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Lemlist vs Emelia vs Apollo vs Instantly vs La Growth Machine</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Le marche des outils de prospection outbound est dense en 2026. Voici une comparaison detaillee de Lemlist avec ses 4 principaux concurrents.</p>
@@ -991,7 +991,7 @@ export default function LemlistArticle() {
                   {/* Big comparison table */}
                   <div className="mt-5 overflow-x-auto">
                     <div className="min-w-[600px]">
-                      <div className="grid grid-cols-6 gap-2 pb-3 border-b border-[#E8E8E8]">
+                      <div className="grid grid-cols-6 gap-2 pb-3 border-b border-[#EAEAEA]">
                         <span className="text-[10px] font-semibold text-[#999]">Critere</span>
                         {[
                           { name: "Lemlist", domain: "lemlist.com", color: "#6C5CE7" },
@@ -1035,28 +1035,28 @@ export default function LemlistArticle() {
 
                   {/* Detailed comparison cards */}
                   <div className="mt-6 space-y-4">
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=lemlist.com&sz=32" alt="Lemlist" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Lemlist vs Emelia</span>
                       </div>
                       <p className="text-[12px] text-[#777] leading-[1.65]">La difference de prix est le facteur decisif. Pour du cold email pur, Lemlist coute 3 a 10 fois plus cher qu&apos;Emelia pour un volume d&apos;envoi equivalent. Emelia offre une meilleure delivrabilite (warm-up Mailreach superieur a Lemwarm), une interface plus simple, et un support en francais. Lemlist gagne sur la personnalisation (images, videos, liquid syntax), le multicanal et la base B2B. Notre regle chez Ceres : si le client fait uniquement de l&apos;email, Emelia. Si le client a besoin de personnalisation avancee ou de multicanal, Lemlist.</p>
                     </div>
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=apollo.io&sz=32" alt="Apollo" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Lemlist vs Apollo</span>
                       </div>
                       <p className="text-[12px] text-[#777] leading-[1.65]">Apollo est le choix oppose a Lemlist. Ou Lemlist excelle sur la personnalisation, Apollo excelle sur les donnees. La base de donnees B2B d&apos;Apollo (275M contacts) est mieux maintenue et plus fiable que celle de Lemlist, avec un CRM leger integre qui evite d&apos;avoir un outil supplementaire. En revanche, Apollo est faible sur la personnalisation email (pas d&apos;images dynamiques, pas de liquid syntax), et la delivrabilite est moyenne. Si votre priorite est l&apos;enrichissement et les donnees, Apollo. Si c&apos;est la personnalisation et le multicanal, Lemlist.</p>
                     </div>
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=instantly.ai&sz=32" alt="Instantly" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Lemlist vs Instantly</span>
                       </div>
                       <p className="text-[12px] text-[#777] leading-[1.65]">Instantly est concu pour le volume. Son modele de prix (par workspace, pas par utilisateur) le rend beaucoup plus economique pour les equipes qui envoient en masse. La delivrabilite est bonne grace au warm-up integre et a la rotation de boites illimitee. Lemlist est superieur sur la personnalisation et le multicanal, mais si votre strategie repose sur le volume d&apos;emails plutot que sur la personnalisation unitaire, Instantly est plus adapte et moins cher.</p>
                     </div>
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <img src="https://www.google.com/s2/favicons?domain=lagrowthmachine.com&sz=32" alt="LGM" className="w-4 h-4" />
                         <span className="text-[12px] font-semibold text-[#111]">Lemlist vs La Growth Machine</span>
@@ -1070,7 +1070,7 @@ export default function LemlistArticle() {
 
               {/* Section 14 : Limites */}
               <section id="limites" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les limites qu&apos;on a rencontrees en 2 ans</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Apres deux ans d&apos;utilisation intensive sur une dizaine de comptes clients, voici les problemes concrets que nous avons rencontres. Ce ne sont pas des defauts theoriques mais des irritants quotidiens.</p>
@@ -1127,7 +1127,7 @@ export default function LemlistArticle() {
 
               {/* Section 15 : Verdict */}
               <section id="verdict" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Verdict</span>
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-[20px] font-semibold text-white">Notre avis final apres 2 ans</h2>
@@ -1206,10 +1206,10 @@ export default function LemlistArticle() {
 
               {/* Section 16 : Pour qui */}
               <section id="pour-qui" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pour qui Lemlist est fait</h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#F0FDF4] p-4">
+                    <div className="rounded-lg bg-[#F0FDF4] p-4">
                       <p className="text-[12px] font-semibold text-[#22C55E] mb-3">Ideal pour</p>
                       {[
                         "Equipes qui exploitent la personnalisation avancee (images, videos, landing pages)",
@@ -1223,7 +1223,7 @@ export default function LemlistArticle() {
                         <p key={i} className="text-[11px] text-[#555] mb-2 flex items-start gap-2"><span className="text-[#22C55E] mt-0.5 shrink-0">+</span>{i}</p>
                       ))}
                     </div>
-                    <div className="rounded-xl bg-[#FEF2F2] p-4">
+                    <div className="rounded-lg bg-[#FEF2F2] p-4">
                       <p className="text-[12px] font-semibold text-[#EF4444] mb-3">Pas adapte si</p>
                       {[
                         "Vous faites uniquement du cold email (Emelia ou Instantly suffisent)",
@@ -1239,7 +1239,7 @@ export default function LemlistArticle() {
                     </div>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Notre recommandation en 2026</p>
                     <div className="space-y-2 text-[12px] text-[#777] leading-[1.65]">
                       <p>Si vous hesitez, posez-vous une question simple : allez-vous utiliser la personnalisation visuelle (images, videos, landing pages) et le multicanal LinkedIn ? Si oui, Lemlist est probablement le meilleur choix. Le plan Multichannel Expert a $99/mois est le sweet spot.</p>
@@ -1256,7 +1256,7 @@ export default function LemlistArticle() {
               <p className="text-[13px] font-semibold text-[#111] mb-4">Articles similaires</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedArticles.map((a) => (
-                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
+                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold text-white mb-3" style={{ background: a.color }}>
                       {a.category[0]}
                     </div>
@@ -1269,14 +1269,14 @@ export default function LemlistArticle() {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Besoin d&apos;aide pour choisir votre stack outbound ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[500px] mx-auto">On configure et connecte vos outils de prospection a votre CRM. Lemlist, Emelia, Apollo, Instantly, La Growth Machine, HubSpot. Audit, setup et optimisation en moins de 2 semaines.</p>
                 <div className="flex items-center justify-center gap-3">
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                     <span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Reserver un appel
                   </a>
-                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                     Nos services
                   </Link>
                 </div>

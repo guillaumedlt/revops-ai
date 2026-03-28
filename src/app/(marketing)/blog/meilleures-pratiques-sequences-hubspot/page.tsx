@@ -297,7 +297,7 @@ export default function SequencesHubSpotArticle() {
 
               {/* Comparison table */}
               <div className="overflow-x-auto mb-6">
-                <table className="w-full border-collapse rounded-xl overflow-hidden">
+                <table className="w-full border-collapse rounded-lg overflow-hidden">
                   <thead>
                     <tr style={{ backgroundColor: ARTICLE_COLOR }}>
                       <th className="text-left text-white text-sm font-semibold px-4 py-3">Critere</th>
@@ -392,7 +392,7 @@ export default function SequencesHubSpotArticle() {
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="p-5 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-shadow"
+                    className="p-5 rounded-lg border border-gray-200 bg-white hover:shadow-md transition-shadow"
                   >
                     <span
                       className="inline-block text-xs font-bold text-white px-2.5 py-1 rounded-full mb-3"
@@ -442,7 +442,7 @@ export default function SequencesHubSpotArticle() {
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="p-4 rounded-2xl border border-gray-200 bg-white text-center"
+                    className="p-4 rounded-lg border border-gray-200 bg-white text-center"
                   >
                     <p
                       className="text-2xl font-bold mb-1"
@@ -476,7 +476,7 @@ export default function SequencesHubSpotArticle() {
               </p>
 
               {/* Dark section */}
-              <div className="bg-gray-900 rounded-2xl p-6 text-white">
+              <div className="bg-gray-900 rounded-lg p-6 text-white">
                 <h3 className="font-semibold text-lg mb-3">
                   Conseil Ceres : la regle du fuseau horaire
                 </h3>
@@ -520,10 +520,10 @@ export default function SequencesHubSpotArticle() {
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="flex gap-4 p-5 rounded-2xl border border-gray-200 bg-white"
+                    className="flex gap-4 p-5 rounded-lg border border-gray-200 bg-white"
                   >
                     <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-sm shrink-0"
+                      className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm shrink-0"
                       style={{ backgroundColor: ARTICLE_COLOR }}
                     >
                       {i + 1}
@@ -581,7 +581,7 @@ export default function SequencesHubSpotArticle() {
 
               {/* Comparison table */}
               <div className="overflow-x-auto mb-6">
-                <table className="w-full border-collapse rounded-xl overflow-hidden text-sm">
+                <table className="w-full border-collapse rounded-lg overflow-hidden text-sm">
                   <thead>
                     <tr style={{ backgroundColor: ARTICLE_COLOR }}>
                       <th className="text-left text-white font-semibold px-4 py-3">Variable testee</th>
@@ -675,7 +675,7 @@ export default function SequencesHubSpotArticle() {
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="p-6 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-shadow"
+                    className="p-6 rounded-lg border border-gray-200 bg-white hover:shadow-md transition-shadow"
                   >
                     <div className="flex items-start justify-between mb-3">
                       <h3
@@ -699,7 +699,7 @@ export default function SequencesHubSpotArticle() {
                 ))}
               </div>
 
-              <div className="bg-gray-900 rounded-2xl p-6 text-white">
+              <div className="bg-gray-900 rounded-lg p-6 text-white">
                 <h3 className="font-semibold text-lg mb-3">
                   Exemple reel : client Ceres dans la cybersecurite
                 </h3>
@@ -736,7 +736,7 @@ export default function SequencesHubSpotArticle() {
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="p-5 rounded-2xl border border-gray-200 bg-white"
+                    className="p-5 rounded-lg border border-gray-200 bg-white"
                   >
                     <p
                       className="text-sm font-medium text-gray-500 mb-2"
@@ -816,7 +816,7 @@ export default function SequencesHubSpotArticle() {
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="p-5 rounded-2xl border border-red-100 bg-red-50/50"
+                    className="p-5 rounded-lg border border-red-100 bg-red-50/50"
                   >
                     <div className="flex items-start gap-3">
                       <div className="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center text-red-600 font-bold text-sm shrink-0 mt-0.5">
@@ -883,10 +883,10 @@ export default function SequencesHubSpotArticle() {
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="flex gap-4 p-5 rounded-2xl border border-gray-200 bg-white"
+                    className="flex gap-4 p-5 rounded-lg border border-gray-200 bg-white"
                   >
                     <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-sm shrink-0"
+                      className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm shrink-0"
                       style={{ backgroundColor: ARTICLE_COLOR }}
                     >
                       {i + 1}
@@ -902,7 +902,7 @@ export default function SequencesHubSpotArticle() {
                 ))}
               </div>
 
-              <div className="bg-gray-900 rounded-2xl p-6 text-white">
+              <div className="bg-gray-900 rounded-lg p-6 text-white">
                 <h3 className="font-semibold text-lg mb-3">
                   Resultat client : +62% de pipeline en 4 mois
                 </h3>
@@ -921,7 +921,7 @@ export default function SequencesHubSpotArticle() {
             {/* CTA */}
             <section className="mb-16">
               <div
-                className="rounded-2xl p-8 sm:p-12 text-center text-white"
+                className="rounded-lg p-8 sm:p-12 text-center text-white"
                 style={{ backgroundColor: ARTICLE_COLOR }}
               >
                 <h2 className="text-2xl sm:text-3xl font-bold mb-4">
@@ -934,7 +934,7 @@ export default function SequencesHubSpotArticle() {
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-white font-semibold px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors"
+                  className="inline-flex items-center gap-2 bg-white font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors"
                   style={{ color: ARTICLE_COLOR }}
                 >
                   Demander un audit gratuit
@@ -955,7 +955,7 @@ export default function SequencesHubSpotArticle() {
                   <Link
                     key={i}
                     href={article.href}
-                    className="group p-5 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-all"
+                    className="group p-5 rounded-lg border border-gray-200 bg-white hover:shadow-md transition-all"
                   >
                     <span
                       className="inline-block text-xs font-medium px-2.5 py-1 rounded-full mb-3"

@@ -51,7 +51,7 @@ var PROVIDER_LABELS: Record<string, string> = {
 function ProviderIcon({ provider, size = 16 }: { provider: string; size?: number }) {
   if (provider === "kairo") {
     return (
-      <div className="flex items-center justify-center rounded bg-[#0A0A0A] text-white shrink-0" style={{ width: size, height: size }}>
+      <div className="flex items-center justify-center rounded bg-[#111] text-white shrink-0" style={{ width: size, height: size }}>
         <span style={{ fontSize: size * 0.6, fontWeight: 700, lineHeight: 1 }}>K</span>
       </div>
     );
@@ -290,12 +290,12 @@ export default function ChatInputBar({
   }).filter(function(g) { return g.models.length > 0; });
 
   return (
-    <div className="relative w-full px-4 pb-4">
+    <div className="relative w-full px-5 pb-4">
       <div className="mx-auto max-w-3xl w-full">
-        <div className="relative border border-[#E5E5E5] rounded-2xl bg-white shadow-sm focus-within:ring-1 focus-within:ring-[#D4D4D4] transition-shadow">
+        <div className="relative border border-[#EAEAEA] rounded-lg bg-white focus-within:border-[#111] transition-colors">
           {/* Slash command popover */}
           {showSlash && filteredSlash.length > 0 && (
-            <div ref={slashRef} className="absolute bottom-full left-4 mb-2 w-[300px] max-w-[calc(100vw-2rem)] rounded-xl border border-[#E5E5E5] bg-white shadow-lg z-50 py-1 overflow-hidden">
+            <div ref={slashRef} className="absolute bottom-full left-4 mb-2 w-[300px] max-w-[calc(100vw-2rem)] rounded-lg border border-[#EAEAEA] bg-white shadow-lg z-50 py-1 overflow-hidden">
               {filteredSlash.map(function(cmd, i) {
                 var Icon = ICON_MAP[cmd.icon] || FileText;
                 return (
@@ -305,11 +305,11 @@ export default function ChatInputBar({
                     className={"w-full flex items-center gap-3 px-3 py-2 text-left transition-colors " + (i === slashIndex ? "bg-[#F5F5F5]" : "hover:bg-[#FAFAFA]")}
                   >
                     <div className="h-8 w-8 rounded-lg bg-[#F5F5F5] flex items-center justify-center shrink-0">
-                      <Icon size={16} className="text-[#525252]" />
+                      <Icon size={16} className="text-[#555]" />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-sm font-medium text-[#0A0A0A]">{cmd.command}</p>
-                      <p className="text-[11px] text-[#A3A3A3] truncate">{cmd.description}</p>
+                      <p className="text-sm font-medium text-[#111]">{cmd.command}</p>
+                      <p className="text-[11px] text-[#BBB] truncate">{cmd.description}</p>
                     </div>
                   </button>
                 );
@@ -320,16 +320,16 @@ export default function ChatInputBar({
           {/* File preview chip */}
           {selectedFile && (
             <div className="px-4 pt-2">
-              <div className="inline-flex items-center gap-2 rounded-lg border border-[#E5E5E5] bg-[#FAFAFA] px-3 py-1.5 text-xs text-[#525252]">
+              <div className="inline-flex items-center gap-2 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] px-3 py-1.5 text-xs text-[#555]">
                 <span className="max-w-[200px] truncate">{selectedFile.name}</span>
-                <span className="text-[#A3A3A3]">
+                <span className="text-[#BBB]">
                   {selectedFile.size < 1024
                     ? selectedFile.size + " B"
                     : selectedFile.size < 1048576
                       ? (selectedFile.size / 1024).toFixed(1) + " KB"
                       : (selectedFile.size / 1048576).toFixed(1) + " MB"}
                 </span>
-                <button onClick={function() { setSelectedFile(null); }} className="text-[#A3A3A3] hover:text-[#0A0A0A] text-sm leading-none">&times;</button>
+                <button onClick={function() { setSelectedFile(null); }} className="text-[#BBB] hover:text-[#111] text-sm leading-none">&times;</button>
               </div>
             </div>
           )}
@@ -344,7 +344,7 @@ export default function ChatInputBar({
               disabled={disabled || uploading}
               placeholder="Ask Kairo anything... (type / for commands)"
               rows={1}
-              className="w-full resize-none bg-transparent text-sm text-[#0A0A0A] placeholder:text-[#A3A3A3] focus:outline-none min-h-[36px] max-h-[200px] py-1"
+              className="w-full resize-none bg-transparent text-sm text-[#111] placeholder:text-[#BBB] focus:outline-none min-h-[36px] max-h-[200px] py-1"
             />
           </div>
 
@@ -360,15 +360,15 @@ export default function ChatInputBar({
                 <button
                   onClick={function() { setShowConnectors(!showConnectors); }}
                   type="button"
-                  className="flex h-8 w-8 items-center justify-center rounded-lg text-[#737373] hover:bg-[#F5F5F5] hover:text-[#0A0A0A] transition-colors shrink-0"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg text-[#999] hover:bg-[#F5F5F5] hover:text-[#111] transition-colors shrink-0"
                   title="Connectors"
                 >
                   <SlidersHorizontal size={16} />
                 </button>
                 {showConnectors && (
-                  <div className="absolute bottom-full left-0 mb-2 w-[280px] max-w-[calc(100vw-2rem)] rounded-xl border border-[#E5E5E5] bg-white shadow-lg z-50 overflow-hidden">
+                  <div className="absolute bottom-full left-0 mb-2 w-[280px] max-w-[calc(100vw-2rem)] rounded-lg border border-[#EAEAEA] bg-white shadow-lg z-50 overflow-hidden">
                     <div className="px-4 py-2.5 border-b border-[#F0F0F0]">
-                      <p className="text-xs font-semibold text-[#0A0A0A]">Connectors</p>
+                      <p className="text-xs font-semibold text-[#111]">Connectors</p>
                     </div>
                     <div className="p-1.5">
                       {CONNECTOR_REGISTRY.map(function(c) {
@@ -377,8 +377,8 @@ export default function ChatInputBar({
                           <div key={c.id} className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#FAFAFA] transition-colors">
                             <img src={c.logo} alt="" className="h-5 w-5 rounded" />
                             <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-[#0A0A0A]">{c.name}</p>
-                              <p className="text-[10px] text-[#A3A3A3] truncate">{c.description}</p>
+                              <p className="text-sm font-medium text-[#111]">{c.name}</p>
+                              <p className="text-[10px] text-[#BBB] truncate">{c.description}</p>
                             </div>
                             {isConnected ? (
                               <div className="flex items-center gap-1">
@@ -388,7 +388,7 @@ export default function ChatInputBar({
                             ) : (
                               <a
                                 href="/settings?tab=connectors"
-                                className="text-[10px] text-[#0A0A0A] font-medium px-2.5 py-1 rounded-md border border-[#E5E5E5] hover:bg-[#F5F5F5] transition-colors"
+                                className="text-[10px] text-[#111] font-medium px-2.5 py-1 rounded-md border border-[#EAEAEA] hover:bg-[#F5F5F5] transition-colors"
                               >
                                 Connect
                               </a>
@@ -406,15 +406,15 @@ export default function ChatInputBar({
               <div className="relative" ref={modelRef}>
                 <button
                   onClick={function() { setShowModelPicker(!showModelPicker); }}
-                  className="ml-1 h-7 px-2 sm:px-2.5 rounded-full text-[10px] sm:text-[11px] font-medium border border-[#E5E5E5] text-[#525252] hover:bg-[#F5F5F5] transition-colors flex items-center gap-1 sm:gap-1.5 shrink-0"
+                  className="ml-1 h-7 px-2 sm:px-2.5 rounded-full text-[10px] sm:text-[11px] font-medium border border-[#EAEAEA] text-[#555] hover:bg-[#F5F5F5] transition-colors flex items-center gap-1 sm:gap-1.5 shrink-0"
                 >
                   <ProviderIcon provider={currentModel.provider} size={14} />
                   <span className="hidden sm:inline">{currentModel.label}</span>
                   <span className="sm:hidden">{currentModel.label.split(" ")[0]}</span>
-                  <ChevronDown size={12} className={"text-[#A3A3A3] transition-transform " + (showModelPicker ? "rotate-180" : "")} />
+                  <ChevronDown size={12} className={"text-[#BBB] transition-transform " + (showModelPicker ? "rotate-180" : "")} />
                 </button>
                 {showModelPicker && (
-                  <div className="absolute bottom-full left-0 mb-1 bg-white border border-[#E5E5E5] rounded-xl shadow-lg w-[260px] max-w-[calc(100vw-2rem)] z-50 overflow-hidden">
+                  <div className="absolute bottom-full left-0 mb-1 bg-white border border-[#EAEAEA] rounded-lg shadow-lg w-[260px] max-w-[calc(100vw-2rem)] z-50 overflow-hidden">
                     <div className="max-h-[320px] overflow-y-auto py-1">
                       {groupedModels.map(function(group, gi) {
                         return (
@@ -422,7 +422,7 @@ export default function ChatInputBar({
                             {gi > 0 && <div className="mx-3 my-1 border-t border-[#F0F0F0]" />}
                             {group.label && (
                               <div className="px-3 pt-2 pb-1">
-                                <span className="text-[10px] uppercase tracking-wider text-[#A3A3A3] font-medium">{group.label}</span>
+                                <span className="text-[10px] uppercase tracking-wider text-[#BBB] font-medium">{group.label}</span>
                               </div>
                             )}
                             {group.models.map(function(model) {
@@ -440,14 +440,14 @@ export default function ChatInputBar({
                                 >
                                   <ProviderIcon provider={model.provider} size={15} />
                                   <div className="flex-1 min-w-0">
-                                    <p className={"text-[13px] leading-tight " + (isSelected ? "font-medium text-[#0A0A0A]" : "text-[#525252]")}>{model.label}</p>
+                                    <p className={"text-[13px] leading-tight " + (isSelected ? "font-medium text-[#111]" : "text-[#555]")}>{model.label}</p>
                                     {connected ? (
-                                      <p className="text-[10px] text-[#A3A3A3] leading-tight">{model.description}</p>
+                                      <p className="text-[10px] text-[#BBB] leading-tight">{model.description}</p>
                                     ) : (
                                       <p className="text-[10px] text-amber-500 font-medium leading-tight">No API key</p>
                                     )}
                                   </div>
-                                  {isSelected && <Check size={13} className="text-[#0A0A0A] shrink-0" />}
+                                  {isSelected && <Check size={13} className="text-[#111] shrink-0" />}
                                 </button>
                               );
                             })}
@@ -466,13 +466,13 @@ export default function ChatInputBar({
                 <button
                   onClick={handleSend}
                   disabled={disabled || uploading}
-                  className="h-8 w-8 rounded-full bg-[#0A0A0A] text-white flex items-center justify-center hover:bg-[#333] transition-colors disabled:opacity-50"
+                  className="h-8 w-8 rounded-full bg-[#111] text-white flex items-center justify-center hover:bg-[#333] transition-colors disabled:opacity-50"
                 >
                   <ArrowUp size={16} />
                 </button>
               ) : (
                 <div className="h-8 w-8 rounded-full bg-[#E5E5E5] flex items-center justify-center">
-                  <ArrowUp size={16} className="text-[#A3A3A3]" />
+                  <ArrowUp size={16} className="text-[#BBB]" />
                 </div>
               )}
             </div>

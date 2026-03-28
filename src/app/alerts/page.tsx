@@ -56,7 +56,7 @@ function getScoreColor(score: number): string {
 function TrendIcon({ trend }: { trend: string }) {
   if (trend === "improving") return <ArrowUpRight size={12} className="text-[#22C55E]" />;
   if (trend === "declining") return <ArrowDownRight size={12} className="text-[#EF4444]" />;
-  return <Minus size={12} className="text-[#A3A3A3]" />;
+  return <Minus size={12} className="text-[#BBB]" />;
 }
 
 function ScoreGauge({ score, size = 120 }: { score: number; size?: number }) {
@@ -136,7 +136,7 @@ export default function AlertsPage() {
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <div className="h-5 w-5 border-2 border-[#E5E5E5] border-t-[#0A0A0A] rounded-full animate-spin" />
+        <div className="h-5 w-5 border-2 border-[#EAEAEA] border-t-[#0A0A0A] rounded-full animate-spin" />
       </div>
     );
   }
@@ -145,17 +145,17 @@ export default function AlertsPage() {
     return (
       <div className="flex-1 flex items-center justify-center px-4">
         <div className="max-w-md text-center">
-          <div className="h-14 w-14 rounded-2xl bg-[#F5F5F5] flex items-center justify-center mx-auto mb-4">
-            <Plug size={28} className="text-[#A3A3A3]" />
+          <div className="h-14 w-14 rounded-lg bg-[#F5F5F5] flex items-center justify-center mx-auto mb-4">
+            <Plug size={28} className="text-[#BBB]" />
           </div>
-          <h2 className="text-lg font-semibold text-[#0A0A0A] mb-2">Connecte HubSpot pour activer les alertes</h2>
-          <p className="text-sm text-[#737373] mb-6">
+          <h2 className="text-lg font-semibold text-[#111] mb-2">Connecte HubSpot pour activer les alertes</h2>
+          <p className="text-sm text-[#999] mb-6">
             Kairo analyse tes donnees CRM chaque jour et detecte automatiquement les problemes :
             deals bloques, pipeline insuffisant, win rate en baisse, donnees manquantes...
           </p>
           <button
             onClick={function() { router.push("/settings?tab=connectors"); }}
-            className="bg-[#0A0A0A] text-white rounded-lg px-5 py-2.5 text-sm font-medium hover:bg-[#262626] transition-colors"
+            className="bg-[#111] text-white rounded-lg px-5 py-2.5 text-sm font-medium hover:bg-[#262626] transition-colors"
           >
             Connecter HubSpot
           </button>
@@ -169,8 +169,8 @@ export default function AlertsPage() {
       <div className="max-w-5xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-xl font-semibold text-[#0A0A0A]">Command Center</h1>
-          <p className="text-sm text-[#737373] mt-0.5">Sante de ton CRM, scores et alertes en temps reel.</p>
+          <h1 className="text-xl font-semibold text-[#111]">Command Center</h1>
+          <p className="text-sm text-[#999] mt-0.5">Sante de ton CRM, scores et alertes en temps reel.</p>
         </div>
 
         {/* ═══ SCORES SECTION ═══ */}
@@ -178,19 +178,19 @@ export default function AlertsPage() {
           <div className="mb-8">
             <div className="grid grid-cols-12 gap-4">
               {/* Main score gauge */}
-              <div className="col-span-12 md:col-span-4 bg-white rounded-xl border border-[#E5E5E5] p-6 flex flex-col items-center">
+              <div className="col-span-12 md:col-span-4 bg-white rounded-lg border border-[#EAEAEA] p-6 flex flex-col items-center">
                 <ScoreGauge score={scores.overallScore} />
                 <div className="mt-3 text-center">
                   <span className="inline-block px-3 py-1 rounded-full text-sm font-bold" style={{ color: getScoreColor(scores.overallScore), backgroundColor: getScoreColor(scores.overallScore) + "15" }}>
                     Grade {scores.grade}
                   </span>
-                  <p className="text-[10px] text-[#A3A3A3] mt-2">Adoption Score</p>
+                  <p className="text-[10px] text-[#BBB] mt-2">Adoption Score</p>
                 </div>
               </div>
 
               {/* Dimension breakdown */}
-              <div className="col-span-12 md:col-span-8 bg-white rounded-xl border border-[#E5E5E5] p-6">
-                <h3 className="text-sm font-semibold text-[#0A0A0A] mb-4">Dimensions</h3>
+              <div className="col-span-12 md:col-span-8 bg-white rounded-lg border border-[#EAEAEA] p-6">
+                <h3 className="text-sm font-semibold text-[#111] mb-4">Dimensions</h3>
                 <div className="space-y-3.5">
                   {Object.entries(scores.dimensions).map(function(entry) {
                     var key = entry[0];
@@ -204,7 +204,7 @@ export default function AlertsPage() {
                       <div key={key}>
                         <div className="flex items-center justify-between mb-1.5">
                           <div className="flex items-center gap-2">
-                            <span className="text-[13px] font-medium text-[#0A0A0A]">{meta.label}</span>
+                            <span className="text-[13px] font-medium text-[#111]">{meta.label}</span>
                             <span className="text-[10px] text-[#C0C0C0]">{meta.weight}</span>
                           </div>
                           <div className="flex items-center gap-1.5">
@@ -224,7 +224,7 @@ export default function AlertsPage() {
 
             {/* Recommendations */}
             {scores.domainHealth.recommendations.length > 0 && (
-              <div className="mt-4 bg-[#FFFBEB] border border-[#FDE68A] rounded-xl px-5 py-4">
+              <div className="mt-4 bg-[#FFFBEB] border border-[#FDE68A] rounded-lg px-5 py-4">
                 <h4 className="text-[12px] font-semibold text-[#92400E] mb-2">Recommandations prioritaires</h4>
                 <div className="space-y-1.5">
                   {scores.domainHealth.recommendations.map(function(rec, i) {
@@ -244,16 +244,16 @@ export default function AlertsPage() {
         {/* ═══ ALERTS SECTION ═══ */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-[#0A0A0A]">
+            <h2 className="text-lg font-semibold text-[#111]">
               Alertes
-              {alerts.length > 0 && <span className="text-sm font-normal text-[#A3A3A3] ml-2">({alerts.length})</span>}
+              {alerts.length > 0 && <span className="text-sm font-normal text-[#BBB] ml-2">({alerts.length})</span>}
             </h2>
           </div>
 
           {/* Severity filters */}
           {alerts.length > 0 && (
             <div className="flex items-center gap-2 mb-4">
-              <button onClick={function() { setFilter("all"); }} className={"px-3 py-1.5 rounded-lg text-[12px] font-medium border transition-colors " + (filter === "all" ? "bg-[#0A0A0A] text-white border-[#0A0A0A]" : "text-[#737373] border-[#E5E5E5] hover:border-[#D4D4D4]")}>
+              <button onClick={function() { setFilter("all"); }} className={"px-3 py-1.5 rounded-lg text-[12px] font-medium border transition-colors " + (filter === "all" ? "bg-[#111] text-white border-[#0A0A0A]" : "text-[#999] border-[#EAEAEA] hover:border-[#D4D4D4]")}>
                 Tout ({alerts.length})
               </button>
               {critical > 0 && (
@@ -276,12 +276,12 @@ export default function AlertsPage() {
 
           {/* Empty state */}
           {alerts.length === 0 && (
-            <div className="text-center py-12 bg-white rounded-xl border border-[#E5E5E5]">
-              <div className="h-12 w-12 rounded-2xl bg-[#F0FDF4] flex items-center justify-center mx-auto mb-3">
+            <div className="text-center py-12 bg-white rounded-lg border border-[#EAEAEA]">
+              <div className="h-12 w-12 rounded-lg bg-[#F0FDF4] flex items-center justify-center mx-auto mb-3">
                 <Check size={24} className="text-[#22C55E]" />
               </div>
-              <p className="text-sm font-medium text-[#0A0A0A]">Aucune alerte active</p>
-              <p className="text-xs text-[#A3A3A3] mt-1">Kairo analyse ton CRM chaque jour. Tout est en ordre.</p>
+              <p className="text-sm font-medium text-[#111]">Aucune alerte active</p>
+              <p className="text-xs text-[#BBB] mt-1">Kairo analyse ton CRM chaque jour. Tout est en ordre.</p>
             </div>
           )}
 
@@ -296,31 +296,31 @@ export default function AlertsPage() {
               var borderColor = alert.severity === "critical" ? "border-l-[#EF4444]" : alert.severity === "warning" ? "border-l-[#F59E0B]" : "border-l-[#6366F1]";
 
               return (
-                <div key={alert.id} className={"bg-white rounded-xl border border-[#E5E5E5] border-l-[3px] " + borderColor + " overflow-hidden"}>
+                <div key={alert.id} className={"bg-white rounded-lg border border-[#EAEAEA] border-l-[3px] " + borderColor + " overflow-hidden"}>
                   <div className="p-4">
                     <div className="flex items-start gap-3">
                       <div className="mt-0.5 shrink-0">{severityIcon}</div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="text-sm font-medium text-[#0A0A0A]">{alert.title}</h3>
+                          <h3 className="text-sm font-medium text-[#111]">{alert.title}</h3>
                           {alert.domain && (
-                            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#F5F5F5] text-[#737373] shrink-0">
+                            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#F5F5F5] text-[#999] shrink-0">
                               {DOMAIN_LABELS[alert.domain] || alert.domain}
                             </span>
                           )}
                         </div>
-                        <p className="text-[13px] text-[#525252] leading-relaxed">{alert.description}</p>
+                        <p className="text-[13px] text-[#555] leading-relaxed">{alert.description}</p>
                         {alert.ai_suggestion && (
                           <div className="mt-3 px-3 py-2.5 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
-                            <p className="text-[11px] font-medium text-[#A3A3A3] uppercase tracking-wider mb-1">Recommandation Kairo</p>
-                            <p className="text-[12px] text-[#525252] leading-relaxed">{alert.ai_suggestion}</p>
+                            <p className="text-[11px] font-medium text-[#BBB] uppercase tracking-wider mb-1">Recommandation Kairo</p>
+                            <p className="text-[12px] text-[#555] leading-relaxed">{alert.ai_suggestion}</p>
                           </div>
                         )}
                         <div className="flex items-center gap-2 mt-3">
-                          <button onClick={function() { handleInvestigate(alert); }} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-medium bg-[#0A0A0A] text-white hover:bg-[#333] transition-colors">
+                          <button onClick={function() { handleInvestigate(alert); }} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-medium bg-[#111] text-white hover:bg-[#333] transition-colors">
                             Investiguer <ChevronRight size={11} />
                           </button>
-                          <button onClick={function() { handleDismiss(alert.id); }} className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] text-[#A3A3A3] hover:text-[#EF4444] hover:bg-red-50 transition-colors">
+                          <button onClick={function() { handleDismiss(alert.id); }} className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] text-[#BBB] hover:text-[#EF4444] hover:bg-red-50 transition-colors">
                             <X size={11} /> Ignorer
                           </button>
                           <span className="text-[10px] text-[#C0C0C0] ml-auto">{timeSince(alert.created_at)}</span>

@@ -141,7 +141,7 @@ export default function TrackingConversionsHubSpotArticle() {
               </div>
 
               {/* Quick stats card */}
-              <div className="mt-8 rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-5">
+              <div className="mt-8 rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-5">
                 <span className="text-[13px] font-semibold text-[#111] mb-4 block">Ce que vous allez apprendre</span>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {[
@@ -150,7 +150,7 @@ export default function TrackingConversionsHubSpotArticle() {
                     { label: "KPI a suivre", value: "12 metriques", color: "#22C55E" },
                     { label: "Erreurs courantes", value: "8 erreurs", color: "#FF7A59" },
                   ].map((s) => (
-                    <div key={s.label} className="text-center p-3 rounded-xl bg-white border border-[#F2F2F2]">
+                    <div key={s.label} className="text-center p-3 rounded-lg bg-white border border-[#F2F2F2]">
                       <div className="text-[18px] font-bold" style={{ color: s.color }}>{s.value}</div>
                       <div className="text-[10px] text-[#999] mt-1">{s.label}</div>
                     </div>
@@ -162,7 +162,7 @@ export default function TrackingConversionsHubSpotArticle() {
             <article>
               {/* Section 1 - Pourquoi */}
               <section id="pourquoi" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Pourquoi le tracking des conversions est critique</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>La plupart des equipes marketing B2B investissent entre 5 000 et 50 000 euros par mois en acquisition. Google Ads, LinkedIn Ads, SEO, contenus, webinaires, evenements. Mais quand on leur demande quel canal genere leurs meilleurs clients, la reponse est souvent vague. &ldquo;On pense que c&apos;est LinkedIn.&rdquo; &ldquo;Google Ads marche bien.&rdquo; &ldquo;Le SEO ramene du trafic.&rdquo;</p>
@@ -182,7 +182,7 @@ export default function TrackingConversionsHubSpotArticle() {
                       { label: "D\u2019augmentation du ROI avec un tracking correct", value: "+23%", color: "#22C55E" },
                       { label: "Points de contact avant conversion B2B", value: "8.2", color: "#4B5EFC" },
                     ].map((m) => (
-                      <div key={m.label} className="text-center p-3 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2]">
+                      <div key={m.label} className="text-center p-3 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2]">
                         <div className="text-[18px] font-bold" style={{ color: m.color }}>{m.value}</div>
                         <div className="text-[10px] text-[#999] mt-1">{m.label}</div>
                       </div>
@@ -194,7 +194,7 @@ export default function TrackingConversionsHubSpotArticle() {
 
               {/* Section 2 - UTM */}
               <section id="utm" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les UTM : la base de l&apos;attribution</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Les parametres UTM (Urchin Tracking Module) sont des balises que vous ajoutez a vos URLs pour identifier l&apos;origine du trafic. C&apos;est le mecanisme fondamental sur lequel repose toute l&apos;attribution dans HubSpot et Google Analytics.</p>
@@ -210,7 +210,7 @@ export default function TrackingConversionsHubSpotArticle() {
                       { param: "utm_term", desc: "Le mot-cle cible (principalement pour le search payant). Utile pour identifier quel mot-cle a declenche la visite.", example: "utm_term=crm+hubspot+prix" },
                       { param: "utm_content", desc: "La variante de contenu ou de creative. Ideal pour l\u2019A/B testing de vos annonces.", example: "utm_content=banner-v2-blue" },
                     ].map((u) => (
-                      <div key={u.param} className="rounded-xl border border-[#F2F2F2] p-4">
+                      <div key={u.param} className="rounded-lg border border-[#F2F2F2] p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <code className="text-[12px] font-mono font-semibold text-[#4B5EFC] bg-[#F0F1FF] px-2 py-0.5 rounded">{u.param}</code>
                         </div>
@@ -220,7 +220,7 @@ export default function TrackingConversionsHubSpotArticle() {
                     ))}
                   </div>
 
-                  <div className="mt-6 rounded-xl bg-[#111] p-5">
+                  <div className="mt-6 rounded-lg bg-[#111] p-5">
                     <p className="text-[12px] font-semibold text-white mb-3">Convention de nommage recommandee</p>
                     <div className="space-y-2 text-[12px] text-white/60 leading-[1.7]">
                       <p>La coherence du nommage est la cle. Voici la convention que nous utilisons chez Ceres pour tous nos clients :</p>
@@ -279,7 +279,7 @@ https://www.ceres-revops.com/blog/article?
 
               {/* Section 3 - Sources HubSpot */}
               <section id="sources" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Configurer les sources dans HubSpot</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>HubSpot dispose d&apos;un systeme de categorisation automatique des sources de trafic. Quand un visiteur arrive sur votre site avec le code de suivi HubSpot installe, le CRM analyse l&apos;URL, le referrer et les parametres UTM pour determiner la source.</p>
@@ -314,11 +314,11 @@ https://www.ceres-revops.com/blog/article?
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-3">Mapping UTM vers les sources HubSpot</p>
                     <div className="overflow-x-auto">
                       <div className="min-w-[450px]">
-                        <div className="grid grid-cols-4 gap-2 pb-3 border-b border-[#E8E8E8]">
+                        <div className="grid grid-cols-4 gap-2 pb-3 border-b border-[#EAEAEA]">
                           <span className="text-[10px] font-semibold text-[#999]">utm_medium</span>
                           <span className="text-[10px] font-semibold text-[#999]">utm_source</span>
                           <span className="text-[10px] font-semibold text-[#4B5EFC]">Original Source</span>
@@ -355,7 +355,7 @@ https://www.ceres-revops.com/blog/article?
 
               {/* Section 4 - Formulaires */}
               <section id="formulaires" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Tracker les soumissions de formulaires</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Les formulaires sont le point de conversion principal en B2B. C&apos;est le moment ou un visiteur anonyme devient un contact identifie dans votre CRM. Le tracking des soumissions de formulaires doit etre impeccable.</p>
@@ -394,7 +394,7 @@ https://www.ceres-revops.com/blog/article?
                     ))}
                   </div>
 
-                  <div className="mt-6 rounded-xl bg-[#111] p-5">
+                  <div className="mt-6 rounded-lg bg-[#111] p-5">
                     <p className="text-[12px] font-semibold text-white mb-3">Exemple : soumission via API avec tracking du hutk</p>
                     <div className="rounded-lg bg-white/5 p-4 overflow-x-auto">
                       <pre className="text-[11px] font-mono text-[#22C55E] leading-[1.8] whitespace-pre">{`// Recuperer le hutk (cookie de tracking HubSpot)
@@ -436,7 +436,7 @@ const response = await fetch(
 
               {/* Section 5 - Attribution multi-touch */}
               <section id="attribution" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Attribution multi-touch dans HubSpot</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>L&apos;attribution single-touch (premiere ou derniere interaction) est insuffisante en B2B. Un cycle de vente dure en moyenne 3 a 6 mois et implique 8 a 12 points de contact. Attribuer 100% du credit a un seul point de contact est trompeur.</p>
@@ -445,7 +445,7 @@ const response = await fetch(
 
                   <div className="mt-5 overflow-x-auto">
                     <div className="min-w-[500px]">
-                      <div className="grid grid-cols-4 gap-2 pb-3 border-b border-[#E8E8E8]">
+                      <div className="grid grid-cols-4 gap-2 pb-3 border-b border-[#EAEAEA]">
                         <span className="text-[10px] font-semibold text-[#999]">Modele</span>
                         <span className="text-[10px] font-semibold text-[#999]">Repartition du credit</span>
                         <span className="text-[10px] font-semibold text-[#999]">Cas d&apos;usage</span>
@@ -480,7 +480,7 @@ const response = await fetch(
 
               {/* Section 6 - Events personnalises */}
               <section id="events" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Events personnalises et behavioral events</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Au-dela des soumissions de formulaires, HubSpot permet de tracker des actions specifiques sur votre site grace aux custom behavioral events (disponibles en Marketing Hub Enterprise). C&apos;est un levier puissant pour comprendre le comportement de vos prospects avant la conversion.</p>
@@ -509,7 +509,7 @@ const response = await fetch(
                     ))}
                   </div>
 
-                  <div className="mt-6 rounded-xl bg-[#111] p-5">
+                  <div className="mt-6 rounded-lg bg-[#111] p-5">
                     <p className="text-[12px] font-semibold text-white mb-3">Implementation via le tracking code HubSpot</p>
                     <div className="rounded-lg bg-white/5 p-4 overflow-x-auto">
                       <pre className="text-[11px] font-mono text-[#22C55E] leading-[1.8] whitespace-pre">{`// Tracker un event personnalise dans HubSpot
@@ -543,7 +543,7 @@ _hsq.push(["trackCustomBehavioralEvent", {
 
               {/* Section 7 - GA4 */}
               <section id="ga4" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Connecter HubSpot a Google Analytics 4</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>HubSpot et Google Analytics 4 ne trackent pas les memes choses. HubSpot se concentre sur les contacts identifies et les deals. GA4 analyse le trafic global, les parcours de navigation et les micro-conversions. Les combiner donne une vision complete du funnel.</p>
@@ -551,7 +551,7 @@ _hsq.push(["trackCustomBehavioralEvent", {
                   </div>
 
                   <div className="mt-5 space-y-4">
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <span className="w-5 h-5 rounded-md bg-[#F5F5F5] flex items-center justify-center text-[10px] font-bold text-[#999]">1</span>
                         <h3 className="text-[13px] font-semibold text-[#111]">Partage des UTM (natif)</h3>
@@ -559,7 +559,7 @@ _hsq.push(["trackCustomBehavioralEvent", {
                       <p className="text-[12px] text-[#666] leading-[1.7]">Si vous utilisez les memes conventions UTM pour HubSpot et GA4, les deux outils categorisentles sources de la meme maniere. C&apos;est le niveau minimum d&apos;integration. Aucune configuration technique supplementaire n&apos;est requise, juste de la rigueur dans le nommage.</p>
                     </div>
 
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <span className="w-5 h-5 rounded-md bg-[#F5F5F5] flex items-center justify-center text-[10px] font-bold text-[#999]">2</span>
                         <h3 className="text-[13px] font-semibold text-[#111]">Envoi d&apos;events vers GA4 via GTM</h3>
@@ -588,7 +588,7 @@ window.addEventListener("message", function(event) {
                       </div>
                     </div>
 
-                    <div className="rounded-xl border border-[#F2F2F2] p-4">
+                    <div className="rounded-lg border border-[#F2F2F2] p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <span className="w-5 h-5 rounded-md bg-[#F5F5F5] flex items-center justify-center text-[10px] font-bold text-[#999]">3</span>
                         <h3 className="text-[13px] font-semibold text-[#111]">Import de donnees offline dans GA4</h3>
@@ -597,11 +597,11 @@ window.addEventListener("message", function(event) {
                     </div>
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[#FAFAFA] border border-[#F2F2F2] p-4">
+                  <div className="mt-5 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] p-4">
                     <p className="text-[12px] font-semibold text-[#111] mb-2">Mapping des events HubSpot vers GA4</p>
                     <div className="overflow-x-auto">
                       <div className="min-w-[400px]">
-                        <div className="grid grid-cols-3 gap-2 pb-3 border-b border-[#E8E8E8]">
+                        <div className="grid grid-cols-3 gap-2 pb-3 border-b border-[#EAEAEA]">
                           <span className="text-[10px] font-semibold text-[#999]">Action HubSpot</span>
                           <span className="text-[10px] font-semibold text-[#999]">Event GA4</span>
                           <span className="text-[10px] font-semibold text-[#999]">Type</span>
@@ -629,7 +629,7 @@ window.addEventListener("message", function(event) {
 
               {/* Section 8 - Dashboard */}
               <section id="dashboard" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Dashboard de conversion : les KPI a suivre</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Un tracking bien configure ne sert a rien sans un dashboard qui rend les donnees actionnables. Voici les 12 KPI que nous suivons dans le dashboard de conversion que nous deplotons pour nos clients HubSpot.</p>
@@ -650,7 +650,7 @@ window.addEventListener("message", function(event) {
                       { kpi: "CAC (Cout d\u2019acquisition client)", formula: "Budget total / Clients acquis", target: "< 1/3 du LTV", color: "#FF7A59" },
                       { kpi: "Ratio LTV/CAC", formula: "Lifetime Value / CAC", target: "> 3:1", color: "#22C55E" },
                     ].map((k) => (
-                      <div key={k.kpi} className="rounded-xl border border-[#F2F2F2] p-3">
+                      <div key={k.kpi} className="rounded-lg border border-[#F2F2F2] p-3">
                         <div className="flex items-center gap-2 mb-1.5">
                           <div className="w-2 h-2 rounded-full shrink-0" style={{ background: k.color }} />
                           <span className="text-[12px] font-semibold text-[#111]">{k.kpi}</span>
@@ -671,7 +671,7 @@ window.addEventListener("message", function(event) {
 
               {/* Section 9 - Erreurs courantes */}
               <section id="erreurs" className="mb-8">
-                <div className="rounded-2xl border border-[#E8E8E8] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
+                <div className="rounded-lg border border-[#EAEAEA] bg-white p-5 md:p-8 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)]">
                   <h2 className="text-[17px] font-semibold text-[#111] mb-4">Les 8 erreurs courantes du tracking HubSpot</h2>
                   <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                     <p>Apres avoir audite plus de 40 portails HubSpot, voici les erreurs que nous retrouvons le plus frequemment. Chacune d&apos;entre elles fausse vos rapports et vous fait prendre de mauvaises decisions.</p>
@@ -728,7 +728,7 @@ window.addEventListener("message", function(event) {
 
               {/* Section 10 - Setup Ceres */}
               <section id="setup-ceres" className="mb-8">
-                <div className="rounded-2xl bg-[#111] p-5 md:p-8">
+                <div className="rounded-lg bg-[#111] p-5 md:p-8">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-[12px] font-medium text-white/60 mb-4">Notre methode</span>
                   <h2 className="text-[20px] font-semibold text-white mb-4">Notre setup de tracking chez Ceres</h2>
                   <div className="space-y-3 text-[13px] text-white/60 leading-[1.75]">
@@ -784,7 +784,7 @@ window.addEventListener("message", function(event) {
                       { label: "Temps moyen de mise en place", value: "2 sem.", color: "#22C55E" },
                       { label: "Amelioration moyenne de la fiabilite des donnees", value: "+45%", color: "#6C5CE7" },
                     ].map((m) => (
-                      <div key={m.label} className="text-center p-3 rounded-xl bg-white/5">
+                      <div key={m.label} className="text-center p-3 rounded-lg bg-white/5">
                         <div className="text-[18px] font-bold" style={{ color: m.color }}>{m.value}</div>
                         <div className="text-[10px] text-white/30 mt-1">{m.label}</div>
                       </div>
@@ -804,7 +804,7 @@ window.addEventListener("message", function(event) {
               <p className="text-[13px] font-semibold text-[#111] mb-4">Articles similaires</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedArticles.map((a) => (
-                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-xl border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
+                  <Link key={a.slug} href={`/blog/${a.slug}`} className="rounded-lg border border-[#F2F2F2] p-4 hover:border-[#DDD] transition-colors group">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold text-white mb-3" style={{ background: a.color }}>
                       {a.category[0]}
                     </div>
@@ -817,14 +817,14 @@ window.addEventListener("message", function(event) {
 
             {/* CTA */}
             <section>
-              <div className="rounded-2xl border border-[#E8E8E8] bg-[#FAFAFA] p-6 md:p-10 text-center">
+              <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-6 md:p-10 text-center">
                 <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#111] tracking-[-0.02em] mb-3">Votre tracking HubSpot est-il fiable ?</h2>
                 <p className="text-[13px] text-[#999] mb-6 max-w-[450px] mx-auto">On audite votre portail HubSpot, on corrige le tracking et on deploie un dashboard de conversion en moins de 2 semaines. Resultats mesurables des le premier mois.</p>
                 <div className="flex items-center justify-center gap-3">
                   <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#111] text-white text-[13px] font-medium hover:bg-[#222] transition-colors">
                     <span className="w-2 h-2 rounded-sm bg-[#22C55E]" />Reserver un audit gratuit
                   </a>
-                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#E5E5E5] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
+                  <Link href="/agence-hubspot" className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#EAEAEA] bg-white text-[#111] text-[13px] font-medium hover:border-[#CCC] transition-colors">
                     Nos services
                   </Link>
                 </div>

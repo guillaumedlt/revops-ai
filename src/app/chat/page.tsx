@@ -64,29 +64,26 @@ export default function ChatWelcome() {
   return (
     <div className="flex flex-1 flex-col h-full">
       {/* Mobile header */}
-      <div className="md:hidden flex items-center px-4 py-3 border-b border-[#EBEBEB] bg-white shrink-0">
-        <div className="h-7 w-7 rounded-lg bg-[#0A0A0A] flex items-center justify-center">
-          <span className="text-white text-[10px] font-bold">K</span>
+      <div className="md:hidden flex items-center px-4 h-[49px] border-b border-[#EAEAEA] bg-white shrink-0">
+        <div className="h-6 w-6 rounded bg-[#111] flex items-center justify-center">
+          <span className="text-white text-[9px] font-bold">K</span>
         </div>
-        <span className="text-[13px] font-semibold text-[#0A0A0A] ml-2">Kairo</span>
+        <span className="text-[13px] font-semibold text-[#111] ml-2">Kairo</span>
       </div>
 
-      <div className="flex flex-1 flex-col items-center justify-center px-4 overflow-y-auto py-8">
+      <div className="flex flex-1 flex-col items-center justify-center px-5 overflow-y-auto py-8">
         <motion.div
-          className="w-full max-w-2xl"
-          initial={{ opacity: 0, y: 16 }}
+          className="w-full max-w-[640px]"
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
         >
           {/* Greeting */}
-          <div className="text-center mb-8">
-            <div className="h-11 w-11 rounded-xl bg-[#0A0A0A] flex items-center justify-center mx-auto mb-4">
-              <span className="text-white text-sm font-bold">K</span>
-            </div>
-            <h1 className="text-[26px] font-bold text-[#0A0A0A] tracking-tight">
+          <div className="text-center mb-7">
+            <h1 className="text-[22px] font-semibold text-[#111] tracking-tight">
               {"Comment puis-je t'aider ?"}
             </h1>
-            <p className="text-sm text-[#A3A3A3] mt-1.5">Pose une question sur ta pipeline, tes deals, ou tes performances.</p>
+            <p className="text-[13px] text-[#999] mt-1">Pose une question ou utilise une commande /</p>
           </div>
 
           {/* Alerts summary */}
@@ -97,12 +94,12 @@ export default function ChatWelcome() {
               transition={{ delay: 0.15 }}
               className="mb-6"
             >
-              <div className="rounded-xl border border-[#EBEBEB] bg-white overflow-hidden">
+              <div className="rounded-lg border border-[#EAEAEA] bg-white overflow-hidden">
                 {/* Header */}
-                <div className="flex items-center justify-between px-4 py-2.5 bg-[#FAFAFA] border-b border-[#F0F0F0]">
+                <div className="flex items-center justify-between px-3 py-2 bg-[#FAFAFA] border-b border-[#F0F0F0]">
                   <div className="flex items-center gap-2">
                     <div className={"h-2 w-2 rounded-full " + (criticalAlerts.length > 0 ? "bg-[#EF4444] animate-pulse" : "bg-[#F59E0B]")} />
-                    <span className="text-[12px] font-semibold text-[#0A0A0A]">
+                    <span className="text-[12px] font-semibold text-[#111]">
                       {alerts.length} alerte{alerts.length > 1 ? "s" : ""} detectee{alerts.length > 1 ? "s" : ""}
                     </span>
                   </div>
@@ -114,7 +111,7 @@ export default function ChatWelcome() {
                     )}
                     <button
                       onClick={function() { router.push("/alerts"); }}
-                      className="text-[11px] text-[#737373] hover:text-[#0A0A0A] flex items-center gap-0.5"
+                      className="text-[11px] text-[#999] hover:text-[#111] flex items-center gap-0.5"
                     >
                       Monitoring <ChevronRight size={11} />
                     </button>
@@ -133,7 +130,7 @@ export default function ChatWelcome() {
                     return (
                       <div key={alert.id} className="flex items-center gap-3 px-4 py-2.5 hover:bg-[#FAFAFA] transition-colors">
                         <div className="shrink-0">{icon}</div>
-                        <p className="flex-1 text-[12px] text-[#525252] truncate">{alert.title}</p>
+                        <p className="flex-1 text-[12px] text-[#555] truncate">{alert.title}</p>
                         <button
                           onClick={function() { handleSuggestion("A propos de l'alerte : " + alert.title + ". Donne-moi les details et un plan d'action."); }}
                           className="text-[10px] font-medium text-[#6366F1] hover:text-[#4F46E5] shrink-0 flex items-center gap-0.5"
@@ -142,7 +139,7 @@ export default function ChatWelcome() {
                         </button>
                         <button
                           onClick={function() { handleDismissAlert(alert.id); }}
-                          className="shrink-0 text-[#D4D4D4] hover:text-[#737373]"
+                          className="shrink-0 text-[#D4D4D4] hover:text-[#999]"
                         >
                           <X size={12} />
                         </button>
@@ -160,27 +157,25 @@ export default function ChatWelcome() {
           </div>
 
           {/* Suggestions */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-2 gap-2">
             {SUGGESTIONS.map(function(cat) {
               return (
-                <div key={cat.label} className="rounded-xl border border-[#EBEBEB] bg-white overflow-hidden hover:border-[#D4D4D4] transition-colors">
-                  <div className="px-4 pt-3 pb-1">
-                    <span className="text-[10px] uppercase tracking-wider text-[#B0B0B0] font-semibold">{cat.label}</span>
+                <div key={cat.label} className="rounded-lg border border-[#EAEAEA] bg-white overflow-hidden">
+                  <div className="px-3 pt-2.5 pb-0.5">
+                    <span className="text-[10px] uppercase tracking-wider text-[#BBB] font-semibold">{cat.label}</span>
                   </div>
-                  <div>
-                    {cat.items.map(function(item, idx) {
-                      return (
-                        <button
-                          key={item}
-                          onClick={function() { handleSuggestion(item); }}
-                          disabled={sending}
-                          className={"w-full text-left px-4 py-2.5 text-[13px] text-[#525252] hover:bg-[#FAFAFA] hover:text-[#0A0A0A] transition-colors disabled:opacity-40 " + (idx < cat.items.length - 1 ? "border-b border-[#F5F5F5]" : "")}
-                        >
-                          {item}
-                        </button>
-                      );
-                    })}
-                  </div>
+                  {cat.items.map(function(item, idx) {
+                    return (
+                      <button
+                        key={item}
+                        onClick={function() { handleSuggestion(item); }}
+                        disabled={sending}
+                        className={"w-full text-left px-3 py-2 text-[13px] text-[#555] hover:bg-[#F5F5F5] hover:text-[#111] transition-colors disabled:opacity-40 " + (idx < cat.items.length - 1 ? "border-b border-[#F5F5F5]" : "")}
+                      >
+                        {item}
+                      </button>
+                    );
+                  })}
                 </div>
               );
             })}
