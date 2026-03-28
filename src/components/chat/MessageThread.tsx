@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { RotateCcw, LayoutDashboard, Plus, Check, Copy, BarChart3 } from "lucide-react";
+import { RotateCcw, LayoutDashboard, Plus, Check, Copy, BarChart3, Zap } from "lucide-react";
 import BlockRenderer from "./blocks/BlockRenderer";
 import TextBlock from "./blocks/TextBlock";
 import type { ContentBlock } from "@/types/chat-blocks";
@@ -22,6 +22,35 @@ interface Props {
   error?: { message: string } | null;
   onRetry?: () => void;
   isLoading?: boolean;
+  onSendSuggestion?: (text: string) => void;
+}
+
+// Extract action suggestions from assistant message content
+function extractSuggestions(content: string): string[] {
+  // Look for "Actions suggerees" or similar section
+  var lines = content.split("\n");
+  var inSuggestions = false;
+  var suggestions: string[] = [];
+
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i].trim();
+    if (line.match(/actions?\s*sugg[eé]r[eé]es|prochaines?\s*[eé]tapes?|tu\s*peux\s*aussi/i)) {
+      inSuggestions = true;
+      continue;
+    }
+    if (inSuggestions) {
+      // Extract bullet points: - "text" or - text
+      var bulletMatch = line.match(/^[-•]\s*["""]?(.+?)["""]?\s*$/);
+      if (bulletMatch && bulletMatch[1].length > 10 && bulletMatch[1].length < 120) {
+        suggestions.push(bulletMatch[1].replace(/^\*\*|\*\*$/g, "").trim());
+      }
+      // Stop if we hit an empty line or non-bullet after suggestions
+      if (!line && suggestions.length > 0) break;
+      if (line && !line.startsWith("-") && !line.startsWith("•") && !line.startsWith("*") && suggestions.length > 0) break;
+    }
+  }
+
+  return suggestions.slice(0, 3);
 }
 
 var TOOL_LABELS: Record<string, string> = {
@@ -308,6 +337,58 @@ function ErrorCard({
   );
 }
 
+function AssistantMessage({ msg, onSendSuggestion }: { msg: Message; onSendSuggestion?: (text: string) => void }) {
+  var suggestions = useMemo(function() { return extractSuggestions(msg.content); }, [msg.content]);
+  var isLastMsg = true; // Always show suggestions on the last assistant message
+
+  return (
+    <div className="flex gap-3">
+      <KairoAvatar />
+      <div className="flex-1 min-w-0">
+        <div className="relative w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A] group/msg">
+          {msg.content_blocks && msg.content_blocks.length > 0 ? (
+            <>
+              <BlockRenderer blocks={msg.content_blocks} />
+              {msg.content_blocks.length > 2 && (
+                <div className="mt-4 pt-3 border-t border-[#F0F0F0] opacity-0 group-hover/msg:opacity-100 transition-opacity">
+                  <SaveMessageToDashboard blocks={msg.content_blocks} title={msg.content.slice(0, 60)} />
+                </div>
+              )}
+            </>
+          ) : (
+            <TextBlock text={msg.content} />
+          )}
+          <button
+            onClick={function() { navigator.clipboard.writeText(msg.content); }}
+            className="absolute top-2 right-2 opacity-0 group-hover/msg:opacity-100 h-7 w-7 flex items-center justify-center rounded-lg text-[#A3A3A3] hover:text-[#0A0A0A] hover:bg-[#F5F5F5] transition-all"
+            title="Copy"
+          >
+            <Copy size={13} />
+          </button>
+        </div>
+
+        {/* Clickable action suggestions */}
+        {suggestions.length > 0 && onSendSuggestion && (
+          <div className="flex flex-wrap gap-1.5 mt-2 ml-1">
+            {suggestions.map(function(s, i) {
+              return (
+                <button
+                  key={i}
+                  onClick={function() { onSendSuggestion(s); }}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-medium text-[#525252] bg-[#F5F5F5] hover:bg-[#EBEBEB] hover:text-[#0A0A0A] border border-[#EBEBEB] transition-colors"
+                >
+                  <Zap size={10} className="text-[#A3A3A3]" />
+                  <span className="truncate max-w-[200px]">{s}</span>
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function StreamingMessage({ streamingText, streamingBlocks, activeTools }: { streamingText: string; streamingBlocks?: ContentBlock[] | null; activeTools: string[] }) {
   var processed = useMemo(function() { return processStreamingText(streamingText); }, [streamingText]);
 
@@ -343,6 +424,7 @@ export default function MessageThread({
   error,
   onRetry,
   isLoading,
+  onSendSuggestion,
 }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -363,32 +445,7 @@ export default function MessageThread({
                 {msg.content}
               </div>
             ) : (
-              <div className="flex gap-3">
-                <KairoAvatar />
-                <div className="flex-1 min-w-0">
-                  <div className="relative w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A] group/msg">
-                    {msg.content_blocks && msg.content_blocks.length > 0 ? (
-                      <>
-                        <BlockRenderer blocks={msg.content_blocks} />
-                        {msg.content_blocks.length > 2 && (
-                          <div className="mt-4 pt-3 border-t border-[#F0F0F0] opacity-0 group-hover/msg:opacity-100 transition-opacity">
-                            <SaveMessageToDashboard blocks={msg.content_blocks} title={msg.content.slice(0, 60)} />
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <TextBlock text={msg.content} />
-                    )}
-                    <button
-                      onClick={function() { navigator.clipboard.writeText(msg.content); }}
-                      className="absolute top-2 right-2 opacity-0 group-hover/msg:opacity-100 h-7 w-7 flex items-center justify-center rounded-lg text-[#A3A3A3] hover:text-[#0A0A0A] hover:bg-[#F5F5F5] transition-all"
-                      title="Copy"
-                    >
-                      <Copy size={13} />
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <AssistantMessage msg={msg} onSendSuggestion={onSendSuggestion} />
             )}
           </div>
         ))}
