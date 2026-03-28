@@ -73,9 +73,9 @@ function WidgetContent({ widget }: { widget: Widget }) {
     case "scorecard":
       return <ScorecardBlock title="" value={c.value || ""} target={c.target} score={c.score || 0} breakdown={c.breakdown} />;
     case "report":
-      return c.blocks ? <BlockRenderer blocks={c.blocks} /> : <p className="text-xs text-[#BBB]">Empty report</p>;
+      return c.blocks ? <BlockRenderer blocks={c.blocks} /> : <p className="text-xs text-[#BBB]">Rapport vide</p>;
     default:
-      return <p className="text-xs text-[#BBB]">Unknown widget type</p>;
+      return <p className="text-xs text-[#BBB]">Type inconnu</p>;
   }
 }
 
@@ -263,7 +263,7 @@ export default function DashboardViewPage() {
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <div className="h-5 w-5 border-2 border-[#EAEAEA] border-t-[#0A0A0A] rounded-full animate-spin" />
+        <div className="h-5 w-5 border-2 border-[#EAEAEA] border-t-[#111] rounded-full animate-spin" />
       </div>
     );
   }
@@ -290,7 +290,7 @@ export default function DashboardViewPage() {
                   value={editName}
                   onChange={(e) => setEditName(e.target.value)}
                   autoFocus
-                  className="text-lg font-semibold text-[#111] bg-transparent border-b border-[#0A0A0A] focus:outline-none"
+                  className="text-lg font-semibold text-[#111] bg-transparent border-b border-[#111] focus:outline-none"
                 />
                 <button
                   onClick={handleSaveName}
@@ -333,16 +333,16 @@ export default function DashboardViewPage() {
         {widgets.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-sm text-[#555] font-medium">
-              No widgets yet
+              Aucun widget
             </p>
             <p className="text-sm text-[#BBB] mt-1">
-              Go to Chat and use the pin icon on any report to add it here.
+              Va dans le chat et utilise le bouton pour epingler des rapports ici.
             </p>
             <button
               onClick={() => router.push("/chat")}
               className="mt-4 bg-[#111] text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-[#262626] transition-colors"
             >
-              Go to Chat
+              Aller au chat
             </button>
           </div>
         ) : (

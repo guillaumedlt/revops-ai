@@ -234,7 +234,7 @@ export default function SlaMarketingSalesTemplatePage() {
 
                   {/* Reverse funnel calculation */}
                   <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
-                    <p className="text-[12px] font-semibold text-[#333] mb-4">Calcul inverse : de l&apos;objectif revenue aux MQLs</p>
+                    <p className="text-[12px] font-semibold text-[#111] mb-4">Calcul inverse : de l&apos;objectif revenue aux MQLs</p>
                     <div className="flex flex-col items-center gap-0">
                       {[
                         { etape: "Objectif revenue annuel", valeur: "1 200 000 EUR", bg: "#111", text: "white" },
@@ -439,7 +439,7 @@ export default function SlaMarketingSalesTemplatePage() {
                             { terme: "Opportunity", def: "SQL avec un montant estime, un timeline, et un decision-maker identifie. Dans le pipeline." },
                           ].map((item) => (
                             <div key={item.terme}>
-                              <span className="text-[11px] font-semibold text-[#333]">{item.terme} : </span>
+                              <span className="text-[11px] font-semibold text-[#111]">{item.terme} : </span>
                               <span className="text-[11px] text-[#666]">{item.def}</span>
                             </div>
                           ))}
@@ -470,7 +470,7 @@ export default function SlaMarketingSalesTemplatePage() {
                                 { eng: "Score minimum", cible: "> _____ pts", mesure: "HubSpot lead score" },
                               ].map((row) => (
                                 <tr key={row.eng} className="border-b border-[#F8F8F8]">
-                                  <td className="py-2 pr-3 font-medium text-[#333]">{row.eng}</td>
+                                  <td className="py-2 pr-3 font-medium text-[#111]">{row.eng}</td>
                                   <td className="py-2 pr-3">{row.cible}</td>
                                   <td className="py-2">{row.mesure}</td>
                                 </tr>
@@ -504,7 +504,7 @@ export default function SlaMarketingSalesTemplatePage() {
                                 { eng: "Qualite CRM", cible: "100% proprietes remplies", mesure: "Rapport completude" },
                               ].map((row) => (
                                 <tr key={row.eng} className="border-b border-[#F8F8F8]">
-                                  <td className="py-2 pr-3 font-medium text-[#333]">{row.eng}</td>
+                                  <td className="py-2 pr-3 font-medium text-[#111]">{row.eng}</td>
                                   <td className="py-2 pr-3">{row.cible}</td>
                                   <td className="py-2">{row.mesure}</td>
                                 </tr>
@@ -635,7 +635,7 @@ export default function SlaMarketingSalesTemplatePage() {
                               <div key={item.metric} className="flex items-center justify-between">
                                 <span className="text-[10px] text-[#666]">{item.metric}</span>
                                 <div className="flex items-center gap-1.5">
-                                  <span className="text-[10px] font-medium text-[#333]">{item.actual}</span>
+                                  <span className="text-[10px] font-medium text-[#111]">{item.actual}</span>
                                   <div className={`w-1.5 h-1.5 rounded-full ${item.ok ? "bg-[#22C55E]" : "bg-[#F59E0B]"}`} />
                                 </div>
                               </div>
@@ -657,7 +657,7 @@ export default function SlaMarketingSalesTemplatePage() {
                               <div key={item.metric} className="flex items-center justify-between">
                                 <span className="text-[10px] text-[#666]">{item.metric}</span>
                                 <div className="flex items-center gap-1.5">
-                                  <span className="text-[10px] font-medium text-[#333]">{item.actual}</span>
+                                  <span className="text-[10px] font-medium text-[#111]">{item.actual}</span>
                                   <div className={`w-1.5 h-1.5 rounded-full ${item.ok ? "bg-[#22C55E]" : "bg-[#F59E0B]"}`} />
                                 </div>
                               </div>
@@ -691,7 +691,7 @@ export default function SlaMarketingSalesTemplatePage() {
 
                   {/* Workflows list */}
                   <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
-                    <p className="text-[12px] font-semibold text-[#333] mb-4">Les 4 workflows HubSpot essentiels</p>
+                    <p className="text-[12px] font-semibold text-[#111] mb-4">Les 4 workflows HubSpot essentiels</p>
                     <div className="space-y-3">
                       {[
                         { nom: "MQL Handoff", trigger: "Lifecycle stage = MQL", actions: "Enregistrer timestamp, assigner commercial, notification Slack, creer tache (delai 4h)", color: "#FF7A59" },
@@ -703,7 +703,7 @@ export default function SlaMarketingSalesTemplatePage() {
                           <div className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: wf.color }} />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="text-[11px] font-semibold text-[#333]">{wf.nom}</span>
+                              <span className="text-[11px] font-semibold text-[#111]">{wf.nom}</span>
                               <span className="text-[9px] text-[#BBB]">Trigger : {wf.trigger}</span>
                             </div>
                             <p className="text-[10px] text-[#777] leading-[1.5]">{wf.actions}</p>
@@ -866,7 +866,7 @@ export default function SlaMarketingSalesTemplatePage() {
                           <span className="text-[11px] font-bold" style={{ color: v.color }}>{v.version}</span>
                           <span className="text-[9px] text-[#CCC]">{v.trimestre}</span>
                         </div>
-                        <p className="text-[11px] font-semibold text-[#333] mb-2">{v.focus}</p>
+                        <p className="text-[11px] font-semibold text-[#111] mb-2">{v.focus}</p>
                         <div className="space-y-1.5">
                           {v.items.map((item) => (
                             <div key={item} className="flex items-start gap-1.5 text-[10px] text-[#777]">

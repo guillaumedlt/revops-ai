@@ -23,7 +23,7 @@ function SlideContent({ blocks }: { blocks: ContentBlock[] }) {
         switch (block.type) {
           case "text":
             return (
-              <div key={i} className="text-[13px] text-[#333] leading-relaxed">
+              <div key={i} className="text-[13px] text-[#111] leading-relaxed">
                 {block.text.split("\n").map(function(line, li) {
                   if (line.startsWith("- ")) return <div key={li} className="flex gap-2 py-0.5"><span className="text-[#BBB]">•</span><span>{line.slice(2)}</span></div>;
                   if (line.startsWith("**") && line.endsWith("**")) return <p key={li} className="font-semibold text-[#111] mt-2">{line.slice(2, -2)}</p>;
@@ -122,11 +122,11 @@ function AddReportToDashboard({ title, sections }: { title: string; sections: Co
   return (
     <div className="relative">
       <button onClick={handleOpen} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#111] text-white hover:bg-[#333] shadow-sm transition-colors">
-        <LayoutDashboard size={12} /> Add to Dashboard
+        <LayoutDashboard size={12} /> Ajouter au dashboard
       </button>
       {open && (
         <div className="absolute bottom-full right-0 mb-1 w-[220px] rounded-lg border border-[#EAEAEA] bg-white shadow-lg p-2 z-50">
-          <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#BBB]">Add to Dashboard</p>
+          <p className="px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-[#BBB]">Ajouter au dashboard</p>
           {dashboards.length === 0 ? (
             <p className="px-2 py-2 text-xs text-[#999]">No dashboards yet</p>
           ) : dashboards.map(function(d) {
@@ -161,7 +161,7 @@ export default function ReportSlides({ title, sections }: ReportSlidesProps) {
 
   return (
     <div className="group/report relative">
-      {/* Add to Dashboard button on hover */}
+      {/* Ajouter au dashboard button on hover */}
       <div className="absolute -top-3 right-0 z-10 opacity-0 group-hover/report:opacity-100 transition-opacity">
         <AddReportToDashboard title={title} sections={sections} />
       </div>
@@ -194,9 +194,9 @@ export default function ReportSlides({ title, sections }: ReportSlidesProps) {
               })}
             </div>
             <div className="flex items-center gap-0.5">
-              <button onClick={prev} disabled={current === 0} className="h-6 w-6 flex items-center justify-center rounded text-[#555] hover:bg-[#E5E5E5] disabled:opacity-30 transition-colors"><ChevronLeft size={14} /></button>
+              <button onClick={prev} disabled={current === 0} className="h-6 w-6 flex items-center justify-center rounded text-[#555] hover:bg-[#F0F0F0] disabled:opacity-30 transition-colors"><ChevronLeft size={14} /></button>
               <span className="text-[10px] text-[#BBB] min-w-[28px] text-center">{(current + 1) + "/" + total}</span>
-              <button onClick={next} disabled={current === total - 1} className="h-6 w-6 flex items-center justify-center rounded text-[#555] hover:bg-[#E5E5E5] disabled:opacity-30 transition-colors"><ChevronRight size={14} /></button>
+              <button onClick={next} disabled={current === total - 1} className="h-6 w-6 flex items-center justify-center rounded text-[#555] hover:bg-[#F0F0F0] disabled:opacity-30 transition-colors"><ChevronRight size={14} /></button>
             </div>
           </div>
         </div>

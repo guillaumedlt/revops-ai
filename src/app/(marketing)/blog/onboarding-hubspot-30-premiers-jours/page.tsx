@@ -235,7 +235,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                           <div className={`w-4 h-4 rounded border-2 flex items-center justify-center shrink-0 mt-0.5 ${item.done ? "bg-[#22C55E] border-[#22C55E]" : "border-[#D1D5DB] bg-white"}`}>
                             {item.done && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
                           </div>
-                          <span className={`text-[12px] leading-[1.5] ${item.done ? "text-[#999] line-through" : "text-[#333]"}`} dangerouslySetInnerHTML={{ __html: item.label }} />
+                          <span className={`text-[12px] leading-[1.5] ${item.done ? "text-[#999] line-through" : "text-[#111]"}`} dangerouslySetInnerHTML={{ __html: item.label }} />
                         </div>
                       ))}
                     </div>
@@ -316,7 +316,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                         <div className="w-4 h-4 rounded bg-[#FF7A59] flex items-center justify-center">
                           <svg width="8" height="8" viewBox="0 0 24 24" fill="white"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" /></svg>
                         </div>
-                        <span className="text-[12px] font-semibold text-[#333]">Pipeline : Ventes B2B</span>
+                        <span className="text-[12px] font-semibold text-[#111]">Pipeline : Ventes B2B</span>
                         <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#E8F5E9] text-[#2E7D32] font-medium ml-auto">Actif</span>
                       </div>
 
@@ -332,7 +332,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                         ].map((stage, i) => (
                           <div key={i} className="flex-1 min-w-[90px]">
                             <div className="h-2 rounded-full mb-2" style={{ background: stage.color }} />
-                            <p className="text-[10px] font-semibold text-[#333] truncate">{stage.name}</p>
+                            <p className="text-[10px] font-semibold text-[#111] truncate">{stage.name}</p>
                             <p className="text-[9px] text-[#999]">Proba. : {stage.prob}</p>
                           </div>
                         ))}
@@ -341,7 +341,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                       {/* Stage detail */}
                       <div className="rounded-lg border border-[#E0E0E0] bg-white p-3">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-[11px] font-semibold text-[#333]">Etape selectionnee : Discovery call</span>
+                          <span className="text-[11px] font-semibold text-[#111]">Etape selectionnee : Discovery call</span>
                           <span className="text-[9px] px-2 py-0.5 rounded bg-[#FFF3E0] text-[#E65100]">Probabilite 40%</span>
                         </div>
                         <div className="space-y-1.5">
@@ -355,11 +355,11 @@ export default function OnboardingHubSpot30JoursArticle() {
                           </div>
                           <div className="flex items-center gap-2">
                             <span className="text-[9px] text-[#999] w-28 shrink-0">Duree moyenne :</span>
-                            <span className="text-[9px] text-[#333]">7 jours</span>
+                            <span className="text-[9px] text-[#111]">7 jours</span>
                           </div>
                           <div className="flex items-center gap-2">
                             <span className="text-[9px] text-[#999] w-28 shrink-0">Action automatique :</span>
-                            <span className="text-[9px] text-[#333]">Creer une tache de suivi pour le commercial</span>
+                            <span className="text-[9px] text-[#111]">Creer une tache de suivi pour le commercial</span>
                           </div>
                         </div>
                       </div>
@@ -461,7 +461,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                             <div className="flex items-center justify-between mb-1.5">
                               <div className="flex items-center gap-2">
                                 <div className="w-2 h-2 rounded-full" style={{ background: imp.color }} />
-                                <span className="text-[11px] font-semibold text-[#333]">{imp.type}</span>
+                                <span className="text-[11px] font-semibold text-[#111]">{imp.type}</span>
                               </div>
                               <div className="flex items-center gap-2">
                                 <span className="text-[10px] text-[#999]">{imp.count} enregistrements</span>
@@ -671,7 +671,7 @@ export default function OnboardingHubSpot30JoursArticle() {
 
                       {/* Pipeline chart mockup */}
                       <div className="rounded-lg border border-[#EAEAEA] bg-white p-3 mb-3">
-                        <p className="text-[10px] font-semibold text-[#333] mb-3">Pipeline par etape</p>
+                        <p className="text-[10px] font-semibold text-[#111] mb-3">Pipeline par etape</p>
                         <div className="space-y-2">
                           {[
                             { stage: "Nouveau lead", value: 125000, pct: 100, color: "#4B5EFC" },
@@ -685,7 +685,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                               <div className="flex-1 h-4 rounded bg-[#F5F5F5] overflow-hidden">
                                 <div className="h-full rounded transition-all" style={{ width: `${s.pct}%`, background: s.color }} />
                               </div>
-                              <span className="text-[9px] font-medium text-[#333] w-20 text-right">{s.value.toLocaleString("fr-FR")} EUR</span>
+                              <span className="text-[9px] font-medium text-[#111] w-20 text-right">{s.value.toLocaleString("fr-FR")} EUR</span>
                             </div>
                           ))}
                         </div>
@@ -693,7 +693,7 @@ export default function OnboardingHubSpot30JoursArticle() {
 
                       {/* Activity chart mockup */}
                       <div className="rounded-lg border border-[#EAEAEA] bg-white p-3">
-                        <p className="text-[10px] font-semibold text-[#333] mb-3">Activites cette semaine</p>
+                        <p className="text-[10px] font-semibold text-[#111] mb-3">Activites cette semaine</p>
                         <div className="flex items-end gap-1 h-16">
                           {[
                             { day: "Lun", val: 80, color: "#4B5EFC" },
@@ -862,7 +862,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                           <span className="text-[11px] text-[#777]">{row.seul}</span>
                         </div>
                         <div className="p-3 text-center bg-[#FFFCFA]">
-                          <span className="text-[11px] text-[#333] font-medium">{row.agence}</span>
+                          <span className="text-[11px] text-[#111] font-medium">{row.agence}</span>
                         </div>
                       </div>
                     ))}
@@ -894,7 +894,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                     {/* Timeline header */}
                     <div className="bg-[#F5F5F5] border-b border-[#EAEAEA] px-4 py-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-[11px] font-semibold text-[#333]">Timeline onboarding HubSpot -- 30 jours</span>
+                        <span className="text-[11px] font-semibold text-[#111]">Timeline onboarding HubSpot -- 30 jours</span>
                         <div className="flex items-center gap-3">
                           {[
                             { label: "Pre-onboarding", color: "#999" },
@@ -989,7 +989,7 @@ export default function OnboardingHubSpot30JoursArticle() {
                           <div key={phase.phase} className="rounded-lg border border-[#F0F0F0] bg-white p-3">
                             <div className="flex items-center gap-2 mb-2">
                               <div className="w-3 h-3 rounded-full" style={{ background: phase.color }} />
-                              <span className="text-[11px] font-semibold text-[#333]" dangerouslySetInnerHTML={{ __html: phase.phase }} />
+                              <span className="text-[11px] font-semibold text-[#111]" dangerouslySetInnerHTML={{ __html: phase.phase }} />
                             </div>
                             <div className="grid grid-cols-2 gap-1.5 pl-5">
                               {phase.milestones.map((m) => (

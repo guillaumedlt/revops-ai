@@ -513,7 +513,7 @@ export default function RevOpsStartupsPage() {
                             { critere: "Risque", interne: "Depart = tout a refaire", externe: "Continuite de service" },
                           ].map((row) => (
                             <tr key={row.critere} className="border-b border-[#F8F8F8] last:border-0">
-                              <td className="text-[11px] font-medium text-[#333] px-5 py-3">{row.critere}</td>
+                              <td className="text-[11px] font-medium text-[#111] px-5 py-3">{row.critere}</td>
                               <td className="text-[10px] text-[#666] px-4 py-3">{row.interne}</td>
                               <td className="text-[10px] text-[#666] px-4 py-3">{row.externe}</td>
                             </tr>
@@ -716,7 +716,7 @@ export default function RevOpsStartupsPage() {
                         ].map((bench) => (
                           <div key={bench.metric}>
                             <div className="flex items-center justify-between mb-1.5">
-                              <span className="text-[11px] font-medium text-[#333]">{bench.metric}</span>
+                              <span className="text-[11px] font-medium text-[#111]">{bench.metric}</span>
                               <span className="text-[10px] font-bold" style={{ color: bench.color }}>{bench.improvement}</span>
                             </div>
                             <div className="flex items-center gap-3">

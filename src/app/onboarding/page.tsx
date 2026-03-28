@@ -80,7 +80,7 @@ export default function OnboardingPage() {
             <div key={i} className="flex items-center gap-2">
               <div className={"h-7 w-7 rounded-full flex items-center justify-center text-[11px] font-bold transition-all " + (
                 i < step ? "bg-[#111] text-white" :
-                i === step ? "bg-[#111] text-white ring-4 ring-[#0A0A0A]/10" :
+                i === step ? "bg-[#111] text-white ring-4 ring-[#111]/10" :
                 "bg-[#F0F0F0] text-[#BBB]"
               )}>
                 {i < step ? <Check size={13} /> : i + 1}
@@ -107,7 +107,7 @@ export default function OnboardingPage() {
               onChange={function(e) { setName(e.target.value); }}
               onKeyDown={function(e) { if (e.key === "Enter") handleSaveName(); }}
               placeholder="Guillaume"
-              className="w-full h-12 px-4 text-sm rounded-lg border border-[#EAEAEA] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] focus:border-transparent transition-shadow"
+              className="w-full h-12 px-4 text-sm rounded-lg border border-[#EAEAEA] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent transition-shadow"
               autoFocus
             />
           </div>

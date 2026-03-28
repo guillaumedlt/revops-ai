@@ -104,7 +104,7 @@ export default function TemplatesPopover({ onSelect }: TemplatesPopoverProps) {
             <div className="relative">
               <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#BBB]" />
               <input ref={searchRef} type="text" value={search} onChange={function(e) { setSearch(e.target.value); }}
-                placeholder="Search templates..."
+                placeholder="Rechercher..."
                 className="w-full h-8 pl-9 pr-3 text-xs rounded-lg border border-[#EAEAEA] focus:outline-none focus:ring-1 focus:ring-[#D4D4D4]" />
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function TemplatesPopover({ onSelect }: TemplatesPopoverProps) {
           {/* Templates list */}
           <div className="max-h-[280px] overflow-y-auto p-2">
             {filtered.length === 0 ? (
-              <p className="text-xs text-[#BBB] text-center py-4">No templates found</p>
+              <p className="text-xs text-[#BBB] text-center py-4">Aucun template</p>
             ) : filtered.map(function(cat) {
               return (
                 <div key={cat.category} className="mb-2">
@@ -123,7 +123,7 @@ export default function TemplatesPopover({ onSelect }: TemplatesPopoverProps) {
                       <button key={item.label} onClick={function() { onSelect(item.prompt); if (!needsInput) setOpen(false); }}
                         className="w-full text-left px-2 py-2 rounded-lg text-xs hover:bg-[#F5F5F5] transition-colors group flex items-center justify-between">
                         <span className="text-[#111] group-hover:text-[#111]">{item.label}</span>
-                        {needsInput && <span className="text-[10px] text-[#D4D4D4]">type to complete</span>}
+                        {needsInput && <span className="text-[10px] text-[#D4D4D4]">a completer</span>}
                       </button>
                     );
                   })}

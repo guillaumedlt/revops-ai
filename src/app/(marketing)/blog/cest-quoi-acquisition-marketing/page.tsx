@@ -207,7 +207,7 @@ export default function AcquisitionMarketingGuidePage() {
                           ["Horizon", "Court terme", "Court a moyen terme", "Long terme"],
                         ].map(([critere, acq, act, ret]) => (
                           <tr key={critere} className="border-b border-[#F5F5F5]">
-                            <td className="py-2.5 pr-4 font-medium text-[#333]">{critere}</td>
+                            <td className="py-2.5 pr-4 font-medium text-[#111]">{critere}</td>
                             <td className="py-2.5 pr-4">{acq}</td>
                             <td className="py-2.5 pr-4">{act}</td>
                             <td className="py-2.5">{ret}</td>
@@ -376,15 +376,15 @@ export default function AcquisitionMarketingGuidePage() {
                           <div className="w-2.5 h-2.5 rounded-sm" style={{ backgroundColor: m.color }} />
                           <span className="text-[16px] font-bold" style={{ color: m.color }}>{m.metric}</span>
                         </div>
-                        <p className="text-[11px] font-semibold text-[#333] mb-2">{m.fullName}</p>
+                        <p className="text-[11px] font-semibold text-[#111] mb-2">{m.fullName}</p>
                         <p className="text-[11px] text-[#666] leading-[1.6] mb-3">{m.desc}</p>
                         <div className="p-2.5 rounded-lg bg-white border border-[#EAEAEA] mb-2">
                           <p className="text-[10px] text-[#999] mb-0.5">Formule</p>
-                          <p className="text-[10px] font-mono text-[#333]">{m.formula}</p>
+                          <p className="text-[10px] font-mono text-[#111]">{m.formula}</p>
                         </div>
                         <div className="p-2.5 rounded-lg bg-white border border-[#EAEAEA]">
                           <p className="text-[10px] text-[#999] mb-0.5">Benchmark</p>
-                          <p className="text-[10px] text-[#333]">{m.benchmark}</p>
+                          <p className="text-[10px] text-[#111]">{m.benchmark}</p>
                         </div>
                       </div>
                     ))}
@@ -408,7 +408,7 @@ export default function AcquisitionMarketingGuidePage() {
                           <div className="flex-1 h-2 bg-[#E8E8E8] rounded-full overflow-hidden">
                             <div className="h-full bg-[#FF7A59] rounded-full" style={{ width: c.bar }} />
                           </div>
-                          <span className="text-[11px] font-semibold text-[#333] w-[40px] text-right">{c.taux}</span>
+                          <span className="text-[11px] font-semibold text-[#111] w-[40px] text-right">{c.taux}</span>
                         </div>
                       ))}
                     </div>
@@ -501,7 +501,7 @@ export default function AcquisitionMarketingGuidePage() {
                           ["CAC typique", "200 a 5 000 EUR", "5 a 100 EUR"],
                         ].map(([critere, b2b, b2c]) => (
                           <tr key={critere} className="border-b border-[#F5F5F5]">
-                            <td className="py-2.5 pr-4 font-medium text-[#333]">{critere}</td>
+                            <td className="py-2.5 pr-4 font-medium text-[#111]">{critere}</td>
                             <td className="py-2.5 pr-4">{b2b}</td>
                             <td className="py-2.5">{b2c}</td>
                           </tr>
@@ -637,7 +637,7 @@ export default function AcquisitionMarketingGuidePage() {
                         <p className="text-[12px] text-[#666] leading-[1.7] mb-3">{t.desc}</p>
                         <div className="p-2.5 rounded-lg bg-white border border-[#EAEAEA]">
                           <p className="text-[10px] text-[#999] mb-0.5">Cas d&apos;usage</p>
-                          <p className="text-[10px] text-[#333]">{t.useCase}</p>
+                          <p className="text-[10px] text-[#111]">{t.useCase}</p>
                         </div>
                       </div>
                     ))}

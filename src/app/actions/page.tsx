@@ -173,7 +173,7 @@ export default function ActionsPage() {
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <div className="h-5 w-5 border-2 border-[#EAEAEA] border-t-[#0A0A0A] rounded-full animate-spin" />
+        <div className="h-5 w-5 border-2 border-[#EAEAEA] border-t-[#111] rounded-full animate-spin" />
       </div>
     );
   }

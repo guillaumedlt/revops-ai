@@ -65,7 +65,7 @@ export default function IcpPage() {
       .catch(function() { setError("Network error"); setStep("input"); setLoading(false); });
   }
 
-  if (initLoad) return <div className="flex-1 flex items-center justify-center"><div className="h-8 w-8 border-2 border-[#EAEAEA] border-t-[#0A0A0A] rounded-full animate-spin" /></div>;
+  if (initLoad) return <div className="flex-1 flex items-center justify-center"><div className="h-8 w-8 border-2 border-[#EAEAEA] border-t-[#111] rounded-full animate-spin" /></div>;
 
   if (step === "input") {
     return (
@@ -77,7 +77,7 @@ export default function IcpPage() {
           <div className="relative mb-4">
             <Globe size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#BBB]" />
             <input type="text" value={input} onChange={function(e) { setInput(e.target.value); setError(null); }} onKeyDown={function(e) { if (e.key === "Enter") handleSubmit(); }}
-              placeholder="yourcompany.com or you@company.com" className="w-full h-12 pl-11 pr-4 text-sm rounded-lg border border-[#EAEAEA] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] focus:border-transparent" autoFocus />
+              placeholder="yourcompany.com or you@company.com" className="w-full h-12 pl-11 pr-4 text-sm rounded-lg border border-[#EAEAEA] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent" autoFocus />
           </div>
           {error && <p className="text-sm text-[#EF4444] mb-4">{error}</p>}
           <button onClick={handleSubmit} disabled={loading || !input.trim()} className="w-full h-11 rounded-lg bg-[#111] text-white text-sm font-medium hover:bg-[#333] disabled:opacity-40 transition-colors flex items-center justify-center gap-2">
@@ -92,7 +92,7 @@ export default function IcpPage() {
     return (
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="text-center">
-          <div className="h-12 w-12 border-2 border-[#EAEAEA] border-t-[#0A0A0A] rounded-full animate-spin mx-auto mb-6" />
+          <div className="h-12 w-12 border-2 border-[#EAEAEA] border-t-[#111] rounded-full animate-spin mx-auto mb-6" />
           <h2 className="text-lg font-semibold text-[#111] mb-3">Analyzing your company...</h2>
           <div className="space-y-1.5 text-sm text-[#999]">
             <p>Researching your business</p>
@@ -351,7 +351,7 @@ export default function IcpPage() {
               onChange={function(e) { setChatInput(e.target.value); }}
               onKeyDown={function(e) { if (e.key === "Enter") handleRefine(); }}
               placeholder="Ex: Our sweet spot is 20-50 employees, add fintech industry..."
-              className="flex-1 h-10 px-4 text-sm rounded-lg border border-[#EAEAEA] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] focus:border-transparent"
+              className="flex-1 h-10 px-4 text-sm rounded-lg border border-[#EAEAEA] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent"
               disabled={refining}
             />
             <button onClick={handleRefine} disabled={refining || !chatInput.trim()}

@@ -296,7 +296,7 @@ export default function LeadScoringGuidePage() {
                           ].map((row) => (
                             row.values.map((v, i) => (
                               <tr key={`${row.critere}-${i}`} className="border-b border-[#F5F5F5]">
-                                {i === 0 && <td className="py-2 pr-4 font-medium text-[#333] align-top" rowSpan={row.values.length}>{row.critere}</td>}
+                                {i === 0 && <td className="py-2 pr-4 font-medium text-[#111] align-top" rowSpan={row.values.length}>{row.critere}</td>}
                                 <td className="py-2 pr-4">{v.val}</td>
                                 <td className="py-2 text-right">
                                   <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-semibold ${parseInt(v.pts) >= 10 ? "bg-[#22C55E]/10 text-[#22C55E]" : parseInt(v.pts) >= 5 ? "bg-[#6C5CE7]/10 text-[#6C5CE7]" : "bg-[#F0F0F0] text-[#999]"}`}>{v.pts}</span>
@@ -464,7 +464,7 @@ export default function LeadScoringGuidePage() {
                               <div className="w-2 h-2 rounded-full" style={{ backgroundColor: t.color }} />
                               <span className="text-[11px] font-semibold" style={{ color: t.color }}>{t.score}</span>
                             </div>
-                            <p className="text-[11px] font-medium text-[#333] mb-0.5">{t.label}</p>
+                            <p className="text-[11px] font-medium text-[#111] mb-0.5">{t.label}</p>
                             <p className="text-[10px] text-[#999] leading-[1.4]">{t.desc}</p>
                           </div>
                         ))}

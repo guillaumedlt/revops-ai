@@ -483,7 +483,7 @@ export default function StructurerEquipeRevOpsPage() {
                       <div key={item.change} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="w-5 h-5 rounded bg-[#6C5CE7]/10 flex items-center justify-center text-[9px] font-bold text-[#6C5CE7]">{item.icon}</div>
-                          <p className="text-[11px] font-semibold text-[#333]">{item.change}</p>
+                          <p className="text-[11px] font-semibold text-[#111]">{item.change}</p>
                         </div>
                         <p className="text-[10px] text-[#777] leading-[1.6]">{item.desc}</p>
                       </div>

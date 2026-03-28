@@ -115,26 +115,26 @@ export default function SignupPage() {
                 <label className="block text-[12px] font-medium text-[#555] mb-1.5">Prenom</label>
                 <input type="text" value={firstName} onChange={function(e) { setFirstName(e.target.value); }}
                   placeholder="Guillaume" required
-                  className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] focus:border-transparent transition-shadow" />
+                  className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent transition-shadow" />
               </div>
               <div>
                 <label className="block text-[12px] font-medium text-[#555] mb-1.5">Nom</label>
                 <input type="text" value={lastName} onChange={function(e) { setLastName(e.target.value); }}
                   placeholder="Dupont" required
-                  className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] focus:border-transparent transition-shadow" />
+                  className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent transition-shadow" />
               </div>
             </div>
             <div>
               <label className="block text-[12px] font-medium text-[#555] mb-1.5">Email professionnel</label>
               <input type="email" value={email} onChange={function(e) { setEmail(e.target.value); }}
                 placeholder="prenom@entreprise.com" required
-                className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] focus:border-transparent transition-shadow" />
+                className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent transition-shadow" />
             </div>
             <div>
               <label className="block text-[12px] font-medium text-[#555] mb-1.5">Mot de passe</label>
               <input type="password" value={password} onChange={function(e) { setPassword(e.target.value); }}
                 placeholder="8 caracteres minimum" required minLength={8}
-                className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] focus:border-transparent transition-shadow" />
+                className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent transition-shadow" />
             </div>
             <button type="submit" disabled={loading || !firstName.trim() || !lastName.trim() || !email.trim() || !password}
               className="w-full h-11 rounded-lg bg-[#111] text-white text-sm font-medium hover:bg-[#262626] disabled:opacity-40 transition-colors flex items-center justify-center gap-2 mt-1">

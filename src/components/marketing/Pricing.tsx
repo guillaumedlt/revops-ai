@@ -84,7 +84,7 @@ export default function Pricing() {
               className={
                 "rounded-lg p-7 flex flex-col transition-all " +
                 (plan.highlight
-                  ? "bg-[#111] text-white ring-1 ring-[#0A0A0A] scale-[1.02]"
+                  ? "bg-[#111] text-white ring-1 ring-[#111] scale-[1.02]"
                   : "bg-white border border-[#EAEAEA] hover:border-[#D4D4D4]")
               }
             >

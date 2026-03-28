@@ -177,7 +177,7 @@ export default function ABMGuidePage() {
                           ["Mesure", "MQL, SQL, taux de conversion", "Engagement par compte, pipeline influence"],
                         ].map(([critere, inbound, abm]) => (
                           <tr key={critere} className="border-b border-[#F5F5F5]">
-                            <td className="py-2.5 pr-4 font-medium text-[#333]">{critere}</td>
+                            <td className="py-2.5 pr-4 font-medium text-[#111]">{critere}</td>
                             <td className="py-2.5 pr-4">{inbound}</td>
                             <td className="py-2.5">{abm}</td>
                           </tr>
@@ -260,8 +260,8 @@ export default function ABMGuidePage() {
                           <span className="text-[11px] text-[#999] ml-auto">{level.subtitle}</span>
                         </div>
                         <div className="flex gap-4 mb-3">
-                          <div className="text-[11px]"><span className="text-[#999]">Comptes : </span><span className="text-[#333] font-medium">{level.accounts}</span></div>
-                          <div className="text-[11px]"><span className="text-[#999]">Effort : </span><span className="text-[#333] font-medium">{level.effort}</span></div>
+                          <div className="text-[11px]"><span className="text-[#999]">Comptes : </span><span className="text-[#111] font-medium">{level.accounts}</span></div>
+                          <div className="text-[11px]"><span className="text-[#999]">Effort : </span><span className="text-[#111] font-medium">{level.effort}</span></div>
                         </div>
                         <p className="text-[12px] text-[#666] leading-[1.7]">{level.desc}</p>
                       </div>
@@ -368,7 +368,7 @@ export default function ABMGuidePage() {
                       { title: "Relations existantes", desc: "Avez-vous des connexions en commun sur LinkedIn. Y a-t-il eu des interactions passees avec votre entreprise. Un ancien client, un participant a un webinaire, un visiteur du site." },
                     ].map((item) => (
                       <div key={item.title} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
-                        <p className="text-[12px] font-semibold text-[#333] mb-1">{item.title}</p>
+                        <p className="text-[12px] font-semibold text-[#111] mb-1">{item.title}</p>
                         <p className="text-[11px] text-[#777] leading-[1.6]">{item.desc}</p>
                       </div>
                     ))}
@@ -411,7 +411,7 @@ export default function ABMGuidePage() {
                           ["Ads", "Messages specifiques au compte", "Ads par cluster", "Ads par segment"],
                         ].map(([element, t1, t2, t3]) => (
                           <tr key={element} className="border-b border-[#F5F5F5]">
-                            <td className="py-2.5 pr-4 font-medium text-[#333]">{element}</td>
+                            <td className="py-2.5 pr-4 font-medium text-[#111]">{element}</td>
                             <td className="py-2.5 pr-4">{t1}</td>
                             <td className="py-2.5 pr-4">{t2}</td>
                             <td className="py-2.5">{t3}</td>
@@ -542,7 +542,7 @@ export default function ABMGuidePage() {
                           ["Content", "Mutiny / Folloze", "Personnalisation du site web par compte ou segment", "A partir de 10 000 USD/an"],
                         ].map(([cat, tool, role, budget]) => (
                           <tr key={tool} className="border-b border-[#F5F5F5]">
-                            <td className="py-2.5 pr-4 font-medium text-[#333]">{cat}</td>
+                            <td className="py-2.5 pr-4 font-medium text-[#111]">{cat}</td>
                             <td className="py-2.5 pr-4 font-medium text-[#6C5CE7]">{tool}</td>
                             <td className="py-2.5 pr-4">{role}</td>
                             <td className="py-2.5 text-[11px] text-[#999]">{budget}</td>

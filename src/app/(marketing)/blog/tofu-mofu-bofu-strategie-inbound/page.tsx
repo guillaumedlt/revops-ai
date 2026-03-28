@@ -247,7 +247,7 @@ export default function TofuMofuBofuPage() {
                         { kpi: "Nouveaux visiteurs", desc: "Part de l&apos;audience nouvelle" },
                       ].map((k) => (
                         <div key={k.kpi} className="text-center">
-                          <p className="text-[11px] font-semibold text-[#333]">{k.kpi}</p>
+                          <p className="text-[11px] font-semibold text-[#111]">{k.kpi}</p>
                           <p className="text-[10px] text-[#999] mt-0.5">{k.desc}</p>
                         </div>
                       ))}
@@ -298,7 +298,7 @@ export default function TofuMofuBofuPage() {
                         { kpi: "Taux d&apos;ouverture", desc: "Emails de nurturing" },
                       ].map((k) => (
                         <div key={k.kpi} className="text-center">
-                          <p className="text-[11px] font-semibold text-[#333]">{k.kpi}</p>
+                          <p className="text-[11px] font-semibold text-[#111]">{k.kpi}</p>
                           <p className="text-[10px] text-[#999] mt-0.5">{k.desc}</p>
                         </div>
                       ))}
@@ -350,7 +350,7 @@ export default function TofuMofuBofuPage() {
                         { kpi: "Cycle de vente", desc: "Duree moyenne en jours" },
                       ].map((k) => (
                         <div key={k.kpi} className="text-center">
-                          <p className="text-[11px] font-semibold text-[#333]">{k.kpi}</p>
+                          <p className="text-[11px] font-semibold text-[#111]">{k.kpi}</p>
                           <p className="text-[10px] text-[#999] mt-0.5">{k.desc}</p>
                         </div>
                       ))}
@@ -398,7 +398,7 @@ export default function TofuMofuBofuPage() {
                         ].map(([etape, format, objectif, cta, kpi], i) => (
                           <tr key={i} className="border-b border-[#F5F5F5]">
                             <td className="py-2.5 pr-4 font-medium" style={{ color: etape === "TOFU" ? "#FF7A59" : etape === "MOFU" ? "#4B5EFC" : "#22C55E" }}>{etape}</td>
-                            <td className="py-2.5 pr-4 font-medium text-[#333]">{format}</td>
+                            <td className="py-2.5 pr-4 font-medium text-[#111]">{format}</td>
                             <td className="py-2.5 pr-4">{objectif}</td>
                             <td className="py-2.5 pr-4">{cta}</td>
                             <td className="py-2.5">{kpi}</td>

@@ -90,7 +90,7 @@ export default function PricingPage() {
             return (
               <div
                 key={plan.id}
-                className={"rounded-lg border p-6 flex flex-col " + (plan.highlighted ? "border-[#0A0A0A] ring-1 ring-[#0A0A0A] relative" : "border-[#EAEAEA]")}
+                className={"rounded-lg border p-6 flex flex-col " + (plan.highlighted ? "border-[#111] ring-1 ring-[#111] relative" : "border-[#EAEAEA]")}
               >
                 {plan.highlighted && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#111] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">

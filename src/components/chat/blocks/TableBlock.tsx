@@ -116,7 +116,7 @@ export default function TableBlock({ title, headers, rows, sortable = true, sear
           )}
           <button
             onClick={exportCSV}
-            className="h-7 px-2 flex items-center gap-1 rounded-lg text-[11px] text-[#999] hover:text-[#111] hover:bg-[#E5E5E5] transition-colors"
+            className="h-7 px-2 flex items-center gap-1 rounded-lg text-[11px] text-[#999] hover:text-[#111] hover:bg-[#F0F0F0] transition-colors"
             title="Export CSV"
           >
             <Download size={12} />
@@ -180,14 +180,14 @@ export default function TableBlock({ title, headers, rows, sortable = true, sear
         {showPagination && (
           <div className="flex items-center gap-1">
             <button onClick={function() { setPage(Math.max(0, page - 1)); }} disabled={page === 0}
-              className="h-6 w-6 flex items-center justify-center rounded text-[#555] hover:bg-[#E5E5E5] disabled:opacity-30">
+              className="h-6 w-6 flex items-center justify-center rounded text-[#555] hover:bg-[#F0F0F0] disabled:opacity-30">
               <ChevronLeft size={14} />
             </button>
             <span className="text-[10px] text-[#999] min-w-[40px] text-center">
               {(page + 1) + " / " + totalPages}
             </span>
             <button onClick={function() { setPage(Math.min(totalPages - 1, page + 1)); }} disabled={page >= totalPages - 1}
-              className="h-6 w-6 flex items-center justify-center rounded text-[#555] hover:bg-[#E5E5E5] disabled:opacity-30">
+              className="h-6 w-6 flex items-center justify-center rounded text-[#555] hover:bg-[#F0F0F0] disabled:opacity-30">
               <ChevronRight size={14} />
             </button>
           </div>

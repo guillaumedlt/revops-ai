@@ -28,7 +28,7 @@ function CreateModal({ onClose, onCreate }: { onClose: () => void; onCreate: (na
     <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-[#111]">Create Dashboard</h2>
+          <h2 className="text-lg font-semibold text-[#111]">Creer un dashboard</h2>
           <button onClick={onClose} className="text-[#BBB] hover:text-[#111]">
             <X size={18} />
           </button>
@@ -42,7 +42,7 @@ function CreateModal({ onClose, onCreate }: { onClose: () => void; onCreate: (na
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Weekly Pipeline Review"
               autoFocus
-              className="w-full h-10 px-3 text-sm rounded-lg border border-[#EAEAEA] bg-white text-[#111] placeholder:text-[#BBB] focus:outline-none focus:ring-1 focus:ring-[#0A0A0A]"
+              className="w-full h-10 px-3 text-sm rounded-lg border border-[#EAEAEA] bg-white text-[#111] placeholder:text-[#BBB] focus:outline-none focus:ring-1 focus:ring-[#111]"
             />
           </div>
           <div>
@@ -52,19 +52,19 @@ function CreateModal({ onClose, onCreate }: { onClose: () => void; onCreate: (na
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="What is this dashboard for?"
-              className="w-full h-10 px-3 text-sm rounded-lg border border-[#EAEAEA] bg-white text-[#111] placeholder:text-[#BBB] focus:outline-none focus:ring-1 focus:ring-[#0A0A0A]"
+              className="w-full h-10 px-3 text-sm rounded-lg border border-[#EAEAEA] bg-white text-[#111] placeholder:text-[#BBB] focus:outline-none focus:ring-1 focus:ring-[#111]"
             />
           </div>
           <div className="flex justify-end gap-2 pt-2">
             <button type="button" onClick={onClose} className="px-4 py-2 text-sm text-[#555] hover:bg-[#F5F5F5] rounded-lg">
-              Cancel
+              Annuler
             </button>
             <button
               type="submit"
               disabled={!name.trim() || loading}
               className="bg-[#111] text-white rounded-lg px-4 py-2 text-sm font-medium disabled:opacity-50 hover:bg-[#262626] transition-colors"
             >
-              {loading ? "Creating..." : "Create"}
+              {loading ? "Creation..." : "Creer"}
             </button>
           </div>
         </form>
@@ -129,7 +129,7 @@ export default function DashboardsPage() {
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <div className="h-5 w-5 border-2 border-[#EAEAEA] border-t-[#0A0A0A] rounded-full animate-spin" />
+        <div className="h-5 w-5 border-2 border-[#EAEAEA] border-t-[#111] rounded-full animate-spin" />
       </div>
     );
   }
@@ -141,14 +141,14 @@ export default function DashboardsPage() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-xl font-semibold text-[#111]">Dashboards</h1>
-            <p className="text-sm text-[#999] mt-0.5">Pin reports and metrics from chat into custom dashboards.</p>
+            <p className="text-sm text-[#999] mt-0.5">Epingle tes rapports et metriques dans des dashboards personnalises.</p>
           </div>
           <button
             onClick={() => setShowCreate(true)}
             className="bg-[#111] text-white rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-1.5 hover:bg-[#262626] transition-colors"
           >
             <Plus size={16} />
-            Create Dashboard
+            Creer un dashboard
           </button>
         </div>
 
@@ -158,8 +158,8 @@ export default function DashboardsPage() {
             <div className="h-12 w-12 rounded-lg bg-[#F5F5F5] flex items-center justify-center mx-auto mb-3">
               <LayoutDashboard size={24} className="text-[#BBB]" />
             </div>
-            <p className="text-sm text-[#555] font-medium">No dashboards yet</p>
-            <p className="text-sm text-[#BBB] mt-1">Create one to start pinning reports.</p>
+            <p className="text-sm text-[#555] font-medium">Aucun dashboard</p>
+            <p className="text-sm text-[#BBB] mt-1">Cree-en un pour commencer a epingler tes rapports.</p>
           </div>
         ) : (
           <div className="grid grid-cols-3 gap-4">

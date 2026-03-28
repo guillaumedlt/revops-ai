@@ -136,7 +136,7 @@ export default function AlertsPage() {
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <div className="h-5 w-5 border-2 border-[#EAEAEA] border-t-[#0A0A0A] rounded-full animate-spin" />
+        <div className="h-5 w-5 border-2 border-[#EAEAEA] border-t-[#111] rounded-full animate-spin" />
       </div>
     );
   }
@@ -253,7 +253,7 @@ export default function AlertsPage() {
           {/* Severity filters */}
           {alerts.length > 0 && (
             <div className="flex items-center gap-2 mb-4">
-              <button onClick={function() { setFilter("all"); }} className={"px-3 py-1.5 rounded-lg text-[12px] font-medium border transition-colors " + (filter === "all" ? "bg-[#111] text-white border-[#0A0A0A]" : "text-[#999] border-[#EAEAEA] hover:border-[#D4D4D4]")}>
+              <button onClick={function() { setFilter("all"); }} className={"px-3 py-1.5 rounded-lg text-[12px] font-medium border transition-colors " + (filter === "all" ? "bg-[#111] text-white border-[#111]" : "text-[#999] border-[#EAEAEA] hover:border-[#D4D4D4]")}>
                 Tout ({alerts.length})
               </button>
               {critical > 0 && (

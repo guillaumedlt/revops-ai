@@ -321,7 +321,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                     <p className="text-[12px] font-semibold text-[#FF7A59] mb-3">Template SLA Semaine 1 -- Engagements reciproques</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <p className="text-[11px] font-semibold text-[#333] mb-2">Marketing s&apos;engage a :</p>
+                        <p className="text-[11px] font-semibold text-[#111] mb-2">Marketing s&apos;engage a :</p>
                         <ul className="space-y-1.5">
                           {["Transmettre X MQLs par mois", "Respecter les criteres de qualification definis", "Documenter le contexte d&apos;engagement du lead", "Alerter les sales dans les 2h via Slack"].map((item) => (
                             <li key={item} className="flex items-start gap-2 text-[10px] text-[#777]">
@@ -332,7 +332,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                         </ul>
                       </div>
                       <div>
-                        <p className="text-[11px] font-semibold text-[#333] mb-2">Sales s&apos;engage a :</p>
+                        <p className="text-[11px] font-semibold text-[#111] mb-2">Sales s&apos;engage a :</p>
                         <ul className="space-y-1.5">
                           {["Contacter chaque MQL dans les 24h", "Logger la disposition dans le CRM", "Remonter la qualite du lead (accepted/rejected)", "Participer au review hebdomadaire"].map((item) => (
                             <li key={item} className="flex items-start gap-2 text-[10px] text-[#777]">
@@ -448,7 +448,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                     <p className="text-[12px] font-semibold text-[#4B5EFC] mb-4">Modele de Lead Scoring recommande</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <p className="text-[11px] font-semibold text-[#333] mb-2">Criteres de Fit (profil)</p>
+                        <p className="text-[11px] font-semibold text-[#111] mb-2">Criteres de Fit (profil)</p>
                         <div className="space-y-1.5">
                           {[
                             { critere: "Taille entreprise > 50 salaries", points: "+15" },
@@ -465,7 +465,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                         </div>
                       </div>
                       <div>
-                        <p className="text-[11px] font-semibold text-[#333] mb-2">Criteres d&apos;Engagement (comportement)</p>
+                        <p className="text-[11px] font-semibold text-[#111] mb-2">Criteres d&apos;Engagement (comportement)</p>
                         <div className="space-y-1.5">
                           {[
                             { critere: "Visite page pricing", points: "+20" },
@@ -559,7 +559,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
 
                       {/* Funnel bar chart mockup */}
                       <div className="mb-5">
-                        <p className="text-[11px] font-semibold text-[#333] mb-3">Conversion funnel -- ce mois</p>
+                        <p className="text-[11px] font-semibold text-[#111] mb-3">Conversion funnel -- ce mois</p>
                         <div className="space-y-2">
                           {[
                             { stage: "Visiteurs", value: 12400, max: 12400, color: "#E8E8E8" },
@@ -700,7 +700,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                       { kpi: "MQL-to-Opp rate", target: "> 25%", desc: "MQLs convertis en opportunites", color: "#22C55E" },
                     ].map((item) => (
                       <div key={item.kpi} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F2F2F2] text-center">
-                        <p className="text-[11px] font-semibold text-[#333] mb-1">{item.kpi}</p>
+                        <p className="text-[11px] font-semibold text-[#111] mb-1">{item.kpi}</p>
                         <p className="text-[16px] font-bold" style={{ color: item.color }}>{item.target}</p>
                         <p className="text-[9px] text-[#999] mt-1">{item.desc}</p>
                       </div>
@@ -718,7 +718,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                         { section: "4. Actions semaine prochaine", items: ["Actions marketing (contenu, campagnes, scoring)", "Actions sales (follow-up, feedback)", "Actions communes (process, outils)"] },
                       ].map((block) => (
                         <div key={block.section}>
-                          <p className="text-[11px] font-semibold text-[#333] mb-1.5">{block.section}</p>
+                          <p className="text-[11px] font-semibold text-[#111] mb-1.5">{block.section}</p>
                           <div className="space-y-1">
                             {block.items.map((item) => (
                               <div key={item} className="flex items-start gap-2 text-[10px] text-[#777]">
@@ -797,7 +797,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                                 <span className="text-[10px] text-[#666]">{item.metric}</span>
                                 <div className="flex items-center gap-2">
                                   <span className="text-[10px] text-[#BBB]">{item.target}</span>
-                                  <span className="text-[10px] font-semibold text-[#333]">{item.actual}</span>
+                                  <span className="text-[10px] font-semibold text-[#111]">{item.actual}</span>
                                   <div className={`w-2 h-2 rounded-full ${item.status === "ok" ? "bg-[#22C55E]" : item.status === "warning" ? "bg-[#F59E0B]" : "bg-[#FF7A59]"}`} />
                                 </div>
                               </div>
@@ -822,7 +822,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
                                 <span className="text-[10px] text-[#666]">{item.metric}</span>
                                 <div className="flex items-center gap-2">
                                   <span className="text-[10px] text-[#BBB]">{item.target}</span>
-                                  <span className="text-[10px] font-semibold text-[#333]">{item.actual}</span>
+                                  <span className="text-[10px] font-semibold text-[#111]">{item.actual}</span>
                                   <div className={`w-2 h-2 rounded-full ${item.status === "ok" ? "bg-[#22C55E]" : item.status === "warning" ? "bg-[#F59E0B]" : "bg-[#FF7A59]"}`} />
                                 </div>
                               </div>
@@ -855,7 +855,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
 
                   {/* SLA contents */}
                   <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
-                    <p className="text-[12px] font-semibold text-[#333] mb-3">Ce que contient un SLA complet</p>
+                    <p className="text-[12px] font-semibold text-[#111] mb-3">Ce que contient un SLA complet</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {[
                         "Definitions partagees (MQL, SQL, Opportunity)",
@@ -927,7 +927,7 @@ export default function AlignerMarketingSalesRevOpsPage() {
 
                   {/* Shared OKRs example */}
                   <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
-                    <p className="text-[12px] font-semibold text-[#333] mb-4">Exemple d&apos;OKRs partages -- Q2 2026</p>
+                    <p className="text-[12px] font-semibold text-[#111] mb-4">Exemple d&apos;OKRs partages -- Q2 2026</p>
                     <div className="space-y-4">
                       {[
                         {

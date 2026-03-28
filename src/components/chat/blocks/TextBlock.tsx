@@ -26,13 +26,13 @@ export default function TextBlock({ text }: { text: string }) {
     if (listItems.length === 0) return;
     if (listItems[0].ordered) {
       elements.push(
-        <ol key={key++} className="list-decimal pl-5 space-y-1 text-[#333]">
+        <ol key={key++} className="list-decimal pl-5 space-y-1 text-[#111]">
           {listItems.map(function(item, i) { return <li key={i}>{formatInline(item.text)}</li>; })}
         </ol>
       );
     } else {
       elements.push(
-        <ul key={key++} className="list-disc pl-5 space-y-1 text-[#333]">
+        <ul key={key++} className="list-disc pl-5 space-y-1 text-[#111]">
           {listItems.map(function(item, i) { return <li key={i}>{formatInline(item.text)}</li>; })}
         </ul>
       );
@@ -67,7 +67,7 @@ export default function TextBlock({ text }: { text: string }) {
       elements.push(<div key={key++} className="h-1.5" />);
     } else {
       flushList();
-      elements.push(<p key={key++} className="text-[#333] leading-relaxed">{formatInline(line)}</p>);
+      elements.push(<p key={key++} className="text-[#111] leading-relaxed">{formatInline(line)}</p>);
     }
   }
   flushList();

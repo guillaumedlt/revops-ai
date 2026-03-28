@@ -249,7 +249,7 @@ export default function HubSpotVsSalesforceArticle() {
                             { stage: "Closing", color: "#FCE4EC", deals: ["Foxtrot - 60K"] },
                           ].map((col) => (
                             <div key={col.stage} className="flex-1 min-w-0">
-                              <div className="text-[7px] font-semibold text-[#333] mb-1.5 truncate">{col.stage}</div>
+                              <div className="text-[7px] font-semibold text-[#111] mb-1.5 truncate">{col.stage}</div>
                               <div className="space-y-1">
                                 {col.deals.map((d) => (
                                   <div key={d} className="rounded px-1.5 py-1 text-[6px] text-[#444] font-medium truncate" style={{ background: col.color }}>{d}</div>
@@ -292,7 +292,7 @@ export default function HubSpotVsSalesforceArticle() {
                             { stage: "Negotiation", color: "#FFF8E1", deals: ["Nu Ltd - $78K"] },
                           ].map((col) => (
                             <div key={col.stage} className="flex-1 min-w-0">
-                              <div className="text-[7px] font-semibold text-[#333] mb-1.5 truncate">{col.stage}</div>
+                              <div className="text-[7px] font-semibold text-[#111] mb-1.5 truncate">{col.stage}</div>
                               <div className="space-y-1">
                                 {col.deals.map((d) => (
                                   <div key={d} className="rounded px-1.5 py-1 text-[6px] text-[#444] font-medium truncate" style={{ background: col.color }}>{d}</div>
@@ -339,7 +339,7 @@ export default function HubSpotVsSalesforceArticle() {
                           ].map((f) => (
                             <div key={f.label} className="flex justify-between">
                               <span className="text-[7px] text-[#999]">{f.label}</span>
-                              <span className="text-[7px] font-medium text-[#333]">{f.value}</span>
+                              <span className="text-[7px] font-medium text-[#111]">{f.value}</span>
                             </div>
                           ))}
                         </div>
@@ -396,7 +396,7 @@ export default function HubSpotVsSalesforceArticle() {
                           ].map((f) => (
                             <div key={f.label}>
                               <span className="text-[6px] text-[#999] block">{f.label}</span>
-                              <span className="text-[7px] font-medium text-[#333]">{f.value}</span>
+                              <span className="text-[7px] font-medium text-[#111]">{f.value}</span>
                             </div>
                           ))}
                         </div>
@@ -596,7 +596,7 @@ export default function HubSpotVsSalesforceArticle() {
                         </div>
                         {/* Bar chart mockup */}
                         <div className="bg-white rounded p-2 border border-[#E5E8EB] mb-2">
-                          <p className="text-[7px] font-semibold text-[#333] mb-2">Pipeline par etape</p>
+                          <p className="text-[7px] font-semibold text-[#111] mb-2">Pipeline par etape</p>
                           <div className="flex items-end gap-1 h-[40px]">
                             {[65, 45, 80, 35, 55, 25].map((h, i) => (
                               <div key={i} className="flex-1 rounded-t" style={{ height: `${h}%`, background: i % 2 === 0 ? "#FF7A59" : "#FFB49A" }} />
@@ -605,7 +605,7 @@ export default function HubSpotVsSalesforceArticle() {
                         </div>
                         {/* Donut mockup */}
                         <div className="bg-white rounded p-2 border border-[#E5E8EB]">
-                          <p className="text-[7px] font-semibold text-[#333] mb-1">Win rate par source</p>
+                          <p className="text-[7px] font-semibold text-[#111] mb-1">Win rate par source</p>
                           <div className="flex items-center gap-2">
                             <div className="w-8 h-8 rounded-full border-[3px] border-[#FF7A59]" style={{ borderRightColor: "#FFE0D6", borderBottomColor: "#FFE0D6" }} />
                             <div className="space-y-0.5">
@@ -644,7 +644,7 @@ export default function HubSpotVsSalesforceArticle() {
                         </div>
                         {/* Stacked bar chart */}
                         <div className="bg-white rounded p-2 border border-[#D8DDE6] mb-2">
-                          <p className="text-[7px] font-semibold text-[#333] mb-2">Forecast par categorie</p>
+                          <p className="text-[7px] font-semibold text-[#111] mb-2">Forecast par categorie</p>
                           <div className="space-y-1">
                             {[
                               { label: "Commit", widths: [70], colors: ["#00A1E0"] },
@@ -664,7 +664,7 @@ export default function HubSpotVsSalesforceArticle() {
                         </div>
                         {/* Table mockup */}
                         <div className="bg-white rounded p-2 border border-[#D8DDE6]">
-                          <p className="text-[7px] font-semibold text-[#333] mb-1">Top reps by revenue</p>
+                          <p className="text-[7px] font-semibold text-[#111] mb-1">Top reps by revenue</p>
                           <div className="space-y-0.5">
                             {[
                               { name: "M. Martin", val: "$98K" },
@@ -673,7 +673,7 @@ export default function HubSpotVsSalesforceArticle() {
                             ].map((r) => (
                               <div key={r.name} className="flex justify-between">
                                 <span className="text-[6px] text-[#00A1E0]">{r.name}</span>
-                                <span className="text-[6px] font-medium text-[#333]">{r.val}</span>
+                                <span className="text-[6px] font-medium text-[#111]">{r.val}</span>
                               </div>
                             ))}
                           </div>

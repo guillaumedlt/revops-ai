@@ -11,8 +11,8 @@ type Tab = "general" | "llm" | "connectors" | "billing";
 const TABS: { id: Tab; label: string }[] = [
   { id: "general", label: "General" },
   { id: "llm", label: "LLM" },
-  { id: "connectors", label: "Connectors" },
-  { id: "billing", label: "Billing" },
+  { id: "connectors", label: "Connecteurs" },
+  { id: "billing", label: "Facturation" },
 ];
 
 interface LlmConfig {
@@ -79,7 +79,7 @@ function Step({ n, text, sub, link }: { n: string; text: string; sub?: string; l
     <div className="flex items-start gap-2 flex-1 min-w-0">
       <span className="h-5 w-5 rounded-full bg-[#111] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">{n}</span>
       <div className="min-w-0">
-        <p className="text-[11px] text-[#333] leading-snug">{text}</p>
+        <p className="text-[11px] text-[#111] leading-snug">{text}</p>
         {sub && <p className="text-[10px] text-[#BBB] leading-snug mt-0.5">{sub}</p>}
         {link && (
           <a href={link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-0.5 text-[10px] text-[#6366F1] hover:underline mt-0.5">
@@ -210,7 +210,7 @@ function BillingTab() {
                 key={pack.id}
                 onClick={function() { handleBuyPack(pack.id); }}
                 disabled={buying === pack.id}
-                className={"relative rounded-lg border p-4 text-center transition-all hover:shadow-sm disabled:opacity-50 " + (pack.popular ? "border-[#0A0A0A] ring-1 ring-[#0A0A0A]" : "border-[#EAEAEA] hover:border-[#D4D4D4]")}
+                className={"relative rounded-lg border p-4 text-center transition-all hover:shadow-sm disabled:opacity-50 " + (pack.popular ? "border-[#111] ring-1 ring-[#111]" : "border-[#EAEAEA] hover:border-[#D4D4D4]")}
               >
                 {pack.popular && (
                   <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-[#111] text-white text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">Best value</span>
@@ -235,7 +235,7 @@ function SettingsContent() {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [llmConfig, setLlmConfig] = useState<LlmConfig | null>(null);
-  const [editingKey, setEditingKey] = useState<string | null>(null);
+  const [editingKey, setModifieringKey] = useState<string | null>(null);
   const [keyInput, setKeyInput] = useState("");
   const [hubspotConnected, setHubspotConnected] = useState(false);
   const [hubspotHealthy, setHubspotHealthy] = useState(true);
@@ -331,7 +331,7 @@ function SettingsContent() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ [bodyKey]: keyInput }),
     });
-    setEditingKey(null);
+    setModifieringKey(null);
     setKeyInput("");
     const res = await fetch("/api/settings/llm");
     const json = await res.json();
@@ -415,7 +415,7 @@ function SettingsContent() {
             className={
               "px-4 py-2.5 text-sm transition-colors -mb-px " +
               (activeTab === tab.id
-                ? "text-[#111] font-medium border-b-2 border-[#0A0A0A]"
+                ? "text-[#111] font-medium border-b-2 border-[#111]"
                 : "text-[#999] hover:text-[#111]")
             }
           >
@@ -465,7 +465,7 @@ function SettingsContent() {
                     onClick={() => saveDefaultModel(model.id)}
                     className={
                       "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-colors " +
-                      (isSelected ? "bg-[#F5F5F5] ring-1 ring-[#0A0A0A]" : "hover:bg-[#FAFAFA]")
+                      (isSelected ? "bg-[#F5F5F5] ring-1 ring-[#111]" : "hover:bg-[#FAFAFA]")
                     }
                   >
                     <div className="shrink-0">
@@ -522,7 +522,7 @@ function SettingsContent() {
                         value={keyInput}
                         onChange={(e) => setKeyInput(e.target.value)}
                         placeholder="sk-..."
-                        className="h-8 px-3 border border-[#EAEAEA] rounded-lg text-xs w-48 focus:outline-none focus:ring-1 focus:ring-[#0A0A0A]"
+                        className="h-8 px-3 border border-[#EAEAEA] rounded-lg text-xs w-48 focus:outline-none focus:ring-1 focus:ring-[#111]"
                       />
                       <button
                         onClick={() => saveKey(provider.id)}
@@ -531,7 +531,7 @@ function SettingsContent() {
                         Save
                       </button>
                       <button
-                        onClick={() => { setEditingKey(null); setKeyInput(""); }}
+                        onClick={() => { setModifieringKey(null); setKeyInput(""); }}
                         className="text-xs text-[#999]"
                       >
                         Cancel
@@ -539,10 +539,10 @@ function SettingsContent() {
                     </div>
                   ) : (
                     <button
-                      onClick={() => setEditingKey(provider.id)}
+                      onClick={() => setModifieringKey(provider.id)}
                       className="text-xs text-[#999] hover:text-[#111] transition-colors"
                     >
-                      Edit
+                      Modifier
                     </button>
                   )}
                 </div>

@@ -56,7 +56,7 @@ export default function LoginPage() {
               <input
                 type="email" value={email} onChange={function(e) { setEmail(e.target.value); }}
                 placeholder="prenom@entreprise.com" required autoFocus
-                className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] focus:border-transparent transition-shadow"
+                className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent transition-shadow"
               />
             </div>
             <div>
@@ -64,7 +64,7 @@ export default function LoginPage() {
               <input
                 type="password" value={password} onChange={function(e) { setPassword(e.target.value); }}
                 placeholder="••••••••" required minLength={8}
-                className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] focus:border-transparent transition-shadow"
+                className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent transition-shadow"
               />
             </div>
             <button

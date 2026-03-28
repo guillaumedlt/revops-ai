@@ -311,17 +311,17 @@ export default function BlogPostPage() {
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
                           <span className="flex items-center justify-center w-5 h-5 rounded bg-[#FF7A59] text-white text-[9px] font-bold">02</span>
-                          <span className="text-[11px] text-[#333]">Definir MQL/SQL</span>
+                          <span className="text-[11px] text-[#111]">Definir MQL/SQL</span>
                           <span className="text-[9px] text-[#999] ml-auto">1h</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="flex items-center justify-center w-5 h-5 rounded bg-[#FF7A59] text-white text-[9px] font-bold">03</span>
-                          <span className="text-[11px] text-[#333]">Attribution leads</span>
+                          <span className="text-[11px] text-[#111]">Attribution leads</span>
                           <span className="text-[9px] text-[#999] ml-auto">1h</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="flex items-center justify-center w-5 h-5 rounded bg-[#FF7A59] text-white text-[9px] font-bold">06</span>
-                          <span className="text-[11px] text-[#333]">Relances devis</span>
+                          <span className="text-[11px] text-[#111]">Relances devis</span>
                           <span className="text-[9px] text-[#999] ml-auto">1h</span>
                         </div>
                       </div>
@@ -333,17 +333,17 @@ export default function BlogPostPage() {
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
                           <span className="flex items-center justify-center w-5 h-5 rounded bg-[#FF7A59] text-white text-[9px] font-bold">01</span>
-                          <span className="text-[11px] text-[#333]">Nettoyer doublons</span>
+                          <span className="text-[11px] text-[#111]">Nettoyer doublons</span>
                           <span className="text-[9px] text-[#999] ml-auto">2h</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="flex items-center justify-center w-5 h-5 rounded bg-[#FF7A59] text-white text-[9px] font-bold">04</span>
-                          <span className="text-[11px] text-[#333]">Dashboard pipeline</span>
+                          <span className="text-[11px] text-[#111]">Dashboard pipeline</span>
                           <span className="text-[9px] text-[#999] ml-auto">2h</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="flex items-center justify-center w-5 h-5 rounded bg-[#FF7A59] text-white text-[9px] font-bold">05</span>
-                          <span className="text-[11px] text-[#333]">Lead scoring</span>
+                          <span className="text-[11px] text-[#111]">Lead scoring</span>
                           <span className="text-[9px] text-[#999] ml-auto">3h</span>
                         </div>
                       </div>
@@ -355,17 +355,17 @@ export default function BlogPostPage() {
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
                           <span className="flex items-center justify-center w-5 h-5 rounded bg-[#FF7A59] text-white text-[9px] font-bold">07</span>
-                          <span className="text-[11px] text-[#333]">Notifs Slack</span>
+                          <span className="text-[11px] text-[#111]">Notifs Slack</span>
                           <span className="text-[9px] text-[#999] ml-auto">30min</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="flex items-center justify-center w-5 h-5 rounded bg-[#FF7A59] text-white text-[9px] font-bold">09</span>
-                          <span className="text-[11px] text-[#333]">Template reporting</span>
+                          <span className="text-[11px] text-[#111]">Template reporting</span>
                           <span className="text-[9px] text-[#999] ml-auto">1h</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="flex items-center justify-center w-5 h-5 rounded bg-[#FF7A59] text-white text-[9px] font-bold">10</span>
-                          <span className="text-[11px] text-[#333]">Warm-up outbound</span>
+                          <span className="text-[11px] text-[#111]">Warm-up outbound</span>
                           <span className="text-[9px] text-[#999] ml-auto">15min</span>
                         </div>
                       </div>
@@ -377,7 +377,7 @@ export default function BlogPostPage() {
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
                           <span className="flex items-center justify-center w-5 h-5 rounded bg-[#FF7A59] text-white text-[9px] font-bold">08</span>
-                          <span className="text-[11px] text-[#333]">Standardiser proprietes</span>
+                          <span className="text-[11px] text-[#111]">Standardiser proprietes</span>
                           <span className="text-[9px] text-[#999] ml-auto">2h</span>
                         </div>
                       </div>

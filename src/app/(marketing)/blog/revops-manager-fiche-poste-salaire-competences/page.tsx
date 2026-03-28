@@ -338,7 +338,7 @@ export default function RevOpsManagerFichePostePage() {
 
                   {/* CSS Org Chart Mockup */}
                   <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
-                    <p className="text-[12px] font-semibold text-[#333] mb-5">Rattachement hierarchique -- ou se situe le RevOps</p>
+                    <p className="text-[12px] font-semibold text-[#111] mb-5">Rattachement hierarchique -- ou se situe le RevOps</p>
                     <div className="flex flex-col items-center gap-0">
                       {/* CEO level */}
                       <div className="px-4 py-2 rounded-lg bg-[#111] text-white text-[10px] font-semibold">CEO / COO</div>
@@ -401,7 +401,7 @@ export default function RevOpsManagerFichePostePage() {
 
                   {/* CSS Skills Radar Mockup */}
                   <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
-                    <p className="text-[12px] font-semibold text-[#333] mb-4">Radar de competences -- Profil ideal</p>
+                    <p className="text-[12px] font-semibold text-[#111] mb-4">Radar de competences -- Profil ideal</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
                         { skill: "CRM / Admin", level: 95, color: "#FF7A59" },
@@ -481,7 +481,7 @@ export default function RevOpsManagerFichePostePage() {
                         <div key={item.title} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0]">
                           <div className="flex items-center gap-2 mb-2">
                             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
-                            <span className="text-[11px] font-semibold text-[#333]">{item.title}</span>
+                            <span className="text-[11px] font-semibold text-[#111]">{item.title}</span>
                           </div>
                           <p className="text-[10px] text-[#888] leading-[1.6]" dangerouslySetInnerHTML={{ __html: item.desc }} />
                         </div>
@@ -502,7 +502,7 @@ export default function RevOpsManagerFichePostePage() {
 
                   {/* CSS Timeline Mockup: Day-in-the-life */}
                   <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
-                    <p className="text-[12px] font-semibold text-[#333] mb-5">Timeline -- Une journee type</p>
+                    <p className="text-[12px] font-semibold text-[#111] mb-5">Timeline -- Une journee type</p>
                     <div className="relative">
                       {/* Timeline line */}
                       <div className="absolute left-[40px] top-2 bottom-2 w-[2px] bg-[#E8E8E8]" />
@@ -601,7 +601,7 @@ export default function RevOpsManagerFichePostePage() {
 
                   {/* CSS Salary Bar Chart Mockup */}
                   <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
-                    <p className="text-[12px] font-semibold text-[#333] mb-2">Salaire brut annuel par niveau d&apos;experience -- Paris</p>
+                    <p className="text-[12px] font-semibold text-[#111] mb-2">Salaire brut annuel par niveau d&apos;experience -- Paris</p>
                     <p className="text-[9px] text-[#BBB] mb-5">En milliers d&apos;euros, package fixe + variable</p>
                     <div className="space-y-4">
                       {[
@@ -667,7 +667,7 @@ export default function RevOpsManagerFichePostePage() {
                         ].map((item) => (
                           <div key={item.level} className="flex items-center justify-between text-[10px]">
                             <span className="text-[#666]">{item.level}</span>
-                            <span className="font-semibold text-[#333]">{item.range}</span>
+                            <span className="font-semibold text-[#111]">{item.range}</span>
                           </div>
                         ))}
                       </div>
@@ -683,7 +683,7 @@ export default function RevOpsManagerFichePostePage() {
                         ].map((item) => (
                           <div key={item.level} className="flex items-center justify-between text-[10px]">
                             <span className="text-[#666]">{item.level}</span>
-                            <span className="font-semibold text-[#333]">{item.range}</span>
+                            <span className="font-semibold text-[#111]">{item.range}</span>
                           </div>
                         ))}
                       </div>
@@ -692,7 +692,7 @@ export default function RevOpsManagerFichePostePage() {
 
                   {/* Startup vs Corporate */}
                   <div className="mt-5 rounded-lg border border-[#F0F0F0] p-4">
-                    <p className="text-[11px] font-semibold text-[#333] mb-3">Startup / Scale-up vs Grand Groupe</p>
+                    <p className="text-[11px] font-semibold text-[#111] mb-3">Startup / Scale-up vs Grand Groupe</p>
                     <div className="space-y-3 text-[13px] text-[#555] leading-[1.75]">
                       <p className="text-[11px] text-[#777] leading-[1.7]">Les startups et scale-ups proposent generalement un package fixe plus bas de 10 a 15% par rapport aux grands groupes, mais compensent avec des BSPCE (stock-options) et une autonomie plus grande. Un RevOps Manager confirme dans une scale-up parisienne gagnera typiquement 50K-60K fixe + BSPCE, contre 55K-70K fixe dans un grand groupe sans equity. Les scales-ups leves en Serie B+ commencent a s&apos;aligner sur les salaires corporate pour attirer les meilleurs profils.</p>
                       <p className="text-[11px] text-[#777] leading-[1.7]">Le variable est rare dans les postes RevOps en France (contrairement aux US ou 10-20% de variable est courant). Quand il existe, il est generalement indexe sur des KPIs operationnels : adoption CRM, data quality score, respect des SLA, plutot que sur le chiffre d&apos;affaires directement.</p>
@@ -806,7 +806,7 @@ export default function RevOpsManagerFichePostePage() {
 
                   {/* Interview questions */}
                   <div className="mt-6 rounded-lg bg-[#FAFAFA] border border-[#F0F0F0] p-5">
-                    <p className="text-[12px] font-semibold text-[#333] mb-4">10 questions d&apos;entretien pour evaluer un RevOps Manager</p>
+                    <p className="text-[12px] font-semibold text-[#111] mb-4">10 questions d&apos;entretien pour evaluer un RevOps Manager</p>
                     <div className="space-y-2.5">
                       {[
                         { q: "Decrivez un processus lead-to-close que vous avez concu de A a Z. Quels etaient les resultats mesurables ?", cat: "Process", color: "#FF7A59" },

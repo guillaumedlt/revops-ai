@@ -342,7 +342,7 @@ export default function ChatInputBar({
               onChange={function(e) { setValue(e.target.value); }}
               onKeyDown={handleKeyDown}
               disabled={disabled || uploading}
-              placeholder="Ask Kairo anything... (type / for commands)"
+              placeholder="Demande a Kairo... (tape / pour les commandes)"
               rows={1}
               className="w-full resize-none bg-transparent text-sm text-[#111] placeholder:text-[#BBB] focus:outline-none min-h-[36px] max-h-[200px] py-1"
             />
@@ -361,7 +361,7 @@ export default function ChatInputBar({
                   onClick={function() { setShowConnectors(!showConnectors); }}
                   type="button"
                   className="flex h-8 w-8 items-center justify-center rounded-lg text-[#999] hover:bg-[#F5F5F5] hover:text-[#111] transition-colors shrink-0"
-                  title="Connectors"
+                  title="Connecteurs"
                 >
                   <SlidersHorizontal size={16} />
                 </button>
