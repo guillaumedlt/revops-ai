@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { RotateCcw, LayoutDashboard, Plus, Check, Copy, BarChart3, Zap } from "lucide-react";
+import { RotateCcw, LayoutDashboard, Plus, Check, Copy, BarChart3, Zap, CheckSquare } from "lucide-react";
 import BlockRenderer from "./blocks/BlockRenderer";
 import TextBlock from "./blocks/TextBlock";
 import type { ContentBlock } from "@/types/chat-blocks";
@@ -51,6 +51,12 @@ function extractSuggestions(content: string): string[] {
   }
 
   return suggestions.slice(0, 3);
+}
+
+// Detect if the AI proposed actions to add to the board
+function hasProposedActions(content: string): boolean {
+  if (typeof content !== "string") return false;
+  return /actions?\s*recommand[eé]es|ajoute[r]?\s*ces\s*actions|cree[r]?\s*dans\s*ton\s*board/i.test(content);
 }
 
 var TOOL_LABELS: Record<string, string> = {
@@ -340,6 +346,7 @@ function ErrorCard({
 
 function AssistantMessage({ msg, onSendSuggestion }: { msg: Message; onSendSuggestion?: (text: string) => void }) {
   var suggestions = useMemo(function() { return extractSuggestions(msg.content); }, [msg.content]);
+  var showAddActions = useMemo(function() { return hasProposedActions(msg.content); }, [msg.content]);
   var isLastMsg = true; // Always show suggestions on the last assistant message
 
   return (
@@ -368,9 +375,20 @@ function AssistantMessage({ msg, onSendSuggestion }: { msg: Message; onSendSugge
           </button>
         </div>
 
-        {/* Clickable action suggestions */}
-        {suggestions.length > 0 && onSendSuggestion && (
+        {/* Action buttons below message */}
+        {onSendSuggestion && (showAddActions || suggestions.length > 0) && (
           <div className="flex flex-wrap gap-1.5 mt-2 ml-1">
+            {/* Add actions to board button */}
+            {showAddActions && (
+              <button
+                onClick={function() { onSendSuggestion("Oui, ajoute ces actions a mon board avec les bonnes priorites et deadlines."); }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold text-white bg-[#0A0A0A] hover:bg-[#333] transition-colors"
+              >
+                <CheckSquare size={11} />
+                Ajouter au board
+              </button>
+            )}
+            {/* Other suggestions */}
             {suggestions.map(function(s, i) {
               return (
                 <button
