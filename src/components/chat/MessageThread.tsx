@@ -162,8 +162,8 @@ function PulsingDot() {
 
 function KairoAvatar() {
   return (
-    <div className="h-7 w-7 rounded-lg bg-[#0A0A0A] flex items-center justify-center shrink-0 mt-0.5">
-      <span className="text-white text-[10px] font-bold">K</span>
+    <div className="h-6 w-6 rounded-md bg-[#111] flex items-center justify-center shrink-0 mt-0.5">
+      <span className="text-white text-[9px] font-bold">K</span>
     </div>
   );
 }
@@ -353,7 +353,7 @@ function AssistantMessage({ msg, onSendSuggestion }: { msg: Message; onSendSugge
     <div className="flex gap-3">
       <KairoAvatar />
       <div className="flex-1 min-w-0">
-        <div className="relative w-full bg-white border border-[#E5E5E5] rounded-2xl px-5 py-4 text-sm text-[#0A0A0A] group/msg">
+        <div className="relative w-full bg-white border border-[#E8E8E8] rounded-xl px-5 py-4 text-[13px] text-[#111] group/msg">
           {msg.content_blocks && msg.content_blocks.length > 0 ? (
             <>
               <BlockRenderer blocks={msg.content_blocks} />
@@ -456,11 +456,11 @@ export default function MessageThread({
 
   return (
     <div className="flex-1 overflow-y-auto">
-      <div className="max-w-3xl mx-auto px-4 py-6 space-y-6">
+      <div className="max-w-3xl mx-auto px-5 py-6 space-y-5">
         {messages.map((msg) => (
           <div key={msg.id} className={msg.role === "user" ? "flex justify-end" : ""}>
             {msg.role === "user" ? (
-              <div className="max-w-[70%] bg-[#0A0A0A] text-white rounded-2xl px-4 py-2.5 text-sm">
+              <div className="max-w-[70%] bg-[#111] text-white rounded-xl px-4 py-2.5 text-[13px] leading-relaxed">
                 {msg.content}
               </div>
             ) : (
