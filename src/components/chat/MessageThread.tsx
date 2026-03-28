@@ -99,6 +99,7 @@ var THINKING_STEPS = [
 // Strip :::block{...}\n...::: syntax from streaming text so user sees clean text
 // Returns { cleanText, blockCount, isBuilding }
 function processStreamingText(text: string): { cleanText: string; blockCount: number; isBuilding: boolean } {
+  if (typeof text !== "string") text = String(text ?? "");
   if (!text.includes(":::")) return { cleanText: text, blockCount: 0, isBuilding: false };
 
   var blockTypes = "kpi_grid|kpi|chart|table|alert|progress|funnel|comparison|scorecard|report";

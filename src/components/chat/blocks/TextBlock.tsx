@@ -1,6 +1,7 @@
 import React from "react";
 
 function formatInline(str: string): React.ReactNode {
+  if (typeof str !== "string") return String(str ?? "");
   var parts = str.split(/(\*\*[^*]+\*\*|`[^`]+`)/g);
   return parts.map(function(part, i) {
     if (part.startsWith("**") && part.endsWith("**")) {
@@ -15,6 +16,7 @@ function formatInline(str: string): React.ReactNode {
 
 export default function TextBlock({ text }: { text: string }) {
   if (!text) return null;
+  if (typeof text !== "string") text = String(text);
   var lines = text.split("\n");
   var elements: React.ReactNode[] = [];
   var listItems: Array<{ text: string; ordered: boolean }> = [];
