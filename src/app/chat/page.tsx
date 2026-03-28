@@ -7,10 +7,10 @@ import { AlertTriangle, TrendingDown, Zap, ChevronRight, X, ArrowRight } from "l
 import ChatInputBar from "@/components/chat/ChatInputBar";
 
 var SUGGESTIONS = [
-  { label: "Pipeline", items: ["Comment va ma pipeline ?", "Quels deals ont besoin d'attention ?"] },
-  { label: "Performance", items: ["Compare mes commerciaux", "Quel est mon win rate ?"] },
-  { label: "Forecast", items: ["Forecast revenue ce trimestre", "Pipeline coverage ratio"] },
-  { label: "Actions", items: ["Audit complet de mon CRM", "Redige un follow-up email"] },
+  { label: "Sales Ops", items: ["/pipeline", "/forecast"] },
+  { label: "Performance", items: ["/coaching", "Decompose ma sales velocity"] },
+  { label: "RevOps", items: ["/audit", "/report Rapport hebdo complet"] },
+  { label: "Actions", items: ["/cleanup", "/brief "] },
 ];
 
 interface AlertData {

@@ -81,12 +81,23 @@ function ProviderIcon({ provider, size = 16 }: { provider: string; size?: number
 }
 
 var SLASH_COMMANDS = [
-  { command: "/report", label: "Create Report", description: "Generate a PPT-style report from your data", icon: "FileText" },
-  { command: "/dashboard", label: "Add to Dashboard", description: "Create a dashboard widget from the response", icon: "LayoutDashboard" },
-  { command: "/analyze", label: "Deep Analysis", description: "Run a comprehensive analysis on a topic", icon: "Search" },
-  { command: "/compare", label: "Compare", description: "Compare reps, periods, or segments", icon: "GitCompare" },
-  { command: "/forecast", label: "Forecast", description: "Generate revenue or pipeline forecast", icon: "TrendingUp" },
-  { command: "/audit", label: "CRM Audit", description: "Run a full CRM data quality audit", icon: "Shield" },
+  // Sales Ops
+  { command: "/pipeline", label: "Pipeline Review", description: "Revue complete : valeur, stages, deals a risque, coverage", icon: "TrendingUp" },
+  { command: "/forecast", label: "Forecast", description: "Prevision revenue : commit, best case, upside", icon: "TrendingUp" },
+  { command: "/coaching", label: "Coaching Reps", description: "Analyse par rep : forces, faiblesses, actions", icon: "Search" },
+  { command: "/deal", label: "Deal Review", description: "Analyse approfondie d'un deal specifique", icon: "FileText" },
+  // Marketing Ops
+  { command: "/outreach", label: "Outreach Report", description: "Performance campagnes Lemlist + correlation pipeline", icon: "GitCompare" },
+  { command: "/icp", label: "ICP Analysis", description: "Profil client ideal base sur les deals gagnes", icon: "Search" },
+  // RevOps
+  { command: "/report", label: "Rapport Complet", description: "Rapport RevOps avec KPIs, charts, recommandations", icon: "FileText" },
+  { command: "/audit", label: "Audit CRM", description: "Qualite des donnees, champs manquants, hygiene", icon: "Shield" },
+  { command: "/compare", label: "Comparer", description: "Compare reps, periodes, segments, sources", icon: "GitCompare" },
+  // Service Ops
+  { command: "/tickets", label: "Tickets Support", description: "Analyse des tickets : volume, temps de resolution, SLA", icon: "Shield" },
+  // Actions
+  { command: "/cleanup", label: "Cleanup Plan", description: "Plan de nettoyage CRM : deals zombies, contacts dupliques", icon: "Shield" },
+  { command: "/brief", label: "Meeting Brief", description: "Prepare un brief complet pour un call/meeting", icon: "FileText" },
 ];
 
 var ICON_MAP: Record<string, any> = {

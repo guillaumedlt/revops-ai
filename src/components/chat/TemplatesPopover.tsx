@@ -8,93 +8,51 @@ interface TemplatesPopoverProps {
 
 var TEMPLATES = [
   {
-    category: "Pipeline",
+    category: "Sales Ops",
     items: [
-      { label: "Pipeline Overview", prompt: "Give me a complete pipeline overview: total value, deal count, breakdown by stage, and top 10 deals." },
-      { label: "Stalled Deals", prompt: "Which deals have been stalled for more than 14 days? List them with owner, amount, and last activity." },
-      { label: "Deal Health Check", prompt: "Score all my open deals on health (0-100). Show the critical and at-risk ones first." },
-      { label: "Top Deals", prompt: "Show me my top 10 deals by amount with stage, owner, and close date." },
+      { label: "Revue Pipeline", prompt: "/pipeline" },
+      { label: "Forecast Revenue", prompt: "/forecast" },
+      { label: "Coaching Reps", prompt: "/coaching" },
+      { label: "Deals a risque", prompt: "Quels deals sont en danger ? Montre les stalled, sans activite, et proches de la close date." },
+      { label: "Sales Velocity", prompt: "Decompose ma sales velocity : nombre d'opportunites, deal size moyen, win rate, et cycle. Quel levier optimiser en priorite ?" },
+      { label: "Win/Loss Patterns", prompt: "Analyse les patterns des deals gagnes vs perdus. Qu'est-ce qui differencie les deux ?" },
     ],
   },
   {
-    category: "Forecast",
+    category: "Marketing Ops",
     items: [
-      { label: "Quarterly Forecast", prompt: "What's my revenue forecast for this quarter? Show commit, best case, and worst case scenarios." },
-      { label: "Monthly Forecast", prompt: "What revenue can I expect to close this month? Break it down by scenario." },
-      { label: "Pipeline Coverage", prompt: "What's my pipeline coverage ratio? Do I have enough pipeline to hit my target?" },
+      { label: "Performance Outreach", prompt: "/outreach" },
+      { label: "Profil Client Ideal", prompt: "/icp" },
+      { label: "Pipeline par source", prompt: "D'ou viennent mes deals ? Repartition inbound vs outbound vs referral avec les taux de conversion par source." },
+      { label: "Correlation outreach ↔ pipe", prompt: "Quel est le lien entre mes campagnes Lemlist et les deals en pipeline ? Combien de deals viennent de l'outbound ?" },
     ],
   },
   {
-    category: "Performance",
+    category: "Service Ops",
     items: [
-      { label: "Rep Comparison", prompt: "Compare all sales reps: win rate, pipeline value, average deal size, and sales cycle." },
-      { label: "Win Rate Analysis", prompt: "What's our overall win rate? Break it down by deal size and owner." },
-      { label: "Sales Velocity", prompt: "What's our sales velocity? Average cycle time, median deal size, and conversion rate." },
-      { label: "Win/Loss Analysis", prompt: "Analyze why we win and lose deals. Compare patterns between won and lost deals." },
+      { label: "Analyse Tickets", prompt: "/tickets" },
+      { label: "SLA Check", prompt: "Combien de tickets depassent le SLA ? Liste-les par priorite avec le temps de depassement." },
+      { label: "Satisfaction Client", prompt: "Analyse la relation avec mes clients : tickets recurrents, comptes a risque de churn, upsell potentiel." },
     ],
   },
   {
-    category: "Funnel",
+    category: "RevOps",
     items: [
-      { label: "Funnel Conversion", prompt: "Show me the sales funnel with conversion rates between each stage." },
-      { label: "Bottleneck Analysis", prompt: "Where are deals getting stuck in the funnel? Which stage has the lowest conversion?" },
-    ],
-  },
-  {
-    category: "CRM Quality",
-    items: [
-      { label: "CRM Hygiene Audit", prompt: "Audit my CRM data quality: missing fields, stale deals, incomplete records. Score each rep." },
-      { label: "Data Cleanup List", prompt: "Give me a prioritized list of data issues to fix, sorted by impact." },
-      { label: "Missing Data Report", prompt: "How many deals are missing amount, close date, or contact? Break it down by owner." },
-    ],
-  },
-  {
-    category: "ICP & Scoring",
-    items: [
-      { label: "Build My ICP", prompt: "Build my Ideal Customer Profile based on won deals. Show industries, company size, revenue patterns." },
-      { label: "Score a Prospect", prompt: "Score this prospect against my ICP: " },
-      { label: "Best Fit Deals", prompt: "Which open deals best match our ICP? Rank them by fit score." },
-    ],
-  },
-  {
-    category: "Contacts & Companies",
-    items: [
-      { label: "Search Contacts", prompt: "Search for contacts at " },
-      { label: "Company Lookup", prompt: "What do we know about " },
-      { label: "Key Stakeholders", prompt: "Who are the key contacts on my top 5 deals?" },
-    ],
-  },
-  {
-    category: "Outreach (Lemlist)",
-    items: [
-      { label: "Campaign Performance", prompt: "Show me all my Lemlist campaigns with open rates, reply rates, and click rates." },
-      { label: "Best Campaign", prompt: "Which Lemlist campaign has the best performance? Show stats." },
-      { label: "Lead Status", prompt: "Show me the leads from my latest Lemlist campaign with their status." },
+      { label: "Rapport Complet", prompt: "/report Rapport RevOps complet : pipeline, forecast, performance reps, qualite CRM, outreach, et recommandations prioritaires." },
+      { label: "Audit CRM", prompt: "/audit" },
+      { label: "Cleanup CRM", prompt: "/cleanup" },
+      { label: "Comparer Periodes", prompt: "/compare ce mois vs le mois dernier : pipeline, win rate, revenue, cycle de vente." },
     ],
   },
   {
     category: "Actions",
     items: [
-      { label: "Create Follow-up", prompt: "Create a task to follow up on " },
-      { label: "Log a Note", prompt: "Add a note on the deal " },
-      { label: "Update Deal Stage", prompt: "Move the deal " },
-    ],
-  },
-  {
-    category: "Reports",
-    items: [
-      { label: "Full Audit", prompt: "/report Complete RevOps audit: pipeline, performance, forecast, deal health, CRM quality, and recommendations." },
-      { label: "Weekly Summary", prompt: "/report Weekly sales summary with KPIs, closed deals, pipeline changes, and action items." },
-      { label: "Pipeline Report", prompt: "/report Detailed pipeline report with stage breakdown, top deals, risks, and forecast." },
-      { label: "Team Performance", prompt: "/report Team performance report: each rep's metrics, rankings, and coaching recommendations." },
-    ],
-  },
-  {
-    category: "Meeting Prep",
-    items: [
-      { label: "Prep My Call", prompt: "Prepare a meeting brief for my call with " },
-      { label: "Deal Summary", prompt: "Give me a full summary of the deal " },
-      { label: "Account Overview", prompt: "Everything we know about the account " },
+      { label: "Brief Meeting", prompt: "/brief " },
+      { label: "Review un Deal", prompt: "/deal " },
+      { label: "Creer une tache", prompt: "Cree une tache de follow-up pour " },
+      { label: "Rediger un email", prompt: "Redige un email de relance pour le deal " },
+      { label: "Mettre a jour un deal", prompt: "Passe le deal " },
+      { label: "Chercher dans Notion", prompt: "Cherche dans Notion " },
     ],
   },
 ];
