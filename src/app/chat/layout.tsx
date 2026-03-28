@@ -6,8 +6,7 @@ export default function ChatLayout({ children }: { children: React.ReactNode }) 
       <div className="hidden md:block">
         <ConversationSidebar />
       </div>
-      <main className="flex-1 flex flex-col bg-[#FAFAFA] min-w-0">{children}</main>
+      <main className="flex-1 flex flex-col bg-white min-w-0">{children}</main>
     </div>
   );
 }
-
