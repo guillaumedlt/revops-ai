@@ -97,6 +97,35 @@ async function hubspotFetch(path: string, token: string, options?: RequestInit) 
   return res.json();
 }
 
+// Owner name cache (per-request, avoids N+1 calls)
+var ownerCache: Record<string, Record<string, string>> = {};
+
+async function getOwnerMap(token: string): Promise<Record<string, string>> {
+  // Simple cache key based on token prefix
+  var cacheKey = token.slice(0, 10);
+  if (ownerCache[cacheKey]) return ownerCache[cacheKey];
+
+  try {
+    var data = await hubspotFetch("/crm/v3/owners?limit=100", token);
+    var map: Record<string, string> = {};
+    for (var owner of (data.results || [])) {
+      var name = [owner.firstName, owner.lastName].filter(Boolean).join(" ").trim();
+      map[owner.id] = name || owner.email || owner.id;
+    }
+    ownerCache[cacheKey] = map;
+    // Clear cache after 5 min
+    setTimeout(function() { delete ownerCache[cacheKey]; }, 300000);
+    return map;
+  } catch {
+    return {};
+  }
+}
+
+function resolveOwner(ownerMap: Record<string, string>, ownerId: string | undefined | null): string {
+  if (!ownerId) return "Non assigne";
+  return ownerMap[ownerId] || ownerId;
+}
+
 // Paginated search — fetches ALL results (up to maxPages * 100)
 // Aggregates server-side so the AI gets a clean summary, not raw dumps
 async function hubspotSearchAll(
@@ -175,6 +204,7 @@ export const hubspotTools = {
         body: JSON.stringify(body),
       });
       
+      var owners = await getOwnerMap(auth.accessToken);
       return {
         total: data.total,
         deals: (data.results || []).map((d: any) => ({
@@ -182,7 +212,7 @@ export const hubspotTools = {
           name: d.properties.dealname,
           stage: d.properties.dealstage,
           amount: Number(d.properties.amount) || 0,
-          ownerId: d.properties.hubspot_owner_id,
+          owner: resolveOwner(owners, d.properties.hubspot_owner_id),
           closeDate: d.properties.closedate,
           isClosed: d.properties.hs_is_closed === "true",
           isWon: d.properties.hs_is_closed_won === "true",
@@ -358,12 +388,13 @@ export const hubspotTools = {
         auth.accessToken
       );
       
+      var owners = await getOwnerMap(auth.accessToken);
       return {
         id: data.id,
         name: data.properties.dealname,
         stage: data.properties.dealstage,
         amount: Number(data.properties.amount) || 0,
-        ownerId: data.properties.hubspot_owner_id,
+        owner: resolveOwner(owners, data.properties.hubspot_owner_id),
         closeDate: data.properties.closedate,
         isClosed: data.properties.hs_is_closed === "true",
         isWon: data.properties.hs_is_closed_won === "true",
@@ -515,6 +546,7 @@ export const hubspotTools = {
         }),
       });
       
+      var owners = await getOwnerMap(auth.accessToken);
       return {
         total: data.total,
         tickets: (data.results || []).map((t: any) => ({
@@ -522,7 +554,7 @@ export const hubspotTools = {
           subject: t.properties.subject,
           status: t.properties.hs_pipeline_stage,
           priority: t.properties.hs_ticket_priority,
-          ownerId: t.properties.hubspot_owner_id,
+          owner: resolveOwner(owners, t.properties.hubspot_owner_id),
           created: t.properties.createdate,
           lastModified: t.properties.hs_lastmodifieddate,
         })),
@@ -936,6 +968,7 @@ export const hubspotTools = {
 
       const now = Date.now();
       const DAY = 86400000;
+      const ownerMap = await getOwnerMap(auth.accessToken);
 
       const scoredDeals = (data.results || []).map((d: any) => {
         const p = d.properties;
@@ -975,7 +1008,7 @@ export const hubspotTools = {
           name: p.dealname,
           stage: p.dealstage,
           amount: Number(p.amount) || 0,
-          ownerId: p.hubspot_owner_id,
+          owner: resolveOwner(ownerMap, p.hubspot_owner_id),
           healthScore: Math.max(0, health),
           grade: health >= 80 ? "Healthy" : health >= 50 ? "At Risk" : "Critical",
           risks,
@@ -1273,9 +1306,10 @@ export const hubspotTools = {
         if (!ownerWins[o]) ownerWins[o] = { won: 0, lost: 0 };
         ownerWins[o].lost++;
       }
+      const ownerNames = await getOwnerMap(auth.accessToken);
       const ownerPerf = Object.entries(ownerWins).map(function(e) {
         const total = e[1].won + e[1].lost;
-        return { ownerId: e[0], won: e[1].won, lost: e[1].lost, winRate: total > 0 ? Math.round((e[1].won / total) * 100) : 0 };
+        return { owner: resolveOwner(ownerNames, e[0]), won: e[1].won, lost: e[1].lost, winRate: total > 0 ? Math.round((e[1].won / total) * 100) : 0 };
       }).sort(function(a, b) { return b.winRate - a.winRate; });
 
       return {
@@ -1483,11 +1517,7 @@ export const hubspotTools = {
       });
 
       // Get owners
-      const owners = await hubspotFetch("/crm/v3/owners", auth.accessToken);
-      const ownerNames: Record<string, string> = {};
-      for (const o of owners.results || []) {
-        ownerNames[o.id] = ((o.firstName || "") + " " + (o.lastName || "")).trim() || o.email || o.id;
-      }
+      const ownerNames = await getOwnerMap(auth.accessToken);
 
       const now = Date.now();
       const DAY = 86400000;
@@ -1528,8 +1558,7 @@ export const hubspotTools = {
           ((o.noAmount / t) * 25) + ((o.noCloseDate / t) * 25) + ((o.noActivity14d / t) * 25) + ((o.noNotes / t) * 25)
         ));
         return {
-          ownerId: e[0],
-          ownerName: ownerNames[e[0]] || e[0],
+          owner: ownerNames[e[0]] || e[0],
           deals: o.total,
           score: score,
           grade: score >= 80 ? "A" : score >= 60 ? "B" : score >= 40 ? "C" : "D",
