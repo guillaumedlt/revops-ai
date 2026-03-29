@@ -225,6 +225,7 @@ export default function ConversationPage() {
         onRetry={handleRetry}
         isLoading={isStreaming}
         onSendSuggestion={function(text) { sendMessage(text, selectedModel); }}
+        conversationId={conversationId}
       />
       <div className="shrink-0 pb-2">
         <ChatInputBar

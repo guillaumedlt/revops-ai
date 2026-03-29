@@ -91,6 +91,92 @@ function Step({ n, text, sub, link }: { n: string; text: string; sub?: string; l
   );
 }
 
+function GeneralTab({ userEmail, userName, onNameChange }: { userEmail: string; userName: string; onNameChange: (n: string) => void }) {
+  var [editingName, setEditingName] = useState(false);
+  var [nameInput, setNameInput] = useState(userName);
+  var [savingName, setSavingName] = useState(false);
+  var [changingPw, setChangingPw] = useState(false);
+  var [oldPw, setOldPw] = useState("");
+  var [newPw, setNewPw] = useState("");
+  var [pwLoading, setPwLoading] = useState(false);
+  var [pwMsg, setPwMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
+
+  async function handleSaveName() {
+    setSavingName(true);
+    await fetch("/api/settings/llm", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userName: nameInput }) });
+    onNameChange(nameInput);
+    setEditingName(false);
+    setSavingName(false);
+  }
+
+  async function handleChangePw() {
+    if (newPw.length < 8) { setPwMsg({ type: "err", text: "8 characters minimum" }); return; }
+    setPwLoading(true);
+    setPwMsg(null);
+    var supabase = createClient();
+    var { error } = await supabase.auth.updateUser({ password: newPw });
+    if (error) { setPwMsg({ type: "err", text: error.message }); } else { setPwMsg({ type: "ok", text: "Password updated" }); setChangingPw(false); setNewPw(""); setOldPw(""); }
+    setPwLoading(false);
+  }
+
+  return (
+    <div className="space-y-4">
+      {/* Profile */}
+      <div className="bg-white rounded-lg border border-[#EAEAEA] p-5">
+        <h2 className="text-[13px] font-semibold text-[#111] mb-4">Profile</h2>
+        <div className="space-y-3">
+          <div>
+            <label className="text-[11px] text-[#999] font-medium">Email</label>
+            <p className="text-[13px] text-[#111] mt-0.5">{userEmail}</p>
+          </div>
+          <div>
+            <label className="text-[11px] text-[#999] font-medium">Name</label>
+            {editingName ? (
+              <div className="flex items-center gap-2 mt-1">
+                <input type="text" value={nameInput} onChange={function(e) { setNameInput(e.target.value); }} autoFocus
+                  className="h-9 px-3 text-[13px] rounded-lg border border-[#EAEAEA] focus:outline-none focus:border-[#111] flex-1" />
+                <button onClick={handleSaveName} disabled={savingName} className="h-9 px-3 rounded-lg bg-[#111] text-white text-[12px] font-medium hover:bg-[#333] disabled:opacity-40">
+                  {savingName ? "..." : "Save"}
+                </button>
+                <button onClick={function() { setEditingName(false); setNameInput(userName); }} className="text-[12px] text-[#999]">Cancel</button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 mt-0.5">
+                <p className="text-[13px] text-[#111]">{userName || "Not set"}</p>
+                <button onClick={function() { setEditingName(true); setNameInput(userName); }} className="text-[11px] text-[#999] hover:text-[#111] underline">Edit</button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Password */}
+      <div className="bg-white rounded-lg border border-[#EAEAEA] p-5">
+        <h2 className="text-[13px] font-semibold text-[#111] mb-4">Password</h2>
+        {pwMsg && (
+          <div className={"mb-3 rounded-lg px-3 py-2 text-[12px] " + (pwMsg.type === "ok" ? "bg-[#F0FDF4] text-[#22C55E] border border-[#BBF7D0]" : "bg-[#FEF2F2] text-[#EF4444] border border-[#FECACA]")}>{pwMsg.text}</div>
+        )}
+        {changingPw ? (
+          <div className="space-y-2">
+            <input type="password" value={newPw} onChange={function(e) { setNewPw(e.target.value); }} placeholder="New password (8+ characters)" autoFocus
+              className="w-full h-9 px-3 text-[13px] rounded-lg border border-[#EAEAEA] focus:outline-none focus:border-[#111]" />
+            <div className="flex gap-2">
+              <button onClick={handleChangePw} disabled={pwLoading || newPw.length < 8} className="h-9 px-4 rounded-lg bg-[#111] text-white text-[12px] font-medium hover:bg-[#333] disabled:opacity-40">
+                {pwLoading ? "..." : "Update password"}
+              </button>
+              <button onClick={function() { setChangingPw(false); setNewPw(""); setPwMsg(null); }} className="text-[12px] text-[#999]">Cancel</button>
+            </div>
+          </div>
+        ) : (
+          <button onClick={function() { setChangingPw(true); }} className="text-[13px] text-[#111] border border-[#EAEAEA] rounded-lg px-4 h-9 hover:bg-[#F5F5F5] transition-colors">
+            Change password
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function BillingTab() {
   var [credits, setCredits] = useState<{ used: number; total: number; remaining: number; plan: string } | null>(null);
   var [packs, setPacks] = useState<Array<{ id: string; name: string; credits: number; price: number; popular: boolean }>>([]);
@@ -425,30 +511,7 @@ function SettingsContent() {
       </div>
 
       {/* General tab */}
-      {activeTab === "general" && (
-        <div className="space-y-6">
-          <div className="bg-white rounded-lg border border-[#EAEAEA] p-6 space-y-4">
-            <h2 className="text-[13px] font-medium text-[#111]">Account</h2>
-            <div className="space-y-3">
-              <div>
-                <label className="text-xs text-[#999]">Email</label>
-                <p className="text-[13px] text-[#111] mt-0.5">{userEmail}</p>
-              </div>
-              <div>
-                <label className="text-xs text-[#999]">Name</label>
-                <p className="text-[13px] text-[#111] mt-0.5">{userName || "Not set"}</p>
-              </div>
-            </div>
-          </div>
-
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 text-[13px] rounded-lg border border-[#EAEAEA] text-[#999] hover:text-red-600 hover:border-red-200 transition-colors"
-          >
-            Log out
-          </button>
-        </div>
-      )}
+      {activeTab === "general" && <GeneralTab userEmail={userEmail} userName={userName} onNameChange={setUserName} />}
 
       {/* LLM tab */}
       {activeTab === "llm" && (

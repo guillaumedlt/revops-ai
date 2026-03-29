@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { RotateCcw, LayoutDashboard, Plus, Check, Copy, BarChart3, Zap, CheckSquare } from "lucide-react";
+import { RotateCcw, LayoutDashboard, Plus, Check, Copy, BarChart3, Zap, CheckSquare, Download } from "lucide-react";
 import BlockRenderer from "./blocks/BlockRenderer";
 import TextBlock from "./blocks/TextBlock";
 import type { ContentBlock } from "@/types/chat-blocks";
@@ -23,6 +23,7 @@ interface Props {
   onRetry?: () => void;
   isLoading?: boolean;
   onSendSuggestion?: (text: string) => void;
+  conversationId?: string;
 }
 
 // Extract action suggestions from assistant message content
@@ -444,6 +445,7 @@ export default function MessageThread({
   onRetry,
   isLoading,
   onSendSuggestion,
+  conversationId,
 }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -455,7 +457,19 @@ export default function MessageThread({
   var isThinking = isLoading && !streamingText && !error;
 
   return (
-    <div className="flex-1 overflow-y-auto">
+    <div className="flex-1 overflow-y-auto relative">
+      {/* Export PDF button */}
+      {conversationId && messages.length > 0 && (
+        <div className="sticky top-0 z-10 flex justify-end px-5 pt-2">
+          <button
+            onClick={function() { window.open("/api/export/pdf?conversationId=" + conversationId, "_blank"); }}
+            className="h-7 px-2.5 rounded-md text-[11px] text-[#999] hover:text-[#111] bg-white/80 backdrop-blur border border-[#EAEAEA] hover:bg-white flex items-center gap-1.5 transition-colors"
+            title="Export PDF"
+          >
+            <Download size={12} /> PDF
+          </button>
+        </div>
+      )}
       <div className="max-w-3xl mx-auto px-5 py-5 space-y-4">
         {messages.map((msg) => (
           <div key={msg.id} className={msg.role === "user" ? "flex justify-end" : ""}>

@@ -6,6 +6,8 @@ var PUBLIC_PATHS = [
   "/login",
   "/signup",
   "/pricing",
+  "/reset-password",
+  "/update-password",
   "/auth/callback",
   "/api/webhooks/stripe",
   "/api/auth/hubspot/callback",
