@@ -33,14 +33,42 @@ export default function ConversationSidebar() {
   var activeId = pathname.startsWith("/chat/") ? pathname.split("/")[2] : null;
 
   var fetchConversations = useCallback(async function() { var res = await fetch("/api/conversations"); if (res.ok) { var json = await res.json(); setConversations(json.data ?? []); } }, []);
-  useEffect(function() { fetchConversations(); }, [fetchConversations, pathname]);
+
+  // Load conversations only when navigating to/from chat pages
+  var prevPathRef = useRef(pathname);
+  useEffect(function() {
+    var prev = prevPathRef.current;
+    prevPathRef.current = pathname;
+    // Refresh conversations only when entering chat or leaving a conversation
+    if (pathname.startsWith("/chat") || prev.startsWith("/chat/")) {
+      fetchConversations();
+    }
+  }, [fetchConversations, pathname]);
+
+  // Load user, credits, alerts ONCE on mount + refresh credits every 60s
   useEffect(function() {
     var supabase = createClient(); supabase.auth.getUser().then(function({ data }) { setUserEmail(data.user?.email ?? ""); });
     fetch("/api/credits").then(function(r) { return r.json(); }).then(function(json) { if (json.data) setCredits(json.data); }).catch(function() {});
     fetch("/api/alerts").then(function(r) { return r.json(); }).then(function(json) { if (json.data?.counts) setAlertCount(json.data.counts.total); }).catch(function() {});
-  }, [pathname]);
+    fetchConversations();
+    // Refresh credits + alerts every 60s
+    var interval = setInterval(function() {
+      fetch("/api/credits").then(function(r) { return r.json(); }).then(function(json) { if (json.data) setCredits(json.data); }).catch(function() {});
+      fetch("/api/alerts").then(function(r) { return r.json(); }).then(function(json) { if (json.data?.counts) setAlertCount(json.data.counts.total); }).catch(function() {});
+    }, 60000);
+    return function() { clearInterval(interval); };
+  }, [fetchConversations]);
   useEffect(function() { if (!userMenuOpen) return; function h(e: MouseEvent) { if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) setUserMenuOpen(false); } document.addEventListener("mousedown", h); return function() { document.removeEventListener("mousedown", h); }; }, [userMenuOpen]);
   useEffect(function() { function h(e: KeyboardEvent) { if ((e.metaKey || e.ctrlKey) && e.key === "k") { e.preventDefault(); searchRef.current?.focus(); } } document.addEventListener("keydown", h); return function() { document.removeEventListener("keydown", h); }; }, []);
+
+  // Prefetch main pages for instant navigation
+  useEffect(function() {
+    router.prefetch("/chat");
+    router.prefetch("/dashboards");
+    router.prefetch("/actions");
+    router.prefetch("/alerts");
+    router.prefetch("/settings");
+  }, [router]);
 
   async function handleDelete(id: string) { setConversations(function(p) { return p.filter(function(c) { return c.id !== id; }); }); await fetch("/api/conversations/" + id, { method: "DELETE" }); if (pathname === "/chat/" + id) router.push("/chat"); }
   async function handleLogout() { var s = createClient(); await s.auth.signOut(); router.push("/login"); }
