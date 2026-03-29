@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { AlertTriangle, TrendingDown, TrendingUp, Minus, Zap, ChevronRight, Check, X, Plug, ArrowUpRight, ArrowDownRight } from "lucide-react";
+import { AlertTriangle, TrendingDown, TrendingUp, Minus, Zap, ChevronRight, Check, X, Plug, ArrowUpRight, ArrowDownRight, CheckSquare } from "lucide-react";
 
 interface AlertData {
   id: string;
@@ -112,9 +112,29 @@ export default function AlertsPage() {
     ]).finally(function() { setLoading(false); });
   }, []);
 
+  var [createdActions, setCreatedActions] = useState<Set<string>>(new Set());
+
   function handleDismiss(id: string) {
     setAlerts(function(prev) { return prev.filter(function(a) { return a.id !== id; }); });
     fetch("/api/alerts", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ alertId: id, action: "dismissed" }) }).catch(function() {});
+  }
+
+  async function handleCreateAction(alert: AlertData) {
+    var priorityMap: Record<string, string> = { critical: "urgent", warning: "high", info: "medium" };
+    var res = await fetch("/api/pilot/actions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: alert.title,
+        description: alert.ai_suggestion || alert.description,
+        priority: priorityMap[alert.severity] || "medium",
+        source: "alert",
+        domain: alert.domain || "",
+      }),
+    });
+    if (res.ok) {
+      setCreatedActions(function(prev) { var n = new Set(prev); n.add(alert.id); return n; });
+    }
   }
 
   function handleInvestigate(alert: AlertData) {
@@ -317,10 +337,19 @@ export default function AlertsPage() {
                           </div>
                         )}
                         <div className="flex items-center gap-2 mt-3">
-                          <button onClick={function() { handleInvestigate(alert); }} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-medium bg-[#111] text-white hover:bg-[#333] transition-colors">
+                          <button onClick={function() { handleInvestigate(alert); }} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[11px] font-medium bg-[#111] text-white hover:bg-[#333] transition-colors">
                             Investigate <ChevronRight size={11} />
                           </button>
-                          <button onClick={function() { handleDismiss(alert.id); }} className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] text-[#BBB] hover:text-[#EF4444] hover:bg-red-50 transition-colors">
+                          {createdActions.has(alert.id) ? (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-1.5 text-[11px] text-[#22C55E] font-medium">
+                              <Check size={11} /> Added to board
+                            </span>
+                          ) : (
+                            <button onClick={function() { handleCreateAction(alert); }} className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md text-[11px] text-[#555] border border-[#EAEAEA] hover:bg-[#F5F5F5] hover:text-[#111] transition-colors">
+                              <CheckSquare size={11} /> Create action
+                            </button>
+                          )}
+                          <button onClick={function() { handleDismiss(alert.id); }} className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md text-[11px] text-[#BBB] hover:text-[#EF4444] hover:bg-red-50 transition-colors">
                             <X size={11} /> Dismiss
                           </button>
                           <span className="text-[10px] text-[#C0C0C0] ml-auto">{timeSince(alert.created_at)}</span>
