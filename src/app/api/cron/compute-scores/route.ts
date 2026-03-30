@@ -103,8 +103,23 @@ export async function GET(request: NextRequest) {
     }
   }
 
+  // On Mondays, trigger weekly briefing
+  var isMonday = new Date().getUTCDay() === 1;
+  var briefingSent = 0;
+  if (isMonday) {
+    try {
+      var briefingUrl = (process.env.NEXT_PUBLIC_APP_URL || "https://revops-ai-six.vercel.app") + "/api/cron/weekly-briefing";
+      var briefRes = await fetch(briefingUrl, { headers: { "Authorization": "Bearer " + process.env.CRON_SECRET } });
+      var briefJson = await briefRes.json();
+      briefingSent = briefJson.sent || 0;
+    } catch (e) {
+      console.error("[cron] Weekly briefing trigger failed:", e instanceof Error ? e.message : e);
+    }
+  }
+
   return NextResponse.json({
     scored: results.length,
     results,
+    weeklyBriefing: isMonday ? { sent: briefingSent } : null,
   });
 }

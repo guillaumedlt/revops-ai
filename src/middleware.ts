@@ -10,6 +10,7 @@ var PUBLIC_PATHS = [
   "/update-password",
   "/auth/callback",
   "/api/webhooks/stripe",
+  "/api/webhooks/hubspot",
   "/api/auth/hubspot/callback",
   "/api/auth/notion/callback",
   "/api/auth/setup",
