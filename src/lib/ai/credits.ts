@@ -76,11 +76,30 @@ export async function deductCredit(tenantId: string, userId: string, action: Cre
       .single();
 
     if (data) {
-      var newUsed = (data.credits_used || 0) + cost;
-      await supabase
+      var oldUsed = data.credits_used || 0;
+      var newUsed = oldUsed + cost;
+      // Optimistic locking: only update if credits_used hasn't changed since we read
+      var { data: updated, error: updateErr } = await supabase
         .from("credit_allocations")
         .update({ credits_used: newUsed })
-        .eq("id", data.id);
+        .eq("id", data.id)
+        .eq("credits_used", oldUsed) // Prevents race condition
+        .select("credits_used")
+        .single();
+
+      if (updateErr || !updated) {
+        // Race condition — retry once
+        var { data: retry } = await supabase
+          .from("credit_allocations")
+          .select("id, credits_used, credits_allocated, bonus_credits")
+          .eq("id", data.id)
+          .single();
+        if (retry) {
+          await supabase.from("credit_allocations").update({ credits_used: (retry.credits_used || 0) + cost }).eq("id", retry.id);
+          var totalRetry = (retry.credits_allocated ?? 0) + (retry.bonus_credits ?? 0);
+          return { remaining: totalRetry - (retry.credits_used || 0) - cost };
+        }
+      }
 
       var totalCredits = (data.credits_allocated ?? 0) + (data.bonus_credits ?? 0);
       return { remaining: totalCredits - newUsed };

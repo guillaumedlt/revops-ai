@@ -93,10 +93,11 @@ export async function POST(request: NextRequest) {
       user_id: auth.userId,
       title: message.slice(0, 100),
     }).select("id").single();
-    if (convError) {
-      console.error("[chat] Conversation create error:", convError.message);
+    if (convError || !conv?.id) {
+      console.error("[chat] Conversation create error:", convError?.message || "no data");
+      return NextResponse.json({ error: "Failed to create conversation" }, { status: 500 });
     }
-    convId = conv?.id;
+    convId = conv.id;
   }
 
   if (convId) {
@@ -159,7 +160,13 @@ export async function POST(request: NextRequest) {
         const llmSettings = ((tenant?.settings as any)?.llm as any) ?? {};
 
         // Resolve API key: Kairo AI uses server key, everything else needs BYOK
-        let anthropicApiKey = process.env.ANTHROPIC_API_KEY!;
+        let anthropicApiKey = process.env.ANTHROPIC_API_KEY || "";
+        if (!anthropicApiKey && (resolved.provider === "anthropic" || resolved.displayName === "kairo")) {
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Anthropic API key not configured on server. Contact support." })}\n\n`));
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
+          controller.close();
+          return;
+        }
 
         if (resolved.provider === "anthropic" && resolved.displayName !== "kairo") {
           const userKey = llmSettings.anthropicKey;

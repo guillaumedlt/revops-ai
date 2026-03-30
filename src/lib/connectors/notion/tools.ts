@@ -22,6 +22,9 @@ async function notionFetch(path: string, token: string, options?: RequestInit) {
     },
   });
   if (!res.ok) {
+    if (res.status === 401 || res.status === 403) {
+      throw new Error("Notion authorization expired. Please reconnect Notion in Settings > Connectors.");
+    }
     const body = await res.text().catch(() => "");
     throw new Error("Notion API " + res.status + ": " + body.slice(0, 200));
   }

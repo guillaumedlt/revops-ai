@@ -21,15 +21,9 @@ export async function GET(request: NextRequest) {
     apiSuccess({
       defaultModel: llm.defaultModel ?? "revops-ai",
       keys: {
-        anthropic: llm.anthropicKey
-          ? { configured: true, last4: (llm.anthropicKey as string).slice(-4) }
-          : { configured: false },
-        openai: llm.openaiKey
-          ? { configured: true, last4: (llm.openaiKey as string).slice(-4) }
-          : { configured: false },
-        google: llm.googleKey
-          ? { configured: true, last4: (llm.googleKey as string).slice(-4) }
-          : { configured: false },
+        anthropic: { configured: !!llm.anthropicKey },
+        openai: { configured: !!llm.openaiKey },
+        google: { configured: !!llm.googleKey },
       },
     })
   );

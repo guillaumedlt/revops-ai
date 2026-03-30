@@ -10,6 +10,11 @@ export async function POST(request: NextRequest) {
   const file = formData.get("file") as File;
   if (!file) return NextResponse.json(apiError("No file provided"), { status: 400 });
 
+  // Max 10MB file size
+  if (file.size > 10 * 1024 * 1024) {
+    return NextResponse.json(apiError("File too large (max 10MB)"), { status: 400 });
+  }
+
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
