@@ -24,6 +24,7 @@ interface Props {
   isLoading?: boolean;
   onSendSuggestion?: (text: string) => void;
   conversationId?: string;
+  activeAgents?: Array<{ id: string; name: string; emoji: string; color: string; specialty: string; status: string; text: string }>;
 }
 
 // Extract action suggestions from assistant message content
@@ -446,6 +447,7 @@ export default function MessageThread({
   isLoading,
   onSendSuggestion,
   conversationId,
+  activeAgents,
 }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -490,6 +492,44 @@ export default function MessageThread({
             streamingBlocks={streamingBlocks}
             activeTools={activeTools}
           />
+        ) : activeAgents && activeAgents.length > 0 ? (
+          <div className="flex gap-3">
+            <KairoAvatar />
+            <div className="flex-1 min-w-0">
+              <div className="w-full bg-white border border-[#EAEAEA] rounded-lg px-4 py-3.5 text-[13px] text-[#111]">
+                <div className="mb-2">
+                  <p className="text-[11px] font-semibold text-[#111] uppercase tracking-wider mb-3">{activeAgents.length} agents working in parallel</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {activeAgents.map(function(agent) {
+                      var isDone = agent.status === "done";
+                      var isTool = agent.status.startsWith("tool:");
+                      var toolName = isTool ? agent.status.slice(5) : "";
+                      return (
+                        <div key={agent.id} className={"rounded-lg border p-3 transition-all " + (isDone ? "border-[#BBF7D0] bg-[#F0FDF4]" : "border-[#EAEAEA] bg-[#FAFAFA]")}>
+                          <div className="flex items-center gap-2 mb-1.5">
+                            <span className="text-base">{agent.emoji}</span>
+                            <span className="text-[12px] font-semibold text-[#111]">{agent.name}</span>
+                            {isDone ? (
+                              <Check size={12} className="text-[#22C55E] ml-auto" />
+                            ) : (
+                              <div className="ml-auto flex gap-0.5">
+                                <div className="h-1 w-1 rounded-full animate-bounce" style={{ backgroundColor: agent.color, animationDelay: "0ms" }} />
+                                <div className="h-1 w-1 rounded-full animate-bounce" style={{ backgroundColor: agent.color, animationDelay: "150ms" }} />
+                                <div className="h-1 w-1 rounded-full animate-bounce" style={{ backgroundColor: agent.color, animationDelay: "300ms" }} />
+                              </div>
+                            )}
+                          </div>
+                          <p className="text-[10px] text-[#999]">
+                            {isDone ? "Completed" : isTool ? "Querying " + toolName + "..." : agent.text ? "Writing..." : "Analyzing..."}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         ) : isThinking && !error ? (
           <div className="flex gap-3">
             <KairoAvatar />

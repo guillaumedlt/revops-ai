@@ -24,6 +24,7 @@ export default function ConversationPage() {
   const [streamingBlocks, setStreamingBlocks] = useState<ContentBlock[] | null>(null);
   const [activeTools, setActiveTools] = useState<string[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
+  const [activeAgents, setActiveAgents] = useState<Array<{ id: string; name: string; emoji: string; color: string; specialty: string; status: string; text: string }>>([]);
   const [chatError, setChatError] = useState<{ message: string } | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [selectedModel, setSelectedModel] = useState("kairo");
@@ -133,6 +134,16 @@ export default function ConversationPage() {
               } else if (event.type === "content_blocks") {
                 finalBlocks = event.blocks;
                 setStreamingBlocks(event.blocks);
+              } else if (event.type === "agents_start") {
+                setActiveAgents(event.agents.map(function(a: any) { return { ...a, status: "working", text: "" }; }));
+              } else if (event.type === "agent_token") {
+                setActiveAgents(function(prev) { return prev.map(function(a) { return a.id === event.agentId ? { ...a, text: a.text + event.token } : a; }); });
+              } else if (event.type === "agent_tool_start") {
+                setActiveAgents(function(prev) { return prev.map(function(a) { return a.id === event.agentId ? { ...a, status: "tool:" + event.name } : a; }); });
+              } else if (event.type === "agent_tool_result") {
+                setActiveAgents(function(prev) { return prev.map(function(a) { return a.id === event.agentId ? { ...a, status: "working" } : a; }); });
+              } else if (event.type === "agent_done") {
+                setActiveAgents(function(prev) { return prev.map(function(a) { return a.id === event.agentId ? { ...a, status: "done" } : a; }); });
               } else if (event.type === "error") {
                 hadError = true;
                 setChatError({ message: event.error || "Something went wrong. Please try again." });
@@ -153,6 +164,7 @@ export default function ConversationPage() {
                 setStreamingText("");
                 setStreamingBlocks(null);
                 setActiveTools([]);
+                setActiveAgents([]);
               }
             } catch {
               /* parse error */
@@ -226,6 +238,7 @@ export default function ConversationPage() {
         isLoading={isStreaming}
         onSendSuggestion={function(text) { sendMessage(text, selectedModel); }}
         conversationId={conversationId}
+        activeAgents={activeAgents}
       />
       <div className="shrink-0 pb-2">
         <ChatInputBar

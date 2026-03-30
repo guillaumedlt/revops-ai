@@ -7,6 +7,8 @@ import { getToolsForTenant } from "@/lib/connectors";
 import { checkCredits, deductCredit, CREDIT_COSTS, CreditAction } from "@/lib/ai/credits";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { parseContentBlocks } from "@/lib/ai/parse-blocks";
+import { selectAgents } from "@/lib/ai/agents";
+import { runMultiAgent } from "@/lib/ai/orchestrator";
 
 const ChatSchema = z.object({
   message: z.string().min(1).max(4000),
@@ -420,7 +422,45 @@ export async function POST(request: NextRequest) {
           controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "conversation_id", conversationId: convId })}\n\n`));
         }
 
-        // Anthropic provider path (kairo, claude-opus, claude-sonnet, claude-haiku)
+        // Check if multi-agent should be activated
+        var hasLemlist = !!connectorTools["lemlist_get_campaigns"];
+        var selectedAgentIds = selectAgents(message, hasLemlist);
+
+        if (selectedAgentIds.length >= 2 && resolved.displayName === "kairo") {
+          // ═══ MULTI-AGENT MODE ═══
+          var multiText = await runMultiAgent(
+            selectedAgentIds,
+            message,
+            connectorTools,
+            anthropicApiKey,
+            "claude-sonnet-4-6", // Always use Sonnet for multi-agent
+            auth.tenantId,
+            encoder,
+            controller,
+          );
+
+          var multiBlocks = parseContentBlocks(multiText);
+
+          if (convId) {
+            await supabase.from("messages").insert({
+              conversation_id: convId,
+              tenant_id: auth.tenantId,
+              role: "assistant",
+              content: multiText,
+              content_blocks: multiBlocks,
+              model: "kairo-multi",
+            });
+          }
+
+          await deductCredit(auth.tenantId, auth.userId, "report"); // Multi-agent = report cost
+
+          controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "content_blocks", blocks: multiBlocks }) + "\n\n"));
+          controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "done" }) + "\n\n"));
+          controller.close();
+          return;
+        }
+
+        // ═══ SINGLE AGENT MODE (standard) ═══
         let messages: Array<{ role: string; content: any }> = [
           ...historyMessages,
           { role: "user", content: message },
