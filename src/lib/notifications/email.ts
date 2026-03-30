@@ -12,7 +12,7 @@ export async function sendEmail(to: string, subject: string, html: string) {
         "Authorization": "Bearer " + apiKey,
       },
       body: JSON.stringify({
-        from: "Kairo <notifications@kairo.ai>",
+        from: "Kairo <onboarding@resend.dev>",
         to: to,
         subject: subject,
         html: html,
