@@ -121,6 +121,18 @@ export default function ChatInputBar({
     }
     return "kairo";
   });
+
+  // Load default model from settings API (one-time on mount)
+  useEffect(function() {
+    if (typeof window !== "undefined" && !localStorage.getItem("kairo_model")) {
+      fetch("/api/settings/llm").then(function(r) { return r.json(); }).then(function(json) {
+        if (json.data?.defaultModel && json.data.defaultModel !== "kairo") {
+          setSelectedModel(json.data.defaultModel);
+          localStorage.setItem("kairo_model", json.data.defaultModel);
+        }
+      }).catch(function() {});
+    }
+  }, []);
   var [showModelPicker, setShowModelPicker] = useState(false);
   var [showConnectors, setShowConnectors] = useState(false);
   var [selectedFile, setSelectedFile] = useState<File | null>(null);

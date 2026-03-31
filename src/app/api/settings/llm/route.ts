@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json(
     apiSuccess({
-      defaultModel: llm.defaultModel ?? "revops-ai",
+      defaultModel: llm.defaultModel ?? "kairo",
       keys: {
         anthropic: { configured: !!llm.anthropicKey },
         openai: { configured: !!llm.openaiKey },

@@ -430,6 +430,10 @@ function SettingsContent() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ defaultModel: model }),
     });
+    // Also update localStorage so ChatInputBar picks it up immediately
+    if (typeof window !== "undefined") {
+      localStorage.setItem("kairo_model", model);
+    }
     setLlmConfig((prev) => prev ? { ...prev, defaultModel: model } : prev);
   };
 
@@ -518,10 +522,10 @@ function SettingsContent() {
         <div className="space-y-6">
           <div className="bg-white rounded-lg border border-[#EAEAEA] p-6 space-y-4">
             <h2 className="text-[13px] font-medium text-[#111]">Default model</h2>
-            <p className="text-xs text-[#999]">Choose which model Kairo uses by default</p>
+            <p className="text-xs text-[#999]">Choose which model appears by default in the chat. Kairo AI auto-picks the cheapest model for each query to optimize your credits.</p>
             <div className="space-y-1">
               {MODELS.map((model) => {
-                const isSelected = llmConfig?.defaultModel === model.id;
+                const isSelected = (llmConfig?.defaultModel || "kairo") === model.id;
                 return (
                   <button
                     key={model.id}
