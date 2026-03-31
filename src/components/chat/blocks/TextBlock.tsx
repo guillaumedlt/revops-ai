@@ -8,7 +8,7 @@ function formatInline(str: string): React.ReactNode {
       return <strong key={i} className="font-semibold text-[#111]">{part.slice(2, -2)}</strong>;
     }
     if (part.startsWith("`") && part.endsWith("`")) {
-      return <code key={i} className="px-1 py-0.5 rounded bg-[#F5F5F5] text-[12px] font-mono">{part.slice(1, -1)}</code>;
+      return <code key={i} className="px-1 py-0.5 rounded bg-[#F5F5F5] text-[12px] font-mono break-all">{part.slice(1, -1)}</code>;
     }
     return part;
   });
@@ -67,10 +67,10 @@ export default function TextBlock({ text }: { text: string }) {
       elements.push(<div key={key++} className="h-1.5" />);
     } else {
       flushList();
-      elements.push(<p key={key++} className="text-[#111] leading-relaxed">{formatInline(line)}</p>);
+      elements.push(<p key={key++} className="text-[#111] leading-relaxed break-words">{formatInline(line)}</p>);
     }
   }
   flushList();
 
-  return <div className="space-y-1">{elements}</div>;
+  return <div className="space-y-1 overflow-hidden">{elements}</div>;
 }
