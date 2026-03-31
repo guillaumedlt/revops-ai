@@ -376,13 +376,33 @@ function AssistantMessage({ msg, onSendSuggestion }: { msg: Message; onSendSugge
           ) : (
             <TextBlock text={msg.content} />
           )}
-          <button
-            onClick={function() { navigator.clipboard.writeText(msg.content); }}
-            className="absolute top-2 right-2 opacity-0 group-hover/msg:opacity-100 h-7 w-7 flex items-center justify-center rounded-lg text-[#BBB] hover:text-[#111] hover:bg-[#F5F5F5] transition-all"
-            title="Copy"
-          >
-            <Copy size={13} />
-          </button>
+          <div className="absolute top-2 right-2 opacity-0 group-hover/msg:opacity-100 flex items-center gap-0.5 transition-all">
+            {/* Download button for premium content */}
+            {msg.content && msg.content.length > 500 && (
+              <button
+                onClick={function() {
+                  var content = msg.content;
+                  var isHtml = content.includes("<!DOCTYPE") || content.includes("<html") || content.includes("<table");
+                  var ext = isHtml ? "html" : content.trim().startsWith("{") ? "json" : "md";
+                  var mime = isHtml ? "text/html" : ext === "json" ? "application/json" : "text/markdown";
+                  var blob = new Blob([content], { type: mime });
+                  var url = URL.createObjectURL(blob);
+                  var a = document.createElement("a"); a.href = url; a.download = "kairo-export." + ext; a.click(); URL.revokeObjectURL(url);
+                }}
+                className="h-7 w-7 flex items-center justify-center rounded-lg text-[#BBB] hover:text-[#111] hover:bg-[#F5F5F5]"
+                title="Download"
+              >
+                <Download size={13} />
+              </button>
+            )}
+            <button
+              onClick={function() { navigator.clipboard.writeText(msg.content); }}
+              className="h-7 w-7 flex items-center justify-center rounded-lg text-[#BBB] hover:text-[#111] hover:bg-[#F5F5F5]"
+              title="Copy"
+            >
+              <Copy size={13} />
+            </button>
+          </div>
         </div>
 
         {/* Action buttons below message */}

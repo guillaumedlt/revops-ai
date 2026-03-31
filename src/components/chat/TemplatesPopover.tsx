@@ -55,6 +55,16 @@ var TEMPLATES = [
       { label: "Chercher dans Notion", prompt: "Cherche dans Notion " },
     ],
   },
+  {
+    category: "Premium",
+    items: [
+      { label: "Tracking Plan", prompt: "Create a complete tracking plan for my sales funnel with all events, properties, and destinations" },
+      { label: "Email Templates", prompt: "Design a 5-email nurture sequence with HTML templates for cold outreach" },
+      { label: "Sales Playbook", prompt: "Write a complete sales playbook with objection handling, discovery questions, and competitive battle cards" },
+      { label: "Lead Scoring Model", prompt: "Build a lead scoring model based on my won deals data with criteria, weights, and thresholds" },
+      { label: "Integration Spec", prompt: "Create an integration specification for syncing HubSpot with our other tools via webhooks" },
+    ],
+  },
 ];
 
 export default function TemplatesPopover({ onSelect }: TemplatesPopoverProps) {

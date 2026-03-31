@@ -7,7 +7,7 @@ import { getToolsForTenant } from "@/lib/connectors";
 import { checkCredits, deductCredit, CREDIT_COSTS, CreditAction } from "@/lib/ai/credits";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { parseContentBlocks } from "@/lib/ai/parse-blocks";
-import { selectAgents } from "@/lib/ai/agents";
+import { selectAgents, detectPremiumAgent } from "@/lib/ai/agents";
 import { runMultiAgent } from "@/lib/ai/orchestrator";
 
 const ChatSchema = z.object({
@@ -427,6 +427,57 @@ export async function POST(request: NextRequest) {
         // Send conversationId early so client can navigate
         if (convId) {
           controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "conversation_id", conversationId: convId })}\n\n`));
+        }
+
+        // Check if premium agent should be activated
+        var premiumAgent = detectPremiumAgent(message);
+        if (premiumAgent && resolved.displayName === "kairo") {
+          // ═══ PREMIUM AGENT MODE ═══
+          var premiumCost = premiumAgent.creditCost || 10;
+
+          // Notify client about the premium agent + cost
+          controller.enqueue(encoder.encode("data: " + JSON.stringify({
+            type: "premium_agent",
+            agent: { id: premiumAgent.id, name: premiumAgent.name, emoji: premiumAgent.emoji, color: premiumAgent.color, specialty: premiumAgent.specialty, creditCost: premiumCost, outputFormat: premiumAgent.outputFormat },
+          }) + "\n\n"));
+
+          // Run the premium agent with Opus
+          var premiumText = await runMultiAgent(
+            [premiumAgent.id],
+            message,
+            connectorTools,
+            anthropicApiKey,
+            premiumAgent.model || "claude-opus-4-6",
+            auth.tenantId,
+            encoder,
+            controller,
+          );
+
+          var premiumBlocks = parseContentBlocks(premiumText);
+
+          // Send the downloadable file
+          controller.enqueue(encoder.encode("data: " + JSON.stringify({
+            type: "premium_file",
+            agentId: premiumAgent.id,
+            fileName: premiumAgent.id + "-" + new Date().toISOString().split("T")[0] + "." + (premiumAgent.outputFormat === "json" ? "json" : premiumAgent.outputFormat === "html" ? "html" : premiumAgent.outputFormat === "csv" ? "csv" : "md"),
+            content: premiumText,
+            format: premiumAgent.outputFormat || "markdown",
+          }) + "\n\n"));
+
+          if (convId) {
+            await supabase.from("messages").insert({
+              conversation_id: convId, tenant_id: auth.tenantId,
+              role: "assistant", content: premiumText, content_blocks: premiumBlocks, model: "kairo-premium",
+            });
+          }
+
+          // Deduct premium credits
+          await deductCredit(auth.tenantId, auth.userId, "report");
+
+          controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "content_blocks", blocks: premiumBlocks }) + "\n\n"));
+          controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "done" }) + "\n\n"));
+          controller.close();
+          return;
         }
 
         // Check if multi-agent should be activated

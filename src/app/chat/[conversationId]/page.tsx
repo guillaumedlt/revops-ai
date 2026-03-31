@@ -146,6 +146,14 @@ export default function ConversationPage() {
                 setActiveAgents(function(prev) { return prev.map(function(a) { return a.id === event.agentId ? { ...a, status: "working" } : a; }); });
               } else if (event.type === "agent_done") {
                 setActiveAgents(function(prev) { return prev.map(function(a) { return a.id === event.agentId ? { ...a, status: "done" } : a; }); });
+              } else if (event.type === "premium_agent") {
+                // Show premium agent working
+                setActiveAgents([{ id: event.agent.id, name: event.agent.name, emoji: event.agent.emoji, color: event.agent.color, specialty: event.agent.specialty + " (" + event.agent.creditCost + " credits)", status: "working", text: "" }]);
+              } else if (event.type === "premium_file") {
+                // Store file for download button in message
+                if (typeof window !== "undefined") {
+                  (window as any).__kairo_last_file = { fileName: event.fileName, content: event.content, format: event.format };
+                }
               } else if (event.type === "error") {
                 hadError = true;
                 setChatError({ message: event.error || "Something went wrong. Please try again." });
