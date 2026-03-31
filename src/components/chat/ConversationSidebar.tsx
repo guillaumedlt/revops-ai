@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { getStreamingIds } from "@/lib/streaming-tracker";
 import {
   Plus, Search, Settings, LogOut, Trash2, LayoutDashboard, Target,
   Bell, MessageSquare, ChevronsUpDown, CheckSquare, HelpCircle, Archive,
@@ -25,6 +26,19 @@ export default function ConversationSidebar() {
   var [searchQuery, setSearchQuery] = useState("");
   var [credits, setCredits] = useState<{ used: number; total: number; remaining: number; plan: string } | null>(null);
   var [alertCount, setAlertCount] = useState(0);
+  var [streamingConvs, setStreamingConvs] = useState<Set<string>>(new Set());
+
+  // Poll streaming status every 500ms
+  useEffect(function() {
+    var interval = setInterval(function() {
+      var ids = getStreamingIds();
+      setStreamingConvs(function(prev) {
+        if (ids.length === 0 && prev.size === 0) return prev;
+        return new Set(ids);
+      });
+    }, 500);
+    return function() { clearInterval(interval); };
+  }, []);
   var [userMenuOpen, setUserMenuOpen] = useState(false);
   var searchRef = useRef<HTMLInputElement>(null);
   var userMenuRef = useRef<HTMLDivElement>(null);
@@ -140,10 +154,14 @@ export default function ConversationSidebar() {
                       className={"w-full text-left text-[13px] truncate px-2 pr-7 h-[30px] flex items-center rounded transition-colors " + (isActive ? "bg-[#F5F5F5] text-[#111] font-medium" : "text-[#555] hover:bg-[#FAFAFA] hover:text-[#111]")}>
                       <span className="block truncate">{conv.title || "New conversation"}</span>
                     </button>
-                    <button onClick={function(e) { e.stopPropagation(); handleDelete(conv.id); }}
-                      className="absolute right-1 top-1/2 -translate-y-1/2 hidden group-hover:flex h-5 w-5 items-center justify-center rounded text-[#DDD] hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-colors">
-                      <Trash2 size={11} />
-                    </button>
+                    {streamingConvs.has(conv.id) ? (
+                      <div className="absolute right-1.5 top-1/2 -translate-y-1/2 h-4 w-4 border-[1.5px] border-[#EAEAEA] border-t-[#6366F1] rounded-full animate-spin" />
+                    ) : (
+                      <button onClick={function(e) { e.stopPropagation(); handleDelete(conv.id); }}
+                        className="absolute right-1 top-1/2 -translate-y-1/2 hidden group-hover:flex h-5 w-5 items-center justify-center rounded text-[#DDD] hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-colors">
+                        <Trash2 size={11} />
+                      </button>
+                    )}
                   </div>
                 );
               })}

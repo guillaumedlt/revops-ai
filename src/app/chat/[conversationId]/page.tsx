@@ -6,6 +6,7 @@ import { ChevronLeft } from "lucide-react";
 import MessageThread from "@/components/chat/MessageThread";
 import ChatInputBar from "@/components/chat/ChatInputBar";
 import type { ContentBlock } from "@/types/chat-blocks";
+import { markStreaming, unmarkStreaming } from "@/lib/streaming-tracker";
 
 interface Message {
   id: string;
@@ -72,6 +73,7 @@ export default function ConversationPage() {
       };
       setMessages((prev) => [...prev, userMsg]);
       setIsStreaming(true);
+      markStreaming(conversationId);
       setStreamingText("");
       setStreamingBlocks(null);
       setActiveTools([]);
@@ -95,7 +97,7 @@ export default function ConversationPage() {
             errMsg = errJson.error || errMsg;
           } catch {}
           setChatError({ message: errMsg });
-          setIsStreaming(false);
+          setIsStreaming(false); unmarkStreaming(conversationId);
           return;
         }
 
@@ -179,7 +181,7 @@ export default function ConversationPage() {
       } catch {
         setChatError({ message: "Network error. Please check your connection and try again." });
       } finally {
-        setIsStreaming(false);
+        setIsStreaming(false); unmarkStreaming(conversationId);
       }
     },
     [conversationId, isStreaming, selectedModel]
