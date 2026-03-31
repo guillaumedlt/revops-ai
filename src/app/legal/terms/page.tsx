@@ -16,7 +16,7 @@ export default function TermsPage() {
 
           <section>
             <h2 className="text-[15px] font-semibold text-[#111] mb-2">1. Service Provider</h2>
-            <p>Kairo is provided by <strong>Ceres Growth Marketing</strong>, located at 128 rue du Laboratoire, Monaco 98000. By using Kairo, you agree to these terms.</p>
+            <p>Kairo is provided by <strong>Ceres Growth Marketing</strong>, located at 128 rue la Boetie, 75008 Paris, France. By using Kairo, you agree to these terms.</p>
           </section>
 
           <section>
@@ -119,14 +119,14 @@ export default function TermsPage() {
 
           <section>
             <h2 className="text-[15px] font-semibold text-[#111] mb-2">11. Governing Law</h2>
-            <p>These terms are governed by the laws of the Principality of Monaco. Any disputes will be resolved in the courts of Monaco.</p>
+            <p>These terms are governed by the laws of the France. Any disputes will be resolved in the courts of Paris, France.</p>
           </section>
 
           <section>
             <h2 className="text-[15px] font-semibold text-[#111] mb-2">12. Contact</h2>
             <p>
               Ceres Growth Marketing<br />
-              128 rue du Laboratoire, Monaco 98000<br />
+              128 rue la Boetie, 75008 Paris, France<br />
               Email: guillaume@ceres.agency
             </p>
           </section>

@@ -19,8 +19,8 @@ export default function PrivacyPage() {
             <p>Kairo is a product developed and operated by <strong>Ceres Growth Marketing</strong>.</p>
             <p>
               Ceres Growth Marketing<br />
-              128 rue du Laboratoire<br />
-              Monaco, 98000<br />
+              128 rue la Boetie<br />
+              75008 Paris, France<br />
               Contact: guillaume@ceres.agency
             </p>
           </section>
@@ -140,7 +140,7 @@ export default function PrivacyPage() {
             <p>For any questions about this privacy policy or your data:</p>
             <p>
               Ceres Growth Marketing<br />
-              128 rue du Laboratoire, Monaco 98000<br />
+              128 rue la Boetie, 75008 Paris, France<br />
               Email: guillaume@ceres.agency
             </p>
           </section>
