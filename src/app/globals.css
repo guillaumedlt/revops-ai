@@ -2,164 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* HubSpot embedded form overrides */
-#hs-guide-form .hs-form-field { margin-bottom: 12px; }
-#hs-guide-form .hs-form-field label { display: block; font-size: 12px; font-weight: 500; color: #666; margin-bottom: 4px; }
-#hs-guide-form .hs-form-field label .hs-form-required { color: #FF7A59; }
-#hs-guide-form .hs-input { width: 100% !important; padding: 8px 12px; border: 1px solid #E8E8E8; border-radius: 8px; font-size: 13px; color: #111; background: #fff; transition: border-color 0.2s; outline: none; }
-#hs-guide-form .hs-input:focus { border-color: #FF7A59; }
-#hs-guide-form .hs-button { width: 100%; padding: 10px 16px; background: #FF7A59; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-#hs-guide-form .hs-button:hover { background: #E86D4F; }
-#hs-guide-form .hs-error-msgs { list-style: none; padding: 0; margin: 4px 0 0; }
-#hs-guide-form .hs-error-msgs li label { font-size: 11px; color: #EF4444; font-weight: 400; }
-#hs-guide-form .hs-form-booleancheckbox label { font-size: 11px; color: #999; display: flex; align-items: flex-start; gap: 6px; }
-#hs-guide-form .hs-form-booleancheckbox input { margin-top: 2px; }
-#hs-guide-form .legal-consent-container { margin-top: 8px; }
-#hs-guide-form .legal-consent-container p { font-size: 10px; color: #CCC; line-height: 1.5; }
-#hs-guide-form .submitted-message { text-align: center; padding: 20px 0; font-size: 14px; color: #22C55E; font-weight: 600; }
-
-/* HubSpot form - Guide IA */
-#hs-guide-ia-form .hs-form-field { margin-bottom: 12px; }
-#hs-guide-ia-form .hs-form-field label { display: block; font-size: 12px; font-weight: 500; color: #666; margin-bottom: 4px; }
-#hs-guide-ia-form .hs-form-field label .hs-form-required { color: #6D00CC; }
-#hs-guide-ia-form .hs-input { width: 100% !important; padding: 8px 12px; border: 1px solid #E8E8E8; border-radius: 8px; font-size: 13px; color: #111; background: #fff; transition: border-color 0.2s; outline: none; }
-#hs-guide-ia-form .hs-input:focus { border-color: #6D00CC; }
-#hs-guide-ia-form .hs-button { width: 100%; padding: 10px 16px; background: #6D00CC; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-#hs-guide-ia-form .hs-button:hover { background: #5B00AD; }
-#hs-guide-ia-form .hs-error-msgs { list-style: none; padding: 0; margin: 4px 0 0; }
-#hs-guide-ia-form .hs-error-msgs li label { font-size: 11px; color: #EF4444; font-weight: 400; }
-#hs-guide-ia-form .hs-form-booleancheckbox label { font-size: 11px; color: #999; display: flex; align-items: flex-start; gap: 6px; }
-#hs-guide-ia-form .hs-form-booleancheckbox input { margin-top: 2px; }
-#hs-guide-ia-form .legal-consent-container { margin-top: 8px; }
-#hs-guide-ia-form .legal-consent-container p { font-size: 10px; color: #CCC; line-height: 1.5; }
-#hs-guide-ia-form .submitted-message { text-align: center; padding: 20px 0; font-size: 14px; color: #22C55E; font-weight: 600; }
-
 @layer base {
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground font-sans text-base antialiased;
   }
 }
 
-@layer components {
-  /* Body principal — 13px regular */
-  .text-body {
-    @apply text-base font-normal text-foreground;
-  }
-
-  /* Body secondary — 12px gris */
-  .text-secondary {
-    @apply text-sm font-normal text-muted-foreground;
-  }
-
-  /* Label — 11px medium uppercase tracking-wide */
-  .text-label {
-    @apply text-xs font-medium uppercase tracking-wide text-muted-foreground;
-  }
-
-  /* KPI value — 24px semibold */
-  .text-kpi {
-    @apply text-2xl font-semibold text-foreground tracking-tight;
-  }
-
-  /* Card title — 13px medium */
-  .text-card-title {
-    @apply text-base font-medium text-foreground;
-  }
-
-  /* Page title — 20px medium */
-  .text-page-title {
-    @apply text-xl font-medium text-foreground tracking-tight;
-  }
-
-  /* Metric label inside charts — 11px */
-  .text-chart-label {
-    @apply text-xs font-normal text-muted-foreground;
-  }
-
-  /* Score central — 32px bold */
-  .text-score {
-    @apply text-3xl font-bold text-foreground;
-  }
-}
-
 @layer utilities {
-  /* Tabular nums for monospace numbers */
   .tabular-nums {
     font-variant-numeric: tabular-nums;
   }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-}
-
-/* Cube drops in from above */
-@keyframes cubeDropIn {
-  0%   { opacity: 0; transform: translateY(-30px) scale(0.85); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* Brick slots into place (Lego snap) */
-@keyframes brickSlotIn {
-  0%   { opacity: 0; transform: translateY(-50px); }
-  70%  { opacity: 1; transform: translateY(4px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-/* Brick rises from bottom */
-@keyframes brickRise {
-  0%   { opacity: 0; transform: translateY(30px); }
-  70%  { opacity: 1; transform: translateY(-3px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-.brick-anim {
-  animation: brickFade 0.5s ease-out both;
-}
-
-@keyframes brickFade {
-  0%   { opacity: 0; transform: translateY(-12px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-/* Brick leaves */
-@keyframes brickLeave {
-  0%   { opacity: 1; transform: translateX(0) scale(1); }
-  100% { opacity: 0; transform: translateX(20px) scale(0.8); }
-}
-
-/* Fade + slide in for labels */
-@keyframes fadeSlideIn {
-  0%   { opacity: 0; transform: translateX(-10px); }
-  100% { opacity: 1; transform: translateX(0); }
-}
-
-/* Simple fade in */
-@keyframes fadeIn {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-/* Orbit rotation */
-@keyframes orbitSpin {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Blob float */
-@keyframes blobFloat {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%      { transform: translate(10px, -15px) scale(1.1); }
-  66%      { transform: translate(-8px, 10px) scale(0.95); }
-}
-
-/* Orbit along card border using offset-path */
-@keyframes orbitBorder {
-  0%   { offset-distance: 0%; }
-  100% { offset-distance: 100%; }
 }
