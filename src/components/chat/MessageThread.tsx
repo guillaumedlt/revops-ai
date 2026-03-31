@@ -189,12 +189,19 @@ function ThinkingIndicator({ activeTools }: { activeTools: string[] }) {
     };
   }, []);
 
-  // If tools are active, show tool-specific steps
+  // If tools are active, show grouped tool steps
   if (activeTools.length > 0) {
+    // Group identical tools and count them
+    var toolCounts: Record<string, number> = {};
+    activeTools.forEach(function(t) { toolCounts[t] = (toolCounts[t] || 0) + 1; });
+    var uniqueTools = Object.entries(toolCounts);
+
     return (
-      <div className="space-y-2 py-1">
+      <div className="space-y-1.5 py-1">
         <AnimatePresence>
-          {activeTools.map(function (tool) {
+          {uniqueTools.map(function (entry) {
+            var tool = entry[0];
+            var count = entry[1];
             return (
               <motion.div
                 key={tool}
@@ -205,8 +212,9 @@ function ThinkingIndicator({ activeTools }: { activeTools: string[] }) {
                 className="flex items-center gap-2.5 py-0.5"
               >
                 <PulsingDot />
-                <span className="text-sm text-[#999]">
+                <span className="text-[13px] text-[#999]">
                   {TOOL_LABELS[tool] || tool}
+                  {count > 1 && <span className="ml-1.5 text-[11px] text-[#BBB] bg-[#F5F5F5] px-1.5 py-0.5 rounded-full font-medium">{count}x</span>}
                 </span>
               </motion.div>
             );
