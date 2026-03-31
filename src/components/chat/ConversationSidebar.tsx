@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { getStreamingIds } from "@/lib/streaming-tracker";
 import {
-  Plus, Search, Settings, LogOut, Trash2, LayoutDashboard, Target,
+  Plus, Search, Settings, LogOut, Trash2, LayoutDashboard, Target, Shield,
   Bell, MessageSquare, ChevronsUpDown, CheckSquare, HelpCircle, Archive,
 } from "lucide-react";
 
@@ -190,6 +190,12 @@ export default function ConversationSidebar() {
             className="w-full flex items-center gap-2.5 px-1 h-[30px] rounded text-[12px] text-[#999] hover:text-[#111] hover:bg-[#FAFAFA] transition-colors">
             <Settings size={14} className="text-[#CCC]" /> Settings
           </button>
+          {userEmail === "guillaume@ceres.agency" && (
+            <button onClick={function() { router.push("/admin"); }}
+              className={"w-full flex items-center gap-2.5 px-1 h-[30px] rounded text-[12px] transition-colors " + (pathname === "/admin" ? "text-[#6366F1] bg-[#EEF2FF]" : "text-[#999] hover:text-[#6366F1] hover:bg-[#EEF2FF]")}>
+              <Shield size={14} className={pathname === "/admin" ? "text-[#6366F1]" : "text-[#CCC]"} /> Admin
+            </button>
+          )}
         </div>
 
         {/* User */}
