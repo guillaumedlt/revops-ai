@@ -89,6 +89,11 @@ export default function LoginPage() {
             <span className="mx-2">·</span>
             <Link href="/pricing" className="text-[#999] hover:text-[#111]">Pricing</Link>
           </p>
+          <p className="mt-4 text-center text-[11px] text-[#CCC]">
+            <Link href="/legal/privacy" className="hover:text-[#999]">Privacy</Link>
+            <span className="mx-1.5">·</span>
+            <Link href="/legal/terms" className="hover:text-[#999]">Terms</Link>
+          </p>
         </div>
       </div>
 

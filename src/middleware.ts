@@ -14,6 +14,7 @@ var PUBLIC_PATHS = [
   "/api/auth/hubspot/callback",
   "/api/auth/notion/callback",
   "/api/auth/setup",
+  "/legal",
 ];
 
 export async function middleware(request: NextRequest) {
