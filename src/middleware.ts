@@ -14,17 +14,6 @@ var PUBLIC_PATHS = [
   "/api/auth/hubspot/callback",
   "/api/auth/notion/callback",
   "/api/auth/setup",
-  "/audit-revops",
-  "/revops-part-time",
-  "/agence-hubspot",
-  "/agents-ia",
-  "/revops",
-  "/blog",
-  "/guides",
-  "/guide-revops-ultime",
-  "/guide-ia-commercial",
-  "/glossaire",
-  "/cas-clients",
 ];
 
 export async function middleware(request: NextRequest) {
@@ -100,9 +89,9 @@ export async function middleware(request: NextRequest) {
     request: { headers: requestHeaders },
   });
 
-  // Copy Supabase auth cookies
+  // Copy Supabase auth cookies with all attributes
   supabaseResponse.cookies.getAll().forEach(function(cookie) {
-    response.cookies.set(cookie.name, cookie.value);
+    response.cookies.set(cookie);
   });
 
   return response;
