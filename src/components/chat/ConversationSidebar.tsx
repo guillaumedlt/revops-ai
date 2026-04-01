@@ -189,9 +189,13 @@ export default function ConversationSidebar() {
 
         {/* Bottom links */}
         <div className="space-y-[1px]">
+          <button onClick={function() { router.push("/guide"); }}
+            className={"w-full flex items-center gap-2.5 px-1 h-[30px] rounded text-[12px] transition-colors " + (pathname === "/guide" ? "text-[#111] bg-[#F5F5F5]" : "text-[#999] hover:text-[#111] hover:bg-[#FAFAFA]")}>
+            <HelpCircle size={14} className={pathname === "/guide" ? "text-[#111]" : "text-[#CCC]"} /> Guide
+          </button>
           <button onClick={function() { router.push("/settings"); }}
-            className="w-full flex items-center gap-2.5 px-1 h-[30px] rounded text-[12px] text-[#999] hover:text-[#111] hover:bg-[#FAFAFA] transition-colors">
-            <Settings size={14} className="text-[#CCC]" /> Settings
+            className={"w-full flex items-center gap-2.5 px-1 h-[30px] rounded text-[12px] transition-colors " + (pathname === "/settings" ? "text-[#111] bg-[#F5F5F5]" : "text-[#999] hover:text-[#111] hover:bg-[#FAFAFA]")}>
+            <Settings size={14} className={pathname === "/settings" ? "text-[#111]" : "text-[#CCC]"} /> Settings
           </button>
           {isAdmin && (
             <button onClick={function() { router.push("/admin"); }}
