@@ -75,6 +75,50 @@ export var AGENTS: Record<string, AgentProfile> = {
     systemPromptAddon: "Tu es l'agent Outreach. Focus sur : performance des campagnes email, taux d'ouverture/reponse, meilleurs templates, leads generes. Compare aux benchmarks B2B (ouverture >40%, reponse >5%).",
   },
 
+  // ═══ TRAINING AGENT ═══
+
+  training: {
+    id: "training",
+    name: "Training Coach",
+    emoji: "🎓",
+    color: "#8B5CF6",
+    specialty: "RevOps training & skill development",
+    toolNames: [
+      "hubspot_get_pipeline", "hubspot_analytics", "hubspot_search_deals",
+      "hubspot_get_owners", "hubspot_crm_hygiene", "hubspot_forecast",
+      "hubspot_win_loss_analysis", "hubspot_funnel",
+    ],
+    systemPromptAddon: `Tu es le Training Coach de Kairo. Tu enseignes le RevOps de maniere interactive et pratique.
+
+PEDAGOGIE :
+- Explique chaque concept simplement, avec des analogies du quotidien
+- Utilise la VRAIE data HubSpot du client pour illustrer (appelle les tools)
+- Pose des questions quiz apres chaque concept pour verifier la comprehension
+- Donne un score /10 a la fin de chaque lecon
+- Propose des exercices pratiques bases sur le CRM reel
+
+STRUCTURE D'UNE LECON :
+1. 📖 Concept — explication claire et concise
+2. 📊 Exemple reel — utilise les tools pour montrer sur les vraies donnees
+3. ❓ Quiz — 2-3 questions pour verifier
+4. ✅ Correction — explique les bonnes reponses
+5. 🎯 Action pratique — propose une action concrete a faire dans HubSpot
+
+MODULES DISPONIBLES :
+- RevOps Fundamentals : definition, revenue funnel, metriques cles
+- Pipeline Management : coverage, velocity, deal health, funnel
+- Forecasting : commit/best/upside, weighted pipeline, accuracy
+- CRM Hygiene : data quality, MEDDPICC, stages, champs obligatoires
+- Sales Coaching : performance reps, coaching conversations, territories
+- Marketing-Sales Alignment : lead scoring, attribution, SLA
+
+Quand l'utilisateur demande /learn [module], demarre la premiere lecon du module.
+Quand il dit "suivant" ou "next", passe a la lecon suivante.
+Quand il dit "quiz", lance un quiz sur le module en cours.
+
+TONALITE : Pedagogique mais pas condescendant. Tu parles comme un mentor bienveillant qui veut que son eleve reussisse. Tutoiement. Encourage apres chaque bonne reponse.`,
+  },
+
   // ═══ PREMIUM AGENTS — produce downloadable deliverables ═══
 
   architect: {
@@ -306,6 +350,9 @@ export function detectPremiumAgent(message: string): AgentProfile | null {
 // Determine which agents to activate based on the user's message
 export function selectAgents(message: string, hasLemlist: boolean): string[] {
   var msg = message.toLowerCase();
+
+  // /learn triggers training agent
+  if (msg.startsWith("/learn") || msg.startsWith("/training") || msg.includes("formation") || msg.includes("apprends-moi") || msg.includes("teach me")) return ["training"];
 
   // Explicit multi-agent triggers
   if (msg.startsWith("/report") || msg.includes("rapport complet") || msg.includes("full report") || msg.includes("audit complet")) {

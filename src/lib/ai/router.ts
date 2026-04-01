@@ -77,6 +77,9 @@ export function routeToModel(message: string, historyLength: number): ModelChoic
     return "haiku";
   }
 
+  // Training uses Sonnet (good quality, reasonable cost for learning)
+  if (/^\/(learn|training)\b/i.test(msg) || /\b(formation|apprends|teach me)\b/i.test(msg)) return "sonnet";
+
   // Check Opus first (most specific)
   if (OPUS_PATTERNS.some(function(p) { return p.test(msg); })) return "opus";
 

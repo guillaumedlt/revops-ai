@@ -6,7 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { getStreamingIds } from "@/lib/streaming-tracker";
 import {
   Plus, Search, Settings, LogOut, Trash2, LayoutDashboard, Target, Shield,
-  Bell, MessageSquare, ChevronsUpDown, CheckSquare, HelpCircle, Archive,
+  Bell, MessageSquare, ChevronsUpDown, CheckSquare, HelpCircle, Archive, GraduationCap,
 } from "lucide-react";
 
 interface Conversation { id: string; title: string; last_message_at: string | null; created_at: string; }
@@ -127,6 +127,7 @@ export default function ConversationSidebar() {
         {navItem("Dashboards", LayoutDashboard, "/dashboards", pathname.startsWith("/dashboards") && pathname !== "/dashboards/icp")}
         {navItem("Actions", CheckSquare, "/actions", pathname === "/actions")}
         {navItem("Monitoring", Bell, "/alerts", pathname === "/alerts", alertCount)}
+        {navItem("Training", GraduationCap, "/training", pathname === "/training")}
         {navItem("ICP", Target, "/dashboards/icp", pathname === "/dashboards/icp")}
       </div>
 
