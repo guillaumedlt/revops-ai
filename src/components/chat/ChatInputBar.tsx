@@ -102,6 +102,9 @@ var SLASH_COMMANDS = [
   { command: "/learn", label: "Training", description: "Formation interactive RevOps avec exercices sur vos données", icon: "GraduationCap" },
   // Migration
   { command: "/migrate", label: "Migration", description: "Import CSV, migrate from Pipedrive/Salesforce, map fields", icon: "Upload" },
+  // Attribution & Scoring
+  { command: "/attribution", label: "Attribution", description: "Revenue par canal, ROI, first/last/linear touch", icon: "TrendingUp" },
+  { command: "/score", label: "Scoring", description: "Score ICP + engagement + deal health sur vos leads/deals", icon: "Target" },
 ];
 
 var ICON_MAP: Record<string, any> = {

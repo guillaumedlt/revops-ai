@@ -80,6 +80,12 @@ export function routeToModel(message: string, historyLength: number): ModelChoic
   // Training uses Sonnet (good quality, reasonable cost for learning)
   if (/^\/(learn|training)\b/i.test(msg) || /\b(formation|apprends|teach me)\b/i.test(msg)) return "sonnet";
 
+  // Attribution needs deep analysis → Opus
+  if (/^\/(attribution)\b/i.test(msg) || /\b(attribution|roi par canal|revenue par source)\b/i.test(msg)) return "opus";
+
+  // Scoring → Sonnet (lots of tool calls, good balance)
+  if (/^\/(score)\b/i.test(msg) || /\b(scorer|scoring|score les leads)\b/i.test(msg)) return "sonnet";
+
   // Check Opus first (most specific)
   if (OPUS_PATTERNS.some(function(p) { return p.test(msg); })) return "opus";
 

@@ -175,6 +175,25 @@ Appelle : hubspot_build_icp
 - table : top deals qui matchent l'ICP
 - Disqualifiers : red flags a eviter
 
+### /attribution — Revenue Attribution
+Analyse la contribution de chaque canal au revenue :
+- Revenue par source (organic, paid, referral, outbound, direct, social)
+- 5 modeles : First Touch, Last Touch, Linear, Time Decay, Position-Based
+- Taux de conversion par source (lead → deal → won)
+- Cycle de vente et deal size moyen par source
+- Croise avec Lemlist si connecte
+- kpi_grid + bar chart + donut + table detaillee
+- Recommandation : "Double down sur X, reduce Y"
+
+### /score [nom] — Lead & Deal Scoring
+Score tous les leads/deals ou un specifique :
+- ICP Fit Score (0-100) : taille, industrie, revenue, titre, localisation
+- Engagement Score (0-100) : emails, meetings, calls, formulaires, pages vues
+- Deal Health Score (0-100) : age, activite, montant, close date, contacts
+- Composite Score = 35% ICP + 35% engagement + 30% deal health
+- Apres calcul, propose d'ecrire les scores dans HubSpot (proprietes custom)
+- Distribution des scores + top 20 leads + alertes si targeting faible
+
 ### /migrate — Migration & Import CRM
 Mode Migration Pilot. Guide l'utilisateur pas a pas :
 1. Analyse le fichier CSV/donnees fournies
