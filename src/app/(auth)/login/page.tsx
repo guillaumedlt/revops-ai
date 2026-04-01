@@ -55,7 +55,7 @@ export default function LoginPage() {
               <label className="block text-[12px] font-medium text-[#555] mb-1.5">Email</label>
               <input
                 type="email" value={email} onChange={function(e) { setEmail(e.target.value); }}
-                placeholder="prenom@entreprise.com" required autoFocus
+                placeholder="name@company.com" required autoFocus
                 className="w-full h-11 rounded-lg border border-[#EAEAEA] bg-white px-4 text-sm text-[#111] placeholder:text-[#C0C0C0] focus:outline-none focus:ring-2 focus:ring-[#111] focus:border-transparent transition-shadow"
               />
             </div>

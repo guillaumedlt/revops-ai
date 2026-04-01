@@ -132,7 +132,7 @@ export default function ChatWelcome() {
                         <div className="shrink-0">{icon}</div>
                         <p className="flex-1 text-[12px] text-[#555] truncate">{alert.title}</p>
                         <button
-                          onClick={function() { handleSuggestion("A propos de l'alerte : " + alert.title + ". Donne-moi les details et un plan d'action."); }}
+                          onClick={function() { handleSuggestion("About the alert : " + alert.title + ". Donne-moi les details et un plan d'action."); }}
                           className="text-[10px] font-medium text-[#6366F1] hover:text-[#4F46E5] shrink-0 flex items-center gap-0.5"
                         >
                           Investigate <ArrowRight size={9} />

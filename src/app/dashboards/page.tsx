@@ -173,7 +173,7 @@ export default function DashboardsPage() {
                   <button
                     onClick={function(e) {
                       e.stopPropagation();
-                      if (confirm("Supprimer le dashboard \"" + d.name + "\" ?")) {
+                      if (confirm("Delete dashboard \"" + d.name + "\" ?")) {
                         handleDelete(d.id);
                       }
                     }}

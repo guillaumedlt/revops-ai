@@ -88,16 +88,29 @@ export async function deductCredit(tenantId: string, userId: string, action: Cre
         .single();
 
       if (updateErr || !updated) {
-        // Race condition — retry once
+        // Race condition — retry once WITH optimistic locking
         var { data: retry } = await supabase
           .from("credit_allocations")
           .select("id, credits_used, credits_allocated, bonus_credits")
           .eq("id", data.id)
           .single();
         if (retry) {
-          await supabase.from("credit_allocations").update({ credits_used: (retry.credits_used || 0) + cost }).eq("id", retry.id);
-          var totalRetry = (retry.credits_allocated ?? 0) + (retry.bonus_credits ?? 0);
-          return { remaining: totalRetry - (retry.credits_used || 0) - cost };
+          var retryOld = retry.credits_used || 0;
+          var retryTotal = (retry.credits_allocated ?? 0) + (retry.bonus_credits ?? 0);
+          if (retryOld + cost > retryTotal) {
+            return { error: "insufficient_credits", remaining: retryTotal - retryOld };
+          }
+          var { data: retryUpdated } = await supabase
+            .from("credit_allocations")
+            .update({ credits_used: retryOld + cost })
+            .eq("id", retry.id)
+            .eq("credits_used", retryOld)
+            .select("credits_used")
+            .single();
+          if (!retryUpdated) {
+            return { error: "race_condition", remaining: 0 };
+          }
+          return { remaining: retryTotal - retryOld - cost };
         }
       }
 

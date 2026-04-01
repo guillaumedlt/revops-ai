@@ -82,29 +82,29 @@ function ProviderIcon({ provider, size = 16 }: { provider: string; size?: number
 
 var SLASH_COMMANDS = [
   // Sales Ops
-  { command: "/pipeline", label: "Pipeline Review", description: "Revue complete : valeur, stages, deals a risque, coverage", icon: "TrendingUp" },
-  { command: "/forecast", label: "Forecast", description: "Prevision revenue : commit, best case, upside", icon: "TrendingUp" },
-  { command: "/coaching", label: "Coaching Reps", description: "Analyse par rep : forces, faiblesses, actions", icon: "Search" },
-  { command: "/deal", label: "Deal Review", description: "Analyse approfondie d'un deal specifique", icon: "FileText" },
+  { command: "/pipeline", label: "Pipeline Review", description: "Full review: value, stages, at-risk deals, coverage", icon: "TrendingUp" },
+  { command: "/forecast", label: "Forecast", description: "Revenue forecast: commit, best case, upside", icon: "TrendingUp" },
+  { command: "/coaching", label: "Coaching Reps", description: "Per-rep analysis: strengths, weaknesses, actions", icon: "Search" },
+  { command: "/deal", label: "Deal Review", description: "Deep-dive analysis of a specific deal", icon: "FileText" },
   // Marketing Ops
-  { command: "/outreach", label: "Outreach Report", description: "Performance campagnes Lemlist + correlation pipeline", icon: "GitCompare" },
-  { command: "/icp", label: "ICP Analysis", description: "Profile client ideal base sur les deals gagnes", icon: "Search" },
+  { command: "/outreach", label: "Outreach Report", description: "Lemlist campaign performance + pipeline correlation", icon: "GitCompare" },
+  { command: "/icp", label: "ICP Analysis", description: "Ideal customer profile based on won deals", icon: "Search" },
   // RevOps
-  { command: "/report", label: "Rapport Complet", description: "Rapport RevOps avec KPIs, charts, recommandations", icon: "FileText" },
-  { command: "/audit", label: "Audit CRM", description: "Qualite des donnees, champs manquants, hygiene", icon: "Shield" },
-  { command: "/compare", label: "Comparer", description: "Compare reps, periodes, segments, sources", icon: "GitCompare" },
+  { command: "/report", label: "Full Report", description: "Full RevOps report with KPIs, charts, recommendations", icon: "FileText" },
+  { command: "/audit", label: "CRM Audit", description: "Data quality, missing fields, CRM hygiene", icon: "Shield" },
+  { command: "/compare", label: "Compare", description: "Compare reps, periods, segments, sources", icon: "GitCompare" },
   // Service Ops
-  { command: "/tickets", label: "Tickets Support", description: "Analyse des tickets : volume, temps de resolution, SLA", icon: "Shield" },
+  { command: "/tickets", label: "Support Tickets", description: "Ticket analysis: volume, resolution time, SLA", icon: "Shield" },
   // Actions
-  { command: "/cleanup", label: "Cleanup Plan", description: "Plan de nettoyage CRM : deals zombies, contacts dupliques", icon: "Shield" },
-  { command: "/brief", label: "Meeting Brief", description: "Prepare un brief complet pour un call/meeting", icon: "FileText" },
+  { command: "/cleanup", label: "Cleanup Plan", description: "CRM cleanup plan: stale deals, duplicate contacts", icon: "Shield" },
+  { command: "/brief", label: "Meeting Brief", description: "Prepare a complete brief for a call/meeting", icon: "FileText" },
   // Training
-  { command: "/learn", label: "Training", description: "Formation interactive RevOps avec exercices sur vos données", icon: "GraduationCap" },
+  { command: "/learn", label: "Training", description: "Interactive RevOps training with exercises on your data", icon: "GraduationCap" },
   // Migration
   { command: "/migrate", label: "Migration", description: "Import CSV, migrate from Pipedrive/Salesforce, map fields", icon: "Upload" },
   // Attribution & Scoring
-  { command: "/attribution", label: "Attribution", description: "Revenue par canal, ROI, first/last/linear touch", icon: "TrendingUp" },
-  { command: "/score", label: "Scoring", description: "Score ICP + engagement + deal health sur vos leads/deals", icon: "Target" },
+  { command: "/attribution", label: "Attribution", description: "Revenue by channel, ROI, first/last/linear touch", icon: "TrendingUp" },
+  { command: "/score", label: "Scoring", description: "ICP + engagement + deal health scoring on your leads/deals", icon: "Target" },
 ];
 
 var ICON_MAP: Record<string, any> = {

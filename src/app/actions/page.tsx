@@ -111,7 +111,7 @@ export default function ActionsPage() {
 
   async function handleAskKairo() {
     var active = actions.filter(function(a) { return a.status === "todo" || a.status === "in_progress"; });
-    var prompt = "Voici mes " + active.length + " actions en cours :\n" + active.slice(0, 15).map(function(a, i) { return (i + 1) + ". [" + a.priority.toUpperCase() + "] " + a.title; }).join("\n") + "\n\nAnalyse, repriorise si necessaire, et identifie les actions manquantes en checkant mes donnees HubSpot. Cree les actions manquantes directement.";
+    var prompt = "Here are my " + active.length + " active actions :\n" + active.slice(0, 15).map(function(a, i) { return (i + 1) + ". [" + a.priority.toUpperCase() + "] " + a.title; }).join("\n") + "\n\nAnalyse, repriorise si necessaire, et identifie les actions manquantes en checkant mes donnees HubSpot. Cree les actions manquantes directement.";
     var res = await fetch("/api/conversations", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

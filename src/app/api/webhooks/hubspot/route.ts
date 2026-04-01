@@ -17,12 +17,12 @@ export async function POST(request: NextRequest) {
     var expectedSig = createHmac("sha256", clientSecret).update(sourceString).digest("base64");
 
     if (signature !== expectedSig) {
-      // Try v1 signature as fallback
+      // Try v1 signature as fallback (uses client secret as HMAC key)
       var v1Source = clientSecret + body;
-      var v1Expected = createHmac("sha256", "").update(v1Source).digest("hex");
+      var v1Expected = createHmac("sha256", clientSecret).update(v1Source).digest("hex");
       var v1Sig = request.headers.get("x-hubspot-signature");
       if (v1Sig !== v1Expected) {
-        console.error("[hubspot-webhook] Invalid signature");
+        console.error("[hubspot-webhook] Invalid signature — v3 and v1 both failed");
         return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
       }
     }
