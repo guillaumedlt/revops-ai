@@ -23,6 +23,7 @@ function groupByDate(convs: Conversation[]): GroupedConversations {
 export default function ConversationSidebar() {
   var [conversations, setConversations] = useState<Conversation[]>([]);
   var [userEmail, setUserEmail] = useState("");
+  var [isAdmin, setIsAdmin] = useState(false);
   var [searchQuery, setSearchQuery] = useState("");
   var [credits, setCredits] = useState<{ used: number; total: number; remaining: number; plan: string } | null>(null);
   var [alertCount, setAlertCount] = useState(0);
@@ -62,6 +63,7 @@ export default function ConversationSidebar() {
   // Load user, credits, alerts ONCE on mount + refresh credits every 60s
   useEffect(function() {
     var supabase = createClient(); supabase.auth.getUser().then(function({ data }) { setUserEmail(data.user?.email ?? ""); });
+    fetch("/api/admin/stats").then(function(r) { if (r.ok) setIsAdmin(true); }).catch(function() {});
     fetch("/api/credits").then(function(r) { return r.json(); }).then(function(json) { if (json.data) setCredits(json.data); }).catch(function() {});
     fetch("/api/alerts").then(function(r) { return r.json(); }).then(function(json) { if (json.data?.counts) setAlertCount(json.data.counts.total); }).catch(function() {});
     fetchConversations();
@@ -191,7 +193,7 @@ export default function ConversationSidebar() {
             className="w-full flex items-center gap-2.5 px-1 h-[30px] rounded text-[12px] text-[#999] hover:text-[#111] hover:bg-[#FAFAFA] transition-colors">
             <Settings size={14} className="text-[#CCC]" /> Settings
           </button>
-          {userEmail === "guillaume@ceres.agency" && (
+          {isAdmin && (
             <button onClick={function() { router.push("/admin"); }}
               className={"w-full flex items-center gap-2.5 px-1 h-[30px] rounded text-[12px] transition-colors " + (pathname === "/admin" ? "text-[#6366F1] bg-[#EEF2FF]" : "text-[#999] hover:text-[#6366F1] hover:bg-[#EEF2FF]")}>
               <Shield size={14} className={pathname === "/admin" ? "text-[#6366F1]" : "text-[#CCC]"} /> Admin

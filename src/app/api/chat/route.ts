@@ -9,6 +9,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { parseContentBlocks } from "@/lib/ai/parse-blocks";
 import { selectAgents, detectPremiumAgent } from "@/lib/ai/agents";
 import { runMultiAgent } from "@/lib/ai/orchestrator";
+import { decrypt } from "@/lib/crypto";
 
 const ChatSchema = z.object({
   message: z.string().min(1).max(4000),
@@ -40,10 +41,33 @@ function resolveModelId(model: string | undefined, message: string): { provider:
   }
 }
 
+// Simple in-memory rate limiter — 10 requests per minute per tenant
+var rateLimitMap = new Map<string, number[]>();
+function checkRateLimit(tenantId: string): boolean {
+  var now = Date.now();
+  var windowMs = 60000;
+  var maxRequests = 10;
+  var timestamps = rateLimitMap.get(tenantId) || [];
+  timestamps = timestamps.filter(function(t) { return now - t < windowMs; });
+  if (timestamps.length >= maxRequests) return false;
+  timestamps.push(now);
+  rateLimitMap.set(tenantId, timestamps);
+  // Cleanup old tenants every 100 calls
+  if (rateLimitMap.size > 500) {
+    rateLimitMap.forEach(function(v, k) { if (v.every(function(t) { return now - t > windowMs; })) rateLimitMap.delete(k); });
+  }
+  return true;
+}
+
 export async function POST(request: NextRequest) {
   try {
   const auth = getAuthFromHeaders(request);
   if (!auth) return NextResponse.json({ error: "Unauthorized — no auth headers from middleware" }, { status: 401 });
+
+  // Rate limit check
+  if (!checkRateLimit(auth.tenantId)) {
+    return NextResponse.json({ error: "Rate limited — max 10 requests per minute. Please wait." }, { status: 429 });
+  }
 
   let body: any;
   try {
@@ -169,7 +193,7 @@ export async function POST(request: NextRequest) {
         }
 
         if (resolved.provider === "anthropic" && resolved.displayName !== "kairo") {
-          const userKey = llmSettings.anthropicKey;
+          const userKey = llmSettings.anthropicKey ? decrypt(llmSettings.anthropicKey) : null;
           if (!userKey) {
             controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Anthropic API key not configured. Go to Settings > LLM to add your key, or use Kairo AI which is included." })}\n\n`));
             controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
@@ -186,10 +210,10 @@ export async function POST(request: NextRequest) {
           let providerLabel: string;
 
           if (resolved.provider === "openai") {
-            apiKey = llmSettings.openaiKey;
+            apiKey = llmSettings.openaiKey ? decrypt(llmSettings.openaiKey) : null;
             providerLabel = "OpenAI";
           } else {
-            apiKey = llmSettings.googleKey;
+            apiKey = llmSettings.googleKey ? decrypt(llmSettings.googleKey) : null;
             providerLabel = "Google AI";
           }
 
@@ -233,6 +257,7 @@ export async function POST(request: NextRequest) {
             while (oaiLoop) {
               const openaiRes = await fetch("https://api.openai.com/v1/chat/completions", {
                 method: "POST",
+                signal: AbortSignal.timeout(120000),
                 headers: { "Content-Type": "application/json", "Authorization": "Bearer " + apiKey },
                 body: JSON.stringify({
                   model: resolved.modelId,
@@ -531,8 +556,10 @@ export async function POST(request: NextRequest) {
         while (continueLoop) {
           const useTools = retryAttempt === 0 && toolDefs.length > 0;
 
+          const apiAbort = AbortSignal.timeout(120000); // 120s timeout
           const response = await fetch("https://api.anthropic.com/v1/messages", {
             method: "POST",
+            signal: apiAbort,
             headers: {
               "Content-Type": "application/json",
               "x-api-key": anthropicApiKey,
@@ -575,6 +602,7 @@ export async function POST(request: NextRequest) {
           let currentToolUse: { id: string; name: string; inputJson: string } | null = null;
           let stopReason = "";
 
+          try {
           while (true) {
             const { done, value } = await reader.read();
             if (done) break;
@@ -625,6 +653,13 @@ export async function POST(request: NextRequest) {
                 }
               } catch {}
             }
+          }
+
+          } catch (streamErr) {
+            console.error("[chat] Stream read error:", streamErr instanceof Error ? streamErr.message : streamErr);
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Connection to AI interrupted. Please try again." })}\n\n`));
+            controller.close();
+            return;
           }
 
           if (stopReason === "tool_use" && toolUseBlocks.length > 0) {

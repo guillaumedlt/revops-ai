@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getAuthFromHeaders } from "@/lib/api-helpers";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { apiSuccess, apiError } from "@/types/api";
+import { encrypt } from "@/lib/crypto";
 
 export async function GET(request: NextRequest) {
   const auth = getAuthFromHeaders(request);
@@ -47,9 +48,9 @@ export async function PUT(request: NextRequest) {
 
   const newLlm = { ...currentLlm };
   if (body.defaultModel) newLlm.defaultModel = body.defaultModel;
-  if (body.anthropicKey !== undefined) newLlm.anthropicKey = body.anthropicKey || null;
-  if (body.openaiKey !== undefined) newLlm.openaiKey = body.openaiKey || null;
-  if (body.googleKey !== undefined) newLlm.googleKey = body.googleKey || null;
+  if (body.anthropicKey !== undefined) newLlm.anthropicKey = body.anthropicKey ? encrypt(body.anthropicKey) : null;
+  if (body.openaiKey !== undefined) newLlm.openaiKey = body.openaiKey ? encrypt(body.openaiKey) : null;
+  if (body.googleKey !== undefined) newLlm.googleKey = body.googleKey ? encrypt(body.googleKey) : null;
 
   await supabase
     .from("tenants")

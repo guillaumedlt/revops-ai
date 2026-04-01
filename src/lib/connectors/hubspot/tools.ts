@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { decrypt, encrypt } from "@/lib/crypto";
 
 // Helper to get HubSpot access token for a tenant
 async function getHubSpotToken(tenantId: string): Promise<{ accessToken: string; portalId: string } | null> {
@@ -12,11 +13,15 @@ async function getHubSpotToken(tenantId: string): Promise<{ accessToken: string;
 
   if (!data) return null;
 
+  // Decrypt tokens (supports both legacy plaintext and encrypted)
+  var accessToken = decrypt(data.access_token);
+  var refreshToken = decrypt(data.refresh_token);
+
   // Check if token is expired (with 5min buffer)
   const expiresAt = new Date(data.token_expires_at).getTime();
   if (Date.now() > expiresAt - 5 * 60 * 1000) {
     // Refresh the token
-    const refreshed = await refreshHubSpotToken(data.refresh_token, tenantId);
+    const refreshed = await refreshHubSpotToken(refreshToken, tenantId);
     if (!refreshed) {
       // Mark connection as broken
       await supabase.from("hubspot_connections")
@@ -28,7 +33,7 @@ async function getHubSpotToken(tenantId: string): Promise<{ accessToken: string;
     return refreshed;
   }
 
-  return { accessToken: data.access_token, portalId: data.portal_id };
+  return { accessToken: accessToken, portalId: data.portal_id };
 }
 
 async function refreshHubSpotToken(refreshToken: string, tenantId: string): Promise<{ accessToken: string; portalId: string } | null> {
@@ -62,8 +67,8 @@ async function refreshHubSpotToken(refreshToken: string, tenantId: string): Prom
       const { data } = await supabase
         .from("hubspot_connections")
         .update({
-          access_token: tokens.access_token,
-          refresh_token: tokens.refresh_token,
+          access_token: encrypt(tokens.access_token),
+          refresh_token: encrypt(tokens.refresh_token),
           token_expires_at: new Date(Date.now() + tokens.expires_in * 1000).toISOString(),
           sync_status: "idle",
           sync_error: null,

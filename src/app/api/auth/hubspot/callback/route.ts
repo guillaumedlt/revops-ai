@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { exchangeCodeForTokens, getTokenInfo } from "@/lib/hubspot/oauth";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { encrypt } from "@/lib/crypto";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -60,8 +61,8 @@ export async function GET(request: NextRequest) {
       {
         tenant_id: tenantId,
         portal_id: portalId,
-        access_token: tokens.access_token,
-        refresh_token: tokens.refresh_token,
+        access_token: encrypt(tokens.access_token),
+        refresh_token: encrypt(tokens.refresh_token),
         token_expires_at: new Date(Date.now() + tokens.expires_in * 1000).toISOString(),
         scopes: tokenInfo.scopes || [],
         sync_status: "idle",

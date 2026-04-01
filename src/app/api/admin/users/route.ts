@@ -1,14 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAuthFromHeaders } from "@/lib/api-helpers";
 import { createAdminClient } from "@/lib/supabase/admin";
-
-var ADMIN_EMAIL = "guillaume@ceres.agency";
+import { requireAdmin } from "@/lib/admin";
 
 export async function GET(request: NextRequest) {
-  var auth = getAuthFromHeaders(request);
-  if (!auth || auth.email !== ADMIN_EMAIL) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
+  var check = await requireAdmin(request);
+  if (!check.ok) return check.response;
 
   var supabase = createAdminClient();
 
