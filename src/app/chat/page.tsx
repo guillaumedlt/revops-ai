@@ -6,11 +6,18 @@ import { motion } from "framer-motion";
 import { AlertTriangle, TrendingDown, Zap, ChevronRight, X, ArrowRight } from "lucide-react";
 import ChatInputBar from "@/components/chat/ChatInputBar";
 
-var SUGGESTIONS = [
+var SUGGESTIONS_CONNECTED = [
   { label: "Sales Ops", items: ["/pipeline", "/forecast"] },
-  { label: "Performance", items: ["/coaching", "Break down my sales velocity"] },
-  { label: "RevOps", items: ["/audit", "/report Full weekly report"] },
-  { label: "Actions", items: ["/cleanup", "/brief "] },
+  { label: "Performance", items: ["/coaching", "/score"] },
+  { label: "RevOps", items: ["/audit", "/report"] },
+  { label: "Actions", items: ["/cleanup", "/attribution"] },
+];
+
+var SUGGESTIONS_NO_CONNECTOR = [
+  { label: "Learn", items: ["/learn fundamentals", "/learn pipeline"] },
+  { label: "Strategy", items: ["How should I structure my CRM pipeline?", "What's a good lead scoring model?"] },
+  { label: "Templates", items: ["Write me a cold outreach email sequence", "Create a sales playbook for objection handling"] },
+  { label: "Migration", items: ["/migrate", "What are the best practices for CRM data hygiene?"] },
 ];
 
 interface AlertData {
@@ -27,10 +34,14 @@ export default function ChatWelcome() {
   var [sending, setSending] = useState(false);
   var [alerts, setAlerts] = useState<AlertData[]>([]);
   var [alertsExpanded, setAlertsExpanded] = useState(false);
+  var [hasConnector, setHasConnector] = useState(false);
 
   useEffect(function() {
     fetch("/api/alerts").then(function(r) { return r.json(); }).then(function(json) {
       if (json.data?.alerts) setAlerts(json.data.alerts);
+    }).catch(function() {});
+    fetch("/api/connectors/hubspot/status").then(function(r) { return r.json(); }).then(function(json) {
+      if (json.data?.connected) setHasConnector(true);
     }).catch(function() {});
   }, []);
 
@@ -100,7 +111,7 @@ export default function ChatWelcome() {
                   <div className="flex items-center gap-2">
                     <div className={"h-2 w-2 rounded-full " + (criticalAlerts.length > 0 ? "bg-[#EF4444] animate-pulse" : "bg-[#F59E0B]")} />
                     <span className="text-[12px] font-semibold text-[#111]">
-                      {alerts.length} alerte{alerts.length > 1 ? "s" : ""} detectee{alerts.length > 1 ? "s" : ""}
+                      {alerts.length} alert{alerts.length > 1 ? "s" : ""} detected
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -132,7 +143,7 @@ export default function ChatWelcome() {
                         <div className="shrink-0">{icon}</div>
                         <p className="flex-1 text-[12px] text-[#555] truncate">{alert.title}</p>
                         <button
-                          onClick={function() { handleSuggestion("About the alert : " + alert.title + ". Donne-moi les details et un plan d'action."); }}
+                          onClick={function() { handleSuggestion("About the alert: " + alert.title + ". Give me details and an action plan."); }}
                           className="text-[10px] font-medium text-[#6366F1] hover:text-[#4F46E5] shrink-0 flex items-center gap-0.5"
                         >
                           Investigate <ArrowRight size={9} />
@@ -158,7 +169,7 @@ export default function ChatWelcome() {
 
           {/* Suggestions */}
           <div className="grid grid-cols-2 gap-2">
-            {SUGGESTIONS.map(function(cat) {
+            {(hasConnector ? SUGGESTIONS_CONNECTED : SUGGESTIONS_NO_CONNECTOR).map(function(cat) {
               return (
                 <div key={cat.label} className="rounded-lg border border-[#EAEAEA] bg-white overflow-hidden">
                   <div className="px-3 pt-2.5 pb-0.5">
