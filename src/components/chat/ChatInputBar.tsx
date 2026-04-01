@@ -314,7 +314,7 @@ export default function ChatInputBar({
         <div className="relative border border-[#EAEAEA] rounded-lg bg-white focus-within:border-[#111] transition-colors">
           {/* Slash command popover */}
           {showSlash && filteredSlash.length > 0 && (
-            <div ref={slashRef} className="absolute bottom-full left-4 mb-2 w-[300px] max-w-[calc(100vw-2rem)] rounded-lg border border-[#EAEAEA] bg-white shadow-lg z-50 py-1 overflow-hidden">
+            <div ref={slashRef} className="absolute bottom-full left-4 mb-2 w-[300px] max-w-[calc(100vw-2rem)] max-h-[min(320px,40vh)] rounded-lg border border-[#EAEAEA] bg-white shadow-lg z-50 py-1 overflow-y-auto">
               {filteredSlash.map(function(cmd, i) {
                 var Icon = ICON_MAP[cmd.icon] || FileText;
                 return (
