@@ -100,6 +100,8 @@ var SLASH_COMMANDS = [
   { command: "/brief", label: "Meeting Brief", description: "Prepare un brief complet pour un call/meeting", icon: "FileText" },
   // Training
   { command: "/learn", label: "Training", description: "Formation interactive RevOps avec exercices sur vos données", icon: "GraduationCap" },
+  // Migration
+  { command: "/migrate", label: "Migration", description: "Import CSV, migrate from Pipedrive/Salesforce, map fields", icon: "Upload" },
 ];
 
 var ICON_MAP: Record<string, any> = {

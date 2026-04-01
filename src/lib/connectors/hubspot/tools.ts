@@ -1642,4 +1642,330 @@ export const hubspotTools = {
       };
     },
   },
+
+  // ═══ WRITE TOOLS — Create & Import ═══
+
+  hubspot_create_contact: {
+    name: "hubspot_create_contact",
+    description: "Create a new contact in HubSpot. Returns the created contact ID.",
+    parameters: z.object({
+      email: z.string().describe("Contact email (required)"),
+      firstname: z.string().optional().describe("First name"),
+      lastname: z.string().optional().describe("Last name"),
+      phone: z.string().optional().describe("Phone number"),
+      company: z.string().optional().describe("Company name"),
+      jobtitle: z.string().optional().describe("Job title"),
+      lifecyclestage: z.string().optional().describe("Lifecycle stage: subscriber, lead, marketingqualifiedlead, salesqualifiedlead, opportunity, customer, evangelist, other"),
+      extra_properties: z.record(z.string()).optional().describe("Additional custom properties as key-value pairs"),
+    }),
+    execute: async function(args: any, tenantId: string) {
+      var auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      var properties: Record<string, string> = { email: args.email };
+      if (args.firstname) properties.firstname = args.firstname;
+      if (args.lastname) properties.lastname = args.lastname;
+      if (args.phone) properties.phone = args.phone;
+      if (args.company) properties.company = args.company;
+      if (args.jobtitle) properties.jobtitle = args.jobtitle;
+      if (args.lifecyclestage) properties.lifecyclestage = args.lifecyclestage;
+      if (args.extra_properties) Object.assign(properties, args.extra_properties);
+
+      var res = await fetch("https://api.hubapi.com/crm/v3/objects/contacts", {
+        method: "POST",
+        headers: { Authorization: "Bearer " + auth.accessToken, "Content-Type": "application/json" },
+        body: JSON.stringify({ properties }),
+      });
+      var data = await res.json();
+      if (!res.ok) return { error: data.message || "Failed to create contact", status: res.status };
+      return { success: true, contactId: data.id, email: args.email };
+    },
+  },
+
+  hubspot_create_company: {
+    name: "hubspot_create_company",
+    description: "Create a new company in HubSpot. Returns the created company ID.",
+    parameters: z.object({
+      name: z.string().describe("Company name (required)"),
+      domain: z.string().optional().describe("Company website domain (e.g. acme.com)"),
+      industry: z.string().optional().describe("Industry"),
+      numberofemployees: z.string().optional().describe("Number of employees"),
+      annualrevenue: z.string().optional().describe("Annual revenue"),
+      city: z.string().optional().describe("City"),
+      country: z.string().optional().describe("Country"),
+      extra_properties: z.record(z.string()).optional().describe("Additional custom properties"),
+    }),
+    execute: async function(args: any, tenantId: string) {
+      var auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      var properties: Record<string, string> = { name: args.name };
+      if (args.domain) properties.domain = args.domain;
+      if (args.industry) properties.industry = args.industry;
+      if (args.numberofemployees) properties.numberofemployees = args.numberofemployees;
+      if (args.annualrevenue) properties.annualrevenue = args.annualrevenue;
+      if (args.city) properties.city = args.city;
+      if (args.country) properties.country = args.country;
+      if (args.extra_properties) Object.assign(properties, args.extra_properties);
+
+      var res = await fetch("https://api.hubapi.com/crm/v3/objects/companies", {
+        method: "POST",
+        headers: { Authorization: "Bearer " + auth.accessToken, "Content-Type": "application/json" },
+        body: JSON.stringify({ properties }),
+      });
+      var data = await res.json();
+      if (!res.ok) return { error: data.message || "Failed to create company", status: res.status };
+      return { success: true, companyId: data.id, name: args.name };
+    },
+  },
+
+  hubspot_create_deal: {
+    name: "hubspot_create_deal",
+    description: "Create a new deal in HubSpot. Returns the created deal ID.",
+    parameters: z.object({
+      dealname: z.string().describe("Deal name (required)"),
+      amount: z.string().optional().describe("Deal amount"),
+      dealstage: z.string().optional().describe("Deal stage ID"),
+      pipeline: z.string().optional().describe("Pipeline ID (default: default pipeline)"),
+      closedate: z.string().optional().describe("Expected close date (YYYY-MM-DD)"),
+      hubspot_owner_id: z.string().optional().describe("Owner ID"),
+      extra_properties: z.record(z.string()).optional().describe("Additional custom properties"),
+    }),
+    execute: async function(args: any, tenantId: string) {
+      var auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      var properties: Record<string, string> = { dealname: args.dealname };
+      if (args.amount) properties.amount = args.amount;
+      if (args.dealstage) properties.dealstage = args.dealstage;
+      if (args.pipeline) properties.pipeline = args.pipeline;
+      if (args.closedate) properties.closedate = args.closedate;
+      if (args.hubspot_owner_id) properties.hubspot_owner_id = args.hubspot_owner_id;
+      if (args.extra_properties) Object.assign(properties, args.extra_properties);
+
+      var res = await fetch("https://api.hubapi.com/crm/v3/objects/deals", {
+        method: "POST",
+        headers: { Authorization: "Bearer " + auth.accessToken, "Content-Type": "application/json" },
+        body: JSON.stringify({ properties }),
+      });
+      var data = await res.json();
+      if (!res.ok) return { error: data.message || "Failed to create deal", status: res.status };
+      return { success: true, dealId: data.id, dealname: args.dealname };
+    },
+  },
+
+  hubspot_create_property: {
+    name: "hubspot_create_property",
+    description: "Create a custom property on a HubSpot object type. Use this during migration to add custom fields that don't exist yet.",
+    parameters: z.object({
+      objectType: z.string().describe("Object type: contacts, companies, or deals"),
+      name: z.string().describe("Internal property name (lowercase, underscores, no spaces, e.g. migration_source)"),
+      label: z.string().describe("Display label (e.g. 'Migration Source')"),
+      type: z.string().describe("Property type: string, number, date, datetime, enumeration, bool"),
+      fieldType: z.string().describe("Field type: text, textarea, number, date, select, checkbox, radio, booleancheckbox"),
+      groupName: z.string().optional().describe("Property group (default: contactinformation, dealinformation, or companyinformation)"),
+      description: z.string().optional().describe("Description of the property"),
+      options: z.array(z.object({ label: z.string(), value: z.string() })).optional().describe("Options for enumeration/select fields"),
+    }),
+    execute: async function(args: any, tenantId: string) {
+      var auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      var defaultGroups: Record<string, string> = { contacts: "contactinformation", companies: "companyinformation", deals: "dealinformation" };
+      var body: any = {
+        name: args.name,
+        label: args.label,
+        type: args.type,
+        fieldType: args.fieldType,
+        groupName: args.groupName || defaultGroups[args.objectType] || "contactinformation",
+      };
+      if (args.description) body.description = args.description;
+      if (args.options) body.options = args.options;
+
+      var res = await fetch("https://api.hubapi.com/crm/v3/properties/" + args.objectType, {
+        method: "POST",
+        headers: { Authorization: "Bearer " + auth.accessToken, "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      var data = await res.json();
+      if (!res.ok) return { error: data.message || "Failed to create property", status: res.status };
+      return { success: true, propertyName: data.name, label: data.label, objectType: args.objectType };
+    },
+  },
+
+  hubspot_create_association: {
+    name: "hubspot_create_association",
+    description: "Create an association between two HubSpot objects (e.g. link a contact to a company, or a deal to a contact).",
+    parameters: z.object({
+      fromObjectType: z.string().describe("Source object type: contacts, companies, or deals"),
+      fromObjectId: z.string().describe("Source object ID"),
+      toObjectType: z.string().describe("Target object type: contacts, companies, or deals"),
+      toObjectId: z.string().describe("Target object ID"),
+      associationType: z.string().optional().describe("Association type (auto-detected if omitted, e.g. contact_to_company)"),
+    }),
+    execute: async function(args: any, tenantId: string) {
+      var auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      // Auto-detect association type
+      var typeMap: Record<string, string> = {
+        "contacts_companies": "contact_to_company",
+        "companies_contacts": "company_to_contact",
+        "deals_contacts": "deal_to_contact",
+        "contacts_deals": "contact_to_deal",
+        "deals_companies": "deal_to_company",
+        "companies_deals": "company_to_deal",
+      };
+      var key = args.fromObjectType + "_" + args.toObjectType;
+      var assocType = args.associationType || typeMap[key] || key;
+
+      var res = await fetch(
+        "https://api.hubapi.com/crm/v3/objects/" + args.fromObjectType + "/" + args.fromObjectId + "/associations/" + args.toObjectType + "/" + args.toObjectId + "/" + assocType,
+        {
+          method: "PUT",
+          headers: { Authorization: "Bearer " + auth.accessToken, "Content-Type": "application/json" },
+        }
+      );
+      if (!res.ok) {
+        var errData = await res.json().catch(function() { return {}; });
+        return { error: (errData as any).message || "Failed to create association", status: res.status };
+      }
+      return { success: true, from: args.fromObjectType + ":" + args.fromObjectId, to: args.toObjectType + ":" + args.toObjectId };
+    },
+  },
+
+  hubspot_bulk_create: {
+    name: "hubspot_bulk_create",
+    description: "Bulk create up to 100 objects at once (contacts, companies, or deals). Use this for CSV imports and migrations. More efficient than creating one by one.",
+    parameters: z.object({
+      objectType: z.string().describe("Object type: contacts, companies, or deals"),
+      records: z.array(z.record(z.string())).describe("Array of property objects. Each object is a key-value map of property names to values. Max 100 records per batch."),
+    }),
+    execute: async function(args: any, tenantId: string) {
+      var auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      var records = args.records.slice(0, 100);
+      var inputs = records.map(function(r: Record<string, string>) { return { properties: r }; });
+
+      var res = await fetch("https://api.hubapi.com/crm/v3/objects/" + args.objectType + "/batch/create", {
+        method: "POST",
+        headers: { Authorization: "Bearer " + auth.accessToken, "Content-Type": "application/json" },
+        body: JSON.stringify({ inputs }),
+      });
+      var data = await res.json();
+      if (!res.ok) return { error: data.message || "Bulk create failed", status: res.status, details: data.errors?.slice(0, 5) };
+
+      var created = data.results?.length || 0;
+      var errors = data.errors?.length || 0;
+      return {
+        success: true,
+        objectType: args.objectType,
+        created: created,
+        errors: errors,
+        errorDetails: data.errors?.slice(0, 5),
+        ids: (data.results || []).slice(0, 10).map(function(r: any) { return r.id; }),
+      };
+    },
+  },
+
+  hubspot_update_contact: {
+    name: "hubspot_update_contact",
+    description: "Update properties on an existing contact.",
+    parameters: z.object({
+      contactId: z.string().describe("Contact ID to update"),
+      properties: z.record(z.string()).describe("Properties to update as key-value pairs"),
+    }),
+    execute: async function(args: any, tenantId: string) {
+      var auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      var res = await fetch("https://api.hubapi.com/crm/v3/objects/contacts/" + args.contactId, {
+        method: "PATCH",
+        headers: { Authorization: "Bearer " + auth.accessToken, "Content-Type": "application/json" },
+        body: JSON.stringify({ properties: args.properties }),
+      });
+      var data = await res.json();
+      if (!res.ok) return { error: data.message || "Failed to update contact", status: res.status };
+      return { success: true, contactId: args.contactId };
+    },
+  },
+
+  hubspot_update_company: {
+    name: "hubspot_update_company",
+    description: "Update properties on an existing company.",
+    parameters: z.object({
+      companyId: z.string().describe("Company ID to update"),
+      properties: z.record(z.string()).describe("Properties to update as key-value pairs"),
+    }),
+    execute: async function(args: any, tenantId: string) {
+      var auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      var res = await fetch("https://api.hubapi.com/crm/v3/objects/companies/" + args.companyId, {
+        method: "PATCH",
+        headers: { Authorization: "Bearer " + auth.accessToken, "Content-Type": "application/json" },
+        body: JSON.stringify({ properties: args.properties }),
+      });
+      var data = await res.json();
+      if (!res.ok) return { error: data.message || "Failed to update company", status: res.status };
+      return { success: true, companyId: args.companyId };
+    },
+  },
+
+  hubspot_delete_object: {
+    name: "hubspot_delete_object",
+    description: "Delete a HubSpot object (contact, company, or deal). Use carefully — this moves the object to the recycle bin.",
+    parameters: z.object({
+      objectType: z.string().describe("Object type: contacts, companies, or deals"),
+      objectId: z.string().describe("Object ID to delete"),
+    }),
+    execute: async function(args: any, tenantId: string) {
+      var auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      var res = await fetch("https://api.hubapi.com/crm/v3/objects/" + args.objectType + "/" + args.objectId, {
+        method: "DELETE",
+        headers: { Authorization: "Bearer " + auth.accessToken },
+      });
+      if (!res.ok) {
+        var errData = await res.json().catch(function() { return {}; });
+        return { error: (errData as any).message || "Failed to delete object", status: res.status };
+      }
+      return { success: true, deleted: args.objectType + ":" + args.objectId };
+    },
+  },
+
+  hubspot_get_properties: {
+    name: "hubspot_get_properties",
+    description: "List all properties (fields) for a HubSpot object type. Useful for mapping during migration.",
+    parameters: z.object({
+      objectType: z.string().describe("Object type: contacts, companies, or deals"),
+    }),
+    execute: async function(args: any, tenantId: string) {
+      var auth = await getHubSpotToken(tenantId);
+      if (!auth) return { error: "HubSpot not connected" };
+
+      var res = await fetch("https://api.hubapi.com/crm/v3/properties/" + args.objectType, {
+        headers: { Authorization: "Bearer " + auth.accessToken },
+      });
+      var data = await res.json();
+      if (!res.ok) return { error: data.message || "Failed to get properties" };
+
+      var props = (data.results || []).map(function(p: any) {
+        return {
+          name: p.name,
+          label: p.label,
+          type: p.type,
+          fieldType: p.fieldType,
+          groupName: p.groupName,
+          hasUniqueValue: p.hasUniqueValue,
+          calculated: p.calculated,
+          options: p.options?.length > 0 ? p.options.slice(0, 20).map(function(o: any) { return { label: o.label, value: o.value }; }) : undefined,
+        };
+      });
+
+      return { objectType: args.objectType, total: props.length, properties: props };
+    },
+  },
 };

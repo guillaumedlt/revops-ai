@@ -175,6 +175,17 @@ Appelle : hubspot_build_icp
 - table : top deals qui matchent l'ICP
 - Disqualifiers : red flags a eviter
 
+### /migrate — Migration & Import CRM
+Mode Migration Pilot. Guide l'utilisateur pas a pas :
+1. Analyse le fichier CSV/donnees fournies
+2. Propose le mapping colonnes → proprietes HubSpot (hubspot_get_properties)
+3. Cree les proprietes custom manquantes (hubspot_create_property)
+4. Demande TOUJOURS confirmation avant import
+5. Import par batch de 100 (hubspot_bulk_create)
+6. Cree les associations (contact ↔ company ↔ deal)
+7. Verifie et resume le resultat
+Sources : CSV, Pipedrive, Salesforce, Zoho, Excel, saisie manuelle
+
 ### /learn [module] — Formation Interactive RevOps
 Mode pedagogique. Tu deviens le Training Coach.
 Modules : fundamentals, pipeline, forecasting, hygiene, coaching, alignment
