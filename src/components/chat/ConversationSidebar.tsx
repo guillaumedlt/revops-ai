@@ -129,7 +129,6 @@ export default function ConversationSidebar() {
         {navItem("Dashboards", LayoutDashboard, "/dashboards", pathname.startsWith("/dashboards") && pathname !== "/dashboards/icp")}
         {navItem("Actions", CheckSquare, "/actions", pathname === "/actions")}
         {navItem("Monitoring", Bell, "/alerts", pathname === "/alerts", alertCount)}
-        {navItem("Training", GraduationCap, "/training", pathname === "/training")}
         {navItem("ICP", Target, "/dashboards/icp", pathname === "/dashboards/icp")}
       </div>
 
