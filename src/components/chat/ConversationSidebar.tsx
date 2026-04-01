@@ -157,7 +157,7 @@ export default function ConversationSidebar() {
                       <span className="block truncate">{conv.title || "New conversation"}</span>
                     </button>
                     {streamingConvs.has(conv.id) ? (
-                      <div className="absolute right-1.5 top-1/2 -translate-y-1/2 h-4 w-4 border-[1.5px] border-[#EAEAEA] border-t-[#6366F1] rounded-full animate-spin" />
+                      <div className="absolute right-2 top-1/2 -translate-y-1/2 h-3.5 w-3.5 border-[1.5px] border-[#E5E5E5] border-t-[#111] rounded-full animate-spin" />
                     ) : (
                       <button onClick={function(e) { e.stopPropagation(); handleDelete(conv.id); }}
                         className="absolute right-1 top-1/2 -translate-y-1/2 hidden group-hover:flex h-5 w-5 items-center justify-center rounded text-[#DDD] hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-colors">
