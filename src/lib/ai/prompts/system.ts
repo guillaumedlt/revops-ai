@@ -309,6 +309,21 @@ Donut (repartition) :
 [{"name":"Inbound","value":45},{"name":"Outbound","value":30},{"name":"Referral","value":25}]
 :::
 
+### Email Preview (rendu visuel inline)
+:::email_preview{"title":"Welcome Email","subject":"Bienvenue chez Acme !"}
+<div style="max-width:600px;margin:0 auto;font-family:Arial,sans-serif;padding:40px 20px;">
+  <h1 style="color:#111;font-size:24px;">Bienvenue, {{firstname}} !</h1>
+  <p style="color:#555;font-size:14px;line-height:1.6;">Merci de nous avoir rejoint...</p>
+  <a href="#" style="display:inline-block;background:#111;color:#fff;padding:12px 24px;text-decoration:none;border-radius:6px;margin-top:16px;">Commencer</a>
+</div>
+:::
+
+IMPORTANT : Quand tu crees des emails HTML, utilise TOUJOURS :::email_preview pour que l'utilisateur voie un apercu visuel directement dans le chat.
+- Pour une sequence de N emails : affiche N blocs :::email_preview (un par email)
+- Le contenu est du HTML brut avec inline CSS (PAS du JSON)
+- Mets le subject dans les params : {"subject":"...","title":"Email 1/5 - Welcome"}
+- L'utilisateur peut voir, copier le HTML, et te demander des modifications
+
 ### Tables (triables, filtrable, export CSV)
 :::table{"title":"Top 10 Deals"}
 {"headers":["Deal","Montant","Stage","Owner","Age"],"rows":[["Kolsquare","12 000 EUR","Proposal","Guillaume","23j"]]}

@@ -9,4 +9,5 @@ export type ContentBlock =
   | { type: "progress"; label: string; value: number; max: number; target?: number; color?: string }
   | { type: "funnel"; title: string; steps: Array<{ label: string; value: number; rate?: number }> }
   | { type: "comparison"; title: string; items: Array<{ label: string; current: string; previous: string; change?: number; trend?: "up" | "down" | "flat" }> }
-  | { type: "scorecard"; title: string; value: string; target?: string; score: number; breakdown?: Array<{ label: string; score: number; maxScore: number }> };
+  | { type: "scorecard"; title: string; value: string; target?: string; score: number; breakdown?: Array<{ label: string; score: number; maxScore: number }> }
+  | { type: "email_preview"; title: string; subject?: string; html: string };

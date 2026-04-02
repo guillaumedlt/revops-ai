@@ -11,6 +11,91 @@ import FunnelBlock from "./FunnelBlock";
 import ComparisonBlock from "./ComparisonBlock";
 import ScorecardBlock from "./ScorecardBlock";
 import AddToDashboard from "../AddToDashboard";
+import { useState, useRef, useEffect } from "react";
+import { Mail, Copy, Check, ChevronDown, ChevronUp, Code } from "lucide-react";
+
+function EmailPreviewBlock({ title, subject, html }: { title: string; subject?: string; html: string }) {
+  var [showCode, setShowCode] = useState(false);
+  var [copied, setCopied] = useState(false);
+  var [collapsed, setCollapsed] = useState(false);
+  var iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(function() {
+    if (iframeRef.current) {
+      var doc = iframeRef.current.contentDocument;
+      if (doc) {
+        doc.open();
+        doc.write('<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;}</style></head><body>' + html + '</body></html>');
+        doc.close();
+        // Auto-resize iframe to content height
+        setTimeout(function() {
+          if (iframeRef.current && iframeRef.current.contentDocument) {
+            var h = iframeRef.current.contentDocument.body.scrollHeight;
+            iframeRef.current.style.height = Math.min(h + 20, 600) + "px";
+          }
+        }, 100);
+      }
+    }
+  }, [html, collapsed]);
+
+  function copyHtml() {
+    navigator.clipboard.writeText(html);
+    setCopied(true);
+    setTimeout(function() { setCopied(false); }, 2000);
+  }
+
+  return (
+    <div className="rounded-xl border border-[#EAEAEA] bg-white overflow-hidden">
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-2.5 bg-[#FAFAFA] border-b border-[#F0F0F0]">
+        <div className="flex items-center gap-2 min-w-0">
+          <Mail size={14} className="text-[#6366F1] shrink-0" />
+          <span className="text-[13px] font-semibold text-[#111] truncate">{title}</span>
+        </div>
+        <div className="flex items-center gap-1.5 shrink-0">
+          <button onClick={function() { setShowCode(!showCode); }} className={"h-7 px-2 rounded-md text-[11px] font-medium flex items-center gap-1 transition-colors " + (showCode ? "bg-[#111] text-white" : "text-[#999] hover:text-[#111] hover:bg-[#F0F0F0]")}>
+            <Code size={11} /> {showCode ? "Preview" : "HTML"}
+          </button>
+          <button onClick={copyHtml} className="h-7 px-2 rounded-md text-[11px] font-medium text-[#999] hover:text-[#111] hover:bg-[#F0F0F0] flex items-center gap-1 transition-colors">
+            {copied ? <><Check size={11} className="text-[#22C55E]" /> Copied</> : <><Copy size={11} /> Copy HTML</>}
+          </button>
+          <button onClick={function() { setCollapsed(!collapsed); }} className="h-7 w-7 rounded-md text-[#CCC] hover:text-[#111] hover:bg-[#F0F0F0] flex items-center justify-center transition-colors">
+            {collapsed ? <ChevronDown size={13} /> : <ChevronUp size={13} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Subject line */}
+      {subject && !collapsed && (
+        <div className="px-4 py-2 border-b border-[#F5F5F5] bg-[#FEFEFE]">
+          <span className="text-[10px] uppercase tracking-wider text-[#BBB] font-semibold">Subject: </span>
+          <span className="text-[12px] text-[#555]">{subject}</span>
+        </div>
+      )}
+
+      {/* Content */}
+      {!collapsed && (
+        showCode ? (
+          <div className="p-4 bg-[#1E1E1E] overflow-x-auto">
+            <pre className="text-[11px] text-[#D4D4D4] font-mono whitespace-pre-wrap break-all leading-relaxed">{html}</pre>
+          </div>
+        ) : (
+          <div className="bg-[#F5F5F5] p-4">
+            <div className="max-w-[600px] mx-auto bg-white rounded-lg shadow-sm overflow-hidden border border-[#EAEAEA]">
+              <iframe
+                ref={iframeRef}
+                sandbox="allow-same-origin"
+                className="w-full border-0"
+                style={{ height: "300px", minHeight: "200px" }}
+                title={title}
+              />
+            </div>
+          </div>
+        )
+      )}
+    </div>
+  );
+}
 
 function BlockWrapper({ block, children }: { block: ContentBlock; children: React.ReactNode }) {
   if (block.type === "text" || block.type === "alert" || block.type === "report") {
@@ -96,6 +181,9 @@ export default function BlockRenderer({ blocks }: { blocks: ContentBlock[] }) {
             break;
           case "scorecard":
             content = <ScorecardBlock title={block.title} value={block.value} target={block.target} score={block.score} breakdown={block.breakdown} />;
+            break;
+          case "email_preview":
+            content = <EmailPreviewBlock title={block.title} subject={block.subject} html={block.html} />;
             break;
           default:
             return null;

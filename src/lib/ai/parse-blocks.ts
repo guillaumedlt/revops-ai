@@ -1,6 +1,6 @@
 import type { ContentBlock } from "@/types/chat-blocks";
 
-var BLOCK_TYPES = "kpi_grid|kpi|chart|table|alert|progress|funnel|comparison|scorecard";
+var BLOCK_TYPES = "kpi_grid|kpi|chart|table|alert|progress|funnel|comparison|scorecard|email_preview";
 
 function parseInnerBlocks(text: string): ContentBlock[] {
   var blocks: ContentBlock[] = [];
@@ -99,6 +99,14 @@ function parseInnerBlocks(text: string): ContentBlock[] {
           score: scoreData.score || 0,
           breakdown: scoreData.breakdown,
         });
+      } else if (blockType === "email_preview") {
+        // Content is raw HTML — no JSON parsing
+        blocks.push({
+          type: "email_preview",
+          title: params.title || params.subject || "Email Preview",
+          subject: params.subject || "",
+          html: content,
+        } as ContentBlock);
       }
     } catch {
       blocks.push({ type: "text", text: content });
