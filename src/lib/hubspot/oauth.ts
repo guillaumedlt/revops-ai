@@ -1,6 +1,7 @@
 import { randomBytes } from "crypto";
 
 const HUBSPOT_SCOPES = [
+  // Read
   "crm.objects.deals.read",
   "crm.objects.contacts.read",
   "crm.objects.companies.read",
@@ -12,6 +13,11 @@ const HUBSPOT_SCOPES = [
   "crm.objects.goals.read",
   "crm.objects.custom.read",
   "crm.objects.feedback_submissions.read",
+  // Write
+  "crm.objects.deals.write",
+  "crm.objects.contacts.write",
+  "crm.objects.companies.write",
+  "crm.schemas.contacts.write",
 ];
 
 export function generateState(): string {
