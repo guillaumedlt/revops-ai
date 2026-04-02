@@ -29,15 +29,17 @@ export default function ConversationSidebar() {
   var [alertCount, setAlertCount] = useState(0);
   var [streamingConvs, setStreamingConvs] = useState<Set<string>>(new Set());
 
-  // Poll streaming status every 500ms
+  // Poll streaming status every 2s — only update state if IDs actually changed
   useEffect(function() {
     var interval = setInterval(function() {
       var ids = getStreamingIds();
       setStreamingConvs(function(prev) {
-        if (ids.length === 0 && prev.size === 0) return prev;
+        var prevArr = Array.from(prev).sort().join(",");
+        var newArr = ids.sort().join(",");
+        if (prevArr === newArr) return prev; // Same set — no re-render
         return new Set(ids);
       });
-    }, 500);
+    }, 2000);
     return function() { clearInterval(interval); };
   }, []);
   var [userMenuOpen, setUserMenuOpen] = useState(false);
