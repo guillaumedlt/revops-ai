@@ -108,8 +108,75 @@ function parseInnerBlocks(text: string): ContentBlock[] {
   }
 
   var remaining = text.slice(lastIndex).trim();
-  if (remaining) blocks.push({ type: "text", text: remaining });
+  if (remaining) {
+    // Convert markdown tables to table blocks
+    var converted = convertMarkdownTables(remaining);
+    blocks.push(...converted);
+  }
 
+  return blocks;
+}
+
+// Convert markdown tables (| col | col |) to structured table blocks
+function convertMarkdownTables(text: string): ContentBlock[] {
+  var blocks: ContentBlock[] = [];
+  var lines = text.split("\n");
+  var i = 0;
+
+  while (i < lines.length) {
+    // Detect markdown table: line starts with |
+    if (lines[i].trim().startsWith("|") && i + 1 < lines.length && lines[i + 1].trim().match(/^\|[-\s|:]+\|$/)) {
+      // Found a table — collect all rows
+      var headerLine = lines[i].trim();
+      var headers = headerLine.split("|").filter(function(c) { return c.trim(); }).map(function(c) { return c.trim(); });
+
+      // Skip separator line
+      var rowStart = i + 2;
+      var rows: string[][] = [];
+      while (rowStart < lines.length && lines[rowStart].trim().startsWith("|")) {
+        var rowCells = lines[rowStart].trim().split("|").filter(function(c) { return c.trim(); }).map(function(c) { return c.trim(); });
+        if (rowCells.length > 0) rows.push(rowCells);
+        rowStart++;
+      }
+
+      // Check if there's a title in the line before
+      var title = "";
+      if (blocks.length > 0 && blocks[blocks.length - 1].type === "text") {
+        var lastText = (blocks[blocks.length - 1] as any).text as string;
+        var lastLines = lastText.split("\n");
+        var candidate = lastLines[lastLines.length - 1].trim();
+        if (candidate && (candidate.startsWith("**") || candidate.startsWith("##") || candidate.startsWith("✅") || candidate.startsWith("⚠"))) {
+          title = candidate.replace(/^[#*✅⚠️🔴🟠🟡🟢\s]+/, "").replace(/\*+$/g, "").trim();
+          lastLines.pop();
+          var newText = lastLines.join("\n").trim();
+          if (newText) { (blocks[blocks.length - 1] as any).text = newText; }
+          else { blocks.pop(); }
+        }
+      }
+
+      if (headers.length > 0 && rows.length > 0) {
+        blocks.push({
+          type: "table",
+          title: title,
+          headers: headers,
+          rows: rows,
+          sortable: true,
+          searchable: rows.length > 5,
+          pageSize: 10,
+        } as ContentBlock);
+      }
+      i = rowStart;
+    } else {
+      // Not a table line — accumulate text
+      var textLines: string[] = [];
+      while (i < lines.length && !(lines[i].trim().startsWith("|") && i + 1 < lines.length && lines[i + 1]?.trim().match(/^\|[-\s|:]+\|$/))) {
+        textLines.push(lines[i]);
+        i++;
+      }
+      var t = textLines.join("\n").trim();
+      if (t) blocks.push({ type: "text", text: t });
+    }
+  }
   return blocks;
 }
 
