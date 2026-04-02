@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Plus, Check, Clock, Circle, X, Sparkles, GripVertical, Trash2, Calendar } from "lucide-react";
+import { Plus, Check, Clock, Circle, X, Sparkles, GripVertical, Trash2, Calendar, MessageSquare } from "lucide-react";
 
 interface Action {
   id: string;
@@ -284,6 +284,18 @@ export default function ActionsPage() {
                           <p className={"flex-1 text-[13px] font-medium leading-snug " + (col.id === "done" ? "line-through text-[#BBB]" : "text-[#111]")}>
                             {action.title}
                           </p>
+                          <button
+                            onClick={function(e) {
+                              e.stopPropagation();
+                              var prompt = "Help me execute this action: \"" + action.title + "\"" + (action.domain ? " (domain: " + action.domain + ")" : "") + ". Give me a step-by-step plan, then ask for my confirmation before executing anything in HubSpot.";
+                              sessionStorage.setItem("pending_message", JSON.stringify({ message: prompt, model: "kairo" }));
+                              fetch("/api/conversations", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ title: action.title }) }).then(function(r) { return r.json(); }).then(function(json) { if (json.data?.id) router.push("/chat/" + json.data.id); });
+                            }}
+                            className="shrink-0 opacity-0 group-hover:opacity-100 h-5 w-5 flex items-center justify-center rounded text-[#D4D4D4] hover:text-[#6366F1] hover:bg-[#EEF2FF] transition-all"
+                            title="Ask Kairo for help"
+                          >
+                            <MessageSquare size={10} />
+                          </button>
                           <button
                             onClick={function(e) { e.stopPropagation(); handleDelete(action.id); }}
                             className="shrink-0 opacity-0 group-hover:opacity-100 h-5 w-5 flex items-center justify-center rounded text-[#D4D4D4] hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-all"
