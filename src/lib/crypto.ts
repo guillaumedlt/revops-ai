@@ -26,13 +26,20 @@ export function decrypt(ciphertext: string): string {
     // Not encrypted (legacy plaintext) — return as-is
     return ciphertext;
   }
-  var key = getKey();
-  var combined = Buffer.from(ciphertext.slice(4), "base64");
-  var iv = combined.subarray(0, 12);
-  var authTag = combined.subarray(12, 28);
-  var encrypted = combined.subarray(28);
-  var decipher = createDecipheriv("aes-256-gcm", key, iv);
-  decipher.setAuthTag(authTag);
-  var decrypted = Buffer.concat([decipher.update(encrypted), decipher.final()]);
-  return decrypted.toString("utf8");
+  try {
+    var key = getKey();
+    var combined = Buffer.from(ciphertext.slice(4), "base64");
+    var iv = combined.subarray(0, 12);
+    var authTag = combined.subarray(12, 28);
+    var encrypted = combined.subarray(28);
+    var decipher = createDecipheriv("aes-256-gcm", key, iv);
+    decipher.setAuthTag(authTag);
+    var decrypted = Buffer.concat([decipher.update(encrypted), decipher.final()]);
+    return decrypted.toString("utf8");
+  } catch {
+    // Decryption failed — key may have changed. Log and return empty.
+    // User will need to reconnect the service to re-encrypt with current key.
+    console.error("[crypto] Decryption failed — key mismatch. Reconnection needed.");
+    return "";
+  }
 }

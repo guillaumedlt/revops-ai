@@ -17,6 +17,14 @@ async function getHubSpotToken(tenantId: string): Promise<{ accessToken: string;
   var accessToken = decrypt(data.access_token);
   var refreshToken = decrypt(data.refresh_token);
 
+  // If decryption failed (key mismatch), mark connection as needing reconnect
+  if (!accessToken || !refreshToken) {
+    await supabase.from("hubspot_connections")
+      .update({ sync_status: "error", sync_error: "Encryption key changed — please reconnect HubSpot in Settings" })
+      .eq("tenant_id", tenantId);
+    return null;
+  }
+
   // Check if token is expired (with 5min buffer)
   const expiresAt = new Date(data.token_expires_at).getTime();
   if (Date.now() > expiresAt - 5 * 60 * 1000) {
