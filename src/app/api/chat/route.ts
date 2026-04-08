@@ -10,6 +10,7 @@ import { parseContentBlocks } from "@/lib/ai/parse-blocks";
 import { selectAgents, detectPremiumAgent } from "@/lib/ai/agents";
 import { runMultiAgent } from "@/lib/ai/orchestrator";
 import { decrypt } from "@/lib/crypto";
+import { getErrorInfo, detectErrorCode } from "@/lib/errors";
 
 const ChatSchema = z.object({
   message: z.string().min(1).max(4000),
@@ -41,6 +42,20 @@ function resolveModelId(model: string | undefined, message: string): { provider:
   }
 }
 
+// Helper to send a structured error event via SSE
+function sendError(controller: ReadableStreamDefaultController, encoder: TextEncoder, code: any, context?: any) {
+  var info = getErrorInfo(code, context);
+  controller.enqueue(encoder.encode(`data: ${JSON.stringify({
+    type: "error",
+    errorCode: info.code,
+    error: info.message,
+    errorTitle: info.title,
+    action: info.action,
+    actionUrl: info.actionUrl,
+  })}\n\n`));
+  controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
+}
+
 // Simple in-memory rate limiter — 10 requests per minute per tenant
 var rateLimitMap = new Map<string, number[]>();
 function checkRateLimit(tenantId: string): boolean {
@@ -66,7 +81,8 @@ export async function POST(request: NextRequest) {
 
   // Rate limit check
   if (!checkRateLimit(auth.tenantId)) {
-    return NextResponse.json({ error: "Rate limited — max 10 requests per minute. Please wait." }, { status: 429 });
+    var rlInfo = getErrorInfo("RATE_LIMITED");
+    return NextResponse.json({ error: rlInfo.message, errorCode: rlInfo.code, errorTitle: rlInfo.title }, { status: 429 });
   }
 
   let body: any;
@@ -101,8 +117,13 @@ export async function POST(request: NextRequest) {
 
   const credits = await checkCredits(auth.tenantId, creditAction);
   if (!credits.allowed) {
+    var info = getErrorInfo("INSUFFICIENT_CREDITS", { remaining: credits.remaining, cost: credits.cost });
     return NextResponse.json({
-      error: "Plus de credits ce mois-ci (" + credits.remaining + " restants, " + credits.cost + " requis). Passez au plan Pro pour continuer.",
+      error: info.message,
+      errorCode: info.code,
+      errorTitle: info.title,
+      action: info.action,
+      actionUrl: info.actionUrl,
       creditsRemaining: credits.remaining,
       creditCost: credits.cost,
     }, { status: 402 });
@@ -186,8 +207,7 @@ export async function POST(request: NextRequest) {
         // Resolve API key: Kairo AI uses server key, everything else needs BYOK
         let anthropicApiKey = process.env.ANTHROPIC_API_KEY || "";
         if (!anthropicApiKey && (resolved.provider === "anthropic" || resolved.displayName === "kairo")) {
-          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Anthropic API key not configured on server. Contact support." })}\n\n`));
-          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
+          sendError(controller, encoder, "ANTHROPIC_KEY_MISSING");
           controller.close();
           return;
         }
@@ -195,8 +215,7 @@ export async function POST(request: NextRequest) {
         if (resolved.provider === "anthropic" && resolved.displayName !== "kairo") {
           const userKey = llmSettings.anthropicKey ? decrypt(llmSettings.anthropicKey) : null;
           if (!userKey) {
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Anthropic API key not configured. Go to Settings > LLM to add your key, or use Kairo AI which is included." })}\n\n`));
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
+            sendError(controller, encoder, "ANTHROPIC_KEY_MISSING");
             controller.close();
             return;
           }
@@ -218,9 +237,7 @@ export async function POST(request: NextRequest) {
           }
 
           if (!apiKey) {
-            const errorText = providerLabel + " API key not configured. Go to Settings > LLM to add your key.";
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: errorText })}\n\n`));
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
+            sendError(controller, encoder, resolved.provider === "openai" ? "OPENAI_KEY_MISSING" : "GOOGLE_KEY_MISSING");
             controller.close();
             return;
           }
@@ -270,8 +287,8 @@ export async function POST(request: NextRequest) {
 
               if (!openaiRes.ok || !openaiRes.body) {
                 const errBody = await openaiRes.text().catch(() => "");
-                controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "OpenAI error (" + openaiRes.status + "): " + errBody.slice(0, 200) })}\n\n`));
-                controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
+                console.error("[chat][openai]", openaiRes.status, errBody.slice(0, 300));
+                sendError(controller, encoder, "OPENAI_API_ERROR", { provider: "OpenAI", statusCode: openaiRes.status });
                 controller.close();
                 return;
               }
@@ -373,8 +390,8 @@ export async function POST(request: NextRequest) {
 
               if (!geminiRes.ok) {
                 const errBody = await geminiRes.text().catch(() => "");
-                controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Gemini error (" + geminiRes.status + "): " + errBody.slice(0, 200) })}\n\n`));
-                controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "done" })}\n\n`));
+                console.error("[chat][gemini]", geminiRes.status, errBody.slice(0, 300));
+                sendError(controller, encoder, "GOOGLE_API_ERROR", { provider: "Gemini", statusCode: geminiRes.status });
                 controller.close();
                 return;
               }
@@ -586,11 +603,7 @@ export async function POST(request: NextRequest) {
               continue;
             }
 
-            const friendlyError = response.status >= 500
-              ? "The AI service is temporarily unavailable. Please try again."
-              : "API error (" + response.status + ")";
-
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: friendlyError, statusCode: response.status })}\n\n`));
+            sendError(controller, encoder, "ANTHROPIC_API_ERROR", { provider: "Claude", statusCode: response.status });
             break;
           }
 
@@ -657,7 +670,7 @@ export async function POST(request: NextRequest) {
 
           } catch (streamErr) {
             console.error("[chat] Stream read error:", streamErr instanceof Error ? streamErr.message : streamErr);
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Connection to AI interrupted. Please try again." })}\n\n`));
+            sendError(controller, encoder, "STREAM_INTERRUPTED");
             controller.close();
             return;
           }
@@ -723,7 +736,8 @@ export async function POST(request: NextRequest) {
         controller.close();
       } catch (error) {
         console.error("[chat] Error:", error instanceof Error ? error.message : error);
-        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", error: "An unexpected error occurred." })}\n\n`));
+        var errCode = detectErrorCode(error);
+        sendError(controller, encoder, errCode);
         controller.close();
       }
     },

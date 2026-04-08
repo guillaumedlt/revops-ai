@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { RotateCcw, LayoutDashboard, Plus, Check, Copy, BarChart3, Zap, CheckSquare, Download } from "lucide-react";
+import { RotateCcw, LayoutDashboard, Plus, Check, Copy, BarChart3, Zap, CheckSquare, Download, AlertTriangle } from "lucide-react";
 import BlockRenderer from "./blocks/BlockRenderer";
 import TextBlock from "./blocks/TextBlock";
 import type { ContentBlock } from "@/types/chat-blocks";
@@ -19,7 +19,7 @@ interface Props {
   streamingText: string;
   streamingBlocks?: ContentBlock[] | null;
   activeTools: string[];
-  error?: { message: string } | null;
+  error?: { message: string; title?: string; action?: string; actionUrl?: string; code?: string } | null;
   onRetry?: () => void;
   isLoading?: boolean;
   onSendSuggestion?: (text: string) => void;
@@ -327,29 +327,63 @@ function SaveMessageToDashboard({ blocks, title }: { blocks: any[]; title: strin
 
 function ErrorCard({
   message,
+  title,
+  action,
+  actionUrl,
+  code,
   onRetry,
 }: {
   message: string;
+  title?: string;
+  action?: string;
+  actionUrl?: string;
+  code?: string;
   onRetry?: () => void;
 }) {
+  // Color theme based on error code (info / warning / error)
+  var isInfo = code === "INSUFFICIENT_CREDITS" || code === "RATE_LIMITED" || code === "HUBSPOT_NOT_CONNECTED" || code === "ANTHROPIC_KEY_MISSING" || code === "OPENAI_KEY_MISSING" || code === "GOOGLE_KEY_MISSING";
+  var bgColor = isInfo ? "bg-[#FFFBEB] border-[#FEF3C7]" : "bg-red-50/60 border-red-100";
+  var iconColor = isInfo ? "text-[#F59E0B]" : "text-red-500";
+  var titleColor = isInfo ? "text-[#92400E]" : "text-red-700";
+  var msgColor = isInfo ? "text-[#92400E]" : "text-red-700";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-lg border border-red-100 bg-red-50/60 px-4 py-3 text-sm"
+      className={"rounded-lg border px-4 py-3 " + bgColor}
     >
-      <p className="text-red-700 mb-2">
-        {message || "Something went wrong. Please try again."}
-      </p>
-      {onRetry && (
-        <button
-          onClick={onRetry}
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-red-600 hover:text-red-800 transition-colors bg-white border border-red-200 rounded-lg px-3 py-1.5 hover:bg-red-50"
-        >
-          <RotateCcw size={12} />
-          Retry
-        </button>
-      )}
+      <div className="flex items-start gap-2.5">
+        <AlertTriangle size={14} className={"shrink-0 mt-0.5 " + iconColor} />
+        <div className="flex-1 min-w-0">
+          {title && <p className={"text-[13px] font-semibold mb-0.5 " + titleColor}>{title}</p>}
+          <p className={"text-[12px] leading-relaxed " + msgColor}>
+            {message || "Something went wrong. Please try again."}
+          </p>
+          {code && (
+            <p className="text-[10px] text-[#BBB] mt-1 font-mono">{code}</p>
+          )}
+          <div className="flex items-center gap-2 mt-2">
+            {action && actionUrl && (
+              <a
+                href={actionUrl}
+                className="inline-flex items-center gap-1.5 text-[11px] font-medium text-white bg-[#111] hover:bg-[#333] rounded-lg px-3 py-1.5 transition-colors"
+              >
+                {action}
+              </a>
+            )}
+            {onRetry && (
+              <button
+                onClick={onRetry}
+                className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#555] hover:text-[#111] transition-colors bg-white border border-[#EAEAEA] rounded-lg px-3 py-1.5 hover:bg-[#F5F5F5]"
+              >
+                <RotateCcw size={11} />
+                Retry
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 }
@@ -582,7 +616,14 @@ export default function MessageThread({
 
         {/* Error state with retry */}
         {error && (
-          <ErrorCard message={error.message} onRetry={onRetry} />
+          <ErrorCard
+            message={error.message}
+            title={error.title}
+            action={error.action}
+            actionUrl={error.actionUrl}
+            code={error.code}
+            onRetry={onRetry}
+          />
         )}
 
         <div ref={bottomRef} />

@@ -26,7 +26,7 @@ export default function ConversationPage() {
   const [activeTools, setActiveTools] = useState<string[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
   const [activeAgents, setActiveAgents] = useState<Array<{ id: string; name: string; emoji: string; color: string; specialty: string; status: string; text: string }>>([]);
-  const [chatError, setChatError] = useState<{ message: string } | null>(null);
+  const [chatError, setChatError] = useState<{ message: string; title?: string; action?: string; actionUrl?: string; code?: string } | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [selectedModel, setSelectedModel] = useState("kairo");
   const initialSent = useRef(false);
@@ -92,11 +92,19 @@ export default function ConversationPage() {
 
         if (!res.ok || !res.body) {
           let errMsg = "Server error (" + res.status + ")";
+          let errTitle: string | undefined;
+          let errAction: string | undefined;
+          let errActionUrl: string | undefined;
+          let errCode: string | undefined;
           try {
             const errJson = await res.json();
             errMsg = errJson.error || errMsg;
+            errTitle = errJson.errorTitle;
+            errAction = errJson.action;
+            errActionUrl = errJson.actionUrl;
+            errCode = errJson.errorCode;
           } catch {}
-          setChatError({ message: errMsg });
+          setChatError({ message: errMsg, title: errTitle, action: errAction, actionUrl: errActionUrl, code: errCode });
           setIsStreaming(false); unmarkStreaming(conversationId);
           return;
         }
@@ -156,7 +164,13 @@ export default function ConversationPage() {
                 }
               } else if (event.type === "error") {
                 hadError = true;
-                setChatError({ message: event.error || "Something went wrong. Please try again." });
+                setChatError({
+                  message: event.error || "Something went wrong. Please try again.",
+                  title: event.errorTitle,
+                  action: event.action,
+                  actionUrl: event.actionUrl,
+                  code: event.errorCode,
+                });
               } else if (event.type === "done") {
                 // Flush any pending RAF
                 if (rafId.current) {
