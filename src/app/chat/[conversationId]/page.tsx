@@ -33,13 +33,116 @@ export default function ConversationPage() {
   const lastMessageRef = useRef<string>("");
   const pendingText = useRef("");
   const rafId = useRef<number | null>(null);
+  const activeJobPollRef = useRef<number | null>(null);
+
+  // Helper to start polling a job (used both on initial /report and on resume)
+  function startJobPolling(jobId: string) {
+    // Clear any existing poll
+    if (activeJobPollRef.current) {
+      clearInterval(activeJobPollRef.current);
+      activeJobPollRef.current = null;
+    }
+    setIsStreaming(true);
+    markStreaming(conversationId);
+    sessionStorage.setItem("kairo-job-" + conversationId, jobId);
+
+    var pollAttempts = 0;
+    var maxPolls = 600; // 20 min
+    var interval = window.setInterval(async function() {
+      pollAttempts++;
+      if (pollAttempts > maxPolls) {
+        clearInterval(interval);
+        activeJobPollRef.current = null;
+        setChatError({ message: "Report timed out after 20 minutes.", title: "Timeout", code: "TIMEOUT" });
+        setIsStreaming(false); unmarkStreaming(conversationId);
+        sessionStorage.removeItem("kairo-job-" + conversationId);
+        return;
+      }
+      try {
+        var pollRes = await fetch("/api/reports/" + jobId);
+        if (pollRes.status === 404) {
+          clearInterval(interval);
+          activeJobPollRef.current = null;
+          sessionStorage.removeItem("kairo-job-" + conversationId);
+          setIsStreaming(false); unmarkStreaming(conversationId);
+          return;
+        }
+        var pollJson = await pollRes.json();
+        if (!pollJson.data) return;
+        var jobData = pollJson.data;
+
+        setActiveAgents(jobData.agents.map(function(a: any) {
+          return { id: a.id, name: a.name, emoji: a.emoji, color: a.color, specialty: "", status: a.status === "running" ? "working" : a.status, text: a.text || "" };
+        }));
+
+        if (jobData.status === "completed" || jobData.status === "partial" || jobData.status === "failed") {
+          clearInterval(interval);
+          activeJobPollRef.current = null;
+          sessionStorage.removeItem("kairo-job-" + conversationId);
+
+          if (jobData.status === "failed" && !jobData.finalText) {
+            setChatError({
+              message: jobData.error || "All agents failed. Click retry to try the failed ones again.",
+              title: "Report failed",
+              code: jobData.errorCode || "UNKNOWN",
+            });
+            setIsStreaming(false); unmarkStreaming(conversationId);
+            setActiveAgents([]);
+            return;
+          }
+
+          // Check if the message is already in the messages list (avoid duplicate when DB-saved)
+          // The worker also saves the message to DB, so on refresh it'll be loaded from there
+          var assistantMsg: Message = {
+            id: crypto.randomUUID(),
+            role: "assistant",
+            content: jobData.finalText || "(Report generated)",
+            content_blocks: jobData.finalBlocks,
+            created_at: new Date().toISOString(),
+          };
+          setMessages(function(prev) {
+            // Don't add if last message has same content (race with DB reload)
+            if (prev.length > 0 && prev[prev.length - 1].content === assistantMsg.content) return prev;
+            return [...prev, assistantMsg];
+          });
+          setActiveAgents([]);
+          setIsStreaming(false); unmarkStreaming(conversationId);
+        }
+      } catch (e) {
+        console.error("[poll]", e);
+      }
+    }, 2000);
+    activeJobPollRef.current = interval;
+  }
 
   // Cleanup RAF on unmount
   useEffect(() => {
     return () => {
       if (rafId.current) cancelAnimationFrame(rafId.current);
+      if (activeJobPollRef.current) {
+        clearInterval(activeJobPollRef.current);
+        activeJobPollRef.current = null;
+      }
     };
   }, []);
+
+  // Resume any in-progress report job for this conversation
+  useEffect(() => {
+    var savedJobId = sessionStorage.getItem("kairo-job-" + conversationId);
+    if (savedJobId) {
+      // Verify the job still exists and is still running
+      fetch("/api/reports/" + savedJobId).then(function(r) { return r.json(); }).then(function(json) {
+        if (json?.data && (json.data.status === "pending" || json.data.status === "running")) {
+          startJobPolling(savedJobId);
+        } else {
+          // Job is done — clean up
+          sessionStorage.removeItem("kairo-job-" + conversationId);
+        }
+      }).catch(function() {
+        sessionStorage.removeItem("kairo-job-" + conversationId);
+      });
+    }
+  }, [conversationId]);
 
   // Fetch existing messages
   useEffect(() => {
@@ -99,67 +202,13 @@ export default function ConversationPage() {
             return;
           }
           const { data } = await startRes.json();
-          var jobId = data.jobId;
           var jobAgentIds: string[] = data.agentIds || [];
-
-          // Initialize active agents from the job (will be filled by polling)
+          // Initialize active agents (will be filled by polling)
           setActiveAgents(jobAgentIds.map(function(id) {
             return { id: id, name: id, emoji: "🤖", color: "#999", specialty: "", status: "pending", text: "" };
           }));
-
-          // Poll the job until done
-          var pollAttempts = 0;
-          var maxPolls = 600; // 600 * 2s = 20 min max
-          var pollInterval = setInterval(async function() {
-            pollAttempts++;
-            if (pollAttempts > maxPolls) {
-              clearInterval(pollInterval);
-              setChatError({ message: "Report timed out after 20 minutes. Please retry.", title: "Timeout", code: "TIMEOUT" });
-              setIsStreaming(false); unmarkStreaming(conversationId);
-              return;
-            }
-            try {
-              const pollRes = await fetch("/api/reports/" + jobId);
-              const pollJson = await pollRes.json();
-              if (!pollJson.data) return;
-              var jobData = pollJson.data;
-
-              // Update active agents UI
-              setActiveAgents(jobData.agents.map(function(a: any) {
-                return { id: a.id, name: a.name, emoji: a.emoji, color: a.color, specialty: "", status: a.status === "running" ? "working" : a.status, text: a.text || "" };
-              }));
-
-              // Job done?
-              if (jobData.status === "completed" || jobData.status === "partial" || jobData.status === "failed") {
-                clearInterval(pollInterval);
-
-                if (jobData.status === "failed" && !jobData.finalText) {
-                  setChatError({
-                    message: jobData.error || "All agents failed. Click retry to try the failed ones again.",
-                    title: "Report failed",
-                    code: jobData.errorCode || "UNKNOWN",
-                  });
-                  setIsStreaming(false); unmarkStreaming(conversationId);
-                  setActiveAgents([]);
-                  return;
-                }
-
-                // Add the final message
-                const assistantMsg: Message = {
-                  id: crypto.randomUUID(),
-                  role: "assistant",
-                  content: jobData.finalText || "(Report generated)",
-                  content_blocks: jobData.finalBlocks,
-                  created_at: new Date().toISOString(),
-                };
-                setMessages((prev) => [...prev, assistantMsg]);
-                setActiveAgents([]);
-                setIsStreaming(false); unmarkStreaming(conversationId);
-              }
-            } catch (e) {
-              console.error("[poll]", e);
-            }
-          }, 2000);
+          // Start polling — survives navigation via sessionStorage
+          startJobPolling(data.jobId);
         } catch (e: any) {
           setChatError({ message: e?.message || "Failed to start report" });
           setIsStreaming(false); unmarkStreaming(conversationId);
