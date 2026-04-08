@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { SlidersHorizontal, ArrowUp, FileText, LayoutDashboard, Search, GitCompare, TrendingUp, Shield, ChevronDown, Check } from "lucide-react";
+import { SlidersHorizontal, ArrowUp, FileText, LayoutDashboard, Search, GitCompare, TrendingUp, Shield, ChevronDown, Check, Mic, MicOff } from "lucide-react";
 import FileUpload from "./FileUpload";
 import TemplatesPopover from "./TemplatesPopover";
 import { CONNECTOR_REGISTRY } from "@/lib/connectors/registry";
@@ -146,6 +146,9 @@ export default function ChatInputBar({
   var [uploading, setUploading] = useState(false);
   var [showSlash, setShowSlash] = useState(false);
   var [slashIndex, setSlashIndex] = useState(0);
+  var [isRecording, setIsRecording] = useState(false);
+  var [voiceSupported, setVoiceSupported] = useState(false);
+  var recognitionRef = useRef<any>(null);
   var textareaRef = useRef<HTMLTextAreaElement>(null);
   var modelRef = useRef<HTMLDivElement>(null);
   var connectorsRef = useRef<HTMLDivElement>(null);
@@ -158,6 +161,71 @@ export default function ChatInputBar({
   });
 
   var [connectorStatus, setConnectorStatus] = useState<Record<string, boolean>>({});
+
+  // Initialize Web Speech API for voice input
+  useEffect(function() {
+    if (typeof window === "undefined") return;
+    var SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SR) { setVoiceSupported(false); return; }
+    setVoiceSupported(true);
+
+    var recognition = new SR();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = "fr-FR"; // Default to French, fallback to English handled by browser
+
+    recognition.onresult = function(event: any) {
+      var finalText = "";
+      var interimText = "";
+      for (var i = event.resultIndex; i < event.results.length; i++) {
+        var transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalText += transcript + " ";
+        } else {
+          interimText += transcript;
+        }
+      }
+      // Append final text to the input value, show interim as preview
+      if (finalText) {
+        setValue(function(prev: string) {
+          return (prev ? prev.trim() + " " : "") + finalText.trim();
+        });
+      }
+    };
+
+    recognition.onend = function() {
+      setIsRecording(false);
+    };
+
+    recognition.onerror = function(e: any) {
+      console.error("[voice]", e.error);
+      setIsRecording(false);
+    };
+
+    recognitionRef.current = recognition;
+
+    return function() {
+      if (recognitionRef.current) {
+        try { recognitionRef.current.stop(); } catch (e) {}
+      }
+    };
+  }, []);
+
+  function toggleVoice() {
+    if (!recognitionRef.current) return;
+    if (isRecording) {
+      try { recognitionRef.current.stop(); } catch (e) {}
+      setIsRecording(false);
+    } else {
+      try {
+        recognitionRef.current.start();
+        setIsRecording(true);
+      } catch (e) {
+        console.error("[voice] start failed:", e);
+        setIsRecording(false);
+      }
+    }
+  }
 
   useEffect(function() {
     fetch("/api/settings/llm").then(function(r) { return r.json(); }).then(function(json) {
@@ -479,8 +547,19 @@ export default function ChatInputBar({
               </div>
             </div>
 
-            {/* Send button */}
-            <div className="flex items-center gap-0.5 shrink-0">
+            {/* Voice + Send buttons */}
+            <div className="flex items-center gap-1.5 shrink-0">
+              {voiceSupported && (
+                <button
+                  onClick={toggleVoice}
+                  type="button"
+                  disabled={disabled || uploading}
+                  className={"h-8 w-8 rounded-full flex items-center justify-center transition-all " + (isRecording ? "bg-[#EF4444] text-white animate-pulse" : "bg-[#F5F5F5] text-[#999] hover:bg-[#EAEAEA] hover:text-[#111]")}
+                  title={isRecording ? "Stop recording" : "Voice input"}
+                >
+                  {isRecording ? <MicOff size={14} /> : <Mic size={14} />}
+                </button>
+              )}
               {value.trim() ? (
                 <button
                   onClick={handleSend}
