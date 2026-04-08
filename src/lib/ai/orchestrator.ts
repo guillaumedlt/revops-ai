@@ -58,33 +58,58 @@ async function runAgent(
 
   while (continueLoop && iterCount < maxIterations) {
     iterCount++;
-    var response: Response;
-    try {
-      response = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        signal: AbortSignal.timeout(90000), // 90s per iteration
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": anthropicApiKey,
-          "anthropic-version": "2023-06-01",
-        },
-        body: JSON.stringify({
-          model: modelId,
-          max_tokens: 4096,
-          system: agentSystemPrompt,
-          messages,
-          ...(toolDefs.length > 0 ? { tools: toolDefs } : {}),
-          stream: true,
-        }),
-      });
-    } catch (e) {
-      console.error("[orchestrator] Fetch error agent=" + agent.id, e);
-      return { agentId: agent.id, text: finalText, error: "Network timeout" };
+    var response: Response | null = null;
+    var retries = 0;
+    var maxRetries = 4;
+
+    // Retry loop with exponential backoff for 429 / 529 / 503 / network errors
+    while (retries < maxRetries) {
+      try {
+        response = await fetch("https://api.anthropic.com/v1/messages", {
+          method: "POST",
+          signal: AbortSignal.timeout(90000),
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": anthropicApiKey,
+            "anthropic-version": "2023-06-01",
+          },
+          body: JSON.stringify({
+            model: modelId,
+            max_tokens: 4096,
+            system: agentSystemPrompt,
+            messages,
+            ...(toolDefs.length > 0 ? { tools: toolDefs } : {}),
+            stream: true,
+          }),
+        });
+
+        // Retry on rate limit / overloaded / server errors
+        if (response.status === 429 || response.status === 529 || response.status === 503) {
+          retries++;
+          if (retries >= maxRetries) break;
+          // Exponential backoff: 2s, 4s, 8s, 16s + jitter
+          var backoff = Math.pow(2, retries) * 1000 + Math.random() * 500;
+          console.warn("[orchestrator] " + response.status + " on agent=" + agent.id + ", retry " + retries + "/" + maxRetries + " in " + Math.round(backoff) + "ms");
+          await new Promise(function(r) { setTimeout(r, backoff); });
+          continue;
+        }
+        break; // Success or non-retryable error
+      } catch (e) {
+        retries++;
+        if (retries >= maxRetries) {
+          console.error("[orchestrator] Fetch error agent=" + agent.id, e);
+          return { agentId: agent.id, text: finalText, error: "Network timeout after " + maxRetries + " retries" };
+        }
+        var backoff = Math.pow(2, retries) * 1000;
+        await new Promise(function(r) { setTimeout(r, backoff); });
+      }
     }
 
-    if (!response.ok || !response.body) {
-      console.error("[orchestrator] API error agent=" + agent.id, response.status);
-      return { agentId: agent.id, text: finalText, error: "API error " + response.status };
+    if (!response || !response.ok || !response.body) {
+      var status = response?.status || 0;
+      console.error("[orchestrator] API error agent=" + agent.id, status);
+      var errMsg = status === 429 ? "Rate limited (try again in 30s)" : "API error " + status;
+      return { agentId: agent.id, text: finalText, error: errMsg };
     }
 
     var reader = response.body.getReader();
@@ -201,8 +226,12 @@ export async function runMultiAgent(
     agents: agents.map(function(a) { return { id: a.id, name: a.name, emoji: a.emoji, color: a.color, specialty: a.specialty }; }),
   }) + "\n\n"));
 
-  // Run all agents in parallel — use allSettled so one failure doesn't kill all
-  var settled = await Promise.allSettled(agents.map(function(agent) {
+  // Run agents in batches of 2 to avoid hitting Anthropic rate limits
+  // (5 agents x 4-6 tool calls each = 20-30 parallel API calls → 429)
+  var BATCH_SIZE = 2;
+  var results: AgentResult[] = [];
+
+  function runOneAgent(agent: AgentProfile): Promise<AgentResult> {
     return runAgent(
       agent,
       message,
@@ -224,14 +253,24 @@ export async function runMultiAgent(
       },
       tenantId,
     );
-  }));
+  }
 
-  // Convert settled results to AgentResult format
-  var results: AgentResult[] = settled.map(function(s, i) {
-    if (s.status === "fulfilled") return s.value;
-    console.error("[orchestrator] Agent " + agents[i].id + " rejected:", s.reason);
-    return { agentId: agents[i].id, text: "", error: "Agent crashed: " + (s.reason?.message || "unknown") };
-  });
+  for (var i = 0; i < agents.length; i += BATCH_SIZE) {
+    var batch = agents.slice(i, i + BATCH_SIZE);
+    var settled = await Promise.allSettled(batch.map(runOneAgent));
+    settled.forEach(function(s, idx) {
+      if (s.status === "fulfilled") {
+        results.push(s.value);
+      } else {
+        console.error("[orchestrator] Agent " + batch[idx].id + " rejected:", s.reason);
+        results.push({ agentId: batch[idx].id, text: "", error: "Agent crashed: " + (s.reason?.message || "unknown") });
+      }
+    });
+    // Brief pause between batches to let rate limits recover
+    if (i + BATCH_SIZE < agents.length) {
+      await new Promise(function(r) { setTimeout(r, 500); });
+    }
+  }
 
   // Combine all agent results into final text
   var sections = results.map(function(r) {

@@ -109,7 +109,7 @@ export function getErrorInfo(code: ErrorCode, context?: { remaining?: number; co
         return { code, title: "Invalid API key", message: "Your " + provider + " API key is invalid or expired. Please check it in Settings.", action: "Check key", actionUrl: "/settings?tab=llm" };
       }
       if (status === 429) {
-        return { code, title: provider + " rate limit", message: provider + " is rate-limiting your requests. Wait a moment and try again." };
+        return { code, title: provider + " rate limit", message: provider + " is rate-limiting your requests. Wait 30 seconds and try a simpler query, or use a less complex command like /pipeline instead of /report." };
       }
       if (status === 529 || status === 503) {
         return { code, title: provider + " overloaded", message: provider + " is currently overloaded. Try again in a few seconds, or switch to another model." };
