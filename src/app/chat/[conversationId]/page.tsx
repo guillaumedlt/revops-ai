@@ -171,16 +171,27 @@ export default function ConversationPage() {
                   actionUrl: event.actionUrl,
                   code: event.errorCode,
                 });
+              } else if (event.type === "text") {
+                // Final text from multi-agent or premium agent
+                accText = event.text || accText;
               } else if (event.type === "done") {
                 // Flush any pending RAF
                 if (rafId.current) {
                   cancelAnimationFrame(rafId.current);
                   rafId.current = null;
                 }
+                // Use accText OR fallback to extracting from blocks
+                var msgContent = accText;
+                if (!msgContent && finalBlocks && finalBlocks.length > 0) {
+                  msgContent = finalBlocks.map(function(b: any) { return b.type === "text" ? b.text : ""; }).filter(Boolean).join("\n\n");
+                }
+                if (!msgContent && finalBlocks && finalBlocks.length > 0) {
+                  msgContent = "(Report generated — see content below)";
+                }
                 const assistantMsg: Message = {
                   id: crypto.randomUUID(),
                   role: "assistant",
-                  content: accText,
+                  content: msgContent,
                   content_blocks: finalBlocks,
                   created_at: new Date().toISOString(),
                 };
@@ -196,9 +207,13 @@ export default function ConversationPage() {
           }
         }
 
-        // If stream ended without a "done" event and no text was received, show error
-        if (!accText && !hadError) {
-          setChatError({ message: "No response received. Please try again." });
+        // If stream ended without text AND without blocks AND without error, show error
+        if (!accText && !finalBlocks && !hadError) {
+          setChatError({
+            message: "The AI didn't return a response. This usually happens when the request is too complex or HubSpot is slow. Try again or break it into smaller questions.",
+            title: "No response received",
+            code: "STREAM_INTERRUPTED",
+          });
         }
       } catch {
         setChatError({ message: "Network error. Please check your connection and try again." });

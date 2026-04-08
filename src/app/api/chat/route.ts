@@ -539,6 +539,13 @@ export async function POST(request: NextRequest) {
             controller,
           );
 
+          if (!multiText || multiText.trim().length < 10) {
+            // Orchestrator returned nothing — emit error
+            sendError(controller, encoder, "UNKNOWN");
+            controller.close();
+            return;
+          }
+
           var multiBlocks = parseContentBlocks(multiText);
 
           if (convId) {
@@ -554,7 +561,10 @@ export async function POST(request: NextRequest) {
 
           await deductCredit(auth.tenantId, auth.userId, "report"); // Multi-agent = report cost
 
+          // Send the final text + blocks so it persists across page reload
+          controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "text", text: multiText }) + "\n\n"));
           controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "content_blocks", blocks: multiBlocks }) + "\n\n"));
+          controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "metadata", conversationId: convId, model: "kairo-multi", creditsRemaining: credits.remaining - CREDIT_COSTS.report, creditCost: CREDIT_COSTS.report }) + "\n\n"));
           controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "done" }) + "\n\n"));
           controller.close();
           return;

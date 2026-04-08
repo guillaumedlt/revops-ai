@@ -53,26 +53,38 @@ async function runAgent(
   var finalText = "";
   var continueLoop = true;
 
-  while (continueLoop) {
-    var response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": anthropicApiKey,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: modelId,
-        max_tokens: 4096,
-        system: agentSystemPrompt,
-        messages,
-        ...(toolDefs.length > 0 ? { tools: toolDefs } : {}),
-        stream: true,
-      }),
-    });
+  var iterCount = 0;
+  var maxIterations = 8; // Prevent infinite tool loops
+
+  while (continueLoop && iterCount < maxIterations) {
+    iterCount++;
+    var response: Response;
+    try {
+      response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        signal: AbortSignal.timeout(90000), // 90s per iteration
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": anthropicApiKey,
+          "anthropic-version": "2023-06-01",
+        },
+        body: JSON.stringify({
+          model: modelId,
+          max_tokens: 4096,
+          system: agentSystemPrompt,
+          messages,
+          ...(toolDefs.length > 0 ? { tools: toolDefs } : {}),
+          stream: true,
+        }),
+      });
+    } catch (e) {
+      console.error("[orchestrator] Fetch error agent=" + agent.id, e);
+      return { agentId: agent.id, text: finalText, error: "Network timeout" };
+    }
 
     if (!response.ok || !response.body) {
-      return { agentId: agent.id, text: "", error: "API error " + response.status };
+      console.error("[orchestrator] API error agent=" + agent.id, response.status);
+      return { agentId: agent.id, text: finalText, error: "API error " + response.status };
     }
 
     var reader = response.body.getReader();
@@ -83,6 +95,7 @@ async function runAgent(
     var currentToolUse: { id: string; name: string; inputJson: string } | null = null;
     var stopReason = "";
 
+    try {
     while (true) {
       var { done, value } = await reader.read();
       if (done) break;
@@ -123,6 +136,12 @@ async function runAgent(
           }
         } catch {}
       }
+    }
+    } catch (streamErr) {
+      console.error("[orchestrator] Stream error agent=" + agent.id, streamErr);
+      finalText += fullText;
+      onDone(agent.id);
+      return { agentId: agent.id, text: finalText, error: "Stream interrupted" };
     }
 
     if (stopReason === "tool_use" && toolUseBlocks.length > 0) {
@@ -182,8 +201,8 @@ export async function runMultiAgent(
     agents: agents.map(function(a) { return { id: a.id, name: a.name, emoji: a.emoji, color: a.color, specialty: a.specialty }; }),
   }) + "\n\n"));
 
-  // Run all agents in parallel
-  var results = await Promise.all(agents.map(function(agent) {
+  // Run all agents in parallel — use allSettled so one failure doesn't kill all
+  var settled = await Promise.allSettled(agents.map(function(agent) {
     return runAgent(
       agent,
       message,
@@ -191,32 +210,45 @@ export async function runMultiAgent(
       allTools,
       anthropicApiKey,
       modelId,
-      // onToken
       function(agentId, token) {
-        controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "agent_token", agentId: agentId, token: token }) + "\n\n"));
+        try { controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "agent_token", agentId: agentId, token: token }) + "\n\n")); } catch {}
       },
-      // onToolStart
       function(agentId, toolName) {
-        controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "agent_tool_start", agentId: agentId, name: toolName }) + "\n\n"));
+        try { controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "agent_tool_start", agentId: agentId, name: toolName }) + "\n\n")); } catch {}
       },
-      // onToolResult
       function(agentId, toolName) {
-        controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "agent_tool_result", agentId: agentId, name: toolName }) + "\n\n"));
+        try { controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "agent_tool_result", agentId: agentId, name: toolName }) + "\n\n")); } catch {}
       },
-      // onDone
       function(agentId) {
-        controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "agent_done", agentId: agentId }) + "\n\n"));
+        try { controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "agent_done", agentId: agentId }) + "\n\n")); } catch {}
       },
       tenantId,
     );
   }));
 
-  // Combine all agent results into final text
-  var combinedText = results.map(function(r) {
-    var agent = AGENTS[r.agentId];
-    if (!agent || !r.text) return "";
-    return "## " + agent.emoji + " " + agent.name + "\n\n" + r.text;
-  }).filter(Boolean).join("\n\n---\n\n");
+  // Convert settled results to AgentResult format
+  var results: AgentResult[] = settled.map(function(s, i) {
+    if (s.status === "fulfilled") return s.value;
+    console.error("[orchestrator] Agent " + agents[i].id + " rejected:", s.reason);
+    return { agentId: agents[i].id, text: "", error: "Agent crashed: " + (s.reason?.message || "unknown") };
+  });
 
+  // Combine all agent results into final text
+  var sections = results.map(function(r) {
+    var agent = AGENTS[r.agentId];
+    if (!agent) return "";
+    if (!r.text || r.text.trim() === "") {
+      // Agent returned nothing — show error placeholder
+      return "## " + agent.emoji + " " + agent.name + "\n\n*" + (r.error || "No data returned for this section.") + "*";
+    }
+    return "## " + agent.emoji + " " + agent.name + "\n\n" + r.text;
+  }).filter(Boolean);
+
+  if (sections.length === 0) {
+    // All agents failed — return a clear error
+    return "# Report failed\n\nAll agents failed to generate content. This can happen if:\n- HubSpot connection is broken (reconnect in Settings)\n- Anthropic API is overloaded (try again in a moment)\n- The request was too complex (try a simpler query first)\n\nPlease retry, and if the issue persists, check Settings → Connectors.";
+  }
+
+  var combinedText = sections.join("\n\n---\n\n");
   return combinedText;
 }
