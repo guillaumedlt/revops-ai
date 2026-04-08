@@ -69,18 +69,47 @@ function fixOrphanJsonTables(text: string): string {
       continue;
     }
 
-    // Detect orphan JSON kpi_grid: line starting with [{"label"
-    if (trimmed.startsWith('[{"label"') && trimmed.includes('"value"')) {
+    // Detect orphan JSON kpi_grid: line starting with [{
+    // Could be [{"label":...,"value":...}] OR [{"value":...,"label":...}]
+    if (trimmed.startsWith("[{") && (trimmed.includes('"label"') || trimmed.includes('"value"'))) {
+      // Walk to collect full multi-line JSON
+      var jsonStart = i;
+      var jsonStr = trimmed;
+      var brackCount = 0;
+      for (var ch of jsonStr) {
+        if (ch === "[" || ch === "{") brackCount++;
+        if (ch === "]" || ch === "}") brackCount--;
+      }
+      while (brackCount > 0 && i + 1 < lines.length) {
+        i++;
+        jsonStr += "\n" + lines[i];
+        for (var ch3 of lines[i]) {
+          if (ch3 === "[" || ch3 === "{") brackCount++;
+          if (ch3 === "]" || ch3 === "}") brackCount--;
+        }
+      }
+
       try {
-        var parsedKpi = JSON.parse(trimmed);
-        if (Array.isArray(parsedKpi) && parsedKpi.every(function(p: any) { return p.label && p.value; })) {
-          result.push(":::kpi_grid");
-          result.push(trimmed);
+        var parsedKpi = JSON.parse(jsonStr);
+        if (Array.isArray(parsedKpi) && parsedKpi.length > 0 && parsedKpi.every(function(p: any) { return p && typeof p === "object" && (p.label !== undefined || p.value !== undefined); })) {
+          // Check previous line for title (optional)
+          var kpiTitle = "";
+          if (result.length > 0) {
+            var prevK = result[result.length - 1].trim();
+            if (prevK.startsWith("#") || /^[\p{Emoji}🏆📊📈📉💰🎯⚠️✅❌🔴🟠🟡🟢]/u.test(prevK) || prevK.startsWith("**")) {
+              kpiTitle = prevK.replace(/^[#*\s]+/, "").replace(/\*+$/, "").trim();
+              result.pop();
+            }
+          }
+          result.push(":::kpi_grid" + (kpiTitle ? '{"title":"' + kpiTitle.replace(/"/g, '\\"') + '"}' : ""));
+          result.push(jsonStr);
           result.push(":::");
           i++;
           continue;
         }
       } catch {}
+      // Fall through if not valid
+      i = jsonStart;
     }
 
     result.push(line);
