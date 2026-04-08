@@ -161,7 +161,22 @@ function fixOrphanJsonTables(text: string): string {
 
       try {
         var parsedKpi = JSON.parse(jsonStr);
-        if (Array.isArray(parsedKpi) && parsedKpi.length > 0 && parsedKpi.every(function(p: any) { return p && typeof p === "object" && (p.label !== undefined || p.value !== undefined); })) {
+        if (Array.isArray(parsedKpi) && parsedKpi.length > 0 && parsedKpi.every(function(p: any) {
+          return p && typeof p === "object" && (
+            (p.label ?? p.title ?? p.name) !== undefined ||
+            (p.value ?? p.amount ?? p.val) !== undefined
+          );
+        })) {
+          // Normalize keys: AI may use name/title/amount/val variants
+          var normalized = parsedKpi.map(function(p: any) {
+            return {
+              label: p.label ?? p.title ?? p.name ?? "",
+              value: String(p.value ?? p.amount ?? p.val ?? ""),
+              change: p.change,
+              trend: p.trend,
+            };
+          });
+
           // Check previous line for title (optional)
           var kpiTitle = "";
           if (result.length > 0) {
@@ -172,7 +187,7 @@ function fixOrphanJsonTables(text: string): string {
             }
           }
           result.push(":::kpi_grid" + (kpiTitle ? '{"title":"' + kpiTitle.replace(/"/g, '\\"') + '"}' : ""));
-          result.push(jsonStr);
+          result.push(JSON.stringify(normalized));
           result.push(":::");
           i++;
           continue;

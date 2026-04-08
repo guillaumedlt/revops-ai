@@ -82,7 +82,8 @@ export default function TableBlock({ title, headers, rows, sortable = true, sear
   function exportCSV() {
     var csvHeaders = headers.join(",");
     var csvRows = rows.map(function(row) {
-      return row.map(function(cell) {
+      return headers.map(function(_, j) {
+        var cell = row && row[j] != null ? String(row[j]) : "";
         return '"' + cell.replace(/"/g, '""') + '"';
       }).join(",");
     });
@@ -157,7 +158,9 @@ export default function TableBlock({ title, headers, rows, sortable = true, sear
             ) : paginated.map(function(row, i) {
               return (
                 <tr key={i} className={"border-b border-[#F5F5F5] last:border-0 hover:bg-[#FAFAFA] transition-colors " + (i % 2 === 1 ? "bg-[#FAFAFA]/30" : "bg-white")}>
-                  {row.map(function(cell, j) {
+                  {headers.map(function(_, j) {
+                    var rawCell = row && row[j];
+                    var cell = (rawCell !== undefined && rawCell !== null && rawCell !== "") ? String(rawCell) : "—";
                     var style = getCellStyle(cell);
                     return (
                       <td key={j} className={"px-4 py-2.5 text-[#111] " + (j === 0 ? "font-medium " : "") + style}>

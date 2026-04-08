@@ -45,9 +45,9 @@ export default function ComparisonBlock({ title, items }: Props) {
 
           return (
             <div key={i} className="grid grid-cols-4 gap-2 px-4 py-3 hover:bg-[#FAFAFA] transition-colors">
-              <span className="text-sm font-medium text-[#111]">{item.label}</span>
-              <span className="text-sm font-semibold text-[#111] text-right tabular-nums">{item.current}</span>
-              <span className="text-sm text-[#999] text-right tabular-nums">{item.previous}</span>
+              <span className="text-sm font-medium text-[#111]">{item.label || "—"}</span>
+              <span className="text-sm font-semibold text-[#111] text-right tabular-nums">{item.current ?? "—"}</span>
+              <span className="text-sm text-[#999] text-right tabular-nums">{item.previous ?? "—"}</span>
               <span className={"text-sm font-medium text-right tabular-nums " + changeColor}>
                 {item.change !== undefined ? changePrefix + item.change + "%" : "—"}
               </span>

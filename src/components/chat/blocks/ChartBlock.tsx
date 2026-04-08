@@ -71,12 +71,23 @@ function CustomTooltip({ active, payload, label }: any) {
 export default function ChartBlock({ chartType, title, data, xKey, yKey, yKeys, colors }: Props) {
   if (!data || data.length === 0) return null;
 
-  var keys = Object.keys(data[0]);
+  var keys = Object.keys(data[0] || {});
+  if (keys.length === 0) return null;
+
   var x = xKey || keys.find(function(k) { return typeof data[0][k] === "string"; }) || keys[0];
 
   // Multi-series: use yKeys if provided, otherwise detect all numeric keys
   var numericKeys = keys.filter(function(k) { return k !== x && typeof data[0][k] === "number"; });
-  var seriesKeys = yKeys && yKeys.length > 0 ? yKeys : (yKey ? [yKey] : numericKeys.length > 0 ? numericKeys : [keys[1]]);
+  var seriesKeys = yKeys && yKeys.length > 0 ? yKeys : (yKey ? [yKey] : numericKeys.length > 0 ? numericKeys : (keys.length > 1 ? [keys[1]] : []));
+
+  // Defensive: if no series found, render error state instead of crashing
+  if (seriesKeys.length === 0) {
+    return (
+      <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-4 text-[12px] text-[#999]">
+        Chart could not be rendered: missing numeric data.
+      </div>
+    );
+  }
   var palette = colors && colors.length > 0 ? colors : PALETTE;
   var isMultiSeries = seriesKeys.length > 1;
   var height = isMultiSeries || chartType === "combo" ? 300 : 260;
