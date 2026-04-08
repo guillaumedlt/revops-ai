@@ -12,7 +12,104 @@ import ComparisonBlock from "./ComparisonBlock";
 import ScorecardBlock from "./ScorecardBlock";
 import AddToDashboard from "../AddToDashboard";
 import { useState, useRef, useEffect } from "react";
-import { Mail, Copy, Check, ChevronDown, ChevronUp, Code } from "lucide-react";
+import { Mail, Copy, Check, ChevronDown, ChevronUp, Code, HelpCircle, X, AlertTriangle, Loader2, CheckCircle2, XCircle } from "lucide-react";
+
+// Click handler injected via window event so MessageThread can listen and re-send
+function emitClick(message: string) {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("kairo-suggestion-click", { detail: { message } }));
+  }
+}
+
+function ClarificationBlock({ question, options, allowCustom }: { question: string; options: Array<{ label: string; value: string; description?: string }>; allowCustom?: boolean }) {
+  var [selected, setSelected] = useState<string | null>(null);
+  return (
+    <div className="rounded-xl border border-[#EAEAEA] bg-white overflow-hidden">
+      <div className="px-4 py-2.5 bg-[#FAFAFA] border-b border-[#F0F0F0] flex items-center gap-2">
+        <HelpCircle size={14} className="text-[#6366F1]" />
+        <span className="text-[12px] font-semibold text-[#111]">Clarification needed</span>
+      </div>
+      <div className="px-4 py-3">
+        <p className="text-[13px] text-[#111] mb-3">{question}</p>
+        <div className="space-y-1.5">
+          {options.map(function(opt, i) {
+            var isSelected = selected === opt.value;
+            return (
+              <button
+                key={i}
+                onClick={function() { setSelected(opt.value); emitClick(opt.value); }}
+                disabled={selected !== null}
+                className={"w-full text-left px-3 py-2 rounded-lg border transition-all " + (isSelected ? "border-[#6366F1] bg-[#EEF2FF]" : selected ? "border-[#F0F0F0] bg-[#FAFAFA] opacity-50 cursor-not-allowed" : "border-[#EAEAEA] hover:border-[#6366F1] hover:bg-[#FAFAFA]")}
+              >
+                <div className="flex items-center gap-2">
+                  <div className={"h-3.5 w-3.5 rounded-full border-2 shrink-0 " + (isSelected ? "border-[#6366F1] bg-[#6366F1]" : "border-[#CCC]")}>
+                    {isSelected && <div className="h-1 w-1 rounded-full bg-white m-auto mt-[3px]" />}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[12px] font-medium text-[#111]">{opt.label}</p>
+                    {opt.description && <p className="text-[10px] text-[#999] mt-0.5">{opt.description}</p>}
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+        {allowCustom && !selected && (
+          <p className="text-[10px] text-[#BBB] mt-2 text-center">Or type your own answer below</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ConfirmationBlock({ action, details, confirmText, cancelText, severity }: { action: string; details?: string; confirmText?: string; cancelText?: string; severity?: "info" | "warning" | "danger" }) {
+  var [response, setResponse] = useState<"confirm" | "cancel" | null>(null);
+  var sevColor = severity === "danger" ? "#EF4444" : severity === "warning" ? "#F59E0B" : "#6366F1";
+  var sevBg = severity === "danger" ? "#FEF2F2" : severity === "warning" ? "#FFFBEB" : "#EEF2FF";
+  return (
+    <div className="rounded-xl border-2 overflow-hidden" style={{ borderColor: sevColor + "40", backgroundColor: sevBg }}>
+      <div className="px-4 py-3 flex items-start gap-3">
+        <AlertTriangle size={16} className="shrink-0 mt-0.5" style={{ color: sevColor }} />
+        <div className="flex-1 min-w-0">
+          <p className="text-[13px] font-semibold text-[#111]">{action}</p>
+          {details && <p className="text-[12px] text-[#555] mt-1 leading-relaxed">{details}</p>}
+        </div>
+      </div>
+      <div className="px-4 pb-3 flex items-center gap-2 justify-end">
+        <button
+          onClick={function() { setResponse("cancel"); emitClick("Non, annule"); }}
+          disabled={response !== null}
+          className={"h-8 px-3 rounded-lg text-[12px] font-medium border transition-colors " + (response === "cancel" ? "bg-[#F5F5F5] border-[#EAEAEA] text-[#999]" : "bg-white border-[#EAEAEA] text-[#555] hover:border-[#CCC] disabled:opacity-50")}
+        >
+          {cancelText || "Cancel"}
+        </button>
+        <button
+          onClick={function() { setResponse("confirm"); emitClick("Oui, confirme et execute"); }}
+          disabled={response !== null}
+          className={"h-8 px-3 rounded-lg text-[12px] font-semibold text-white transition-colors disabled:opacity-50"}
+          style={{ backgroundColor: response === "confirm" ? "#22C55E" : sevColor }}
+        >
+          {response === "confirm" ? "✓ Confirmed" : (confirmText || "Confirm & Execute")}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function ActionResultBlock({ status, action, details }: { status: "success" | "error" | "pending"; action: string; details?: string }) {
+  var Icon = status === "success" ? CheckCircle2 : status === "error" ? XCircle : Loader2;
+  var color = status === "success" ? "#22C55E" : status === "error" ? "#EF4444" : "#6366F1";
+  var bg = status === "success" ? "#F0FDF4" : status === "error" ? "#FEF2F2" : "#EEF2FF";
+  return (
+    <div className="rounded-lg border px-3 py-2 flex items-start gap-2.5" style={{ backgroundColor: bg, borderColor: color + "30" }}>
+      <Icon size={14} className={status === "pending" ? "animate-spin" : ""} style={{ color: color }} />
+      <div className="flex-1 min-w-0">
+        <p className="text-[12px] font-medium" style={{ color: color }}>{action}</p>
+        {details && <p className="text-[11px] text-[#555] mt-0.5">{details}</p>}
+      </div>
+    </div>
+  );
+}
 
 function EmailPreviewBlock({ title, subject, html }: { title: string; subject?: string; html: string }) {
   var [showCode, setShowCode] = useState(false);
@@ -98,7 +195,7 @@ function EmailPreviewBlock({ title, subject, html }: { title: string; subject?: 
 }
 
 function BlockWrapper({ block, children }: { block: ContentBlock; children: React.ReactNode }) {
-  if (block.type === "text" || block.type === "alert" || block.type === "report") {
+  if (block.type === "text" || block.type === "alert" || block.type === "report" || block.type === "clarification" || block.type === "confirmation" || block.type === "action_result") {
     return <>{children}</>;
   }
 
@@ -184,6 +281,15 @@ export default function BlockRenderer({ blocks }: { blocks: ContentBlock[] }) {
             break;
           case "email_preview":
             content = <EmailPreviewBlock title={block.title} subject={block.subject} html={block.html} />;
+            break;
+          case "clarification":
+            content = <ClarificationBlock question={block.question} options={block.options} allowCustom={block.allowCustom} />;
+            break;
+          case "confirmation":
+            content = <ConfirmationBlock action={block.action} details={block.details} confirmText={block.confirmText} cancelText={block.cancelText} severity={block.severity} />;
+            break;
+          case "action_result":
+            content = <ActionResultBlock status={block.status} action={block.action} details={block.details} />;
             break;
           default:
             return null;

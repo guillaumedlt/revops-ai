@@ -1,6 +1,6 @@
 import type { ContentBlock } from "@/types/chat-blocks";
 
-var BLOCK_TYPES = "kpi_grid|kpi|chart|table|alert|progress|funnel|comparison|scorecard|email_preview";
+var BLOCK_TYPES = "kpi_grid|kpi|chart|table|alert|progress|funnel|comparison|scorecard|email_preview|clarification|confirmation|action_result";
 
 function parseInnerBlocks(text: string): ContentBlock[] {
   var blocks: ContentBlock[] = [];
@@ -106,6 +106,32 @@ function parseInnerBlocks(text: string): ContentBlock[] {
           title: params.title || params.subject || "Email Preview",
           subject: params.subject || "",
           html: content,
+        } as ContentBlock);
+      } else if (blockType === "clarification") {
+        var clarData = JSON.parse(content);
+        blocks.push({
+          type: "clarification",
+          question: clarData.question || params.question || "",
+          options: clarData.options || [],
+          allowCustom: clarData.allowCustom !== false,
+        } as ContentBlock);
+      } else if (blockType === "confirmation") {
+        var confData = JSON.parse(content);
+        blocks.push({
+          type: "confirmation",
+          action: confData.action || "",
+          details: confData.details,
+          confirmText: confData.confirmText || "Confirm",
+          cancelText: confData.cancelText || "Cancel",
+          severity: confData.severity || params.severity || "warning",
+        } as ContentBlock);
+      } else if (blockType === "action_result") {
+        var resData = JSON.parse(content);
+        blocks.push({
+          type: "action_result",
+          status: resData.status || "success",
+          action: resData.action || "",
+          details: resData.details,
         } as ContentBlock);
       }
     } catch {

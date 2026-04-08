@@ -483,6 +483,17 @@ export default function MessageThread({
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, streamingText]);
 
+  // Listen for clarification/confirmation clicks from interactive blocks
+  useEffect(() => {
+    function handleClick(e: any) {
+      if (e.detail?.message && onSendSuggestion) {
+        onSendSuggestion(e.detail.message);
+      }
+    }
+    window.addEventListener("kairo-suggestion-click", handleClick as EventListener);
+    return () => window.removeEventListener("kairo-suggestion-click", handleClick as EventListener);
+  }, [onSendSuggestion]);
+
   // Show thinking state: only when parent signals loading and no text/error yet
   var isThinking = isLoading && !streamingText && !error;
 

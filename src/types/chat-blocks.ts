@@ -10,4 +10,7 @@ export type ContentBlock =
   | { type: "funnel"; title: string; steps: Array<{ label: string; value: number; rate?: number }> }
   | { type: "comparison"; title: string; items: Array<{ label: string; current: string; previous: string; change?: number; trend?: "up" | "down" | "flat" }> }
   | { type: "scorecard"; title: string; value: string; target?: string; score: number; breakdown?: Array<{ label: string; score: number; maxScore: number }> }
-  | { type: "email_preview"; title: string; subject?: string; html: string };
+  | { type: "email_preview"; title: string; subject?: string; html: string }
+  | { type: "clarification"; question: string; options: Array<{ label: string; value: string; description?: string }>; allowCustom?: boolean }
+  | { type: "confirmation"; action: string; details?: string; confirmText?: string; cancelText?: string; severity?: "info" | "warning" | "danger" }
+  | { type: "action_result"; status: "success" | "error" | "pending"; action: string; details?: string };
