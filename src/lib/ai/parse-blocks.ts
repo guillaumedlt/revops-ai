@@ -19,8 +19,8 @@ function fixOrphanJsonTables(text: string): string {
 
     // Track block boundaries — don't process JSON inside already-wrapped blocks
     if (trimmed.startsWith(":::")) {
-      // Single ::: closes, ::: with content opens
-      if (trimmed === ":::") {
+      // Closing tags: ::: alone, :::end_xxx
+      if (trimmed === ":::" || trimmed.startsWith(":::end_")) {
         insideBlock = false;
       } else {
         insideBlock = true;
@@ -203,13 +203,47 @@ function fixOrphanJsonTables(text: string): string {
   return result.join("\n");
 }
 
+// Try to parse JSON, with fallback that fixes common AI mistakes
+function safeParseJSON(str: string): any {
+  try {
+    return JSON.parse(str);
+  } catch {}
+  // Try cleanup: remove trailing commas, smart quotes
+  try {
+    var cleaned = str
+      .replace(/,(\s*[}\]])/g, "$1") // trailing commas
+      .replace(/[\u201C\u201D]/g, '"') // smart quotes "" → "
+      .replace(/[\u2018\u2019]/g, "'"); // smart quotes '' → '
+    return JSON.parse(cleaned);
+  } catch {}
+  return null;
+}
+
 function parseInnerBlocks(text: string): ContentBlock[] {
-  // Pre-process: wrap orphan JSON tables/kpi_grids in proper :::block syntax
+  // Step 1: Extract email_preview blocks FIRST using a specific delimiter
+  // (their HTML content can contain ::: which would break the generic regex)
+  var emailBlocks: Array<{ placeholder: string; params: any; html: string }> = [];
+  // Match :::email_preview{...} ... :::end_email_preview OR :::email_preview ... ::: (fallback)
+  var emailRegex = /:::email_preview(\{[^}]*\})?\n([\s\S]*?):::end_email_preview/g;
+  var emailMatch;
+  var idx = 0;
+  while ((emailMatch = emailRegex.exec(text)) !== null) {
+    var placeholder = "\x00EMAIL_BLOCK_" + (idx++) + "\x00";
+    var emailParams: any = {};
+    if (emailMatch[1]) {
+      try { emailParams = JSON.parse(emailMatch[1]); } catch { emailParams = {}; }
+    }
+    emailBlocks.push({ placeholder: placeholder, params: emailParams, html: emailMatch[2].trim() });
+    text = text.slice(0, emailMatch.index) + placeholder + text.slice(emailMatch.index + emailMatch[0].length);
+    emailRegex.lastIndex = emailMatch.index + placeholder.length;
+  }
+
+  // Step 2: Pre-process: wrap orphan JSON tables/kpi_grids in proper :::block syntax
   text = fixOrphanJsonTables(text);
 
   var blocks: ContentBlock[] = [];
 
-  if (!text.includes(":::")) {
+  if (!text.includes(":::") && emailBlocks.length === 0) {
     if (text.trim()) blocks.push({ type: "text", text: text.trim() });
     return blocks;
   }
@@ -235,34 +269,50 @@ function parseInnerBlocks(text: string): ContentBlock[] {
 
     try {
       if (blockType === "kpi_grid") {
-        var items = JSON.parse(content);
-        blocks.push({ type: "kpi_grid", items: items });
+        var items = safeParseJSON(content);
+        if (items && Array.isArray(items)) {
+          blocks.push({ type: "kpi_grid", items: items });
+        } else {
+          blocks.push({ type: "text", text: content });
+        }
       } else if (blockType === "kpi") {
-        var kpiData = JSON.parse(content);
-        blocks.push({ type: "kpi", ...kpiData } as ContentBlock);
+        var kpiData = safeParseJSON(content);
+        if (kpiData) {
+          blocks.push({ type: "kpi", ...kpiData } as ContentBlock);
+        } else {
+          blocks.push({ type: "text", text: content });
+        }
       } else if (blockType === "chart") {
-        var chartData = JSON.parse(content);
-        blocks.push({
-          type: "chart",
-          chartType: (params.type as any) || "bar",
-          title: params.title || "",
-          data: chartData,
-          xKey: params.xKey,
-          yKey: params.yKey,
-          yKeys: params.yKeys,
-          colors: params.colors,
-        });
+        var chartData = safeParseJSON(content);
+        if (chartData) {
+          blocks.push({
+            type: "chart",
+            chartType: (params.type as any) || "bar",
+            title: params.title || "",
+            data: chartData,
+            xKey: params.xKey,
+            yKey: params.yKey,
+            yKeys: params.yKeys,
+            colors: params.colors,
+          });
+        } else {
+          blocks.push({ type: "text", text: content });
+        }
       } else if (blockType === "table") {
-        var tableData = JSON.parse(content);
-        blocks.push({
-          type: "table",
-          title: params.title,
-          headers: tableData.headers || [],
-          rows: tableData.rows || [],
-          sortable: params.sortable !== false,
-          searchable: params.searchable !== false,
-          pageSize: params.pageSize || 10,
-        });
+        var tableData = safeParseJSON(content);
+        if (tableData && tableData.headers) {
+          blocks.push({
+            type: "table",
+            title: params.title,
+            headers: tableData.headers || [],
+            rows: tableData.rows || [],
+            sortable: params.sortable !== false,
+            searchable: params.searchable !== false,
+            pageSize: params.pageSize || 10,
+          });
+        } else {
+          blocks.push({ type: "text", text: content });
+        }
       } else if (blockType === "alert") {
         blocks.push({
           type: "alert",
@@ -270,39 +320,55 @@ function parseInnerBlocks(text: string): ContentBlock[] {
           message: content,
         });
       } else if (blockType === "progress") {
-        var progressData = JSON.parse(content);
-        blocks.push({
-          type: "progress",
-          label: progressData.label || params.label || "",
-          value: progressData.value || 0,
-          max: progressData.max || 100,
-          target: progressData.target,
-          color: progressData.color || params.color,
-        });
+        var progressData = safeParseJSON(content);
+        if (progressData) {
+          blocks.push({
+            type: "progress",
+            label: progressData.label || params.label || "",
+            value: progressData.value || 0,
+            max: progressData.max || 100,
+            target: progressData.target,
+            color: progressData.color || params.color,
+          });
+        } else {
+          blocks.push({ type: "text", text: content });
+        }
       } else if (blockType === "funnel") {
-        var funnelData = JSON.parse(content);
-        blocks.push({
-          type: "funnel",
-          title: params.title || "",
-          steps: Array.isArray(funnelData) ? funnelData : (funnelData.steps || []),
-        });
+        var funnelData = safeParseJSON(content);
+        if (funnelData) {
+          blocks.push({
+            type: "funnel",
+            title: params.title || "",
+            steps: Array.isArray(funnelData) ? funnelData : (funnelData.steps || []),
+          });
+        } else {
+          blocks.push({ type: "text", text: content });
+        }
       } else if (blockType === "comparison") {
-        var compData = JSON.parse(content);
-        blocks.push({
-          type: "comparison",
-          title: params.title || "",
-          items: Array.isArray(compData) ? compData : (compData.items || []),
-        });
+        var compData = safeParseJSON(content);
+        if (compData) {
+          blocks.push({
+            type: "comparison",
+            title: params.title || "",
+            items: Array.isArray(compData) ? compData : (compData.items || []),
+          });
+        } else {
+          blocks.push({ type: "text", text: content });
+        }
       } else if (blockType === "scorecard") {
-        var scoreData = JSON.parse(content);
-        blocks.push({
-          type: "scorecard",
-          title: params.title || scoreData.title || "",
-          value: scoreData.value || "",
-          target: scoreData.target,
-          score: scoreData.score || 0,
-          breakdown: scoreData.breakdown,
-        });
+        var scoreData = safeParseJSON(content);
+        if (scoreData) {
+          blocks.push({
+            type: "scorecard",
+            title: params.title || scoreData.title || "",
+            value: scoreData.value || "",
+            target: scoreData.target,
+            score: scoreData.score || 0,
+            breakdown: scoreData.breakdown,
+          });
+        } else {
+          blocks.push({ type: "text", text: content });
+        }
       } else if (blockType === "email_preview") {
         // Content is raw HTML — no JSON parsing
         blocks.push({
@@ -312,31 +378,37 @@ function parseInnerBlocks(text: string): ContentBlock[] {
           html: content,
         } as ContentBlock);
       } else if (blockType === "clarification") {
-        var clarData = JSON.parse(content);
-        blocks.push({
-          type: "clarification",
-          question: clarData.question || params.question || "",
-          options: clarData.options || [],
-          allowCustom: clarData.allowCustom !== false,
-        } as ContentBlock);
+        var clarData = safeParseJSON(content);
+        if (clarData) {
+          blocks.push({
+            type: "clarification",
+            question: clarData.question || params.question || "",
+            options: clarData.options || [],
+            allowCustom: clarData.allowCustom !== false,
+          } as ContentBlock);
+        }
       } else if (blockType === "confirmation") {
-        var confData = JSON.parse(content);
-        blocks.push({
-          type: "confirmation",
-          action: confData.action || "",
-          details: confData.details,
-          confirmText: confData.confirmText || "Confirm",
-          cancelText: confData.cancelText || "Cancel",
-          severity: confData.severity || params.severity || "warning",
-        } as ContentBlock);
+        var confData = safeParseJSON(content);
+        if (confData) {
+          blocks.push({
+            type: "confirmation",
+            action: confData.action || "",
+            details: confData.details,
+            confirmText: confData.confirmText || "Confirm",
+            cancelText: confData.cancelText || "Cancel",
+            severity: confData.severity || params.severity || "warning",
+          } as ContentBlock);
+        }
       } else if (blockType === "action_result") {
-        var resData = JSON.parse(content);
-        blocks.push({
-          type: "action_result",
-          status: resData.status || "success",
-          action: resData.action || "",
-          details: resData.details,
-        } as ContentBlock);
+        var resData = safeParseJSON(content);
+        if (resData) {
+          blocks.push({
+            type: "action_result",
+            status: resData.status || "success",
+            action: resData.action || "",
+            details: resData.details,
+          } as ContentBlock);
+        }
       }
     } catch {
       blocks.push({ type: "text", text: content });
@@ -350,6 +422,41 @@ function parseInnerBlocks(text: string): ContentBlock[] {
     // Convert markdown tables to table blocks
     var converted = convertMarkdownTables(remaining);
     blocks.push(...converted);
+  }
+
+  // Step 3: Replace email_preview placeholders with their actual blocks
+  if (emailBlocks.length > 0) {
+    var expandedBlocks: ContentBlock[] = [];
+    for (var b of blocks) {
+      if (b.type === "text") {
+        var txt = (b as any).text;
+        // Find any placeholder in this text block
+        var hasPlaceholder = false;
+        for (var eb of emailBlocks) {
+          if (txt.includes(eb.placeholder)) {
+            hasPlaceholder = true;
+            // Split text around placeholder
+            var parts = txt.split(eb.placeholder);
+            if (parts[0] && parts[0].trim()) expandedBlocks.push({ type: "text", text: parts[0].trim() });
+            expandedBlocks.push({
+              type: "email_preview",
+              title: eb.params.title || eb.params.subject || "Email Preview",
+              subject: eb.params.subject || "",
+              html: eb.html,
+            } as ContentBlock);
+            txt = parts.slice(1).join(eb.placeholder);
+          }
+        }
+        if (hasPlaceholder) {
+          if (txt && txt.trim()) expandedBlocks.push({ type: "text", text: txt.trim() });
+        } else {
+          expandedBlocks.push(b);
+        }
+      } else {
+        expandedBlocks.push(b);
+      }
+    }
+    blocks = expandedBlocks;
   }
 
   return blocks;

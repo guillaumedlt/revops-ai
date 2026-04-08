@@ -349,9 +349,10 @@ QUAND UTILISER :
   <p style="color:#555;font-size:14px;line-height:1.6;">Merci de nous avoir rejoint...</p>
   <a href="#" style="display:inline-block;background:#111;color:#fff;padding:12px 24px;text-decoration:none;border-radius:6px;margin-top:16px;">Commencer</a>
 </div>
-:::
+:::end_email_preview
 
 IMPORTANT : Quand tu crees des emails HTML, utilise TOUJOURS :::email_preview pour que l'utilisateur voie un apercu visuel directement dans le chat.
+- Termine TOUJOURS le bloc avec :::end_email_preview (PAS juste :::, car le HTML peut contenir des ::: a l'interieur qui casseraient le rendu)
 - Pour une sequence de N emails : affiche N blocs :::email_preview (un par email)
 - Le contenu est du HTML brut avec inline CSS (PAS du JSON)
 - Mets le subject dans les params : {"subject":"...","title":"Email 1/5 - Welcome"}

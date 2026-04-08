@@ -121,8 +121,15 @@ function EmailPreviewBlock({ title, subject, html }: { title: string; subject?: 
     if (iframeRef.current) {
       var doc = iframeRef.current.contentDocument;
       if (doc) {
+        // Sanitize: strip script tags, on* event handlers, javascript: URLs
+        // (defense in depth: iframe is also sandboxed without allow-scripts)
+        var safeHtml = html
+          .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
+          .replace(/\son\w+\s*=\s*"[^"]*"/gi, "")
+          .replace(/\son\w+\s*=\s*'[^']*'/gi, "")
+          .replace(/javascript\s*:/gi, "");
         doc.open();
-        doc.write('<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;}</style></head><body>' + html + '</body></html>');
+        doc.write('<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;}</style></head><body>' + safeHtml + '</body></html>');
         doc.close();
         // Auto-resize iframe to content height
         setTimeout(function() {
