@@ -78,6 +78,95 @@ export default function ConversationPage() {
       setStreamingBlocks(null);
       setActiveTools([]);
 
+      // Use the job system for /report (resumable, queueable, retryable)
+      if (message.trim().toLowerCase().startsWith("/report")) {
+        try {
+          const startRes = await fetch("/api/reports/start", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message, conversationId }),
+          });
+          if (!startRes.ok) {
+            const err = await startRes.json().catch(() => ({}));
+            setChatError({
+              message: err.error || "Failed to start report",
+              title: err.errorTitle,
+              action: err.action,
+              actionUrl: err.actionUrl,
+              code: err.errorCode,
+            });
+            setIsStreaming(false); unmarkStreaming(conversationId);
+            return;
+          }
+          const { data } = await startRes.json();
+          var jobId = data.jobId;
+          var jobAgentIds: string[] = data.agentIds || [];
+
+          // Initialize active agents from the job (will be filled by polling)
+          setActiveAgents(jobAgentIds.map(function(id) {
+            return { id: id, name: id, emoji: "🤖", color: "#999", specialty: "", status: "pending", text: "" };
+          }));
+
+          // Poll the job until done
+          var pollAttempts = 0;
+          var maxPolls = 600; // 600 * 2s = 20 min max
+          var pollInterval = setInterval(async function() {
+            pollAttempts++;
+            if (pollAttempts > maxPolls) {
+              clearInterval(pollInterval);
+              setChatError({ message: "Report timed out after 20 minutes. Please retry.", title: "Timeout", code: "TIMEOUT" });
+              setIsStreaming(false); unmarkStreaming(conversationId);
+              return;
+            }
+            try {
+              const pollRes = await fetch("/api/reports/" + jobId);
+              const pollJson = await pollRes.json();
+              if (!pollJson.data) return;
+              var jobData = pollJson.data;
+
+              // Update active agents UI
+              setActiveAgents(jobData.agents.map(function(a: any) {
+                return { id: a.id, name: a.name, emoji: a.emoji, color: a.color, specialty: "", status: a.status === "running" ? "working" : a.status, text: a.text || "" };
+              }));
+
+              // Job done?
+              if (jobData.status === "completed" || jobData.status === "partial" || jobData.status === "failed") {
+                clearInterval(pollInterval);
+
+                if (jobData.status === "failed" && !jobData.finalText) {
+                  setChatError({
+                    message: jobData.error || "All agents failed. Click retry to try the failed ones again.",
+                    title: "Report failed",
+                    code: jobData.errorCode || "UNKNOWN",
+                  });
+                  setIsStreaming(false); unmarkStreaming(conversationId);
+                  setActiveAgents([]);
+                  return;
+                }
+
+                // Add the final message
+                const assistantMsg: Message = {
+                  id: crypto.randomUUID(),
+                  role: "assistant",
+                  content: jobData.finalText || "(Report generated)",
+                  content_blocks: jobData.finalBlocks,
+                  created_at: new Date().toISOString(),
+                };
+                setMessages((prev) => [...prev, assistantMsg]);
+                setActiveAgents([]);
+                setIsStreaming(false); unmarkStreaming(conversationId);
+              }
+            } catch (e) {
+              console.error("[poll]", e);
+            }
+          }, 2000);
+        } catch (e: any) {
+          setChatError({ message: e?.message || "Failed to start report" });
+          setIsStreaming(false); unmarkStreaming(conversationId);
+        }
+        return;
+      }
+
       try {
         const res = await fetch("/api/chat", {
           method: "POST",
