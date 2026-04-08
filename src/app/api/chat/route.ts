@@ -177,8 +177,26 @@ export async function POST(request: NextRequest) {
           // Strip block syntax from history to save tokens
           content = content.replace(/:::[a-z_]+(\{[^}]*\})?\n[\s\S]*?:::/g, "[bloc visuel]").slice(0, 500) + "...";
         }
-        return { role: m.role, content: content };
-      });
+        return { role: m.role, content: content.trim() };
+      })
+      // Filter out empty messages (Anthropic rejects them with 400)
+      .filter(function(m: any) { return m.content && m.content.length > 0; });
+
+      // Anthropic requires alternating user/assistant — collapse consecutive same-role
+      var fixed: Array<{ role: string; content: string }> = [];
+      for (var hm of historyMessages) {
+        if (fixed.length > 0 && fixed[fixed.length - 1].role === hm.role) {
+          fixed[fixed.length - 1].content += "\n\n" + hm.content;
+        } else {
+          fixed.push(hm);
+        }
+      }
+      historyMessages = fixed;
+
+      // Anthropic requires the conversation to start with a user message
+      while (historyMessages.length > 0 && historyMessages[0].role !== "user") {
+        historyMessages.shift();
+      }
     }
   }
 

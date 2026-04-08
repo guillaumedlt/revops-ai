@@ -12,9 +12,28 @@ function fixOrphanJsonTables(text: string): string {
   var lines = text.split("\n");
   var result: string[] = [];
   var i = 0;
+  var insideBlock = false; // Track if we're inside a :::block ::: section
   while (i < lines.length) {
     var line = lines[i];
     var trimmed = line.trim();
+
+    // Track block boundaries — don't process JSON inside already-wrapped blocks
+    if (trimmed.startsWith(":::")) {
+      // Single ::: closes, ::: with content opens
+      if (trimmed === ":::") {
+        insideBlock = false;
+      } else {
+        insideBlock = true;
+      }
+      result.push(line);
+      i++;
+      continue;
+    }
+    if (insideBlock) {
+      result.push(line);
+      i++;
+      continue;
+    }
 
     // Detect orphan JSON table: line starting with {"headers"
     if (trimmed.startsWith('{"headers"') || trimmed.startsWith("{ \"headers\"")) {
@@ -67,6 +86,57 @@ function fixOrphanJsonTables(text: string): string {
       result.push(line);
       i = jsonStart + 1;
       continue;
+    }
+
+    // Detect orphan JSON object {"type":..., ...} (any single block)
+    if (trimmed.startsWith("{") && !trimmed.startsWith("{{")) {
+      var jsonStart2 = i;
+      var jsonStr2 = trimmed;
+      var braceCount2 = 0;
+      for (var ch4 of jsonStr2) {
+        if (ch4 === "{") braceCount2++;
+        if (ch4 === "}") braceCount2--;
+      }
+      while (braceCount2 > 0 && i + 1 < lines.length) {
+        i++;
+        jsonStr2 += "\n" + lines[i];
+        for (var ch5 of lines[i]) {
+          if (ch5 === "{") braceCount2++;
+          if (ch5 === "}") braceCount2--;
+        }
+      }
+      try {
+        var parsedObj = JSON.parse(jsonStr2);
+        if (parsedObj && typeof parsedObj === "object") {
+          // Detect block type from structure
+          var blockType: string | null = null;
+          if (Array.isArray(parsedObj.headers) && Array.isArray(parsedObj.rows)) blockType = "table";
+          else if (Array.isArray(parsedObj.steps)) blockType = "funnel";
+          else if (parsedObj.score !== undefined && parsedObj.value !== undefined) blockType = "scorecard";
+          else if (Array.isArray(parsedObj.items) && parsedObj.items.length > 0 && parsedObj.items[0].current !== undefined) blockType = "comparison";
+          else if (parsedObj.label && parsedObj.value !== undefined && parsedObj.max !== undefined) blockType = "progress";
+
+          if (blockType) {
+            var prevTitle = "";
+            if (result.length > 0) {
+              var prevT = result[result.length - 1].trim();
+              if (prevT.startsWith("#") || /^[\p{Emoji}🏆📊📈📉💰🎯⚠️✅❌🔴🟠🟡🟢]/u.test(prevT) || prevT.startsWith("**")) {
+                prevTitle = prevT.replace(/^[#*\s]+/, "").replace(/\*+$/, "").trim();
+                result.pop();
+              }
+            }
+            var paramsObj: any = {};
+            if (prevTitle) paramsObj.title = prevTitle;
+            var paramsStr = Object.keys(paramsObj).length > 0 ? JSON.stringify(paramsObj) : "";
+            result.push(":::" + blockType + paramsStr);
+            result.push(jsonStr2);
+            result.push(":::");
+            i++;
+            continue;
+          }
+        }
+      } catch {}
+      i = jsonStart2;
     }
 
     // Detect orphan JSON kpi_grid: line starting with [{
