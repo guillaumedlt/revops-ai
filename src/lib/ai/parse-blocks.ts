@@ -2,7 +2,97 @@ import type { ContentBlock } from "@/types/chat-blocks";
 
 var BLOCK_TYPES = "kpi_grid|kpi|chart|table|alert|progress|funnel|comparison|scorecard|email_preview|clarification|confirmation|action_result";
 
+// Pre-process: convert orphan JSON tables (no :::table wrapper) into proper blocks.
+// AI sometimes outputs the table title as a heading + raw JSON, like:
+//   ## 🏆 Top 10 Deals
+//   {"headers":[...],"rows":[...]}
+function fixOrphanJsonTables(text: string): string {
+  // Match: optional title line, then a JSON object with headers + rows
+  // Pattern: a line starting with #, **, or emoji + emoji-like, followed by a JSON line starting with {"headers"
+  var lines = text.split("\n");
+  var result: string[] = [];
+  var i = 0;
+  while (i < lines.length) {
+    var line = lines[i];
+    var trimmed = line.trim();
+
+    // Detect orphan JSON table: line starting with {"headers"
+    if (trimmed.startsWith('{"headers"') || trimmed.startsWith("{ \"headers\"")) {
+      // Collect the full JSON (might span multiple lines if pretty-printed)
+      var jsonStart = i;
+      var jsonStr = trimmed;
+      // If it doesn't end with }, keep collecting lines
+      var braceCount = 0;
+      for (var ch of jsonStr) {
+        if (ch === "{") braceCount++;
+        if (ch === "}") braceCount--;
+      }
+      while (braceCount > 0 && i + 1 < lines.length) {
+        i++;
+        jsonStr += "\n" + lines[i];
+        for (var ch2 of lines[i]) {
+          if (ch2 === "{") braceCount++;
+          if (ch2 === "}") braceCount--;
+        }
+      }
+
+      // Check the previous line for a title
+      var title = "";
+      if (result.length > 0) {
+        var prevLine = result[result.length - 1].trim();
+        // Match: ## Title, **Title**, or starts with emoji + text
+        var titleMatch = prevLine.match(/^(?:#{1,4}\s*)?(.+?)(?:\*+)?$/);
+        // Only treat as title if it's heading-like (starts with #, contains emoji, or is bold)
+        if (prevLine.startsWith("#") || /^[\p{Emoji}🏆📊📈📉💰🎯⚠️✅❌🔴🟠🟡🟢]/u.test(prevLine) || prevLine.startsWith("**")) {
+          title = prevLine.replace(/^[#*\s]+/, "").replace(/\*+$/, "").trim();
+          result.pop(); // Remove the title line, it'll go into the block params
+        }
+      }
+
+      // Validate JSON
+      try {
+        var parsed = JSON.parse(jsonStr);
+        if (parsed && Array.isArray(parsed.headers) && Array.isArray(parsed.rows)) {
+          var paramStr = title ? '{"title":"' + title.replace(/"/g, '\\"') + '"}' : "";
+          result.push(":::table" + paramStr);
+          result.push(jsonStr);
+          result.push(":::");
+          i++;
+          continue;
+        }
+      } catch {
+        // Not valid JSON, leave as-is
+      }
+      // Fall through if invalid
+      result.push(line);
+      i = jsonStart + 1;
+      continue;
+    }
+
+    // Detect orphan JSON kpi_grid: line starting with [{"label"
+    if (trimmed.startsWith('[{"label"') && trimmed.includes('"value"')) {
+      try {
+        var parsedKpi = JSON.parse(trimmed);
+        if (Array.isArray(parsedKpi) && parsedKpi.every(function(p: any) { return p.label && p.value; })) {
+          result.push(":::kpi_grid");
+          result.push(trimmed);
+          result.push(":::");
+          i++;
+          continue;
+        }
+      } catch {}
+    }
+
+    result.push(line);
+    i++;
+  }
+  return result.join("\n");
+}
+
 function parseInnerBlocks(text: string): ContentBlock[] {
+  // Pre-process: wrap orphan JSON tables/kpi_grids in proper :::block syntax
+  text = fixOrphanJsonTables(text);
+
   var blocks: ContentBlock[] = [];
 
   if (!text.includes(":::")) {

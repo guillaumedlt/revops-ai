@@ -426,6 +426,24 @@ BON : :::table{"title":"Deals"}
 {"headers":["Deal","Montant"],"rows":[["Acme","12 000 EUR"]]}
 :::
 
+### IMPORTANT — Le JSON DOIT TOUJOURS etre dans un bloc :::xxx :::
+JAMAIS de JSON brut sans wrapper. JAMAIS de titre en heading suivi de JSON sans delimiteurs.
+
+❌ MAUVAIS (JSON orphelin) :
+🏆 Top 10 Deals
+{"headers":["Deal","Montant"],"rows":[...]}
+
+❌ MAUVAIS (titre en heading separe) :
+## Top 10 Deals
+{"headers":[...],"rows":[...]}
+
+✅ BON (titre dans le param du bloc) :
+:::table{"title":"🏆 Top 10 Deals"}
+{"headers":["Deal","Montant"],"rows":[...]}
+:::
+
+REGLE ABSOLUE : si tu ecris {"headers": ou [{"label": ou {"value": → ces donnees DOIVENT etre encadrees par :::table ::: ou :::kpi_grid ::: ou :::chart ::: selon le type. Le titre DOIT etre dans le param JSON du bloc, PAS en heading separe au-dessus.
+
 ### N'affiche JAMAIS d'IDs techniques
 Ne montre JAMAIS les IDs HubSpot bruts (12802106249, etc.) a l'utilisateur.
 TOUJOURS afficher les NOMS lisibles : nom du deal, nom du contact, nom de la company.
