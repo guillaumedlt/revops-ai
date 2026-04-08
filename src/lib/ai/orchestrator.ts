@@ -1,4 +1,4 @@
-// Multi-agent orchestrator — runs specialized agents in parallel
+// Multi-agent orchestrator — runs specialized agents sequentially with shared tool cache
 
 import { AGENTS, type AgentProfile } from "./agents";
 import { SYSTEM_PROMPT, buildTenantContext } from "./prompts/system";
@@ -9,6 +9,10 @@ interface AgentResult {
   text: string;
   error?: string;
 }
+
+// Shared cache for tool results across agents in the same /report
+// Key: toolName + JSON.stringify(input)
+type ToolCache = Map<string, any>;
 
 // Run a single agent with its own API call and tool loop
 async function runAgent(
@@ -23,6 +27,7 @@ async function runAgent(
   onToolResult: (agentId: string, toolName: string) => void,
   onDone: (agentId: string) => void,
   tenantId: string,
+  toolCache: ToolCache,
 ): Promise<AgentResult> {
   // Filter tools to only this agent's tools
   var agentTools: Record<string, ConnectorTool> = {};
@@ -87,9 +92,14 @@ async function runAgent(
         if (response.status === 429 || response.status === 529 || response.status === 503) {
           retries++;
           if (retries >= maxRetries) break;
-          // Exponential backoff: 2s, 4s, 8s, 16s + jitter
-          var backoff = Math.pow(2, retries) * 1000 + Math.random() * 500;
-          console.warn("[orchestrator] " + response.status + " on agent=" + agent.id + ", retry " + retries + "/" + maxRetries + " in " + Math.round(backoff) + "ms");
+          // Aggressive backoff: 5s, 15s, 30s, 60s + jitter (Anthropic tier 1 needs time)
+          var backoffs = [5000, 15000, 30000, 60000];
+          var backoff = backoffs[retries - 1] + Math.random() * 1000;
+          console.warn("[orchestrator] " + response.status + " on agent=" + agent.id + ", retry " + retries + "/" + maxRetries + " in " + Math.round(backoff / 1000) + "s");
+          // Notify client we're waiting
+          try {
+            onToolStart(agent.id, "waiting_for_rate_limit");
+          } catch {}
           await new Promise(function(r) { setTimeout(r, backoff); });
           continue;
         }
@@ -183,11 +193,19 @@ async function runAgent(
         var tool = agentTools[toolCall.name];
         var result: any = { error: "Unknown tool" };
         if (tool) {
-          try {
-            result = await tool.execute(toolCall.input, tenantId);
+          // Check shared cache first — saves duplicate HubSpot calls across agents
+          var cacheKey = toolCall.name + ":" + JSON.stringify(toolCall.input);
+          if (toolCache.has(cacheKey)) {
+            result = toolCache.get(cacheKey);
             onToolResult(agent.id, toolCall.name);
-          } catch (e) {
-            result = { error: e instanceof Error ? e.message : "Tool failed" };
+          } else {
+            try {
+              result = await tool.execute(toolCall.input, tenantId);
+              toolCache.set(cacheKey, result);
+              onToolResult(agent.id, toolCall.name);
+            } catch (e) {
+              result = { error: e instanceof Error ? e.message : "Tool failed" };
+            }
           }
         }
         toolResults.push({ type: "tool_result", tool_use_id: toolCall.id, content: JSON.stringify(result) });
@@ -226,10 +244,12 @@ export async function runMultiAgent(
     agents: agents.map(function(a) { return { id: a.id, name: a.name, emoji: a.emoji, color: a.color, specialty: a.specialty }; }),
   }) + "\n\n"));
 
-  // Run agents in batches of 2 to avoid hitting Anthropic rate limits
-  // (5 agents x 4-6 tool calls each = 20-30 parallel API calls → 429)
-  var BATCH_SIZE = 2;
+  // Run agents truly sequentially with shared tool cache
+  // - Sequential = no rate limit explosion
+  // - Shared cache = if Pipeline already called hubspot_get_pipeline,
+  //   Forecast reuses the cached result instead of re-calling
   var results: AgentResult[] = [];
+  var sharedCache: ToolCache = new Map();
 
   function runOneAgent(agent: AgentProfile): Promise<AgentResult> {
     return runAgent(
@@ -252,25 +272,25 @@ export async function runMultiAgent(
         try { controller.enqueue(encoder.encode("data: " + JSON.stringify({ type: "agent_done", agentId: agentId }) + "\n\n")); } catch {}
       },
       tenantId,
+      sharedCache,
     );
   }
 
-  for (var i = 0; i < agents.length; i += BATCH_SIZE) {
-    var batch = agents.slice(i, i + BATCH_SIZE);
-    var settled = await Promise.allSettled(batch.map(runOneAgent));
-    settled.forEach(function(s, idx) {
-      if (s.status === "fulfilled") {
-        results.push(s.value);
-      } else {
-        console.error("[orchestrator] Agent " + batch[idx].id + " rejected:", s.reason);
-        results.push({ agentId: batch[idx].id, text: "", error: "Agent crashed: " + (s.reason?.message || "unknown") });
-      }
-    });
-    // Brief pause between batches to let rate limits recover
-    if (i + BATCH_SIZE < agents.length) {
-      await new Promise(function(r) { setTimeout(r, 500); });
+  for (var i = 0; i < agents.length; i++) {
+    try {
+      var result = await runOneAgent(agents[i]);
+      results.push(result);
+    } catch (e: any) {
+      console.error("[orchestrator] Agent " + agents[i].id + " crashed:", e);
+      results.push({ agentId: agents[i].id, text: "", error: "Agent crashed: " + (e?.message || "unknown") });
+    }
+    // Pause between agents to spread out API calls (helps rate limits)
+    if (i + 1 < agents.length) {
+      await new Promise(function(r) { setTimeout(r, 1500); });
     }
   }
+
+  console.log("[orchestrator] Done. Tool cache hits saved:", sharedCache.size, "calls");
 
   // Combine all agent results into final text
   var sections = results.map(function(r) {
