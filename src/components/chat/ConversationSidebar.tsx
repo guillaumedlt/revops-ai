@@ -27,19 +27,20 @@ export default function ConversationSidebar() {
   var [searchQuery, setSearchQuery] = useState("");
   var [credits, setCredits] = useState<{ used: number; total: number; remaining: number; plan: string } | null>(null);
   var [alertCount, setAlertCount] = useState(0);
-  var [streamingConvs, setStreamingConvs] = useState<Set<string>>(new Set());
+  var [streamingKey, setStreamingKey] = useState(""); // CSV of streaming IDs, only for triggering re-render
+  var streamingSetRef = useRef<Set<string>>(new Set());
 
-  // Poll streaming status every 2s — only update state if IDs actually changed
+  // Poll streaming status every 3s — only update if the set of IDs changes
   useEffect(function() {
     var interval = setInterval(function() {
       var ids = getStreamingIds();
-      setStreamingConvs(function(prev) {
-        var prevArr = Array.from(prev).sort().join(",");
-        var newArr = ids.sort().join(",");
-        if (prevArr === newArr) return prev; // Same set — no re-render
-        return new Set(ids);
-      });
-    }, 2000);
+      var newKey = ids.sort().join(",");
+      var oldKey = Array.from(streamingSetRef.current).sort().join(",");
+      if (newKey !== oldKey) {
+        streamingSetRef.current = new Set(ids);
+        setStreamingKey(newKey); // Triggers ONE re-render when set changes
+      }
+    }, 3000);
     return function() { clearInterval(interval); };
   }, []);
   var [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -158,8 +159,13 @@ export default function ConversationSidebar() {
                       className={"w-full text-left text-[13px] truncate px-2 pr-7 h-[30px] flex items-center rounded transition-colors " + (isActive ? "bg-[#F5F5F5] text-[#111] font-medium" : "text-[#555] hover:bg-[#FAFAFA] hover:text-[#111]")}>
                       <span className="block truncate">{conv.title || "New conversation"}</span>
                     </button>
-                    {streamingConvs.has(conv.id) ? (
-                      <div className="absolute right-2 top-1/2 -translate-y-1/2 h-3.5 w-3.5 border-[1.5px] border-[#E5E5E5] border-t-[#111] rounded-full animate-spin" />
+                    {streamingSetRef.current.has(conv.id) ? (
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2">
+                        <svg width="14" height="14" viewBox="0 0 14 14" className="animate-spin">
+                          <circle cx="7" cy="7" r="5.5" fill="none" stroke="#E5E5E5" strokeWidth="1.5" />
+                          <path d="M 7 1.5 A 5.5 5.5 0 0 1 12.5 7" fill="none" stroke="#111" strokeWidth="1.5" strokeLinecap="round" />
+                        </svg>
+                      </span>
                     ) : (
                       <button onClick={function(e) { e.stopPropagation(); handleDelete(conv.id); }}
                         className="absolute right-1 top-1/2 -translate-y-1/2 hidden group-hover:flex h-5 w-5 items-center justify-center rounded text-[#DDD] hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-colors">
