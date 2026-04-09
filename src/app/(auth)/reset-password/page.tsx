@@ -19,7 +19,7 @@ export default function ResetPasswordPage() {
 
     var supabase = createClient();
     var { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: (window.location.origin || "https://revops-ai-six.vercel.app") + "/update-password",
+      redirectTo: window.location.origin + "/auth/callback?next=/update-password",
     });
 
     if (resetError) {
