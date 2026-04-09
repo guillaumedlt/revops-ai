@@ -110,13 +110,13 @@ async function hubspotFetch(path: string, token: string, options?: RequestInit) 
   return res.json();
 }
 
-// Owner name cache (per-request, avoids N+1 calls)
-var ownerCache: Record<string, Record<string, string>> = {};
+// Owner name cache — keyed by tenantId (NOT token) to prevent cross-tenant leaks
+var ownerCache: Record<string, { map: Record<string, string>; expires: number }> = {};
 
-async function getOwnerMap(token: string): Promise<Record<string, string>> {
-  // Simple cache key based on token prefix
-  var cacheKey = token.slice(0, 10);
-  if (ownerCache[cacheKey]) return ownerCache[cacheKey];
+async function getOwnerMap(token: string, tenantId?: string): Promise<Record<string, string>> {
+  var cacheKey = tenantId || token.slice(0, 20);
+  var cached = ownerCache[cacheKey];
+  if (cached && cached.expires > Date.now()) return cached.map;
 
   try {
     var data = await hubspotFetch("/crm/v3/owners?limit=100", token);
@@ -125,9 +125,7 @@ async function getOwnerMap(token: string): Promise<Record<string, string>> {
       var name = [owner.firstName, owner.lastName].filter(Boolean).join(" ").trim();
       map[owner.id] = name || owner.email || owner.id;
     }
-    ownerCache[cacheKey] = map;
-    // Clear cache after 5 min
-    setTimeout(function() { delete ownerCache[cacheKey]; }, 300000);
+    ownerCache[cacheKey] = { map: map, expires: Date.now() + 300000 }; // 5 min TTL
     return map;
   } catch {
     return {};
