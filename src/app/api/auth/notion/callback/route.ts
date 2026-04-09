@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
 
   const clientId = process.env.NOTION_CLIENT_ID!;
   const clientSecret = process.env.NOTION_CLIENT_SECRET!;
-  const redirectUri = (process.env.NEXT_PUBLIC_APP_URL || "https://revops-ai-six.vercel.app") + "/api/auth/notion/callback";
+  const redirectUri = (process.env.NEXT_PUBLIC_APP_URL || "https://aikairo.app") + "/api/auth/notion/callback";
 
   try {
     // Exchange code for access token

@@ -68,7 +68,7 @@ export async function GET(request: NextRequest) {
   <h1>${title}</h1>
   <p class="meta">Genere par Kairo — ${date}</p>
   ${messagesHtml}
-  <p style="margin-top:32px;font-size:10px;color:#ccc;text-align:center;">Genere par Kairo AI — revops-ai-six.vercel.app</p>
+  <p style="margin-top:32px;font-size:10px;color:#ccc;text-align:center;">Genere par Kairo AI — aikairo.app</p>
 </body>
 </html>`;
 

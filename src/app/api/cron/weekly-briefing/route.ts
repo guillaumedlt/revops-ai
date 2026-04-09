@@ -167,7 +167,7 @@ function buildWeeklyEmailHtml(data: {
     '</div>' +
 
     '<div style="text-align:center;">' +
-    '<a href="https://revops-ai-six.vercel.app/alerts" style="display:inline-block;background:#111;color:white;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">Open Kairo →</a>' +
+    '<a href="https://aikairo.app/alerts" style="display:inline-block;background:#111;color:white;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">Open Kairo →</a>' +
     '</div>' +
 
     '<p style="font-size:10px;color:#CCC;text-align:center;margin-top:32px;">Sent by Kairo AI — Your RevOps Assistant</p>' +

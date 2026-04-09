@@ -49,14 +49,14 @@ export async function POST(request: NextRequest) {
       .eq("id", auth.tenantId);
   }
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://revops-ai-six.vercel.app";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://aikairo.app";
 
   const session = await stripe.checkout.sessions.create({
     customer: customerId,
     mode: "subscription",
     line_items: [{ price: plan.stripePriceId, quantity: 1 }],
-    success_url: `${appUrl}/dashboard/settings?billing=success`,
-    cancel_url: `${appUrl}/dashboard/settings?billing=cancelled`,
+    success_url: `${appUrl}/settings?billing=success`,
+    cancel_url: `${appUrl}/settings?billing=cancelled`,
     subscription_data: {
       metadata: { tenant_id: auth.tenantId },
     },

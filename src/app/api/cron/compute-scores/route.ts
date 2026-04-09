@@ -108,7 +108,7 @@ export async function GET(request: NextRequest) {
   var briefingSent = 0;
   if (isMonday) {
     try {
-      var briefingUrl = (process.env.NEXT_PUBLIC_APP_URL || "https://revops-ai-six.vercel.app") + "/api/cron/weekly-briefing";
+      var briefingUrl = (process.env.NEXT_PUBLIC_APP_URL || "https://aikairo.app") + "/api/cron/weekly-briefing";
       var briefRes = await fetch(briefingUrl, { headers: { "Authorization": "Bearer " + process.env.CRON_SECRET } });
       var briefJson = await briefRes.json();
       briefingSent = briefJson.sent || 0;

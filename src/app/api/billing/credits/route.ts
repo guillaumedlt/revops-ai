@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
     await supabase.from("tenants").update({ stripe_customer_id: customerId }).eq("id", auth.tenantId);
   }
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://revops-ai-six.vercel.app";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://aikairo.app";
 
   const session = await stripe.checkout.sessions.create({
     customer: customerId,

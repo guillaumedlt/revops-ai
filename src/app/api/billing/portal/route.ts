@@ -20,11 +20,11 @@ export async function POST(request: NextRequest) {
   }
 
   const stripe = getStripe();
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://revops-ai-six.vercel.app";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://aikairo.app";
 
   const session = await stripe.billingPortal.sessions.create({
     customer: tenant.stripe_customer_id,
-    return_url: `${appUrl}/dashboard/settings`,
+    return_url: `${appUrl}/settings`,
   });
 
   return NextResponse.json(apiSuccess({ portalUrl: session.url }));

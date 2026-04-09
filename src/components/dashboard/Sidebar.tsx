@@ -76,7 +76,7 @@ function NavSection({ label, items }: { label: string; items: NavItem[] }) {
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const isSettingsActive = pathname === "/dashboard/settings";
+  const isSettingsActive = pathname === "/settings";
 
   return (
     <aside className="w-[220px] bg-sidebar-background border-r border-sidebar-border flex flex-col h-full shrink-0">
@@ -96,7 +96,7 @@ export default function Sidebar() {
 
       <div className="px-2 py-3">
         <Link
-          href="/dashboard/settings"
+          href="/settings"
           className={`flex items-center gap-2 h-8 px-3 rounded text-sm ${
             isSettingsActive
               ? "text-sidebar-active font-medium bg-sidebar-active-bg"

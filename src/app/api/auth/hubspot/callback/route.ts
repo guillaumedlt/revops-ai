@@ -6,7 +6,7 @@ import { encrypt } from "@/lib/crypto";
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const code = searchParams.get("code");
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://revops-ai-six.vercel.app";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://aikairo.app";
 
   if (!code) {
     return NextResponse.redirect(`${appUrl}/settings?tab=connectors&hubspot=error&reason=missing_code`);

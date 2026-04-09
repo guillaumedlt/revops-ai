@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Notion integration not configured" }, { status: 500 });
   }
 
-  const redirectUri = (process.env.NEXT_PUBLIC_APP_URL || "https://revops-ai-six.vercel.app") + "/api/auth/notion/callback";
+  const redirectUri = (process.env.NEXT_PUBLIC_APP_URL || "https://aikairo.app") + "/api/auth/notion/callback";
 
   const url = new URL("https://api.notion.com/v1/oauth/authorize");
   url.searchParams.set("client_id", clientId);
