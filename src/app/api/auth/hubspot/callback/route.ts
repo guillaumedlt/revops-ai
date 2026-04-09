@@ -20,36 +20,51 @@ export async function GET(request: NextRequest) {
 
     const supabase = createAdminClient();
 
-    // Find tenant: first by portal_id, then most recent without portal
+    // Step 1: Identify the current user from their session cookie
+    const { createServerClient } = await import("@supabase/ssr");
+    const response = NextResponse.redirect(`${appUrl}/settings?tab=connectors&hubspot=success`);
+    const authClient = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() { return request.cookies.getAll(); },
+          setAll(cookiesToSet: Array<{ name: string; value: string; options?: Record<string, unknown> }>) {
+            cookiesToSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options as any));
+          },
+        },
+      }
+    );
+    const { data: { user } } = await authClient.auth.getUser();
+
+    // Step 2: Find the tenant — prefer user's own tenant, fallback to portal match
     let tenantId: string | null = null;
 
-    const { data: existingTenant } = await supabase
-      .from("tenants")
-      .select("id")
-      .eq("hubspot_portal_id", portalId)
-      .single();
-
-    if (existingTenant) {
-      tenantId = existingTenant.id;
-    } else {
-      // Find the most recent tenant without a HubSpot connection
-      const { data: unlinkedTenants } = await supabase
-        .from("tenants")
-        .select("id")
-        .is("hubspot_portal_id", null)
-        .order("created_at", { ascending: false })
-        .limit(1);
-
-      if (unlinkedTenants?.length) {
-        tenantId = unlinkedTenants[0].id;
+    if (user) {
+      // Get the user's tenant from DB
+      const { data: dbUser } = await supabase
+        .from("users")
+        .select("tenant_id")
+        .eq("id", user.id)
+        .single();
+      if (dbUser?.tenant_id) {
+        tenantId = dbUser.tenant_id;
+        // Update tenant with portal info
         await supabase
           .from("tenants")
-          .update({
-            hubspot_portal_id: portalId,
-            name: tokenInfo.hub_domain || `Portal ${portalId}`,
-          })
+          .update({ hubspot_portal_id: portalId, name: tokenInfo.hub_domain || `Portal ${portalId}` })
           .eq("id", tenantId);
       }
+    }
+
+    // Fallback: check if this portal is already linked to a tenant
+    if (!tenantId) {
+      const { data: existingTenant } = await supabase
+        .from("tenants")
+        .select("id")
+        .eq("hubspot_portal_id", portalId)
+        .single();
+      if (existingTenant) tenantId = existingTenant.id;
     }
 
     if (!tenantId) {
@@ -75,7 +90,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(`${appUrl}/settings?tab=connectors&hubspot=error&reason=db_error`);
     }
 
-    return NextResponse.redirect(`${appUrl}/settings?tab=connectors&hubspot=success`);
+    // Return the response object created earlier (it has the auth cookies set)
+    return response;
   } catch (error) {
     console.error("HubSpot callback error:", error);
     const msg = error instanceof Error ? error.message : "unknown";
