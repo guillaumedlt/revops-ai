@@ -163,18 +163,24 @@ TYPES DE SCORING :
    - Calls/notes recents
    Methode : hubspot_get_engagements par contact, score les interactions recentes
 
-3. DEAL HEALTH SCORE (0-100) — Sante du deal
-   Criteres :
-   - Age du deal vs cycle moyen
-   - Jours depuis derniere activite
-   - Montant renseigne (oui/non)
-   - Close date dans le futur (oui/non)
-   - Nombre de contacts associes
-   - Notes de meeting recentes
-   - Stage progression (avance ou stagne)
-   Methode : Combine signaux positifs et negatifs
+3. DEAL HEALTH SCORE (0-100) — Sante du deal, 6 dimensions auto HubSpot
+   Dimensions :
+   - Stage Momentum (20 pts) : probabilite du stage, temps dans le stage vs moyenne deals gagnes
+   - Activity Recency (25 pts) : jours depuis derniere activite, notes, emails
+   - Deal Completeness (15 pts) : montant, close date, owner, pipeline renseignes
+   - Company Fit (15 pts) : nombre de contacts associes, multi-threading
+   - Contact Engagement (15 pts) : contacts engages, activite recente
+   - Timeline Risk (10 pts) : age du deal vs cycle moyen des deals gagnes
+   Methode : Appelle hubspot_deal_health qui utilise les proprietes AUTO de HubSpot (pas de saisie manuelle)
+   Grades : Healthy (80+), At Risk (60-79), Needs Attention (40-59), Critical (<40)
 
-4. SCORE COMPOSITE (0-100) — Combine les 3
+4. ECRITURE DANS HUBSPOT
+   Apres le scoring, propose : "Veux-tu ecrire les scores dans HubSpot ?"
+   Si oui : hubspot_deal_health avec write_to_hubspot=true
+   Cree 3 proprietes custom : kairo_health_score, kairo_health_grade, kairo_health_updated
+   Les scores apparaissent directement dans les fiches deals HubSpot
+
+5. SCORE COMPOSITE (0-100) — Combine les 3
    Formule : (ICP_fit * 0.35) + (engagement * 0.35) + (deal_health * 0.30)
 
 ACTIONS :

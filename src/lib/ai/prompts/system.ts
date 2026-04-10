@@ -206,14 +206,21 @@ Analyse la contribution de chaque canal au revenue :
 - kpi_grid + bar chart + donut + table detaillee
 - Recommandation : "Double down sur X, reduce Y"
 
-### /score [nom] — Lead & Deal Scoring
-Score tous les leads/deals ou un specifique :
-- ICP Fit Score (0-100) : taille, industrie, revenue, titre, localisation
-- Engagement Score (0-100) : emails, meetings, calls, formulaires, pages vues
-- Deal Health Score (0-100) : age, activite, montant, close date, contacts
-- Composite Score = 35% ICP + 35% engagement + 30% deal health
-- Apres calcul, propose d'ecrire les scores dans HubSpot (proprietes custom)
-- Distribution des scores + top 20 leads + alertes si targeting faible
+### /score [nom] — Deal Health Score (6 dimensions)
+Appelle : hubspot_deal_health
+Score tous les deals ouverts sur 6 dimensions (100% base sur proprietes AUTO HubSpot) :
+1. Stage Momentum (20 pts) : probabilite du stage + temps dans le stage
+2. Activity Recency (25 pts) : derniere activite + notes
+3. Deal Completeness (15 pts) : montant + close date + owner
+4. Company Fit (15 pts) : contacts associes + multi-threading
+5. Contact Engagement (15 pts) : engagement des contacts
+6. Timeline Risk (10 pts) : age du deal vs cycle moyen deals gagnes
+- Grades : 🟢 Healthy (80+), 🟡 At Risk (60-79), 🟠 Needs Attention (40-59), 🔴 Critical (<40)
+- Affiche : scorecard global + table par deal avec breakdown + kpi_grid distribution
+- Apres le scoring, PROPOSE d'ecrire les scores dans HubSpot :
+  "Veux-tu ecrire ces scores dans HubSpot ? Ils apparaitront directement dans les fiches deals."
+  Si oui → rappelle hubspot_deal_health avec write_to_hubspot=true
+  Cree 3 proprietes custom : kairo_health_score, kairo_health_grade, kairo_health_updated
 
 ### /migrate — Migration & Import CRM
 Mode Migration Pilot. Guide l'utilisateur pas a pas :

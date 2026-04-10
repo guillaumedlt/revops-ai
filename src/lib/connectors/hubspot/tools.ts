@@ -954,10 +954,11 @@ export const hubspotTools = {
 
   hubspot_deal_health: {
     connector: "hubspot",
-    description: "Calculate a health score (0-100) for open deals. Identifies at-risk deals based on: days without activity, time stuck in stage, missing data, and deal amount vs average. Returns scored deals sorted by risk.",
+    description: "Calculate a 6-dimension health score (0-100) for open deals using HubSpot auto-populated properties. Dimensions: Stage Momentum, Activity Recency, Deal Completeness, Company Fit, Contact Engagement, Timeline Risk. Returns scored deals sorted by risk with per-dimension breakdown.",
     parameters: z.object({
       owner_id: z.string().optional().describe("Filter by owner ID"),
       min_amount: z.number().optional().describe("Minimum deal amount to include"),
+      write_to_hubspot: z.boolean().optional().describe("Write scores back to HubSpot as custom properties (kairo_health_score, kairo_health_grade)"),
     }),
     execute: async (args: any, tenantId: string) => {
       const auth = await getHubSpotToken(tenantId);
@@ -967,11 +968,20 @@ export const hubspotTools = {
       if (args.owner_id) filters.push({ propertyName: "hubspot_owner_id", operator: "EQ", value: args.owner_id });
       if (args.min_amount) filters.push({ propertyName: "amount", operator: "GTE", value: String(args.min_amount) });
 
+      // Fetch deals with ALL auto-populated properties for scoring
+      const DEAL_PROPS = [
+        "dealname", "dealstage", "amount", "hubspot_owner_id", "closedate",
+        "hs_last_sales_activity_date", "hs_date_entered_currentstage",
+        "hs_deal_stage_probability", "notes_last_updated", "createdate",
+        "num_associated_contacts", "pipeline", "hs_is_closed", "hs_is_closed_won",
+        "days_to_close",
+      ];
+
       const data = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
         method: "POST",
         body: JSON.stringify({
           filterGroups: [{ filters }],
-          properties: ["dealname", "dealstage", "amount", "hubspot_owner_id", "closedate", "hs_last_sales_activity_date", "hs_date_entered_" + "currentstage", "createdate", "notes_last_updated"],
+          properties: DEAL_PROPS,
           limit: 100,
           sorts: [{ propertyName: "amount", direction: "DESCENDING" }],
         }),
@@ -979,40 +989,114 @@ export const hubspotTools = {
 
       const now = Date.now();
       const DAY = 86400000;
-      const ownerMap = await getOwnerMap(auth.accessToken);
+      const ownerMap = await getOwnerMap(auth.accessToken, tenantId);
 
+      // Fetch won deals for ICP baseline (avg cycle, top industries, etc.)
+      var wonData: any = null;
+      try {
+        wonData = await hubspotFetch("/crm/v3/objects/deals/search", auth.accessToken, {
+          method: "POST",
+          body: JSON.stringify({
+            filterGroups: [{ filters: [{ propertyName: "hs_is_closed_won", operator: "EQ", value: "true" }] }],
+            properties: ["createdate", "closedate", "amount", "dealstage"],
+            limit: 50,
+          }),
+        });
+      } catch {}
+
+      // Calculate baseline from won deals
+      var avgWonCycleDays = 45; // default
+      if (wonData?.results?.length > 3) {
+        var cycles = wonData.results.map(function(d: any) {
+          var created = d.properties.createdate ? new Date(d.properties.createdate).getTime() : 0;
+          var closed = d.properties.closedate ? new Date(d.properties.closedate).getTime() : 0;
+          return created && closed && closed > created ? (closed - created) / DAY : null;
+        }).filter(Boolean) as number[];
+        if (cycles.length > 0) avgWonCycleDays = Math.round(cycles.reduce(function(a, b) { return a + b; }, 0) / cycles.length);
+      }
+
+      // Score each deal
       const scoredDeals = (data.results || []).map((d: any) => {
         const p = d.properties;
-        let health = 100;
+        const breakdown: Record<string, { score: number; max: number; detail: string }> = {};
         const risks: string[] = [];
 
-        // Activity check (-30 pts max)
-        const lastActivity = p.hs_last_sales_activity_date ? new Date(p.hs_last_sales_activity_date).getTime() : 0;
-        const daysSinceActivity = lastActivity ? Math.floor((now - lastActivity) / DAY) : 999;
-        if (daysSinceActivity > 30) { health -= 30; risks.push("No activity in " + daysSinceActivity + " days"); }
-        else if (daysSinceActivity > 14) { health -= 15; risks.push("No activity in " + daysSinceActivity + " days"); }
-        else if (daysSinceActivity > 7) { health -= 5; }
+        // ═══ 1. STAGE MOMENTUM (20 pts) ═══
+        var stageScore = 20;
+        var stageProb = Number(p.hs_deal_stage_probability) || 0;
+        // Higher stage probability = better
+        if (stageProb >= 70) stageScore = 20;
+        else if (stageProb >= 40) stageScore = 15;
+        else if (stageProb >= 20) stageScore = 10;
+        else stageScore = 5;
+        // Penalty if stuck in current stage
+        var enteredStage = p.hs_date_entered_currentstage ? new Date(p.hs_date_entered_currentstage).getTime() : 0;
+        var daysInStage = enteredStage ? Math.floor((now - enteredStage) / DAY) : 0;
+        if (daysInStage > avgWonCycleDays * 0.5) { stageScore = Math.max(0, stageScore - 10); risks.push("Stuck in stage for " + daysInStage + " days"); }
+        else if (daysInStage > avgWonCycleDays * 0.3) { stageScore = Math.max(0, stageScore - 5); }
+        breakdown.stageMomentum = { score: stageScore, max: 20, detail: "Stage prob: " + stageProb + "%, " + daysInStage + "d in stage" };
 
-        // Close date check (-25 pts max)
-        if (p.closedate) {
-          const closeDate = new Date(p.closedate).getTime();
-          if (closeDate < now) { health -= 25; risks.push("Close date passed"); }
-          else if (closeDate - now < 7 * DAY) { health -= 10; risks.push("Closing in < 7 days"); }
-        } else {
-          health -= 10; risks.push("No close date set");
-        }
+        // ═══ 2. ACTIVITY RECENCY (25 pts) ═══
+        var actScore = 25;
+        var lastActivity = p.hs_last_sales_activity_date ? new Date(p.hs_last_sales_activity_date).getTime() : 0;
+        var daysSinceActivity = lastActivity ? Math.floor((now - lastActivity) / DAY) : 999;
+        if (daysSinceActivity > 30) { actScore = 0; risks.push("No activity in " + daysSinceActivity + " days"); }
+        else if (daysSinceActivity > 14) { actScore = 8; risks.push("Inactive " + daysSinceActivity + " days"); }
+        else if (daysSinceActivity > 7) { actScore = 15; }
+        else { actScore = 25; }
+        // Bonus check: notes
+        var lastNote = p.notes_last_updated ? new Date(p.notes_last_updated).getTime() : 0;
+        var daysSinceNote = lastNote ? Math.floor((now - lastNote) / DAY) : 999;
+        if (daysSinceNote > 30) actScore = Math.max(0, actScore - 5);
+        breakdown.activityRecency = { score: actScore, max: 25, detail: daysSinceActivity + "d since activity, " + daysSinceNote + "d since note" };
 
-        // Amount check (-15 pts)
-        if (!p.amount || Number(p.amount) === 0) { health -= 15; risks.push("No amount set"); }
+        // ═══ 3. DEAL COMPLETENESS (15 pts) ═══
+        var compScore = 15;
+        if (!p.amount || Number(p.amount) === 0) { compScore -= 5; risks.push("No amount"); }
+        if (!p.closedate) { compScore -= 4; risks.push("No close date"); }
+        else if (new Date(p.closedate).getTime() < now) { compScore -= 3; risks.push("Close date passed"); }
+        if (!p.hubspot_owner_id) { compScore -= 3; risks.push("No owner"); }
+        if (!p.pipeline) { compScore -= 3; }
+        breakdown.dealCompleteness = { score: Math.max(0, compScore), max: 15, detail: [p.amount ? "Amount ✓" : "Amount ✗", p.closedate ? "Close date ✓" : "Close date ✗", p.hubspot_owner_id ? "Owner ✓" : "Owner ✗"].join(", ") };
 
-        // Age check (-20 pts max)
-        const created = p.createdate ? new Date(p.createdate).getTime() : now;
-        const ageInDays = Math.floor((now - created) / DAY);
-        if (ageInDays > 90) { health -= 20; risks.push("Open for " + ageInDays + " days"); }
-        else if (ageInDays > 60) { health -= 10; risks.push("Open for " + ageInDays + " days"); }
+        // ═══ 4. COMPANY FIT (15 pts) — based on associated contacts count as proxy ═══
+        var fitScore = 10; // Default middle score (actual ICP check needs separate API call)
+        var numContacts = Number(p.num_associated_contacts) || 0;
+        // More contacts associated = more engaged = better fit signal
+        if (numContacts >= 3) fitScore = 15;
+        else if (numContacts >= 2) fitScore = 12;
+        else if (numContacts === 1) fitScore = 8;
+        else { fitScore = 3; risks.push("No contacts associated"); }
+        breakdown.companyFit = { score: fitScore, max: 15, detail: numContacts + " contacts associated" };
 
-        // Notes check (-10 pts)
-        if (!p.notes_last_updated) { health -= 10; risks.push("No notes"); }
+        // ═══ 5. CONTACT ENGAGEMENT (15 pts) ═══
+        var engScore = 10; // Default: we know contacts exist
+        if (numContacts >= 3) engScore = 15; // Multi-threaded = great
+        else if (numContacts >= 1) engScore = 10;
+        else engScore = 0;
+        // Deduct if no recent activity from contacts
+        if (daysSinceActivity > 14 && numContacts > 0) engScore = Math.max(0, engScore - 5);
+        breakdown.contactEngagement = { score: engScore, max: 15, detail: numContacts + " contacts, " + (daysSinceActivity < 14 ? "recently active" : "inactive") };
+
+        // ═══ 6. TIMELINE RISK (10 pts) ═══
+        var timeScore = 10;
+        var created = p.createdate ? new Date(p.createdate).getTime() : now;
+        var ageInDays = Math.floor((now - created) / DAY);
+        // Compare deal age to avg won cycle
+        if (ageInDays > avgWonCycleDays * 2) { timeScore = 0; risks.push("Open " + ageInDays + "d (avg won: " + avgWonCycleDays + "d)"); }
+        else if (ageInDays > avgWonCycleDays * 1.5) { timeScore = 3; risks.push("Aging: " + ageInDays + "d vs " + avgWonCycleDays + "d avg"); }
+        else if (ageInDays > avgWonCycleDays) { timeScore = 6; }
+        else { timeScore = 10; }
+        // Close date in past = extra penalty
+        if (p.closedate && new Date(p.closedate).getTime() < now) { timeScore = Math.max(0, timeScore - 5); }
+        breakdown.timelineRisk = { score: timeScore, max: 10, detail: ageInDays + "d old (avg won cycle: " + avgWonCycleDays + "d)" };
+
+        // ═══ TOTAL ═══
+        var total = stageScore + actScore + Math.max(0, compScore) + fitScore + engScore + timeScore;
+        total = Math.max(0, Math.min(100, total));
+
+        var grade = total >= 80 ? "Healthy" : total >= 60 ? "At Risk" : total >= 40 ? "Needs Attention" : "Critical";
+        var emoji = total >= 80 ? "🟢" : total >= 60 ? "🟡" : total >= 40 ? "🟠" : "🔴";
 
         return {
           id: d.id,
@@ -1020,25 +1104,72 @@ export const hubspotTools = {
           stage: p.dealstage,
           amount: Number(p.amount) || 0,
           owner: resolveOwner(ownerMap, p.hubspot_owner_id),
-          healthScore: Math.max(0, health),
-          grade: health >= 80 ? "Healthy" : health >= 50 ? "At Risk" : "Critical",
-          risks,
-          daysSinceActivity,
-          ageInDays,
+          healthScore: total,
+          grade: grade,
+          emoji: emoji,
+          breakdown: breakdown,
+          risks: risks,
+          daysSinceActivity: daysSinceActivity,
+          ageInDays: ageInDays,
+          numContacts: numContacts,
+          stageProb: stageProb,
         };
       });
 
       // Sort by health (worst first)
       scoredDeals.sort((a: any, b: any) => a.healthScore - b.healthScore);
 
-      const criticalCount = scoredDeals.filter((d: any) => d.grade === "Critical").length;
-      const atRiskCount = scoredDeals.filter((d: any) => d.grade === "At Risk").length;
-      const healthyCount = scoredDeals.filter((d: any) => d.grade === "Healthy").length;
-      const avgHealth = scoredDeals.length ? Math.round(scoredDeals.reduce((s: number, d: any) => s + d.healthScore, 0) / scoredDeals.length) : 0;
+      // Write scores to HubSpot if requested
+      var writeResults: any = null;
+      if (args.write_to_hubspot && scoredDeals.length > 0) {
+        // Ensure custom properties exist
+        var propsToCreate = [
+          { name: "kairo_health_score", label: "Kairo Health Score", type: "number", fieldType: "number", description: "Deal health score (0-100) computed by Kairo AI", groupName: "dealinformation" },
+          { name: "kairo_health_grade", label: "Kairo Health Grade", type: "enumeration", fieldType: "select", description: "Deal health grade", groupName: "dealinformation", options: [{ label: "🟢 Healthy", value: "healthy" }, { label: "🟡 At Risk", value: "at_risk" }, { label: "🟠 Needs Attention", value: "needs_attention" }, { label: "🔴 Critical", value: "critical" }] },
+          { name: "kairo_health_updated", label: "Kairo Health Updated", type: "datetime", fieldType: "date", description: "Last time Kairo scored this deal", groupName: "dealinformation" },
+        ];
+        for (var prop of propsToCreate) {
+          try {
+            await hubspotFetch("/crm/v3/properties/deals", auth.accessToken, {
+              method: "POST",
+              body: JSON.stringify(prop),
+            });
+          } catch {} // Ignore if already exists
+        }
+
+        // Batch update scores (10 at a time to avoid rate limits)
+        var gradeMap: Record<string, string> = { "Healthy": "healthy", "At Risk": "at_risk", "Needs Attention": "needs_attention", "Critical": "critical" };
+        var nowIso = new Date().toISOString();
+        var updated = 0;
+        var failed = 0;
+        for (var i = 0; i < scoredDeals.length; i += 10) {
+          var batch = scoredDeals.slice(i, i + 10);
+          var inputs = batch.map(function(deal: any) {
+            return { id: deal.id, properties: { kairo_health_score: String(deal.healthScore), kairo_health_grade: gradeMap[deal.grade] || "critical", kairo_health_updated: nowIso } };
+          });
+          try {
+            await hubspotFetch("/crm/v3/objects/deals/batch/update", auth.accessToken, {
+              method: "POST",
+              body: JSON.stringify({ inputs: inputs }),
+            });
+            updated += batch.length;
+          } catch (e) {
+            failed += batch.length;
+          }
+        }
+        writeResults = { updated: updated, failed: failed, propertiesCreated: true };
+      }
+
+      var criticalCount = scoredDeals.filter((d: any) => d.grade === "Critical").length;
+      var needsAttCount = scoredDeals.filter((d: any) => d.grade === "Needs Attention").length;
+      var atRiskCount = scoredDeals.filter((d: any) => d.grade === "At Risk").length;
+      var healthyCount = scoredDeals.filter((d: any) => d.grade === "Healthy").length;
+      var avgHealth = scoredDeals.length ? Math.round(scoredDeals.reduce((s: number, d: any) => s + d.healthScore, 0) / scoredDeals.length) : 0;
 
       return {
-        summary: { total: scoredDeals.length, critical: criticalCount, atRisk: atRiskCount, healthy: healthyCount, avgHealth },
+        summary: { total: scoredDeals.length, critical: criticalCount, needsAttention: needsAttCount, atRisk: atRiskCount, healthy: healthyCount, avgHealth: avgHealth, avgWonCycleDays: avgWonCycleDays },
         deals: scoredDeals,
+        ...(writeResults ? { hubspotWrite: writeResults } : {}),
       };
     },
   },
