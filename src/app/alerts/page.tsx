@@ -113,6 +113,9 @@ function HealthScoreTab() {
   var [loading, setLoading] = useState(true);
   var [writing, setWriting] = useState(false);
   var [writeResult, setWriteResult] = useState<{ updated: number; failed: number } | null>(null);
+  var [gradeFilter, setGradeFilter] = useState("all");
+  var [page, setPage] = useState(1);
+  var PAGE_SIZE = 10;
 
   useEffect(function() {
     // Load pipelines
@@ -155,6 +158,12 @@ function HealthScoreTab() {
   var currentPipeline = pipelines.find(function(p) { return p.id === selectedPipeline; });
   var currentStages = currentPipeline?.stages || [];
 
+  // Filter + paginate deals
+  var filteredDeals = health?.deals || [];
+  if (gradeFilter !== "all") filteredDeals = filteredDeals.filter(function(d) { return d.grade === gradeFilter; });
+  var totalPages = Math.ceil(filteredDeals.length / PAGE_SIZE);
+  var paginatedDeals = filteredDeals.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
   if (loading) return <div className="py-12 text-center"><div className="h-5 w-5 border-2 border-[#EAEAEA] border-t-[#111] rounded-full animate-spin mx-auto" /></div>;
 
   return (
@@ -191,100 +200,117 @@ function HealthScoreTab() {
       )}
 
       {!health || health.deals.length === 0 ? (
-        <div className="text-center py-12 text-[#999] text-[13px]">No open deals found in this pipeline.</div>
+        <div className="text-center py-12 text-[#999] text-[13px]">No open deals found.</div>
       ) : (
         <>
           {/* Summary KPIs */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
-            <div className="rounded-lg border border-[#EAEAEA] bg-white p-4 text-center">
-              <p className="text-2xl font-bold text-[#111]">{health.summary.avgHealth}</p>
-              <p className="text-[10px] text-[#BBB] mt-1">Avg Score /100</p>
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-6">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white px-3 py-3 text-center">
+              <p className="text-xl font-bold text-[#111]">{health.summary.avgHealth}<span className="text-[11px] font-normal text-[#BBB]">/100</span></p>
+              <p className="text-[10px] text-[#999] mt-0.5">Avg Score</p>
             </div>
-            <div className="rounded-lg border border-[#EAEAEA] bg-white p-4 text-center">
-              <p className="text-2xl font-bold text-[#111]">{health.summary.total}</p>
-              <p className="text-[10px] text-[#BBB] mt-1">Total Deals</p>
-            </div>
-            <div className="rounded-lg border border-[#22C55E20] bg-[#F0FDF4] p-4 text-center">
-              <p className="text-2xl font-bold text-[#22C55E]">{health.summary.healthy}</p>
-              <p className="text-[10px] text-[#22C55E] mt-1">🟢 Healthy</p>
-            </div>
-            <div className="rounded-lg border border-[#F59E0B20] bg-[#FFFBEB] p-4 text-center">
-              <p className="text-2xl font-bold text-[#F59E0B]">{health.summary.atRisk}</p>
-              <p className="text-[10px] text-[#F59E0B] mt-1">🟡 At Risk</p>
-            </div>
-            <div className="rounded-lg border border-[#F9731620] bg-[#FFF7ED] p-4 text-center">
-              <p className="text-2xl font-bold text-[#F97316]">{health.summary.needsAttention}</p>
-              <p className="text-[10px] text-[#F97316] mt-1">🟠 Needs Att.</p>
-            </div>
-            <div className="rounded-lg border border-[#EF444420] bg-[#FEF2F2] p-4 text-center">
-              <p className="text-2xl font-bold text-[#EF4444]">{health.summary.critical}</p>
-              <p className="text-[10px] text-[#EF4444] mt-1">🔴 Critical</p>
-            </div>
+            {[
+              { count: health.summary.healthy, label: "Healthy", color: "#22C55E", bg: "bg-[#F0FDF4]" },
+              { count: health.summary.atRisk, label: "At Risk", color: "#F59E0B", bg: "bg-[#FFFBEB]" },
+              { count: health.summary.needsAttention, label: "Attention", color: "#F97316", bg: "bg-[#FFF7ED]" },
+              { count: health.summary.critical, label: "Critical", color: "#EF4444", bg: "bg-[#FEF2F2]" },
+            ].map(function(k) {
+              return (
+                <button key={k.label} onClick={function() { setGradeFilter(function(prev: string) { return prev === k.label ? "all" : k.label; }); }} className={"rounded-lg border px-3 py-3 text-center transition-all " + k.bg + (gradeFilter === k.label ? " ring-2 ring-offset-1" : "")} style={gradeFilter === k.label ? { borderColor: k.color, ringColor: k.color } : { borderColor: k.color + "20" }}>
+                  <p className="text-xl font-bold" style={{ color: k.color }}>{k.count}</p>
+                  <p className="text-[10px] mt-0.5" style={{ color: k.color }}>{k.label}</p>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Deals table */}
-          <div className="rounded-lg border border-[#EAEAEA] bg-white overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-[12px]">
-                <thead>
-                  <tr className="border-b border-[#EAEAEA] bg-[#FAFAFA]">
-                    <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5">Deal</th>
-                    <th className="text-right text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5">Score</th>
-                    <th className="text-center text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5">Grade</th>
-                    <th className="text-right text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5">Amount</th>
-                    <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5">Owner</th>
-                    <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5 hidden lg:table-cell">Stage</th>
-                    <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5 hidden lg:table-cell">Momentum</th>
-                    <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5 hidden lg:table-cell">Activity</th>
-                    <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5 hidden xl:table-cell">Risks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {health.deals.map(function(deal) {
-                    var scoreColor = deal.healthScore >= 80 ? "#22C55E" : deal.healthScore >= 60 ? "#F59E0B" : deal.healthScore >= 40 ? "#F97316" : "#EF4444";
-                    var gradeBg = deal.healthScore >= 80 ? "bg-[#F0FDF4] text-[#22C55E]" : deal.healthScore >= 60 ? "bg-[#FFFBEB] text-[#F59E0B]" : deal.healthScore >= 40 ? "bg-[#FFF7ED] text-[#F97316]" : "bg-[#FEF2F2] text-[#EF4444]";
-                    return (
-                      <tr key={deal.id} className="border-b border-[#F5F5F5] last:border-0 hover:bg-[#FAFAFA]">
-                        <td className="px-3 py-2.5">
-                          <p className="font-medium text-[#111] truncate max-w-[200px]">{deal.name}</p>
-                        </td>
-                        <td className="px-3 py-2.5 text-right">
-                          <div className="flex items-center justify-end gap-2">
-                            <div className="w-16 h-1.5 bg-[#F0F0F0] rounded-full overflow-hidden">
-                              <div className="h-full rounded-full" style={{ width: deal.healthScore + "%", backgroundColor: scoreColor }} />
-                            </div>
-                            <span className="font-bold tabular-nums" style={{ color: scoreColor }}>{deal.healthScore}</span>
+          {/* Deal cards list */}
+          <div className="space-y-2">
+            {paginatedDeals.map(function(deal) {
+              var scoreColor = deal.healthScore >= 80 ? "#22C55E" : deal.healthScore >= 60 ? "#F59E0B" : deal.healthScore >= 40 ? "#F97316" : "#EF4444";
+              var dims = [
+                { key: "stageMomentum", label: "Stage" },
+                { key: "activityRecency", label: "Activity" },
+                { key: "dealCompleteness", label: "Data" },
+                { key: "companyFit", label: "Fit" },
+                { key: "contactEngagement", label: "Contacts" },
+                { key: "timelineRisk", label: "Timeline" },
+              ];
+              return (
+                <div key={deal.id} className="rounded-lg border border-[#EAEAEA] bg-white px-4 py-3 hover:border-[#CCC] transition-colors">
+                  {/* Row 1: Name + Score + Grade + Amount */}
+                  <div className="flex items-center gap-3">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <p className="text-[13px] font-semibold text-[#111] truncate">{deal.name}</p>
+                        <span className={"text-[10px] font-semibold px-1.5 py-0.5 rounded shrink-0 " + (deal.healthScore >= 80 ? "bg-[#F0FDF4] text-[#22C55E]" : deal.healthScore >= 60 ? "bg-[#FFFBEB] text-[#F59E0B]" : deal.healthScore >= 40 ? "bg-[#FFF7ED] text-[#F97316]" : "bg-[#FEF2F2] text-[#EF4444]")}>{deal.emoji} {deal.grade}</span>
+                      </div>
+                      <div className="flex items-center gap-3 mt-1 text-[11px] text-[#999]">
+                        <span>{deal.owner || "No owner"}</span>
+                        <span>·</span>
+                        <span>{deal.stage || "—"}</span>
+                        <span>·</span>
+                        <span>{deal.amount > 0 ? new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(deal.amount) : "No amount"}</span>
+                        {deal.daysSinceActivity < 999 && <><span>·</span><span>{deal.daysSinceActivity}d since activity</span></>}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <div className="w-20 h-2 bg-[#F0F0F0] rounded-full overflow-hidden">
+                        <div className="h-full rounded-full transition-all" style={{ width: deal.healthScore + "%", backgroundColor: scoreColor }} />
+                      </div>
+                      <span className="text-[14px] font-bold tabular-nums w-8 text-right" style={{ color: scoreColor }}>{deal.healthScore}</span>
+                    </div>
+                  </div>
+
+                  {/* Row 2: Dimension mini-bars */}
+                  <div className="flex items-center gap-1.5 mt-2.5">
+                    {dims.map(function(dim) {
+                      var b = deal.breakdown[dim.key];
+                      if (!b) return null;
+                      var pct = Math.round((b.score / b.max) * 100);
+                      var c = pct >= 75 ? "#22C55E" : pct >= 50 ? "#F59E0B" : pct >= 25 ? "#F97316" : "#EF4444";
+                      return (
+                        <div key={dim.key} className="flex-1 min-w-0" title={dim.label + ": " + b.score + "/" + b.max + " — " + b.detail}>
+                          <div className="flex items-center justify-between mb-0.5">
+                            <span className="text-[9px] text-[#BBB]">{dim.label}</span>
+                            <span className="text-[9px] font-medium tabular-nums" style={{ color: c }}>{b.score}/{b.max}</span>
                           </div>
-                        </td>
-                        <td className="px-3 py-2.5 text-center">
-                          <span className={"text-[10px] font-semibold px-2 py-0.5 rounded " + gradeBg}>{deal.emoji} {deal.grade}</span>
-                        </td>
-                        <td className="px-3 py-2.5 text-right tabular-nums text-[#555]">{deal.amount > 0 ? (deal.amount / 1000).toFixed(0) + "K" : "—"}</td>
-                        <td className="px-3 py-2.5 text-[#555] truncate max-w-[120px]">{deal.owner || "—"}</td>
-                        <td className="px-3 py-2.5 text-[#999] hidden lg:table-cell truncate max-w-[100px]">{deal.stage || "—"}</td>
-                        <td className="px-3 py-2.5 hidden lg:table-cell">
-                          <span className="text-[10px] tabular-nums">{deal.breakdown.stageMomentum?.score}/{deal.breakdown.stageMomentum?.max}</span>
-                        </td>
-                        <td className="px-3 py-2.5 hidden lg:table-cell">
-                          <span className="text-[10px] tabular-nums">{deal.breakdown.activityRecency?.score}/{deal.breakdown.activityRecency?.max}</span>
-                        </td>
-                        <td className="px-3 py-2.5 hidden xl:table-cell">
-                          <div className="flex flex-wrap gap-1">
-                            {deal.risks.slice(0, 2).map(function(r, i) {
-                              return <span key={i} className="text-[9px] bg-[#FEF2F2] text-[#EF4444] px-1.5 py-0.5 rounded truncate max-w-[150px]">{r}</span>;
-                            })}
+                          <div className="h-1 bg-[#F0F0F0] rounded-full overflow-hidden">
+                            <div className="h-full rounded-full" style={{ width: pct + "%", backgroundColor: c }} />
                           </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-            <div className="px-3 py-2 bg-[#FAFAFA] border-t border-[#EAEAEA] text-[10px] text-[#999]">
-              {health.deals.length} deals · Avg won cycle: {health.summary.avgWonCycleDays}d
-            </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Row 3: Risks */}
+                  {deal.risks.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {deal.risks.slice(0, 3).map(function(r, i) {
+                        return <span key={i} className="text-[9px] bg-[#FEF2F2] text-[#DC2626] px-1.5 py-0.5 rounded">{r}</span>;
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-between mt-4">
+              <p className="text-[11px] text-[#999]">{filteredDeals.length} deal{filteredDeals.length !== 1 ? "s" : ""}{gradeFilter !== "all" ? " (" + gradeFilter + ")" : ""}</p>
+              <div className="flex items-center gap-1">
+                {Array.from({ length: totalPages }, function(_, i) {
+                  return (
+                    <button key={i} onClick={function() { setPage(i + 1); }} className={"h-7 w-7 rounded text-[11px] font-medium transition-colors " + (page === i + 1 ? "bg-[#111] text-white" : "text-[#999] hover:bg-[#F5F5F5]")}>
+                      {i + 1}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </>
       )}
     </div>
