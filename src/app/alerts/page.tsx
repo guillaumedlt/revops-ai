@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { AlertTriangle, TrendingDown, TrendingUp, Minus, Zap, ChevronRight, Check, X, Plug, ArrowUpRight, ArrowDownRight, CheckSquare } from "lucide-react";
+import { AlertTriangle, TrendingDown, TrendingUp, Minus, Zap, ChevronRight, Check, X, Plug, ArrowUpRight, ArrowDownRight, CheckSquare, Heart, ChevronDown, Upload, RefreshCw } from "lucide-react";
 
 interface AlertData {
   id: string;
@@ -90,8 +90,210 @@ function timeSince(date: string): string {
   return Math.floor(seconds / 86400) + "j";
 }
 
+// ═══ Health Score types ═══
+interface DealHealth {
+  id: string; name: string; stage: string; amount: number; owner: string;
+  healthScore: number; grade: string; emoji: string; numContacts: number; stageProb: number;
+  breakdown: Record<string, { score: number; max: number; detail: string }>;
+  risks: string[];
+  daysSinceActivity: number; ageInDays: number;
+}
+interface HealthData {
+  summary: { total: number; critical: number; needsAttention: number; atRisk: number; healthy: number; avgHealth: number; avgWonCycleDays: number };
+  deals: DealHealth[];
+  hubspotWrite?: { updated: number; failed: number };
+}
+interface Pipeline { id: string; label: string; stages: Array<{ id: string; label: string; displayOrder: number }>; }
+
+function HealthScoreTab() {
+  var [health, setHealth] = useState<HealthData | null>(null);
+  var [pipelines, setPipelines] = useState<Pipeline[]>([]);
+  var [selectedPipeline, setSelectedPipeline] = useState("");
+  var [selectedClosedWon, setSelectedClosedWon] = useState("");
+  var [loading, setLoading] = useState(true);
+  var [writing, setWriting] = useState(false);
+  var [writeResult, setWriteResult] = useState<{ updated: number; failed: number } | null>(null);
+
+  useEffect(function() {
+    // Load pipelines
+    fetch("/api/connectors/hubspot/pipelines").then(function(r) { return r.json(); }).then(function(json) {
+      if (json.data?.pipelines) {
+        setPipelines(json.data.pipelines);
+        if (json.data.pipelines.length > 0) {
+          setSelectedPipeline(json.data.pipelines[0].id);
+          // Auto-detect closed won stage
+          var stages = json.data.pipelines[0].stages || [];
+          var closedWon = stages.find(function(s: any) { return s.metadata?.probability === "1.0" || s.label.toLowerCase().includes("won") || s.id.includes("won"); });
+          if (closedWon) setSelectedClosedWon(closedWon.id);
+          else if (stages.length > 0) setSelectedClosedWon(stages[stages.length - 1].id);
+        }
+      }
+    }).catch(function() {});
+
+    // Load health scores
+    fetch("/api/health-score").then(function(r) { return r.json(); }).then(function(json) {
+      if (json.data) setHealth(json.data);
+    }).catch(function() {}).finally(function() { setLoading(false); });
+  }, []);
+
+  function refreshScores() {
+    setLoading(true);
+    setWriteResult(null);
+    fetch("/api/health-score").then(function(r) { return r.json(); }).then(function(json) {
+      if (json.data) setHealth(json.data);
+    }).catch(function() {}).finally(function() { setLoading(false); });
+  }
+
+  function writeToHubSpot() {
+    setWriting(true);
+    fetch("/api/health-score?write=true").then(function(r) { return r.json(); }).then(function(json) {
+      if (json.data?.hubspotWrite) setWriteResult(json.data.hubspotWrite);
+      if (json.data) setHealth(json.data);
+    }).catch(function() {}).finally(function() { setWriting(false); });
+  }
+
+  var currentPipeline = pipelines.find(function(p) { return p.id === selectedPipeline; });
+  var currentStages = currentPipeline?.stages || [];
+
+  if (loading) return <div className="py-12 text-center"><div className="h-5 w-5 border-2 border-[#EAEAEA] border-t-[#111] rounded-full animate-spin mx-auto" /></div>;
+
+  return (
+    <div>
+      {/* Pipeline + Closed Won selector */}
+      <div className="flex items-center gap-3 mb-6 flex-wrap">
+        <div>
+          <label className="text-[10px] uppercase tracking-wider text-[#BBB] font-semibold block mb-1">Pipeline</label>
+          <select value={selectedPipeline} onChange={function(e) { setSelectedPipeline(e.target.value); }} className="h-9 px-3 text-[12px] rounded-lg border border-[#EAEAEA] bg-white text-[#111] min-w-[180px]">
+            {pipelines.map(function(p) { return <option key={p.id} value={p.id}>{p.label}</option>; })}
+          </select>
+        </div>
+        <div>
+          <label className="text-[10px] uppercase tracking-wider text-[#BBB] font-semibold block mb-1">Closed Won Stage</label>
+          <select value={selectedClosedWon} onChange={function(e) { setSelectedClosedWon(e.target.value); }} className="h-9 px-3 text-[12px] rounded-lg border border-[#EAEAEA] bg-white text-[#111] min-w-[180px]">
+            {currentStages.map(function(s) { return <option key={s.id} value={s.id}>{s.label}</option>; })}
+          </select>
+        </div>
+        <div className="flex-1" />
+        <div className="flex items-center gap-2">
+          <button onClick={refreshScores} className="h-9 px-3 rounded-lg border border-[#EAEAEA] text-[12px] text-[#555] hover:bg-[#F5F5F5] flex items-center gap-1.5 transition-colors">
+            <RefreshCw size={12} /> Refresh
+          </button>
+          <button onClick={writeToHubSpot} disabled={writing || !health} className="h-9 px-3 rounded-lg bg-[#111] text-white text-[12px] font-medium flex items-center gap-1.5 hover:bg-[#333] transition-colors disabled:opacity-50">
+            <Upload size={12} /> {writing ? "Writing..." : "Write to HubSpot"}
+          </button>
+        </div>
+      </div>
+
+      {writeResult && (
+        <div className={"rounded-lg border px-4 py-2.5 mb-4 text-[12px] " + (writeResult.failed === 0 ? "bg-[#F0FDF4] border-[#BBF7D0] text-[#166534]" : "bg-[#FFFBEB] border-[#FEF3C7] text-[#92400E]")}>
+          {writeResult.failed === 0 ? "✅" : "⚠️"} {writeResult.updated} deals updated in HubSpot{writeResult.failed > 0 ? " (" + writeResult.failed + " failed)" : ""}. Scores are now visible on deal cards.
+        </div>
+      )}
+
+      {!health || health.deals.length === 0 ? (
+        <div className="text-center py-12 text-[#999] text-[13px]">No open deals found in this pipeline.</div>
+      ) : (
+        <>
+          {/* Summary KPIs */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-4 text-center">
+              <p className="text-2xl font-bold text-[#111]">{health.summary.avgHealth}</p>
+              <p className="text-[10px] text-[#BBB] mt-1">Avg Score /100</p>
+            </div>
+            <div className="rounded-lg border border-[#EAEAEA] bg-white p-4 text-center">
+              <p className="text-2xl font-bold text-[#111]">{health.summary.total}</p>
+              <p className="text-[10px] text-[#BBB] mt-1">Total Deals</p>
+            </div>
+            <div className="rounded-lg border border-[#22C55E20] bg-[#F0FDF4] p-4 text-center">
+              <p className="text-2xl font-bold text-[#22C55E]">{health.summary.healthy}</p>
+              <p className="text-[10px] text-[#22C55E] mt-1">🟢 Healthy</p>
+            </div>
+            <div className="rounded-lg border border-[#F59E0B20] bg-[#FFFBEB] p-4 text-center">
+              <p className="text-2xl font-bold text-[#F59E0B]">{health.summary.atRisk}</p>
+              <p className="text-[10px] text-[#F59E0B] mt-1">🟡 At Risk</p>
+            </div>
+            <div className="rounded-lg border border-[#F9731620] bg-[#FFF7ED] p-4 text-center">
+              <p className="text-2xl font-bold text-[#F97316]">{health.summary.needsAttention}</p>
+              <p className="text-[10px] text-[#F97316] mt-1">🟠 Needs Att.</p>
+            </div>
+            <div className="rounded-lg border border-[#EF444420] bg-[#FEF2F2] p-4 text-center">
+              <p className="text-2xl font-bold text-[#EF4444]">{health.summary.critical}</p>
+              <p className="text-[10px] text-[#EF4444] mt-1">🔴 Critical</p>
+            </div>
+          </div>
+
+          {/* Deals table */}
+          <div className="rounded-lg border border-[#EAEAEA] bg-white overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-[12px]">
+                <thead>
+                  <tr className="border-b border-[#EAEAEA] bg-[#FAFAFA]">
+                    <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5">Deal</th>
+                    <th className="text-right text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5">Score</th>
+                    <th className="text-center text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5">Grade</th>
+                    <th className="text-right text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5">Amount</th>
+                    <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5">Owner</th>
+                    <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5 hidden lg:table-cell">Stage</th>
+                    <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5 hidden lg:table-cell">Momentum</th>
+                    <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5 hidden lg:table-cell">Activity</th>
+                    <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-[#999] px-3 py-2.5 hidden xl:table-cell">Risks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {health.deals.map(function(deal) {
+                    var scoreColor = deal.healthScore >= 80 ? "#22C55E" : deal.healthScore >= 60 ? "#F59E0B" : deal.healthScore >= 40 ? "#F97316" : "#EF4444";
+                    var gradeBg = deal.healthScore >= 80 ? "bg-[#F0FDF4] text-[#22C55E]" : deal.healthScore >= 60 ? "bg-[#FFFBEB] text-[#F59E0B]" : deal.healthScore >= 40 ? "bg-[#FFF7ED] text-[#F97316]" : "bg-[#FEF2F2] text-[#EF4444]";
+                    return (
+                      <tr key={deal.id} className="border-b border-[#F5F5F5] last:border-0 hover:bg-[#FAFAFA]">
+                        <td className="px-3 py-2.5">
+                          <p className="font-medium text-[#111] truncate max-w-[200px]">{deal.name}</p>
+                        </td>
+                        <td className="px-3 py-2.5 text-right">
+                          <div className="flex items-center justify-end gap-2">
+                            <div className="w-16 h-1.5 bg-[#F0F0F0] rounded-full overflow-hidden">
+                              <div className="h-full rounded-full" style={{ width: deal.healthScore + "%", backgroundColor: scoreColor }} />
+                            </div>
+                            <span className="font-bold tabular-nums" style={{ color: scoreColor }}>{deal.healthScore}</span>
+                          </div>
+                        </td>
+                        <td className="px-3 py-2.5 text-center">
+                          <span className={"text-[10px] font-semibold px-2 py-0.5 rounded " + gradeBg}>{deal.emoji} {deal.grade}</span>
+                        </td>
+                        <td className="px-3 py-2.5 text-right tabular-nums text-[#555]">{deal.amount > 0 ? (deal.amount / 1000).toFixed(0) + "K" : "—"}</td>
+                        <td className="px-3 py-2.5 text-[#555] truncate max-w-[120px]">{deal.owner || "—"}</td>
+                        <td className="px-3 py-2.5 text-[#999] hidden lg:table-cell truncate max-w-[100px]">{deal.stage || "—"}</td>
+                        <td className="px-3 py-2.5 hidden lg:table-cell">
+                          <span className="text-[10px] tabular-nums">{deal.breakdown.stageMomentum?.score}/{deal.breakdown.stageMomentum?.max}</span>
+                        </td>
+                        <td className="px-3 py-2.5 hidden lg:table-cell">
+                          <span className="text-[10px] tabular-nums">{deal.breakdown.activityRecency?.score}/{deal.breakdown.activityRecency?.max}</span>
+                        </td>
+                        <td className="px-3 py-2.5 hidden xl:table-cell">
+                          <div className="flex flex-wrap gap-1">
+                            {deal.risks.slice(0, 2).map(function(r, i) {
+                              return <span key={i} className="text-[9px] bg-[#FEF2F2] text-[#EF4444] px-1.5 py-0.5 rounded truncate max-w-[150px]">{r}</span>;
+                            })}
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <div className="px-3 py-2 bg-[#FAFAFA] border-t border-[#EAEAEA] text-[10px] text-[#999]">
+              {health.deals.length} deals · Avg won cycle: {health.summary.avgWonCycleDays}d
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 export default function AlertsPage() {
   var router = useRouter();
+  var [tab, setTab] = useState<"alerts" | "health">("alerts");
   var [alerts, setAlerts] = useState<AlertData[]>([]);
   var [scores, setScores] = useState<ScoreData | null>(null);
   var [loading, setLoading] = useState(true);
@@ -188,11 +390,26 @@ export default function AlertsPage() {
     <div className="flex-1 overflow-y-auto">
       <div className="max-w-5xl mx-auto px-6 py-8">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-4">
           <h1 className="text-xl font-semibold text-[#111]">Command Center</h1>
           <p className="text-[13px] text-[#999] mt-0.5">CRM health, scores and alerts in real-time.</p>
         </div>
 
+        {/* Tabs */}
+        <div className="flex items-center gap-0 border-b border-[#EAEAEA] mb-6">
+          <button onClick={function() { setTab("alerts"); }} className={"px-4 py-2.5 text-[13px] -mb-px transition-colors " + (tab === "alerts" ? "text-[#111] font-medium border-b-2 border-[#111]" : "text-[#999] hover:text-[#111]")}>
+            Alerts {alerts.length > 0 ? "(" + alerts.length + ")" : ""}
+          </button>
+          <button onClick={function() { setTab("health"); }} className={"px-4 py-2.5 text-[13px] -mb-px transition-colors flex items-center gap-1.5 " + (tab === "health" ? "text-[#111] font-medium border-b-2 border-[#111]" : "text-[#999] hover:text-[#111]")}>
+            <Heart size={13} /> Health Score
+          </button>
+        </div>
+
+        {/* Health Score Tab */}
+        {tab === "health" && <HealthScoreTab />}
+
+        {/* Alerts Tab */}
+        {tab === "alerts" && <>
         {/* ═══ SCORES SECTION ═══ */}
         {scores && scores.overallScore > 0 && (
           <div className="mb-8">
@@ -362,6 +579,7 @@ export default function AlertsPage() {
             })}
           </div>
         </div>
+        </>}
       </div>
     </div>
   );
